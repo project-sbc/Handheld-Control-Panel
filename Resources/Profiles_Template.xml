@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<Profiles>
+		<Profile >
+			<ID>1</ID>
+			<ProfileName>Default</ProfileName>
+			<Exe></Exe>
+			<LaunchOptions>
+				<Resolution></Resolution>
+				<RefreshRate></RefreshRate>
+				<Path></Path>
+				<AppType></AppType>
+				<GameID></GameID>
+			</LaunchOptions>
+			<Offline>
+				<TDP1>9</TDP1>
+				<TDP2>12</TDP2>
+				<ActiveCores></ActiveCores>
+				<MAXCPU></MAXCPU>
+				<FPSLimit></FPSLimit>
+				<EPP></EPP>
+				<GPUCLK></GPUCLK>
+			</Offline>
+			<Online>
+				<TDP1>10</TDP1>
+				<TDP2>11</TDP2>
+				<ActiveCores></ActiveCores>
+				<MAXCPU></MAXCPU>
+				<FPSLimit></FPSLimit>
+				<EPP></EPP>
+				<GPUCLK></GPUCLK>
+			</Online>
+		</Profile>
+
+	</Profiles>
+
+	<ControllerHotKeys>
+		<ControllerHotKey>
+			<ID>1</ID>
+			<Type>Controller</Type>
+			<Action>Show_Hide_HCP</Action>
+			<Parameter></Parameter>
+			<Hotkey>776</Hotkey>
+		</ControllerHotKey>
+
+	</ControllerHotKeys>
+	<ProfileTemplate>
+		<Profile >
+			<ID></ID>
+			<ProfileName>ProfileTemplate</ProfileName>
+			<Exe></Exe>
+			<LaunchOptions>
+				<Resolution></Resolution>
+				<RefreshRate></RefreshRate>
+				<Path></Path>
+				<GameID></GameID>
+				<AppType></AppType>
+			</LaunchOptions>
+			<Offline>
+				<TDP1></TDP1>
+				<TDP2></TDP2>
+				<ActiveCores></ActiveCores>
+				<MAXCPU></MAXCPU>
+				<FPSLimit></FPSLimit>
+				<EPP></EPP>
+				<GPUCLK></GPUCLK>
+			</Offline>
+			<Online>
+				<TDP1></TDP1>
+				<TDP2></TDP2>
+				<ActiveCores></ActiveCores>
+				<MAXCPU></MAXCPU>
+				<FPSLimit></FPSLimit>
+				<EPP></EPP>
+				<GPUCLK></GPUCLK>
+			</Online>
+		</Profile>
+	</ProfileTemplate>
+
+	<ControllerHotKeyTemplate>
+		<ControllerHotKey>
+			<ID></ID>
+			<Type></Type>
+			<Action></Action>
+			<Parameter></Parameter>
+			<Hotkey></Hotkey>
+		</ControllerHotKey>
+	</ControllerHotKeyTemplate>
+	
+</Configuration>
+

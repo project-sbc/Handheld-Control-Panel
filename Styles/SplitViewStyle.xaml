@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
+    <Style x:Key="splitView" TargetType="mah:SplitView">
+        <Setter Property="IsPaneOpen"  Value="True"   />
+        <Setter Property="DisplayMode" Value="CompactOverlay" />
+        <Setter Property="OpenPaneLength" Value="200" />
+        <Setter Property="CompactPaneLength" Value="42" />
+        <Setter Property="PaneBackground" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+        <Setter Property="PaneBackground" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+    </Style>
+</ResourceDictionary>
