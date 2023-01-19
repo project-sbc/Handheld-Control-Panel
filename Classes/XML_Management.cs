@@ -1,4 +1,4 @@
-﻿using ControlzEx.Standard;
+﻿
 using Handheld_Control_Panel.Classes.Global_Variables;
 using SharpDX;
 using System;

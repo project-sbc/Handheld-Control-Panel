@@ -229,15 +229,10 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
     }
     public class controllerInputEventArgs : EventArgs
     {
-
         public string Action { get; set; }
-
-
         public controllerInputEventArgs(string action)
         {
             this.Action = action;
         }
-
-
     }
 }

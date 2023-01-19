@@ -1,6 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="MainWindow_NavigationView_Home">Home</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Hotkeys">Hotkeys</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Gamelauncher">Game Launcher</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
+
+    
+    
+
+
+
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>
     <system:String x:Key="TDP_Slider_Sub">Sustained Thermal Design Power (TDP)</system:String>
     <!-- end settings page-->
