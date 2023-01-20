@@ -27,71 +27,69 @@ namespace Handheld_Control_Panel
     }
     public partial class MainWindow : Window
     {
-        private System.Collections.IList menuItems;
+        private string window = "MainWindow";
+        private string page = "";
         public MainWindow()
         {
-            Controller_Management.start_Controller_Management();
+            
             InitializeComponent();
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
-            //set menu item list
-            menuItems = new List<NavigationViewItem>();
-            menuItems = mainWindowNavigationView.MenuItems;
+
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
             Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
-            string action = args.Action;
-
             if (MainWindowNavigation.windowNavigation)
             {
-                navigateNavigationView(action);
+                navigateNavigationView(args.Action);
             }
             else
             {
-                raiseControllerInput(action);
+                Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action,window+page);
             }
 
         }
 
 
-        public event EventHandler<controllerInputEventArgs> controllerInput;
-
-        public void raiseControllerInput(string action)
-        {
-            controllerInput?.Invoke(this, new controllerInputEventArgs(action));
-        }
 
         private void navigateNavigationView(string action)
         {
-            if (action == "Up")
+            try
             {
-                mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[mainWindowNavigationView.MenuItems.IndexOf(mainWindowNavigationView.SelectedItem) - 1];
+                if (action == "Up")
+                {
+                    mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[mainWindowNavigationView.MenuItems.IndexOf(mainWindowNavigationView.SelectedItem) - 1];
+                }
+                if (action == "Down")
+                {
+                    mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[mainWindowNavigationView.MenuItems.IndexOf(mainWindowNavigationView.SelectedItem) + 1];
+                }
+                if (action == "Right" || action == "A")
+                {
+                    MainWindowNavigation.windowNavigation = false;
+                }
             }
-            if (action == "Down")
+            catch
             {
-                mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[mainWindowNavigationView.MenuItems.IndexOf(mainWindowNavigationView.SelectedItem) + 1];
-            }
-            if (action == "Right" || action == "A")
-            {
-                MainWindowNavigation.windowNavigation = false;
+
             }
         }
 
-        private void NavigationView_ItemInvoked(ModernWpf.Controls.NavigationView sender, ModernWpf.Controls.NavigationViewItemInvokedEventArgs args)
+    
+        private void mainWindowNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            NavigationView navView = sender;
-            Debug.WriteLine(navView.SelectedItem);
+            NavigationViewItem navigationViewItem = (NavigationViewItem)mainWindowNavigationView.SelectedItem;
+            frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
+            page = navigationViewItem.Tag.ToString();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
         }
     }
-    public class controllerInputEventArgsMainWindow : EventArgs
-    {
-        public string Action { get; set; }
-        public controllerInputEventArgsMainWindow(string action)
-        {
-            this.Action = action;
-        }
-    }
+    
 }

@@ -18,6 +18,7 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Unicons" Version="4.11.0" />
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="MouseKeyHook" Version="5.6.0" />
+    <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
     <PackageReference Include="SecretNest.SequentialScheduler" Version="1.1.0" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     <PackageReference Include="System.Management" Version="7.0.0" />

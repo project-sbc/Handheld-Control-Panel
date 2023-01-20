@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:Handheld_Control_Panel.Pages"
       xmlns:uc="clr-namespace:Handheld_Control_Panel.Pages.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="HomePage">
+      d:DesignHeight="450" d:DesignWidth="800" 
+      Title="HomePage" Loaded="Page_Loaded">
 
-    <DockPanel x:Name="dockPanel">
-       
-    </DockPanel>
+    <StackPanel x:Name="stackPanel">
+        <uc:TDP_Slider />
+    </StackPanel>
 </Page>

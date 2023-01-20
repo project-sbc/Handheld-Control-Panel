@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using SharpDX;
 using SharpDX.XInput;
+using Linearstar.Windows.RawInput;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -233,6 +234,46 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         public controllerInputEventArgs(string action)
         {
             this.Action = action;
+        }
+    }
+
+    public class controllerPageInputEventArgs : EventArgs
+    {
+        public string Action { get; set; }
+        public string WindowPage { get; set; }
+        public controllerPageInputEventArgs(string action, string windowpage)
+        {
+            this.Action = action;
+            this.WindowPage = windowpage;
+        }
+    }
+
+    public class controllerUserControlInputEventArgs : EventArgs
+    {
+        public string Action { get; set; }
+        public string WindowPage { get; set; }
+        public string UserControl { get; set; }
+        public controllerUserControlInputEventArgs(string action, string windowpage, string usercontrol)
+        {
+            this.Action = action;
+            this.WindowPage = windowpage;
+            this.UserControl = usercontrol;
+        }
+    }
+
+    public static class Controller_Window_Page_UserControl_Events
+    {
+        public static event EventHandler<controllerPageInputEventArgs> pageControllerInput;
+        public static event EventHandler<controllerUserControlInputEventArgs> userControlControllerInput;
+
+
+        public static void raisePageControllerInputEvent(string action, string windowpage)
+        {
+            pageControllerInput?.Invoke(null, new controllerPageInputEventArgs(action, windowpage));
+        }
+        public static void raiseUserControlControllerInputEvent(string action, string windowpage, string usercontrol)
+        {
+            userControlControllerInput?.Invoke(null, new controllerUserControlInputEventArgs(action, windowpage, usercontrol));
         }
     }
 }
