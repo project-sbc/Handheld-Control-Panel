@@ -36,6 +36,8 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString());
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
+
+            
         }
 
         private void handleControllerInputs(object sender, EventArgs e)

@@ -10,6 +10,6 @@
       Title="HomePage" Loaded="Page_Loaded">
 
     <StackPanel x:Name="stackPanel">
-        <uc:TDP_Slider />
+        
     </StackPanel>
 </Page>
