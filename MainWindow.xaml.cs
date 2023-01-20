@@ -88,6 +88,7 @@ namespace Handheld_Control_Panel
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //set initial view to homepage or 0 index
             mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
         }
     }

@@ -1,4 +1,5 @@
-﻿using Handheld_Control_Panel.Classes.Controller_Management;
+﻿using Handheld_Control_Panel.Classes;
+using Handheld_Control_Panel.Classes.Controller_Management;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,26 +24,18 @@ namespace Handheld_Control_Panel.Pages.UserControls
     public partial class TDP_Slider : UserControl
     {
         private string windowpage = "";
-        private string usercontrol = "TDP_Slider";
+        private string usercontrol = "";
         public TDP_Slider()
         {
             InitializeComponent();
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            subscribeControllerInputEvents();
-            getWindowPageString();
-        }
-        private void getWindowPageString()
-        {
-            string[] pagewindow = Window.GetWindow(this).ToString().Replace("}", "").Replace("{", "").Replace("Handheld_Control_Panel.", "").Replace(".xaml", "").Replace("Pages/", "").Split(":");
-            windowpage = pagewindow[0].Trim() + pagewindow[1].Trim();
-        }
-        private void subscribeControllerInputEvents()
-        {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
+            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString());
+            usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
         }
-
+      
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
