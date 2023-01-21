@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Handheld_Control_Panel.Classes
+namespace Handheld_Control_Panel.Classes.UserControl_Management
 {
     public static class UserControl_Management
     {
@@ -34,5 +34,6 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
+      
     }
 }

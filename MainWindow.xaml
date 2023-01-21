@@ -7,7 +7,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        Title="Handheld Control Panel" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ui:WindowHelper.UseModernWindowStyle="True">
+        Title="Handheld Control Panel" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ui:WindowHelper.UseModernWindowStyle="True">
     <ui:NavigationView x:Name="mainWindowNavigationView"  SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}">
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem Icon="Home" Tag="HomePage"  Content="{StaticResource MainWindow_NavigationView_Home}" />
