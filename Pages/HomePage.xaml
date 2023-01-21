@@ -9,7 +9,9 @@
       d:DesignHeight="450" d:DesignWidth="800" 
       Title="HomePage" Loaded="Page_Loaded">
 
-    <StackPanel x:Name="stackPanel">
-        
+    <StackPanel x:Name="stackPanel" Style="{StaticResource pageStackPanel}">
+        <Label Content="{DynamicResource Header_CPU_Settings}" Style="{StaticResource headerLabel}" />
+        <Rectangle Style="{StaticResource rectangle}" />
+        <uc:TDP_Slider />
     </StackPanel>
 </Page>

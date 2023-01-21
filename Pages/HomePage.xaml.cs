@@ -1,6 +1,7 @@
 ﻿using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Pages.UserControls;
+using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -26,6 +27,9 @@ namespace Handheld_Control_Panel.Pages
     public partial class HomePage : Page
     {
         private string windowpage;
+        private List<UserControl> userControls = new List<UserControl>();
+        private int selectedUserControl = -1;
+        private int highlightedUserControl = -1;
         public HomePage()
         {
             InitializeComponent();
@@ -36,10 +40,22 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString());
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
+            getUserControlsOnPage();
 
-            
         }
 
+        private void getUserControlsOnPage()
+        {
+            foreach (object child in stackPanel.Children)
+            {
+                if (child is UserControl)
+                {
+                    userControls.Add((UserControl)child);
+                }
+
+            }
+        }
+        //
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
@@ -48,25 +64,14 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                Debug.WriteLine("yes");
-                foreach(object child in stackPanel.Children)
-                {
-                    if (child is System.Windows.Controls.UserControl)
-                    {
-                        string usercontrol = child.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.", "");
-                       
-
-                    }
-
-                }
-
+                //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
+                int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl);
+                highlightedUserControl = intReturn[0];
+                selectedUserControl = intReturn[1];
             }
-           
 
         }
-
-       
-
+      
 
     }
 }

@@ -34,6 +34,8 @@ namespace Handheld_Control_Panel.Pages.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString());
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
+
+            if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
         }
       
         private void handleControllerInputs(object sender, EventArgs e)
@@ -41,7 +43,7 @@ namespace Handheld_Control_Panel.Pages.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                //Debug.WriteLine("YESSSS");
+                UserControl_Management.handleUserControl(border, leftBorder ,control, args.Action);
             }
 
         }

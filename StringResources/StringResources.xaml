@@ -8,10 +8,16 @@
     <system:String x:Key="MainWindow_NavigationView_Gamelauncher">Game Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
 
-    
-    
+
+    <system:String x:Key="Header_CPU_Settings">CPU Settings</system:String>
 
 
+    <system:String x:Key="Usercontrol_TDP_MainText">TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
+
+    
+    
+    <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>
     <system:String x:Key="TDP_Slider_Sub">Sustained Thermal Design Power (TDP)</system:String>

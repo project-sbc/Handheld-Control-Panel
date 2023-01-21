@@ -35,7 +35,7 @@ namespace Handheld_Control_Panel
             InitializeComponent();
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
-
+            mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
@@ -70,6 +70,7 @@ namespace Handheld_Control_Panel
                 if (action == "Right" || action == "A")
                 {
                     MainWindowNavigation.windowNavigation = false;
+                    Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent("Right", window + page);
                 }
             }
             catch
@@ -86,11 +87,7 @@ namespace Handheld_Control_Panel
             page = navigationViewItem.Tag.ToString();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //set initial view to homepage or 0 index
-            mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
-        }
+       
     }
     
 }

@@ -12,11 +12,9 @@
  
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
-       
 
-                <ResourceDictionary Source="/Styles/TextStyles.xaml" />
-                <ResourceDictionary Source="/Styles/IconStyles.xaml" />
-                <ResourceDictionary Source="/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/Styles/ControlStyles.xaml" />
+
            
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
 

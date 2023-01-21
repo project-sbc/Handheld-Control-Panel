@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Handheld_Control_Panel.Pages.UserControls"
+             xmlns:local="clr-namespace:Handheld_Control_Panel.Pages.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
-    <Grid>
-        <Slider />
-    </Grid>
+             d:DesignHeight="125" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Border Style="{StaticResource userControlBorder}" BorderThickness="0,2,2,2" BorderBrush="Transparent" x:Name="border" >
+        <Border Style="{StaticResource userControlLeftBorder}" BorderThickness="2,0,0,0"  BorderBrush="Transparent" x:Name="leftBorder" >
+            <DockPanel Margin="3,3,3,3">
+                <DockPanel DockPanel.Dock="Top">
+                    <iconPacks:PackIconMaterial Kind="LightningBolt" Style="{StaticResource userControlIconMaterial}" />
+                    <DockPanel >
+                        <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+                            <Label Content="{DynamicResource Usercontrol_TDP_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                            <Label x:Name="subText" Content="{DynamicResource Usercontrol_TDP_SubText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                            <Label Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} W" Style="{StaticResource userControlUnitLabel}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </DockPanel>
+                <Slider x:Name="control" Height="30"  Minimum="0" Maximum="100" TickFrequency="1" SmallChange="1" LargeChange="5" IsSnapToTickEnabled="True"  >
+                    <Slider.LayoutTransform>
+                        <ScaleTransform ScaleY="1.4" ScaleX="1.4" />
+                    </Slider.LayoutTransform>
+                </Slider>
+            </DockPanel>
+        </Border>
+      
+    </Border>
 </UserControl>
