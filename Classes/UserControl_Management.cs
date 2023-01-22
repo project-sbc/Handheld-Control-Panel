@@ -14,14 +14,35 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
     {
         public static void handleUserControl(Border border, Border leftBorder,object control, string action)
         {
-            switch (action)
+            
+            
+
+
+            switch (action )
             {
                 case "Highlight":
-                    leftBorder.BorderBrush = System.Windows.Media.Brushes.Black;
-                    border.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    if (Properties.Settings.Default.SystemTheme == "Light")
+                    {
+                        leftBorder.BorderBrush = System.Windows.Media.Brushes.Black;
+                        border.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    }
+                    else
+                    {
+                        leftBorder.BorderBrush = System.Windows.Media.Brushes.White;
+                        border.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    }
+
                     break;
                 case "Select":
-                    border.BorderBrush = System.Windows.Media.Brushes.Black;
+                    if (Properties.Settings.Default.SystemTheme == "Light")
+                    {
+                        border.BorderBrush = System.Windows.Media.Brushes.Black;
+                    }
+                    else
+                    {
+                        border.BorderBrush = System.Windows.Media.Brushes.White;
+                    }
+                  
                     break;
                 case "Unhighlight":
                     border.BorderBrush = System.Windows.Media.Brushes.Transparent;

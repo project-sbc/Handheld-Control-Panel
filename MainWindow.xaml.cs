@@ -40,7 +40,7 @@ namespace Handheld_Control_Panel
             mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
 
 
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
+            ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
         }
 
         private void handleControllerInputs(object sender, EventArgs e)

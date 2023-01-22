@@ -15,9 +15,9 @@ namespace Handheld_Control_Panel.Classes
         public static string getWindowPageFromWindowToString(string window)
         {
             //gets window page value so I know what window and page is being used
-            return window.Replace(" ", "").Replace(":", "").Replace("Handheld_Control_Panel.", "").Replace(".xaml", "").Replace("Pages/", ""); 
+            return window.Replace(" ", "").Replace(":", "").Replace("Handheld_Control_Panel.", "").Replace("Pages.", ""); 
         }
-
+     
         public static void switchToOuterNavigation(string window)
         {
             //global method to switch the page back to the window navigation
