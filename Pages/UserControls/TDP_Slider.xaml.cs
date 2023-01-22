@@ -1,5 +1,7 @@
 ﻿using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.UserControl_Management;
+using Handheld_Control_Panel.Styles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -45,12 +47,11 @@ namespace Handheld_Control_Panel.Pages.UserControls
             {
                 Classes.UserControl_Management.UserControl_Management.handleUserControl(border, leftBorder ,control, args.Action);
             }
-
         }
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            UserControl_Management.Slider_ValueChanged(this, e);
         }
     }
 }

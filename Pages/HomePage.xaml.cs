@@ -12,12 +12,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-
+using MahApps.Metro;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ControlzEx.Theming;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -33,6 +34,8 @@ namespace Handheld_Control_Panel.Pages
         public HomePage()
         {
             InitializeComponent();
+            // ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

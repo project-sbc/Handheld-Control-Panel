@@ -14,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ControlzEx.Theming;
+using MahApps.Metro.Controls;
 
 namespace Handheld_Control_Panel
 {
@@ -25,7 +27,7 @@ namespace Handheld_Control_Panel
     {
         public static bool windowNavigation = true;
     }
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private string window = "MainWindow";
         private string page = "";
@@ -36,6 +38,9 @@ namespace Handheld_Control_Panel
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
             mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
+
+
+            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
@@ -85,6 +90,7 @@ namespace Handheld_Control_Panel
             NavigationViewItem navigationViewItem = (NavigationViewItem)mainWindowNavigationView.SelectedItem;
             frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
             page = navigationViewItem.Tag.ToString();
+            
         }
 
        

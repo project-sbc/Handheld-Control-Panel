@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Handheld_Control_Panel.Styles
     /// <summary>
     /// Interaction logic for ControlStyle.xaml
     /// </summary>
-    public partial class ControlStyle : Window
+    public partial class ControlStyle : ResourceDictionary
     {
         public ControlStyle()
         {
@@ -26,7 +27,7 @@ namespace Handheld_Control_Panel.Styles
 
         public void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            Debug.WriteLine("YES Dog");
         }
     }
 }

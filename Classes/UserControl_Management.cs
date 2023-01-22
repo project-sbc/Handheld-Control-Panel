@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
         }
 
-      
+        public static void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Debug.WriteLine("YES Dog");
+        }
     }
 }

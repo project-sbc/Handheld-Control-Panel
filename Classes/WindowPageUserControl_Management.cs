@@ -96,7 +96,7 @@ namespace Handheld_Control_Panel.Classes
                 }
                 else
                 {
-                    if (action == "B" || action == "Left")
+                    if (action == "B")
                     {
                         //press b on a selected usercontrol means it goes back to being highlighted and selectedindex is -1
                         Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[selectedIndex].ToString()));

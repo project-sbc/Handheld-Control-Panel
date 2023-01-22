@@ -9,7 +9,8 @@ using System.Windows;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Linearstar.Windows.RawInput;
-using static Vanara.Interop.KnownShellItemPropertyKeys;
+using ModernWpf;
+
 
 namespace Handheld_Control_Panel
 {
@@ -24,10 +25,16 @@ namespace Handheld_Control_Panel
             //start up
             Controller_Management.start_Controller_Management();
 
-          
+            changecolor();
+
+    
+        }
+        public void changecolor()
+        {
+            
+
         }
 
-       
 
     }
 }

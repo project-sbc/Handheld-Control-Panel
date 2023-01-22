@@ -12,46 +12,10 @@
 
     </Style>
     <!--buttons-->
-    <Style x:Key="menuButton" TargetType="RadioButton">
-        <!--Normal button style-->
-        <Setter Property="Height" Value="50"/>
-        <Setter Property="Margin" Value="0,0,0,0"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderThickness="0,0,0,0"
-                            BorderBrush="{TemplateBinding BorderBrush}">
-                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <!--Button Style on hover-->
-            <Trigger Property="IsMouseOver" Value="True">
-
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
-
-            </Trigger>
-            <!--Activated button style-->
-            <Trigger Property="IsChecked" Value="True">
-
-                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
-
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-
+   
     <!--icons-->
     <Style x:Key="userControlIconMaterial" TargetType="icon:PackIconMaterial">
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Width" Value="30"/>
@@ -60,7 +24,7 @@
         <Setter Property="Margin" Value="0,0,5,0" />
     </Style>
     <Style x:Key="userControlIconFontAwesome" TargetType="icon:PackIconFontAwesome">
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Width" Value="30"/>
@@ -70,7 +34,7 @@
 
     </Style>
     <Style x:Key="userControlIconUnicons" TargetType="icon:PackIconUnicons">
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Width" Value="30"/>
@@ -101,26 +65,29 @@
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="24" />
         <Setter Property="Margin" Value="20,0,0,0" />
-
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
     <Style x:Key="userControlMainLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="24" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
     <Style x:Key="userControlSubLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="24" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
     <Style x:Key="userControlUnitLabel" TargetType="Label">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
     <!--rectangles-->
     <Style x:Key="rectangle" TargetType="Rectangle" >
         <Setter Property="Height" Value="1" />
-        <Setter Property="Fill" Value="Black" />
+        <Setter Property="Fill" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="Margin" Value="20,0,20,0" />
     </Style>
 
@@ -143,12 +110,8 @@
         <Setter Property="IsBackEnabled" Value="False" />
         <Setter Property="IsBackButtonVisible" Value="Collapsed" />
         <Setter Property="IsSettingsVisible" Value="False" />
+        <Setter Property="Foreground" Value="{StaticResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
-    <!--slider-->
-    <Style x:Key="userControlSlider" TargetType="Slider">
-        <Setter Property="Height" Value="30" />
-        <Setter Property="IsSnapToTickEnabled" Value="True" />
-        <EventSetter Event="ValueChanged" Handler="Slider_ValueChanged" />
-    </Style>
+  
 </ResourceDictionary>
