@@ -7,11 +7,49 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace Handheld_Control_Panel.Classes.UserControl_Management
 {
     public static class UserControl_Management
     {
+        public static void setupControl(object control)
+        {
+            if (control is Slider)
+            {
+                Slider slider = (Slider)control;
+                slider.IsSnapToTickEnabled = true;
+
+                switch (slider.Tag)
+                {
+                    case "Slider_TDP":
+                        slider.Minimum = Properties.Settings.Default.minTDP;
+                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        slider.Value = Global_Variables.Global_Variables.readPL1;
+                        break;
+
+                    default:break;
+                }
+
+
+
+
+
+
+
+
+
+                   
+            }
+
+
+
+        }
+
         public static void handleUserControl(Border border, Border leftBorder,object control, string action)
         {
             
@@ -50,15 +88,63 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
 
                 default: break;
-
             }
-            
-
         }
 
         public static void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Debug.WriteLine("YES Dog");
+            string userControl = sender.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.", "");
+
+            switch(userControl)
+            {
+                case "Slider_TDP":
+
+                    break;
+
+                default: break;
+
+
+            }
         }
+
+        #region set slider thumbsize
+        private static DependencyObject GetElementFromParent(DependencyObject parent, string childname)
+        {
+            //Internet routine for finding thumb of slider
+            //Use element parent for thumb size control on slider
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is FrameworkElement childframeworkelement && childframeworkelement.Name == childname)
+                    return child;
+
+                var FindRes = GetElementFromParent(child, childname);
+                if (FindRes != null)
+                    return FindRes;
+            }
+            return null;
+        }
+            
+
+        public static void setThumbSize(Slider slider)
+        {
+            //set thumb size, internet routine
+            var SliderThumb = GetElementFromParent(slider as DependencyObject, "HorizontalThumb"); //Make sure to put the right name for your slider layout options are: ("VerticalThumb", "HorizontalThumb")
+            if (SliderThumb != null)
+            {
+
+                if (SliderThumb is Thumb thumb)
+                {
+
+                    thumb.Width = 16;
+                    thumb.Height = 24;
+                }
+                else { }
+            }
+            else { }
+        }
+        #endregion
+
     }
 }

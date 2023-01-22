@@ -111,6 +111,7 @@
         <Setter Property="IsBackButtonVisible" Value="Collapsed" />
         <Setter Property="IsSettingsVisible" Value="False" />
         <Setter Property="Foreground" Value="{StaticResource MahApps.Brushes.ThemeForeground}" />
+        
     </Style>
 
   

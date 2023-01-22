@@ -15,10 +15,10 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent}" />
       
         </Grid.Resources>
-        <ui:NavigationView x:Name="mainWindowNavigationView"   SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}">
+        <ui:NavigationView x:Name="mainWindowNavigationView"  SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}">
 
             <ui:NavigationView.MenuItems >
-                <ui:NavigationViewItem Icon="Home" Tag="HomePage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{StaticResource MainWindow_NavigationView_Home}" />
+                <ui:NavigationViewItem Icon="Home" Tag="HomePage"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{StaticResource MainWindow_NavigationView_Home}" />
                 <ui:NavigationViewItem Tag="HomePage" Icon="Library"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{StaticResource MainWindow_NavigationView_Profiles}"  />
                 <ui:NavigationViewItem Icon="Keyboard" Tag="Hotkeys" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{StaticResource MainWindow_NavigationView_Hotkeys}" />
                 <ui:NavigationViewItem Icon="XboxOneConsole" Tag="GameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{StaticResource MainWindow_NavigationView_Gamelauncher}" />

@@ -21,7 +21,7 @@
                         </StackPanel>
                     </DockPanel>
                 </DockPanel>
-                <Slider x:Name="control" Height="30" Margin="12,0,12,0" IsSnapToTickEnabled="True"  Minimum="0" Maximum="100" TickFrequency="1" SmallChange="1" LargeChange="5" ValueChanged="control_ValueChanged"   >
+                <Slider x:Name="control" Tag="Slider_TDP" Height="30" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
                     <Slider.LayoutTransform>
                         <ScaleTransform ScaleY="1.4" ScaleX="1.4" />
                     </Slider.LayoutTransform>

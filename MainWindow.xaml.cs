@@ -35,6 +35,10 @@ namespace Handheld_Control_Panel
         {
             
             InitializeComponent();
+
+            //start controller management, do this when the window opens to prevent accidental hotkey presses
+            Controller_Management.start_Controller_Management();
+
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
             mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];

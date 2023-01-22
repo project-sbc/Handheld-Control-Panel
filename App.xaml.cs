@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Task_Scheduler;
 using Linearstar.Windows.RawInput;
 using ModernWpf;
 
@@ -22,19 +23,12 @@ namespace Handheld_Control_Panel
     {
         public App()
         {
-            //start up
-            Controller_Management.start_Controller_Management();
-
-            changecolor();
+            //start task scheduler
+            Task_Scheduler.startScheduler();
+        
 
     
         }
-        public void changecolor()
-        {
-            
-
-        }
-
-
+     
     }
 }

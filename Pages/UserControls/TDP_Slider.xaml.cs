@@ -31,16 +31,16 @@ namespace Handheld_Control_Panel.Pages.UserControls
         public TDP_Slider()
         {
             InitializeComponent();
+            UserControl_Management.setupControl(control);
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString()+ this.GetParentObject().GetParentObject().GetParentObject().GetParentObject());
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-
+            if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
         }
-      
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
@@ -52,7 +52,11 @@ namespace Handheld_Control_Panel.Pages.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            UserControl_Management.Slider_ValueChanged(this, e);
+            if(this.IsLoaded)
+            {
+                UserControl_Management.Slider_ValueChanged(this, e);
+            }
+       
         }
     }
 }
