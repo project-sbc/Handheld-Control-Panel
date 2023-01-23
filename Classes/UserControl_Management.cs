@@ -31,7 +31,14 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Global_Variables.Global_Variables.readPL1;
                         break;
-
+                    case "Slider_TDP2":
+                        slider.Minimum = Properties.Settings.Default.minTDP;
+                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        slider.Value = Global_Variables.Global_Variables.readPL2;
+                        break;
                     default:break;
                 }
 
@@ -93,14 +100,18 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
         public static void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            string userControl = sender.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.", "");
-
-            switch(userControl)
+        
+            Slider slider = (Slider)sender;
+            string sliderTag = slider.Tag.ToString();
+            double sliderValue = slider.Value;
+            switch (sliderTag)
             {
                 case "Slider_TDP":
-
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.readPL2));
                     break;
-
+                case "Slider_TDP2":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.readPL1, (int)sliderValue));
+                    break;
                 default: break;
 
 

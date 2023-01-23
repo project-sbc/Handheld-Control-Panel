@@ -12,9 +12,10 @@
     <system:String x:Key="Header_CPU_Settings">CPU Settings</system:String>
 
 
-    <system:String x:Key="Usercontrol_TDP_MainText">TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
-
+    <system:String x:Key="Usercontrol_TDP2_MainText">Boost TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP2_SubText">Change temporary boost thermal design power (TDP) in watts</system:String>
     
     
     <!--old stuff-->

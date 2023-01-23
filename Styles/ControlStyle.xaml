@@ -49,7 +49,7 @@
     <Style x:Key="pageStackPanel" TargetType="StackPanel">
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalOnly"/>
-
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
     </Style>
 
     <!--textblocks-->

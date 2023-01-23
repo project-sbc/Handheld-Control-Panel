@@ -27,10 +27,10 @@ namespace Handheld_Control_Panel.Classes
             //test code
 
             //check for updates first
-            //Update_Software.Update_Software.checkForUpdates(true);
+            Update_Software.Update_Software.checkForUpdates(true);
 
             //Load XML profile file
-            //XML_Management.Load_XML_File.load_XML_File();
+            XML_Management.Load_XML_File.load_XML_File();
 
             //check steam/playnite installed for added features
             //Steam_Management.setSteamDirectory();
@@ -42,48 +42,51 @@ namespace Handheld_Control_Panel.Classes
             //XML_Management.Manage_XML_Profiles.syncSteamGameToProfile();
             
             //load controller hotkey dictionary
-            //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForControllerHotKeys();
-            //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForKBHotKeys();
+            XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForControllerHotKeys();
+            XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForKBHotKeys();
 
             //start controller timer to read controller states
             //Controller_Management.Controller_Management.start_Controller_Management();
 
             //get cpu information
-            //TDP_Management.TDP_Management.determineCPU();
+            TDP_Management.TDP_Management.determineCPU();
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
-            //TDP_Management.TDP_Management.checkDriverBlockRegistry();
+            TDP_Management.TDP_Management.checkDriverBlockRegistry();
 
             //Make sure powercfg profile has coreparking and maxprocfreq unhidden or otherwise those wont work
-           // MaxProcFreq_Management.MaxProcFreq_Management.unhidePowercfgMaxProcFreq();
-           // CoreParking_Management.CoreParking_Management.unhidePowercfgCoreParking();
-           // EPP_Management.EPP_Management.unhidePowercfgEPP();
+            MaxProcFreq_Management.MaxProcFreq_Management.unhidePowercfgMaxProcFreq();
+            CoreParking_Management.CoreParking_Management.unhidePowercfgCoreParking();
+            EPP_Management.EPP_Management.unhidePowercfgEPP();
 
             //get max core count
-           // Global_Variables.Global_Variables.maxCpuCores = new ManagementObjectSearcher("Select * from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["NumberOfCores"].ToString()));
+            Global_Variables.Global_Variables.maxCpuCores = new ManagementObjectSearcher("Select * from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["NumberOfCores"].ToString()));
             
             //load lists (resolutions, refresh rates, scalings)
-           // Display_Management.Display_Management.generateDisplayResolutionAndRateList();
+            Display_Management.Display_Management.generateDisplayResolutionAndRateList();
             
-          //  XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
+            XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
 
             //load language resource
-           // loadLanguage();
+            loadLanguage();
 
             //start task scheduler
-          //  Task_Scheduler.Task_Scheduler.startScheduler();
+            Task_Scheduler.Task_Scheduler.startScheduler();
+
+            //update values
+            ParallelTaskUpdate_Management.UpdateTask();
 
             //get motherboard info
           //  Fan_Management.Fan_Management.determineFanDevice();
 
             //check if RTSS should be started at startup
-          //  RTSS.checkStartRTSS();
+            RTSS.checkStartRTSS();
 
             //apply rtss fps limit of 0 by default if cant find limit between 5-60
-           // RTSS.getRTSSFPSLimit();
+            RTSS.getRTSSFPSLimit();
 
             //apply default profile, 0 is default profile ID and will only apply if 0 exists
-           // XML_Management.Manage_XML_Profiles.applyProfile("0", false);
+            XML_Management.Manage_XML_Profiles.applyProfile("0", false);
 
 
 

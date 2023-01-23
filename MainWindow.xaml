@@ -8,7 +8,7 @@
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        Title="Handheld Control Panel" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" >
+        Title="Handheld Control Panel" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing" >
     <Grid>
         <Grid.Resources>
     

@@ -16,6 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ControlzEx.Theming;
 using MahApps.Metro.Controls;
+using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.Classes;
+using System.Windows.Forms;
 
 namespace Handheld_Control_Panel
 {
@@ -97,7 +100,19 @@ namespace Handheld_Control_Panel
             
         }
 
-       
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //close task scheduler
+            // Dispose of thread to allow program to close properly
+            Handheld_Control_Panel.Classes.Task_Scheduler.Task_Scheduler.closeScheduler();
+
+
+            //mouse keyboard input hook
+            //MouseKeyHook.Unsubscribe();
+
+            //kill controller thread
+            Global_Variables.killControllerThread = true;
+        }
     }
     
 }

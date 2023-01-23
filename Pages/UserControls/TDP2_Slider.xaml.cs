@@ -24,11 +24,11 @@ namespace Handheld_Control_Panel.Pages.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class TDP_Slider : UserControl
+    public partial class TDP2_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public TDP_Slider()
+        public TDP2_Slider()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);
@@ -40,6 +40,8 @@ namespace Handheld_Control_Panel.Pages.UserControls
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
             if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
+
+            Debug.WriteLine(this.Height.ToString());
         }
         private void handleControllerInputs(object sender, EventArgs e)
         {
