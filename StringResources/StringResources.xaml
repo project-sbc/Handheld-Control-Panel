@@ -11,7 +11,8 @@
 
 
     <system:String x:Key="Header_CPU_Settings">CPU Settings</system:String>
-
+    <system:String x:Key="Header_System_Settings">System Settings</system:String>
+    
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
@@ -32,7 +33,7 @@
     <system:String x:Key="Usercontrol_EPP_MainText">EPP</system:String>
     <system:String x:Key="Usercontrol_EPP_SubText">Change energy performance preference (EPP) Lower is better performance.</system:String>
     <system:String x:Key="Usercontrol_CoreParking_MainText">Active Cores</system:String>
-    <system:String x:Key="Usercontrol_EPP_SubText">Change number of active CPU Cores</system:String>
+    <system:String x:Key="Usercontrol_CoreParking_SubText">Change number of active CPU Cores</system:String>
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>
