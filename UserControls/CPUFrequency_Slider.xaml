@@ -19,8 +19,8 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                       
                         <Label x:Name="unitLabel" Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} MHz" Style="{StaticResource userControlUnitLabel}"/>
-           
-                        <mah:ToggleSwitch x:Name="toggleSwitch"  OnContent="{DynamicResource Usercontrol_VolumeMute_OnContent}" OffContent="{DynamicResource Usercontrol_VolumeMute_OffContent}" Toggled="toggleSwitch_Toggled" />
+
+                        <mah:ToggleSwitch x:Name="toggleSwitch"  OnContent="{DynamicResource Usercontrol_CPUUnlock_OnContent}" OffContent="{DynamicResource Usercontrol_CPUUnlock_OffContent}" Toggled="toggleSwitch_Toggled" />
                         <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,6,0"  />
                     </StackPanel>
                 </DockPanel>
