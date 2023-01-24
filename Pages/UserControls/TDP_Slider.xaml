@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:Handheld_Control_Panel.Pages.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
               d:DesignWidth="800" Loaded="UserControl_Loaded">
-    <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
-        <Border Style="{StaticResource userControlLeftBorder}"  x:Name="leftBorder" >
-            <DockPanel Margin="3,3,3,3">
+
+        <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
+            <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
                     <iconPacks:PackIconMaterial Kind="LightningBolt" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
@@ -21,13 +21,12 @@
                         </StackPanel>
                     </DockPanel>
                 </DockPanel>
-                <Slider x:Name="control" Tag="Slider_TDP" Height="30" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
+                <Slider x:Name="control" Tag="Slider_TDP" Height="24" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
                     <Slider.LayoutTransform>
                         <ScaleTransform ScaleY="1.4" ScaleX="1.4" />
                     </Slider.LayoutTransform>
                 </Slider>
             </DockPanel>
         </Border>
-      
-    </Border>
+
 </UserControl>

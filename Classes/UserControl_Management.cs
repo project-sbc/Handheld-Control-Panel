@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -39,6 +40,23 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Global_Variables.Global_Variables.readPL2;
                         break;
+                    case "Slider_Volume":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        slider.Value = Global_Variables.Global_Variables.volume;
+                        break;
+                    case "Slider_Brightness":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        slider.Value = Global_Variables.Global_Variables.brightness;
+                        break;
+
                     default:break;
                 }
 
@@ -57,44 +75,54 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
         }
 
-        public static void handleUserControl(Border border, Border leftBorder,object control, string action)
+        public static void handleUserControl(Border border, object control, string action)
         {
-            
-            
+
+            ResourceDictionary res = (ResourceDictionary)Application.LoadComponent(new Uri("Styles/ControlStyle.xaml", UriKind.RelativeOrAbsolute));
 
 
             switch (action )
             {
                 case "Highlight":
-                    if (Properties.Settings.Default.SystemTheme == "Light")
-                    {
-                        leftBorder.BorderBrush = System.Windows.Media.Brushes.Black;
-                        border.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                    }
-                    else
-                    {
-                        leftBorder.BorderBrush = System.Windows.Media.Brushes.White;
-                        border.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                    }
+                    border.Style = (Style)res["userControlBorderHighlight"];
 
                     break;
                 case "Select":
-                    if (Properties.Settings.Default.SystemTheme == "Light")
-                    {
-                        border.BorderBrush = System.Windows.Media.Brushes.Black;
-                    }
-                    else
-                    {
-                        border.BorderBrush = System.Windows.Media.Brushes.White;
-                    }
-                  
+                    border.Style = (Style)res["userControlBorderSelected"];
+
                     break;
                 case "Unhighlight":
-                    border.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                    leftBorder.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    border.Style = (Style)res["userControlBorder"];
+                    
                     break;
 
-                default: break;
+                default: 
+                    if (control is Slider)
+                    {
+                        Slider slider = (Slider)control;
+                        switch(action)
+                        {
+                            case "Up":
+                                slider.Value = slider.Value + slider.LargeChange;
+                                break;
+                            case "Down":
+                                slider.Value = slider.Value - slider.LargeChange;
+                                break;
+                            case "Right":
+                                slider.Value = slider.Value + slider.SmallChange;
+                                break;
+                            case "Left":
+                                slider.Value = slider.Value - slider.SmallChange;
+                                break;
+                            default:break;
+                        }
+
+                    }
+                    
+                    
+                    
+                    
+                    break;
             }
         }
 
@@ -111,6 +139,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_TDP2":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.readPL1, (int)sliderValue));
+                    break;
+                case "Slider_Volume":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume((int)sliderValue));
                     break;
                 default: break;
 
@@ -148,8 +179,8 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 if (SliderThumb is Thumb thumb)
                 {
 
-                    thumb.Width = 16;
-                    thumb.Height = 24;
+                    thumb.Width = 13;
+                    thumb.Height = 18;
                 }
                 else { }
             }

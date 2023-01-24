@@ -11,8 +11,14 @@
         <Setter Property="Width" Value="42" />
 
     </Style>
-    <!--buttons-->
-   
+    <!--textblock-->
+    <Style x:Key="controllerButtonTextblock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+    </Style>
     <!--icons-->
     <Style x:Key="userControlIconMaterial" TargetType="icon:PackIconMaterial">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
@@ -63,46 +69,56 @@
     <!--labels-->
     <Style x:Key="headerLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Margin" Value="20,0,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
     <Style x:Key="userControlMainLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
     <Style x:Key="userControlSubLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
     <Style x:Key="userControlUnitLabel" TargetType="Label">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
     <!--rectangles-->
     <Style x:Key="rectangle" TargetType="Rectangle" >
-        <Setter Property="Height" Value="1" />
+        <Setter Property="Height" Value="2" />
         <Setter Property="Fill" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="Margin" Value="20,0,20,0" />
     </Style>
 
     <!--borders-->
+    <Style x:Key="userControlBorderHighlight" TargetType="Border">
+        <Setter Property="Margin" Value="18,1,18,1" />
+        <Setter Property="BorderThickness" Value="3,3,3,3" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+    </Style>
+    <Style x:Key="userControlBorderSelected" TargetType="Border">
+        <Setter Property="Margin" Value="18,1,18,1" />
+        <Setter Property="BorderThickness" Value="3,3,3,3" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+    </Style>
     <Style x:Key="userControlBorder" TargetType="Border">
-        <Setter Property="Margin" Value="18,3,18,3" />
-        <Setter Property="BorderThickness" Value="0,2,2,2" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+        <Setter Property="Margin" Value="18,1,18,1" />
+        <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
-    <Style x:Key="userControlLeftBorder" TargetType="Border">
-
-        <Setter Property="BorderThickness" Value="2,0,0,0" />
-        <Setter Property="CornerRadius" Value="7" />
-    </Style>
-
     <!--navigationview-->
     <Style x:Key="navigationView" TargetType="ui:NavigationView" >
         <Setter Property="IsPaneOpen" Value="False" />

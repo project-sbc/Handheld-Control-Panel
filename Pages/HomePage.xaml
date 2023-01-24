@@ -14,6 +14,8 @@
         <Rectangle Style="{StaticResource rectangle}" />
         <uc:TDP_Slider/>
         <uc:TDP2_Slider/>
- 
+
+        <uc:Volume_Slider />
+        <uc:Brightness_Slider/>
     </StackPanel>
 </Page>

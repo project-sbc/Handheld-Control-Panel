@@ -16,8 +16,14 @@
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
     <system:String x:Key="Usercontrol_TDP2_MainText">Boost TDP</system:String>
     <system:String x:Key="Usercontrol_TDP2_SubText">Change temporary boost thermal design power (TDP) in watts</system:String>
-    
-    
+    <system:String x:Key="Usercontrol_Volume_MainText">Volume</system:String>
+    <system:String x:Key="Usercontrol_Volume_SubText">Change system volume</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute_MainText">Mute</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute_SubText">Mute system volume</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute_OnContent">Muted</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute_OffContent">Unmuted</system:String>
+    <system:String x:Key="Usercontrol_Brightness_MainText">Brightness</system:String>
+    <system:String x:Key="Usercontrol_Brightness_SubText">Change system brightness</system:String>
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

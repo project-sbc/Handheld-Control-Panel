@@ -7,12 +7,12 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True"
         Title="Handheld Control Panel" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing" >
-    <Grid>
+    <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         <Grid.Resources>
     
-            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent}" />
+            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
       
         </Grid.Resources>
         <ui:NavigationView x:Name="mainWindowNavigationView"  SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}">
