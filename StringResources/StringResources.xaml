@@ -24,6 +24,8 @@
     <system:String x:Key="Usercontrol_VolumeMute_OffContent">Unmuted</system:String>
     <system:String x:Key="Usercontrol_Brightness_MainText">Brightness</system:String>
     <system:String x:Key="Usercontrol_Brightness_SubText">Change system brightness</system:String>
+    <system:String x:Key="Usercontrol_CPUFrequency_MainText">Max CPU Frequency</system:String>
+    <system:String x:Key="Usercontrol_CPUFrequency_SubText">Change max CPU frequency from powercfg</system:String>
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

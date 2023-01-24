@@ -19,16 +19,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Handheld_Control_Panel.Pages.UserControls
+namespace Handheld_Control_Panel.UserControls
 {
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class TDP2_Slider : UserControl
+    public partial class TDP_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public TDP2_Slider()
+        public TDP_Slider()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);
@@ -36,13 +36,14 @@ namespace Handheld_Control_Panel.Pages.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString()+ this.GetParentObject().GetParentObject().GetParentObject().GetParentObject());
+            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
             if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
-
-            Debug.WriteLine(this.Height.ToString());
         }
+
+
+
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
@@ -54,7 +55,7 @@ namespace Handheld_Control_Panel.Pages.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(this.IsLoaded)
+            if(this.IsLoaded && control.Visibility != Visibility.Collapsed)
             {
                 UserControl_Management.Slider_ValueChanged(sender, e);
             }

@@ -52,10 +52,10 @@
 
     <!--stack panel-->
 
-    <Style x:Key="pageStackPanel" TargetType="StackPanel">
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="ScrollViewer.PanningMode" Value="VerticalOnly"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+    <Style x:Key="pageScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="CanContentScroll" Value="True" />
+        <Setter Property="PanningMode" Value="VerticalOnly"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
     </Style>
 
     <!--textblocks-->

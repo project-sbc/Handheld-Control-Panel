@@ -20,33 +20,47 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Handheld_Control_Panel.Pages.UserControls
+namespace Handheld_Control_Panel.UserControls
 {
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Volume_Slider : UserControl
+    public partial class CPUFrequency_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Volume_Slider()
+        public CPUFrequency_Slider()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);
+            handleMaxCPUFrequency();
+          
+        }
 
-            toggleSwitch.IsOn = Global_Variables.muteVolume;
-            if (toggleSwitch.IsOn) { icon.Kind = MahApps.Metro.IconPacks.PackIconUniconsKind.VolumeMute; } else { icon.Kind = MahApps.Metro.IconPacks.PackIconUniconsKind.VolumeUp; }
+        private void handleMaxCPUFrequency()
+        {
+            if (Global_Variables.cpuMaxFrequency == 0)
+            {
+                toggleSwitch.IsOn = true;
+                unitLabel.Visibility = Visibility.Hidden;
+                control.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                toggleSwitch.IsOn = false;
+                
+            }
+          
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString()+ this.GetParentObject().GetParentObject().GetParentObject().GetParentObject());
+            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
             if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
 
-            
         }
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -59,6 +73,7 @@ namespace Handheld_Control_Panel.Pages.UserControls
                 }
                 else
                 {
+                    
                     Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
                 }
                 
@@ -77,14 +92,20 @@ namespace Handheld_Control_Panel.Pages.UserControls
         private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             bool toggle = toggleSwitch.IsOn;
-            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolumeMute(toggle));
+           
             if (toggleSwitch.IsOn)
             {
-                icon.Kind = MahApps.Metro.IconPacks.PackIconUniconsKind.VolumeMute; 
+                control.Visibility = Visibility.Collapsed;
+                unitLabel.Visibility = Visibility.Hidden;
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency(0));
             } 
             else 
-            { 
-                icon.Kind = MahApps.Metro.IconPacks.PackIconUniconsKind.VolumeUp; 
+            {
+                unitLabel.Visibility = Visibility.Visible;
+                control.Visibility = Visibility.Visible;
+                control.Value = control.Maximum;
+                double value = control.Value;
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency((int)value));
             }
         }
     }

@@ -121,13 +121,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\UserControls\Brightness_Slider.xaml.cs">
+    <Compile Update="UserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\UserControls\Volume_Slider.xaml.cs">
+    <Compile Update="UserControls\CPUFrequency_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\UserControls\TDP2_Slider.xaml.cs">
+    <Compile Update="UserControls\Volume_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\TDP2_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
@@ -152,6 +155,10 @@
 
   <ItemGroup>
     <Resource Include="ProjectSBC.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\UserControls\" />
   </ItemGroup>
 
 </Project>

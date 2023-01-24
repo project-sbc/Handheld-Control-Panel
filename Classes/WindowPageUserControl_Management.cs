@@ -1,10 +1,12 @@
 ﻿using Handheld_Control_Panel.Classes.Controller_Management;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Handheld_Control_Panel.Classes
@@ -12,10 +14,20 @@ namespace Handheld_Control_Panel.Classes
     public static class WindowPageUserControl_Management
     {
         //COMMON routines across all pages/windows/usercontrols.... to make it so that a one size fits all method exists
-        public static string getWindowPageFromWindowToString(string window)
+        public static string getWindowPageFromWindowToString(DependencyObject thisObject)
         {
+            //get page from object
+            int counter = 0;
+            DependencyObject parent = thisObject;
+            while (!parent.ToString().Contains("Page") && counter < 20)
+            {
+                counter++;
+                parent = parent.GetParentObject();
+            }
+
             //gets window page value so I know what window and page is being used
-            return window.Replace(" ", "").Replace(":", "").Replace("Handheld_Control_Panel.", "").Replace("Pages.", ""); 
+            string combo = Window.GetWindow(thisObject).ToString() + parent.ToString();
+            return combo.Replace(" ", "").Replace(":", "").Replace("Handheld_Control_Panel.", "").Replace("Pages.", ""); 
         }
      
         public static void switchToOuterNavigation(string window)

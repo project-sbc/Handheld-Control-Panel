@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="systemAccent" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Steel</Value>
+      <Value Profile="(Default)">Blue</Value>
     </Setting>
     <Setting Name="language" Type="System.String" Scope="User">
       <Value Profile="(Default)">English</Value>
@@ -30,7 +30,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="SystemTheme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Dark</Value>
+      <Value Profile="(Default)">Light</Value>
     </Setting>
     <Setting Name="autoApplySetTDP" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

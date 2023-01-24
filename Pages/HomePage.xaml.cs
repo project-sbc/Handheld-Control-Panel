@@ -1,6 +1,6 @@
 ﻿using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
-using Handheld_Control_Panel.Pages.UserControls;
+using Handheld_Control_Panel.UserControls;
 using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace Handheld_Control_Panel.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //get unique window page combo from getwindow to string
-            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(Window.GetWindow(this).ToString()+this);
+            windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
             getUserControlsOnPage();

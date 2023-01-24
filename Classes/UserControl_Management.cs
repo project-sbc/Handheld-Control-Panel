@@ -56,7 +56,23 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.brightness;
                         break;
+                    case "Slider_MaxCPU":
+                        slider.Minimum = 1000;
+                        slider.Maximum = 5000;
+                        slider.TickFrequency = 100;
+                        slider.SmallChange = 100;
+                        slider.LargeChange = 500;
+                        if (Global_Variables.Global_Variables.cpuMaxFrequency == 0)
+                        {
+                            slider.Value = slider.Maximum;
+                        }
+                        else
+                        {
+                            slider.Value = Global_Variables.Global_Variables.cpuMaxFrequency;
+                        }
+                   
 
+                        break;
                     default:break;
                 }
 
@@ -142,6 +158,18 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_Volume":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume((int)sliderValue));
+                    break;
+
+                case "Slider_MaxCPU":
+                    if (sliderValue == slider.Maximum)
+                    {
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency(0));
+                    }
+                    else
+                    {
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency((int)sliderValue));
+                    }
+                    
                     break;
                 default: break;
 
