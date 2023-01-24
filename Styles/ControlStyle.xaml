@@ -94,19 +94,19 @@
     <Style x:Key="rectangle" TargetType="Rectangle" >
         <Setter Property="Height" Value="2" />
         <Setter Property="Fill" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="Margin" Value="20,0,20,0" />
+        <Setter Property="Margin" Value="11,0,11,2" />
     </Style>
 
     <!--borders-->
     <Style x:Key="userControlBorderHighlight" TargetType="Border">
-        <Setter Property="Margin" Value="18,1,18,1" />
+        <Setter Property="Margin" Value="7,1,7,1" />
         <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
     </Style>
     <Style x:Key="userControlBorderSelected" TargetType="Border">
-        <Setter Property="Margin" Value="18,1,18,1" />
+        <Setter Property="Margin" Value="7,1,7,1" />
         <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
@@ -114,7 +114,7 @@
     </Style>
     <Style x:Key="userControlBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
-        <Setter Property="Margin" Value="18,1,18,1" />
+        <Setter Property="Margin" Value="7,1,7,1" />
         <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
         <Setter Property="BorderBrush" Value="Transparent" />

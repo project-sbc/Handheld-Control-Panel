@@ -69,9 +69,9 @@ namespace Handheld_Control_Panel.Pages
             {
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl);
-                if (highlightedUserControl != intReturn[0])
+                if (highlightedUserControl != intReturn[0] && intReturn[0] > -1)
                 {
-                    highlightedUserControl = intReturn[0];
+                    
                     if (action == "Up")
                     {
                         ((IScrollInfo)stackPanel).MouseWheelUp();
@@ -80,9 +80,9 @@ namespace Handheld_Control_Panel.Pages
                     {
                         ((IScrollInfo)stackPanel).MouseWheelDown();
                     }
-                    userControls[highlightedUserControl].BringIntoView() ;
+                    userControls[intReturn[0]].BringIntoView() ;
                 }
-                
+                highlightedUserControl = intReturn[0];
                 selectedUserControl = intReturn[1];
             }
 

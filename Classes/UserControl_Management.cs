@@ -48,6 +48,22 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.volume;
                         break;
+                    case "Slider_EPP":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        slider.Value = Global_Variables.Global_Variables.EPP;
+                        break;
+                    case "Slider_CoreParking":
+                        slider.Minimum = 1;
+                        slider.Maximum = Global_Variables.Global_Variables.maxCpuCores;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 2;
+                        slider.Value = Global_Variables.Global_Variables.cpuActiveCores;
+                        break;
                     case "Slider_Brightness":
                         slider.Minimum = 0;
                         slider.Maximum = 100;
@@ -135,16 +151,12 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                     }
                     
-                    
-                    
-                    
                     break;
             }
         }
 
         public static void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-        
             Slider slider = (Slider)sender;
             string sliderTag = slider.Tag.ToString();
             double sliderValue = slider.Value;
@@ -159,7 +171,12 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 case "Slider_Volume":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume((int)sliderValue));
                     break;
-
+                case "Slider_EPP":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.EPP_Management.EPP_Management.changeEPP((int)sliderValue));
+                    break;
+                case "Slider_CoreParking":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.CoreParking_Management.CoreParking_Management.changeActiveCores((int)sliderValue));
+                    break;
                 case "Slider_MaxCPU":
                     if (sliderValue == slider.Maximum)
                     {

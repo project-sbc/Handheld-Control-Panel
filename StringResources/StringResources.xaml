@@ -5,7 +5,8 @@
     <system:String x:Key="MainWindow_NavigationView_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
     <system:String x:Key="MainWindow_NavigationView_Hotkeys">Hotkeys</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Gamelauncher">Game Launcher</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Gamelauncher">App Launcher</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Customize">Customize</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
 
 
@@ -28,8 +29,10 @@
     <system:String x:Key="Usercontrol_CPUFrequency_SubText">Change max CPU frequency from powercfg</system:String>
     <system:String x:Key="Usercontrol_CPUUnlock_OnContent">Unlocked</system:String>
     <system:String x:Key="Usercontrol_CPUUnlock_OffContent">Locked</system:String>
-
-    
+    <system:String x:Key="Usercontrol_EPP_MainText">EPP</system:String>
+    <system:String x:Key="Usercontrol_EPP_SubText">Change energy performance preference (EPP) Lower is better performance.</system:String>
+    <system:String x:Key="Usercontrol_CoreParking_MainText">Active Cores</system:String>
+    <system:String x:Key="Usercontrol_EPP_SubText">Change number of active CPU Cores</system:String>
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

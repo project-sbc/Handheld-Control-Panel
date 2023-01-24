@@ -127,6 +127,12 @@
     <Compile Update="UserControls\CPUFrequency_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\CoreParking_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EPP_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Volume_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

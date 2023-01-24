@@ -10,7 +10,7 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel Margin="2,2,2,2">
             <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconUnicons x:Name="icon" Kind="VolumeUp" Style="{StaticResource userControlIconUnicons}" />
+                <iconPacks:PackIconFontAwesome  Kind="MicrochipSolid" x:Name="icon" Style="{StaticResource userControlIconFontAwesome}" />
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_CPUFrequency_MainText}" Style="{StaticResource userControlMainLabel}"/>

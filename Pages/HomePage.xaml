@@ -15,6 +15,7 @@
             <uc:TDP_Slider/>
             <uc:TDP2_Slider/>
             <uc:CPUFrequency_Slider/>
+            <uc:EPP_Slider />
             <uc:Volume_Slider />
             <uc:Brightness_Slider/>
         </StackPanel>
