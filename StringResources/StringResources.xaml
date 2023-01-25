@@ -34,6 +34,12 @@
     <system:String x:Key="Usercontrol_EPP_SubText">Change energy performance preference (EPP) Lower is better performance.</system:String>
     <system:String x:Key="Usercontrol_CoreParking_MainText">Active Cores</system:String>
     <system:String x:Key="Usercontrol_CoreParking_SubText">Change number of active CPU Cores</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit_MainText">FPS Limit</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit_SubText">Set RTSS FPS limit</system:String>
+
+    <system:String x:Key="Usercontrol_StartRTSS_MainText">Start RTSS</system:String>
+    
+
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

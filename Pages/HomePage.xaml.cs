@@ -74,11 +74,11 @@ namespace Handheld_Control_Panel.Pages
                     
                     if (action == "Up")
                     {
-                        ((IScrollInfo)stackPanel).MouseWheelUp();
+                        ((IScrollInfo)stackPanel).LineUp();
                     }
                     if (action == "Down")
                     {
-                        ((IScrollInfo)stackPanel).MouseWheelDown();
+                        ((IScrollInfo)stackPanel).LineDown();
                     }
                     userControls[intReturn[0]].BringIntoView() ;
                 }

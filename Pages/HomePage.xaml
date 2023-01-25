@@ -17,6 +17,7 @@
             <uc:CPUFrequency_Slider/>
             <uc:EPP_Slider />
             <uc:CoreParking_Slider/>
+            <uc:FPSLimit_Slider />
             <Label Content="{DynamicResource Header_System_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:Volume_Slider />

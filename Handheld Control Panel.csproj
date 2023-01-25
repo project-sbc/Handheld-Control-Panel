@@ -124,6 +124,9 @@
     <Compile Update="UserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\FPSLimit_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\CPUFrequency_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -161,10 +164,6 @@
 
   <ItemGroup>
     <Resource Include="ProjectSBC.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\UserControls\" />
   </ItemGroup>
 
 </Project>

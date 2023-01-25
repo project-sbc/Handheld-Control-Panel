@@ -72,6 +72,16 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.brightness;
                         break;
+                    case "Slider_FPSLimit":
+                        slider.Minimum = 0;
+                        slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        slider.Value = Global_Variables.Global_Variables.FPSLimit;
+                        break;
+
+                        
                     case "Slider_MaxCPU":
                         slider.Minimum = 1000;
                         slider.Maximum = 5000;
@@ -173,6 +183,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_EPP":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.EPP_Management.EPP_Management.changeEPP((int)sliderValue));
+                    break;
+                case "Slider_FPSLimit":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.setRTSSFPSLimit((int)sliderValue));
                     break;
                 case "Slider_CoreParking":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.CoreParking_Management.CoreParking_Management.changeActiveCores((int)sliderValue));

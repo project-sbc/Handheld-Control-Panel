@@ -80,7 +80,7 @@ namespace Handheld_Control_Panel.Classes
           //  Fan_Management.Fan_Management.determineFanDevice();
 
             //check if RTSS should be started at startup
-            RTSS.checkStartRTSS();
+            RTSS.checkAutoStartRTSS();
 
             //apply rtss fps limit of 0 by default if cant find limit between 5-60
             RTSS.getRTSSFPSLimit();

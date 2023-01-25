@@ -19,6 +19,14 @@
         <Setter Property="Foreground"
                 Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
+    <!--button-->
+    <Style x:Key="userControlButton" TargetType="Button">
+        <Setter Property="Height" Value="38" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+    </Style>
+
     <!--icons-->
     <Style x:Key="userControlIconMaterial" TargetType="icon:PackIconMaterial">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />

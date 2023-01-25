@@ -23,19 +23,23 @@ namespace Handheld_Control_Panel.Classes
             }
         }
 
-        public static void checkStartRTSS()
+        public static void checkAutoStartRTSS()
         {
             if (!RTSSRunning() && Properties.Settings.Default.autoStartRTSS)
             {
-                if (File.Exists(@"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe"))
-                {
-                    Process process = new Process();
-                    process.StartInfo.FileName = @"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe";
-                    process.Start();
+                startRTSS();
+            }
+        }
+        public static void startRTSS()
+        {
+            if (File.Exists(@"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe"))
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = @"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe";
+                process.Start();
 
-                    process.Dispose();
-                    process = null;
-                } 
+                process.Dispose();
+                process = null;
             }
         }
         public static bool RTSSRunning()

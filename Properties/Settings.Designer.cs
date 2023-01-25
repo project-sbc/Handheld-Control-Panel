@@ -225,5 +225,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["directoryEpicGames"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int maxRTSSFPSLimit {
+            get {
+                return ((int)(this["maxRTSSFPSLimit"]));
+            }
+            set {
+                this["maxRTSSFPSLimit"] = value;
+            }
+        }
     }
 }
