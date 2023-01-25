@@ -136,6 +136,9 @@
     <Compile Update="UserControls\EPP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\AccentColor_Picker.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Volume_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

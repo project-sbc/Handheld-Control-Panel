@@ -40,6 +40,11 @@
     <system:String x:Key="Usercontrol_StartRTSS_MainText">Start RTSS</system:String>
     
 
+    
+    
+    
+    
+    
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>
