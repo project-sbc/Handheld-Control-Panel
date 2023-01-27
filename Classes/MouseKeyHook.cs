@@ -22,10 +22,13 @@ namespace Handheld_Control_Panel.Classes
         {
             // Note: for the application hook, use the Hook.AppEvents() instead
             m_GlobalHook = Hook.GlobalEvents();
-
+     
             m_GlobalHook.KeyDown += GlobalHook_KeyEvent;
             m_GlobalHook.KeyUp += GlobalHook_KeyEvent;
         }
+
+
+
         private static void GlobalHook_KeyEvent(object? sender, KeyEventArgs e)
         {
 

@@ -50,7 +50,12 @@ namespace Handheld_Control_Panel.UserControls
         {
             foreach(Theme theme in themes)
             {
-                control.Items.Add(accentShape(theme));
+                if (theme.ToString().Contains("(Light)"))
+                {
+                    control.Items.Add(accentShape(theme));
+                    
+                }
+      
             }
           
             foreach (Rectangle lbi in control.Items)
@@ -74,7 +79,7 @@ namespace Handheld_Control_Panel.UserControls
             accentShape.Height = 30;
             accentShape.VerticalAlignment= VerticalAlignment.Center;
             accentShape.HorizontalAlignment = HorizontalAlignment.Center;
-            accentShape.Margin = new Thickness(3,3,3,3);
+            accentShape.Margin = new Thickness(3,6,8,6);
             accentShape.Fill = theme.ShowcaseBrush;
             accentShape.Tag = theme.DisplayName;
             return accentShape;
@@ -97,6 +102,8 @@ namespace Handheld_Control_Panel.UserControls
                 string theme = themeShape.Tag.ToString();
                 theme = theme.Substring(0, theme.IndexOf("(")).Trim();
                 ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + theme);
+                Properties.Settings.Default.systemAccent = theme;
+                Properties.Settings.Default.Save();
             }
             
         }

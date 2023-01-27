@@ -13,11 +13,11 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                    <iconPacks:PackIconMaterial Kind="LightningBolt" Style="{StaticResource userControlIconMaterial}" />
+                    <iconPacks:PackIconFontAwesome Kind="PaintBrushSolid" Style="{StaticResource userControlIconFontAwesome}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                            <Label Content="{DynamicResource Usercontrol_TDP_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                            <Label x:Name="subText" Content="{DynamicResource Usercontrol_TDP_SubText}" />
+                            <Label Content="{DynamicResource Usercontrol_AccentPicker_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_AccentPicker_SubText}" />
                         </StackPanel>
                       
                     </DockPanel>
@@ -25,9 +25,10 @@
             <ListBox x:Name="control" HorizontalAlignment="Center" SelectionChanged="control_SelectionChanged"  >
                 <ListBox.Template>
                     <ControlTemplate>
-                        <WrapPanel  IsItemsHost="True" />
+                        <StackPanel Orientation="Horizontal"   IsItemsHost="True" />
                     </ControlTemplate>
                 </ListBox.Template>
+       
             </ListBox>
             </DockPanel>
         </Border>

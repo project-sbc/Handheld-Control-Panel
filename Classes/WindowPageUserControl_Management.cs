@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -48,7 +49,7 @@ namespace Handheld_Control_Panel.Classes
         }
 
 
-        public static int[] globalHandlePageControllerInput(string windowpage, string action, List<UserControl> userControls, int highlightedIndex, int selectedIndex)
+        public static int[] globalHandlePageControllerInput(string windowpage, string action, List<UserControl> userControls, int highlightedIndex, int selectedIndex, StackPanel stackPanel)
         {
             //global method so that all pages can process there controller input through here, this makes it easier to update across all pages 
 
@@ -88,6 +89,10 @@ namespace Handheld_Control_Panel.Classes
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex - 1].ToString()));
                             intReturn[0] = highlightedIndex-1;
+                            ((IScrollInfo)stackPanel).MouseWheelUp();
+                            userControls[intReturn[0]].BringIntoView();
+                
+                            
                         }
                     }
                     if (action == "Down")
@@ -97,6 +102,8 @@ namespace Handheld_Control_Panel.Classes
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + 1].ToString()));
                             intReturn[0] = highlightedIndex+ 1;
+                            ((IScrollInfo)stackPanel).MouseWheelDown();
+                            userControls[intReturn[0]].BringIntoView();
                         }
                     }
                     if (action == "B" || action == "Left")

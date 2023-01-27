@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.HomePage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,19 +11,14 @@
     
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-            <Label Content="{DynamicResource Header_CPU_Settings}" Style="{StaticResource headerLabel}" />
+            <Label Content="{DynamicResource Header_General_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
-            <uc:TDP_Slider/>
-          
-            <uc:TDP2_Slider/>
-            <uc:CPUFrequency_Slider/>
-            <uc:EPP_Slider />
-            <uc:CoreParking_Slider/>
-            <uc:FPSLimit_Slider />
+
+            <uc:AccentColor_Picker/>
+       
             <Label Content="{DynamicResource Header_System_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
-            <uc:Volume_Slider />
-            <uc:Brightness_Slider/>
+
         </StackPanel>
     </ScrollViewer>
   

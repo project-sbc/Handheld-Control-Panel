@@ -12,6 +12,7 @@
 
     <system:String x:Key="Header_CPU_Settings">CPU Settings</system:String>
     <system:String x:Key="Header_System_Settings">System Settings</system:String>
+    <system:String x:Key="Header_General_Settings">General Settings</system:String>
     
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
@@ -36,6 +37,11 @@
     <system:String x:Key="Usercontrol_CoreParking_SubText">Change number of active CPU Cores</system:String>
     <system:String x:Key="Usercontrol_FPSLimit_MainText">FPS Limit</system:String>
     <system:String x:Key="Usercontrol_FPSLimit_SubText">Set RTSS FPS limit</system:String>
+
+    <system:String x:Key="Usercontrol_AccentPicker_MainText">Accent Color</system:String>
+    <system:String x:Key="Usercontrol_AccentPicker_SubText">Select accent color for application</system:String>
+
+    
 
     <system:String x:Key="Usercontrol_StartRTSS_MainText">Start RTSS</system:String>
     
