@@ -22,13 +22,12 @@
                       
                     </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" HorizontalAlignment="Center" SelectionChanged="control_SelectionChanged"  >
-                <ListBox.Template>
-                    <ControlTemplate>
-                        <StackPanel Orientation="Horizontal"   IsItemsHost="True" />
-                    </ControlTemplate>
-                </ListBox.Template>
-       
+            <ListBox x:Name="control" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" SelectionChanged="control_SelectionChanged"  >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
             </ListBox>
             </DockPanel>
         </Border>

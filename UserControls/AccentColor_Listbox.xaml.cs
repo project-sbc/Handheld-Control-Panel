@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -78,7 +79,7 @@ namespace Handheld_Control_Panel.UserControls
             accentShape.Width = 30;
             accentShape.Height = 30;
             accentShape.VerticalAlignment= VerticalAlignment.Center;
-            accentShape.HorizontalAlignment = HorizontalAlignment.Center;
+            //accentShape.HorizontalAlignment = HorizontalAlignment.Center;
             accentShape.Margin = new Thickness(3,6,8,6);
             accentShape.Fill = theme.ShowcaseBrush;
             accentShape.Tag = theme.DisplayName;
@@ -104,6 +105,7 @@ namespace Handheld_Control_Panel.UserControls
                 ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + theme);
                 Properties.Settings.Default.systemAccent = theme;
                 Properties.Settings.Default.Save();
+                control.ScrollIntoView(control.SelectedItem);
             }
             
         }

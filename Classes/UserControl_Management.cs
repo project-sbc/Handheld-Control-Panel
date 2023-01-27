@@ -170,7 +170,28 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     if (control is ListBox)
                     {
                         ListBox listBox = (ListBox)control;
-                        
+                        switch(action)
+                        {
+                            case "Left":
+                                if (listBox.SelectedIndex > 0) { listBox.SelectedIndex = listBox.SelectedIndex - 1; listBox.ScrollIntoView(listBox.SelectedItem); }
+                                break;
+
+                            case "Up":
+                                if (listBox.SelectedIndex > 0) { listBox.SelectedIndex = listBox.SelectedIndex - 1; listBox.ScrollIntoView(listBox.SelectedItem); }
+                                break;
+                            case "Right":
+                                if (listBox.SelectedIndex < (listBox.Items.Count -1)) { listBox.SelectedIndex = listBox.SelectedIndex + 1; listBox.ScrollIntoView(listBox.SelectedItem); }
+                                break;
+                            case "Down":
+                                if (listBox.SelectedIndex < (listBox.Items.Count - 1)) 
+                                { 
+                                    listBox.SelectedIndex = listBox.SelectedIndex + 1; 
+                                   
+                                }
+                                break;
+                            default: break;
+
+                        }
                         
 
                     }
