@@ -13,8 +13,8 @@
         <StackPanel x:Name="stackPanel" >
             <Label Content="{DynamicResource Header_General_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
-
-            <uc:AccentColor_Picker/>
+            <uc:Theme_Toggleswitch />
+            <uc:AccentColor_Listbox/>
        
             <Label Content="{DynamicResource Header_System_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />

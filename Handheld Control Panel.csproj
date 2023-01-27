@@ -127,6 +127,9 @@
     <Compile Update="UserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Theme_Toggleswitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\FPSLimit_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,7 +142,7 @@
     <Compile Update="UserControls\EPP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\AccentColor_Picker.xaml.cs">
+    <Compile Update="UserControls\AccentColor_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Volume_Slider.xaml.cs">

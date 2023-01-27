@@ -26,12 +26,12 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class AccentColor_Picker : UserControl
+    public partial class AccentColor_Listbox : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
         public ReadOnlyObservableCollection<Theme> themes = ThemeManager.Current.Themes;
-        public AccentColor_Picker()
+        public AccentColor_Listbox()
         {
             InitializeComponent();
             //UserControl_Management.setupControl(control);

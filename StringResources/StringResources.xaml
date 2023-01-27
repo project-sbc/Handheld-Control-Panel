@@ -13,37 +13,53 @@
     <system:String x:Key="Header_CPU_Settings">CPU Settings</system:String>
     <system:String x:Key="Header_System_Settings">System Settings</system:String>
     <system:String x:Key="Header_General_Settings">General Settings</system:String>
+    <system:String x:Key="Header_Display_Settings">Display Settings</system:String>
     
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
+    
     <system:String x:Key="Usercontrol_TDP2_MainText">Boost TDP</system:String>
     <system:String x:Key="Usercontrol_TDP2_SubText">Change temporary boost thermal design power (TDP) in watts</system:String>
+    
     <system:String x:Key="Usercontrol_Volume_MainText">Volume</system:String>
     <system:String x:Key="Usercontrol_Volume_SubText">Change system volume</system:String>
+    
     <system:String x:Key="Usercontrol_VolumeMute_MainText">Mute</system:String>
     <system:String x:Key="Usercontrol_VolumeMute_SubText">Mute system volume</system:String>
     <system:String x:Key="Usercontrol_VolumeMute_OnContent">Muted</system:String>
     <system:String x:Key="Usercontrol_VolumeMute_OffContent">Unmuted</system:String>
+    
     <system:String x:Key="Usercontrol_Brightness_MainText">Brightness</system:String>
     <system:String x:Key="Usercontrol_Brightness_SubText">Change system brightness</system:String>
+    
     <system:String x:Key="Usercontrol_CPUFrequency_MainText">Max CPU Frequency</system:String>
     <system:String x:Key="Usercontrol_CPUFrequency_SubText">Change max CPU frequency from powercfg</system:String>
     <system:String x:Key="Usercontrol_CPUUnlock_OnContent">Unlocked</system:String>
     <system:String x:Key="Usercontrol_CPUUnlock_OffContent">Locked</system:String>
+    
     <system:String x:Key="Usercontrol_EPP_MainText">EPP</system:String>
     <system:String x:Key="Usercontrol_EPP_SubText">Change energy performance preference (EPP) Lower is better performance.</system:String>
+    
     <system:String x:Key="Usercontrol_CoreParking_MainText">Active Cores</system:String>
     <system:String x:Key="Usercontrol_CoreParking_SubText">Change number of active CPU Cores</system:String>
+    
     <system:String x:Key="Usercontrol_FPSLimit_MainText">FPS Limit</system:String>
     <system:String x:Key="Usercontrol_FPSLimit_SubText">Set RTSS FPS limit</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit_OnContent">Unlimited</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit_OffContent">Limited</system:String>
+    <system:String x:Key="Usercontrol_StartRTSS_MainText">Start RTSS</system:String>
 
     <system:String x:Key="Usercontrol_AccentPicker_MainText">Accent Color</system:String>
-    <system:String x:Key="Usercontrol_AccentPicker_SubText">Select accent color for application</system:String>
+    <system:String x:Key="Usercontrol_AccentPicker_SubText">Select accent color for application. Switch pages to take full effect.</system:String>
 
-    
+    <system:String x:Key="Usercontrol_ThemeToggleSwitch_MainText">Application Theme</system:String>
+    <system:String x:Key="Usercontrol_ThemeToggleSwitch_SubText">Select dark or light mode. Switch pages to take full effect.</system:String>
+    <system:String x:Key="Usercontrol_ThemeToggleSwitch_OnContent">Dark Mode</system:String>
+    <system:String x:Key="Usercontrol_ThemeToggleSwitch_OffContent">Light Mode</system:String>
 
-    <system:String x:Key="Usercontrol_StartRTSS_MainText">Start RTSS</system:String>
+
+ 
     
 
     

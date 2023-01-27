@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -160,7 +161,19 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         }
 
                     }
-                    
+                    if (control is ToggleSwitch)
+                    {
+                        ToggleSwitch toggleSwitch = (ToggleSwitch)control;
+                        toggleSwitch.IsOn = !toggleSwitch.IsOn;
+
+                    }
+                    if (control is ListBox)
+                    {
+                        ListBox listBox = (ListBox)control;
+                        
+                        
+
+                    }
                     break;
             }
         }
