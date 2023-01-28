@@ -30,6 +30,18 @@ namespace Handheld_Control_Panel.Classes
                 startRTSS();
             }
         }
+
+        public static bool directoryRTSSExists()
+        {
+            if (File.Exists(@"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static void startRTSS()
         {
             if (File.Exists(@"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe"))

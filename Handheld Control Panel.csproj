@@ -127,6 +127,9 @@
     <Compile Update="UserControls\Refresh_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Scaling_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Resolution_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

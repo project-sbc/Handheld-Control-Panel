@@ -32,20 +32,27 @@ namespace Handheld_Control_Panel.UserControls
         private string usercontrol = "";
         public FPSLimit_Slider()
         {
-            InitializeComponent();
-            UserControl_Management.setupControl(control);
-            if (RTSS.RTSSRunning())
+            if (RTSS.directoryRTSSExists())
             {
-                handleMaxFPSLimit();
-                startRTSS.Visibility = Visibility.Collapsed;
+                InitializeComponent();
+                UserControl_Management.setupControl(control);
+                if (RTSS.RTSSRunning())
+                {
+                    handleMaxFPSLimit();
+                    startRTSS.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    //hide slider during load so that the thumb size can still be adjusted (wont work when collapsed)
+                    //control.Visibility= Visibility.Collapsed;
+                    toggleSwitch.Visibility = Visibility.Collapsed;
+                    unitLabel.Visibility = Visibility.Collapsed;
+                    startRTSS.Visibility = Visibility.Visible;
+                }
             }
             else
             {
-                //hide slider during load so that the thumb size can still be adjusted (wont work when collapsed)
-                //control.Visibility= Visibility.Collapsed;
-                toggleSwitch.Visibility = Visibility.Collapsed;
-                unitLabel.Visibility = Visibility.Collapsed;
-                startRTSS.Visibility = Visibility.Visible;
+                this.Visibility= Visibility.Collapsed;
             }
 
           

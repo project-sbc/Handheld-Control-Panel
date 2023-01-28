@@ -27,7 +27,8 @@
                     </StackPanel>
                 </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" Background="{DynamicResource MahApps.Brushes.Accent4}"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+            <ListBox x:Name="control" FontSize="16" Background="{DynamicResource MahApps.Brushes.Accent4}"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+                
                 <ListBox.ItemsPanel>
                    
                     <ItemsPanelTemplate>
