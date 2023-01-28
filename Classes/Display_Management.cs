@@ -26,6 +26,12 @@ namespace Handheld_Control_Panel.Classes.Display_Management
         public static string BaseDir = AppDomain.CurrentDomain.BaseDirectory;
         private static Object objLock = new Object();
 
+        //event is for refresh rate to update when the resolution changes
+        public static event EventHandler resolutionChangedEvent;
+        public static void raiseResolutionChangedEvent()
+        {
+            resolutionChangedEvent?.Invoke(null, EventArgs.Empty);
+        }
         public static void getCurrentDisplaySettings()
         {
             

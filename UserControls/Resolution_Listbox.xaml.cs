@@ -87,8 +87,11 @@ namespace Handheld_Control_Panel.UserControls
                 //check to make sure new resolution has that refresh rate, otherwise display error about changing refresh rate
                 if (Global_Variables.resolution_refreshrates[selectedItem].Contains(Global_Variables.refreshRate))
                 {
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(selectedItem));
+                    Display_Management.SetDisplayResolution(selectedItem);
+
                     selectedObject = control.SelectedItem;
+                    Display_Management.raiseResolutionChangedEvent();
+
                 }
                 else
                 {

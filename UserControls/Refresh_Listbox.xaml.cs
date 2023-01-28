@@ -45,16 +45,20 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
+            Display_Management.resolutionChangedEvent += handleResolutionChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
            
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
         }
-
+        private void handleResolutionChanged(object sender, EventArgs e)
+        {
+            setListboxItemsource();
+        }
         private void setListboxItemsource()
         {
-            control.ItemsSource = Global_Variables.resolutions;
-            control.SelectedItem = Global_Variables.resolution;
+            control.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.resolution];
+            control.SelectedItem = Global_Variables.refreshRate;
 
         }
 
