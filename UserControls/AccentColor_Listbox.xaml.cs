@@ -31,7 +31,9 @@ namespace Handheld_Control_Panel.UserControls
     {
         private string windowpage = "";
         private string usercontrol = "";
+        private object selectedObject;
         public ReadOnlyObservableCollection<Theme> themes = ThemeManager.Current.Themes;
+
         public AccentColor_Listbox()
         {
             InitializeComponent();
@@ -64,6 +66,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (lbi.Tag.ToString().Contains(Properties.Settings.Default.systemAccent))
                 {
                     control.SelectedItem = lbi;
+                    selectedObject = lbi;
                 }
 
             }
@@ -91,13 +94,22 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                if (args.Action == "A")
+                {
+                    handleListboxChange();
+                }
+                else
+                {
+                    Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                    if (args.Action == "Highlight" && control.SelectedItem != selectedObject && selectedObject != null) { control.SelectedItem = selectedObject; }
+                }
+               
             }
         }
 
-        private void control_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void handleListboxChange()
         {
-            if(this.IsLoaded)
+            if (this.IsLoaded)
             {
                 Rectangle themeShape = (Rectangle)control.SelectedItem;
                 string theme = themeShape.Tag.ToString();
@@ -105,9 +117,19 @@ namespace Handheld_Control_Panel.UserControls
                 ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + theme);
                 Properties.Settings.Default.systemAccent = theme;
                 Properties.Settings.Default.Save();
-                control.ScrollIntoView(control.SelectedItem);
+                selectedObject = control.SelectedItem;
             }
-            
+
+        }
+
+        private void control_TouchUp(object sender, TouchEventArgs e)
+        {
+            handleListboxChange();
+        }
+
+        private void control_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            handleListboxChange();
         }
     }
 

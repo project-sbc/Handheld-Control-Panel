@@ -163,8 +163,12 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     }
                     if (control is ToggleSwitch)
                     {
-                        ToggleSwitch toggleSwitch = (ToggleSwitch)control;
-                        toggleSwitch.IsOn = !toggleSwitch.IsOn;
+                        if (action == "A")
+                        {
+                            ToggleSwitch toggleSwitch = (ToggleSwitch)control;
+                            toggleSwitch.IsOn = !toggleSwitch.IsOn;
+                        }
+              
 
                     }
                     if (control is ListBox)
@@ -173,22 +177,35 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         switch(action)
                         {
                             case "Left":
-                                if (listBox.SelectedIndex > 0) { listBox.SelectedIndex = listBox.SelectedIndex - 1; listBox.ScrollIntoView(listBox.SelectedItem); }
+                                if (listBox.SelectedIndex > 0) 
+                                { 
+                                    listBox.SelectedIndex = listBox.SelectedIndex - 1; 
+                                    listBox.ScrollIntoView(listBox.SelectedItem); 
+                                }
                                 break;
 
                             case "Up":
-                                if (listBox.SelectedIndex > 0) { listBox.SelectedIndex = listBox.SelectedIndex - 1; listBox.ScrollIntoView(listBox.SelectedItem); }
+                                if (listBox.SelectedIndex > 0) 
+                                { 
+                                    listBox.SelectedIndex = listBox.SelectedIndex - 1; 
+                                    listBox.ScrollIntoView(listBox.SelectedItem); 
+                                }
                                 break;
                             case "Right":
-                                if (listBox.SelectedIndex < (listBox.Items.Count -1)) { listBox.SelectedIndex = listBox.SelectedIndex + 1; listBox.ScrollIntoView(listBox.SelectedItem); }
+                                if (listBox.SelectedIndex < (listBox.Items.Count -1)) 
+                                { 
+                                    listBox.SelectedIndex = listBox.SelectedIndex + 1;
+                                    listBox.ScrollIntoView(listBox.SelectedItem);
+                                }
                                 break;
                             case "Down":
                                 if (listBox.SelectedIndex < (listBox.Items.Count - 1)) 
                                 { 
-                                    listBox.SelectedIndex = listBox.SelectedIndex + 1; 
-                                   
+                                    listBox.SelectedIndex = listBox.SelectedIndex + 1;
+                                    listBox.ScrollIntoView(listBox.SelectedItem);
                                 }
                                 break;
+                           
                             default: break;
 
                         }
