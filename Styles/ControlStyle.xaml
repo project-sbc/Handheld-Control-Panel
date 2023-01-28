@@ -27,6 +27,14 @@
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
+    <!-- listbox item -->
+    <Style x:Key="listBoxItem" TargetType="{x:Type ListBoxItem}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                             Color="{DynamicResource MahApps.Colors.Accent}"/>
+        </Style.Resources>
+    </Style>
+
     <!--icons-->
     <Style x:Key="userControlIconMaterial" TargetType="icon:PackIconMaterial">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />

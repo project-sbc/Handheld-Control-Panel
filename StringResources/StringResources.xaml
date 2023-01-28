@@ -58,15 +58,19 @@
     <system:String x:Key="Usercontrol_ThemeToggleSwitch_OnContent">Dark Mode</system:String>
     <system:String x:Key="Usercontrol_ThemeToggleSwitch_OffContent">Light Mode</system:String>
 
+    <system:String x:Key="Usercontrol_Resolution_MainText">Display Resolution</system:String>
+    <system:String x:Key="Usercontrol_Resolution_SubText">Change primary display resolution</system:String>
 
- 
-    
+    <system:String x:Key="Usercontrol_Refresh_MainText">Display Refresh Rate</system:String>
+    <system:String x:Key="Usercontrol_Refresh_SubText">Change primary display refresh rate</system:String>
 
-    
-    
-    
-    
-    
+    <system:String x:Key="ErrorMessage_Refreshrate_In_Resolution">The resolution you selected is not compatible with the currently selected refresh rate. Please select a new refresh rate.</system:String>
+
+
+
+
+
+
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>
