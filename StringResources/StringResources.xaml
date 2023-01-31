@@ -78,8 +78,11 @@
     <system:String x:Key="Usercontrol_Language_MainText">Language</system:String>
     <system:String x:Key="Usercontrol_Language_SubText">Select application language</system:String>
 
+    <system:String x:Key="Usercontrol_MaxTDP_MainText">Maximum TDP</system:String>
+    <system:String x:Key="Usercontrol_MaxTDP_SubText">Configure the maximum allowed TDP in the application</system:String>
 
-
+    <system:String x:Key="Usercontrol_MinTDP_MainText">Minimum TDP</system:String>
+    <system:String x:Key="Usercontrol_MinTDP_SubText">Configure the minimum allowed TDP in the application</system:String>
 
 
 

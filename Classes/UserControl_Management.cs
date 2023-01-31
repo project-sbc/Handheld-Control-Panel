@@ -33,6 +33,30 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Global_Variables.Global_Variables.readPL1;
                         break;
+                    case "Slider_MaxGPUCLK":
+                        slider.Minimum = 400;
+                        slider.Maximum = 2200;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        slider.Value = Properties.Settings.Default.maxGPUCLK;
+                        break;
+                    case "Slider_MinTDP":
+                        slider.Minimum = 3;
+                        slider.Maximum = 25;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        slider.Value = Properties.Settings.Default.minTDP;
+                        break;
+                    case "Slider_MaxTDP":
+                        slider.Minimum = 5;
+                        slider.Maximum = 65;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        slider.Value = Properties.Settings.Default.maxTDP;
+                        break;
                     case "Slider_TDP2":
                         slider.Minimum = Properties.Settings.Default.minTDP;
                         slider.Maximum = Properties.Settings.Default.maxTDP;
@@ -223,6 +247,18 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             double sliderValue = slider.Value;
             switch (sliderTag)
             {
+                case "Slider_MaxGPUCLK":
+                    Properties.Settings.Default.maxGPUCLK = (int)sliderValue;
+                    Properties.Settings.Default.Save();
+                    break;
+                case "Slider_MinTDP":
+                    Properties.Settings.Default.minTDP = (int)sliderValue;
+                    Properties.Settings.Default.Save();
+                    break;
+                case "Slider_MaxTDP":
+                    Properties.Settings.Default.maxTDP = (int)sliderValue;
+                    Properties.Settings.Default.Save();
+                    break;
                 case "Slider_TDP":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.readPL2));
                     break;
