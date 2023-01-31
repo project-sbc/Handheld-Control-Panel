@@ -43,7 +43,7 @@
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Margin" Value="2,0,5,0" />
     </Style>
     <Style x:Key="userControlIconFontAwesome" TargetType="icon:PackIconFontAwesome">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
@@ -52,7 +52,7 @@
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Margin" Value="2,0,5,0" />
 
     </Style>
     <Style x:Key="userControlIconUnicons" TargetType="icon:PackIconUnicons">
@@ -62,7 +62,7 @@
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Margin" Value="2,0,5,0" />
 
     </Style>
 
