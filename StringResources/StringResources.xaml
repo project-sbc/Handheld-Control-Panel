@@ -75,7 +75,8 @@
     <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
     <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
 
-
+    <system:String x:Key="Usercontrol_Language_MainText">Language</system:String>
+    <system:String x:Key="Usercontrol_Language_SubText">Select application language</system:String>
 
 
 

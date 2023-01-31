@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
@@ -27,18 +28,18 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class AccentColor_Listbox : UserControl
+    public partial class Language_Listbox : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
         private object selectedObject;
         public ReadOnlyObservableCollection<Theme> themes = ThemeManager.Current.Themes;
 
-        public AccentColor_Listbox()
+        public Language_Listbox()
         {
             InitializeComponent();
             //UserControl_Management.setupControl(control);
-            setThemeItems();
+            setLanguageItems();
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -49,45 +50,17 @@ namespace Handheld_Control_Panel.UserControls
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
         }
 
-        private void setThemeItems()
+        private void setLanguageItems()
         {
-            foreach(Theme theme in themes)
-            {
-                if (theme.ToString().Contains("(Light)"))
-                {
-                    control.Items.Add(accentShape(theme));
-                    
-                }
+            control.Items.Add("English");
+            control.Items.Add("中文");
+            control.Items.Add("Pусский");
+            
+            control.SelectedItem = Properties.Settings.Default.language;
+
+        }
+
       
-            }
-          
-            foreach (Rectangle lbi in control.Items)
-            {
-                if (lbi.Tag.ToString().Contains(Properties.Settings.Default.systemAccent))
-                {
-                    control.SelectedItem = lbi;
-                    selectedObject = lbi;
-                }
-
-            }
-
-
-        }
-
-        private Rectangle accentShape(Theme theme)
-        {
-            Rectangle accentShape = new Rectangle();
-            accentShape.RadiusX = 4;
-            accentShape.RadiusY=4;
-            accentShape.Width = 30;
-            accentShape.Height = 30;
-            accentShape.VerticalAlignment= VerticalAlignment.Center;
-            //accentShape.HorizontalAlignment = HorizontalAlignment.Center;
-            accentShape.Margin = new Thickness(3,6,4,6);
-            accentShape.Fill = theme.ShowcaseBrush;
-            accentShape.Tag = theme.DisplayName;
-            return accentShape;
-        }
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -111,13 +84,34 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (this.IsLoaded)
             {
-                Rectangle themeShape = (Rectangle)control.SelectedItem;
-                string theme = themeShape.Tag.ToString();
-                theme = theme.Substring(0, theme.IndexOf("(")).Trim();
-                ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + theme);
-                Properties.Settings.Default.systemAccent = theme;
-                Properties.Settings.Default.Save();
-                selectedObject = control.SelectedItem;
+               if (control.SelectedItem != null)
+                {
+                    string selectedItem = control.SelectedValue.ToString();
+
+                    Properties.Settings.Default.language = selectedItem;
+                    Properties.Settings.Default.Save();
+                    selectedObject = selectedItem;
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.languageDict);
+                    switch (selectedItem)
+                    {
+                        default:
+                        case "English":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+                        case "中文":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.zh-Hans.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+                        case "Pусский":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.ru.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+
+
+                    }
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.languageDict);
+            
+                }
+
+
             }
 
         }

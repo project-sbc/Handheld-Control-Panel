@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.AccentColor_Listbox"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Language_Listbox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,16 +13,18 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                    <iconPacks:PackIconFontAwesome Kind="PaintBrushSolid" Style="{StaticResource userControlIconFontAwesome}" />
+                    <iconPacks:PackIconFontAwesome Kind="LanguageSolid" Style="{StaticResource userControlIconFontAwesome}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                            <Label Content="{DynamicResource Usercontrol_AccentPicker_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_AccentPicker_SubText}" />
+                            <Label Content="{DynamicResource Usercontrol_Language_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_Language_SubText}" />
                         </StackPanel>
                       
                     </DockPanel>
                 </DockPanel>
             <ListBox x:Name="control" ScrollViewer.CanContentScroll="True" Background="Transparent"  ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+        
+
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">

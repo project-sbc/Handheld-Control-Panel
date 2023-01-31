@@ -13,6 +13,7 @@
         <StackPanel x:Name="stackPanel" >
             <Label Content="{DynamicResource Header_General_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
+            <uc:Language_Listbox />
             <uc:Theme_Toggleswitch />
             <uc:AccentColor_Listbox/>
             <uc:Autostart_Toggleswitch/>
