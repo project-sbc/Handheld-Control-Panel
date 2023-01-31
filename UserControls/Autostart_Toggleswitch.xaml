@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Theme_Toggleswitch"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Autostart_Toggleswitch"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,17 +10,14 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel Margin="2,2,2,2">
             <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconFontAwesome  Kind="AdjustSolid" x:Name="icon" Style="{StaticResource userControlIconFontAwesome}" />
+                <iconPacks:PackIconFontAwesome  Kind="WindowsBrands" x:Name="icon" Style="{StaticResource userControlIconFontAwesome}" />
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-                        <Label Content="{DynamicResource Usercontrol_ThemeToggleSwitch_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_ThemeToggleSwitch_SubText}" />
+                        <Label Content="{DynamicResource Usercontrol_Autostart_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_Autostart_SubText}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-
-
-
-                        <mah:ToggleSwitch x:Name="control"  OnContent="{DynamicResource Usercontrol_ThemeToggleSwitch_OnContent}" OffContent="{DynamicResource Usercontrol_ThemeToggleSwitch_OffContent}" Toggled="toggleSwitch_Toggled" />
+                        <mah:ToggleSwitch x:Name="control"  OnContent="{DynamicResource Usercontrol_Enable_OnContent}" OffContent="{DynamicResource Usercontrol_Disable_OffContent}" Toggled="toggleSwitch_Toggled" />
                         <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,6,0"  />
                     </StackPanel>
                 </DockPanel>

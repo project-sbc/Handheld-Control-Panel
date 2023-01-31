@@ -29,18 +29,25 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Resolution_Listbox : UserControl
+    public partial class Scaling_Listbox : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
         private object selectedObject;
         
 
-        public Resolution_Listbox()
+        public Scaling_Listbox()
         {
             InitializeComponent();
             //UserControl_Management.setupControl(control);
-            setListboxItemsource();
+         
+        }
+
+        private void getDPIScaling()
+        {
+            //used to get absolute resolution (not scaled resolution)
+            Global_Variables.scaling = (VisualTreeHelper.GetDpi(this).DpiScaleX * 100).ToString();
+
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -49,13 +56,20 @@ namespace Handheld_Control_Panel.UserControls
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
            
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
+
+            getDPIScaling();
+            setListboxItemsource();
         }
 
         private void setListboxItemsource()
         {
-            control.ItemsSource = Global_Variables.resolutions;
-            control.SelectedItem = Global_Variables.resolution;
-
+            control.Items.Add("100");
+            control.Items.Add("125");
+            control.Items.Add("150");
+            control.Items.Add("175");
+            control.Items.Add("200");
+            control.Items.Add("225");
+            control.SelectedItem = Global_Variables.scaling;
         }
 
      
@@ -81,25 +95,13 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (this.IsLoaded)
             {
-               
-                string selectedItem = control.SelectedItem.ToString();
-
-                //check to make sure new resolution has that refresh rate, otherwise display error about changing refresh rate
-                if (Global_Variables.resolution_refreshrates[selectedItem].Contains(Global_Variables.refreshRate))
+                if (control.SelectedItem!= null)
                 {
-                    Display_Management.SetDisplayResolution(selectedItem);
-
-                    selectedObject = control.SelectedItem;
-                    Display_Management.raiseResolutionChangedEvent();
-
+                    Classes.Display_Management.Display_Management.SetDisplayScaling(control.SelectedItem.ToString());
                 }
-                else
-                {
-                    MessageBox.Show(Application.Current.Resources["ErrorMessage_Refreshrate_In_Resolution"].ToString());
-                    control.SelectedItem = selectedObject;
-                }
+              
 
-                
+
             }
 
         }

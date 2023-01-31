@@ -23,7 +23,7 @@
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:Resolution_Listbox />
             <uc:Refresh_Listbox/>
-            
+            <uc:Scaling_Listbox/>
             <uc:FPSLimit_Slider />
             
             <Label Content="{DynamicResource Header_System_Settings}" Style="{StaticResource headerLabel}" />

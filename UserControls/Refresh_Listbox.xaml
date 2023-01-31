@@ -13,7 +13,7 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial Kind="Monitor" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconMaterial  Kind="MonitorShimmer" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_Refresh_MainText}" Style="{StaticResource userControlMainLabel}"/>
@@ -27,12 +27,23 @@
                     </StackPanel>
                 </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" FontSize="16" Background="{DynamicResource MahApps.Brushes.Accent4}"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
-                
+            <ListBox x:Name="control" FontSize="16" Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+                <ListBox.Resources>
+
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
                 <ListBox.ItemsPanel>
                    
                     <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" Background="{DynamicResource MahApps.Brushes.Accent}" Orientation="Horizontal" />
+                        <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>

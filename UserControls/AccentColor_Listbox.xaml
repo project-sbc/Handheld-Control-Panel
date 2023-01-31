@@ -22,10 +22,23 @@
                       
                     </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" ScrollViewer.CanContentScroll="True" Background="{DynamicResource MahApps.Brushes.Accent4}" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+            <ListBox x:Name="control" ScrollViewer.CanContentScroll="True" Background="Transparent"  ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+                <ListBox.Resources>
+
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
                 <ListBox.ItemsPanel>
+
                     <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" Background="{DynamicResource MahApps.Brushes.Accent}" Orientation="Horizontal" />
+                        <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>

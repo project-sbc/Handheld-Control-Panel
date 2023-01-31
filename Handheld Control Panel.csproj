@@ -136,6 +136,9 @@
     <Compile Update="UserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Autostart_Toggleswitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Theme_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -182,6 +185,12 @@
 
   <ItemGroup>
     <Resource Include="ProjectSBC.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UserControls\Autostart_Toggleswitch.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

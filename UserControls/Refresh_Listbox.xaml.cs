@@ -85,8 +85,13 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (this.IsLoaded)
             {
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(control.SelectedItem.ToString()));
-                selectedObject = control.SelectedItem;
+                if (control.SelectedItem!= null)
+                {
+                    string refresh = control.SelectedItem.ToString();
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayRefreshRate(refresh));
+                    selectedObject = control.SelectedItem;
+                }
+
             }
 
         }

@@ -15,7 +15,7 @@
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:Theme_Toggleswitch />
             <uc:AccentColor_Listbox/>
-       
+            <uc:Autostart_Toggleswitch/>
             <Label Content="{DynamicResource Header_System_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
 

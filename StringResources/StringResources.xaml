@@ -66,6 +66,21 @@
 
     <system:String x:Key="ErrorMessage_Refreshrate_In_Resolution">The resolution you selected is not compatible with the currently selected refresh rate. Please select a new refresh rate.</system:String>
 
+    <system:String x:Key="Usercontrol_Scaling_MainText">Display Scaling</system:String>
+    <system:String x:Key="Usercontrol_Scaling_SubText">Change primary display scaling</system:String>
+
+    <system:String x:Key="Usercontrol_Autostart_MainText">Autostart</system:String>
+    <system:String x:Key="Usercontrol_Autostart_SubText">Start application with windows</system:String>
+
+    <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
+    <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
+
+
+
+
+
+
+
 
 
 

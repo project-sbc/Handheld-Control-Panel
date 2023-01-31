@@ -83,7 +83,7 @@ namespace Handheld_Control_Panel.UserControls
             accentShape.Height = 30;
             accentShape.VerticalAlignment= VerticalAlignment.Center;
             //accentShape.HorizontalAlignment = HorizontalAlignment.Center;
-            accentShape.Margin = new Thickness(3,6,8,6);
+            accentShape.Margin = new Thickness(3,6,4,6);
             accentShape.Fill = theme.ShowcaseBrush;
             accentShape.Tag = theme.DisplayName;
             return accentShape;
