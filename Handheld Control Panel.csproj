@@ -124,6 +124,9 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\GPUCLK_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Language_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

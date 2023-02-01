@@ -25,29 +25,29 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class CPUFrequency_Slider : UserControl
+    public partial class GPUCLK_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public CPUFrequency_Slider()
+        public GPUCLK_Slider()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);
-            handleMaxCPUFrequency();
+            handleGPUCLK();
           
         }
 
-        private void handleMaxCPUFrequency()
+        private void handleGPUCLK()
         {
-            if (Global_Variables.cpuMaxFrequency == 0)
+            if (Global_Variables.gpuclk == "Default")
             {
-                toggleSwitch.IsOn = true;
+                toggleSwitch.IsOn = false;
                 unitLabel.Visibility = Visibility.Hidden;
                 control.Visibility = Visibility.Collapsed;
             }
             else
             {
-                toggleSwitch.IsOn = false;
+                toggleSwitch.IsOn = true;
                 
             }
           
@@ -74,7 +74,6 @@ namespace Handheld_Control_Panel.UserControls
                 }
                 else
                 {
-                    
                     Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
                 }
                 
@@ -94,19 +93,20 @@ namespace Handheld_Control_Panel.UserControls
         {
             bool toggle = toggleSwitch.IsOn;
            
-            if (toggleSwitch.IsOn)
+            if (!toggleSwitch.IsOn)
             {
                 control.Visibility = Visibility.Collapsed;
                 unitLabel.Visibility = Visibility.Hidden;
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency(0));
+                //try resetting display driver
+                MessageBox.Show("Message for projectSBC, add display driver reset");
             } 
             else 
             {
                 unitLabel.Visibility = Visibility.Visible;
                 control.Visibility = Visibility.Visible;
-                control.Value = control.Maximum;
+                control.Value = control.Minimum;
                 double value = control.Value;
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency((int)value));
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)value));
             }
         }
     }

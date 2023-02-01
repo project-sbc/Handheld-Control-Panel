@@ -33,6 +33,19 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Global_Variables.Global_Variables.readPL1;
                         break;
+                    case "Slider_GPUCLK":
+                        slider.Minimum = 400;
+                        slider.Maximum = Properties.Settings.Default.maxGPUCLK;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        slider.Value = slider.Minimum;
+                        if (Global_Variables.Global_Variables.gpuclk != "Default")
+                        {
+                            slider.Value = Int32.Parse(Global_Variables.Global_Variables.gpuclk);
+                        }
+                        
+                        break;
                     case "Slider_MaxGPUCLK":
                         slider.Minimum = 400;
                         slider.Maximum = 2200;
