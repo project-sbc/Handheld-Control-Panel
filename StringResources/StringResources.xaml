@@ -15,7 +15,7 @@
     <system:String x:Key="Header_General_Settings">General Settings</system:String>
     <system:String x:Key="Header_Display_Settings">Display Settings</system:String>
     <system:String x:Key="Header_TDP_Settings">TDP Settings</system:String>
-    
+    <system:String x:Key="Header_RTSS_Settings">RTSS Settings</system:String>
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
@@ -86,9 +86,22 @@
     <system:String x:Key="Usercontrol_MinTDP_SubText">Configure the minimum allowed TDP in the application</system:String>
 
     <system:String x:Key="Usercontrol_GPUCLK_MainText">GPU Clock</system:String>
-    <system:String x:Key="Usercontrol_GPUCLK_SubText">Set static GPU clock speed</system:String>
+    <system:String x:Key="Usercontrol_GPUCLK_SubText">Set static GPU clock speed for AMD devices</system:String>
     <system:String x:Key="Usercontrol_GPUCLKToggleSwitch_OnContent">Static</system:String>
     <system:String x:Key="Usercontrol_GPUCLKToggleSwitch_OffContent">Default</system:String>
+
+    <system:String x:Key="Usercontrol_MaxFPS_MainText">Maximum RTSS FPS Limit</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS_SubText">Configure the maximum allowed FPS Limit in RTSS</system:String>
+
+    <system:String x:Key="Usercontrol_StartRTSSToggleSwitch_MainText">RTSS Autostart</system:String>
+    <system:String x:Key="Usercontrol_StartRTSSToggleSwitch_SubText">Configure RTSS to start with HCP</system:String>
+
+    <system:String x:Key="Usercontrol_IntelTDP_MainText">Intel TDP Method</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP_SubText">Select method for applying TDP on intel devices.</system:String>
+    
+
+
+
 
 
 

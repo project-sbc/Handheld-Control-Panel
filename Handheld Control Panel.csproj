@@ -129,6 +129,9 @@
     <Compile Update="UserControls\GPUCLK_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\IntelTDPType_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Language_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -145,6 +148,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Autostart_Toggleswitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\StartRTSS_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Theme_Toggleswitch.xaml.cs">

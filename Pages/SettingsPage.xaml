@@ -22,6 +22,13 @@
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:MaxTDP_Slider/>
             <uc:MinTDP_Slider />
+            <uc:IntelTDPType_Listbox />
+            
+            <Label Content="{DynamicResource Header_RTSS_Settings}" Style="{StaticResource headerLabel}" />
+            <Rectangle Style="{StaticResource rectangle}" />
+            <uc:StartRTSS_Toggleswitch />
+            <uc:MaxFPS_Slider />
+      
 
         </StackPanel>
     </ScrollViewer>

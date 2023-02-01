@@ -118,8 +118,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Global_Variables.Global_Variables.FPSLimit;
                         break;
+                    case "Slider_MaxFPS":
+                        slider.Minimum = 5;
+                        slider.Maximum = 200;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        slider.Value = Properties.Settings.Default.maxRTSSFPSLimit;
+                        break;
 
-                        
                     case "Slider_MaxCPU":
                         slider.Minimum = 1000;
                         slider.Maximum = 5000;
@@ -270,6 +277,10 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_MaxTDP":
                     Properties.Settings.Default.maxTDP = (int)sliderValue;
+                    Properties.Settings.Default.Save();
+                    break;
+                case "Slider_MaxFPS":
+                    Properties.Settings.Default.maxRTSSFPSLimit = (int)sliderValue;
                     Properties.Settings.Default.Save();
                     break;
                 case "Slider_TDP":
