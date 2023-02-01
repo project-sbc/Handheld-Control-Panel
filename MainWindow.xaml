@@ -8,7 +8,7 @@
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
-        Title="Handheld Control Panel" Height="550" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing" >
+        Title="Handheld Control Panel" Height="650" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing" >
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         <Grid.Resources>
     
@@ -19,7 +19,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
 
             <ui:NavigationView.MenuItems >
                 <ui:NavigationViewItem Icon="Home" Tag="HomePage"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{DynamicResource MainWindow_NavigationView_Home}" />
-                <ui:NavigationViewItem Tag="HomePage" Icon="Library"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Profiles}"  />
+                <ui:NavigationViewItem Tag="ProfilesPage" Icon="Library"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Profiles}"  />
                 <ui:NavigationViewItem Icon="Keyboard" Tag="Hotkeys" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Hotkeys}" />
                 <ui:NavigationViewItem Icon="SwitchApps" Tag="GameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Gamelauncher}" />
                 <ui:NavigationViewItem Icon="AllApps" Tag="Customize" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Customize}" />

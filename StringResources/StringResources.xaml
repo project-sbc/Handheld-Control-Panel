@@ -104,9 +104,10 @@
 
     <system:String x:Key="Usercontrol_CheckUpdatesButton_MainText">Check For Updates</system:String>
     <system:String x:Key="Usercontrol_CheckUpdatesButton_SubText">Current version: </system:String>
+
+    <system:String x:Key="Usercontrol_CombineTDPToggleSwitch_MainText">Combine TDP</system:String>
+    <system:String x:Key="Usercontrol_CombineTDPToggleSwitch_SubText">Set sustained and boost TDP to same value</system:String>
     
-
-
 
 
     <!--old stuff-->
