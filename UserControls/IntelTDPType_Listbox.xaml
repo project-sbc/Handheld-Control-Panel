@@ -13,7 +13,7 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial Kind="LightningBolt" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconSimpleIcons Kind="Intel" Style="{StaticResource userControlIconSimpleIcons}" />
                 <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                             <Label Content="{DynamicResource Usercontrol_IntelTDP_MainText}" Style="{StaticResource userControlMainLabel}"/>
@@ -22,7 +22,7 @@
                       
                     </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" ScrollViewer.CanContentScroll="True" Background="Transparent"  ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+            <ListBox x:Name="control" ScrollViewer.CanContentScroll="True" Background="Transparent"  ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
         
 
                 <ListBox.Resources>

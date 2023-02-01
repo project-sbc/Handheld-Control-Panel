@@ -97,11 +97,14 @@
     <system:String x:Key="Usercontrol_StartRTSSToggleSwitch_SubText">Configure RTSS to start with HCP</system:String>
 
     <system:String x:Key="Usercontrol_IntelTDP_MainText">Intel TDP Method</system:String>
-    <system:String x:Key="Usercontrol_IntelTDP_SubText">Select method for applying TDP on intel devices.</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP_SubText">Select method for applying TDP on intel devices</system:String>
+
+    <system:String x:Key="Usercontrol_AutoUpdateToggleSwitch_MainText">Check Updates Startup</system:String>
+    <system:String x:Key="Usercontrol_AutoUpdateToggleSwitch_SubText">Check for application updates at startup</system:String>
+
+    <system:String x:Key="Usercontrol_CheckUpdatesButton_MainText">Check For Updates</system:String>
+    <system:String x:Key="Usercontrol_CheckUpdatesButton_SubText">Current version: </system:String>
     
-
-
-
 
 
 

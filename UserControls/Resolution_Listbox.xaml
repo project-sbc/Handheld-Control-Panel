@@ -27,7 +27,7 @@
                     </StackPanel>
                 </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" FontSize="16" Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+            <ListBox x:Name="control" FontSize="16" Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">

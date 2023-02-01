@@ -126,6 +126,9 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\CheckUpdates_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\GPUCLK_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Autostart_Toggleswitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\AutoUpdate_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\StartRTSS_Toggleswitch.xaml.cs">

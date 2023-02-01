@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.StartRTSS_Toggleswitch"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.CheckUpdates_Button"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,22 +10,29 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel Margin="2,2,2,2">
             <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial   Kind="Speedometer" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconMaterial   Kind="Speedometer" x:Name="icon" Style="{StaticResource userControlIconMaterial}" />
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-                        <Label Content="{DynamicResource Usercontrol_StartRTSSToggleSwitch_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_StartRTSSToggleSwitch_SubText}" />
+                        <Label Content="{DynamicResource Usercontrol_CheckUpdatesButton_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label x:Name="subText" Content="{DynamicResource Usercontrol_CheckUpdatesButton_SubText}" />
+                            <Label Name="version" Content="{Binding Version}" />
+                        </StackPanel>
+                        
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-
-
-
-                        <mah:ToggleSwitch x:Name="control"  OnContent="{DynamicResource Usercontrol_Enable_OnContent}" OffContent="{DynamicResource Usercontrol_Disable_OffContent}" Toggled="toggleSwitch_Toggled" />
+                        <Button x:Name="control" Content="{DynamicResource Usercontrol_CheckUpdatesButton_MainText}" Style="{StaticResource userControlButton}" Click="button_Click" >
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
                         <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,6,0"  />
                     </StackPanel>
                 </DockPanel>
             </DockPanel>
-          
+         
         </DockPanel>
 
     </Border>
