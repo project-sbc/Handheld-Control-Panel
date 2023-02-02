@@ -98,6 +98,32 @@ namespace Handheld_Control_Panel.Classes
 
 
 
+
+
+            Online_TDP1 = onlineNode.SelectSingleNode("TDP1").InnerText;
+            Online_TDP2 = onlineNode.SelectSingleNode("TDP2").InnerText;
+            Online_ActiveCores = onlineNode.SelectSingleNode("ActiveCores").InnerText;
+            Online_MAXCPU = onlineNode.SelectSingleNode("MAXCPU").InnerText;
+            Online_FPSLimit = onlineNode.SelectSingleNode("FPSLimit").InnerText;
+            Online_EPP = onlineNode.SelectSingleNode("EPP").InnerText;
+            Online_GPUCLK = onlineNode.SelectSingleNode("GPUCLK").InnerText;
+
+            Offline_TDP1 = offlineNode.SelectSingleNode("TDP1").InnerText;
+            Offline_TDP2 = offlineNode.SelectSingleNode("TDP2").InnerText;
+            Offline_ActiveCores = offlineNode.SelectSingleNode("ActiveCores").InnerText;
+            Offline_MAXCPU = offlineNode.SelectSingleNode("MAXCPU").InnerText;
+            Offline_FPSLimit = offlineNode.SelectSingleNode("FPSLimit").InnerText;
+            Offline_EPP = offlineNode.SelectSingleNode("EPP").InnerText;
+            Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
+
+            Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
+            RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
+            Path = LaunchOptions.SelectSingleNode("Path").InnerText;
+            AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
+            GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+
+
+
         }
     }
 }
