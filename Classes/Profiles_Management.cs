@@ -3,14 +3,33 @@ using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public static class Profiles_Management
+    public class Profiles_Management
     {
+        public Profiles[] profiles;
+        public Profile selectedProfile=null;
+
+        public Profiles_Management()
+        {
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+            foreach (XmlNode node in xmlNode.ChildNodes)
+            {
+                Profile profile = new Profile();
+                profile.LoadProfile(node.SelectSingleNode("ID").InnerText);
+                profiles.Append(profile);
+            }
+            
+            xmlDocument = null;
+        }
         
     }
 

@@ -47,8 +47,8 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //Profile 
         public static string ActiveProfile = "";
         public static bool profileAutoApplied = false;
-        public static Dictionary<string, string> Profiles = new Dictionary<string, string>();
-
+        //public static Dictionary<string, string> Profiles = new Dictionary<string, string>();
+        public Profiles profiles = new
         //Power
         public static string powerStatus = "";
         public static int batteryLevel = -1;
