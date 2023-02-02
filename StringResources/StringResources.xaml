@@ -107,9 +107,14 @@
 
     <system:String x:Key="Usercontrol_CombineTDPToggleSwitch_MainText">Combine TDP</system:String>
     <system:String x:Key="Usercontrol_CombineTDPToggleSwitch_SubText">Set sustained and boost TDP to same value</system:String>
+
+    <system:String x:Key="Usercontrol_ProfilesList_MainText">Profile List</system:String>
+    <system:String x:Key="Usercontrol_ProfilesList_SubText">Profile List</system:String>
+    <system:String x:Key="Usercontrol_ProfilesListButtonEdit_MainText">Edit</system:String>
+    <system:String x:Key="Usercontrol_ProfilesListButtonAdd_MainText">Add</system:String>
+    <system:String x:Key="Usercontrol_ProfilesListButtonDelete_MainText">Delete</system:String>
     
-
-
+    
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

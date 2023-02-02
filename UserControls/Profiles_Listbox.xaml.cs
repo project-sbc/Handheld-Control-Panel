@@ -45,12 +45,7 @@ namespace Handheld_Control_Panel.UserControls
             //setListboxItemsource();
         }
 
-        private void getDPIScaling()
-        {
-            //used to get absolute resolution (not scaled resolution)
-            Global_Variables.scaling = (VisualTreeHelper.GetDpi(this).DpiScaleX * 100).ToString();
-
-        }
+    
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
@@ -104,11 +99,8 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (control.SelectedItem!= null)
                 {
-                    Classes.Display_Management.Display_Management.SetDisplayScaling(control.SelectedItem.ToString());
+                    
                 }
-              
-
-
             }
 
         }

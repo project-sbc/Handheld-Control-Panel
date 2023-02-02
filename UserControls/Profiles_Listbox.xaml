@@ -16,14 +16,31 @@
                 <iconPacks:PackIconMaterial Kind="ViewListOutline" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                            <Label Content="{DynamicResource Usercontrol_Scaling_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_Scaling_SubText}" />
+                            <Label Content="{DynamicResource Usercontrol_ProfilesList_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_ProfilesList_SubText}" />
                         </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  DockPanel.Dock="Right">
+                        <Button  Height="50" Tag="EditProfile">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonEdit_MainText}" VerticalContentAlignment="Center" FontSize="20" />
+                                <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,0,0"  />
+                            </StackPanel>
+                          
+                        </Button>
+                        <Button Height="50" Tag="AddProfile">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonAdd_MainText}" VerticalContentAlignment="Center" FontSize="20" />
+                                <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF095;" Margin="0,0,0,0"  />
+                            </StackPanel>
 
-                        <Label x:Name="unitLabel" Content="{Binding ElementName=control, Path=SelectedItem}" ContentStringFormat="{}{0} %" Style="{StaticResource userControlUnitLabel}"/>
-                        
-                        
+                        </Button>
+                        <Button Height="50" Tag="DeleteProfile">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonDelete_MainText}" VerticalContentAlignment="Center" FontSize="20" />
+                                <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF096;" Margin="0,0,0,0"  />
+                            </StackPanel>
+
+                        </Button>
                     </StackPanel>
                 </DockPanel>
                 </DockPanel>
@@ -45,8 +62,8 @@
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
-                                <ColumnDefinition Width="210" SharedSizeGroup="Column2"/>
-                                <ColumnDefinition Width="210" SharedSizeGroup="Column3"/>
+                                <ColumnDefinition Width="360" SharedSizeGroup="Column2"/>
+                                <ColumnDefinition Width="360" SharedSizeGroup="Column3"/>
 
                             </Grid.ColumnDefinitions>
                             <!-- Assumes MVVM and you wish to bind to properties and commands -->
