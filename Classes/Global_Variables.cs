@@ -11,6 +11,8 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
     public static class Global_Variables
     {
 
+        public static string xmlFile = AppDomain.CurrentDomain.BaseDirectory + "Resources\\Profiles.xml";
+
         //Processor global
         public static string cpuType = "";
         public static string MCHBAR = "";
@@ -45,10 +47,10 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int FPSLimit = 0;
 
         //Profile 
-        public static string ActiveProfile = "";
         public static bool profileAutoApplied = false;
-        //public static Dictionary<string, string> Profiles = new Dictionary<string, string>();
-        public Profiles profiles = new
+      
+        public static Profiles_Management profiles;
+
         //Power
         public static string powerStatus = "";
         public static int batteryLevel = -1;
@@ -78,7 +80,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static List<string> FPSLimits = new List<string>();
         public static List<string> FanModes = new List<string>();
 
-        public static string xmlFile = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\Profiles.xml";
+   
 
         //amd power slide
         public static int AMDPowerSlide;

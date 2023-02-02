@@ -2,6 +2,7 @@
 using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
@@ -12,11 +13,13 @@ namespace Handheld_Control_Panel.Classes
 {
     public class Profiles_Management
     {
-        public Profiles[] profiles;
+        public List<Profile> profiles= new List< Profile>();
         public Profile selectedProfile=null;
 
         public Profiles_Management()
         {
+            //XML_Management.Load_XML_File.load_XML_File();
+
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
@@ -24,13 +27,16 @@ namespace Handheld_Control_Panel.Classes
             foreach (XmlNode node in xmlNode.ChildNodes)
             {
                 Profile profile = new Profile();
+
                 profile.LoadProfile(node.SelectSingleNode("ID").InnerText);
-                profiles.Append(profile);
+                profiles.Add(profile);
             }
             
             xmlDocument = null;
+
+            //profile.LoadProfile(node.SelectSingleNode("ID").InnerText);
         }
-        
+
     }
 
     public class Profile
@@ -153,12 +159,13 @@ namespace Handheld_Control_Panel.Classes
 
                     ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
                     Exe = parentNode.SelectSingleNode("Exe").InnerText;
+                    ID = ID;
 
                 }
 
 
             }
-        
+            Debug.WriteLine("done with profile");
             xmlDocument = null;
 
         }

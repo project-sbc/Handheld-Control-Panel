@@ -30,30 +30,31 @@ namespace Handheld_Control_Panel.Classes.XML_Management
         public static void generateGlobalVariableProfileToExeList()
         {
             //loads the global variable dictionary with 
-            if (Global_Variables.Global_Variables.Profiles.Count != 0) { Global_Variables.Global_Variables.Profiles.Clear(); }
+            if (Global_Variables.Global_Variables.profiles.profiles.Count != 0)
+            { //Global_Variables.Global_Variables.Profiles.Clear(); }
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
-            Dictionary<string, string> profiles = new Dictionary<string, string>();
+                Dictionary<string, string> profiles = new Dictionary<string, string>();
 
-            Global_Variables.Global_Variables.Profiles.Clear();
-            foreach (XmlNode node in xmlNode.ChildNodes)
-            {
-                if (node.SelectSingleNode("Exe").InnerText != "")
+                //Global_Variables.Global_Variables.Profiles.Clear();
+                foreach (XmlNode node in xmlNode.ChildNodes)
                 {
-                    Global_Variables.Global_Variables.Profiles.Add(node.SelectSingleNode("Exe").InnerText, node.SelectSingleNode("ID").InnerText);
+                    if (node.SelectSingleNode("Exe").InnerText != "")
+                    {
+                        //Global_Variables.Global_Variables.Profiles.Add(node.SelectSingleNode("Exe").InnerText, node.SelectSingleNode("ID").InnerText);
+                    }
+
                 }
 
+                xmlDocument = null;
+
+
+
             }
-
-            xmlDocument = null;
-
-
-
         }
-
         public static DataTable profilesDatatable()
         {
 
@@ -72,7 +73,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                 string ID = node.SelectSingleNode("ID").InnerText;
                 string ProfileName = node.SelectSingleNode("ProfileName").InnerText;
                 string Exe = node.SelectSingleNode("Exe").InnerText;
-               
+
                 dt.Rows.Add(node.SelectSingleNode("ID").InnerText, ProfileName, Exe);
             }
             xmlDocument = null;
@@ -153,7 +154,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
             newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
             newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
             newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "Steam";
-                  
+
             xmlNodeProfiles.AppendChild(newNode);
 
 
@@ -193,12 +194,12 @@ namespace Handheld_Control_Panel.Classes.XML_Management
         public static string lookUpExeOfActiveProfile()
         {
             string result = "";
-            if (Global_Variables.Global_Variables.ActiveProfile != "")
+            if (Global_Variables.Global_Variables.profiles.selectedProfile != null)
             {
                 System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
                 xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
                 XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + Global_Variables.Global_Variables.ActiveProfile + "']");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + Global_Variables.Global_Variables.profiles.selectedProfile.ID + "']");
 
                 if (xmlSelectedNode != null)
                 {
@@ -206,7 +207,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                 }
 
                 xmlDocument = null;
-        
+
             }
             return result;
         }
@@ -246,9 +247,9 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                     xmlSelectedNode.InnerText = newID;
                     xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
                 }
-               
+
                 xmlDocument = null;
-      
+
             }
             return newID;
 
@@ -429,7 +430,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNodes = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
-            foreach(XmlNode node in xmlNodes.ChildNodes)
+            foreach (XmlNode node in xmlNodes.ChildNodes)
             {
                 if (node.SelectSingleNode("LaunchOptions/AppType").InnerText == "Steam" || ((node.SelectSingleNode("LaunchOptions/AppType").InnerText == "App" || node.SelectSingleNode("LaunchOptions/AppType").InnerText == "EpicGames") && node.SelectSingleNode("LaunchOptions/Path").InnerText != ""))
                 {
@@ -442,7 +443,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                     result.Add(row);
                 }
             }
-                       
+
 
             return result;
 
@@ -456,7 +457,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
             XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
-           
+
             if (xmlSelectedNode != null)
             {
                 XmlNode profileNode = xmlSelectedNode.ParentNode;
@@ -500,7 +501,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                 xmlDocument = null;
 
             }
-            
+
 
 
         }
@@ -535,7 +536,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
         }
         public static string getProfileNameByID(string ID)
         {
-         
+
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
@@ -570,7 +571,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
                     if (parentNode != null)
                     {
-                        Global_Variables.Global_Variables.ActiveProfile = ID;
+                        Global_Variables.Global_Variables.profiles.selectedProfile.ID = Int32.Parse(ID);
 
                         XmlNode powerNode;
                         if (powerStatus == "Online")
@@ -624,10 +625,10 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
                             }
 
-                        
+
 
                         }
-                        
+
                     }
 
                     Global_Variables.Global_Variables.profileAutoApplied = profileAutoApplied;
@@ -635,14 +636,14 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                 else
                 {
                     //if profile is default and no profile was detected make activeprofile none
-                    Global_Variables.Global_Variables.ActiveProfile = "";
+                    Global_Variables.Global_Variables.profiles.selectedProfile = null;
                     Global_Variables.Global_Variables.profileAutoApplied = false;
-                   
+
 
                 }
                 xmlDocument = null;
             }
-   
+
 
 
         }
@@ -740,488 +741,489 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
     }
     public static class Manage_XML_ControllerHotKeys
-    {
-
-
-        public static string getNewIDNumberForHotKey()
         {
-            int ID = 1;
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
 
 
-            while (xmlSelectedNode == null) 
+            public static string getNewIDNumberForHotKey()
             {
-                ID= ID+1;
-                xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
-            }
-            return ID.ToString();
+                int ID = 1;
 
-            xmlDocument = null;
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
 
-        }
-        public static void loadGlobalDictionaryForKBHotKeys()
-        {
-            Dictionary<string, ActionParameter> KBHotKey = new Dictionary<string, ActionParameter>();
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
-            {
-                if (node.SelectSingleNode("Action").InnerText != "" && node.SelectSingleNode("Type").InnerText == "Keyboard")
+                while (xmlSelectedNode == null)
                 {
-                    string hotKey = node.SelectSingleNode("Hotkey").InnerText;
-                    string action = node.SelectSingleNode("Action").InnerText;
-                    string parameter = node.SelectSingleNode("Parameter").InnerText;
-
-                    ActionParameter actpar = new ActionParameter();
-                    actpar.Parameter = parameter;
-                    actpar.Action = action;
-                    KBHotKey.Add(hotKey, actpar);
+                    ID = ID + 1;
+                    xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
                 }
+                return ID.ToString();
+
+                xmlDocument = null;
 
             }
-            //clear the list if it isnt null - meaning reset for any changes
-            if (Global_Variables.Global_Variables.KBHotKeyDictionary != null) { Global_Variables.Global_Variables.KBHotKeyDictionary.Clear(); }
-
-            Global_Variables.Global_Variables.KBHotKeyDictionary = KBHotKey;
-
-        }
-        public static void loadGlobalDictionaryForControllerHotKeys()
-        {
-            Dictionary<ushort, ActionParameter> controllerHotKey = new Dictionary<ushort, ActionParameter>();
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
+            public static void loadGlobalDictionaryForKBHotKeys()
             {
-                if (node.SelectSingleNode("Action").InnerText != "" && node.SelectSingleNode("Type").InnerText=="Controller")
-                {
-                    ushort hotKey = Convert.ToUInt16(node.SelectSingleNode("Hotkey").InnerText);
-                    string action = node.SelectSingleNode("Action").InnerText;
-                    string parameter = node.SelectSingleNode("Parameter").InnerText;
+                Dictionary<string, ActionParameter> KBHotKey = new Dictionary<string, ActionParameter>();
 
-                    ActionParameter actpar = new ActionParameter();
-                    actpar.Parameter = parameter;
-                    actpar.Action= action;
-                    controllerHotKey.Add(hotKey, actpar);
-                }
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
 
-            }
-            //clear the list if it isnt null - meaning reset for any changes
-            if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null) { Global_Variables.Global_Variables.controllerHotKeyDictionary.Clear(); }
-            
-            Global_Variables.Global_Variables.controllerHotKeyDictionary = controllerHotKey;
-           
-        }
-        public static void saveHotKeyProfile(string ID, string action, string parameter, string hotkey, string type)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID + "']");
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-                XmlNode nodeHotKey = parentNode.SelectSingleNode("HotKey");
-                nodeHotKey.InnerText = hotkey;
-                XmlNode nodeAction = parentNode.SelectSingleNode("Action");
-                nodeAction.InnerText = action;
-                XmlNode nodeParameter = parentNode.SelectSingleNode("Parameter");
-                nodeParameter.InnerText = parameter;
-                XmlNode nodeType = parentNode.SelectSingleNode("Type");
-                nodeType.InnerText = type;
-                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-            }
-            
-            xmlDocument = null;
-            loadGlobalDictionaryForControllerHotKeys();
-            loadGlobalDictionaryForKBHotKeys();
-
-        }
-        public static DataTable hotkeyDatatable ()
-        {
-            //turn this into hotkey table
-            DataTable dt = new DataTable();
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Type");
-            dt.Columns.Add("Action");
-            dt.Columns.Add("HotKeyDisplayText");
-            dt.Columns.Add("Parameter");
-            dt.Columns.Add("HotKeyValue");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
-            {
-                string type = "";
-                if (node.SelectSingleNode("Type").InnerText != "") { type= System.Windows.Application.Current.Resources[node.SelectSingleNode("Type").InnerText].ToString(); }
-                string hotkey = node.SelectSingleNode("Hotkey").InnerText;
-                string action = "";
-                if (node.SelectSingleNode("Action").InnerText != "") { type = System.Windows.Application.Current.Resources[node.SelectSingleNode("Action").InnerText].ToString(); }
-                ushort hotkeyUshort;
-                string hotkeyConverted;
-                if (ushort.TryParse(hotkey, out hotkeyUshort ))
-                {
-                    hotkeyConverted = HotKey_Management.convertControllerUshortToString(Convert.ToUInt16(hotkeyUshort));
-                }
-                else
-                {
-                    hotkeyConverted = hotkey;
-                }
-             
-                dt.Rows.Add(node.SelectSingleNode("ID").InnerText, type, action, hotkeyConverted, node.SelectSingleNode("Parameter").InnerText, hotkey);
-            }
-            xmlDocument = null;
-            return dt;
-
-
-        }
-
-        public static void createHotKey()
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeyTemplate/ControllerHotKey");
-            XmlNode xmlNodeHotKey = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "ControllerHotKey", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForHotKey();
-            newNode.SelectSingleNode("Type").InnerText = "Controller";
-            newNode.SelectSingleNode("HotKey").InnerText = "";
-            xmlNodeHotKey.AppendChild(newNode);
-
-
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-        public static void deleteHotKey(string ID)
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeHotkeys = xmlDocument.SelectSingleNode("//Configuration/HotKeys");
-
-            foreach (XmlNode node in xmlNodeHotkeys.ChildNodes)
-            {
-                if (node.SelectSingleNode("ID").InnerText == ID)
-                {
-                    xmlNodeHotkeys.RemoveChild(node);
-                    break;
-                }
-
-            }
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-            xmlDocument = null;
-        }
-
-    }
-
-    public static class Manage_XML_Apps
-    {
-        public static DataTable appList()
-        {
-            DataTable dt = new DataTable();
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-
-            dt.Columns.Add("DisplayName");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
-            {
-                if (node.SelectSingleNode("DisplayName") != null)
-                {
-                    dt.Rows.Add(node.SelectSingleNode("DisplayName").InnerText);
-                }
-                
-            }
-            xmlDocument = null;
-            return dt;
-
-
-        }
-
-        public static DataTable appListProfileExe()
-        {
-            DataTable dt = new DataTable();
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-
-            dt.Columns.Add("Profile");
-            dt.Columns.Add("Exe");
-            if (xmlNode.ChildNodes.Count > 0)
-            {
                 foreach (XmlNode node in xmlNode.ChildNodes)
                 {
-                    if (node.SelectSingleNode("Profile") != null)
+                    if (node.SelectSingleNode("Action").InnerText != "" && node.SelectSingleNode("Type").InnerText == "Keyboard")
                     {
-                        if (node.SelectSingleNode("Profile").InnerText != "")
+                        string hotKey = node.SelectSingleNode("Hotkey").InnerText;
+                        string action = node.SelectSingleNode("Action").InnerText;
+                        string parameter = node.SelectSingleNode("Parameter").InnerText;
+
+                        ActionParameter actpar = new ActionParameter();
+                        actpar.Parameter = parameter;
+                        actpar.Action = action;
+                        KBHotKey.Add(hotKey, actpar);
+                    }
+
+                }
+                //clear the list if it isnt null - meaning reset for any changes
+                if (Global_Variables.Global_Variables.KBHotKeyDictionary != null) { Global_Variables.Global_Variables.KBHotKeyDictionary.Clear(); }
+
+                Global_Variables.Global_Variables.KBHotKeyDictionary = KBHotKey;
+
+            }
+            public static void loadGlobalDictionaryForControllerHotKeys()
+            {
+                Dictionary<ushort, ActionParameter> controllerHotKey = new Dictionary<ushort, ActionParameter>();
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+
+                foreach (XmlNode node in xmlNode.ChildNodes)
+                {
+                    if (node.SelectSingleNode("Action").InnerText != "" && node.SelectSingleNode("Type").InnerText == "Controller")
+                    {
+                        ushort hotKey = Convert.ToUInt16(node.SelectSingleNode("Hotkey").InnerText);
+                        string action = node.SelectSingleNode("Action").InnerText;
+                        string parameter = node.SelectSingleNode("Parameter").InnerText;
+
+                        ActionParameter actpar = new ActionParameter();
+                        actpar.Parameter = parameter;
+                        actpar.Action = action;
+                        controllerHotKey.Add(hotKey, actpar);
+                    }
+
+                }
+                //clear the list if it isnt null - meaning reset for any changes
+                if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null) { Global_Variables.Global_Variables.controllerHotKeyDictionary.Clear(); }
+
+                Global_Variables.Global_Variables.controllerHotKeyDictionary = controllerHotKey;
+
+            }
+            public static void saveHotKeyProfile(string ID, string action, string parameter, string hotkey, string type)
+            {
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID + "']");
+                if (xmlSelectedNode != null)
+                {
+                    XmlNode parentNode = xmlSelectedNode.ParentNode;
+                    XmlNode nodeHotKey = parentNode.SelectSingleNode("HotKey");
+                    nodeHotKey.InnerText = hotkey;
+                    XmlNode nodeAction = parentNode.SelectSingleNode("Action");
+                    nodeAction.InnerText = action;
+                    XmlNode nodeParameter = parentNode.SelectSingleNode("Parameter");
+                    nodeParameter.InnerText = parameter;
+                    XmlNode nodeType = parentNode.SelectSingleNode("Type");
+                    nodeType.InnerText = type;
+                    xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                }
+
+                xmlDocument = null;
+                loadGlobalDictionaryForControllerHotKeys();
+                loadGlobalDictionaryForKBHotKeys();
+
+            }
+            public static DataTable hotkeyDatatable()
+            {
+                //turn this into hotkey table
+                DataTable dt = new DataTable();
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+
+                dt.Columns.Add("ID");
+                dt.Columns.Add("Type");
+                dt.Columns.Add("Action");
+                dt.Columns.Add("HotKeyDisplayText");
+                dt.Columns.Add("Parameter");
+                dt.Columns.Add("HotKeyValue");
+
+                foreach (XmlNode node in xmlNode.ChildNodes)
+                {
+                    string type = "";
+                    if (node.SelectSingleNode("Type").InnerText != "") { type = System.Windows.Application.Current.Resources[node.SelectSingleNode("Type").InnerText].ToString(); }
+                    string hotkey = node.SelectSingleNode("Hotkey").InnerText;
+                    string action = "";
+                    if (node.SelectSingleNode("Action").InnerText != "") { type = System.Windows.Application.Current.Resources[node.SelectSingleNode("Action").InnerText].ToString(); }
+                    ushort hotkeyUshort;
+                    string hotkeyConverted;
+                    if (ushort.TryParse(hotkey, out hotkeyUshort))
+                    {
+                        hotkeyConverted = HotKey_Management.convertControllerUshortToString(Convert.ToUInt16(hotkeyUshort));
+                    }
+                    else
+                    {
+                        hotkeyConverted = hotkey;
+                    }
+
+                    dt.Rows.Add(node.SelectSingleNode("ID").InnerText, type, action, hotkeyConverted, node.SelectSingleNode("Parameter").InnerText, hotkey);
+                }
+                xmlDocument = null;
+                return dt;
+
+
+            }
+
+            public static void createHotKey()
+            {
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeyTemplate/ControllerHotKey");
+                XmlNode xmlNodeHotKey = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+
+                XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "ControllerHotKey", "");
+                newNode.InnerXml = xmlNodeTemplate.InnerXml;
+                newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForHotKey();
+                newNode.SelectSingleNode("Type").InnerText = "Controller";
+                newNode.SelectSingleNode("HotKey").InnerText = "";
+                xmlNodeHotKey.AppendChild(newNode);
+
+
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+                xmlDocument = null;
+
+            }
+            public static void deleteHotKey(string ID)
+            {
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeHotkeys = xmlDocument.SelectSingleNode("//Configuration/HotKeys");
+
+                foreach (XmlNode node in xmlNodeHotkeys.ChildNodes)
+                {
+                    if (node.SelectSingleNode("ID").InnerText == ID)
+                    {
+                        xmlNodeHotkeys.RemoveChild(node);
+                        break;
+                    }
+
+                }
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                xmlDocument = null;
+            }
+
+        }
+
+        public static class Manage_XML_Apps
+        {
+            public static DataTable appList()
+            {
+                DataTable dt = new DataTable();
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+
+                dt.Columns.Add("DisplayName");
+
+                foreach (XmlNode node in xmlNode.ChildNodes)
+                {
+                    if (node.SelectSingleNode("DisplayName") != null)
+                    {
+                        dt.Rows.Add(node.SelectSingleNode("DisplayName").InnerText);
+                    }
+
+                }
+                xmlDocument = null;
+                return dt;
+
+
+            }
+
+            public static DataTable appListProfileExe()
+            {
+                DataTable dt = new DataTable();
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+
+                dt.Columns.Add("Profile");
+                dt.Columns.Add("Exe");
+                if (xmlNode.ChildNodes.Count > 0)
+                {
+                    foreach (XmlNode node in xmlNode.ChildNodes)
+                    {
+                        if (node.SelectSingleNode("Profile") != null)
                         {
-                            dt.Rows.Add(node.SelectSingleNode("Profile").InnerText, node.SelectSingleNode("Exe").InnerText);
+                            if (node.SelectSingleNode("Profile").InnerText != "")
+                            {
+                                dt.Rows.Add(node.SelectSingleNode("Profile").InnerText, node.SelectSingleNode("Exe").InnerText);
+                            }
                         }
+
                     }
-
                 }
+
+                xmlDocument = null;
+                return dt;
+
+
             }
 
-            xmlDocument = null;
-            return dt;
-
-
-        }
-
-        public static string lookupProfileByAppExe(string exe)
-        {
-           
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNodeList xmlNodes = xmlDocument.SelectSingleNode("//Configuration/Applications").SelectNodes("App/Exe[text()='" + exe + "']");
-            string profile = "";
-    
-
-            foreach (XmlNode node in xmlNodes)
+            public static string lookupProfileByAppExe(string exe)
             {
-                profile = node.ParentNode.SelectSingleNode("Profile").InnerText;
-            }
-            xmlDocument = null;
-            return profile;
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNodeList xmlNodes = xmlDocument.SelectSingleNode("//Configuration/Applications").SelectNodes("App/Exe[text()='" + exe + "']");
+                string profile = "";
 
 
-        }
-        public static DataTable appListByProfile(string profileName)
-        {
-            DataTable dt = new DataTable();
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNodeList xmlNodes = xmlDocument.SelectSingleNode("//Configuration/Applications").SelectNodes("App/Profile[text()='" + profileName + "']");
-
-            dt.Columns.Add("DisplayName");
-
-            foreach (XmlNode node in xmlNodes)
-            {
-      
-                dt.Rows.Add(node.ParentNode.SelectSingleNode("DisplayName").InnerText);
-            }
-            xmlDocument = null;
-            return dt;
-
-
-        }
-        public static void changeProfileNameInApps(string oldName, string newName)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-            XmlNodeList xmlSelectedNodes = xmlNode.SelectNodes("App/Profile[text()='" + oldName + "']");
-            if (xmlSelectedNodes != null)
-            {
-                foreach (XmlNode xmlNode1 in xmlSelectedNodes)
+                foreach (XmlNode node in xmlNodes)
                 {
-                    
-                    if (xmlNode1.Name == "Profile")
+                    profile = node.ParentNode.SelectSingleNode("Profile").InnerText;
+                }
+                xmlDocument = null;
+                return profile;
+
+
+            }
+            public static DataTable appListByProfile(string profileName)
+            {
+                DataTable dt = new DataTable();
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNodeList xmlNodes = xmlDocument.SelectSingleNode("//Configuration/Applications").SelectNodes("App/Profile[text()='" + profileName + "']");
+
+                dt.Columns.Add("DisplayName");
+
+                foreach (XmlNode node in xmlNodes)
+                {
+
+                    dt.Rows.Add(node.ParentNode.SelectSingleNode("DisplayName").InnerText);
+                }
+                xmlDocument = null;
+                return dt;
+
+
+            }
+            public static void changeProfileNameInApps(string oldName, string newName)
+            {
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+                XmlNodeList xmlSelectedNodes = xmlNode.SelectNodes("App/Profile[text()='" + oldName + "']");
+                if (xmlSelectedNodes != null)
+                {
+                    foreach (XmlNode xmlNode1 in xmlSelectedNodes)
                     {
-                        if (xmlNode1.InnerText == oldName) { xmlNode1.InnerText = newName; }
+
+                        if (xmlNode1.Name == "Profile")
+                        {
+                            if (xmlNode1.InnerText == oldName) { xmlNode1.InnerText = newName; }
+
+                        }
 
                     }
 
-                }
-
-
-            }
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-
-        public static void createApp(string ProfileName = "")
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/AppTemplate/App");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Applications");
-
-            string newAppName = "NewApp";
-            if (ProfileName != "")
-            {
-                newAppName = ProfileName + "_App";
-            }
-            
-            int countApp = 0;
-            XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("App/DisplayName[text()='" + newAppName + "']");
-
-            if (xmlNodesByName.Count > 0)
-            {
-                while (xmlNodesByName.Count > 0)
-                {
-                    countApp++;
-                    xmlNodesByName = xmlNodeProfiles.SelectNodes("App/DisplayName[text()='" + newAppName + countApp.ToString() + "']");
 
                 }
-                newAppName = newAppName + countApp.ToString();
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+                xmlDocument = null;
+
             }
 
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "App", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("DisplayName").InnerText = newAppName;
-            newNode.SelectSingleNode("Profile").InnerText = ProfileName;
-            xmlNodeProfiles.AppendChild(newNode);
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-        public static void deleteApp(string appName)
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Applications");
-
-            foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+            public static void createApp(string ProfileName = "")
             {
-                if (node.SelectSingleNode("DisplayName").InnerText == appName)
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/AppTemplate/App");
+                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Applications");
+
+                string newAppName = "NewApp";
+                if (ProfileName != "")
                 {
-                    xmlNodeProfiles.RemoveChild(node);
-                    break;
+                    newAppName = ProfileName + "_App";
                 }
 
-            }
+                int countApp = 0;
+                XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("App/DisplayName[text()='" + newAppName + "']");
 
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-            xmlDocument = null;
-        }
-
-
-        public static void saveAppArray(string[] result, string appName)
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
+                if (xmlNodesByName.Count > 0)
                 {
-                    
-                    foreach (XmlNode node in parentNode.ChildNodes)
+                    while (xmlNodesByName.Count > 0)
                     {
-                        
-                        if (node.Name == "Exe") { node.InnerText = result[0]; }
-                        if (node.Name == "Path") { node.InnerText = result[1]; }
-                        if (node.Name == "AppType") { node.InnerText = result[2]; }
-                        if (node.Name == "GameType") { node.InnerText = result[3]; }
-                        if (node.Name == "Image") { node.InnerText = result[4]; }
-                        if (node.Name == "Profile") { node.InnerText = result[5]; }
-  
-                    }
+                        countApp++;
+                        xmlNodesByName = xmlNodeProfiles.SelectNodes("App/DisplayName[text()='" + newAppName + countApp.ToString() + "']");
 
-          
+                    }
+                    newAppName = newAppName + countApp.ToString();
                 }
 
+                XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "App", "");
+                newNode.InnerXml = xmlNodeTemplate.InnerXml;
+                newNode.SelectSingleNode("DisplayName").InnerText = newAppName;
+                newNode.SelectSingleNode("Profile").InnerText = ProfileName;
+                xmlNodeProfiles.AppendChild(newNode);
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+                xmlDocument = null;
 
             }
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-
-        }
-        public static string[] loadAppArray(string appName)
-        {
-            string[] result = new string[6];
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
-            if (xmlSelectedNode != null)
+            public static void deleteApp(string appName)
             {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Applications");
 
-                if (parentNode != null)
+                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
                 {
-                   
-                    foreach (XmlNode node in parentNode.ChildNodes)
+                    if (node.SelectSingleNode("DisplayName").InnerText == appName)
                     {
-                        // not needed, already gotten if (node.Name == "DisplayName") { result[0] = node.InnerText; }
-                        if (node.Name == "Exe") { result[0] = node.InnerText; }
-                        if (node.Name == "Path") { result[1] = node.InnerText; }
-                        if (node.Name == "AppType") { result[2] = node.InnerText; }
-                        if (node.Name == "GameType") { result[3] = node.InnerText; }
-                        if (node.Name == "Image") { result[4] = node.InnerText; }
-                        if (node.Name == "Profile") { result[5] = node.InnerText; }
-                        
-                     
+                        xmlNodeProfiles.RemoveChild(node);
+                        break;
                     }
 
+                }
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                xmlDocument = null;
+            }
+
+
+            public static void saveAppArray(string[] result, string appName)
+            {
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
+                if (xmlSelectedNode != null)
+                {
+                    XmlNode parentNode = xmlSelectedNode.ParentNode;
+
+                    if (parentNode != null)
+                    {
+
+                        foreach (XmlNode node in parentNode.ChildNodes)
+                        {
+
+                            if (node.Name == "Exe") { node.InnerText = result[0]; }
+                            if (node.Name == "Path") { node.InnerText = result[1]; }
+                            if (node.Name == "AppType") { node.InnerText = result[2]; }
+                            if (node.Name == "GameType") { node.InnerText = result[3]; }
+                            if (node.Name == "Image") { node.InnerText = result[4]; }
+                            if (node.Name == "Profile") { node.InnerText = result[5]; }
+
+                        }
+
+
+                    }
+
+
+                }
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+                xmlDocument = null;
+
+
+            }
+            public static string[] loadAppArray(string appName)
+            {
+                string[] result = new string[6];
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
+                if (xmlSelectedNode != null)
+                {
+                    XmlNode parentNode = xmlSelectedNode.ParentNode;
+
+                    if (parentNode != null)
+                    {
+
+                        foreach (XmlNode node in parentNode.ChildNodes)
+                        {
+                            // not needed, already gotten if (node.Name == "DisplayName") { result[0] = node.InnerText; }
+                            if (node.Name == "Exe") { result[0] = node.InnerText; }
+                            if (node.Name == "Path") { result[1] = node.InnerText; }
+                            if (node.Name == "AppType") { result[2] = node.InnerText; }
+                            if (node.Name == "GameType") { result[3] = node.InnerText; }
+                            if (node.Name == "Image") { result[4] = node.InnerText; }
+                            if (node.Name == "Profile") { result[5] = node.InnerText; }
+
+
+                        }
+
+
+
+                    }
 
 
                 }
 
-
+                xmlDocument = null;
+                return result;
             }
 
-            xmlDocument = null;
-            return result;
-        }
-
-        public static string loadAppParameter(string parameter, string appName)
-        {
-            string result = "";
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
-            if (xmlSelectedNode != null)
+            public static string loadAppParameter(string parameter, string appName)
             {
-          
-                XmlNode parameterNode = xmlSelectedNode.SelectSingleNode(parameter);
-                result = parameterNode.InnerText;
-            }
+                string result = "";
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
+                if (xmlSelectedNode != null)
+                {
 
-            xmlDocument = null;
-            return result;
-        }
-        public static void changeAppParameter(string parameter, string appName, string newValue)
-        {
-    
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
-            if (xmlSelectedNode != null)
+                    XmlNode parameterNode = xmlSelectedNode.SelectSingleNode(parameter);
+                    result = parameterNode.InnerText;
+                }
+
+                xmlDocument = null;
+                return result;
+            }
+            public static void changeAppParameter(string parameter, string appName, string newValue)
             {
 
-                XmlNode parameterNode = xmlSelectedNode.ParentNode.SelectSingleNode(parameter);
-          
-                parameterNode.InnerText = newValue;
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Applications");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("App/DisplayName[text()='" + appName + "']");
+                if (xmlSelectedNode != null)
+                {
+
+                    XmlNode parameterNode = xmlSelectedNode.ParentNode.SelectSingleNode(parameter);
+
+                    parameterNode.InnerText = newValue;
+                }
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                xmlDocument = null;
+
             }
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-            xmlDocument = null;
+
 
         }
-
-
-
+        
     }
-}
+

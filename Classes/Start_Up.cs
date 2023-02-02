@@ -32,6 +32,10 @@ namespace Handheld_Control_Panel.Classes
             //Load XML profile file
             XML_Management.Load_XML_File.load_XML_File();
 
+
+            //
+            
+
             //check steam/playnite installed for added features
             //Steam_Management.setSteamDirectory();
             //Playnite_Management.setPlayniteDirectory();
@@ -40,10 +44,10 @@ namespace Handheld_Control_Panel.Classes
 
             //XML_Management.Manage_XML_Profiles.syncEpicGameToProfile();
             //XML_Management.Manage_XML_Profiles.syncSteamGameToProfile();
-            
+
             //load controller hotkey dictionary
-            XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForControllerHotKeys();
-            XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForKBHotKeys();
+            //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForControllerHotKeys();
+            //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForKBHotKeys();
 
             //start controller timer to read controller states
             //Controller_Management.Controller_Management.start_Controller_Management();
@@ -65,7 +69,7 @@ namespace Handheld_Control_Panel.Classes
             //load lists (resolutions, refresh rates, scalings)
             Display_Management.Display_Management.generateDisplayResolutionAndRateList();
             
-            XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
+            //XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
 
             //load language resource
             loadLanguage();
@@ -86,9 +90,9 @@ namespace Handheld_Control_Panel.Classes
             RTSS.getRTSSFPSLimit();
 
             //apply default profile, 0 is default profile ID and will only apply if 0 exists
-            XML_Management.Manage_XML_Profiles.applyProfile("0", false);
+            //XML_Management.Manage_XML_Profiles.applyProfile("0", false);
 
-
+            Global_Variables.Global_Variables.profiles = new Profiles_Management();
 
         }
 
