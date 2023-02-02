@@ -96,33 +96,51 @@ namespace Handheld_Control_Panel.Classes
         public void LoadProfile(string ID)
         {
 
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
+
+            if (xmlSelectedNode != null)
+            {
+                XmlNode parentNode = xmlSelectedNode.ParentNode;
+
+                if (parentNode != null)
+                {
+                    XmlNode onlineNode = parentNode.SelectSingleNode("Online");
+                    Online_TDP1 = onlineNode.SelectSingleNode("TDP1").InnerText;
+                    Online_TDP2 = onlineNode.SelectSingleNode("TDP2").InnerText;
+                    Online_ActiveCores = onlineNode.SelectSingleNode("ActiveCores").InnerText;
+                    Online_MAXCPU = onlineNode.SelectSingleNode("MAXCPU").InnerText;
+                    Online_FPSLimit = onlineNode.SelectSingleNode("FPSLimit").InnerText;
+                    Online_EPP = onlineNode.SelectSingleNode("EPP").InnerText;
+                    Online_GPUCLK = onlineNode.SelectSingleNode("GPUCLK").InnerText;
+
+                    XmlNode offlineNode = parentNode.SelectSingleNode("Offline");
+                    Offline_TDP1 = offlineNode.SelectSingleNode("TDP1").InnerText;
+                    Offline_TDP2 = offlineNode.SelectSingleNode("TDP2").InnerText;
+                    Offline_ActiveCores = offlineNode.SelectSingleNode("ActiveCores").InnerText;
+                    Offline_MAXCPU = offlineNode.SelectSingleNode("MAXCPU").InnerText;
+                    Offline_FPSLimit = offlineNode.SelectSingleNode("FPSLimit").InnerText;
+                    Offline_EPP = offlineNode.SelectSingleNode("EPP").InnerText;
+                    Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
+
+                    XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
+                    Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
+                    RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
+                    Path = LaunchOptions.SelectSingleNode("Path").InnerText;
+                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
+                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+
+                    ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
+                    Exe = parentNode.SelectSingleNode("Exe").InnerText;
+
+                }
 
 
-
-
-            Online_TDP1 = onlineNode.SelectSingleNode("TDP1").InnerText;
-            Online_TDP2 = onlineNode.SelectSingleNode("TDP2").InnerText;
-            Online_ActiveCores = onlineNode.SelectSingleNode("ActiveCores").InnerText;
-            Online_MAXCPU = onlineNode.SelectSingleNode("MAXCPU").InnerText;
-            Online_FPSLimit = onlineNode.SelectSingleNode("FPSLimit").InnerText;
-            Online_EPP = onlineNode.SelectSingleNode("EPP").InnerText;
-            Online_GPUCLK = onlineNode.SelectSingleNode("GPUCLK").InnerText;
-
-            Offline_TDP1 = offlineNode.SelectSingleNode("TDP1").InnerText;
-            Offline_TDP2 = offlineNode.SelectSingleNode("TDP2").InnerText;
-            Offline_ActiveCores = offlineNode.SelectSingleNode("ActiveCores").InnerText;
-            Offline_MAXCPU = offlineNode.SelectSingleNode("MAXCPU").InnerText;
-            Offline_FPSLimit = offlineNode.SelectSingleNode("FPSLimit").InnerText;
-            Offline_EPP = offlineNode.SelectSingleNode("EPP").InnerText;
-            Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
-
-            Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
-            RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
-            Path = LaunchOptions.SelectSingleNode("Path").InnerText;
-            AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
-            GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
-
-
+            }
+        
+            xmlDocument = null;
 
         }
     }
