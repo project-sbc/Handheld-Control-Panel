@@ -113,8 +113,10 @@
     <system:String x:Key="Usercontrol_ProfilesListButtonEdit_MainText">Edit</system:String>
     <system:String x:Key="Usercontrol_ProfilesListButtonAdd_MainText">Add</system:String>
     <system:String x:Key="Usercontrol_ProfilesListButtonDelete_MainText">Delete</system:String>
+
+    <system:String x:Key="Usercontrol_ProfilesProfileName_MainText">Profile Name</system:String>
     
-    
+
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

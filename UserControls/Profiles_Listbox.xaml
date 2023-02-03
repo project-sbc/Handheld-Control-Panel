@@ -20,23 +20,23 @@
                         <Label x:Name="subText" Content="{DynamicResource Usercontrol_ProfilesList_SubText}" />
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  DockPanel.Dock="Right">
-                        <Button  Height="50" Tag="EditProfile">
+                        <Button  Height="44" Tag="EditProfile">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonEdit_MainText}" VerticalContentAlignment="Center" FontSize="20" />
+                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonEdit_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,0,0"  />
                             </StackPanel>
                           
                         </Button>
-                        <Button Height="50" Tag="AddProfile">
+                        <Button Height="44" Tag="AddProfile">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonAdd_MainText}" VerticalContentAlignment="Center" FontSize="20" />
+                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonAdd_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF095;" Margin="0,0,0,0"  />
                             </StackPanel>
 
                         </Button>
-                        <Button Height="50" Tag="DeleteProfile">
+                        <Button Height="44" Tag="DeleteProfile">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonDelete_MainText}" VerticalContentAlignment="Center" FontSize="20" />
+                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonDelete_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF096;" Margin="0,0,0,0"  />
                             </StackPanel>
 
@@ -44,7 +44,7 @@
                     </StackPanel>
                 </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" FontSize="16" Background="Transparent" Width="770"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+            <ListBox x:Name="control" FontSize="16" Background="Transparent" Width="770"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">
