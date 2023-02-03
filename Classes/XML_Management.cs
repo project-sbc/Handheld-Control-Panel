@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
         public static void generateGlobalVariableProfileToExeList()
         {
             //loads the global variable dictionary with 
-            if (Global_Variables.Global_Variables.profiles.profiles.Count != 0)
+            if (Global_Variables.Global_Variables.profiles.Count != 0)
             { //Global_Variables.Global_Variables.Profiles.Clear(); }
 
                 System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
@@ -194,12 +194,12 @@ namespace Handheld_Control_Panel.Classes.XML_Management
         public static string lookUpExeOfActiveProfile()
         {
             string result = "";
-            if (Global_Variables.Global_Variables.profiles.selectedProfile != null)
+            if (Global_Variables.Global_Variables.profiles.activeProfile != null)
             {
                 System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
                 xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
                 XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + Global_Variables.Global_Variables.profiles.selectedProfile.ID + "']");
+                XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + Global_Variables.Global_Variables.profiles.activeProfile.ID + "']");
 
                 if (xmlSelectedNode != null)
                 {
@@ -571,7 +571,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
                     if (parentNode != null)
                     {
-                        Global_Variables.Global_Variables.profiles.selectedProfile.ID = Int32.Parse(ID);
+                        Global_Variables.Global_Variables.profiles.activeProfile.ID = ID;
 
                         XmlNode powerNode;
                         if (powerStatus == "Online")
@@ -636,7 +636,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                 else
                 {
                     //if profile is default and no profile was detected make activeprofile none
-                    Global_Variables.Global_Variables.profiles.selectedProfile = null;
+                    Global_Variables.Global_Variables.profiles.activeProfile = null;
                     Global_Variables.Global_Variables.profileAutoApplied = false;
 
 

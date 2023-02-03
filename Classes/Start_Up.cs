@@ -31,26 +31,16 @@ namespace Handheld_Control_Panel.Classes
 
             //Load XML profile file
             XML_Management.Load_XML_File.load_XML_File();
-
-
-            //
             
 
             //check steam/playnite installed for added features
-            //Steam_Management.setSteamDirectory();
-            //Playnite_Management.setPlayniteDirectory();
-            //EpicGames_Management.setEpicGamesDirectory();
-
-
-            //XML_Management.Manage_XML_Profiles.syncEpicGameToProfile();
-            //XML_Management.Manage_XML_Profiles.syncSteamGameToProfile();
+            Steam_Management.setSteamDirectory();
+            Playnite_Management.setPlayniteDirectory();
+            EpicGames_Management.setEpicGamesDirectory();
 
             //load controller hotkey dictionary
             //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForControllerHotKeys();
             //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForKBHotKeys();
-
-            //start controller timer to read controller states
-            //Controller_Management.Controller_Management.start_Controller_Management();
 
             //get cpu information
             TDP_Management.TDP_Management.determineCPU();

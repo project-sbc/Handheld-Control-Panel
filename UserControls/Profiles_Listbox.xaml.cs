@@ -54,24 +54,12 @@ namespace Handheld_Control_Panel.UserControls
            
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
 
-         
             setListboxItemsource();
         }
 
         private void setListboxItemsource(string ID = "")
         {
-            control.ItemsSource = Manage_XML_Profiles.profilesDatatable().AsDataView();
-            if (ID != "")
-            {
-                foreach (DataRowView drv in control.ItemsSource)
-                {
-                    if (drv[0].ToString() == ID)
-                    {
-                        control.SelectedItem = drv;
-                        break;
-                    }
-                }
-            }
+            control.ItemsSource = Global_Variables.profiles;
         }
 
      

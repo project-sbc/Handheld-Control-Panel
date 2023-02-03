@@ -221,7 +221,16 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 RegistryKey myKey = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\Control\\CI\\Config", true);
                 if (myKey != null)
                 {
-                    myKey.SetValue("VulnerableDriverBlocklistEnable", "0", RegistryValueKind.String);
+                    if (myKey.GetValue("VulnerableDriverBlocklistEnable") == "1")
+                    {
+                        var msgBox = MessageBox.Show("","", MessageBoxButton.YesNo);
+                        if (msgBox == MessageBoxResult.Yes)
+                        {
+                            myKey.SetValue("VulnerableDriverBlocklistEnable", "0", RegistryValueKind.String);
+                        }
+                      
+                    }
+
                     myKey.Close();
                 }
             }

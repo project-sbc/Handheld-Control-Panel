@@ -11,15 +11,14 @@ using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public class Profiles_Management
+    public class Profiles_Management: List<Profile>
     {
-        public List<Profile> profiles= new List< Profile>();
-        public Profile selectedProfile=null;
-
+        //public List<Profile> profiles= new List< Profile>();
+        public Profile activeProfile=null;
+        public Profile editingProfile = null;
+        public Profile defaultProfile = null;
         public Profiles_Management()
         {
-            //XML_Management.Load_XML_File.load_XML_File();
-
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
@@ -29,19 +28,18 @@ namespace Handheld_Control_Panel.Classes
                 Profile profile = new Profile();
 
                 profile.LoadProfile(node.SelectSingleNode("ID").InnerText);
-                profiles.Add(profile);
+                if (node.SelectSingleNode("ID").InnerText == "0") { defaultProfile = profile; }
+                this.Add(profile);
             }
             
-            xmlDocument = null;
-
-            //profile.LoadProfile(node.SelectSingleNode("ID").InnerText);
+            xmlDocument = null;          
         }
 
     }
 
     public class Profile
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string ProfileName { get; set; } = "";
         public string Exe { get; set; } = "";
         public string Resolution { get; set; } = "";
