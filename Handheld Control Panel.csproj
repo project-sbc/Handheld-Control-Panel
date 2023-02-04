@@ -123,6 +123,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\ProfileDetailsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ProfilesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

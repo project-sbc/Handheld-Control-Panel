@@ -17,7 +17,7 @@
                          
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <TextBox Name="control" Style="{StaticResource profilesTextBox}" />
+                        <TextBox Name="control" Style="{StaticResource profilesTextBox}" LostFocus="control_LostFocus" />
                     </StackPanel>
                     </DockPanel>
                 </DockPanel>

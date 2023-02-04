@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.ProfilesPage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.ProfileDetailsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,10 +10,10 @@
       Title="HomePage" Loaded="Page_Loaded">
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-            <Label Content="{DynamicResource Header_ProfilesList_Settings}" Style="{StaticResource headerLabel}" />
+            <Label Content="{DynamicResource Header_ProfileDetails_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
-            <uc:Profiles_Listbox/>
-          
+
+            <uc:Profiles_ProfileName/>
 
 
         </StackPanel>

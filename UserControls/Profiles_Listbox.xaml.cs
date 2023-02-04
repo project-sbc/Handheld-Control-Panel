@@ -7,6 +7,7 @@ using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Classes.XML_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
+using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -52,7 +53,7 @@ namespace Handheld_Control_Panel.UserControls
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
            
-            if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
+            //if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
 
             setListboxItemsource();
         }
@@ -87,7 +88,10 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (control.SelectedItem!= null)
                 {
-                    
+                    Global_Variables.profiles.editingProfile = (Profile)control.SelectedItem;
+
+                    MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+                    mainWindow.frame.Navigate(new Uri("Pages\\ProfileDetailsPage.xaml", UriKind.RelativeOrAbsolute));
                 }
             }
 

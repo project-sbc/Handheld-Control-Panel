@@ -16,6 +16,9 @@
     <system:String x:Key="Header_Display_Settings">Display Settings</system:String>
     <system:String x:Key="Header_TDP_Settings">TDP Settings</system:String>
     <system:String x:Key="Header_RTSS_Settings">RTSS Settings</system:String>
+    
+    <system:String x:Key="Header_ProfilesList_Settings">Profiles List</system:String>
+    <system:String x:Key="Header_ProfileDetails_Settings">Profile Details</system:String>
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
@@ -109,7 +112,6 @@
     <system:String x:Key="Usercontrol_CombineTDPToggleSwitch_SubText">Set sustained and boost TDP to same value</system:String>
 
     <system:String x:Key="Usercontrol_ProfilesList_MainText">Profile List</system:String>
-    <system:String x:Key="Usercontrol_ProfilesList_SubText">Profile List</system:String>
     <system:String x:Key="Usercontrol_ProfilesListButtonEdit_MainText">Edit</system:String>
     <system:String x:Key="Usercontrol_ProfilesListButtonAdd_MainText">Add</system:String>
     <system:String x:Key="Usercontrol_ProfilesListButtonDelete_MainText">Delete</system:String>

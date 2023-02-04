@@ -1,5 +1,6 @@
 ﻿using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
@@ -33,6 +34,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             InitializeComponent();
             //UserControl_Management.setupControl(control);
+            control.Text = Global_Variables.profiles.editingProfile.ProfileName;
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -53,6 +55,13 @@ namespace Handheld_Control_Panel.UserControls
             }
         }
 
-    
+        private void control_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(Global_Variables.profiles.editingProfile != null && control.Text != "")
+            {
+                Global_Variables.profiles.editingProfile.ProfileName = control.Text;
+            }
+           
+        }
     }
 }
