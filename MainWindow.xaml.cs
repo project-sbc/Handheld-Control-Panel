@@ -96,7 +96,7 @@ namespace Handheld_Control_Panel
         {
             NavigationViewItem navigationViewItem = (NavigationViewItem)mainWindowNavigationView.SelectedItem;
             frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
-            page = navigationViewItem.Tag.ToString();
+            
             
         }
 
@@ -112,6 +112,11 @@ namespace Handheld_Control_Panel
 
             //kill controller thread
             Global_Variables.killControllerThread = true;
+        }
+
+        private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            page = frame.Source.ToString().Replace("Pages/","").Replace(".xaml","");
         }
     }
     

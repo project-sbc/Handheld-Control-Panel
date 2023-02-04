@@ -31,6 +31,14 @@
         <Setter Property="Foreground"
                 Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
+
+    <Style x:Key="profileControllerButtonTextblock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+    </Style>
     <!--button-->
     <Style x:Key="userControlButton" TargetType="Button">
         <Setter Property="Height" Value="38" />
@@ -88,6 +96,9 @@
 
     </Style>
 
+
+
+  
     <!--stack panel-->
 
     <Style x:Key="pageScrollViewer" TargetType="ScrollViewer">

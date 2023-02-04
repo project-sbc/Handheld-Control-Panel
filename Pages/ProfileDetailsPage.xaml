@@ -10,10 +10,28 @@
       Title="HomePage" Loaded="Page_Loaded">
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-            <Label Content="{DynamicResource Header_ProfileDetails_Settings}" Style="{StaticResource headerLabel}" />
+            <DockPanel >
+                <Label Content="{DynamicResource Header_ProfileDetails_Settings}" Style="{StaticResource headerLabel}" />
+                <Button  Height="34" DockPanel.Dock="Right"   Margin="4,0,4,0" Tag="SaveProfile">
+                    <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
+                        <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonSave_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                        <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEDE3;" Margin="0,0,0,0"  />
+                    </StackPanel>
+
+                </Button>
+                <Button  Height="34" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="4,0,4,0" Tag="Back">
+                    <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
+                        <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonBack_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                        <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xF094;" Margin="0,0,0,0"  />
+                    </StackPanel>
+
+                </Button>
+            </DockPanel>
+            
             <Rectangle Style="{StaticResource rectangle}" />
 
-            <uc:Profiles_ProfileName/>
+            <uc:Profiles_ProfileName />
+            <uc:Profiles_Exe />
 
 
         </StackPanel>

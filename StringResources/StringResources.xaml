@@ -116,8 +116,14 @@
     <system:String x:Key="Usercontrol_ProfilesListButtonAdd_MainText">Add</system:String>
     <system:String x:Key="Usercontrol_ProfilesListButtonDelete_MainText">Delete</system:String>
 
-    <system:String x:Key="Usercontrol_ProfilesProfileName_MainText">Profile Name</system:String>
+    <system:String x:Key="Usercontrol_ProfileDetailsButtonSave_MainText">Save</system:String>
+    <system:String x:Key="Usercontrol_ProfileDetailsButtonBack_MainText">Back</system:String>
+
     
+    
+    <system:String x:Key="Usercontrol_ProfilesProfileName_MainText">Profile Name</system:String>
+    <system:String x:Key="Usercontrol_ProfilesExe_MainText">Process Name</system:String>
+    <system:String x:Key="Usercontrol_ProfilesExe_SubText">Use list or textbox to pick process name</system:String>
 
     <!--old stuff-->
 

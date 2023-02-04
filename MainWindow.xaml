@@ -27,7 +27,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ui:NavigationViewItem Icon="Setting" Tag="SettingsPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Settings}" />
             </ui:NavigationView.MenuItems>
 
-            <Frame x:Name="frame" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="frame" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
 
         </ui:NavigationView>
     </Grid>
