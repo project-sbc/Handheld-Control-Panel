@@ -38,14 +38,25 @@
 
             <uc:ProfileOnline_TDP />
             <uc:ProfileOnline_TDP2 />
-            
+            <uc:ProfileOnline_MaxCPU />
+            <uc:ProfileOnline_ActiveCores />
+            <uc:ProfileOnline_EPP />
+            <uc:ProfileOnline_FPSLimit />
+            <uc:ProfileOnline_GPUCLK />
+      
+
 
             <Label Content="{DynamicResource Header_ProfileOnBattery_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:ProfileOffline_TDP />
             <uc:ProfileOffline_TDP2 />
-            
-            
+            <uc:ProfileOffline_MaxCPU />
+            <uc:ProfileOffline_ActiveCores />
+            <uc:ProfileOffline_EPP />
+            <uc:ProfileOffline_FPSLimit />
+            <uc:ProfileOffline_GPUCLK />
+
+
         </StackPanel>
     </ScrollViewer>
 

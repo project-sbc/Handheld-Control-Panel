@@ -132,6 +132,36 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_GPUCLK.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_GPUCLK.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_FPSLimit.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_FPSLimit.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_ActiveCores.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_ActiveCores.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_MaxCPU.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_MaxCPU.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_EPP.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_EPP.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Settings\CombineTDP_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -180,10 +210,10 @@
     <Compile Update="UserControls\Settings\AutoUpdate_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\StartRTSS_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\Settings\StartRTSS_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\Theme_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\Settings\Theme_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\FPSLimit_Slider.xaml.cs">

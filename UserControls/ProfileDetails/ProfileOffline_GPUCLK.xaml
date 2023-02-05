@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.ProfileOffline_TDP"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.ProfileOffline_GPUCLK"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,22 +10,22 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel Margin="2,2,2,2">
             <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial  Kind="LightningBolt" x:Name="icon" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconMaterial  Kind="ExpansionCardVariant" x:Name="icon" Style="{StaticResource userControlIconMaterial}" />
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-                        <Label Content="{DynamicResource Usercontrol_TDP_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label Content="{DynamicResource Usercontrol_GPUCLK_MainText}" Style="{StaticResource userControlMainLabel}"/>
                       
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                       
-                        <Label x:Name="unitLabel" Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} W" Style="{StaticResource userControlUnitLabel}"/>
+                        <Label x:Name="unitLabel" Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} MHz" Style="{StaticResource userControlUnitLabel}"/>
 
                         <mah:ToggleSwitch x:Name="toggleSwitch"  OnContent="{DynamicResource Usercontrol_Enable_OnContent}" OffContent="{DynamicResource Usercontrol_Disable_OffContent}" Toggled="toggleSwitch_Toggled" />
                         <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,6,0"  />
                     </StackPanel>
                 </DockPanel>
             </DockPanel>
-            <Slider x:Name="control" Tag="Slider_ProfileOfflineTDP" Height="24" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
+            <Slider x:Name="control" Tag="Slider_ProfileOfflineGPUCLK" Height="24" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
                 <Slider.LayoutTransform>
                     <ScaleTransform ScaleY="1.4" ScaleX="1.4" />
                 </Slider.LayoutTransform>

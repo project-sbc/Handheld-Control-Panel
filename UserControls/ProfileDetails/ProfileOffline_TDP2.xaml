@@ -25,7 +25,7 @@
                     </StackPanel>
                 </DockPanel>
             </DockPanel>
-            <Slider x:Name="control" Tag="Slider_ProfileOnlineTDP" Height="24" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
+            <Slider x:Name="control" Tag="Slider_ProfileOfflineTDP2" Height="24" Margin="12,0,12,0" ValueChanged="control_ValueChanged"   >
                 <Slider.LayoutTransform>
                     <ScaleTransform ScaleY="1.4" ScaleX="1.4" />
                 </Slider.LayoutTransform>
