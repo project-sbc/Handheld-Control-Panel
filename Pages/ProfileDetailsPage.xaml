@@ -27,13 +27,25 @@
 
                 </Button>
             </DockPanel>
-            
+           
             <Rectangle Style="{StaticResource rectangle}" />
 
             <uc:Profiles_ProfileName />
             <uc:Profiles_Exe />
 
+            <Label Content="{DynamicResource Header_ProfileOnCharger_Settings}" Style="{StaticResource headerLabel}" />
+            <Rectangle Style="{StaticResource rectangle}" />
 
+            <uc:ProfileOnline_TDP />
+            <uc:ProfileOnline_TDP2 />
+            
+
+            <Label Content="{DynamicResource Header_ProfileOnBattery_Settings}" Style="{StaticResource headerLabel}" />
+            <Rectangle Style="{StaticResource rectangle}" />
+            <uc:ProfileOffline_TDP />
+            <uc:ProfileOffline_TDP2 />
+            
+            
         </StackPanel>
     </ScrollViewer>
 

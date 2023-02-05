@@ -132,19 +132,31 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\CombineTDP_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\Settings\CombineTDP_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\CheckUpdates_Button.xaml.cs">
+    <Compile Update="UserControls\Settings\CheckUpdates_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_TDP.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOffline_TDP2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_TDP2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileOnline_TDP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\GPUCLK_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\IntelTDPType_Listbox.xaml.cs">
+    <Compile Update="UserControls\Settings\IntelTDPType_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\Language_Listbox.xaml.cs">
+    <Compile Update="UserControls\Settings\Language_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Refresh_Listbox.xaml.cs">
@@ -162,10 +174,10 @@
     <Compile Update="UserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\Autostart_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\Settings\Autostart_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\AutoUpdate_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\Settings\AutoUpdate_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\StartRTSS_Toggleswitch.xaml.cs">
@@ -186,7 +198,7 @@
     <Compile Update="UserControls\EPP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\AccentColor_Listbox.xaml.cs">
+    <Compile Update="UserControls\Settings\AccentColor_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Volume_Slider.xaml.cs">
@@ -220,7 +232,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="UserControls\Autostart_Toggleswitch.xaml">
+    <Page Update="UserControls\Settings\Autostart_Toggleswitch.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

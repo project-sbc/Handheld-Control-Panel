@@ -34,7 +34,7 @@
 
     <Style x:Key="profileControllerButtonTextblock" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
-        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontSize" Value="19" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Foreground"
                 Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />

@@ -25,6 +25,94 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                 switch (slider.Tag)
                 {
+                    case "Slider_ProfileOnlineTDP":
+                        slider.Minimum = Properties.Settings.Default.minTDP;
+                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        
+                        break;
+                    case "Slider_ProfileOfflineTDP":
+                        slider.Minimum = Properties.Settings.Default.minTDP;
+                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        break;
+                    case "Slider_ProfileOnlineTDP2":
+                        slider.Minimum = Properties.Settings.Default.minTDP;
+                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        break;
+                    case "Slider_ProfileOfflineTDP2":
+                        slider.Minimum = Properties.Settings.Default.minTDP;
+                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        break;
+                    case "Slider_ProfileOnlineEPP":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        break;
+                    case "Slider_ProfileOfflineEPP":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        break;
+                    case "Slider_ProfileOnlineGPUCLK":
+                        slider.Minimum = 400;
+                        slider.Maximum = Properties.Settings.Default.maxGPUCLK;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        slider.Value = slider.Minimum;
+                        break;
+                    case "Slider_ProfileOfflineGPUCLK":
+                        slider.Minimum = 400;
+                        slider.Maximum = Properties.Settings.Default.maxGPUCLK;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        slider.Value = slider.Minimum;
+                        break;
+                    case "Slider_ProfileOnlineMaxCPU":
+                        slider.Minimum = 400;
+                        slider.Maximum = 2200;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        break;
+                    case "Slider_ProfileOfflineMaxCPU":
+                        slider.Minimum = 400;
+                        slider.Maximum = 2200;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        break;
+                    case "Slider_ProfileOnlineActiveCores":
+                        slider.Minimum = 1;
+                        slider.Maximum = Global_Variables.Global_Variables.maxCpuCores;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 2;
+                        break;
+                    case "Slider_ProfileOfflineActiveCores":
+                        slider.Minimum = 1;
+                        slider.Maximum = Global_Variables.Global_Variables.maxCpuCores;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 2;
+                        break;
+
                     case "Slider_TDP":
                         slider.Minimum = Properties.Settings.Default.minTDP;
                         slider.Maximum = Properties.Settings.Default.maxTDP;
@@ -267,6 +355,44 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             double sliderValue = slider.Value;
             switch (sliderTag)
             {
+                
+                 case "Slider_ProfileOnlineTDP":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_TDP1 = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOfflineTDP":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_TDP1 = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOnlineTDP2":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_TDP2 = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOfflineTDP2":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_TDP2 = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOnlineEPP":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_EPP = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOfflineEPP":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_EPP = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOnlineGPUCLK":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_GPUCLK = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOfflineGPUCLK":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_GPUCLK = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOnlineMaxCPU":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_MAXCPU = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOfflineMaxCPU":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_MAXCPU = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOnlineActiveCores":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_ActiveCores = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOfflineActiveCores":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_ActiveCores = sliderValue.ToString();
+                    break;
+
                 case "Slider_MaxGPUCLK":
                     Properties.Settings.Default.maxGPUCLK = (int)sliderValue;
                     Properties.Settings.Default.Save();
