@@ -1,6 +1,8 @@
 ﻿using Handheld_Control_Panel.Classes.Global_Variables;
+
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Runtime.CompilerServices;
@@ -9,11 +11,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 
+using Microsoft.Maui.Devices.Sensors;
+
 namespace Handheld_Control_Panel.Classes
 {
     public static class Start_Up
     {
-   
+     
 
         public static void Start_Routine()
         {
@@ -23,6 +27,8 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //test code here
+            
+
 
             //test code
 

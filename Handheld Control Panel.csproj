@@ -114,7 +114,7 @@
     <PackageReference Include="ModernWpfUI.MahApps" Version="0.9.5" />
     <PackageReference Include="MouseKeyHook" Version="5.6.0" />
     <PackageReference Include="Nefarius.Drivers.HidHide" Version="1.8.54" />
-    <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.6.213" />
+    <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.8.228" />
     <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
     <PackageReference Include="SecretNest.SequentialScheduler" Version="1.1.0" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
