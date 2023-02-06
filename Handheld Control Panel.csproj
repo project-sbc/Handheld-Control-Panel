@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows8.0</TargetFramework>
+
     <RootNamespace>Handheld_Control_Panel</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
