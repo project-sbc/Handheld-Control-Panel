@@ -85,18 +85,18 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Value = slider.Minimum;
                         break;
                     case "Slider_ProfileOnlineMaxCPU":
-                        slider.Minimum = 400;
-                        slider.Maximum = 2200;
-                        slider.TickFrequency = 50;
-                        slider.SmallChange = 50;
-                        slider.LargeChange = 100;
+                        slider.Minimum = 500;
+                        slider.Maximum = 5000;
+                        slider.TickFrequency = 100;
+                        slider.SmallChange = 100;
+                        slider.LargeChange = 500;
                         break;
                     case "Slider_ProfileOfflineMaxCPU":
-                        slider.Minimum = 400;
-                        slider.Maximum = 2200;
-                        slider.TickFrequency = 50;
-                        slider.SmallChange = 50;
-                        slider.LargeChange = 100;
+                        slider.Minimum = 500;
+                        slider.Maximum = 5000;
+                        slider.TickFrequency = 100;
+                        slider.SmallChange = 100;
+                        slider.LargeChange = 500;
                         break;
                     case "Slider_ProfileOnlineActiveCores":
                         slider.Minimum = 1;
@@ -112,6 +112,21 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.SmallChange = 1;
                         slider.LargeChange = 2;
                         break;
+                    case "Slider_ProfileOfflineFPSLimit":
+                        slider.Minimum = 0;
+                        slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        break;
+                    case "Slider_ProfileOnlineFPSLimit":
+                        slider.Minimum = 0;
+                        slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        break;
+
 
                     case "Slider_TDP":
                         slider.Minimum = Properties.Settings.Default.minTDP;
