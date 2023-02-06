@@ -89,7 +89,8 @@ namespace Handheld_Control_Panel.Classes
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex - 1].ToString()));
                             intReturn[0] = highlightedIndex-1;
-                            ((IScrollInfo)stackPanel).MouseWheelUp();
+                            if (intReturn[0] == 0) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+                            
                             userControls[intReturn[0]].BringIntoView();
                 
                             
@@ -102,7 +103,8 @@ namespace Handheld_Control_Panel.Classes
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + 1].ToString()));
                             intReturn[0] = highlightedIndex+ 1;
-                            ((IScrollInfo)stackPanel).MouseWheelDown();
+                            if (intReturn[0] == userControls.Count-1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+                            //((IScrollInfo)stackPanel).MouseWheelDown();
                             userControls[intReturn[0]].BringIntoView();
                         }
                     }
