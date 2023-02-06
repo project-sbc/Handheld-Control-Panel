@@ -118,7 +118,8 @@
     <!--labels-->
     <Style x:Key="headerLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="23" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="20,0,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
@@ -162,11 +163,11 @@
         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
     <Style x:Key="userControlBorder" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent3}" />
+
         <Setter Property="Margin" Value="7,1,7,1" />
         <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
-        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
     </Style>
     <!--navigationview-->
     <Style x:Key="navigationView" TargetType="ui:NavigationView" >
