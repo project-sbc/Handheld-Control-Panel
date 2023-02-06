@@ -61,6 +61,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setListboxItemsource(string ID = "")
         {
             control.ItemsSource = Global_Variables.profiles;
+            if (Global_Variables.profiles.editingProfile != null) { control.SelectedItem = Global_Variables.profiles.editingProfile; }
         }
 
      
@@ -106,6 +107,26 @@ namespace Handheld_Control_Panel.UserControls
         {
             handleListboxChange();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            switch(button.Name)
+            {
+                case "EditProfile":
+                    handleListboxChange();
+                    break;
+                case "AddProfile":
+
+                    break;
+                case "DeleteProfile":
+
+                    break;
+                default: break;
+            }
+        }
+
+       
     }
 
   

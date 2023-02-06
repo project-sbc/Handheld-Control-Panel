@@ -12,17 +12,17 @@
         <StackPanel x:Name="stackPanel" >
             <DockPanel >
                 <Label Content="{DynamicResource Header_ProfileDetails_Settings}" Style="{StaticResource headerLabel}" />
-                <Button  Height="34" DockPanel.Dock="Right"   Margin="4,0,4,0" Tag="SaveProfile">
+                <Button  Height="34" DockPanel.Dock="Right"   Margin="4,0,4,0" Click="Button_Click" Name="SaveProfile">
                     <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
                         <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonSave_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                         <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEDE3;" Margin="0,0,0,0"  />
                     </StackPanel>
 
                 </Button>
-                <Button  Height="34" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="4,0,4,0" Tag="Back">
+                <Button  Height="34" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="4,0,4,0" Click="Button_Click" Name="Back">
                     <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
                         <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonBack_MainText}" VerticalContentAlignment="Center" FontSize="14" />
-                        <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xF094;" Margin="0,0,0,0"  />
+                        <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEECA;" Margin="0,0,0,0"  />
                     </StackPanel>
 
                 </Button>

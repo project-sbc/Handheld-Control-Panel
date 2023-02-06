@@ -117,6 +117,8 @@ namespace Handheld_Control_Panel
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             page = frame.Source.ToString().Replace("Pages/","").Replace(".xaml","");
+            if (!page.Contains("Profile")) { Global_Variables.profiles.editingProfile = null; }
+
         }
     }
     

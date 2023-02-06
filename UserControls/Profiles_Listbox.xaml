@@ -20,21 +20,21 @@
                        
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  DockPanel.Dock="Right">
-                        <Button  Height="44" Tag="EditProfile">
+                        <Button  Height="44" Name="EditProfile" Margin="0,0,6,0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="{DynamicResource Usercontrol_ProfilesListButtonEdit_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,0,0"  />
                             </StackPanel>
                           
                         </Button>
-                        <Button Height="44" Tag="AddProfile">
+                        <Button Height="44" Name="AddProfile" Margin="0,0,6,0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="{DynamicResource Usercontrol_ProfilesListButtonAdd_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF095;" Margin="0,0,0,0"  />
                             </StackPanel>
 
                         </Button>
-                        <Button Height="44" Tag="DeleteProfile">
+                        <Button Height="44" Name="DeleteProfile" Margin="0,0,6,0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Label Content="{DynamicResource Usercontrol_ProfilesListButtonDelete_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF096;" Margin="0,0,0,0"  />

@@ -20,6 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
+using Handheld_Control_Panel.Classes.Global_Variables;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -58,6 +59,19 @@ namespace Handheld_Control_Panel.Pages
 
             }
         }
+
+        private void goBackToProfileList()
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.frame.Navigate(new Uri("Pages\\ProfilesPage.xaml", UriKind.RelativeOrAbsolute));
+
+        }
+
+        private void saveProfile()
+        {
+            Global_Variables.profiles.editingProfile.SaveToXML();
+
+        }
         //
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -67,15 +81,41 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
-              
-                highlightedUserControl = intReturn[0];
-                selectedUserControl = intReturn[1];
+                switch(action)
+                {
+                    case "Start":
+
+                        break;
+
+                    default:
+                        //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
+                        int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+
+                        highlightedUserControl = intReturn[0];
+                        selectedUserControl = intReturn[1];
+
+                        break;
+                }
+
+             
             }
 
         }
-      
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            switch(button.Name)
+            {
+                case "Save":
+                    saveProfile();
+                    break;
+                case "Back":
+                    goBackToProfileList();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
