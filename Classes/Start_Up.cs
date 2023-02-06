@@ -10,15 +10,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-
-using Microsoft.Maui.Devices.Sensors;
+using System.Windows.Threading;
+using Windows.Devices.Sensors;
+using Windows.UI.Core;
 
 namespace Handheld_Control_Panel.Classes
 {
     public static class Start_Up
     {
-     
-
+        private static void ReadingChanged(object sender, AccelerometerReadingChangedEventArgs e)
+        {
+            AccelerometerReading reading = e.Reading;
+            //Debug.WriteLine( reading.AccelerationZ);
+            //Debug.WriteLine(reading.AccelerationY);
+            Debug.WriteLine(reading.AccelerationZ);
+        }
+        
         public static void Start_Routine()
         {
             //error catch
@@ -27,8 +34,10 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //test code here
-            
+            //Accelerometer acc = Accelerometer.GetDefault();
+            Accelerometer gyro = Accelerometer.GetDefault();
 
+            gyro.ReadingChanged += ReadingChanged;
 
             //test code
 

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows8.0</TargetFramework>
-
+    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
     <RootNamespace>Handheld_Control_Panel</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\HCP.ico</ApplicationIcon>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -256,6 +256,7 @@
     <Reference Include="RTSSSharedMemoryNET">
       <HintPath>Resources\RTSS\RTSSSharedMemoryNET.dll</HintPath>
     </Reference>
+
   </ItemGroup>
 
   <ItemGroup>
