@@ -167,7 +167,7 @@
         <Setter Property="Margin" Value="7,1,7,1" />
         <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
     <!--navigationview-->
     <Style x:Key="navigationView" TargetType="ui:NavigationView" >
