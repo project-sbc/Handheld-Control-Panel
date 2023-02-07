@@ -164,11 +164,14 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        public void LoadProfile(string ID, XmlDocument xmlDocument)
+        public void LoadProfile(string ID, XmlDocument xmlDocument=null)
         {
+            if (xmlDocument == null)
+            {
+                xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            }
 
-            //System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            //xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
 
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
             XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");

@@ -62,6 +62,9 @@ namespace Handheld_Control_Panel.Pages
 
         private void goBackToProfileList()
         {
+            //make sure the current profile is loaded back to the XML if they didn't save
+            Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             mainWindow.frame.Navigate(new Uri("Pages\\ProfilesPage.xaml", UriKind.RelativeOrAbsolute));
 
@@ -70,7 +73,6 @@ namespace Handheld_Control_Panel.Pages
         private void saveProfile()
         {
             Global_Variables.profiles.editingProfile.SaveToXML();
-
         }
         //
         private void handleControllerInputs(object sender, EventArgs e)
