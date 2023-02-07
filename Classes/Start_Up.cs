@@ -18,12 +18,20 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class Start_Up
     {
+        private static double number = 0;
         private static void ReadingChanged(object sender, AccelerometerReadingChangedEventArgs e)
         {
-            AccelerometerReading reading = e.Reading;
+
+            //Accelerometer acc = Accelerometer.GetDefault();
+            //Accelerometer gyro = Accelerometer.GetDefault();
+
+            //gyro.ReadingChanged += ReadingChanged;
+            //AccelerometerReading reading = e.Reading;
             //Debug.WriteLine( reading.AccelerationZ);
             //Debug.WriteLine(reading.AccelerationY);
-            Debug.WriteLine(reading.AccelerationZ);
+            //number =number  +reading.AccelerationX;
+            //Debug.WriteLine(number.ToString());
+            //Debug.WriteLine(reading.AccelerationX);
         }
         
         public static void Start_Routine()
@@ -34,10 +42,7 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //test code here
-            //Accelerometer acc = Accelerometer.GetDefault();
-            Accelerometer gyro = Accelerometer.GetDefault();
 
-            gyro.ReadingChanged += ReadingChanged;
 
             //test code
 
