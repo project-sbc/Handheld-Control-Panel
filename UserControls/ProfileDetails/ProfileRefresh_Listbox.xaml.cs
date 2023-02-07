@@ -136,7 +136,7 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     unitLabel.Visibility = Visibility.Visible;
                     control.Visibility = Visibility.Visible;
-                    Global_Variables.profiles.editingProfile.Resolution = control.SelectedItem.ToString();
+                    //Global_Variables.profiles.editingProfile.Resolution = control.SelectedItem.ToString();
                 }
             }
 
