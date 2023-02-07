@@ -5,6 +5,7 @@
 			<ID>1</ID>
 			<ProfileName>Default</ProfileName>
 			<Exe></Exe>
+			<DefaultProfile>True</DefaultProfile>
 			<LaunchOptions>
 				<Resolution></Resolution>
 				<RefreshRate></RefreshRate>
@@ -49,6 +50,7 @@
 			<ID></ID>
 			<ProfileName>ProfileTemplate</ProfileName>
 			<Exe></Exe>
+			<DefaultProfile>False</DefaultProfile>
 			<LaunchOptions>
 				<Resolution></Resolution>
 				<RefreshRate></RefreshRate>
