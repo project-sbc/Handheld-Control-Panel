@@ -12,76 +12,50 @@ using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public class HotKey_Management: Dictionary<String,Hotkey>
+    public class HotKey_Management: Dictionary<String,HotkeyItem>
     {
       
-        public Hotkey editingHotkey = null;
+        public HotkeyItem editingHotkey = null;
 
         public HotKey_Management()
         {
             //populates list
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
 
             foreach (XmlNode node in xmlNode.ChildNodes)
             {
-                Profile profile = new Profile();
+                HotkeyItem hotkey = new HotkeyItem();
 
-                profile.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-                if (node.SelectSingleNode("ID").InnerText == "0") { defaultProfile = profile; }
-                this.Add(profile);
+                hotkey.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
+         
+                this.Add(hotkey.Hotkey, hotkey);
             }
             
             xmlDocument = null;          
         }
 
-        public void setCurrentDefaultProfileToFalse(string ID)
-        {
-            //changes 
-            foreach (DictionaryEntry hotkey in this)
-            {
-                if (hotkey..ID == ID)
-                {
-                    profile.DefaultProfile = "False";
-                }
-            }
 
-        }
 
         public void addNewProfile()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeyTemplate/ControllerHotKey");
+            XmlNode xmlNodeHotKeys = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+                     
 
 
-            string newProfileName = "NewProfile";
-            int countProfile = 0;
-            XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + "']");
-
-            if (xmlNodesByName.Count > 0)
-            {
-                while (xmlNodesByName.Count > 0)
-                {
-                    countProfile++;
-                    xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + countProfile.ToString() + "']");
-
-                }
-                newProfileName = newProfileName + countProfile.ToString();
-            }
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
+            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "ControllerHotKey", "");
             newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = newProfileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile(xmlDocument);
-            xmlNodeProfiles.AppendChild(newNode);
+            
+            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForHotkey(xmlDocument);
+            xmlNodeHotKeys.AppendChild(newNode);
 
-            Profile profile = new Profile();
-            this.Add(profile);
-            profile.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
+            HotkeyItem hotkey = new HotkeyItem();
+            this.Add(hotkey.Hotkey, hotkey);
+            hotkey.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
 
             xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
 
@@ -95,12 +69,12 @@ namespace Handheld_Control_Panel.Classes
             int ID = 0;
 
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Hotkeys");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID.ToString() + "']");
+            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
 
             while (xmlSelectedNode != null)
             {
                 ID = ID + 1;
-                xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID.ToString() + "']");
+                xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
             }
             //ID++;
             return ID.ToString();
@@ -108,39 +82,19 @@ namespace Handheld_Control_Panel.Classes
         }
     }
 
-    public class Hotkey
+    public class HotkeyItem
     {
         public string ID { get; set; }
-        public string DefaultProfile { get; set; }
-        public string ProfileName { get; set; } = "";
-        public string Exe { get; set; } = "";
-        public string Resolution { get; set; } = "";
-        public string RefreshRate { get; set; } = "";
-        public string Path { get; set; } = "";
-        public string AppType { get; set; } = "";
-        public string GameID { get; set; } = "";
-        public string Offline_TDP1 { get; set; } = "";
-        public string Offline_TDP2 { get; set; } = "";
-        public string Offline_ActiveCores { get; set; } = "";
-        public string Offline_MAXCPU { get; set; } = "";
-        public string Offline_FPSLimit { get; set; } = "";
-        public string Offline_EPP { get; set; } = "";
-        public string Offline_GPUCLK { get; set; } = "";
-        public string Online_TDP1 { get; set; } = "";
-        public string Online_TDP2 { get; set; } = "";
-        public string Online_ActiveCores { get; set; } = "";
-        public string Online_MAXCPU { get; set; } = "";
-        public string Online_FPSLimit { get; set; } = "";
-        public string Online_EPP { get; set; } = "";
-        public string Online_GPUCLK { get; set; } = "";
-
-
+        public string Type { get; set; }
+        public string Action { get; set; } = "";
+        public string Parameter { get; set; } = "";
+        public string Hotkey { get; set; } = "";
         public void SaveToXML()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID + "']");
 
             if (xmlSelectedNode != null)
             {
@@ -148,60 +102,17 @@ namespace Handheld_Control_Panel.Classes
 
                 if (parentNode != null)
                 {
-                    XmlNode onlineNode = parentNode.SelectSingleNode("Online");
-                    onlineNode.SelectSingleNode("TDP1").InnerText = Online_TDP1;
-                    onlineNode.SelectSingleNode("TDP2").InnerText = Online_TDP2;
-                    onlineNode.SelectSingleNode("ActiveCores").InnerText = Online_ActiveCores;
-                    onlineNode.SelectSingleNode("MAXCPU").InnerText = Online_MAXCPU;
-                    onlineNode.SelectSingleNode("FPSLimit").InnerText = Online_FPSLimit;
-                    onlineNode.SelectSingleNode("EPP").InnerText = Online_EPP;
-                    onlineNode.SelectSingleNode("GPUCLK").InnerText = Online_GPUCLK;
-
-                    XmlNode offlineNode = parentNode.SelectSingleNode("Offline");
-                    offlineNode.SelectSingleNode("TDP1").InnerText = Offline_TDP1;
-                    offlineNode.SelectSingleNode("TDP2").InnerText = Offline_TDP2;
-                    offlineNode.SelectSingleNode("ActiveCores").InnerText = Offline_ActiveCores;
-                    offlineNode.SelectSingleNode("MAXCPU").InnerText = Offline_MAXCPU;
-                    offlineNode.SelectSingleNode("FPSLimit").InnerText = Offline_FPSLimit;
-                    offlineNode.SelectSingleNode("EPP").InnerText = Offline_EPP;
-                    offlineNode.SelectSingleNode("GPUCLK").InnerText = Offline_GPUCLK;
-
-                    XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
-                    LaunchOptions.SelectSingleNode("Resolution").InnerText = Resolution;
-                    LaunchOptions.SelectSingleNode("RefreshRate").InnerText = RefreshRate;
-                    LaunchOptions.SelectSingleNode("Path").InnerText = Path;
-                    LaunchOptions.SelectSingleNode("AppType").InnerText = AppType;
-                    LaunchOptions.SelectSingleNode("GameID").InnerText = GameID;
-
-
-                    parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
-                    parentNode.SelectSingleNode("Exe").InnerText = Exe;
-
-                    //if ID isnt 0, which is the default profile, and its been saved to be the default profile, then make this ID 0 and change the other profile
-                    if (DefaultProfile != parentNode.SelectSingleNode("DefaultProfile").InnerText && DefaultProfile == "True")
-                    {
-                        //check to see if a default profile exists
-                        XmlNode xmlCurrentDefault = xmlNode.SelectSingleNode("Profile/DefaultProfile[text()='True']");
-                        if (xmlCurrentDefault != null)
-                        {
-                            //if not null set to false
-                            xmlCurrentDefault.InnerText = "False";
-                            //get the ID and change status in profiles list
-                            string curDefID = xmlCurrentDefault.ParentNode.SelectSingleNode("ID").InnerText;
-                            Global_Variables.Global_Variables.profiles.setCurrentDefaultProfileToFalse(curDefID);
-                        }
-                        
-                    }
-                    parentNode.SelectSingleNode("DefaultProfile").InnerText = DefaultProfile;
+                    parentNode.SelectSingleNode("Type").InnerText = Type;
+                    parentNode.SelectSingleNode("Action").InnerText = Action;
+                    parentNode.SelectSingleNode("Parameter").InnerText = Parameter;
+                    parentNode.SelectSingleNode("Hotkey").InnerText = Hotkey;
 
                 }
-
 
             }
             xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
 
             xmlDocument = null;
-
 
         }
 
@@ -214,8 +125,8 @@ namespace Handheld_Control_Panel.Classes
             }
 
 
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + loadID + "']");
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + loadID + "']");
 
             if (xmlSelectedNode != null)
             {
@@ -223,42 +134,14 @@ namespace Handheld_Control_Panel.Classes
 
                 if (parentNode != null)
                 {
-                    XmlNode onlineNode = parentNode.SelectSingleNode("Online");
-                    Online_TDP1 = onlineNode.SelectSingleNode("TDP1").InnerText;
-                    Online_TDP2 = onlineNode.SelectSingleNode("TDP2").InnerText;
-                    Online_ActiveCores = onlineNode.SelectSingleNode("ActiveCores").InnerText;
-                    Online_MAXCPU = onlineNode.SelectSingleNode("MAXCPU").InnerText;
-                    Online_FPSLimit = onlineNode.SelectSingleNode("FPSLimit").InnerText;
-                    Online_EPP = onlineNode.SelectSingleNode("EPP").InnerText;
-                    Online_GPUCLK = onlineNode.SelectSingleNode("GPUCLK").InnerText;
-
-                    XmlNode offlineNode = parentNode.SelectSingleNode("Offline");
-                    Offline_TDP1 = offlineNode.SelectSingleNode("TDP1").InnerText;
-                    Offline_TDP2 = offlineNode.SelectSingleNode("TDP2").InnerText;
-                    Offline_ActiveCores = offlineNode.SelectSingleNode("ActiveCores").InnerText;
-                    Offline_MAXCPU = offlineNode.SelectSingleNode("MAXCPU").InnerText;
-                    Offline_FPSLimit = offlineNode.SelectSingleNode("FPSLimit").InnerText;
-                    Offline_EPP = offlineNode.SelectSingleNode("EPP").InnerText;
-                    Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
-
-                    XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
-                    Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
-                    RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
-                    Path = LaunchOptions.SelectSingleNode("Path").InnerText;
-                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
-                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
-
-                    ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
-                    Exe = parentNode.SelectSingleNode("Exe").InnerText;
-                    DefaultProfile = parentNode.SelectSingleNode("DefaultProfile").InnerText;
+                   
+                    Type = parentNode.SelectSingleNode("Type").InnerText;
+                    Action = parentNode.SelectSingleNode("Action").InnerText;
+                    Parameter = parentNode.SelectSingleNode("Parameter").InnerText;
+                    Hotkey = parentNode.SelectSingleNode("Hotkey").InnerText;
                     ID = loadID;
-                    
-
                 }
-
-
-            }
-            
+            }            
             xmlDocument = null;
 
         }

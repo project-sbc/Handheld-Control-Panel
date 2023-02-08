@@ -29,7 +29,7 @@ namespace Handheld_Control_Panel.Classes
                 Profile profile = new Profile();
 
                 profile.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-                if (node.SelectSingleNode("ID").InnerText == "0") { defaultProfile = profile; }
+                if (node.SelectSingleNode("DefaultProfile").InnerText == "True") { defaultProfile = profile; }
                 this.Add(profile);
             }
             
