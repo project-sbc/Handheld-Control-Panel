@@ -164,7 +164,7 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        public void LoadProfile(string ID, XmlDocument xmlDocument=null)
+        public void LoadProfile(string loadID, XmlDocument xmlDocument=null)
         {
             if (xmlDocument == null)
             {
@@ -174,7 +174,7 @@ namespace Handheld_Control_Panel.Classes
 
 
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
+            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + loadID + "']");
 
             if (xmlSelectedNode != null)
             {
@@ -210,7 +210,7 @@ namespace Handheld_Control_Panel.Classes
                     ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
                     Exe = parentNode.SelectSingleNode("Exe").InnerText;
                     DefaultProfile = parentNode.SelectSingleNode("DefaultProfile").InnerText;
-                    ID = ID;
+                    ID = loadID;
                     
 
                 }

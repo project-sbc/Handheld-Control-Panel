@@ -109,7 +109,7 @@ namespace Handheld_Control_Panel.Pages
             Button button = (Button)sender;
             switch(button.Name)
             {
-                case "Save":
+                case "SaveProfile":
                     saveProfile();
                     break;
                 case "Back":

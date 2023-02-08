@@ -41,6 +41,9 @@ namespace Handheld_Control_Panel.UserControls
         {
             InitializeComponent();
             //UserControl_Management.setupControl(control);
+
+            if (Global_Variables.profiles.editingProfile.RefreshRate == "") { toggleSwitch.IsOn = false; control.Visibility = Visibility.Collapsed; } else { toggleSwitch.IsOn = true; }
+
             setListboxItemsource();
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
