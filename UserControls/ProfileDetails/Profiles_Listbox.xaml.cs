@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 
@@ -60,7 +61,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setListboxItemsource(string ID = "")
         {
+            control.ItemsSource = null;
             control.ItemsSource = Global_Variables.profiles;
+            
             if (Global_Variables.profiles.editingProfile != null) { control.SelectedItem = Global_Variables.profiles.editingProfile; }
         }
 
@@ -70,15 +73,24 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                if (args.Action == "A")
+
+                switch(args.Action)
                 {
-                    handleListboxChange();
+                    case "A":
+                        handleListboxChange();
+                        break;
+                    case "Y":
+                        AddProfile.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        break;
+                    case "X":
+                        DeleteProfile.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        break;
+                    default:
+                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                        if (args.Action == "Highlight" && control.SelectedItem != selectedObject && selectedObject != null) { control.SelectedItem = selectedObject; }
+                        break;
                 }
-                else
-                {
-                    Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
-                    if (args.Action == "Highlight" && control.SelectedItem != selectedObject && selectedObject != null) { control.SelectedItem = selectedObject; }
-                }
+               
                
             }
         }
@@ -98,15 +110,7 @@ namespace Handheld_Control_Panel.UserControls
 
         }
 
-        private void control_TouchUp(object sender, TouchEventArgs e)
-        {
-            handleListboxChange();
-        }
 
-        private void control_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            handleListboxChange();
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -117,7 +121,8 @@ namespace Handheld_Control_Panel.UserControls
                     handleListboxChange();
                     break;
                 case "AddProfile":
-
+                    Global_Variables.profiles.addNewProfile();
+                    setListboxItemsource();
                     break;
                 case "DeleteProfile":
 
@@ -126,7 +131,11 @@ namespace Handheld_Control_Panel.UserControls
             }
         }
 
-       
+        private void control_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            handleListboxChange();
+
+        }
     }
 
   

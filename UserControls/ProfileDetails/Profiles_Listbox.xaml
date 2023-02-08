@@ -44,7 +44,7 @@
                     </StackPanel>
                 </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" FontSize="16" Background="Transparent" Width="770"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+            <ListBox x:Name="control" FontSize="16" Background="Transparent" Width="770"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  MouseDoubleClick="control_MouseDoubleClick"   >
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">

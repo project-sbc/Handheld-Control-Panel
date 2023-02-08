@@ -48,6 +48,47 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
+
+        public void addNewProfile()
+        {
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+
+            string newProfileName = "NewProfile";
+            int countProfile = 0;
+            XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + "']");
+
+            if (xmlNodesByName.Count > 0)
+            {
+                while (xmlNodesByName.Count > 0)
+                {
+                    countProfile++;
+                    xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + countProfile.ToString() + "']");
+
+                }
+                newProfileName = newProfileName + countProfile.ToString();
+            }
+
+
+            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
+            newNode.InnerXml = xmlNodeTemplate.InnerXml;
+            newNode.SelectSingleNode("ProfileName").InnerText = newProfileName;
+            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile(xmlDocument);
+            xmlNodeProfiles.AppendChild(newNode);
+
+            Profile profile = new Profile();
+            this.Add(profile);
+            profile.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
+
+            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+            xmlDocument = null;
+
+        }
+
         public string getNewIDNumberForProfile(XmlDocument xmlDocument)
         {
             //gets ID for new profiles
