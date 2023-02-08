@@ -14,8 +14,11 @@
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                             <Label Content="{DynamicResource Usercontrol_MaxFPS_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                            <Label x:Name="subText" Content="{DynamicResource Usercontrol_MaxFPS_SubText}" />
-                        </StackPanel>
+                      
+                        <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="480">
+                            <TextBlock Text="{DynamicResource Usercontrol_MaxFPS_SubText}" Style="{StaticResource userControlSubText}" />
+                        </Label>
+                    </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                             <Label Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} FPS" Style="{StaticResource userControlUnitLabel}"/>
                         </StackPanel>
