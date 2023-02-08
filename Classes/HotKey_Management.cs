@@ -1,6 +1,7 @@
 ﻿using SharpDX;
 using SharpDX.XInput;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -38,9 +39,9 @@ namespace Handheld_Control_Panel.Classes
         public void setCurrentDefaultProfileToFalse(string ID)
         {
             //changes 
-            foreach (Profile profile in this)
+            foreach (DictionaryEntry hotkey in this)
             {
-                if (profile.ID == ID)
+                if (hotkey..ID == ID)
                 {
                     profile.DefaultProfile = "False";
                 }
