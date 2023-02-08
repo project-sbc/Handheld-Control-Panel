@@ -163,6 +163,9 @@
     <Compile Update="UserControls\ProfileDetails\ProfileOnline_EPP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\ProfileDetails\ProfileDefault_ToggleSwitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\ProfileDetails\ProfileResolution_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

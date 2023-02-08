@@ -39,7 +39,7 @@
 
                 <uc:Profiles_ProfileName />
                 <uc:Profiles_Exe />
-
+                <uc:ProfileDefault_ToggleSwitch />
                 <Label Content="{DynamicResource Header_ProfileLauncher_Settings}" Style="{StaticResource headerLabel}" />
                 <Rectangle Style="{StaticResource rectangle}" />
                 <uc:ProfileResolution_Listbox />

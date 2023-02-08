@@ -123,13 +123,21 @@
 
     <system:String x:Key="Usercontrol_ProfileDetailsButtonSave_MainText">Save</system:String>
     <system:String x:Key="Usercontrol_ProfileDetailsButtonBack_MainText">Back</system:String>
-
-    
     
     <system:String x:Key="Usercontrol_ProfilesProfileName_MainText">Profile Name</system:String>
     <system:String x:Key="Usercontrol_ProfilesExe_MainText">Process Name</system:String>
     <system:String x:Key="Usercontrol_ProfilesExe_SubText">This allows automatic profile switching when the process is detected running</system:String>
 
+
+    <system:String x:Key="Usercontrol_ProfilesDefault_MainText">Set Default Profile</system:String>
+    <system:String x:Key="Usercontrol_ProfilesDefault_SubText">Sets as default profile when other applications are not running</system:String>
+
+    <system:String x:Key="Usercontrol_ProfilesResolution_MainText">Application Resolution</system:String>
+    <system:String x:Key="Usercontrol_ProfilesResolution_SubText">Changes resolution when application is launched from HCP</system:String>
+
+    <system:String x:Key="Usercontrol_ProfilesRefresh_MainText">Application Refresh Rate</system:String>
+    <system:String x:Key="Usercontrol_ProfilesRefresh_SubText">Changes refresh rate when application is launched from HCP</system:String>
+    
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

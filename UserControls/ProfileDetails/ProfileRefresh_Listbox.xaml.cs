@@ -86,14 +86,22 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                if (args.Action == "A")
+                switch (args.Action)
                 {
-                    handleListboxChange();
-                }
-                else
-                {
-                    Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
-                    if (args.Action == "Highlight" && control.SelectedItem != selectedObject && selectedObject != null) { control.SelectedItem = selectedObject; }
+                    case "X":
+                        toggleSwitch.IsOn = !toggleSwitch.IsOn;
+                        break;
+                    case "A":
+                        handleListboxChange();
+                        break;
+
+                    default:
+                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                        if (args.Action == "Highlight" && control.SelectedItem != selectedObject && selectedObject != null) { control.SelectedItem = selectedObject; }
+
+                        break;
+
+
                 }
                
             }
