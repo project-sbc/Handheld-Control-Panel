@@ -103,23 +103,9 @@ namespace Handheld_Control_Panel.UserControls
             if (this.IsLoaded && control.Visibility == Visibility.Visible)
             {
                
-                string selectedItem = control.SelectedItem.ToString();
-
-                //check to make sure new resolution has that refresh rate, otherwise display error about changing refresh rate
-                if (Global_Variables.resolution_refreshrates[selectedItem].Contains(Global_Variables.refreshRate))
-                {
-                    Display_Management.SetDisplayResolution(selectedItem);
-
-                    selectedObject = control.SelectedItem;
-                    Display_Management.raiseResolutionChangedEvent();
-
-                }
-                else
-                {
-                    MessageBox.Show(Application.Current.Resources["ErrorMessage_Refreshrate_In_Resolution"].ToString());
-                    control.SelectedItem = selectedObject;
-                }
-
+                Global_Variables.profiles.editingProfile.Resolution = control.SelectedItem.ToString();
+                Display_Management.raiseResolutionProfileChangedEvent();
+                selectedObject = control.SelectedItem;
                 
             }
 

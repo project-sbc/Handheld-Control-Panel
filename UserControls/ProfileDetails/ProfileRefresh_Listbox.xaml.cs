@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            Display_Management.resolutionChangedEvent += handleResolutionChanged;
+            Display_Management.resolutionProfileChangedEvent += handleResolutionChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
            
@@ -59,7 +59,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setListboxItemsource()
         {
             
-            if (Global_Variables.profiles.editingProfile.Resolution != "")
+            if (Global_Variables.profiles.editingProfile.Resolution != "" && control.Visibility == Visibility.Visible)
             {
                 control.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution];
 
@@ -98,12 +98,12 @@ namespace Handheld_Control_Panel.UserControls
 
         private void handleListboxChange()
         {
-            if (this.IsLoaded)
+            if (this.IsLoaded && control.Visibility==Visibility.Visible)
             {
-                if (control.SelectedItem!= null)
+                if (control.SelectedItem != null)
                 {
                     string refresh = control.SelectedItem.ToString();
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayRefreshRate(refresh));
+                    Global_Variables.profiles.editingProfile.RefreshRate = refresh;
                     selectedObject = control.SelectedItem;
                 }
 
@@ -136,6 +136,7 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     unitLabel.Visibility = Visibility.Visible;
                     control.Visibility = Visibility.Visible;
+                    setListboxItemsource();
                     //Global_Variables.profiles.editingProfile.Resolution = control.SelectedItem.ToString();
                 }
             }

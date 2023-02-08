@@ -32,6 +32,11 @@ namespace Handheld_Control_Panel.Classes.Display_Management
         {
             resolutionChangedEvent?.Invoke(null, EventArgs.Empty);
         }
+        public static event EventHandler resolutionProfileChangedEvent;
+        public static void raiseResolutionProfileChangedEvent()
+        {
+            resolutionProfileChangedEvent?.Invoke(null, EventArgs.Empty);
+        }
         public static void getCurrentDisplaySettings()
         {
             
