@@ -13,7 +13,10 @@
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_TDP2_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_TDP2_SubText}" />
+             
+                        <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="480">
+                            <TextBlock Text="{DynamicResource Usercontrol_TDP2_SubText}" Style="{StaticResource userControlSubText}" />
+                        </Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                         <Label Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} W" Style="{StaticResource userControlUnitLabel}"/>

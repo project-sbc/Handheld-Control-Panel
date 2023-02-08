@@ -14,7 +14,10 @@
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_FPSLimit_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_FPSLimit_SubText}" />
+                
+                        <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="430">
+                            <TextBlock Text="{DynamicResource Usercontrol_FPSLimit_SubText}" Style="{StaticResource userControlSubText}" />
+                        </Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                         <Button x:Name="startRTSS" Content="{DynamicResource Usercontrol_StartRTSS_MainText}" Style="{StaticResource userControlButton}" Click="startRTSS_Click" >

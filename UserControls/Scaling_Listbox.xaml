@@ -17,8 +17,11 @@
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                             <Label Content="{DynamicResource Usercontrol_Scaling_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_Scaling_SubText}" />
-                        </StackPanel>
+                  
+                        <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="480">
+                            <TextBlock Text="{DynamicResource Usercontrol_Scaling_SubText}" Style="{StaticResource userControlSubText}" />
+                        </Label>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
 
                         <Label x:Name="unitLabel" Content="{Binding ElementName=control, Path=SelectedItem}" ContentStringFormat="{}{0} %" Style="{StaticResource userControlUnitLabel}"/>

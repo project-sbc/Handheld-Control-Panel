@@ -14,7 +14,10 @@
                 <DockPanel >
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_CPUFrequency_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label x:Name="subText" Content="{DynamicResource Usercontrol_CPUFrequency_SubText}" />
+                      
+                        <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="480">
+                            <TextBlock Text="{DynamicResource Usercontrol_CPUFrequency_SubText}" Style="{StaticResource userControlSubText}" />
+                        </Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                       

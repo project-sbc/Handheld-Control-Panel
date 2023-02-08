@@ -199,7 +199,7 @@
     <Compile Update="UserControls\Refresh_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\Profiles_Listbox.xaml.cs">
+    <Compile Update="UserControls\ProfileDetails\Profiles_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Scaling_Listbox.xaml.cs">
