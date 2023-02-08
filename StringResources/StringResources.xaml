@@ -21,6 +21,9 @@
     <system:String x:Key="Header_ProfileDetails_Settings">Profile Details</system:String>
     <system:String x:Key="Header_ProfileOnCharger_Settings">On Charger</system:String>
     <system:String x:Key="Header_ProfileOnBattery_Settings">On Battery</system:String>
+    <system:String x:Key="Header_ProfileLauncher_Settings">Launch Options</system:String>
+
+    
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
@@ -125,7 +128,7 @@
     
     <system:String x:Key="Usercontrol_ProfilesProfileName_MainText">Profile Name</system:String>
     <system:String x:Key="Usercontrol_ProfilesExe_MainText">Process Name</system:String>
-    <system:String x:Key="Usercontrol_ProfilesExe_SubText">Use list or textbox to pick process name</system:String>
+    <system:String x:Key="Usercontrol_ProfilesExe_SubText">This allows automatic profile switching when the process is detected running</system:String>
 
     <!--old stuff-->
 

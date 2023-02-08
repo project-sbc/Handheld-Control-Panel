@@ -14,7 +14,9 @@
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_ProfilesExe_MainText}" Style="{StaticResource userControlMainLabel}"/>
-                        <Label Content="{DynamicResource Usercontrol_ProfilesExe_SubText}" Style="{StaticResource userControlSubLabel}"/>
+                        <Label Style="{StaticResource userControlSubLabel}" Width="480">
+                            <TextBlock Text="{DynamicResource Usercontrol_ProfilesExe_SubText}" Style="{StaticResource userControlSubText}" />
+                        </Label>
                     </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
                         <TextBox Name="controlText" Style="{StaticResource profilesTextBox}" LostFocus="control_LostFocus" />

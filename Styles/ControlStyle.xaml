@@ -18,7 +18,7 @@
 
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="400" />
+        <Setter Property="Width" Value="250" />
         <Setter Property="Height" Value="28" />
 
     </Style>
@@ -96,7 +96,7 @@
 
     </Style>
 
-
+   
 
   
     <!--stack panel-->
@@ -114,7 +114,10 @@
         <Setter Property="FontSize" Value="13.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
+    <Style x:Key="userControlSubText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
     <!--labels-->
     <Style x:Key="headerLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>

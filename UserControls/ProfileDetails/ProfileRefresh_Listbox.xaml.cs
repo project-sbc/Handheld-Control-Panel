@@ -133,7 +133,7 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     control.Visibility = Visibility.Collapsed;
                     unitLabel.Visibility = Visibility.Hidden;
-                    Global_Variables.profiles.editingProfile.Resolution = "";
+                    Global_Variables.profiles.editingProfile.RefreshRate = "";
                 }
                 else
                 {

@@ -39,6 +39,9 @@
 
                 <uc:Profiles_ProfileName />
                 <uc:Profiles_Exe />
+
+                <Label Content="{DynamicResource Header_ProfileLauncher_Settings}" Style="{StaticResource headerLabel}" />
+                <Rectangle Style="{StaticResource rectangle}" />
                 <uc:ProfileResolution_Listbox />
                 <uc:ProfileRefresh_Listbox />
                 <Label Content="{DynamicResource Header_ProfileOnCharger_Settings}" Style="{StaticResource headerLabel}" />
