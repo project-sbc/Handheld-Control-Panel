@@ -1,4 +1,6 @@
-﻿using SharpDX;
+﻿using Handheld_Control_Panel.Classes.Global_Variables;
+using MahApps.Metro.Controls;
+using SharpDX;
 using SharpDX.XInput;
 using System;
 using System.Collections;
@@ -12,10 +14,67 @@ using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public class HotKey_Management: Dictionary<String,HotkeyItem>
+    public class HotKey_Management: List<HotkeyItem>
     {
       
         public HotkeyItem editingHotkey = null;
+
+        public void generateGlobalControllerHotKeyList()
+        {
+            Dictionary<ushort, ActionParameter> returnDictionary = Global_Variables.Global_Variables.controllerHotKeyDictionary;
+
+            returnDictionary.Clear();
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+
+            foreach (XmlNode node in xmlNode.ChildNodes)
+            {
+                if (node.SelectSingleNode("Type").InnerText == "Controller")
+                {
+                    ushort hotkey;
+                    if (ushort.TryParse(node.SelectSingleNode("Hotkey").InnerText, out hotkey))
+                    {
+                        ActionParameter ap = new ActionParameter();
+                        ap.Action = node.SelectSingleNode("Action").InnerText;
+                        ap.Action = node.SelectSingleNode("Parameter").InnerText;
+                        returnDictionary.Add(hotkey, ap);
+                    }
+
+                }
+
+            }
+            xmlDocument = null;
+        }
+
+        public void generateGlobalKeyboardHotKeyList()
+        {
+            Dictionary<string, ActionParameter> returnDictionary = Global_Variables.Global_Variables.KBHotKeyDictionary;
+
+            returnDictionary.Clear();
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+
+            foreach (XmlNode node in xmlNode.ChildNodes)
+            {
+                if (node.SelectSingleNode("Type").InnerText == "Keyboard")
+                {
+                    ActionParameter ap = new ActionParameter();
+                    string hotkey = node.SelectSingleNode("Hotkey").InnerText;
+                    ap.Action = node.SelectSingleNode("Action").InnerText;
+                    ap.Action = node.SelectSingleNode("Parameter").InnerText;
+                    returnDictionary.Add(hotkey, ap);
+
+                }
+
+            }
+
+            xmlDocument = null;
+          
+        }
 
         public HotKey_Management()
         {
@@ -30,7 +89,7 @@ namespace Handheld_Control_Panel.Classes
 
                 hotkey.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
          
-                this.Add(hotkey.Hotkey, hotkey);
+                this.Add(hotkey);
             }
             
             xmlDocument = null;          
@@ -44,9 +103,7 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeyTemplate/ControllerHotKey");
             XmlNode xmlNodeHotKeys = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-                     
-
-
+               
             XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "ControllerHotKey", "");
             newNode.InnerXml = xmlNodeTemplate.InnerXml;
             
@@ -54,7 +111,7 @@ namespace Handheld_Control_Panel.Classes
             xmlNodeHotKeys.AppendChild(newNode);
 
             HotkeyItem hotkey = new HotkeyItem();
-            this.Add(hotkey.Hotkey, hotkey);
+            this.Add(hotkey);
             hotkey.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
 
             xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);

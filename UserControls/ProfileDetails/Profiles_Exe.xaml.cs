@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -69,7 +70,16 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                if (args.Action == "X")
+                {
+                    button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                }
+                else
+                {
+                    Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                }
+
+               
             }
         }
 
@@ -103,6 +113,29 @@ namespace Handheld_Control_Panel.UserControls
         private void control_MouseUp(object sender, MouseButtonEventArgs e)
         {
             handleListboxChange();
+        }
+
+
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.InitialDirectory = "C:\\";
+            dialog.Filter = "Applications (.exe)|*.exe"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                string exe = dialog.SafeFileName;
+                if (exe.Length > 4)
+                {
+                    controlText.Text = exe.Substring(0, exe.Length - 4);
+                }
+            }
+
         }
     }
 }

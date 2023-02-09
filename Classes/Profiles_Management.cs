@@ -49,6 +49,35 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
+        public void deleteProfile(Profile profile)
+        {
+            if (profile != null)
+            {
+                string ID = profile.ID;
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+                {
+                    if (node.SelectSingleNode("ID").InnerText == ID)
+                    {
+                        xmlNodeProfiles.RemoveChild(node);
+                        break;
+                    }
+
+                }
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                xmlDocument = null;
+
+                this.Remove(profile);
+            }
+          
+
+        }
+
         public void addNewProfile()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();

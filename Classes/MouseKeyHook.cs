@@ -54,7 +54,7 @@ namespace Handheld_Control_Panel.Classes
                 {
                     args.SuppressKeyPress = true;
                     ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
-                    HotKey_Management.runHotKeyAction(action);
+                    //HotKey_Management.runHotKeyAction(action);
                     runningKeyStroke = "";
 
                 }

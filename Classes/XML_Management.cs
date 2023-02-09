@@ -874,7 +874,8 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                     string hotkeyConverted;
                     if (ushort.TryParse(hotkey, out hotkeyUshort))
                     {
-                        hotkeyConverted = HotKey_Management.convertControllerUshortToString(Convert.ToUInt16(hotkeyUshort));
+                    //hotkeyConverted = HotKey_Management.convertControllerUshortToString(Convert.ToUInt16(hotkeyUshort));
+                        hotkeyConverted = hotkey;
                     }
                     else
                     {
