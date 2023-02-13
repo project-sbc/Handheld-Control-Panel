@@ -97,7 +97,7 @@ namespace Handheld_Control_Panel.Classes
 
 
 
-        public void addNewProfile()
+        public void addNewHotkey()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);

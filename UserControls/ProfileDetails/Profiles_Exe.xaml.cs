@@ -70,7 +70,7 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                if (args.Action == "X")
+                if (args.Action == "Y")
                 {
                     button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                 }

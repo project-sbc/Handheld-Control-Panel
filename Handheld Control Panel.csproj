@@ -273,6 +273,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="UserControls\ProfileDetails\Profiles_AppType.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\Settings\Autostart_Toggleswitch.xaml">
       <SubType>Designer</SubType>
     </Page>

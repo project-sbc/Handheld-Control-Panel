@@ -137,6 +137,11 @@
 
     <system:String x:Key="Usercontrol_ProfilesRefresh_MainText">Application Refresh Rate</system:String>
     <system:String x:Key="Usercontrol_ProfilesRefresh_SubText">Changes refresh rate when application is launched from HCP</system:String>
+   
+    <system:String x:Key="Usercontrol_ProfilesAppType_MainText">Application Type</system:String>
+    <system:String x:Key="Usercontrol_ProfilesAppType_SubText">Executable: Select an exe or clear the textbox to disable.</system:String>
+
+
     
     <!--old stuff-->
 
