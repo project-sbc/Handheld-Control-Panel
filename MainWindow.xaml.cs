@@ -44,9 +44,11 @@ namespace Handheld_Control_Panel
 
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
+
+            //set selected item of hamburger nav menu
             mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
 
-
+            //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
         }
 
@@ -94,6 +96,7 @@ namespace Handheld_Control_Panel
     
         private void mainWindowNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            //change hamburger menu navigation frame based on selected item
             NavigationViewItem navigationViewItem = (NavigationViewItem)mainWindowNavigationView.SelectedItem;
             frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
             
