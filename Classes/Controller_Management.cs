@@ -84,6 +84,10 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                         {
                             buttonEvents.raiseControllerInput("Start");
                         }
+                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                        {
+                            buttonEvents.raiseControllerInput("Back");
+                        }
                         if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
                         {
                             buttonEvents.raiseControllerInput("A");

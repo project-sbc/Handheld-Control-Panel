@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
@@ -289,6 +290,58 @@ namespace Handheld_Control_Panel.Classes
             }
             
             xmlDocument = null;
+
+        }
+
+        public void applyProfile()
+        {
+            string powerStatus = SystemParameters.PowerLineStatus.ToString();
+
+
+            switch (powerStatus)
+            {
+                case "Online":
+                    if (Online_ActiveCores != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => CoreParking_Management.CoreParking_Management.changeActiveCores(Convert.ToInt32(Online_ActiveCores))); }
+                    if (Online_EPP != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(Online_EPP))); }
+                    if (Online_FPSLimit != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(Online_EPP))); }
+                    if (Online_GPUCLK != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(Online_EPP))); }
+                    if (Online_MAXCPU != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(Online_EPP))); }
+                    if (Online_TDP1 != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(Online_EPP))); }
+                    if (Online_TDP2 != "") { Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(Online_EPP))); }
+
+
+
+                    tdp1 = node.InnerText;
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => TDP_Management.TDP_Management.changeTDP(Convert.ToInt32(tdp1), Convert.ToInt32(tdp1)));
+                    break;
+                case "TDP2":
+                    if (tdp1 != "")
+                    {
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => TDP_Management.TDP_Management.changeTDP(Convert.ToInt32(tdp1), Convert.ToInt32(node.InnerText)));
+                    }
+                    break;
+                case "GPUCLK":
+                    if (Global_Variables.Global_Variables.cpuType == "AMD")
+                    {
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock(Convert.ToInt32(node.InnerText)));
+                    }
+                    break;
+                case "EPP":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(Convert.ToInt32(node.InnerText)));
+                    break;
+                case "MAXCPU":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency(Convert.ToInt32(node.InnerText)));
+                    break;
+                case "ActiveCores":
+                    
+                    break;
+                case "FPSLimit":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => RTSS.setRTSSFPSLimit(Convert.ToInt32(node.InnerText)));
+                    break;
+
+                default: break;
+            }
+
 
         }
     }

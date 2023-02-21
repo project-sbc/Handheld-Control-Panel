@@ -86,7 +86,10 @@ namespace Handheld_Control_Panel.Pages
                 switch(action)
                 {
                     case "Start":
-
+                        saveProfile();
+                        break;
+                    case "Back":
+                        goBackToProfileList();
                         break;
 
                     default:
