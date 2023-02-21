@@ -10,9 +10,9 @@
       Title="HomePage" Loaded="Page_Loaded">
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-            <Label Content="{DynamicResource Header_ProfilesList_Settings}" Style="{StaticResource headerLabel}" />
+            <Label Content="{DynamicResource Header_HotKeysList_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
-            <uc:Profiles_Listbox/>
+            <uc:HotKeys_Listbox/>
           
 
 

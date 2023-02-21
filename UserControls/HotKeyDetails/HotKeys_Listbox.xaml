@@ -16,27 +16,27 @@
                 <iconPacks:PackIconMaterial Kind="ViewListOutline" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                            <Label Content="{DynamicResource Usercontrol_ProfilesList_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                            <Label Content="{DynamicResource Usercontrol_HotKeysList_MainText}" Style="{StaticResource userControlMainLabel}"/>
                        
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  DockPanel.Dock="Right">
                         <Button  Height="44" Name="EditProfile" Margin="0,0,6,0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonEdit_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                                <Label Content="{DynamicResource Usercontrol_HotKeysListButtonEdit_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF093;" Margin="0,0,0,0"  />
                             </StackPanel>
                           
                         </Button>
                         <Button Height="44" Name="AddProfile" Margin="0,0,6,0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonAdd_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                                <Label Content="{DynamicResource Usercontrol_HotKeysListButtonAdd_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF095;" Margin="0,0,0,0"  />
                             </StackPanel>
 
                         </Button>
                         <Button Height="44" Name="DeleteProfile" Margin="0,0,6,0" Click="Button_Click">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Label Content="{DynamicResource Usercontrol_ProfilesListButtonDelete_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                                <Label Content="{DynamicResource Usercontrol_HotKeysListButtonDelete_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                                 <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xF096;" Margin="0,0,0,0"  />
                             </StackPanel>
 
@@ -62,15 +62,19 @@
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
-                                <ColumnDefinition Width="360" SharedSizeGroup="Column2"/>
-                                <ColumnDefinition Width="360" SharedSizeGroup="Column3"/>
-                                <ColumnDefinition Width="360" SharedSizeGroup="Column4"/>
+                                <ColumnDefinition Width="180" SharedSizeGroup="Column2"/>
+                                <ColumnDefinition Width="180" SharedSizeGroup="Column3"/>
+                                <ColumnDefinition Width="180" SharedSizeGroup="Column4"/>
+                                <ColumnDefinition Width="180" SharedSizeGroup="Column4"/>
 
                             </Grid.ColumnDefinitions>
                             <!-- Assumes MVVM and you wish to bind to properties and commands -->
                             <TextBlock Grid.Column="0"  Text="{Binding ID}" Margin="0,0,15,0" />
-                            <TextBlock Grid.Column="1" FontSize="18" Text="{Binding Type}"/>
-                            <TextBlock Grid.Column="2" FontSize="18" Text="{Binding Action}"/>
+                            <TextBlock Grid.Column="1" FontSize="14" Text="{Binding DisplayType}"/>
+                            <TextBlock Grid.Column="2" FontSize="14" Text="{Binding DisplayAction}"/>
+                            <TextBlock Grid.Column="3" FontSize="14" Text="{Binding DisplayParameter}"/>
+                            <TextBlock Grid.Column="3" FontSize="14" Text="{Binding DisplayHotkey}"/>
+                            
 
                         </Grid>
                     </DataTemplate>

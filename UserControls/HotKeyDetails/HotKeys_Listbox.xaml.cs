@@ -62,9 +62,9 @@ namespace Handheld_Control_Panel.UserControls
         private void setListboxItemsource(string ID = "")
         {
             control.ItemsSource = null;
-            control.ItemsSource = Global_Variables.profiles;
+            control.ItemsSource = Global_Variables.hotKeys;
             
-            if (Global_Variables.profiles.editingProfile != null) { control.SelectedItem = Global_Variables.profiles.editingProfile; }
+            if (Global_Variables.hotKeys.editingHotkey != null) { control.SelectedItem = Global_Variables.hotKeys.editingHotkey; }
         }
 
      

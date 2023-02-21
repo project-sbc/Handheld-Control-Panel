@@ -89,6 +89,7 @@ namespace Handheld_Control_Panel.Classes
             //XML_Management.Manage_XML_Profiles.applyProfile("0", false);
 
             Global_Variables.Global_Variables.profiles = new Profiles_Management();
+            Global_Variables.Global_Variables.hotKeys = new HotKey_Management();
 
         }
 

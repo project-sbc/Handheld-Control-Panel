@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
@@ -18,6 +19,7 @@ namespace Handheld_Control_Panel.Classes
     {
       
         public HotkeyItem editingHotkey = null;
+
 
         public void generateGlobalControllerHotKeyList()
         {
@@ -34,6 +36,7 @@ namespace Handheld_Control_Panel.Classes
                 if (node.SelectSingleNode("Type").InnerText == "Controller")
                 {
                     ushort hotkey;
+                    
                     if (ushort.TryParse(node.SelectSingleNode("Hotkey").InnerText, out hotkey))
                     {
                         ActionParameter ap = new ActionParameter();
@@ -47,6 +50,30 @@ namespace Handheld_Control_Panel.Classes
             }
             xmlDocument = null;
         }
+
+        //good reference to keep even if i dont use it, lookup of values of buttons to Ushort
+        static Dictionary<string, ushort> controllerFlagUshortLookup =
+   new Dictionary<string, ushort>()
+   {
+           {"A", 4096},
+           {"B", 8192 },
+           {"X", 16384 },
+           {"Y", 32768 },
+           {"LB", 256 },
+           {"RB", 512 },
+           {"DPadUp", 1},
+           {"DPadDown", 2 },
+           {"DPadLeft", 4 },
+           {"DPadRight", 8},
+         {"Start", 16 },
+           {"Back", 32 },
+           {"LStick", 64 },
+            {"RStick", 128 }
+
+   };
+
+       
+       
 
         public void generateGlobalKeyboardHotKeyList()
         {
@@ -142,10 +169,150 @@ namespace Handheld_Control_Panel.Classes
     public class HotkeyItem
     {
         public string ID { get; set; }
-        public string Type { get; set; }
-        public string Action { get; set; } = "";
-        public string Parameter { get; set; } = "";
-        public string Hotkey { get; set; } = "";
+        private string type { get; set; } = "";
+        public string Type
+        {
+
+            get
+            {
+                return type;
+            }
+            set
+            {
+                DisplayType = Application.Current.Resources["Hotkeys_Type_" + value].ToString();
+                type = value;
+            }
+
+        }
+        public string DisplayType { get; set; } = "";
+
+
+        private string action { get; set; } = "";
+        public string Action
+        {
+
+            get
+            {
+                return action;
+            }
+            set
+            {
+                DisplayAction = Application.Current.Resources["Hotkeys_Action_" + value].ToString();
+                action = value;
+            }
+
+        }
+        public string DisplayAction { get; set; } = "";
+
+
+        private string hotkey { get; set; } = "";
+        public string Hotkey
+        {
+
+            get
+            {
+                return hotkey;
+            }
+            set
+            {
+                if (Type == "Controller")
+                {
+                    DisplayHotkey = convertControllerUshortToString(value);
+                }
+                else
+                {
+                    DisplayHotkey = value;
+                }
+                
+                hotkey = value;
+            }
+
+        }
+        public string DisplayHotkey{ get; set; } = "";
+
+        private string parameter { get; set; } = "";
+        public string Parameter
+        {
+
+            get
+            {
+                return parameter;
+            }
+            set
+            {
+                if (Action == "OpenProgram")
+                {
+                    DisplayParameter = Global_Variables.Global_Variables.profiles.getProfileNameById(value);
+                }
+                else
+                {
+                    if (Action.Contains("Change"))
+                    {
+                        int number;
+                        if (Int32.TryParse(value, out number))
+                        {
+                            if (number > 0) { DisplayParameter = "+" + value; }
+                        }
+                    }
+                    else
+                    {
+                        DisplayParameter = value;
+                    }
+                }
+
+                parameter = value;
+            }
+
+        }
+        public string DisplayParameter { get; set; } = "";
+
+
+        public string convertControllerUshortToString(string hotkey)
+        {
+            string gamepadCombo = "";
+            Gamepad gamepad = new Gamepad();
+
+
+            ushort uShorthotkey;
+
+            if (ushort.TryParse(hotkey, out uShorthotkey))
+            {
+                gamepad.Buttons = (GamepadButtonFlags)(uShorthotkey);
+
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.A)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "A"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.B)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "B"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.X)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "X"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.Y)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "Y"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "LB"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "RB"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "LStick"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.RightThumb)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "RStick"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.Start)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "Start"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.Back)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "Back"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "DPadUp"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "DPadDown"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "DPadLeft"); }
+                if (gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight)) { gamepadCombo = makeGamepadButtonString(gamepadCombo, "DPadRight"); }
+            }
+
+
+            return gamepadCombo;
+
+        }
+        private string makeGamepadButtonString(string currentValue, string addValue)
+        {
+            //routine to make string for 
+            if (currentValue == "")
+            {
+                return addValue;
+            }
+            else
+            {
+                return currentValue + "+" + addValue;
+            }
+
+        }
+
         public void SaveToXML()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
@@ -191,7 +358,7 @@ namespace Handheld_Control_Panel.Classes
 
                 if (parentNode != null)
                 {
-                   
+                    Debug.WriteLine(parentNode.SelectSingleNode("Type").InnerText);
                     Type = parentNode.SelectSingleNode("Type").InnerText;
                     Action = parentNode.SelectSingleNode("Action").InnerText;
                     Parameter = parentNode.SelectSingleNode("Parameter").InnerText;
@@ -203,4 +370,5 @@ namespace Handheld_Control_Panel.Classes
 
         }
     }
+   
 }

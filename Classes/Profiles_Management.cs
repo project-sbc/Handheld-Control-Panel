@@ -49,7 +49,18 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-
+        public string getProfileNameById(string ID)
+        {
+            string name = "";
+            foreach (Profile profile in this)
+            {
+                if (profile.ID == ID)
+                {
+                    name = profile.ProfileName;
+                }
+            }
+            return name;
+        }
         public void deleteProfile(Profile profile)
         {
             if (profile != null)

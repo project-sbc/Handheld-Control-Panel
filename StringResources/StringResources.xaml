@@ -23,6 +23,7 @@
     <system:String x:Key="Header_ProfileOnBattery_Settings">On Battery</system:String>
     <system:String x:Key="Header_ProfileLauncher_Settings">Launch Options</system:String>
 
+    <system:String x:Key="Header_HotKeysList_Settings">Hot Keys List</system:String>
     
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
@@ -142,6 +143,20 @@
     <system:String x:Key="Usercontrol_ProfilesAppType_SubText">Executable: Select an exe or clear the textbox to disable.</system:String>
 
 
+    <system:String x:Key="Usercontrol_HotKeysList_MainText">Hot Key List</system:String>
+    <system:String x:Key="Usercontrol_HotKeysListButtonEdit_MainText">Edit</system:String>
+    <system:String x:Key="Usercontrol_HotKeysListButtonAdd_MainText">Add</system:String>
+    <system:String x:Key="Usercontrol_HotKeysListButtonDelete_MainText">Delete</system:String>
+
+
+    <system:String x:Key="Hotkeys_Action_Open_Program">Open Program</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">Change TDP</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Show/Hide HCP</system:String>
+    <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
+    <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
+    
+    
+    
     
     <!--old stuff-->
 
