@@ -127,6 +127,9 @@
     <Compile Update="Pages\ProfileDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\HotKeysPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ProfilesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -170,6 +173,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\ProfileDetails\ProfileRefresh_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HotKeyDetails\HotKeys_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\Settings\CombineTDP_Toggleswitch.xaml.cs">

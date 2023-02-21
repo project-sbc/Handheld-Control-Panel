@@ -50,6 +50,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static bool profileAutoApplied = false;
       
         public static Profiles_Management profiles;
+        public static HotKey_Management hotKeys;
 
         //Power
         public static string powerStatus = "";
