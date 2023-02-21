@@ -125,7 +125,12 @@ namespace Handheld_Control_Panel.UserControls
                     setListboxItemsource();
                     break;
                 case "DeleteProfile":
-
+                    if (control.SelectedItem != null)
+                    {
+                        Global_Variables.profiles.deleteProfile((Profile)control.SelectedItem);
+                        setListboxItemsource();
+                    }
+             
                     break;
                 default: break;
             }

@@ -82,10 +82,10 @@
 	<ControllerHotKeyTemplate>
 		<ControllerHotKey>
 			<ID></ID>
-			<Type></Type>
-			<Action></Action>
+			<Type>Controller</Type>
+			<Action>Show_Hide_HCP</Action>
 			<Parameter></Parameter>
-			<Hotkey></Hotkey>
+			<Hotkey>776</Hotkey>
 		</ControllerHotKey>
 	</ControllerHotKeyTemplate>
 	

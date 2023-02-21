@@ -1,0 +1,80 @@
+﻿<Page x:Class="Handheld_Control_Panel.Pages.HotKeyDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Handheld_Control_Panel.Pages"
+      xmlns:uc="clr-namespace:Handheld_Control_Panel.UserControls"
+      mc:Ignorable="d" 
+      d:DesignWidth="800" 
+      Title="HomePage" Loaded="Page_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel >
+            <Label Content="{DynamicResource Header_ProfileDetails_Settings}" Style="{StaticResource headerLabel}" />
+            <Button  Height="34" DockPanel.Dock="Right"   Margin="4,0,4,0" Click="Button_Click" Name="SaveProfile">
+                <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonSave_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                    <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEDE3;" Margin="0,0,0,0"  />
+                </StackPanel>
+
+            </Button>
+            <Button  Height="34" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="4,0,4,0" Click="Button_Click" Name="Back">
+                <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonBack_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                    <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEECA;" Margin="0,0,0,0"  />
+                </StackPanel>
+
+            </Button>
+            
+        </DockPanel>
+        <Rectangle Style="{StaticResource rectangle}" VerticalAlignment="Bottom"  />
+
+        <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
+            <StackPanel x:Name="stackPanel" >
+
+
+                <uc:Profiles_ProfileName />
+                <uc:Profiles_Exe />
+                <uc:ProfileDefault_ToggleSwitch />
+                <Label Content="{DynamicResource Header_ProfileLauncher_Settings}" Style="{StaticResource headerLabel}" />
+                <Rectangle Style="{StaticResource rectangle}" />
+                <uc:Profiles_AppType/>
+                <uc:ProfileResolution_Listbox />
+                <uc:ProfileRefresh_Listbox />
+                
+                <Label Content="{DynamicResource Header_ProfileOnCharger_Settings}" Style="{StaticResource headerLabel}" />
+                <Rectangle Style="{StaticResource rectangle}" />
+
+                <uc:ProfileOnline_TDP />
+                <uc:ProfileOnline_TDP2 />
+                <uc:ProfileOnline_MaxCPU />
+                <uc:ProfileOnline_ActiveCores />
+                <uc:ProfileOnline_EPP />
+                <uc:ProfileOnline_FPSLimit />
+                <uc:ProfileOnline_GPUCLK />
+
+
+
+                <Label Content="{DynamicResource Header_ProfileOnBattery_Settings}" Style="{StaticResource headerLabel}" />
+                <Rectangle Style="{StaticResource rectangle}" />
+                <uc:ProfileOffline_TDP />
+                <uc:ProfileOffline_TDP2 />
+                <uc:ProfileOffline_MaxCPU />
+                <uc:ProfileOffline_ActiveCores />
+                <uc:ProfileOffline_EPP />
+                <uc:ProfileOffline_FPSLimit />
+                <uc:ProfileOffline_GPUCLK />
+
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+    
+   
+
+
+</Page>

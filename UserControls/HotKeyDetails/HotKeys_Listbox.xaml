@@ -71,9 +71,9 @@
                             <!-- Assumes MVVM and you wish to bind to properties and commands -->
                             <TextBlock Grid.Column="0"  Text="{Binding ID}" Margin="0,0,15,0" />
                             <TextBlock Grid.Column="1" FontSize="14" Text="{Binding DisplayType}"/>
-                            <TextBlock Grid.Column="2" FontSize="14" Text="{Binding DisplayAction}"/>
-                            <TextBlock Grid.Column="3" FontSize="14" Text="{Binding DisplayParameter}"/>
-                            <TextBlock Grid.Column="3" FontSize="14" Text="{Binding DisplayHotkey}"/>
+                            <TextBlock Grid.Column="3" FontSize="14" Text="{Binding DisplayAction}"/>
+                            <TextBlock Grid.Column="4" FontSize="14" Text="{Binding DisplayParameter}"/>
+                            <TextBlock Grid.Column="2" FontSize="14" Text="{Binding DisplayHotkey}"/>
                             
 
                         </Grid>

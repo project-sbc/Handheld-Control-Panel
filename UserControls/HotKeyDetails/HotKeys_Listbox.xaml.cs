@@ -101,16 +101,14 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (control.SelectedItem!= null)
                 {
-                    Global_Variables.profiles.editingProfile = (Profile)control.SelectedItem;
+                    Global_Variables.hotKeys.editingHotkey = (HotkeyItem)control.SelectedItem;
 
                     MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-                    mainWindow.frame.Navigate(new Uri("Pages\\ProfileDetailsPage.xaml", UriKind.RelativeOrAbsolute));
+                    mainWindow.frame.Navigate(new Uri("Pages\\HotKeyDetailsPage.xaml", UriKind.RelativeOrAbsolute));
                 }
             }
 
         }
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -121,11 +119,15 @@ namespace Handheld_Control_Panel.UserControls
                     handleListboxChange();
                     break;
                 case "AddProfile":
-                    Global_Variables.profiles.addNewProfile();
+                    Global_Variables.hotKeys.addNewHotkey();
                     setListboxItemsource();
                     break;
                 case "DeleteProfile":
-
+                    if (control.SelectedItem != null)
+                    {
+                        Global_Variables.hotKeys.deleteHotkey((HotkeyItem)control.SelectedItem);
+                        setListboxItemsource();
+                    }
                     break;
                 default: break;
             }

@@ -72,8 +72,35 @@ namespace Handheld_Control_Panel.Classes
 
    };
 
-       
-       
+        public void deleteHotkey(HotkeyItem hotKey)
+        {
+            if (hotKey != null)
+            {
+                string ID = hotKey.ID;
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+
+                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+                {
+                    if (node.SelectSingleNode("ID").InnerText == ID)
+                    {
+                        xmlNodeProfiles.RemoveChild(node);
+                        break;
+                    }
+
+                }
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                xmlDocument = null;
+
+                this.Remove(hotKey);
+            }
+
+
+        }
+
 
         public void generateGlobalKeyboardHotKeyList()
         {
@@ -152,7 +179,7 @@ namespace Handheld_Control_Panel.Classes
             //gets ID for new profiles
             int ID = 0;
 
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Hotkeys");
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
             XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
 
             while (xmlSelectedNode != null)
@@ -179,7 +206,11 @@ namespace Handheld_Control_Panel.Classes
             }
             set
             {
-                DisplayType = Application.Current.Resources["Hotkeys_Type_" + value].ToString();
+                if (value != "")
+                {
+                    DisplayType = Application.Current.Resources["Hotkeys_Type_" + value].ToString();
+                }
+
                 type = value;
             }
 
@@ -197,7 +228,11 @@ namespace Handheld_Control_Panel.Classes
             }
             set
             {
-                DisplayAction = Application.Current.Resources["Hotkeys_Action_" + value].ToString();
+                if (value != "")
+                {
+                    DisplayAction = Application.Current.Resources["Hotkeys_Action_" + value].ToString();
+                }
+               
                 action = value;
             }
 
@@ -215,14 +250,18 @@ namespace Handheld_Control_Panel.Classes
             }
             set
             {
-                if (Type == "Controller")
+                if (value != "")
                 {
-                    DisplayHotkey = convertControllerUshortToString(value);
+                    if (Type == "Controller")
+                    {
+                        DisplayHotkey = convertControllerUshortToString(value);
+                    }
+                    else
+                    {
+                        DisplayHotkey = value;
+                    }
                 }
-                else
-                {
-                    DisplayHotkey = value;
-                }
+           
                 
                 hotkey = value;
             }
@@ -240,25 +279,29 @@ namespace Handheld_Control_Panel.Classes
             }
             set
             {
-                if (Action == "OpenProgram")
+                if (value != "")
                 {
-                    DisplayParameter = Global_Variables.Global_Variables.profiles.getProfileNameById(value);
-                }
-                else
-                {
-                    if (Action.Contains("Change"))
+                    if (Action == "OpenProgram")
                     {
-                        int number;
-                        if (Int32.TryParse(value, out number))
-                        {
-                            if (number > 0) { DisplayParameter = "+" + value; }
-                        }
+                        DisplayParameter = Global_Variables.Global_Variables.profiles.getProfileNameById(value);
                     }
                     else
                     {
-                        DisplayParameter = value;
+                        if (Action.Contains("Change"))
+                        {
+                            int number;
+                            if (Int32.TryParse(value, out number))
+                            {
+                                if (number > 0) { DisplayParameter = "+" + value; }
+                            }
+                        }
+                        else
+                        {
+                            DisplayParameter = value;
+                        }
                     }
                 }
+            
 
                 parameter = value;
             }
