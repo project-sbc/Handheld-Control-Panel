@@ -123,12 +123,26 @@ namespace Handheld_Control_Panel.UserControls
                 case "AddProfile":
                     Global_Variables.profiles.addNewProfile();
                     setListboxItemsource();
+                    control.SelectedIndex = control.Items.Count - 1;
                     break;
                 case "DeleteProfile":
                     if (control.SelectedItem != null)
                     {
+                        int index = control.SelectedIndex;
                         Global_Variables.profiles.deleteProfile((Profile)control.SelectedItem);
                         setListboxItemsource();
+                        if (control.Items.Count -1 > 0) 
+                        { 
+                            if (control.Items.Count-1 > index -1 )
+                            {
+                                control.SelectedIndex = index;
+                            }
+                            else
+                            {
+                                control.SelectedIndex = index-1;
+                            }
+                             
+                        } 
                     }
              
                     break;
