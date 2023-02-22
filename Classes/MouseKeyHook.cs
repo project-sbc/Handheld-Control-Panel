@@ -50,14 +50,18 @@ namespace Handheld_Control_Panel.Classes
                    
                 }
                 Debug.WriteLine(runningKeyStroke); 
-                if (Global_Variables.Global_Variables.KBHotKeyDictionary.ContainsKey(runningKeyStroke) && !programmingKeystroke)
+                if (Global_Variables.Global_Variables.KBHotKeyDictionary.Count > 0)
                 {
-                    args.SuppressKeyPress = true;
-                    ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
-                    //HotKey_Management.runHotKeyAction(action);
-                    runningKeyStroke = "";
+                    if (Global_Variables.Global_Variables.KBHotKeyDictionary.ContainsKey(runningKeyStroke) && !programmingKeystroke)
+                    {
+                        args.SuppressKeyPress = true;
+                        ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
+                        //HotKey_Management.runHotKeyAction(action);
+                        runningKeyStroke = "";
 
+                    }
                 }
+              
             }
             if (args.IsKeyUp)
             {

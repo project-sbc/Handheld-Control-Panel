@@ -41,6 +41,7 @@ namespace Handheld_Control_Panel
 
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
+            MouseKeyHook.Subscribe();
 
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
