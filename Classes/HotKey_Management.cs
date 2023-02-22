@@ -112,25 +112,25 @@ namespace Handheld_Control_Panel.Classes
 
             returnDictionary.Clear();
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
+            //System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            //xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            //XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
 
-            foreach (XmlNode node in xmlNode.ChildNodes)
-            {
-                if (node.SelectSingleNode("Type").InnerText == "Keyboard")
-                {
-                    ActionParameter ap = new ActionParameter();
-                    string hotkey = node.SelectSingleNode("Hotkey").InnerText;
-                    ap.Action = node.SelectSingleNode("Action").InnerText;
-                    ap.Action = node.SelectSingleNode("Parameter").InnerText;
-                    returnDictionary.Add(hotkey, ap);
+            //foreach (XmlNode node in xmlNode.ChildNodes)
+            //{
+                //if (node.SelectSingleNode("Type").InnerText == "Keyboard")
+                //{
+                    //ActionParameter ap = new ActionParameter();
+                    //string hotkey = node.SelectSingleNode("Hotkey").InnerText;
+                    //ap.Action = node.SelectSingleNode("Action").InnerText;
+                    //ap.Action = node.SelectSingleNode("Parameter").InnerText;
+                    //returnDictionary.Add(hotkey, ap);
 
-                }
+                //}
 
-            }
+            //}
 
-            xmlDocument = null;
+            //xmlDocument = null;
           
         }
 

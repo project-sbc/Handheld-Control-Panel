@@ -63,8 +63,8 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static bool controllerConnected = false;
 
         //controller keyboard shortcuts
-        public static Dictionary<ushort,ActionParameter> controllerHotKeyDictionary= null;
-        public static Dictionary<string, ActionParameter> KBHotKeyDictionary = null;
+        public static Dictionary<ushort,ActionParameter> controllerHotKeyDictionary= new Dictionary<ushort, ActionParameter>();
+        public static Dictionary<string, ActionParameter> KBHotKeyDictionary = new Dictionary<string, ActionParameter>();
         
         //kill controller loop thread
         public static bool killControllerThread = false;

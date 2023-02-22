@@ -40,7 +40,7 @@ namespace Handheld_Control_Panel.UserControls
         private DispatcherTimer gamepadTimer = new DispatcherTimer(DispatcherPriority.Render);
         private DispatcherTimer keyboardTimer = new DispatcherTimer();
         private ushort controllerButtons = 0;
-        private int gamepadTimerTickCounter = 0;
+        private DateTime gamepadTimerTickCounter;
         private ushort currentGamepad = 0;
         private ushort previousGamepad = 0;
       
@@ -102,10 +102,9 @@ namespace Handheld_Control_Panel.UserControls
         {
             currentGamepad = ((ushort)Controller_Management.currentGamePad.Buttons);
 
-            gamepadTimerTickCounter = gamepadTimerTickCounter + 1;
-
+            
             //timeout after 100 ticks or just over 5 seconds
-            if (gamepadTimerTickCounter > 100)
+            if (DateTime.Now > gamepadTimerTickCounter)
             {
                 stopGamepadTimer(true);
                 controllerButtons = 0;
@@ -192,7 +191,7 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Management.suspendEventsForGamepadHotKeyProgramming = true;
             gamepadTimer.Tick += gamepad_Tick;
             gamepadTimer.Interval = TimeSpan.FromMilliseconds(70);
-            gamepadTimerTickCounter = 0;
+            gamepadTimerTickCounter = DateTime.Now.AddSeconds(5);
             Thread.Sleep(70);
             gamepadTimer.Start();
             control.Content = "...";
@@ -210,6 +209,7 @@ namespace Handheld_Control_Panel.UserControls
         private void handleKeyboardStringPress(object sender, EventArgs args)
         {
             control.Content = (string)sender;
+            Global_Variables.hotKeys.editingHotkey.Hotkey = (string)sender;
             MouseKeyHook.keyboardEvents.keyboardStringPress -= handleKeyboardStringPress;
             keyboardTimer.Stop();
         }
@@ -222,14 +222,14 @@ namespace Handheld_Control_Panel.UserControls
 
             MouseKeyHook.keyboardEvents.keyboardStringPress += handleKeyboardStringPress;
 
-
+            control.Content = "...";
             keyboardTimer.Start();
         }
         private void stopKBTimer()
         {
             keyboardTimer.Stop();
             MouseKeyHook.programmingKeystroke = false;
-
+           
         }
 
         #endregion
