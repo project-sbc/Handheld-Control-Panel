@@ -24,7 +24,7 @@
     <system:String x:Key="Header_ProfileLauncher_Settings">Launch Options</system:String>
 
     <system:String x:Key="Header_HotKeysList_Settings">Hot Keys List</system:String>
-    
+    <system:String x:Key="Header_HotKeyDetails_Settings">Hotkey Details</system:String>
 
     <system:String x:Key="Usercontrol_TDP_MainText">Thermal Design Power (TDP)</system:String>
     <system:String x:Key="Usercontrol_TDP_SubText">Change sustained thermal design power (TDP) in watts</system:String>
@@ -124,6 +124,9 @@
 
     <system:String x:Key="Usercontrol_ProfileDetailsButtonSave_MainText">Save</system:String>
     <system:String x:Key="Usercontrol_ProfileDetailsButtonBack_MainText">Back</system:String>
+
+    <system:String x:Key="Usercontrol_HotkeyDetailsButtonSave_MainText">Save</system:String>
+    <system:String x:Key="Usercontrol_HotkeyDetailsButtonBack_MainText">Back</system:String>
     
     <system:String x:Key="Usercontrol_ProfilesProfileName_MainText">Profile Name</system:String>
     <system:String x:Key="Usercontrol_ProfilesExe_MainText">Process Name</system:String>
@@ -152,12 +155,16 @@
     <system:String x:Key="Hotkeys_Action_Open_Program">Open Program</system:String>
     <system:String x:Key="Hotkeys_Action_Change_TDP">Change TDP</system:String>
     <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Show/Hide HCP</system:String>
+    
     <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
+
+
+    <system:String x:Key="Usercontrol_HotkeyType_MainText">Hotkey Input Type</system:String>
+    <system:String x:Key="Usercontrol_HotkeyType_SubText">Select hotkey input method</system:String>
     
-    
-    
-    
+
+
     <!--old stuff-->
 
     <system:String x:Key="TDP_Slider_Main">Sustained TDP</system:String>

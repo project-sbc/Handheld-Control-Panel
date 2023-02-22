@@ -20,7 +20,11 @@ namespace Handheld_Control_Panel.Classes
       
         public HotkeyItem editingHotkey = null;
 
-
+        public event EventHandler hotkeyClearedEvent;
+        public void raiseHotkeyClearedEvent()
+        {
+            hotkeyClearedEvent?.Invoke(null, EventArgs.Empty);
+        }
         public void generateGlobalControllerHotKeyList()
         {
             Dictionary<ushort, ActionParameter> returnDictionary = Global_Variables.Global_Variables.controllerHotKeyDictionary;

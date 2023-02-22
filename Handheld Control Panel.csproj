@@ -139,6 +139,9 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HotKeyDetails\HotKeyType_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\ProfileDetails\ProfileOnline_GPUCLK.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

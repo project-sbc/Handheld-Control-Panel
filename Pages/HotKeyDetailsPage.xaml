@@ -14,17 +14,17 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DockPanel >
-            <Label Content="{DynamicResource Header_ProfileDetails_Settings}" Style="{StaticResource headerLabel}" />
+            <Label Content="{DynamicResource Header_HotKeyDetails_Settings}" Style="{StaticResource headerLabel}" />
             <Button  Height="34" DockPanel.Dock="Right"   Margin="4,0,4,0" Click="Button_Click" Name="SaveProfile">
                 <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
-                    <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonSave_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                    <Label Content="{DynamicResource Usercontrol_HotkeyDetailsButtonSave_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                     <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEDE3;" Margin="0,0,0,0"  />
                 </StackPanel>
 
             </Button>
             <Button  Height="34" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="4,0,4,0" Click="Button_Click" Name="Back">
                 <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
-                    <Label Content="{DynamicResource Usercontrol_ProfileDetailsButtonBack_MainText}" VerticalContentAlignment="Center" FontSize="14" />
+                    <Label Content="{DynamicResource Usercontrol_HotkeyDetailsButtonBack_MainText}" VerticalContentAlignment="Center" FontSize="14" />
                     <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEECA;" Margin="0,0,0,0"  />
                 </StackPanel>
 
@@ -35,39 +35,8 @@
 
         <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
+                <uc:HotKeyType_Listbox />
 
-
-                <uc:Profiles_ProfileName />
-                <uc:Profiles_Exe />
-                <uc:ProfileDefault_ToggleSwitch />
-                <Label Content="{DynamicResource Header_ProfileLauncher_Settings}" Style="{StaticResource headerLabel}" />
-                <Rectangle Style="{StaticResource rectangle}" />
-                <uc:Profiles_AppType/>
-                <uc:ProfileResolution_Listbox />
-                <uc:ProfileRefresh_Listbox />
-                
-                <Label Content="{DynamicResource Header_ProfileOnCharger_Settings}" Style="{StaticResource headerLabel}" />
-                <Rectangle Style="{StaticResource rectangle}" />
-
-                <uc:ProfileOnline_TDP />
-                <uc:ProfileOnline_TDP2 />
-                <uc:ProfileOnline_MaxCPU />
-                <uc:ProfileOnline_ActiveCores />
-                <uc:ProfileOnline_EPP />
-                <uc:ProfileOnline_FPSLimit />
-                <uc:ProfileOnline_GPUCLK />
-
-
-
-                <Label Content="{DynamicResource Header_ProfileOnBattery_Settings}" Style="{StaticResource headerLabel}" />
-                <Rectangle Style="{StaticResource rectangle}" />
-                <uc:ProfileOffline_TDP />
-                <uc:ProfileOffline_TDP2 />
-                <uc:ProfileOffline_MaxCPU />
-                <uc:ProfileOffline_ActiveCores />
-                <uc:ProfileOffline_EPP />
-                <uc:ProfileOffline_FPSLimit />
-                <uc:ProfileOffline_GPUCLK />
 
 
             </StackPanel>
