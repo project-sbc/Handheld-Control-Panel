@@ -86,7 +86,7 @@ namespace Handheld_Control_Panel.UserControls
     
         private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (this.IsLoaded)
+            if (control.IsLoaded)
             {
 
                 if (!control.IsOn)

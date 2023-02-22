@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(this.IsLoaded && control.Visibility != Visibility.Collapsed)
+            if(control.IsLoaded && control.Visibility != Visibility.Collapsed)
             {
                 UserControl_Management.Slider_ValueChanged(sender, e);
             }

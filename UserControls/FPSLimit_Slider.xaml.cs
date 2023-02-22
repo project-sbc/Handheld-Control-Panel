@@ -116,7 +116,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(this.IsLoaded)
+            if(control.IsLoaded)
             {
                 UserControl_Management.Slider_ValueChanged(sender, e);
             }

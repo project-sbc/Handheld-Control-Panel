@@ -109,7 +109,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void handleListboxChange()
         {
-            if (this.IsLoaded && control.Visibility==Visibility.Visible)
+            if (control.IsLoaded && control.Visibility==Visibility.Visible)
             {
                 if (control.SelectedItem != null)
                 {
@@ -133,7 +133,7 @@ namespace Handheld_Control_Panel.UserControls
         }
         private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (this.IsLoaded)
+            if (control.IsLoaded)
             {
                 bool toggle = toggleSwitch.IsOn;
 

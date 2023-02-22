@@ -109,7 +109,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void handleListboxChange()
         {
-            if (this.IsLoaded)
+            if (control.IsLoaded)
             {
                 Rectangle themeShape = (Rectangle)control.SelectedItem;
                 string theme = themeShape.Tag.ToString();

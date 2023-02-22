@@ -79,7 +79,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void handleListboxChange()
         {
-            if (this.IsLoaded)
+            if (control.IsLoaded)
             {
                
                 string selectedItem = control.SelectedItem.ToString();

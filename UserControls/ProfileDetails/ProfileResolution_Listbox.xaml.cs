@@ -100,7 +100,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void handleListboxChange()
         {
-            if (this.IsLoaded && control.Visibility == Visibility.Visible)
+            if (control.IsLoaded && control.Visibility == Visibility.Visible)
             {
                
                 Global_Variables.profiles.editingProfile.Resolution = control.SelectedItem.ToString();
@@ -123,7 +123,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (this.IsLoaded)
+            if (toggleSwitch.IsLoaded)
             {
                 bool toggle = toggleSwitch.IsOn;
 
