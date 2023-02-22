@@ -10,30 +10,34 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                    <iconPacks:PackIconMaterial Kind="ApplicationCogOutline" Name="materialIcon"  Style="{StaticResource userControlIconMaterial}" />
-                    <iconPacks:PackIconSimpleIcons Kind="Steam" Name="simpleIcon" Style="{StaticResource userControlIconSimpleIcons}" />
+                    <iconPacks:PackIconMaterial Kind="Keyboard" Name="materialIcon"  Style="{StaticResource userControlIconMaterial}" />
+
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                        <Label Content="{DynamicResource Usercontrol_ProfilesAppType_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label Content="{DynamicResource Usercontrol_Hotkey_MainText}" Style="{StaticResource userControlMainLabel}"/>
                         <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="420">
-                            <TextBlock Text="{StaticResource Usercontrol_ProfilesAppType_SubText}" Style="{StaticResource userControlSubText}" />
+                            <TextBlock Text="{StaticResource Usercontrol_Hotkey_SubText}" Style="{StaticResource userControlSubText}" />
                         </Label>
           
                     </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <TextBox Name="control" Style="{StaticResource profilesTextBox}" LostFocus="control_LostFocus" />
-                        <Button x:Name="button"  Style="{StaticResource userControlButton}" Height="30" Click="button_Click" >
+                      
+                        <Button x:Name="button"  Style="{StaticResource userControlButton}" Height="30" Width="290" Click="button_Click" >
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
                                 </Style>
                             </Button.Resources>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xEC50;" Margin="0,0,6,0"  />
-                                <TextBlock Style="{StaticResource profileControllerButtonTextblock}" Text="&#xF095;" Margin="0,0,6,0"  />
-                            </StackPanel>
+                            <Grid  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="255"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Name="control" HorizontalAlignment="Center"  Margin="0,0,6,0"  />
+                                <TextBlock Grid.Column="1" Style="{StaticResource profileControllerButtonTextblock}" Text="&#xF093;" HorizontalAlignment="Right"  Margin="0,0,6,0"  />
+                            </Grid>
                         </Button>
-                        <Image x:Name="imageControl" MaxHeight="80"/>
+                      
                     </StackPanel>
                   
                 </DockPanel>

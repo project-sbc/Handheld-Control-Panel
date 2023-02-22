@@ -36,7 +36,7 @@
         <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
                 <uc:HotKeyType_Listbox />
-
+                <uc:HotKey_Textbox/>
 
 
             </StackPanel>

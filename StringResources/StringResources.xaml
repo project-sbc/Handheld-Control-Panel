@@ -162,7 +162,8 @@
 
     <system:String x:Key="Usercontrol_HotkeyType_MainText">Hotkey Input Type</system:String>
     <system:String x:Key="Usercontrol_HotkeyType_SubText">Select hotkey input method</system:String>
-    
+    <system:String x:Key="Usercontrol_Hotkey_MainText">Input Hotkey</system:String>
+    <system:String x:Key="Usercontrol_Hotkey_SubText">Click the button and press your hotkeys</system:String>
 
 
     <!--old stuff-->
