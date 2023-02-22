@@ -131,7 +131,7 @@ namespace Handheld_Control_Panel.UserControls
                         setListboxItemsource();
                         if (control.Items.Count > 0)
                         {
-                            if (control.Items.Count > index - 1)
+                            if (control.Items.Count - 1 > index - 1)
                             {
                                 control.SelectedIndex = index;
                             }

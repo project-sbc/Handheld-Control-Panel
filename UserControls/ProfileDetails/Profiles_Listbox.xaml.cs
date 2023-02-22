@@ -131,7 +131,7 @@ namespace Handheld_Control_Panel.UserControls
                         int index = control.SelectedIndex;
                         Global_Variables.profiles.deleteProfile((Profile)control.SelectedItem);
                         setListboxItemsource();
-                        if (control.Items.Count -1 > 0) 
+                        if (control.Items.Count > 0) 
                         { 
                             if (control.Items.Count-1 > index -1 )
                             {
@@ -143,6 +143,7 @@ namespace Handheld_Control_Panel.UserControls
                             }
                              
                         } 
+                        
                     }
              
                     break;
