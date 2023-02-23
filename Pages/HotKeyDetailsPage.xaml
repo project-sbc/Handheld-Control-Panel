@@ -37,7 +37,7 @@
             <StackPanel x:Name="stackPanel" >
                 <uc:HotKeyType_Listbox />
                 <uc:HotKey_Textbox/>
-
+                <uc:HotKeyAction_Listbox />
 
             </StackPanel>
         </ScrollViewer>

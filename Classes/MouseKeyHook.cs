@@ -49,7 +49,7 @@ namespace Handheld_Control_Panel.Classes
                     }
                    
                 }
-                Debug.WriteLine(runningKeyStroke); 
+               
                 if (Global_Variables.Global_Variables.KBHotKeyDictionary.Count != null)
                 {
                     if (Global_Variables.Global_Variables.KBHotKeyDictionary.ContainsKey(runningKeyStroke) && !programmingKeystroke)

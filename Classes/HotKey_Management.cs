@@ -25,6 +25,11 @@ namespace Handheld_Control_Panel.Classes
         {
             hotkeyClearedEvent?.Invoke(null, EventArgs.Empty);
         }
+        public event EventHandler hotkeyActionChangedEvent;
+        public void raiseHotkeyActionChangedEvent()
+        {
+            hotkeyActionChangedEvent?.Invoke(null, EventArgs.Empty);
+        }
         public void generateGlobalControllerHotKeyList()
         {
             Dictionary<ushort, ActionParameter> returnDictionary = Global_Variables.Global_Variables.controllerHotKeyDictionary;
