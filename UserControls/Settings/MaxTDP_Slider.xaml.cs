@@ -1,4 +1,6 @@
-﻿using Handheld_Control_Panel.Classes;
+﻿using Handheld_Control_Panel.Classes.Controller_Management;
+
+using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
@@ -61,6 +63,11 @@ namespace Handheld_Control_Panel.UserControls
                 UserControl_Management.Slider_ValueChanged(sender, e);
             }
        
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
         }
     }
 }

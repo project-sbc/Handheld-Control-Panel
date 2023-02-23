@@ -109,5 +109,10 @@ namespace Handheld_Control_Panel.UserControls
                 Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency((int)value));
             }
         }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+        }
     }
 }
