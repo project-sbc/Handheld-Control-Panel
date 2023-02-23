@@ -63,5 +63,10 @@ namespace Handheld_Control_Panel.UserControls
             }
            
         }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+        }
     }
 }
