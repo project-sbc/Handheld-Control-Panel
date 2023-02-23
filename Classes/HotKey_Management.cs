@@ -290,7 +290,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (value != "")
                 {
-                    if (Action == "OpenProgram")
+                    if (Action == "Open_Program")
                     {
                         DisplayParameter = Global_Variables.Global_Variables.profiles.getProfileNameById(value);
                     }
@@ -301,7 +301,7 @@ namespace Handheld_Control_Panel.Classes
                             int number;
                             if (Int32.TryParse(value, out number))
                             {
-                                if (number > 0) { DisplayParameter = "+" + value; }
+                                if (number > 0) { DisplayParameter = "+" + value; } else { DisplayParameter = value; }
                             }
                         }
                         else

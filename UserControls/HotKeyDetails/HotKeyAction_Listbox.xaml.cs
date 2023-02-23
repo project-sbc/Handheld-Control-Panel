@@ -110,6 +110,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (Global_Variables.hotKeys.editingHotkey.Action == hka.HotkeyAction)
                 {
                     control.SelectedItem = hka;
+                    value.Content = hka.DisplayHotkeyAction;
                 }
             }
 
@@ -156,7 +157,7 @@ namespace Handheld_Control_Panel.UserControls
                     if (Global_Variables.hotKeys.editingHotkey.Action != selected.HotkeyAction)
                     {
                         Global_Variables.hotKeys.editingHotkey.Action = selected.HotkeyAction;
-                        
+                        value.Content = selected.DisplayHotkeyAction; 
                         Global_Variables.hotKeys.raiseHotkeyActionChangedEvent();
                     }
 
@@ -177,7 +178,10 @@ namespace Handheld_Control_Panel.UserControls
             handleListboxChange();
         }
 
-   
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+        }
     }
 
     public class HotKeyAction

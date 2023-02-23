@@ -66,8 +66,8 @@ namespace Handheld_Control_Panel.Pages
             Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
 
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.frame.Navigate(new Uri("Pages\\ProfilesPage.xaml", UriKind.RelativeOrAbsolute));
-
+            mainWindow.navigateHotkeyProfileViews("Pages\\ProfilesPage.xaml");
+            
         }
 
         private void saveProfile()
@@ -121,6 +121,11 @@ namespace Handheld_Control_Panel.Pages
                 default:
                     break;
             }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
     }
 }

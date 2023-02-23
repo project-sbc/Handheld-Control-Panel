@@ -52,6 +52,7 @@ namespace Handheld_Control_Panel.UserControls
         private void HotKeys_hotkeyActionChangedEvent(object? sender, EventArgs e)
         {
             //event triggered when hotkey is changed from controller to keyboard or vice versa
+            value.Content = "";
             setListboxItemsource();
 
         }
@@ -66,16 +67,14 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setListboxItemsource()
         {
+            this.Visibility = Visibility.Visible;
             List<Parameter> hotkeyParameter = new List<Parameter>();
             if (control.ItemsSource!= null) { control.ItemsSource = null; }
             //set as default visible and switch to collapsed in switch statement if its not a parameter type of action (like opening closing hcp)
-            control.Visibility = Visibility.Visible;
+          
             switch (Global_Variables.hotKeys.editingHotkey.Action)
             {
 
-                case "Open_Program":
-
-                    break;
                 case "Change_TDP":
                     for (int i = -5; i < 6; i++)
                     {
@@ -122,29 +121,26 @@ namespace Handheld_Control_Panel.UserControls
                     break;
 
                 default:
-                    control.Visibility = Visibility.Collapsed;
+                    this.Visibility = Visibility.Collapsed;
                     break;
             }
-
-            if (hotkeyParameter.Count > 0)
+            if (this.Visibility== Visibility.Visible)
             {
-
-                control.ItemsSource = hotkeyParameter;
-                foreach (Parameter param in hotkeyParameter)
+                if (hotkeyParameter.Count > 0)
                 {
-                    if (Global_Variables.hotKeys.editingHotkey.Parameter == param.ParameterValue)
+
+                    control.ItemsSource = hotkeyParameter;
+                    foreach (Parameter param in hotkeyParameter)
                     {
-                        control.SelectedItem = param;
+                        if (Global_Variables.hotKeys.editingHotkey.Parameter == param.ParameterValue)
+                        {
+                            control.SelectedItem = param;
+                            value.Content = param.DisplayParameter;
+                        }
                     }
                 }
+
             }
-        
-           
-
-
-            
-           
-         
 
         }
 
@@ -185,7 +181,7 @@ namespace Handheld_Control_Panel.UserControls
                     if (Global_Variables.hotKeys.editingHotkey.Parameter != selected.ParameterValue)
                     {
                         Global_Variables.hotKeys.editingHotkey.Parameter = selected.ParameterValue;
-
+                        value.Content = selected.DisplayParameter;
                     }
 
                 }
@@ -205,7 +201,10 @@ namespace Handheld_Control_Panel.UserControls
             handleListboxChange();
         }
 
-   
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+        }
     }
     public class Parameter
     {

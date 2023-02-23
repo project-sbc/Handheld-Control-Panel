@@ -68,6 +68,12 @@ namespace Handheld_Control_Panel
 
         }
 
+        public void navigateHotkeyProfileViews(string page)
+        {
+
+            frame.Navigate(new Uri(page, UriKind.RelativeOrAbsolute));
+            MainWindowNavigation.windowNavigation = true;
+        }
 
 
         private void navigateNavigationView(string action)

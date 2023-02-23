@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Handheld_Control_Panel.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-              d:DesignWidth="800" Loaded="UserControl_Loaded" >
+              d:DesignWidth="800" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
         
     </UserControl.Resources>
@@ -22,7 +22,10 @@
                             <TextBlock Text="{DynamicResource Usercontrol_HotkeyAction_SubText}" Style="{StaticResource userControlSubText}" />
                         </Label>
                     </StackPanel>
-                   
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Label Name="value" Style="{StaticResource userControlUnitLabel}"/>
+                    </StackPanel>
                 </DockPanel>
                 </DockPanel>
             <ListBox x:Name="control" FontSize="16"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >

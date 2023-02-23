@@ -7,7 +7,7 @@
       xmlns:uc="clr-namespace:Handheld_Control_Panel.UserControls"
       mc:Ignorable="d" 
       d:DesignWidth="800" 
-      Title="HomePage" Loaded="Page_Loaded">
+      Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >

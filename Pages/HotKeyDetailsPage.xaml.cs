@@ -66,8 +66,8 @@ namespace Handheld_Control_Panel.Pages
             Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
 
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.frame.Navigate(new Uri("Pages\\HotKeysPage.xaml", UriKind.RelativeOrAbsolute));
-
+            //mainWindow.frame.Navigate(new Uri("Pages\\HotKeysPage.xaml", UriKind.RelativeOrAbsolute));
+            mainWindow.navigateHotkeyProfileViews("Pages\\HotKeysPage.xaml");
         }
 
         private void saveProfile()
@@ -121,6 +121,11 @@ namespace Handheld_Control_Panel.Pages
                 default:
                     break;
             }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
     }
 }
