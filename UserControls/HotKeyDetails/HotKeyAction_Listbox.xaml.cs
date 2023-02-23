@@ -103,8 +103,17 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(changeBrightness);
 
-
             control.ItemsSource = hotkeyAction;
+
+            foreach (HotKeyAction hka in hotkeyAction)
+            {
+                if (Global_Variables.hotKeys.editingHotkey.Action == hka.HotkeyAction)
+                {
+                    control.SelectedItem = hka;
+                }
+            }
+
+     
            
          
 

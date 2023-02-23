@@ -38,7 +38,7 @@
                 <uc:HotKeyType_Listbox />
                 <uc:HotKey_Textbox/>
                 <uc:HotKeyAction_Listbox />
-
+                <uc:HotKeyParameter_Listbox />
             </StackPanel>
         </ScrollViewer>
     </Grid>
