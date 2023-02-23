@@ -80,8 +80,8 @@ namespace Handheld_Control_Panel.UserControls
             hotkeyAction.Add(changeTDP);
 
             HotKeyAction openSteamBigPicture = new HotKeyAction();
-            changeTDP.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Open_Steam_BigPicture"].ToString();
-            changeTDP.HotkeyAction = "Open_Steam_BigPicture";
+            openSteamBigPicture.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Open_Steam_BigPicture"].ToString();
+            openSteamBigPicture.HotkeyAction = "Open_Steam_BigPicture";
 
             hotkeyAction.Add(openSteamBigPicture);
 
@@ -143,16 +143,14 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (control.SelectedItem != null)
                 {
-                    HotKeyTypes selected = (HotKeyTypes)control.SelectedItem;
-                    if (Global_Variables.hotKeys.editingHotkey.Type != selected.HotKeyType)
+                    HotKeyAction selected = (HotKeyAction)control.SelectedItem;
+                    if (Global_Variables.hotKeys.editingHotkey.Action != selected.HotkeyAction)
                     {
-                        Global_Variables.hotKeys.editingHotkey.Type = selected.HotKeyType;
-                        Global_Variables.hotKeys.editingHotkey.Hotkey = "";
-                        Global_Variables.hotKeys.raiseHotkeyClearedEvent();
-                    }
+                        Global_Variables.hotKeys.editingHotkey.Action = selected.HotkeyAction;
                         
-                    if (selected.HotKeyType== "Controller") { icon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.MicrosoftXboxController; } else { icon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.Keyboard; }
-                    selectedObject = control.SelectedItem;
+                        Global_Variables.hotKeys.raiseHotkeyActionChangedEvent();
+                    }
+
                 }
 
                 

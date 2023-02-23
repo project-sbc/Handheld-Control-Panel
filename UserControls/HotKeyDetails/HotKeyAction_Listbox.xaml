@@ -13,13 +13,13 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial Name="icon" Kind="Keyboard" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconMaterial Name="icon" Kind="ArrowBottomRight" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                        <Label Content="{DynamicResource Usercontrol_HotkeyType_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label Content="{DynamicResource Usercontrol_HotkeyAction_MainText}" Style="{StaticResource userControlMainLabel}"/>
                      
                         <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="480">
-                            <TextBlock Text="{DynamicResource Usercontrol_HotkeyType_SubText}" Style="{StaticResource userControlSubText}" />
+                            <TextBlock Text="{DynamicResource Usercontrol_HotkeyAction_SubText}" Style="{StaticResource userControlSubText}" />
                         </Label>
                     </StackPanel>
                    
@@ -40,7 +40,7 @@
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock   Text="{Binding DisplayHotKeyType}" />
+                        <TextBlock   Text="{Binding DisplayHotkeyAction}" />
                     </DataTemplate>
                     
                 </ListBox.ItemTemplate>
