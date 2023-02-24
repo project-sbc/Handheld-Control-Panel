@@ -148,6 +148,9 @@
     <Compile Update="UserControls\HotKeyDetails\HotKeyAction_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\QuickAction_Wrappanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\ProfileDetails\ProfileOnline_GPUCLK.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
