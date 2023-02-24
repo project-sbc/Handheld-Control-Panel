@@ -19,6 +19,7 @@ using MahApps.Metro.Controls;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Handheld_Control_Panel
 {
@@ -56,15 +57,19 @@ namespace Handheld_Control_Panel
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
-            Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
-            if (MainWindowNavigation.windowNavigation)
+            if (CheckForegroundWindow.IsActive(Process.GetCurrentProcess().MainWindowHandle))
             {
-                navigateNavigationView(args.Action);
+                Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
+                if (MainWindowNavigation.windowNavigation)
+                {
+                    navigateNavigationView(args.Action);
+                }
+                else
+                {
+                    Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
+                }
             }
-            else
-            {
-                Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action,window+page);
-            }
+          
 
         }
 
@@ -131,5 +136,15 @@ namespace Handheld_Control_Panel
 
         }
     }
-    
+    public static class CheckForegroundWindow
+    {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        public static bool IsActive(IntPtr handle)
+        {
+            IntPtr activeHandle = GetForegroundWindow();
+            return (activeHandle == handle);
+        }
+    }
 }

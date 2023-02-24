@@ -73,6 +73,15 @@ namespace Handheld_Control_Panel.Pages
         private void saveProfile()
         {
             Global_Variables.hotKeys.editingHotkey.SaveToXML();
+            if (Global_Variables.hotKeys.editingHotkey.Type == "Controller")
+            {
+                Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
+            }
+            else
+            {
+                Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
+            }
+
         }
         //
         private void handleControllerInputs(object sender, EventArgs e)

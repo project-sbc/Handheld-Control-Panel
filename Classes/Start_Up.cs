@@ -91,6 +91,9 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.profiles = new Profiles_Management();
             Global_Variables.Global_Variables.hotKeys = new HotKey_Management();
 
+            Global_Variables.Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
+            Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
+
         }
 
 

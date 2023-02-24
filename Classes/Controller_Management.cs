@@ -67,15 +67,21 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     if (!suspendEventsForGamepadHotKeyProgramming)
                     {
                         //check if controller combo is in controller hot key dictionary
-                        //if (Global_Variables.Global_Variables.controllerHotKeyDictionary.ContainsKey(btnShort))
-                        //{
-                            //if combo exists, 
-                          //  if (((ushort)previousGamePad.Buttons) != btnShort)
-                          //  {
-                          //      ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
-                          //      HotKey_Management.runHotKeyAction(action);
-                          //  }
-                        //}
+                        
+                        if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null)
+                        {
+                            if (Global_Variables.Global_Variables.controllerHotKeyDictionary.ContainsKey(btnShort))
+                            {
+
+                                if (((ushort)previousGamePad.Buttons) != btnShort)
+                                {
+                                    ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
+                                    QuickAction_Management.runHotKeyAction(action);
+                                }
+                            }
+                        }
+    
+
                         if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
                         {
                             buttonEvents.raiseControllerInput("Back");

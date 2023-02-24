@@ -32,9 +32,9 @@ namespace Handheld_Control_Panel.Classes
         }
         public void generateGlobalControllerHotKeyList()
         {
-            Dictionary<ushort, ActionParameter> returnDictionary = Global_Variables.Global_Variables.controllerHotKeyDictionary;
+            Global_Variables.Global_Variables.controllerHotKeyDictionary.Clear();
 
-            returnDictionary.Clear();
+            Dictionary<ushort, ActionParameter> returnDictionary = new Dictionary<ushort, ActionParameter>();
 
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.Classes
                     {
                         ActionParameter ap = new ActionParameter();
                         ap.Action = node.SelectSingleNode("Action").InnerText;
-                        ap.Action = node.SelectSingleNode("Parameter").InnerText;
+                        ap.Parameter = node.SelectSingleNode("Parameter").InnerText;
                         returnDictionary.Add(hotkey, ap);
                     }
 
@@ -58,6 +58,7 @@ namespace Handheld_Control_Panel.Classes
 
             }
             xmlDocument = null;
+            Global_Variables.Global_Variables.controllerHotKeyDictionary = returnDictionary;
         }
 
         //good reference to keep even if i dont use it, lookup of values of buttons to Ushort
