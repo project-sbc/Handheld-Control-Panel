@@ -45,6 +45,10 @@
 		</ControllerHotKey>
 
 	</ControllerHotKeys>
+
+	<QuickAccessMenu>
+		<Usercontrol>TDP_Slider</Usercontrol>
+	</QuickAccessMenu>
 	<ProfileTemplate>
 		<Profile >
 			<ID></ID>

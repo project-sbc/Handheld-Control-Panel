@@ -124,6 +124,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="QuickAccessMenu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\HotKeyDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +143,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HotKeyDetails\HotKeyParameter_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Customize_QAM.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HotKeyDetails\HotKeyType_Listbox.xaml.cs">

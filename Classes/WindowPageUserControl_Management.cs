@@ -40,12 +40,9 @@ namespace Handheld_Control_Panel.Classes
             }
             if (window.Contains("QuickAccessMenu"))
             {
-                QuickAccessMenuNavigation.windowNavigation = true;
+                QAMNavigation.windowQAMNavigation = true;
             }
-            if (window.Contains("GameLauncher"))
-            {
-                GameLauncherNavigation.windowNavigation = true;
-            }
+            
         }
 
 

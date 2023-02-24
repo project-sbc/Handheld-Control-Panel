@@ -11,6 +11,7 @@
     
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
+            <uc:Customize_QAM />
             <Label Content="{DynamicResource Header_CPU_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:QuickAction_Wrappanel/>
