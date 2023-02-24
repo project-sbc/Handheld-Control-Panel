@@ -13,6 +13,7 @@
         <StackPanel x:Name="stackPanel" >
             <Label Content="{DynamicResource Header_CPU_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
+            <uc:QuickAction_Wrappanel/>
             <uc:TDP_Slider/>
             <uc:TDP2_Slider/>
             <uc:CPUFrequency_Slider/>

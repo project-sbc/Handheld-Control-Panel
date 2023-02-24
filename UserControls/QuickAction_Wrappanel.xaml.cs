@@ -17,13 +17,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-
+using MahApps.Metro.IconPacks;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static Vanara.Interop.KnownShellItemPropertyKeys;
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -41,7 +40,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             InitializeComponent();
             //UserControl_Management.setupControl(control);
-            //setListboxItemsource();
+            setListboxItemsource();
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -52,6 +51,39 @@ namespace Handheld_Control_Panel.UserControls
             
         }
 
+        private void setListboxItemsource()
+        {
+            List<quickactionItem> items = new List<quickactionItem>();
+
+            quickactionItem qai = new quickactionItem();
+            qai.ID = "Toggle_Wifi";
+            qai.iconKind = PackIconMaterialKind.Wifi;
+
+            quickactionItem qai0 = new quickactionItem();
+            qai0.ID = "Toggle_BT";
+            qai0.iconKind = PackIconMaterialKind.Bluetooth ;
+
+            quickactionItem qai2 = new quickactionItem();
+            qai2.ID = "Toggle_Volume";
+            qai2.iconKind = PackIconMaterialKind.VolumeHigh;
+
+            quickactionItem qai3 = new quickactionItem();
+            qai3.ID = "Toggle_Controller";
+            qai3.iconKind = PackIconMaterialKind.MicrosoftXboxController;
+
+            quickactionItem qai4 = new quickactionItem();
+            qai4.ID = "Toggle_MouseMode";
+            qai4.iconKind = PackIconMaterialKind.Mouse;
+
+            items.Add(qai);
+            items.Add(qai0);
+            items.Add(qai2);
+            items.Add(qai3);
+            items.Add(qai4);
+
+            control.ItemsSource = items;
+
+        }
        
 
      
@@ -110,7 +142,10 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
         }
     }
+    class quickactionItem
+    {
+        public string ID { get; set; }
+        public PackIconMaterialKind iconKind { get; set; }
 
-    
-  
+    }
 }

@@ -13,7 +13,7 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial Name="icon" Kind="Keyboard" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconUnicons Name="icon" Kind="TachometerFast" Style="{StaticResource userControlIconUnicons}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_QuickAction_MainText}" Style="{StaticResource userControlMainLabel}"/>
@@ -22,12 +22,39 @@
                     </StackPanel>
                    
                 </DockPanel>
-                </DockPanel>
-            <WrapPanel>
-                
-                
-            </WrapPanel>
+               
             </DockPanel>
+            <ListBox x:Name="control" FontSize="16" HorizontalAlignment="Left"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto"  TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+                <ListBox.Resources>
+
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Resources>
+                           
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" CornerRadius="3" Background="{DynamicResource MahApps.Brushes.Accent3}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                            <Grid Margin="6,6,6,6" >
+                                <iconPacks:PackIconMaterial Height="30" Width="30"  Kind="{Binding iconKind}"  Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Height="0" Width="0" HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Text="{Binding ID}"/>
+                            </Grid>
+                        
+                        </Border>
+                    </DataTemplate>
+
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" HorizontalAlignment="Left" Background="Transparent"  />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        
+        </DockPanel>
         </Border>
 
 </UserControl>
