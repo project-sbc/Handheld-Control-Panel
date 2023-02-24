@@ -152,10 +152,13 @@
     <system:String x:Key="Usercontrol_HotKeysListButtonDelete_MainText">Delete</system:String>
 
 
+
     <system:String x:Key="Usercontrol_HotkeyAction_MainText">Hotkey Action</system:String>
     <system:String x:Key="Usercontrol_HotkeyAction_SubText">Select the hotkey action</system:String>
 
-
+    <system:String x:Key="Usercontrol_QuickAction_MainText">Quick Action Menu</system:String>
+    
+    
     <system:String x:Key="Hotkeys_Action_Open_Program">Open Program</system:String>
     <system:String x:Key="Hotkeys_Action_Change_TDP">Change TDP</system:String>
     <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Toggle Quick Access Menu</system:String>

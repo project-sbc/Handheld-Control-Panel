@@ -16,41 +16,17 @@
                 <iconPacks:PackIconMaterial Name="icon" Kind="Keyboard" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                        <Label Content="{DynamicResource Usercontrol_HotkeyType_MainText}" Style="{StaticResource userControlMainLabel}"/>
+                        <Label Content="{DynamicResource Usercontrol_QuickAction_MainText}" Style="{StaticResource userControlMainLabel}"/>
                      
-                        <Label Name="subText" Style="{StaticResource userControlSubLabel}" Width="480">
-                            <TextBlock Text="{DynamicResource Usercontrol_HotkeyType_SubText}" Style="{StaticResource userControlSubText}" />
-                        </Label>
+                       
                     </StackPanel>
                    
                 </DockPanel>
                 </DockPanel>
-            <ListBox x:Name="control" FontSize="16"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
-                <ListBox.Resources>
-
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Style.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="5"/>
-
-                            </Style>
-                        </Style.Resources>
-                    </Style>
-                </ListBox.Resources>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock   Text="{Binding DisplayHotKeyType}" />
-                    </DataTemplate>
-                    
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-
-                    <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+            <WrapPanel>
+                
+                
+            </WrapPanel>
             </DockPanel>
         </Border>
 
