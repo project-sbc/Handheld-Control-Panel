@@ -39,6 +39,7 @@
                         <Border BorderThickness="1" CornerRadius="3" Background="{DynamicResource MahApps.Brushes.Accent3}" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
                             <Grid Margin="6,6,6,6" >
                                 <iconPacks:PackIconMaterial Height="30" Width="30"  Kind="{Binding iconKind}"  Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <iconPacks:PackIconUnicons RotationAngle="103" Height="30" Width="30" Name="unicon" Kind="{Binding disabled}" Panel.ZIndex="2"   VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 <TextBlock Height="0" Width="0" HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Text="{Binding ID}"/>
                             </Grid>
                         

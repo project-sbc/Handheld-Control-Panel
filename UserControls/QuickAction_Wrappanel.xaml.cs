@@ -23,6 +23,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Handheld_Control_Panel.Classes.Volume_Management;
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -51,21 +52,27 @@ namespace Handheld_Control_Panel.UserControls
             
         }
 
-        private void setListboxItemsource()
+        private async void setListboxItemsource()
         {
             List<quickactionItem> items = new List<quickactionItem>();
 
-            quickactionItem qai = new quickactionItem();
-            qai.ID = "Toggle_Wifi";
-            qai.iconKind = PackIconMaterialKind.Wifi;
+            quickactionItem qaiWifi = new quickactionItem();
+            qaiWifi.ID = "Toggle_Wifi";
+            qaiWifi.iconKind = PackIconMaterialKind.Wifi;
+            Task<bool> wifi = QuickAction_Management.GetWifiIsEnabledAsync();
+            if (!wifi.Result) { qaiWifi.disabled = PackIconUniconsKind.LineAlt; }
 
-            quickactionItem qai0 = new quickactionItem();
-            qai0.ID = "Toggle_BT";
-            qai0.iconKind = PackIconMaterialKind.Bluetooth ;
+            quickactionItem qaiBT = new quickactionItem();
+            qaiBT.ID = "Toggle_BT";
+            qaiBT.iconKind = PackIconMaterialKind.Bluetooth ;
+            Task<bool> bt = QuickAction_Management.GetBluetoothIsEnabledAsync();
+            if (!bt.Result) { qaiBT.disabled = PackIconUniconsKind.LineAlt; }
 
-            quickactionItem qai2 = new quickactionItem();
-            qai2.ID = "Toggle_Volume";
-            qai2.iconKind = PackIconMaterialKind.VolumeHigh;
+            quickactionItem qaiVolume = new quickactionItem();
+            qaiVolume.ID = "Toggle_Volume";
+            qaiVolume.iconKind = PackIconMaterialKind.VolumeHigh;
+            AudioManager.GetMasterVolumeMute();
+            if (Global_Variables.muteVolume) { qaiVolume.iconKind = PackIconMaterialKind.VolumeMute; }
 
             quickactionItem qai3 = new quickactionItem();
             qai3.ID = "Toggle_Controller";
@@ -75,9 +82,9 @@ namespace Handheld_Control_Panel.UserControls
             qai4.ID = "Toggle_MouseMode";
             qai4.iconKind = PackIconMaterialKind.Mouse;
 
-            items.Add(qai);
-            items.Add(qai0);
-            items.Add(qai2);
+            items.Add(qaiWifi);
+            items.Add(qaiBT);
+            items.Add(qaiVolume);
             items.Add(qai3);
             items.Add(qai4);
 
@@ -119,7 +126,27 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (control.SelectedItem != null)
                 {
+                    quickactionItem qai = (quickactionItem)control.SelectedItem;
                     
+                    
+   
+                    switch (qai.ID)
+                    {
+                        case "Toggle_Wifi":
+                            QuickAction_Management.ToggleWifi();
+                            if (qai.disabled == PackIconUniconsKind.None) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
+                            break;
+                        case "Toggle_BT":
+                            QuickAction_Management.ToggleBT();
+                            if (qai.disabled == PackIconUniconsKind.None) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
+                            break;
+                        case "Toggle_Volume":
+                            AudioManager.GetMasterVolumeMute();
+                            if (Global_Variables.muteVolume) { qai.iconKind = PackIconMaterialKind.VolumeMute; } else { qai.iconKind = PackIconMaterialKind.VolumeHigh; }
+                            break;
+
+                    }
+                    control.Items.Refresh();
                 }
 
                 
@@ -146,6 +173,6 @@ namespace Handheld_Control_Panel.UserControls
     {
         public string ID { get; set; }
         public PackIconMaterialKind iconKind { get; set; }
-
+        public PackIconUniconsKind disabled { get; set; }
     }
 }
