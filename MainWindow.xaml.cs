@@ -110,7 +110,14 @@ namespace Handheld_Control_Panel
         {
             //change hamburger menu navigation frame based on selected item
             NavigationViewItem navigationViewItem = (NavigationViewItem)mainWindowNavigationView.SelectedItem;
-            frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
+            if (navigationViewItem.Tag.ToString() != "QAM")
+            {
+                frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                QuickAction_Management.toggleQuickAccessMenu();
+            }
             
             
         }

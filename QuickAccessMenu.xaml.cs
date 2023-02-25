@@ -33,16 +33,12 @@ namespace Handheld_Control_Panel
     }
     public partial class QuickAccessMenu : MetroWindow
     {
-        private string window = "MainWindow";
+        private string window = "QAM";
         private string page = "";
         public QuickAccessMenu()
         {
             
             InitializeComponent();
-
-            //start controller management, do this when the window opens to prevent accidental hotkey presses
-            Controller_Management.start_Controller_Management();
-            MouseKeyHook.Subscribe();
 
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
@@ -73,14 +69,7 @@ namespace Handheld_Control_Panel
 
         }
 
-        public void navigateHotkeyProfileViews(string page)
-        {
-
-            frame.Navigate(new Uri(page, UriKind.RelativeOrAbsolute));
-            MainWindowNavigation.windowNavigation = true;
-        }
-
-
+   
         private void navigateNavigationView(string action)
         {
             try
@@ -117,16 +106,7 @@ namespace Handheld_Control_Panel
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //close task scheduler
-            // Dispose of thread to allow program to close properly
-            Handheld_Control_Panel.Classes.Task_Scheduler.Task_Scheduler.closeScheduler();
-
-
-            //mouse keyboard input hook
-            //MouseKeyHook.Unsubscribe();
-
-            //kill controller thread
-            Global_Variables.killControllerThread = true;
+          
         }
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)

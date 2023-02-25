@@ -124,6 +124,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\QAMHomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="QuickAccessMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

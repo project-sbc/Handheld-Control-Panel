@@ -49,34 +49,20 @@ namespace Handheld_Control_Panel.Classes
             }
         }
 
-        public static async Task<bool> GetBluetoothIsEnabledAsync()
+  
+
+        public static void toggleQuickAccessMenu()
         {
-            var radios = await Radio.GetRadiosAsync();
-            var bluetoothRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
-            return bluetoothRadio != null && bluetoothRadio.State == RadioState.On;
-        }
-        public static async Task<bool> GetWifiIsEnabledAsync()
-        {
-            var radios = await Radio.GetRadiosAsync();
-            var wifiRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.WiFi);
-            return wifiRadio != null && wifiRadio.State == RadioState.On;
-        }
-        public static async System.Threading.Tasks.Task ToggleWifi()
-        {
-            var radios = await Radio.GetRadiosAsync();
-            var wifiRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.WiFi);
-            if (wifiRadio !=null)
+            if (Global_Variables.Global_Variables.qam == null)
             {
-                if (wifiRadio.State != RadioState.Off) { wifiRadio.SetStateAsync(RadioState.Off); } else { wifiRadio.SetStateAsync(RadioState.On); }
+                Global_Variables.Global_Variables.qam = new QuickAccessMenu();
+                Global_Variables.Global_Variables.qam.Show();
             }
-        }
-        public static async System.Threading.Tasks.Task ToggleBT()
-        {
-            var radios = await Radio.GetRadiosAsync();
-            var bluetoothRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
-            if (bluetoothRadio != null)
+            else
             {
-                if (bluetoothRadio.State == RadioState.Off) { bluetoothRadio.SetStateAsync(RadioState.Off); } else { bluetoothRadio.SetStateAsync(RadioState.On); }
+                Global_Variables.Global_Variables.qam.Close();
+                Global_Variables.Global_Variables.qam = null;
+
             }
         }
     }
