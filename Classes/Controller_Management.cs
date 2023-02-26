@@ -12,6 +12,9 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using SharpDX;
 using SharpDX.XInput;
 using Linearstar.Windows.RawInput;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using WindowsInput;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -26,6 +29,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         public static DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
 
         public static buttonEvents buttonEvents = new buttonEvents();
+
+    
 
         public static void start_Controller_Management()
         {
@@ -130,7 +135,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                         {
                             buttonEvents.raiseControllerInput("Right");
                         }
-                        if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)
+                        if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)        
                         {
                             buttonEvents.raiseControllerInput("Left");
                         }
@@ -141,6 +146,14 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                         if (currentGamePad.LeftThumbY < -12000 && previousGamePad.LeftThumbY >= -12000)
                         {
                             buttonEvents.raiseControllerInput("Down");
+                        }
+
+                        if (!Global_Variables.Global_Variables.mouseMode)
+                        {
+                            //InputSimulator sim = new InputSimulator();
+                            //sim.Mouse.move(12, 12);
+                            //sim = null;
+
                         }
                     }
 

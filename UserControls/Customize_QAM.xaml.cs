@@ -42,6 +42,7 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
             //UserControl_Management.setupControl(control);
             setListboxItemsource();
+        
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

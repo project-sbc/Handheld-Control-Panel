@@ -37,6 +37,9 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int volume = 0;
         public static bool muteVolume = false;
 
+        //mouse mode
+        public static bool mouseMode = false;
+
         //cpu settings
         public static int cpuMaxFrequency = 0;
         public static int cpuActiveCores = 0;
