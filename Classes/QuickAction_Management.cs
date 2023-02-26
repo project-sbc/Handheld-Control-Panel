@@ -42,7 +42,9 @@ namespace Handheld_Control_Panel.Classes
                 case "Change_GPUCLK":
                     //MessageBox.Show("make the quick access menu!!!");
                     break;
-
+                case "Toggle_MouseMode":
+                    //MessageBox.Show("make the quick access menu!!!");
+                    break;
 
 
                 default: break;

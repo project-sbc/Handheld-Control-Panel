@@ -25,6 +25,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Handheld_Control_Panel.Classes.Volume_Management;
 using Windows.Devices.Radios;
+using Handheld_Control_Panel.Classes.MouseMode_Management;
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -81,15 +82,17 @@ namespace Handheld_Control_Panel.UserControls
             qai3.ID = "Toggle_Controller";
             qai3.iconKind = PackIconMaterialKind.MicrosoftXboxController;
 
-            quickactionItem qai4 = new quickactionItem();
-            qai4.ID = "Toggle_MouseMode";
-            qai4.iconKind = PackIconMaterialKind.Mouse;
+            quickactionItem qaiMouse = new quickactionItem();
+            qaiMouse.ID = "Toggle_MouseMode";
+            qaiMouse.iconKind = PackIconMaterialKind.Mouse;
+            if (!MouseMode_Management.status_MouseMode()) { qaiMouse.disabled = PackIconUniconsKind.LineAlt; }
+
 
             items.Add(qaiWifi);
             items.Add(qaiBT);
             items.Add(qaiVolume);
             items.Add(qai3);
-            items.Add(qai4);
+            items.Add(qaiMouse);
 
             control.ItemsSource = items;
 
@@ -187,7 +190,9 @@ namespace Handheld_Control_Panel.UserControls
                             AudioManager.GetMasterVolumeMute();
                             if (Global_Variables.muteVolume) { qai.iconKind = PackIconMaterialKind.VolumeHigh; AudioManager.SetMasterVolumeMute(!Global_Variables.muteVolume); } else { qai.iconKind = PackIconMaterialKind.VolumeMute; AudioManager.SetMasterVolumeMute(!Global_Variables.muteVolume); }
                             break;
-
+                        case "Toggle_MouseMode":
+                            if (!MouseMode_Management.toggle_MouseMode()) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
+                            break;
                     }
                     control.Items.Refresh();
                 }
