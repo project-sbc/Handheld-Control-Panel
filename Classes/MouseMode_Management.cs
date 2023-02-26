@@ -25,7 +25,7 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
         public static DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
         public static Gamepad currentGamePad;
         public static Gamepad previousGamePad;
-        public static int sensitivity = 10;
+        public static int sensitivity =20;
         public static void start_MouseMode()
         {
             //create background thread to handle controller input
@@ -34,7 +34,7 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
             timerController.Tick += controller_Tick;
             inputSimulator = new InputSimulator();
             timerController.Start();
-
+            
         }
         public static bool status_MouseMode()
         {
@@ -86,35 +86,29 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
                 if (controller.IsConnected)
                 {
                     currentGamePad = controller.GetState().Gamepad;
-                    short xCon = currentGamePad.LeftThumbX;      
-                    short yCon = currentGamePad.LeftThumbY;
+                    double xCon = currentGamePad.LeftThumbX;
+                    double yCon = -currentGamePad.LeftThumbY;
                     double x = 0;
                     double y = 0;
-                    if (xCon > 0)
+                    if (xCon != 0)
                     {
-                        x = (sensitivity /Math.Log(32768))*Math.Log(xCon+1);
+                       
+                        x = (sensitivity * (xCon/32768) / Math.Sqrt((xCon/32768 * xCon/32768) + 1));
                         x = Math.Round(x, 0);
                     }
                     else
                     {
-                        if (xCon < 0)
-                        {
-                            x = (sensitivity / Math.Log(32768)) * Math.Log(Math.Abs(xCon) + 1);
-                            x = -1*Math.Round(x, 0);
-                        }
+                        x = 0;
                     }
-                    if (yCon > 0)
+                    if (yCon != 0)
                     {
-                        y = (sensitivity / Math.Log(32768)) * Math.Log(yCon + 1);
+
+                        y = (sensitivity * (yCon / 32768) / Math.Sqrt((yCon / 32768 * yCon / 32768) + 1));
                         y = Math.Round(y, 0);
                     }
                     else
                     {
-                        if (yCon < 0)
-                        {
-                            y = (sensitivity / Math.Log(32768)) * Math.Log(Math.Abs(yCon) + 1);
-                            y = -1 * Math.Round(y, 0);
-                        }
+                        y = 0;
                     }
                     inputSimulator.Mouse.MoveMouseBy((int)x,(int)y);
                  

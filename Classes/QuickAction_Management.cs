@@ -40,10 +40,21 @@ namespace Handheld_Control_Panel.Classes
                     //MessageBox.Show("make the quick access menu!!!");
                     break;
                 case "Change_GPUCLK":
-                    //MessageBox.Show("make the quick access menu!!!");
+                    int paramGPU;
+
+                    if (Int32.TryParse(actionParameter.Parameter, out paramGPU))
+                    {
+                        if (Global_Variables.Global_Variables.gpuclk != "Default")
+                        {
+                            param = (int)(paramGPU +  Convert.ToInt32(Global_Variables.Global_Variables.gpuclk));
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock(paramGPU));
+                        }
+                     
+                    }
+                    break;
                     break;
                 case "Toggle_MouseMode":
-                    //MessageBox.Show("make the quick access menu!!!");
+                    MouseMode_Management.MouseMode_Management.toggle_MouseMode();
                     break;
 
 

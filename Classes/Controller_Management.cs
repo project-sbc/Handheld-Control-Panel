@@ -86,75 +86,72 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                             }
                         }
     
+                        if (!MouseMode_Management.MouseMode_Management.status_MouseMode())
+                        {
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                            {
+                                buttonEvents.raiseControllerInput("Back");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Start) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Start))
+                            {
+                                buttonEvents.raiseControllerInput("Start");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                            {
+                                buttonEvents.raiseControllerInput("Back");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
+                            {
+                                buttonEvents.raiseControllerInput("A");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.X) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.X))
+                            {
+                                buttonEvents.raiseControllerInput("X");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Y) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Y))
+                            {
+                                buttonEvents.raiseControllerInput("Y");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp))
+                            {
+                                buttonEvents.raiseControllerInput("Up");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown))
+                            {
+                                buttonEvents.raiseControllerInput("Down");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight))
+                            {
+                                buttonEvents.raiseControllerInput("Right");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft))
+                            {
+                                buttonEvents.raiseControllerInput("Left");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.B) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.B))
+                            {
+                                buttonEvents.raiseControllerInput("B");
+                            }
+                            if (currentGamePad.LeftThumbX > 12000 && previousGamePad.LeftThumbX <= 12000)
+                            {
+                                buttonEvents.raiseControllerInput("Right");
+                            }
+                            if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)
+                            {
+                                buttonEvents.raiseControllerInput("Left");
+                            }
+                            if (currentGamePad.LeftThumbY > 12000 && previousGamePad.LeftThumbY <= 12000)
+                            {
+                                buttonEvents.raiseControllerInput("Up");
+                            }
+                            if (currentGamePad.LeftThumbY < -12000 && previousGamePad.LeftThumbY >= -12000)
+                            {
+                                buttonEvents.raiseControllerInput("Down");
+                            }
+                        }
+                     
 
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
-                        {
-                            buttonEvents.raiseControllerInput("Back");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Start) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Start))
-                        {
-                            buttonEvents.raiseControllerInput("Start");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
-                        {
-                            buttonEvents.raiseControllerInput("Back");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
-                        {
-                            buttonEvents.raiseControllerInput("A");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.X) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.X))
-                        {
-                            buttonEvents.raiseControllerInput("X");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Y) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Y))
-                        {
-                            buttonEvents.raiseControllerInput("Y");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp))
-                        {
-                            buttonEvents.raiseControllerInput("Up");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown))
-                        {
-                            buttonEvents.raiseControllerInput("Down");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight))
-                        {
-                            buttonEvents.raiseControllerInput("Right");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft))
-                        {
-                            buttonEvents.raiseControllerInput("Left");
-                        }
-                        if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.B) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.B))
-                        {
-                            buttonEvents.raiseControllerInput("B");
-                        }
-                        if (currentGamePad.LeftThumbX > 12000 && previousGamePad.LeftThumbX <= 12000)
-                        {
-                            buttonEvents.raiseControllerInput("Right");
-                        }
-                        if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)        
-                        {
-                            buttonEvents.raiseControllerInput("Left");
-                        }
-                        if (currentGamePad.LeftThumbY > 12000 && previousGamePad.LeftThumbY <= 12000)
-                        {
-                            buttonEvents.raiseControllerInput("Up");
-                        }
-                        if (currentGamePad.LeftThumbY < -12000 && previousGamePad.LeftThumbY >= -12000)
-                        {
-                            buttonEvents.raiseControllerInput("Down");
-                        }
 
-                        if (!Global_Variables.Global_Variables.mouseMode)
-                        {
-                            //InputSimulator sim = new InputSimulator();
-                            //sim.Mouse.move(12, 12);
-                            //sim = null;
-
-                        }
                     }
 
 
