@@ -237,5 +237,29 @@ namespace Handheld_Control_Panel.Properties {
                 this["maxRTSSFPSLimit"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        public string mouseModeHIDHide {
+            get {
+                return ((string)(this["mouseModeHIDHide"]));
+            }
+            set {
+                this["mouseModeHIDHide"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int mouseModeSensitivity {
+            get {
+                return ((int)(this["mouseModeSensitivity"]));
+            }
+            set {
+                this["mouseModeSensitivity"] = value;
+            }
+        }
     }
 }
