@@ -252,18 +252,6 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int mouseModeSensitivity {
-            get {
-                return ((int)(this["mouseModeSensitivity"]));
-            }
-            set {
-                this["mouseModeSensitivity"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string GUID {
             get {

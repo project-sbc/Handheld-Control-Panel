@@ -15,6 +15,8 @@ using Linearstar.Windows.RawInput;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using WindowsInput;
+using System.Xml;
+using System.Drawing;
 
 namespace Handheld_Control_Panel.Classes.MouseMode_Management
 {
@@ -25,11 +27,15 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
         public static DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
         public static Gamepad currentGamePad;
         public static Gamepad previousGamePad;
-        public static int sensitivity =20;
+        private static int sensitivity =20;
+        private static int joystickButtonPressSensivitiy =6000;
+        private static Dictionary<string, string> mouseMode = new Dictionary<string, string>();
+
         public static void start_MouseMode()
         {
             //create background thread to handle controller input
             getController();
+            loadConfiguration();
             timerController.Interval = TimeSpan.FromMilliseconds(10);
             timerController.Tick += controller_Tick;
             inputSimulator = new InputSimulator();
@@ -62,6 +68,23 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
             inputSimulator = null;
 
         }
+        public static void loadConfiguration()
+        {
+            mouseMode.Clear();
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfiguration");
+
+            foreach (XmlNode node in xmlNode.ChildNodes)
+            {
+                mouseMode.Add(node.Name, node.InnerText);
+
+            }
+            xmlDocument = null;
+            
+
+        }
+
         private static void controller_Tick(object sender, EventArgs e)
         {
             //start timer to read and compare controller inputs
@@ -86,31 +109,184 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
                 if (controller.IsConnected)
                 {
                     currentGamePad = controller.GetState().Gamepad;
-                    double xCon = currentGamePad.LeftThumbX;
-                    double yCon = -currentGamePad.LeftThumbY;
-                    double x = 0;
-                    double y = 0;
-                    if (xCon != 0)
-                    {
-                       
-                        x = (sensitivity * (xCon/32768) / Math.Sqrt((xCon/32768 * xCon/32768) + 1));
-                        x = Math.Round(x, 0);
-                    }
-                    else
-                    {
-                        x = 0;
-                    }
-                    if (yCon != 0)
-                    {
 
-                        y = (sensitivity * (yCon / 32768) / Math.Sqrt((yCon / 32768 * yCon / 32768) + 1));
-                        y = Math.Round(y, 0);
-                    }
-                    else
+                    double mouseX = 0;
+                    double mouseY = 0;
+                    double mouseScrollX = 0;
+                    double mouseScrollY = 0;
+
+                    switch(mouseMode["LeftThumb"])
                     {
-                        y = 0;
+                        case "Mouse":
+                            mouseX = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbX);
+                            mouseY = normalizeJoystickInput(sensitivity, -currentGamePad.LeftThumbY);
+                            break;
+                        case "Scroll":
+                            mouseScrollX = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbX);
+                            mouseScrollY = normalizeJoystickInput(sensitivity, -currentGamePad.LeftThumbY);
+                            break;
+                        case "WASD":
+                            if (currentGamePad.LeftThumbX > joystickButtonPressSensivitiy & previousGamePad.LeftThumbX <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_D);
+                            }
+                            if (currentGamePad.LeftThumbX < joystickButtonPressSensivitiy & previousGamePad.LeftThumbX >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_D);
+                            }
+
+                            if (currentGamePad.LeftThumbX > -joystickButtonPressSensivitiy & previousGamePad.LeftThumbX <= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_A);
+                            }
+                            if (currentGamePad.LeftThumbX < -joystickButtonPressSensivitiy & previousGamePad.LeftThumbX >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_A);
+                            }
+
+                            if (currentGamePad.LeftThumbY > joystickButtonPressSensivitiy & previousGamePad.LeftThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_W);
+                            }
+                            if (currentGamePad.LeftThumbY < joystickButtonPressSensivitiy & previousGamePad.LeftThumbY >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_W);
+                            }
+                            if (currentGamePad.LeftThumbY > joystickButtonPressSensivitiy & previousGamePad.LeftThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_S);
+                            }
+                            if (currentGamePad.LeftThumbY < -joystickButtonPressSensivitiy & previousGamePad.LeftThumbY >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_S);
+                            }
+                            break;
+                        case "ArrowKeys":
+                            if (currentGamePad.LeftThumbX > joystickButtonPressSensivitiy & previousGamePad.LeftThumbX <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.RIGHT);
+                            }
+                            if (currentGamePad.LeftThumbX < joystickButtonPressSensivitiy & previousGamePad.LeftThumbX >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.RIGHT);
+                            }
+
+                            if (currentGamePad.LeftThumbX > -joystickButtonPressSensivitiy & previousGamePad.LeftThumbX <= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LEFT);
+                            }
+                            if (currentGamePad.LeftThumbX < -joystickButtonPressSensivitiy & previousGamePad.LeftThumbX >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LEFT);
+                            }
+
+                            if (currentGamePad.LeftThumbY > joystickButtonPressSensivitiy & previousGamePad.LeftThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+                            }
+                            if (currentGamePad.LeftThumbY < joystickButtonPressSensivitiy & previousGamePad.LeftThumbY >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+                            }
+                            if (currentGamePad.LeftThumbY > joystickButtonPressSensivitiy & previousGamePad.LeftThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.DOWN);
+                            }
+                            if (currentGamePad.LeftThumbY < -joystickButtonPressSensivitiy & previousGamePad.LeftThumbY >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.DOWN);
+                            }
+                            break;
+                        default: break;
                     }
-                    inputSimulator.Mouse.MoveMouseBy((int)x,(int)y);
+
+                    switch (mouseMode["RightThumb"])
+                    {
+                        case "Mouse":
+                            mouseX = normalizeJoystickInput(sensitivity, currentGamePad.RightThumbX);
+                            mouseY = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbY);
+                            break;
+                        case "Scroll":
+                            mouseScrollX = normalizeJoystickInput(sensitivity, currentGamePad.RightThumbX);
+                            mouseScrollY = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbY);
+                            break;
+                        case "WASD":
+                            if (currentGamePad.RightThumbX > joystickButtonPressSensivitiy & previousGamePad.RightThumbX <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_D);
+                            }
+                            if (currentGamePad.RightThumbX < joystickButtonPressSensivitiy & previousGamePad.RightThumbX >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_D);
+                            }
+
+                            if (currentGamePad.RightThumbX > -joystickButtonPressSensivitiy & previousGamePad.RightThumbX <= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_A);
+                            }
+                            if (currentGamePad.RightThumbX < -joystickButtonPressSensivitiy & previousGamePad.RightThumbX >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_A);
+                            }
+
+                            if (currentGamePad.RightThumbY > joystickButtonPressSensivitiy & previousGamePad.RightThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_W);
+                            }
+                            if (currentGamePad.RightThumbY < joystickButtonPressSensivitiy & previousGamePad.RightThumbY >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_W);
+                            }
+                            if (currentGamePad.RightThumbY > joystickButtonPressSensivitiy & previousGamePad.RightThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_S);
+                            }
+                            if (currentGamePad.RightThumbY < -joystickButtonPressSensivitiy & previousGamePad.RightThumbY >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_S);
+                            }
+                            break;
+                        case "ArrowKeys":
+                            if (currentGamePad.RightThumbX > joystickButtonPressSensivitiy & previousGamePad.RightThumbX <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.RIGHT);
+                            }
+                            if (currentGamePad.RightThumbX < joystickButtonPressSensivitiy & previousGamePad.RightThumbX >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.RIGHT);
+                            }
+
+                            if (currentGamePad.RightThumbX > -joystickButtonPressSensivitiy & previousGamePad.RightThumbX <= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LEFT);
+                            }
+                            if (currentGamePad.RightThumbX < -joystickButtonPressSensivitiy & previousGamePad.RightThumbX >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LEFT);
+                            }
+
+                            if (currentGamePad.RightThumbY > joystickButtonPressSensivitiy & previousGamePad.RightThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+                            }
+                            if (currentGamePad.RightThumbY < joystickButtonPressSensivitiy & previousGamePad.RightThumbY >= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+                            }
+                            if (currentGamePad.RightThumbY > joystickButtonPressSensivitiy & previousGamePad.RightThumbY <= joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.DOWN);
+                            }
+                            if (currentGamePad.RightThumbY < -joystickButtonPressSensivitiy & previousGamePad.RightThumbY >= -joystickButtonPressSensivitiy)
+                            {
+                                inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.DOWN);
+                            }
+                            break;
+                        default: break;
+                    }
+
+
+                    inputSimulator.Mouse.MoveMouseBy((int)mouseX,(int)mouseY);
                  
 
                     previousGamePad = currentGamePad;
@@ -120,7 +296,20 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
 
         }
 
-
+        private static double normalizeJoystickInput(int sensitivty, double value)
+        {
+            double returnValue;
+            if (value != 0)
+            {
+                returnValue = (sensitivity * (value / 32768) / Math.Sqrt((value / 32768 * value / 32768) + 1));
+                returnValue = Math.Round(returnValue, 0);
+                return returnValue;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         private static void getController()
         {
             int controllerNum = 1;

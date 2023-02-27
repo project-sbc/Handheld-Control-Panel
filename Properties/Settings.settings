@@ -59,9 +59,6 @@
     <Setting Name="mouseModeHIDHide" Type="System.String" Scope="User">
       <Value Profile="(Default)">false</Value>
     </Setting>
-    <Setting Name="mouseModeSensitivity" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">20</Value>
-    </Setting>
     <Setting Name="GUID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
