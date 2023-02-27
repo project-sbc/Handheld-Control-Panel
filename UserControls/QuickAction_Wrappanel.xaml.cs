@@ -191,7 +191,12 @@ namespace Handheld_Control_Panel.UserControls
                             if (Global_Variables.muteVolume) { qai.iconKind = PackIconMaterialKind.VolumeHigh; AudioManager.SetMasterVolumeMute(!Global_Variables.muteVolume); } else { qai.iconKind = PackIconMaterialKind.VolumeMute; AudioManager.SetMasterVolumeMute(!Global_Variables.muteVolume); }
                             break;
                         case "Toggle_MouseMode":
+                            //remember calling toggle_mousemode actually changes the mode
                             if (!MouseMode_Management.toggle_MouseMode()) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
+                            break;
+                        case "Toggle_Controller":
+                            Controller_Management.powerCycleController();
+                            if (qai.disabled == PackIconUniconsKind.None) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
                             break;
                     }
                     control.Items.Refresh();

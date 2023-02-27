@@ -52,11 +52,12 @@ namespace Handheld_Control_Panel.Classes
                      
                     }
                     break;
-                    break;
                 case "Toggle_MouseMode":
                     MouseMode_Management.MouseMode_Management.toggle_MouseMode();
                     break;
-
+                case "Toggle_Controller":
+                    Controller_Management.Controller_Management.powerCycleController();
+                    break;
 
                 default: break;
             }

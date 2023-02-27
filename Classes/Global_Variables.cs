@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nefarius.Drivers.HidHide;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,9 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int brightness = -1;
         public static int volume = 0;
         public static bool muteVolume = false;
+
+        //hidhide
+        public static HidHideControlService hidHide;
 
         //mouse mode
         public static bool mouseMode = false;
