@@ -311,9 +311,12 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
 
                     foreach (KeyValuePair<string,string> entry in mouseMode)
                     {
-                        if (!entry.Key.Contains("Thumb") && !entry.Key.Contains("3"))
+                        if (!entry.Key.Contains("Thumb") && entry.Key != "LT" && entry.Key != "RT")
                         {
-
+                            if (currentGamePad.Buttons.HasFlag(buttonLookup[entry.Value]) && !previousGamePad.Buttons.HasFlag(buttonLookup[entry.Value]))
+                            {
+                                inputSimulator.Keyboard.KeyPress()
+                            }
 
                         }
 
