@@ -42,6 +42,10 @@ namespace Handheld_Control_Panel
 
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
+
+            //check controller usb device info GUID instance ID
+            Controller_Management.getDefaultControllerDeviceInformation();
+
             MouseKeyHook.Subscribe();
 
             //subscribe to controller events

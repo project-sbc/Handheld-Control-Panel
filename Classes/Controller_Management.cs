@@ -17,6 +17,7 @@ using System.Runtime.InteropServices;
 using WindowsInput;
 using Nefarius.Utilities.DeviceManagement.PnP;
 using Nefarius.Utilities.DeviceManagement.Extensions;
+using Windows.Devices.Usb;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -32,6 +33,42 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
 
         public static buttonEvents buttonEvents = new buttonEvents();
 
+
+        public static void getDefaultControllerDeviceInformation()
+        {
+            if (Properties.Settings.Default.GUID == "" || Properties.Settings.Default.instanceID == "")
+            {
+                var instance = 0;
+                //Get the VID and PID from instance path, should look like this VID_045E&PID_028E, we need this to search in the Devcon interface GUID
+                string strVIDPID = "VID_045E&PID_028E";
+
+
+                // enumerate all devices that export the GUID_DEVINTERFACE_USB_DEVICE interface
+                while (Devcon.FindByInterfaceGuid(DeviceInterfaceIds.UsbDevice, out var path,
+                           out var instanceId, instance++))
+                {
+
+                    var usbDevice = PnPDevice
+                        .GetDeviceByInterfaceId(path)
+                        .ToUsbPnPDevice();
+
+                   
+
+                    //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
+                    if (path.Contains(strVIDPID))
+                    {
+                        
+                        Guid guid = usbDevice.GetProperty<Guid>(DevicePropertyKey.Device_ClassGuid);
+                        Properties.Settings.Default.GUID = guid.ToString();
+                        Properties.Settings.Default.instanceID = usbDevice.InstanceId;
+                        Properties.Settings.Default.Save();
+                        break;
+                    }
+                }
+            }
+          
+        }
+
         public static void hideController()
         {
             if (Global_Variables.Global_Variables.hidHide.IsInstalled)
@@ -43,42 +80,53 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             }
         }
 
+       
         public static bool toggleEnableDisableController()
         {
-            var instance = 0;
-            //Get the VID and PID from instance path, should look like this VID_045E&PID_028E, we need this to search in the Devcon interface GUID
-            string strVIDPID = "VID_045E&PID_028E";
+            bool deviceEnable;
 
-
-            // enumerate all devices that export the GUID_DEVINTERFACE_USB_DEVICE interface
-            while (Devcon.FindByInterfaceGuid(DeviceInterfaceIds.UsbDevice, out var path,
-                       out var instanceId, instance++))
+            if (controller != null)
             {
-
-                var usbDevice = PnPDevice
-                    .GetDeviceByInterfaceId(path)
-                    .ToUsbPnPDevice();
-
-                //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
-                if (path.Contains(strVIDPID))
-                {
-                    //Apply power port cycle to finish disable
-                    usbDevice.CyclePort();
-                }
+                //apply ! so that when the controller is connected the bool tells to disable and vice versa
+                deviceEnable = !controller.IsConnected;
             }
+            else
+            {
+                deviceEnable = true;
+            }
+            if (Properties.Settings.Default.GUID != "" && Properties.Settings.Default.instanceID != "")
+            {
+                var instance = 0;
 
-            return false;
+                
+
+                Guid guid = new Guid(Properties.Settings.Default.GUID);
+                string instanceID = Properties.Settings.Default.instanceID;
+
+                enabledevice.DeviceHelper.SetDeviceEnabled(guid, instanceID, deviceEnable);
+
+
+                if (!deviceEnable)
+                {
+                    Task.Delay(2000);
+                    powerCycleController();
+                }
+
+
+                return deviceEnable;
+            }
+            else
+            {
+                return !deviceEnable;
+            }
+      
 
         }
 
         public static void powerCycleController()
         {
             var instance = 0;
-            //Get the VID and PID from instance path, should look like this VID_045E&PID_028E, we need this to search in the Devcon interface GUID
-            string strVIDPID = "VID_045E&PID_028E";
-
-
-            // enumerate all devices that export the GUID_DEVINTERFACE_USB_DEVICE interface
+   
             while (Devcon.FindByInterfaceGuid(DeviceInterfaceIds.UsbDevice, out var path,
                        out var instanceId, instance++))
             {
@@ -86,18 +134,11 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                 var usbDevice = PnPDevice
                     .GetDeviceByInterfaceId(path)
                     .ToUsbPnPDevice();
-
-                Guid guid = usbDevice.GetProperty<Guid>(DevicePropertyKey.Device_ClassGuid);
-
+                               
                 //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
-                if (path.Contains(strVIDPID))
+                if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
                 {
-                    Debug.WriteLine(usbDevice.DeviceId);
-                    Debug.WriteLine(usbDevice.InstanceId);
-                    Debug.WriteLine(usbDevice.Port);
                    
-
-
                     //Apply power port cycle to finish disable
                     usbDevice.CyclePort();
                 }

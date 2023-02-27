@@ -261,5 +261,29 @@ namespace Handheld_Control_Panel.Properties {
                 this["mouseModeSensitivity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GUID {
+            get {
+                return ((string)(this["GUID"]));
+            }
+            set {
+                this["GUID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string instanceID {
+            get {
+                return ((string)(this["instanceID"]));
+            }
+            set {
+                this["instanceID"] = value;
+            }
+        }
     }
 }

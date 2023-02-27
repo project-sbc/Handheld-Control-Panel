@@ -195,8 +195,8 @@ namespace Handheld_Control_Panel.UserControls
                             if (!MouseMode_Management.toggle_MouseMode()) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
                             break;
                         case "Toggle_Controller":
-                            Controller_Management.powerCycleController();
-                            if (qai.disabled == PackIconUniconsKind.None) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
+                            
+                            if (Controller_Management.toggleEnableDisableController()) { qai.disabled = PackIconUniconsKind.None; } else { qai.disabled = PackIconUniconsKind.LineAlt; }
                             break;
                     }
                     control.Items.Refresh();
