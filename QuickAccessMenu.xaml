@@ -8,7 +8,7 @@
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True"
-        Title="Handheld Control Panel" Height="650" Width="550" Top="0" ResizeMode="NoResize"   Closing="MetroWindow_Closing" SizeChanged="MetroWindow_SizeChanged" LocationChanged="MetroWindow_LocationChanged" >
+        Title="Handheld Control Panel" Height="650" Width="390" Top="0" ResizeMode="NoResize"   Closing="MetroWindow_Closing" SizeChanged="MetroWindow_SizeChanged" LocationChanged="MetroWindow_LocationChanged" >
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         
         <Grid.Resources>
@@ -16,20 +16,44 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
       
         </Grid.Resources>
-        <ui:NavigationView x:Name="mainWindowNavigationView"  SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
+            <RowDefinition  />
+            <RowDefinition Height="40" />
+            
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="1" HorizontalAlignment="Center">
+            <TextBlock Width="35"  Style="{StaticResource controllerButtonTextblock}" Text="&#xF10C;" />
+            <ListBox x:Name="control" FontSize="16" Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center"  >
+                <ListBox.Resources>
 
-            <ui:NavigationView.MenuItems >
-                <ui:NavigationViewItem Icon="Home" Tag="QAMHomePage"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{DynamicResource MainWindow_NavigationView_Home}" />
-                <ui:NavigationViewItem Icon="SwitchApps" Tag="QAMGameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Gamelauncher}" />
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
 
-            </ui:NavigationView.MenuItems>
-            <DockPanel>
-                               
-                <Frame x:Name="frame" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
-            </DockPanel>
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemsPanel>
+
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBoxItem />
+            </ListBox>
+            <TextBlock Width="35" TextAlignment="Right" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10D;" />
+        </DockPanel>
+        
+        
     
 
-        </ui:NavigationView>
     </Grid>
    
 </mah:MetroWindow>

@@ -8,14 +8,14 @@
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
-        Title="Handheld Control Panel" Height="650" Width="900" ResizeMode="NoResize"  WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing" >
+        Title="Handheld Control Panel" Height="650" Width="900" ResizeMode="NoResize"  WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing"  >
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         <Grid.Resources>
     
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
       
         </Grid.Resources>
-        <ui:NavigationView x:Name="mainWindowNavigationView"  SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}">
+        <ui:NavigationView x:Name="mainWindowNavigationView"   SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}" >
 
             <ui:NavigationView.MenuItems >
                 <ui:NavigationViewItem Icon="Home" Tag="HomePage"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{DynamicResource MainWindow_NavigationView_Home}" />

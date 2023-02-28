@@ -13,7 +13,7 @@
         <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
             <DockPanel Margin="2,2,2,2">
                 <DockPanel DockPanel.Dock="Top">
-                <iconPacks:PackIconMaterial Name="icon" Kind="Keyboard" Style="{StaticResource userControlIconMaterial}" />
+                <iconPacks:PackIconMaterial Name="icon" Kind="DockRight" Style="{StaticResource userControlIconMaterial}" />
                     <DockPanel >
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
                         <Label Content="{DynamicResource Usercontrol_HotkeyType_MainText}" Style="{StaticResource userControlMainLabel}"/>
@@ -33,70 +33,79 @@
                     <ColumnDefinition Width="*" />
                     
                 </Grid.ColumnDefinitions>
-                
+                <Border BorderBrush="White" CornerRadius="4" BorderThickness="1" Grid.Column="0">
+                    <StackPanel>
+                        <Label Content="Display In Menu" Style="{StaticResource userControlSubLabel}"/>
+
+                        <ListBox x:Name="controlL" FontSize="16"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+                        <ListBox.Resources>
+
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+
+                                    </Style>
+                                </Style.Resources>
+                            </Style>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock   Text="{Binding DisplayName}" />
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+
+                            <ItemsPanelTemplate>
+                                <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="White" CornerRadius="4" BorderThickness="1" Grid.Column="2">
+                    <StackPanel>
+                        <Label Content="Excluded From Menu" Style="{StaticResource userControlSubLabel}"/>
+                        <ListBox x:Name="controlR" FontSize="16"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
+                            <ListBox.Resources>
+
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Style.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="5"/>
+
+                                        </Style>
+                                    </Style.Resources>
+                                </Style>
+                            </ListBox.Resources>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock   Text="{Binding DisplayName}" />
+                                </DataTemplate>
+
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+
+                                <ItemsPanelTemplate>
+                                    <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+
+                    </StackPanel>
+                   
+                </Border>
+                <DockPanel Grid.Column="1">
+                    
+                </DockPanel>
             </Grid>
 
-            <Border BorderBrush="White" BorderThickness="1" Grid.Column="0">
-                <ListBox x:Name="controlL" FontSize="16"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
-                    <ListBox.Resources>
-
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Style.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="5"/>
-
-                                </Style>
-                            </Style.Resources>
-                        </Style>
-                    </ListBox.Resources>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock   Text="{Binding DisplayName}" />
-                        </DataTemplate>
-
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-
-                        <ItemsPanelTemplate>
-                            <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-
-            </Border>
-            <Border BorderBrush="White" BorderThickness="1" Grid.Column="2">
-                <ListBox x:Name="controlR" FontSize="16"  Background="Transparent"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" TouchUp="control_TouchUp" MouseUp="control_MouseUp"   >
-                    <ListBox.Resources>
-
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Style.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="5"/>
-
-                                </Style>
-                            </Style.Resources>
-                        </Style>
-                    </ListBox.Resources>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock   Text="{Binding DisplayName}" />
-                        </DataTemplate>
-
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-
-                        <ItemsPanelTemplate>
-                            <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-
-            </Border>
-            <Border Grid.Column="1" BorderBrush="Wheat" BorderThickness="1">
+        
                 
-            </Border>
+           
             </DockPanel>
         </Border>
 
