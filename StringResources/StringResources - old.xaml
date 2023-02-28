@@ -10,17 +10,6 @@
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <system:String x:Key="Header_CPU_Settings">CPU Settings</system:String>
     <system:String x:Key="Header_System_Settings">System Settings</system:String>
     <system:String x:Key="Header_General_Settings">General Settings</system:String>
