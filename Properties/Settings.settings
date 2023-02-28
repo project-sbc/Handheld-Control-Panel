@@ -65,5 +65,8 @@
     <Setting Name="instanceID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="qamUserControls" Type="System.String" Scope="User">
+      <Value Profile="(Default)">QuickAction_Wrappanel;TDP_Slider;TDP2_Slider;GPUCLK_Slider;Resolution_Listbox;Refresh_Listbox;Scaling_Listbox;FPSLimit_Slider;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

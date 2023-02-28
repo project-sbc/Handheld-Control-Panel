@@ -33,7 +33,7 @@ namespace Handheld_Control_Panel.Classes
                     if (line.Contains("path")) 
                     { 
                         paths.Add(@line.Replace("path", "").Replace("\"","").Replace("\t",""));
-                        Debug.WriteLine(@line.Replace("path", "").Replace(" ", "").Replace("\"", "").Replace("\t", ""));
+                      
                     }
                     if (foundApps && line.Contains("}")) { foundApps = false; }
                     if (foundApps && !line.Contains("{"))

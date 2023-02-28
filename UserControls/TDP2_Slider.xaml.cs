@@ -41,7 +41,7 @@ namespace Handheld_Control_Panel.UserControls
             if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
 
-            Debug.WriteLine(this.Height.ToString());
+        
         }
         private void handleControllerInputs(object sender, EventArgs e)
         {

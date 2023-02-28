@@ -42,7 +42,7 @@ namespace Handheld_Control_Panel.Classes
 
                     foreach (string line in lines)
                     {
-                        Debug.WriteLine(line);
+                      
                         if (line.Contains("InstallLocation"))
                         {
                             startNewApp = true;

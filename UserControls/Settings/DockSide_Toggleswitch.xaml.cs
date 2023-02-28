@@ -1,5 +1,8 @@
-﻿using Handheld_Control_Panel.Classes;
+﻿using ControlzEx.Theming;
+using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
@@ -24,24 +27,31 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Brightness_Slider : UserControl
+    public partial class DockSide_Toggleswitch : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Brightness_Slider()
+        public DockSide_Toggleswitch()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);
+            setControlValue();
+          
+        }
+
+        private void setControlValue()
+        {
+            control.IsOn = Properties.Settings.Default.dockWindowRight;
+
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-            if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
+
             if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
 
-         
         }
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -49,16 +59,19 @@ namespace Handheld_Control_Panel.UserControls
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
                 Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+
             }
         }
 
-        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+
+        private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if(control.IsLoaded)
+            if (control.IsLoaded)
             {
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                bool controlValue = control.IsOn;
+                Properties.Settings.Default.dockWindowRight = controlValue;
             }
-       
+          
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

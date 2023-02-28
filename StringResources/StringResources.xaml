@@ -177,6 +177,11 @@
     <system:String x:Key="Usercontrol_Hotkey_MainText">Input Hotkey</system:String>
     <system:String x:Key="Usercontrol_Hotkey_SubText">Click the button and press your hotkeys</system:String>
 
+    <system:String x:Key="Usercontrol_DockQAM_MainText">Quick Access Menu Dock Side</system:String>
+    <system:String x:Key="Usercontrol_DockQAM_SubText">Select menu side left or right</system:String>
+    <system:String x:Key="Usercontrol_DockQAM_OnContent">Right</system:String>
+    <system:String x:Key="Usercontrol_DockQAM_OffContent">Left</system:String>
+
 
     <!--old stuff-->
 

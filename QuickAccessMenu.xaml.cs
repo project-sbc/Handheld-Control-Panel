@@ -20,6 +20,7 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using MahApps.Metro.IconPacks;
 
 namespace Handheld_Control_Panel
 {
@@ -48,6 +49,7 @@ namespace Handheld_Control_Panel
 
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            setWindowSizePosition();
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
@@ -103,10 +105,32 @@ namespace Handheld_Control_Panel
             
             
         }
+        private void setWindowSizePosition()
+        {
 
+            //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
+            //icon needs to be rotated for which side it is on
+            //PackIconFontAwesome packIconFontAwesome = (PackIconFontAwesome)Close.Content;
+
+            this.Top = 0;
+
+            this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight*0.95,0);
+            if (Properties.Settings.Default.dockWindowRight && this.Left != System.Windows.SystemParameters.PrimaryScreenWidth - this.Width)
+            {
+                //if dockWindowRight is true, move to right side of screen
+                this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
+                //packIconFontAwesome.RotationAngle = 0;
+            }
+            if (!Properties.Settings.Default.dockWindowRight && this.Left != 0)
+            {
+                this.Left = 0;
+                //packIconFontAwesome.RotationAngle = 180;
+            }
+
+        }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-          
+            Global_Variables.qam = null;
         }
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
@@ -114,6 +138,16 @@ namespace Handheld_Control_Panel
             page = frame.Source.ToString().Replace("Pages/","").Replace(".xaml","");
             if (!page.Contains("Profile")) { Global_Variables.profiles.editingProfile = null; }
 
+        }
+
+        private void MetroWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            
+        }
+
+        private void MetroWindow_LocationChanged(object sender, EventArgs e)
+        {
+            setWindowSizePosition();
         }
     }
     public static class CheckForegroundWindowQAM

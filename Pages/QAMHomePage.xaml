@@ -11,9 +11,7 @@
     
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-         
-            <Label Content="{DynamicResource Header_CPU_Settings}" Style="{StaticResource headerLabel}" />
-            <Rectangle Style="{StaticResource rectangle}" />
+              
           
         </StackPanel>
     </ScrollViewer>

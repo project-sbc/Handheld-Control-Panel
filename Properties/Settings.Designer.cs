@@ -273,5 +273,18 @@ namespace Handheld_Control_Panel.Properties {
                 this["instanceID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("QuickAction_Wrappanel;TDP_Slider;TDP2_Slider;GPUCLK_Slider;Resolution_Listbox;Ref" +
+            "resh_Listbox;Scaling_Listbox;FPSLimit_Slider;")]
+        public string qamUserControls {
+            get {
+                return ((string)(this["qamUserControls"]));
+            }
+            set {
+                this["qamUserControls"] = value;
+            }
+        }
     }
 }

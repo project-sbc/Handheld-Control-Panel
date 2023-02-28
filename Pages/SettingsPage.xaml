@@ -19,7 +19,8 @@
             <uc:Theme_Toggleswitch />
             <uc:AccentColor_Listbox/>
             <uc:Autostart_Toggleswitch/>
-             
+            <uc:DockSide_Toggleswitch />
+
             <Label Content="{DynamicResource Header_TDP_Settings}" Style="{StaticResource headerLabel}" />
             <Rectangle Style="{StaticResource rectangle}" />
             <uc:MaxTDP_Slider/>

@@ -22,7 +22,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ui:NavigationViewItem Tag="ProfilesPage" Icon="Library"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Profiles}"  />
                 <ui:NavigationViewItem Icon="Keyboard" Tag="HotKeysPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Hotkeys}" />
                 <ui:NavigationViewItem Icon="SwitchApps" Tag="GameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Gamelauncher}" />
-                <ui:NavigationViewItem Icon="AllApps" Tag="Customization" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Customize}" />
+                <ui:NavigationViewItem Icon="AllApps" Tag="CustomizationPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Customize}" />
               
                 
                 <ui:NavigationViewItem Icon="OpenPane" Tag="QAM" Margin="0,15,0,15" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_QAM}" />

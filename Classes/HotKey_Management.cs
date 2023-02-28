@@ -411,7 +411,7 @@ namespace Handheld_Control_Panel.Classes
 
                 if (parentNode != null)
                 {
-                    Debug.WriteLine(parentNode.SelectSingleNode("Type").InnerText);
+                  
                     Type = parentNode.SelectSingleNode("Type").InnerText;
                     Action = parentNode.SelectSingleNode("Action").InnerText;
                     Parameter = parentNode.SelectSingleNode("Parameter").InnerText;

@@ -23,7 +23,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
         //Read TDP routines
         public static void readTDP()
         {
-            Debug.WriteLine("TDP start");
+        
             try
             {
                 //add small delay to prevent write and read operations from interfering

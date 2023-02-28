@@ -174,7 +174,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             {
                 if (line.IndexOf("@") > 0)
                 {
-                    Debug.WriteLine(line);
+                
                     resolution = line.Substring(0, line.IndexOf(",")).Trim();
 
                     if (currResolution != resolution)

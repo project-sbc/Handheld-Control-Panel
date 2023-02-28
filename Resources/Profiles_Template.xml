@@ -54,18 +54,18 @@
 		<RightThumb>WASD</RightThumb>
 		<LT></LT>
 		<RT></RT>
-		<A></A>
-		<B></B>
+		<A>LeftMouseClick</A>
+		<B>RightMouseClick</B>
 		<X></X>
 		<Y></Y>
 		<L3></L3>
 		<R3></R3>
 		<LB></LB>
 		<RB></RB>
-		<DPadUp></DPadUp>
-		<DPadDown></DPadDown>
-		<DPadRight></DPadRight>
-		<DPadLeft></DPadLeft>
+		<DPadUp>W</DPadUp>
+		<DPadDown>S</DPadDown>
+		<DPadRight>D</DPadRight>
+		<DPadLeft>A</DPadLeft>
 		<Start></Start>
 		<Select></Select>
 	</MouseModeConfiguration>

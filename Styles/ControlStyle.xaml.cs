@@ -27,7 +27,7 @@ namespace Handheld_Control_Panel.Styles
 
         public void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Debug.WriteLine("YES Dog");
+           
         }
     }
 }

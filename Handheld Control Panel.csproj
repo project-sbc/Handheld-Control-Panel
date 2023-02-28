@@ -206,6 +206,9 @@
     <Compile Update="UserControls\HotKeyDetails\HotKeys_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\Settings\DockSide_Toggleswitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\Settings\CombineTDP_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

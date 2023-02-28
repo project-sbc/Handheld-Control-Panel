@@ -7,9 +7,10 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
-        Title="Handheld Control Panel" Height="650" Width="550" ResizeMode="NoResize"  WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing" >
+        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True"
+        Title="Handheld Control Panel" Height="650" Width="550" Top="0" ResizeMode="NoResize"   Closing="MetroWindow_Closing" SizeChanged="MetroWindow_SizeChanged" LocationChanged="MetroWindow_LocationChanged" >
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
+        
         <Grid.Resources>
     
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
@@ -22,8 +23,11 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ui:NavigationViewItem Icon="SwitchApps" Tag="QAMGameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Gamelauncher}" />
 
             </ui:NavigationView.MenuItems>
-
-            <Frame x:Name="frame" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
+            <DockPanel>
+                               
+                <Frame x:Name="frame" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
+            </DockPanel>
+    
 
         </ui:NavigationView>
     </Grid>

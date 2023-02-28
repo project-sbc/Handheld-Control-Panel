@@ -16,7 +16,7 @@ namespace Handheld_Control_Panel.Classes.CoreParking_Management
         public static void readActiveCores()
         {
 
-            Debug.WriteLine("core park start");
+            
             string Power = SystemParameters.PowerLineStatus.ToString();
             string result = Run_CLI.Run_CLI.RunCommand(" -Q SCHEME_CURRENT sub_processor CPMAXCORES", true, "C:\\windows\\system32\\powercfg.exe", 1000).Trim();
             string maxCores = "";
