@@ -27,10 +27,10 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         </Grid.RowDefinitions>
 
         <DockPanel>
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" Text="4:39 PM"/>
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="InternetStatus" FontFamily="Segoe MDL2 Assets" FontSize="28" Text="&#xE701;" Margin="0,0,5,5"/>
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="BatteryStatus" FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE83F;" Margin="5,0,5,0"/>
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" Text="100%"/>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" />
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="InternetStatus" FontFamily="Segoe MDL2 Assets" FontSize="28"  Margin="0,0,5,5"/>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="BatteryStatus" FontFamily="Segoe MDL2 Assets" FontSize="36"  Margin="5,0,5,0"/>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" />
             <TextBlock DockPanel.Dock="Right" />
         </DockPanel>
         

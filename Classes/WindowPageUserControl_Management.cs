@@ -40,7 +40,7 @@ namespace Handheld_Control_Panel.Classes
             }
             if (window.Contains("QuickAccessMenu"))
             {
-                QAMNavigation.windowQAMNavigation = true;
+                //QAMNavigation.windowQAMNavigation = true;
             }
             
         }
