@@ -34,7 +34,7 @@ namespace Handheld_Control_Panel
 
     public partial class MainWindow : MetroWindow
     {
-        private string window = "QAM";
+        private string window = "MainWindow";
         private string page = "";
         private DispatcherTimer statusBarTimer = new DispatcherTimer();
         private DispatcherTimer updateTimer = new DispatcherTimer();
@@ -223,6 +223,7 @@ namespace Handheld_Control_Panel
                 frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
                 HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
                 SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
+                page = lbi.Tag.ToString() + "Page";
             }
         }
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)

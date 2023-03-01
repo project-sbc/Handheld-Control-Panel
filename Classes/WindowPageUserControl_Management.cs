@@ -46,86 +46,52 @@ namespace Handheld_Control_Panel.Classes
         }
 
 
-        public static int[] globalHandlePageControllerInput(string windowpage, string action, List<UserControl> userControls, int highlightedIndex, int selectedIndex, StackPanel stackPanel)
+        public static int globalHandlePageControllerInput(string windowpage, string action, List<UserControl> userControls, int highlightedIndex, int selectedIndex, StackPanel stackPanel)
         {
             //global method so that all pages can process there controller input through here, this makes it easier to update across all pages 
 
             //two things need to be returned: highlight and selected index, that will be done in this array
-            int[] intReturn = new int[2];
-            intReturn[0] = highlightedIndex;
-            intReturn[1] = selectedIndex;
+            int intReturn = highlightedIndex;
+           
 
             if (highlightedIndex == -1)
             {
-                if (action == "B" || action == "Left")
-                {
-                    //if nothing selected and 
-                    WindowPageUserControl_Management.switchToOuterNavigation(windowpage);
-                }
-                else
-                {
-                    //highlight first control
-                    Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[0].ToString()));
-                    intReturn[0] = 0;
-                }
+                //highlight first control
+                Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[0].ToString()));
+                intReturn = 0;
             }
             else
             {
-                if (selectedIndex == -1)
+                switch(action)
                 {
-                    if (action == "A")
-                    {
-                        Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Select", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
-                        //set selected index to highlighted index
-                        intReturn[1] = highlightedIndex;
-                    }
-                    if (action == "Up")
-                    {
+                    case "Up":
                         if (highlightedIndex > 0)
                         {
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex - 1].ToString()));
-                            intReturn[0] = highlightedIndex-1;
-                            if (intReturn[0] == 0) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
-                            
-                            userControls[intReturn[0]].BringIntoView();
-                
-                            
+                            intReturn = highlightedIndex - 1;
+                            if (intReturn == 0) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+
+                            userControls[intReturn].BringIntoView();
                         }
-                    }
-                    if (action == "Down")
-                    {
-                        if (highlightedIndex < userControls.Count-1)
+                        break;
+                    case "Down":
+                        if (highlightedIndex < userControls.Count - 1)
                         {
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + 1].ToString()));
-                            intReturn[0] = highlightedIndex+ 1;
-                            if (intReturn[0] == userControls.Count-1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+                            intReturn = highlightedIndex + 1;
+                            if (intReturn == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
                             //((IScrollInfo)stackPanel).MouseWheelDown();
-                            userControls[intReturn[0]].BringIntoView();
+                            userControls[intReturn].BringIntoView();
                         }
-                    }
-                    if (action == "B" || action == "Left")
-                    {
-                        WindowPageUserControl_Management.switchToOuterNavigation(windowpage);
-                        Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
-                        intReturn[0] = -1;
-                    }
-                }
-                else
-                {
-                    if (action == "B")
-                    {
-                        //press b on a selected usercontrol means it goes back to being highlighted and selectedindex is -1
-                        Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[selectedIndex].ToString()));
-                        intReturn[1] = -1;
-                    }
-                    else
-                    {
-                        Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent(action, windowpage, correctUserControl(userControls[selectedIndex].ToString()));
-                    }
+                        break;
+                    default:
+                        Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent(action, windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
+                        break;
 
                 }
+                             
             }
             return intReturn;
         }

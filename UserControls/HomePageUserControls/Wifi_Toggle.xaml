@@ -8,15 +8,10 @@
              mc:Ignorable="d" 
              d:DesignWidth="450" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
-        <DockPanel Margin="2,2,2,2">
-            <DockPanel DockPanel.Dock="Top">
-                 <DockPanel >
-                   
-                    <Label Content="{DynamicResource Usercontrol_Wifi}" DockPanel.Dock="Left" Style="{StaticResource userControlMainLabel}"/>
-                    <mah:ToggleSwitch x:Name="control" DockPanel.Dock="Right" HorizontalAlignment="Right" OnContent="" OffContent="" Margin="0,0,-102,0" Toggled="toggleSwitch_Toggled" />
-                </DockPanel>
-            </DockPanel>
-          
+        <DockPanel >
+
+            <Label Content="{DynamicResource Usercontrol_Wifi}" Margin="5,0,0,0" DockPanel.Dock="Left" Style="{StaticResource userControlMainLabel}"/>
+            <mah:ToggleSwitch x:Name="control" DockPanel.Dock="Right" HorizontalAlignment="Right" OnContent="" OffContent="" Margin="0,0,-102,0" Toggled="toggleSwitch_Toggled" />
         </DockPanel>
 
     </Border>

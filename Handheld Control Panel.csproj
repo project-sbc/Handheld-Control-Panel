@@ -128,6 +128,9 @@
     <Compile Update="Pages\CustomizationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ProfilesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -146,7 +149,7 @@
     <Compile Update="Pages\HotKeysPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\ProfilesPage.xaml.cs">
+    <Compile Update="Pages\ProfilesPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\SettingsPage.xaml.cs">

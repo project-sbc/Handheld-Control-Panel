@@ -162,11 +162,11 @@
         <Setter Property="BorderThickness" Value="3,3,3,3" />
         <Setter Property="CornerRadius" Value="7" />
         <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent2}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+
     </Style>
     <Style x:Key="userControlBorder" TargetType="Border">
-        <Setter Property="Background" Value="" />   
-        <Setter Property="BorderBrush" Value="Transparent" />
+           
+     
     </Style>
     <!--navigationview-->
   

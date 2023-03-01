@@ -94,10 +94,10 @@ namespace Handheld_Control_Panel.Pages
 
                     default:
                         //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                        int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                        int intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
 
-                        highlightedUserControl = intReturn[0];
-                        selectedUserControl = intReturn[1];
+                        highlightedUserControl = intReturn;
+                     
 
                         break;
                 }

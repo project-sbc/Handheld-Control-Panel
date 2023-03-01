@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Pages
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
-        private int selectedUserControl = -1;
+
         private int highlightedUserControl = -1;
         public HomePage()
         {
@@ -68,10 +68,10 @@ namespace Handheld_Control_Panel.Pages
             if (args.WindowPage == windowpage)
             {
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                int intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, 0, stackPanel);
               
-                highlightedUserControl = intReturn[0];
-                selectedUserControl = intReturn[1];
+                highlightedUserControl = intReturn;
+   
             }
 
         }

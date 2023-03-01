@@ -84,7 +84,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             <Label Name="SubheaderLabel" FontSize="16" FontStyle="Italic" Margin="5,-8,0,0" Height="30" DockPanel.Dock="Bottom" Content="Hodfadsfme" Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}" />
         </DockPanel>
 
-        <Frame Name="frame" Grid.Row="4" />
+        <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />
 
         <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Height="40" Width="450" />
     </Grid>
