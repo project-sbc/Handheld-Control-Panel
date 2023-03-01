@@ -67,7 +67,7 @@ namespace Handheld_Control_Panel.Pages
 
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             //mainWindow.frame.Navigate(new Uri("Pages\\HotKeysPage.xaml", UriKind.RelativeOrAbsolute));
-            mainWindow.navigateHotkeyProfileViews("Pages\\HotKeysPage.xaml");
+            //mainWindow.navigateHotkeyProfileViews("Pages\\HotKeysPage.xaml");
         }
 
         private void saveProfile()

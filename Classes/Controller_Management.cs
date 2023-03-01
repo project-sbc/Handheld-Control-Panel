@@ -245,6 +245,16 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                             {
                                 buttonEvents.raiseControllerInput("B");
                             }
+
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
+                            {
+                                buttonEvents.raiseControllerInput("LB");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder))
+                            {
+                                buttonEvents.raiseControllerInput("RB");
+                            }
+
                             if (currentGamePad.LeftThumbX > 12000 && previousGamePad.LeftThumbX <= 12000)
                             {
                                 buttonEvents.raiseControllerInput("Right");

@@ -9,11 +9,21 @@
     <system:String x:Key="MainWindow_NavigationView_Customize">Customize</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
 
-
+    <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Hotkeys">Hotkeys</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Gamelauncher">App Launcher</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Customize">Customize</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
     
     
     
     
+    
+    
+    
+    
+    <!-- break from old stuff-->
     
     
     

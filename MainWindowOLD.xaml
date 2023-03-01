@@ -1,0 +1,38 @@
+﻿<mah:MetroWindow x:Class="Handheld_Control_Panel.MainWindowOLD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Handheld_Control_Panel"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
+        Title="Handheld Control Panel" Height="650" Width="900" ResizeMode="NoResize"  WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing"  >
+    <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
+        <Grid.Resources>
+    
+            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
+      
+        </Grid.Resources>
+        <ui:NavigationView x:Name="mainWindowNavigationView"   SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}" >
+
+            <ui:NavigationView.MenuItems >
+                <ui:NavigationViewItem Icon="Home" Tag="HomePage"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{DynamicResource MainWindow_NavigationView_Home}" />
+                <ui:NavigationViewItem Tag="ProfilesPage" Icon="Library"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Profiles}"  />
+                <ui:NavigationViewItem Icon="Keyboard" Tag="HotKeysPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Hotkeys}" />
+                <ui:NavigationViewItem Icon="SwitchApps" Tag="GameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Gamelauncher}" />
+                <ui:NavigationViewItem Icon="AllApps" Tag="CustomizationPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Customize}" />
+              
+                
+                <ui:NavigationViewItem Icon="OpenPane" Tag="QAM" Margin="0,15,0,15" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_QAM}" />
+
+                <ui:NavigationViewItem Icon="Setting" Tag="SettingsPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Settings}" />
+            </ui:NavigationView.MenuItems>
+
+            <Frame x:Name="frame" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
+
+        </ui:NavigationView>
+    </Grid>
+   
+</mah:MetroWindow>

@@ -131,7 +131,7 @@
     <Compile Update="Pages\QAMHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="QuickAccessMenu.xaml.cs">
+    <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\HotKeyDetailsPage.xaml.cs">

@@ -67,17 +67,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void toggleQuickAccessMenu()
         {
-            if (Global_Variables.Global_Variables.qam == null)
-            {
-                Global_Variables.Global_Variables.qam = new QuickAccessMenu();
-                Global_Variables.Global_Variables.qam.Show();
-            }
-            else
-            {
-                Global_Variables.Global_Variables.qam.Close();
-                Global_Variables.Global_Variables.qam = null;
 
-            }
         }
     }
 }

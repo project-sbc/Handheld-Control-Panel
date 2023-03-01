@@ -7,32 +7,86 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" 
-        Title="Handheld Control Panel" Height="650" Width="900" ResizeMode="NoResize"  WindowStartupLocation="CenterOwner" Closing="MetroWindow_Closing"  >
+        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True"
+        Title="Handheld Control Panel" Height="650" Width="450" Top="0" ResizeMode="NoResize" UseNoneWindowStyle="True"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" >
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
+        
         <Grid.Resources>
     
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
       
         </Grid.Resources>
-        <ui:NavigationView x:Name="mainWindowNavigationView"   SelectionChanged="mainWindowNavigationView_SelectionChanged" Style="{StaticResource navigationView}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="58" />
+            <RowDefinition  />
+            <RowDefinition Height="40" />
+            
+        </Grid.RowDefinitions>
 
-            <ui:NavigationView.MenuItems >
-                <ui:NavigationViewItem Icon="Home" Tag="HomePage"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"  Content="{DynamicResource MainWindow_NavigationView_Home}" />
-                <ui:NavigationViewItem Tag="ProfilesPage" Icon="Library"  Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Profiles}"  />
-                <ui:NavigationViewItem Icon="Keyboard" Tag="HotKeysPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Hotkeys}" />
-                <ui:NavigationViewItem Icon="SwitchApps" Tag="GameLauncher" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Gamelauncher}" />
-                <ui:NavigationViewItem Icon="AllApps" Tag="CustomizationPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Customize}" />
-              
+        <DockPanel>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" Text="4:39 PM"/>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="InternetStatus" FontFamily="Segoe MDL2 Assets" FontSize="28" Text="&#xE701;" Margin="0,0,5,5"/>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="BatteryStatus" FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE83F;" Margin="5,0,5,0"/>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" Text="100%"/>
+            <TextBlock DockPanel.Dock="Right" />
+        </DockPanel>
+        
+        <DockPanel Grid.Row="1" Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <TextBlock Width="35" Margin="5,0,0,0" HorizontalAlignment="Left" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10C;" />
+            <ListBox x:Name="navigation" FontSize="16" Width="310" Background="Transparent" HorizontalContentAlignment="Center" SelectionChanged="navigation_SelectionChanged"  >
+                <ListBox.Resources>
+
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="2"/>
+
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemsPanel>
+
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBoxItem Tag="Home" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE80F;" />
+                </ListBoxItem>
+                <ListBoxItem Tag="Profiles" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
+                </ListBoxItem>
+                <ListBoxItem Tag="Keyboard" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE92E;" />
+                </ListBoxItem>
                 
-                <ui:NavigationViewItem Icon="OpenPane" Tag="QAM" Margin="0,15,0,15" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_QAM}" />
+                <ListBoxItem Tag="AppLauncher" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
+                </ListBoxItem>
+                <ListBoxItem Tag="Customization" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
+                </ListBoxItem>
+                <ListBoxItem Tag="Settings" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE713;" />
+                </ListBoxItem>
+            </ListBox>
+            <TextBlock Width="35" HorizontalAlignment="Right" Margin="0,0,5,0" TextAlignment="Right" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10D;" />
+        </DockPanel>
+        <DockPanel Background="{DynamicResource MahApps.Brushes.Badged.Foreground}" Grid.Row="2"/>
 
-                <ui:NavigationViewItem Icon="Setting" Tag="SettingsPage" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Content="{DynamicResource MainWindow_NavigationView_Settings}" />
-            </ui:NavigationView.MenuItems>
+        <DockPanel Grid.Row="3" Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label Name="HeaderLabel" FontSize="27" Height="40" Margin="5,-5,0,0" FontWeight="Bold" DockPanel.Dock="Top" Content="Home" Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}" />
+            <Label Name="SubheaderLabel" FontSize="16" FontStyle="Italic" Margin="5,-8,0,0" Height="30" DockPanel.Dock="Bottom" Content="Hodfadsfme" Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}" />
+        </DockPanel>
 
-            <Frame x:Name="frame" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
+        <Frame Name="frame" Grid.Row="4" />
 
-        </ui:NavigationView>
+        <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Height="40" Width="450" />
     </Grid>
    
 </mah:MetroWindow>

@@ -20,7 +20,6 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using MahApps.Metro.IconPacks;
 
 namespace Handheld_Control_Panel
 {
@@ -28,19 +27,18 @@ namespace Handheld_Control_Panel
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public static class QAMNavigation
+    public static class MainWindowNavigation
     {
-        public static bool windowQAMNavigation = true;
+        public static bool windowNavigation = true;
     }
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindowOLD : MetroWindow
     {
-        private string window = "QAM";
+        private string window = "MainWindow";
         private string page = "";
-        public MainWindow()
+        public MainWindowOLD()
         {
             
             InitializeComponent();
-
 
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
@@ -54,74 +52,80 @@ namespace Handheld_Control_Panel
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
 
             //set selected item of hamburger nav menu
-            navigation.SelectedIndex = 0;
+            mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[0];
 
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
-
-
-            setWindowSizePosition();
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
-            Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
-            if (args.Action == "LB")
+            if (CheckForegroundWindow.IsActive(Process.GetCurrentProcess().MainWindowHandle))
             {
-                navigateListBox(true);
-            }
-            else
-            {
-                if (args.Action == "RB")
+                Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
+                if (MainWindowNavigation.windowNavigation)
                 {
-                    navigateListBox(false);
+                    navigateNavigationView(args.Action);
                 }
                 else
                 {
                     Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
                 }
             }
-
+          
 
         }
 
-        private void navigateListBox(bool left)
+        public void navigateHotkeyProfileViews(string page)
         {
-            if (left)
+
+            frame.Navigate(new Uri(page, UriKind.RelativeOrAbsolute));
+            MainWindowNavigation.windowNavigation = true;
+        }
+
+
+        private void navigateNavigationView(string action)
+        {
+            try
             {
-                if (navigation.SelectedIndex > 0) { navigation.SelectedIndex = navigation.SelectedIndex -1; }
+                if (action == "Up")
+                {
+                    mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[mainWindowNavigationView.MenuItems.IndexOf(mainWindowNavigationView.SelectedItem) - 1];
+                }
+                if (action == "Down")
+                {
+                    mainWindowNavigationView.SelectedItem = mainWindowNavigationView.MenuItems[mainWindowNavigationView.MenuItems.IndexOf(mainWindowNavigationView.SelectedItem) + 1];
+                }
+                if (action == "Right" || action == "A")
+                {
+                    MainWindowNavigation.windowNavigation = false;
+                    Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent("Right", window + page);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+    
+        private void mainWindowNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            //change hamburger menu navigation frame based on selected item
+            NavigationViewItem navigationViewItem = (NavigationViewItem)mainWindowNavigationView.SelectedItem;
+            if (navigationViewItem.Tag.ToString() != "QAM")
+            {
+                frame.Navigate(new Uri("Pages\\" + navigationViewItem.Tag.ToString() + ".xaml", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                if (navigation.SelectedIndex < (navigation.Items.Count - 1)) { navigation.SelectedIndex=navigation.SelectedIndex + 1; }
+                QuickAction_Management.toggleQuickAccessMenu();
             }
+            
+            
         }
-      
-    
-        private void setWindowSizePosition()
-        {
 
-            //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
-            //icon needs to be rotated for which side it is on
-            //PackIconFontAwesome packIconFontAwesome = (PackIconFontAwesome)Close.Content;
-
-            this.Top = 0;
-
-            this.Height =Math.Round( System.Windows.SystemParameters.PrimaryScreenHeight*0.96,0);
-            if (Properties.Settings.Default.dockWindowRight && this.Left != System.Windows.SystemParameters.PrimaryScreenWidth - this.Width)
-            {
-                //if dockWindowRight is true, move to right side of screen
-                this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
-                //packIconFontAwesome.RotationAngle = 0;
-            }
-            if (!Properties.Settings.Default.dockWindowRight && this.Left != 0)
-            {
-                this.Left = 0;
-                //packIconFontAwesome.RotationAngle = 180;
-            }
-
-        }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //close task scheduler
@@ -130,7 +134,7 @@ namespace Handheld_Control_Panel
 
 
             //mouse keyboard input hook
-            MouseKeyHook.Unsubscribe();
+            //MouseKeyHook.Unsubscribe();
 
             //kill controller thread
             Global_Variables.killControllerThread = true;
@@ -138,27 +142,12 @@ namespace Handheld_Control_Panel
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            //page = frame.Source.ToString().Replace("Pages/","").Replace(".xaml","");
-            //if (!page.Contains("Profile")) { Global_Variables.profiles.editingProfile = null; }
+            page = frame.Source.ToString().Replace("Pages/","").Replace(".xaml","");
+            if (!page.Contains("Profile")) { Global_Variables.profiles.editingProfile = null; }
 
-        }
-
-
-        private void MetroWindow_LocationChanged(object sender, EventArgs e)
-        {
-            setWindowSizePosition();
-        }
-
-        private void navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (navigation.SelectedItem != null)
-            {
-                ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                //frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
-            }
         }
     }
-    public static class CheckForegroundWindowQAM
+    public static class CheckForegroundWindow
     {
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();

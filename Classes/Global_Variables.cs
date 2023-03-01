@@ -11,7 +11,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 {
     public static class Global_Variables
     {
-        public static QuickAccessMenu qam;
+       
 
         public static string xmlFile = AppDomain.CurrentDomain.BaseDirectory + "Resources\\Profiles.xml";
 

@@ -65,8 +65,8 @@ namespace Handheld_Control_Panel.Pages
             //make sure the current profile is loaded back to the XML if they didn't save
             Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
 
-            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.navigateHotkeyProfileViews("Pages\\ProfilesPage.xaml");
+            //MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            //mainWindow.navigateHotkeyProfileViews("Pages\\ProfilesPage.xaml");
             
         }
 
