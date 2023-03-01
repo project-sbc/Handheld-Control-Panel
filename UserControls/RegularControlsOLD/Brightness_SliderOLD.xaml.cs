@@ -24,11 +24,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Brightness_Slider : UserControl
+    public partial class Brightness_SliderOLD : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Brightness_Slider()
+        public Brightness_SliderOLD()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);

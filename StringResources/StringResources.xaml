@@ -6,14 +6,14 @@
     <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
     <system:String x:Key="MainWindow_NavigationView_Hotkeys">Hotkeys</system:String>
     <system:String x:Key="MainWindow_NavigationView_Gamelauncher">App Launcher</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Customize">Customize</system:String>
+    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Hotkeys">Hotkeys</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Gamelauncher">App Launcher</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Customize">Customize</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
 
 
@@ -21,6 +21,7 @@
     <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
 
     <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
+    <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
     
     
     

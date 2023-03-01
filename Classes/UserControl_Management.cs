@@ -488,9 +488,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                 if (SliderThumb is Thumb thumb)
                 {
-
-                    thumb.Width = 13;
-                    thumb.Height = 18;
+               
+                    thumb.Width = 12;
+                    thumb.Height = 12;
                 }
                 else { }
             }

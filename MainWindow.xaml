@@ -68,7 +68,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ListBoxItem Tag="AppLauncher" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
                 </ListBoxItem>
-                <ListBoxItem Tag="Customization" >
+                <ListBoxItem Tag="CustomizeHome" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
                 </ListBoxItem>
                 <ListBoxItem Tag="Settings" >

@@ -128,6 +128,9 @@
     <Compile Update="Pages\CustomizationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\CustomizeHomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ProfilesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -153,6 +156,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\SettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Brightness_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Bluetooth_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Wifi_Toggle.xaml.cs">
@@ -209,7 +218,7 @@
     <Compile Update="UserControls\HotKeyDetailsOLD\HotKeys_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\RegularControlsOLD\Brightness_Slider.xaml.cs">
+    <Compile Update="UserControls\RegularControlsOLD\Brightness_SliderOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\RegularControlsOLD\CoreParking_Slider.xaml.cs">
