@@ -220,7 +220,7 @@ namespace Handheld_Control_Panel
             if (navigation.SelectedItem != null)
             {
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                //frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
                 HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
                 SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
             }
@@ -274,13 +274,27 @@ namespace Handheld_Control_Panel
             statusBarTimer.Stop();
             updateTimer.Stop(); 
         }
-         
+        
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
         {
             setWindowSizePosition();
         }
         #endregion
 
+        public void changeUserInstruction(string newInstructionUserControl)
+        {
+            foreach(UserControl userControl in instructionStackPanel.Children)
+            {
+                instructionStackPanel.Children.Remove(userControl);
+            }
+            switch(newInstructionUserControl)
+            {
+                case "UserControl_Home_Instruction":
+
+                    break;
+                default: break;
+            }
+        }
     }
     public static class CheckForegroundWindowQAM
     {

@@ -15,6 +15,12 @@
     <system:String x:Key="MainWindow_NavigationView_Sub_Gamelauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Customize">Customize</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
+
+
+    <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
+    <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
+
+    <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
     
     
     
@@ -103,8 +109,6 @@
     <system:String x:Key="Usercontrol_Autostart_MainText">Autostart</system:String>
     <system:String x:Key="Usercontrol_Autostart_SubText">Start application with windows</system:String>
 
-    <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
-    <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
 
     <system:String x:Key="Usercontrol_Language_MainText">Language</system:String>
     <system:String x:Key="Usercontrol_Language_SubText">Select application language</system:String>
