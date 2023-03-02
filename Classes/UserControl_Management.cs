@@ -211,7 +211,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 10;
-                        slider.Value = Global_Variables.Global_Variables.brightness;
+                        slider.Value = Global_Variables.Global_Variables.Brightness;
                         break;
                     case "Slider_FPSLimit":
                         slider.Minimum = 0;
@@ -489,8 +489,8 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 if (SliderThumb is Thumb thumb)
                 {
                
-                    thumb.Width = 12;
-                    thumb.Height = 12;
+                    thumb.Width = 22;
+                    thumb.Height = 22;
                 }
                 else { }
             }

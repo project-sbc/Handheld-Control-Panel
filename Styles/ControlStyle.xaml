@@ -7,14 +7,92 @@
                  xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
-    <!--split view-->
-    <Style x:Key="splitViewButton" TargetType="Button" >
-        <Setter Property="Width" Value="42" />
-
+    <!--textblock-->
+    <Style x:Key="controllerButtonTextblock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
-    
-    
-    <!-- textbox-->
+
+    <!--scroll viewer-->
+
+    <Style x:Key="pageScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="CanContentScroll" Value="True" />
+        <Setter Property="PanningMode" Value="VerticalOnly"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+    </Style>
+
+    <!--labels-->
+    <Style x:Key="userControlMainLabel" TargetType="Label">
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="DockPanel.Dock" Value="Left" />
+        <Setter Property="Margin" Value="8,0,0,0" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+    </Style>
+
+    <Style x:Key="userControlToggle" TargetType="mah:ToggleSwitch" >
+        <Setter Property="DockPanel.Dock" Value="Right" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="OnContent" Value="" />
+        <Setter Property="OffContent" Value="" />
+        <Setter Property="Margin" Value="0,0,-135,0" />
+ 
+    </Style>
+
+    <Style x:Key="HeaderLabel" TargetType="Label">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="27" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Margin" Value="5,-5,0,0" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="DockPanel.Dock" Value="Top" />
+    </Style>
+
+    <Style x:Key="SubheaderLabel" TargetType="Label">
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="5,-8,0,0" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="DockPanel.Dock" Value="Bottom" />
+    </Style>
+   
+
+
+
+    <!--textblocks-->
+    <Style x:Key="menuButtonText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize" Value="13.5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="userControlSubText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+
+  
+
+
+
+    <!--borders-->
+    <Style x:Key="userControlBorderHighlight" TargetType="Border">
+
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent2}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+   
+    <Style x:Key="userControlBorder" TargetType="Border">
+           
+     
+    </Style>
+
+
     <Style x:Key="MahApps.Styles.Thumb.Slider.Win10" TargetType="{x:Type Thumb}">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -31,12 +109,14 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False"/>
+  
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
                     <Grid Background="{TemplateBinding Background}">
-                        <Rectangle Fill="{TemplateBinding Foreground}" Height="2"/>
+
+                        <Border Height="8" Background="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding Foreground}" CornerRadius="2" BorderThickness="1" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -62,7 +142,7 @@
             </Grid.RowDefinitions>
             <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
             <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>
-            <Track x:Name="PART_Track" Grid.RowSpan="3" Grid.Row="0">
+            <Track x:Name="PART_Track"  Grid.RowSpan="3" Grid.Row="0">
                 <Track.DecreaseRepeatButton>
                     <RepeatButton x:Name="HorizontalTrackDecrease" Command="{x:Static Slider.DecreaseLarge}" Foreground="{Binding (mah:SliderHelper.TrackValueFillBrush), RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource MahApps.Styles.RepeatButton.Slider.HorizontalTrack.Win10}"/>
                 </Track.DecreaseRepeatButton>
@@ -200,162 +280,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="profilesTextBox" TargetType="TextBox">
-
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="250" />
-        <Setter Property="Height" Value="28" />
-
-    </Style>
-
-    <!--textblock-->
-    <Style x:Key="controllerButtonTextblock" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
-        <Setter Property="FontSize" Value="28" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Foreground"
-                Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-
-    <Style x:Key="profileControllerButtonTextblock" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
-        <Setter Property="FontSize" Value="19" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Foreground"
-                Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-    <!--button-->
-    <Style x:Key="userControlButton" TargetType="Button">
-        <Setter Property="Height" Value="38" />
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
-        <Setter Property="Margin" Value="0,0,8,0" />
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-
-    <!-- listbox item -->
-    <Style x:Key="listBoxItem" TargetType="{x:Type ListBoxItem}">
-        <Style.Resources>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
-                             Color="{DynamicResource MahApps.Colors.Accent}"/>
-        </Style.Resources>
-    </Style>
-
-    <!--icons-->
-    <Style x:Key="userControlIconMaterial" TargetType="icon:PackIconMaterial">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="2,0,5,0" />
-    </Style>
-    <Style x:Key="userControlIconFontAwesome" TargetType="icon:PackIconFontAwesome">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="2,0,5,0" />
-
-    </Style>
-    <Style x:Key="userControlIconUnicons" TargetType="icon:PackIconUnicons">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="2,0,5,0" />
-
-    </Style>
-    <Style x:Key="userControlIconSimpleIcons" TargetType="icon:PackIconSimpleIcons">
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="DockPanel.Dock" Value="Left"/>
-        <Setter Property="Margin" Value="2,0,5,0" />
-
-    </Style>
-
-   
-
-  
-    <!--stack panel-->
-
-    <Style x:Key="pageScrollViewer" TargetType="ScrollViewer">
-        <Setter Property="CanContentScroll" Value="True" />
-        <Setter Property="PanningMode" Value="VerticalOnly"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
-    </Style>
-
-    <!--textblocks-->
-    <Style x:Key="menuButtonText" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Montserrat"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="FontSize" Value="13.5"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-    <Style x:Key="userControlSubText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-    </Style>
-    <!--labels-->
-    <Style x:Key="headerLabel" TargetType="Label">
-        <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="23" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Margin" Value="20,0,0,0" />
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-
-    <Style x:Key="userControlMainLabel" TargetType="Label">
-        <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="20" />
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-    <Style x:Key="userControlSubLabel" TargetType="Label">
-        <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-    <Style x:Key="userControlUnitLabel" TargetType="Label">
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-    </Style>
-
-    <!--rectangles-->
-    <Style x:Key="rectangle" TargetType="Rectangle" >
-        <Setter Property="Height" Value="2" />
-        <Setter Property="Fill" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="Margin" Value="11,0,11,2" />
-    </Style>
-
-    <!--borders-->
-    <Style x:Key="userControlBorderHighlight" TargetType="Border">
-
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent2}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style x:Key="userControlBorderSelected" TargetType="Border">
-      
-        <Setter Property="BorderThickness" Value="3,3,3,3" />
-        <Setter Property="CornerRadius" Value="7" />
-        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent2}" />
-
-    </Style>
-    <Style x:Key="userControlBorder" TargetType="Border">
-           
-     
-    </Style>
-    <!--navigationview-->
   
 
-  
+
+
 </ResourceDictionary>

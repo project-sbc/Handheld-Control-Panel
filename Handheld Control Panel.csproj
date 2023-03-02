@@ -158,6 +158,9 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Volume_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -257,7 +260,7 @@
     <Compile Update="UserControls\RegularControlsOLD\TDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\RegularControlsOLD\Volume_Slider.xaml.cs">
+    <Compile Update="UserControls\RegularControlsOLD\Volume_SliderOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsOLD\DockSide_Toggleswitch.xaml.cs">

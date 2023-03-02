@@ -8,7 +8,7 @@
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True"
-        Title="Handheld Control Panel" Height="650" Width="450" Top="0" ResizeMode="NoResize" UseNoneWindowStyle="True"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" >
+        Title="Handheld Control Panel" Height="750" Width="450" Top="0" ResizeMode="NoResize" UseNoneWindowStyle="True"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" StateChanged="MetroWindow_StateChanged" >
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         
         <Grid.Resources>
@@ -80,8 +80,8 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         <DockPanel Background="{DynamicResource MahApps.Brushes.Badged.Foreground}" Grid.Row="2"/>
 
         <DockPanel Grid.Row="3" Background="{DynamicResource MahApps.Brushes.Accent3}">
-            <Label Name="HeaderLabel" FontSize="27" Height="40" Margin="5,-5,0,0" FontWeight="Bold" DockPanel.Dock="Top" Content="Home" Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}" />
-            <Label Name="SubheaderLabel" FontSize="16" FontStyle="Italic" Margin="5,-8,0,0" Height="30" DockPanel.Dock="Bottom" Content="Hodfadsfme" Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}" />
+            <Label Name="HeaderLabel" Style="{DynamicResource HeaderLabel}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}"/>
         </DockPanel>
 
         <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />

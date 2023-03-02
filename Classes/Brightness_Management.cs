@@ -32,7 +32,9 @@ namespace Handheld_Control_Panel.Classes.Brightness_Management
                             {
                                 Console.WriteLine(item.Name + " " + item.Value.ToString());
                                 if (item.Name == "CurrentBrightness")
-                                { Global_Variables.Global_Variables.brightness = Convert.ToInt32(item.Value); }    //Do something with CurrentBrightness
+                                {
+                                    if (Global_Variables.Global_Variables.Brightness != Convert.ToInt32(item.Value)) { Global_Variables.Global_Variables.Brightness = Convert.ToInt32(item.Value); }; 
+                                }    
                             }
                         }
                     }
@@ -61,7 +63,7 @@ namespace Handheld_Control_Panel.Classes.Brightness_Management
 
                     instance.InvokeMethod("WmiSetBrightness", args);
                 }
-
+                getBrightness();
             }
             catch 
             { 

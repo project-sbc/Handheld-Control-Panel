@@ -34,8 +34,52 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 
 
         //brightness and volume setting
-        public static int brightness = -1;
-        public static int volume = 0;
+        #region brightness
+        public static int Brightness 
+        {
+            get
+            {
+                return brightness;
+            }
+
+            set
+            {
+                brightness = value;
+                raiseBrightnessChanged();
+            }
+        }
+        public static event EventHandler brightnessChanged;
+        public static void raiseBrightnessChanged()
+        {
+            brightnessChanged?.Invoke(null, EventArgs.Empty);
+        }
+
+        public static int brightness { get; set; } = -1;
+        #endregion
+
+        #region volume
+        public static int Volume
+        {
+            get
+            {
+                return volume;
+            }
+
+            set
+            {
+                volume = value;
+                raiseVolumeChanged();
+            }
+        }
+        public static event EventHandler volumeChanged;
+        public static void raiseVolumeChanged()
+        {
+            volumeChanged?.Invoke(null, EventArgs.Empty);
+        }
+
+        public static int volume { get; set; } = 0;
+        #endregion
+
         public static bool muteVolume = false;
 
         //hidhide

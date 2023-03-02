@@ -36,19 +36,32 @@ namespace Handheld_Control_Panel.UserControls
         {
             InitializeComponent();
             //setControlValue();
-            //UserControl_Management.setupControl(control);
-            UserControl_Management.setThumbSize(control);
+            UserControl_Management.setupControl(control);
+            label.Content = Application.Current.Resources["Usercontrol_Brightness"] + " - " + control.Value.ToString() + "%";
             
         }
 
        
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+           //UserControl_Management.setThumbSize(control);
+
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
+            Global_Variables.brightnessChanged += Global_Variables_brightnessChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
         }
+
+        private void Global_Variables_brightnessChanged(object? sender, EventArgs e)
+        {
+            if (Global_Variables.Brightness != control.Value)
+            {
+                control.Value = Global_Variables.Brightness;
+            }
+            
+        }
+
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
@@ -65,6 +78,17 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+            Global_Variables.brightnessChanged -= Global_Variables_brightnessChanged;
+        }
+
+        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
+            {
+                label.Content = Application.Current.Resources["Usercontrol_Brightness"] + " - " + control.Value.ToString() + "%";
+                UserControl_Management.Slider_ValueChanged(sender, e);
+            }
         }
     }
 }

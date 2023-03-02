@@ -73,7 +73,7 @@ namespace Handheld_Control_Panel
         #region timer
         private void startTimers()
         {
-            statusBarTimer.Interval = new TimeSpan(0, 0, 3);
+            statusBarTimer.Interval = new TimeSpan(0, 0, 1);
             statusBarTimer.Tick += StatusBarTimer_Tick;
             statusBarTimer.Start();
 
@@ -219,8 +219,10 @@ namespace Handheld_Control_Panel
         {
             if (navigation.SelectedItem != null)
             {
+               
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
                 frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                
                 HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
                 SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
                 page = lbi.Tag.ToString() + "Page";
@@ -294,6 +296,20 @@ namespace Handheld_Control_Panel
 
                     break;
                 default: break;
+            }
+        }
+
+        private void MetroWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                //stop timer when minimized so that it doesnt run unnecessarily for no benefit when hidden
+                updateTimer.Stop();
+            }
+            if (this.WindowState == WindowState.Normal)
+            {
+                //resume status bar update when it comes back up
+                updateTimer.Start();
             }
         }
     }
