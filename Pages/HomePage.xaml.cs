@@ -20,6 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
+using Handheld_Control_Panel.Classes.Global_Variables;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -36,6 +37,45 @@ namespace Handheld_Control_Panel.Pages
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            addUserControlsToPage();
+
+        }
+        private void addUserControlsToPage()
+        {
+
+
+            List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
+            foreach (HomePageItem item in Global_Variables.homePageItems)
+            {
+                if (item.UserControl != "")
+                {
+                    if (item.Enabled)
+                    {
+                        switch (item.UserControl)
+                        {
+                            case "Usercontrol_Wifi":
+                                stackPanel.Children.Add(new Wifi_Toggle());
+                                break;
+                            case "Usercontrol_Bluetooth":
+                                stackPanel.Children.Add(new Bluetooth_Toggle());
+                                break;
+                            case "Usercontrol_Brightness":
+                                stackPanel.Children.Add(new Brightness_Slider());
+                                break;
+                            case "Usercontrol_VolumeMute":
+                                stackPanel.Children.Add(new VolumeMute_Toggle());
+                                break;
+                            case "Usercontrol_Volume":
+                                stackPanel.Children.Add(new Volume_Slider());
+                                break;
+                            default: break;
+                        }
+                    }
+                }
+             
+              
+            }
+
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

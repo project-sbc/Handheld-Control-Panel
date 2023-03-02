@@ -46,18 +46,13 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-            getUserControlsOnPage();
-
+          
 
             controlList.ItemsSource = Global_Variables.homePageItems;
-            controlList.Items.Refresh();
+
+
         }
 
-        private void getUserControlsOnPage()
-        {
-           
-        }
-        //
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
@@ -78,6 +73,24 @@ namespace Handheld_Control_Panel.Pages
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
+            Global_Variables.homePageItems.saveList();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (controlList.SelectedItem != null)
+            {
+                HomePageItem hpi = controlList.SelectedItem as HomePageItem;
+                if (controlList.SelectedIndex > 0)
+                {
+                    int index = controlList.SelectedIndex;
+                    Global_Variables.homePageItems.Remove(hpi);
+                    Global_Variables.homePageItems.Insert(index -1,hpi);
+                    controlList.Items.Refresh();
+
+                }
+                
+            }
         }
     }
 }

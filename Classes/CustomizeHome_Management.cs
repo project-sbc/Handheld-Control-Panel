@@ -39,7 +39,15 @@ namespace Handheld_Control_Panel.Classes
 
         public void saveList()
         {
+            string newList = "";
+            foreach (HomePageItem hpi in this)
+            {
+                newList = newList + hpi.UserControl.ToString();
+                if (hpi.Enabled) { newList = newList + "1;"; } else { newList = newList + "0;"; }
 
+            }
+            Properties.Settings.Default.qamUserControls= newList;
+            Properties.Settings.Default.Save();
 
         }
 

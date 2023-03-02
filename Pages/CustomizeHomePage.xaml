@@ -37,11 +37,15 @@
                         </Grid.ColumnDefinitions>
                         <!-- Assumes MVVM and you wish to bind to properties and commands -->
                         <TextBlock Grid.Column="0"  Text="{Binding UserControl}" />
-                        <Button VerticalAlignment="Center" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                        <Button VerticalAlignment="Center" Click="Button_Click" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
                             <iconPacks:Unicons Kind="Bars" Height="30" Width="30" />
                         </Button>
                         <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="25" Text="{Binding DisplayUsercontrol}"/>
-                        <mah:ToggleSwitch Grid.Column="3" OnContent="" OffContent="" IsOn="{Binding Enabled}" />
+                        <mah:ToggleSwitch Grid.Column="3" OnContent="" OffContent="" IsOn="{Binding Enabled}" >
+                            <mah:ToggleSwitch.LayoutTransform>
+                                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                            </mah:ToggleSwitch.LayoutTransform>
+                        </mah:ToggleSwitch>
 
                     </Grid>
                 </DataTemplate>
