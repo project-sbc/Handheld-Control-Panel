@@ -185,7 +185,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Minimum = 0;
                         slider.Maximum = 100;
                         slider.TickFrequency = 1;
-                        slider.SmallChange = 1;
+                        slider.SmallChange = 5;
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.volume;
                         break;
@@ -209,7 +209,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Minimum = 0;
                         slider.Maximum = 100;
                         slider.TickFrequency = 1;
-                        slider.SmallChange = 1;
+                        slider.SmallChange = 5;
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.Brightness;
                         break;

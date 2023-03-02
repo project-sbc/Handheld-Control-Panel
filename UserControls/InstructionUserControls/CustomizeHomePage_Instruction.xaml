@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.CustomizeHomePage_Instruction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Handheld_Control_Panel.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="450" Height="50"  >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+   
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Arrange}" />
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF095;" />
+
+
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Close}" />
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF094;" />
+            
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Toggle}" />
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF093;" />
+
+        </StackPanel>
+     
+
+    </Grid>
+</UserControl>

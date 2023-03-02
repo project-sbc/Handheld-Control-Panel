@@ -182,7 +182,10 @@
     <Compile Update="UserControls\HotKeyDetailsOLD\HotKeyAction_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InstructionUserControls\MainPage_Instruction.xaml.cs">
+    <Compile Update="UserControls\InstructionUserControls\CustomizeHomePage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\HomePage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\ProfileDetailsOLD\ProfileOnline_GPUCLK.xaml.cs">

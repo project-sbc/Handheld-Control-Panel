@@ -37,8 +37,7 @@ namespace Handheld_Control_Panel
     {
         private string window = "MainWindow";
         private string page = "";
-        private DispatcherTimer statusBarTimer = new DispatcherTimer();
-        private DispatcherTimer updateTimer = new DispatcherTimer();
+        private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
 
         public MainWindow()
         {
@@ -68,31 +67,26 @@ namespace Handheld_Control_Panel
             updateStatusBar();
 
             //run timer to update time, wifi and battery status  and other stuff
-            startTimers();
+            startTimer();
         }
 
         #region timer
-        private void startTimers()
+        private void startTimer()
         {
-            statusBarTimer.Interval = new TimeSpan(0, 0, 3);
-            statusBarTimer.Tick += StatusBarTimer_Tick;
-            statusBarTimer.Start();
 
-            updateTimer.Interval = new TimeSpan(0, 0, 15);
+            updateTimer.Interval = new TimeSpan(0, 0, 3);
             updateTimer.Tick += UpdateTimer_Tick;
-           //dont start update timer, only start when minimized
+            updateTimer.Start();
 
         }
-        private void StatusBarTimer_Tick(object? sender, EventArgs e)
+
+        private void UpdateTimer_Tick(object? sender, EventArgs e)
         {
             if (this.WindowState != WindowState.Minimized)
             {
                 updateStatusBar();
-                ParallelTaskUpdate_Management.UpdateTask();
+               
             }
-        }
-        private void UpdateTimer_Tick(object? sender, EventArgs e)
-        {
             ParallelTaskUpdate_Management.UpdateTask();
         }
         #endregion
@@ -135,7 +129,7 @@ namespace Handheld_Control_Panel
             if (powerStatus != "AC")
             {
                 batterylevel = Int16.Parse(powerStatus);
-                PowerLineStatus Power = SystemParameters.PowerLineStatus;
+                System.Windows.PowerLineStatus Power = SystemParameters.PowerLineStatus;
                 powerStatus = Power.ToString();
 
             }
@@ -275,7 +269,7 @@ namespace Handheld_Control_Panel
             Global_Variables.killControllerThread = true;
 
             //stop timers
-            statusBarTimer.Stop();
+           
             updateTimer.Stop(); 
         }
         
@@ -287,32 +281,35 @@ namespace Handheld_Control_Panel
 
         public void changeUserInstruction(string newInstructionUserControl)
         {
-            foreach(UserControl userControl in instructionStackPanel.Children)
-            {
-                instructionStackPanel.Children.Remove(userControl);
-            }
-            switch(newInstructionUserControl)
-            {
-                case "MainPage_Instruction":
-                    instructionStackPanel.Children.Add(new MainPage_Instruction());
-                    break;
-                default: break;
-            }
+            this.Dispatcher.BeginInvoke(() => {
+                instructionStackPanel.Children.Clear(); 
+                switch (newInstructionUserControl)
+                {
+                    case "HomePage_Instruction":
+                        instructionStackPanel.Children.Add(new HomePage_Instruction());
+                        break;
+                    case "CustomizeHomePage_Instruction":
+                        instructionStackPanel.Children.Add(new CustomizeHomePage_Instruction());
+                        break;
+                    default: break;
+                }
+
+            });
+
+           
         }
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
             if (this.WindowState == WindowState.Minimized)
             {
-                //stop timer when minimized so that it doesnt run unnecessarily for no benefit when hidden
-                updateTimer.Start();
-                statusBarTimer.Stop();
+               
+                updateTimer.Interval = new TimeSpan(0,0,15);
+               
             }
             if (this.WindowState == WindowState.Normal)
             {
-                //resume status bar update when it comes back up
-                updateTimer.Stop();
-                statusBarTimer.Start();
+                updateTimer.Interval = new TimeSpan(0, 0, 3);
             }
         }
     }

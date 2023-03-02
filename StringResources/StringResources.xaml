@@ -31,6 +31,7 @@
     <system:String x:Key="Instruction_Toggle">TOGGLE</system:String>
     <system:String x:Key="Instruction_Confirm">CONFIRM</system:String>
     <system:String x:Key="Instruction_Close">CLOSE</system:String>
+    <system:String x:Key="Instruction_Arrange">ARRANGE</system:String>
     
     
     

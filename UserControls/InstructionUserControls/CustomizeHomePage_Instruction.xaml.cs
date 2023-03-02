@@ -28,10 +28,10 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class MainPage_Instruction : UserControl
+    public partial class CustomizeHomePage_Instruction : UserControl
     {
  
-        public MainPage_Instruction()
+        public CustomizeHomePage_Instruction()
         {
             InitializeComponent();
            

@@ -58,6 +58,9 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ListBoxItem Tag="Home" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE80F;" />
                 </ListBoxItem>
+                <ListBoxItem Tag="CustomizeHome" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
+                </ListBoxItem>
                 <ListBoxItem Tag="Profiles" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
                 </ListBoxItem>
@@ -68,9 +71,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ListBoxItem Tag="AppLauncher" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
                 </ListBoxItem>
-                <ListBoxItem Tag="CustomizeHome" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
-                </ListBoxItem>
+               
                 <ListBoxItem Tag="Settings" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE713;" />
                 </ListBoxItem>
@@ -86,7 +87,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
 
         <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />
 
-        <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Height="50" Width="450" />
+        <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Grid.Row="5" Height="50" Width="450" />
     </Grid>
    
 </mah:MetroWindow>

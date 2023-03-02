@@ -41,7 +41,11 @@ namespace Handheld_Control_Panel.Pages
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
-           
+
+            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+            wnd.changeUserInstruction("CustomizeHomePage_Instruction");
+            wnd = null;
+
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -104,7 +108,7 @@ namespace Handheld_Control_Panel.Pages
                         case "Down":
                             if (hpi.updownVisibility == Visibility.Visible)
                             {
-                                moveHomePageItem(hpi, index, true);
+                                moveHomePageItem(hpi, index, false);
                             }
                             else
                             {
@@ -144,7 +148,7 @@ namespace Handheld_Control_Panel.Pages
                 if (index < controlList.Items.Count - 1)
                 {
                     Global_Variables.homePageItems.Remove(hpi);
-                    Global_Variables.homePageItems.Insert(index, hpi);
+                    Global_Variables.homePageItems.Insert(index+1, hpi);
                     controlList.Items.Refresh();
                 }
             }
@@ -196,6 +200,7 @@ namespace Handheld_Control_Panel.Pages
                         selectedItem.enableMovementVisibility = Visibility.Visible;
                     }
                     selectedItem = newHomePageItem;
+                    controlList.Items.Refresh();
                 }
             }
 
