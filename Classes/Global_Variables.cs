@@ -80,7 +80,29 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int volume { get; set; } = 0;
         #endregion
 
-        public static bool muteVolume = false;
+        #region mutevolume
+        public static bool Mute
+        {
+            get
+            {
+                return mute;
+            }
+
+            set
+            {
+                mute = value;
+                raiseVolumeMuteChanged();
+            }
+        }
+        public static event EventHandler volumeMuteChanged;
+        public static void raiseVolumeMuteChanged()
+        {
+            volumeMuteChanged?.Invoke(null, EventArgs.Empty);
+        }
+
+        public static bool mute { get; set; } = false;
+        #endregion
+
 
         //hidhide
         public static HidHideControlService hidHide;

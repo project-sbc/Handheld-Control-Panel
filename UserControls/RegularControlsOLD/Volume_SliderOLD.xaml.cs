@@ -34,7 +34,7 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
             UserControl_Management.setupControl(control);
 
-            toggleSwitch.IsOn = Global_Variables.muteVolume;
+            toggleSwitch.IsOn = Global_Variables.Mute;
             if (toggleSwitch.IsOn) { icon.Kind = MahApps.Metro.IconPacks.PackIconUniconsKind.VolumeMute; } else { icon.Kind = MahApps.Metro.IconPacks.PackIconUniconsKind.VolumeUp; }
 
         }

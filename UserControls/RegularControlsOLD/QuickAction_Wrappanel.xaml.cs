@@ -76,7 +76,7 @@ namespace Handheld_Control_Panel.UserControls
             qaiVolume.ID = "Toggle_Volume";
             qaiVolume.iconKind = PackIconMaterialKind.VolumeHigh;
             AudioManager.GetMasterVolumeMute();
-            if (Global_Variables.muteVolume) { qaiVolume.iconKind = PackIconMaterialKind.VolumeMute; }
+            if (Global_Variables.Mute) { qaiVolume.iconKind = PackIconMaterialKind.VolumeMute; }
 
             quickactionItem qai3 = new quickactionItem();
             qai3.ID = "Toggle_Controller";
@@ -188,7 +188,7 @@ namespace Handheld_Control_Panel.UserControls
                             break;
                         case "Toggle_Volume":
                             AudioManager.GetMasterVolumeMute();
-                            if (Global_Variables.muteVolume) { qai.iconKind = PackIconMaterialKind.VolumeHigh; AudioManager.SetMasterVolumeMute(!Global_Variables.muteVolume); } else { qai.iconKind = PackIconMaterialKind.VolumeMute; AudioManager.SetMasterVolumeMute(!Global_Variables.muteVolume); }
+                            if (Global_Variables.Mute) { qai.iconKind = PackIconMaterialKind.VolumeHigh; AudioManager.SetMasterVolumeMute(!Global_Variables.Mute); } else { qai.iconKind = PackIconMaterialKind.VolumeMute; AudioManager.SetMasterVolumeMute(!Global_Variables.Mute); }
                             break;
                         case "Toggle_MouseMode":
                             //remember calling toggle_mousemode actually changes the mode

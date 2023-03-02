@@ -29,8 +29,11 @@ namespace Handheld_Control_Panel.Classes.Volume_Management
                 {
                     float volumeLevel;
                     masterVol.GetMasterVolumeLevelScalar(out volumeLevel);
-                    Global_Variables.Global_Variables.volume = (int)(volumeLevel * 100);
-                    
+                    if (Global_Variables.Global_Variables.Volume != (int)(volumeLevel * 100))
+                    {
+                        Global_Variables.Global_Variables.Volume = (int)(volumeLevel * 100);
+                    }
+  
                 }
 
 
@@ -54,11 +57,14 @@ namespace Handheld_Control_Panel.Classes.Volume_Management
             {
                 masterVol = GetMasterVolumeObject();
                 if (masterVol == null)
-                    Global_Variables.Global_Variables.muteVolume= false;
+                {
+                    if (Global_Variables.Global_Variables.Mute != false) { Global_Variables.Global_Variables.Mute = false; }
+                }
+                   
 
                 bool isMuted;
                 masterVol.GetMute(out isMuted);
-                Global_Variables.Global_Variables.muteVolume= isMuted;
+                if (Global_Variables.Global_Variables.Mute != isMuted) { Global_Variables.Global_Variables.Mute = isMuted; }
             }
             finally
             {

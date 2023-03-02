@@ -24,6 +24,7 @@
     <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
     <system:String x:Key="Usercontrol_Brightness">Brightness</system:String>
     <system:String x:Key="Usercontrol_Volume">Volume</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute">Volume Mute</system:String>
     
     
     

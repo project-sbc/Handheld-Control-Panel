@@ -12,8 +12,10 @@
     <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
             <uc:Wifi_Toggle />
+            <uc:Mute_Toggle />
             <uc:Bluetooth_Toggle />
             <uc:Brightness_Slider />
+            <uc:Volume_Slider />
         </StackPanel>
     </ScrollViewer>
   

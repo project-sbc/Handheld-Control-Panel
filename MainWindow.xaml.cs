@@ -79,7 +79,7 @@ namespace Handheld_Control_Panel
 
             updateTimer.Interval = new TimeSpan(0, 0, 15);
             updateTimer.Tick += UpdateTimer_Tick;
-            updateTimer.Start();
+           //dont start update timer, only start when minimized
 
         }
         private void StatusBarTimer_Tick(object? sender, EventArgs e)
@@ -304,12 +304,14 @@ namespace Handheld_Control_Panel
             if (this.WindowState == WindowState.Minimized)
             {
                 //stop timer when minimized so that it doesnt run unnecessarily for no benefit when hidden
-                updateTimer.Stop();
+                updateTimer.Start();
+                statusBarTimer.Stop();
             }
             if (this.WindowState == WindowState.Normal)
             {
                 //resume status bar update when it comes back up
-                updateTimer.Start();
+                updateTimer.Stop();
+                statusBarTimer.Start();
             }
         }
     }

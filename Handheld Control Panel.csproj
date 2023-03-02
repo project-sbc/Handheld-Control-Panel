@@ -158,6 +158,9 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Mute_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\Volume_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

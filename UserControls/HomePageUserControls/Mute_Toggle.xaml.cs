@@ -4,6 +4,7 @@ using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
+using Handheld_Control_Panel.Classes.Volume_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
 using System;
@@ -21,7 +22,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using Windows.Devices.Radios;
 
 namespace Handheld_Control_Panel.UserControls
@@ -29,45 +29,41 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Volume_Slider : UserControl
+    public partial class Mute_Toggle : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Volume_Slider()
+        public Mute_Toggle()
         {
             InitializeComponent();
-            //setControlValue();
-            UserControl_Management.setupControl(control);
-            label.Content = Application.Current.Resources["Usercontrol_Volume"] + " - " + control.Value.ToString() + "%";
-            
+            setControlValue();
+          
         }
 
-       
+        private void setControlValue()
+        {
+            
+            control.IsOn = Global_Variables.Mute;
+
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-           //UserControl_Management.setThumbSize(control);
-
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            Global_Variables.volumeChanged += Global_Variables_volumeChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-
+            Global_Variables.volumeMuteChanged += Global_Variables_volumeMuteChanged;
         }
 
-        private void Global_Variables_volumeChanged(object? sender, EventArgs e)
+        private void Global_Variables_volumeMuteChanged(object? sender, EventArgs e)
         {
-
             this.Dispatcher.BeginInvoke(() => {
-                if (Global_Variables.Volume != control.Value)
+                if (Global_Variables.Mute != control.IsOn)
                 {
-                    control.Value = Global_Variables.Volume;
+                    control.IsOn = Global_Variables.Mute;
                 }
 
             });
-
         }
-
-      
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -80,22 +76,20 @@ namespace Handheld_Control_Panel.UserControls
         }
 
 
-     
+        private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (control.IsLoaded)
+            {
+                AudioManager.SetMasterVolumeMute(control.IsOn);
+               
+            }
+          
+        }
       
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            Global_Variables.brightnessChanged -= Global_Variables_volumeChanged;
-        }
-
-        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            
-            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
-            {
-                label.Content = Application.Current.Resources["Usercontrol_Volume"] + " - " + control.Value.ToString() + "%";
-                UserControl_Management.Slider_ValueChanged(sender, e);
-            }
+            Global_Variables.volumeMuteChanged += Global_Variables_volumeMuteChanged;
         }
     }
 }
