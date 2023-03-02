@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using MahApps.Metro.Controls;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -78,17 +79,33 @@ namespace Handheld_Control_Panel.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (controlList.SelectedItem != null)
+            Button button = (Button)sender;
+            string buttonTag = button.Tag.ToString();
+
+            if (controlList.SelectedItem != null && buttonTag != "")
             {
                 HomePageItem hpi = controlList.SelectedItem as HomePageItem;
-                if (controlList.SelectedIndex > 0)
-                {
-                    int index = controlList.SelectedIndex;
-                    Global_Variables.homePageItems.Remove(hpi);
-                    Global_Variables.homePageItems.Insert(index -1,hpi);
-                    controlList.Items.Refresh();
 
+                if (button.Tag.ToString().Contains(hpi.UserControl))
+                {
+                    if (controlList.SelectedIndex > 0 && button.Tag.ToString().Contains("_Up"))
+                    {
+                        int index = controlList.SelectedIndex;
+                        Global_Variables.homePageItems.Remove(hpi);
+                        Global_Variables.homePageItems.Insert(index - 1, hpi);
+                        controlList.Items.Refresh();
+
+                    }
+                    if (controlList.SelectedIndex < controlList.Items.Count-1 && button.Tag.ToString().Contains("_Down"))
+                    {
+                        int index = controlList.SelectedIndex;
+                        Global_Variables.homePageItems.Remove(hpi);
+                        Global_Variables.homePageItems.Insert(index, hpi);
+                        controlList.Items.Refresh();
+
+                    }
                 }
+               
                 
             }
         }

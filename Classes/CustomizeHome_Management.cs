@@ -32,6 +32,8 @@ namespace Handheld_Control_Panel.Classes
                     hpi.DisplayUsercontrol = Application.Current.Resources[hpi.UserControl.ToString()].ToString();
                     string boolValue = item.Substring(item.Length - 1, 1);
                     if (boolValue == "1") { hpi.Enabled= true; } else { hpi.Enabled= false; }
+                    hpi.UpArrowTag = hpi.UserControl + "_Up";
+                    hpi.DownArrowTag = hpi.UserControl + "_Down";
                     this.Add(hpi);
                 }
             }
@@ -60,5 +62,8 @@ namespace Handheld_Control_Panel.Classes
         public bool Enabled { get; set; } = true;
         public PackIconUniconsKind iconKind { get; set; } = PackIconUniconsKind.Bars;
         
+        public string UpArrowTag { get; set; }
+        public string DownArrowTag { get; set; }
+
     }
 }

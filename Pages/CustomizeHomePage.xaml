@@ -27,23 +27,29 @@
             </ListBox.Resources>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid  >
+                    <Grid  Height="53">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
-                            <ColumnDefinition Width="60" SharedSizeGroup="Column2"/>
+                            <ColumnDefinition Width="55" SharedSizeGroup="Column2"/>
                             <ColumnDefinition Width="300" SharedSizeGroup="Column3"/>
                             <ColumnDefinition Width="80" SharedSizeGroup="Column4"/>
 
                         </Grid.ColumnDefinitions>
                         <!-- Assumes MVVM and you wish to bind to properties and commands -->
                         <TextBlock Grid.Column="0"  Text="{Binding UserControl}" />
-                        <Button VerticalAlignment="Center" Click="Button_Click" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
-                            <iconPacks:Unicons Kind="Bars" Height="30" Width="30" />
-                        </Button>
+                        <StackPanel Name="updownarrows" Grid.Column="1" Visibility="Visible">
+                            <Button VerticalAlignment="Center" Click="Button_Click" Tag="{Binding UpArrowTag}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                                <iconPacks:Unicons Kind="AngleUp" Height="12" Width="30" />
+                            </Button>
+                            <Button VerticalAlignment="Center" Click="Button_Click"  Tag="{Binding DownArrowTag}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                                <iconPacks:Unicons Kind="AngleDown" Height="12" Width="30" />
+                            </Button>
+                        </StackPanel>
+                       
                         <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="25" Text="{Binding DisplayUsercontrol}"/>
                         <mah:ToggleSwitch Grid.Column="3" OnContent="" OffContent="" IsOn="{Binding Enabled}" >
                             <mah:ToggleSwitch.LayoutTransform>
-                                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                             </mah:ToggleSwitch.LayoutTransform>
                         </mah:ToggleSwitch>
 
