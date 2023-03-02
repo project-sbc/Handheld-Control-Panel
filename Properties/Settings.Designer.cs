@@ -276,8 +276,8 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("QuickAction_Wrappanel;TDP_Slider;TDP2_Slider;GPUCLK_Slider;Resolution_Listbox;Ref" +
-            "resh_Listbox;Scaling_Listbox;FPSLimit_Slider;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volu" +
+            "me0;Usercontrol_VolumeMute1;")]
         public string qamUserControls {
             get {
                 return ((string)(this["qamUserControls"]));

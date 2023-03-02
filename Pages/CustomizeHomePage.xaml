@@ -5,15 +5,46 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Handheld_Control_Panel.Pages"
       xmlns:uc="clr-namespace:Handheld_Control_Panel.UserControls"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    
-    <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
-        <StackPanel x:Name="stackPanel" >
-            <uc:Wifi_Toggle />
 
-        </StackPanel>
-    </ScrollViewer>
-  
+    <ListBox x:Name="control" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
+        <ListBox.Resources>
+
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Background" Value="Transparent" />
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+
+                    </Style>
+                </Style.Resources>
+            </Style>
+        </ListBox.Resources>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Grid Height="50" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
+                        <ColumnDefinition Width="60" SharedSizeGroup="Column2"/>
+                        <ColumnDefinition Width="300" SharedSizeGroup="Column3"/>
+                        <ColumnDefinition Width="80" SharedSizeGroup="Column4"/>
+
+                    </Grid.ColumnDefinitions>
+                    <!-- Assumes MVVM and you wish to bind to properties and commands -->
+                    <TextBlock Grid.Column="0"  Text="{Binding ControlName}" />
+                    <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                        <iconPacks:Unicons Kind="{Binding iconStyle}" />
+                    </Button>
+                    <TextBlock Grid.Column="2" FontSize="18" Text="{Binding DisplayUserControl}"/>
+                    <mah:ToggleSwitch Grid.Column="3" Style="{DynamicResource userControlToggle}" IsOn="{Binding IsOn}" />
+
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+
 </Page>

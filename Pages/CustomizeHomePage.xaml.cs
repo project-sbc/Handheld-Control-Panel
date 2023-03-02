@@ -49,14 +49,7 @@ namespace Handheld_Control_Panel.Pages
 
         private void getUserControlsOnPage()
         {
-            foreach (object child in stackPanel.Children)
-            {
-                if (child is UserControl)
-                {
-                    userControls.Add((UserControl)child);
-                }
-
-            }
+           
         }
         //
         private void handleControllerInputs(object sender, EventArgs e)
@@ -68,7 +61,7 @@ namespace Handheld_Control_Panel.Pages
             if (args.WindowPage == windowpage)
             {
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                int intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, 0, stackPanel);
+                int intReturn = 0;//WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, 0, stackPanel);
               
                 highlightedUserControl = intReturn;
    

@@ -29,11 +29,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Mute_Toggle : UserControl
+    public partial class VolumeMute_Toggle : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Mute_Toggle()
+        public VolumeMute_Toggle()
         {
             InitializeComponent();
             setControlValue();
