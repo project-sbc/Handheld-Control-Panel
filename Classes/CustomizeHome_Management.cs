@@ -34,6 +34,7 @@ namespace Handheld_Control_Panel.Classes
                     if (boolValue == "1") { hpi.Enabled= true; } else { hpi.Enabled= false; }
                     hpi.UpArrowTag = hpi.UserControl + "_Up";
                     hpi.DownArrowTag = hpi.UserControl + "_Down";
+                    hpi.EnableMovementTag = hpi.UserControl + "_EnableMovement";
                     this.Add(hpi);
                 }
             }
@@ -64,6 +65,13 @@ namespace Handheld_Control_Panel.Classes
         
         public string UpArrowTag { get; set; }
         public string DownArrowTag { get; set; }
+
+
+        public Visibility updownVisibility { get; set; } = Visibility.Collapsed;
+        public Visibility enableMovementVisibility { get; set; } = Visibility.Visible;
+        public string EnableMovementTag { get; set; }
+
+  
 
     }
 }

@@ -12,7 +12,7 @@
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
-        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450" Height="500" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
+        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450" Height="500" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" SelectionChanged="controlList_SelectionChanged"     >
             <ListBox.Resources>
 
                 <Style TargetType="ListBoxItem">
@@ -37,7 +37,7 @@
                         </Grid.ColumnDefinitions>
                         <!-- Assumes MVVM and you wish to bind to properties and commands -->
                         <TextBlock Grid.Column="0"  Text="{Binding UserControl}" />
-                        <StackPanel Name="updownarrows" Grid.Column="1" Visibility="Visible">
+                        <StackPanel Name="updownarrows" Grid.Column="1" Visibility="{Binding updownVisibility}">
                             <Button VerticalAlignment="Center" Click="Button_Click" Tag="{Binding UpArrowTag}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
                                 <iconPacks:Unicons Kind="AngleUp" Height="12" Width="30" />
                             </Button>
@@ -45,7 +45,9 @@
                                 <iconPacks:Unicons Kind="AngleDown" Height="12" Width="30" />
                             </Button>
                         </StackPanel>
-                       
+                      <Button VerticalAlignment="Center" Click="Button_Click"  Tag="{Binding EnableMovementTag}" Visibility="{Binding enableMovementVisibility}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                        <iconPacks:Unicons Kind="AngleDown" Height="12" Width="30" />
+                      </Button>
                         <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="25" Text="{Binding DisplayUsercontrol}"/>
                         <mah:ToggleSwitch Grid.Column="3" OnContent="" OffContent="" IsOn="{Binding Enabled}" >
                             <mah:ToggleSwitch.LayoutTransform>
