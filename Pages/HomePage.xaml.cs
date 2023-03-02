@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.UserControls;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -39,6 +40,9 @@ namespace Handheld_Control_Panel.Pages
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
             addUserControlsToPage();
 
+            MainWindow wnd = (MainWindow)Window.GetWindow(this);
+            wnd.changeUserInstruction("MainPage_Instruction");
+            wnd = null;
         }
         private void addUserControlsToPage()
         {

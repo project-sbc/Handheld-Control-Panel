@@ -22,7 +22,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             <RowDefinition Height="2" />
             <RowDefinition Height="58" />
             <RowDefinition  />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             
         </Grid.RowDefinitions>
 
@@ -86,7 +86,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
 
         <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />
 
-        <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Height="40" Width="450" />
+        <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Height="50" Width="450" />
     </Grid>
    
 </mah:MetroWindow>

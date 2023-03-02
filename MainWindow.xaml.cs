@@ -24,6 +24,7 @@ using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
 using System.Management;
 using System.Net.NetworkInformation;
+using Handheld_Control_Panel.UserControls;
 
 namespace Handheld_Control_Panel
 {
@@ -292,8 +293,8 @@ namespace Handheld_Control_Panel
             }
             switch(newInstructionUserControl)
             {
-                case "UserControl_Home_Instruction":
-
+                case "MainPage_Instruction":
+                    instructionStackPanel.Children.Add(new MainPage_Instruction());
                     break;
                 default: break;
             }
