@@ -11,40 +11,43 @@
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
-    <ListBox x:Name="control" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
-        <ListBox.Resources>
+    <Grid>
+        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450" Height="500" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
+            <ListBox.Resources>
 
-            <Style TargetType="ListBoxItem">
-                <Setter Property="Background" Value="Transparent" />
-                <Style.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="0"/>
 
-                    </Style>
-                </Style.Resources>
-            </Style>
-        </ListBox.Resources>
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Grid Height="50" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
-                        <ColumnDefinition Width="60" SharedSizeGroup="Column2"/>
-                        <ColumnDefinition Width="300" SharedSizeGroup="Column3"/>
-                        <ColumnDefinition Width="80" SharedSizeGroup="Column4"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
+                            <ColumnDefinition Width="60" SharedSizeGroup="Column2"/>
+                            <ColumnDefinition Width="300" SharedSizeGroup="Column3"/>
+                            <ColumnDefinition Width="80" SharedSizeGroup="Column4"/>
 
-                    </Grid.ColumnDefinitions>
-                    <!-- Assumes MVVM and you wish to bind to properties and commands -->
-                    <TextBlock Grid.Column="0"  Text="{Binding ControlName}" />
-                    <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
-                        <iconPacks:Unicons Kind="{Binding iconStyle}" />
-                    </Button>
-                    <TextBlock Grid.Column="2" FontSize="18" Text="{Binding DisplayUserControl}"/>
-                    <mah:ToggleSwitch Grid.Column="3" Style="{DynamicResource userControlToggle}" IsOn="{Binding IsOn}" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Assumes MVVM and you wish to bind to properties and commands -->
+                        <TextBlock Grid.Column="0"  Text="{Binding UserControl}" />
+                        <Button VerticalAlignment="Center" Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                            <iconPacks:Unicons Kind="Bars" Height="30" Width="30" />
+                        </Button>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="25" Text="{Binding DisplayUsercontrol}"/>
+                        <mah:ToggleSwitch Grid.Column="3" OnContent="" OffContent="" IsOn="{Binding Enabled}" />
 
-                </Grid>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
+    </Grid>
+  
 </Page>

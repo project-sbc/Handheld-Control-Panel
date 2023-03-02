@@ -32,6 +32,7 @@ namespace Handheld_Control_Panel.Classes
                     hpi.DisplayUsercontrol = Application.Current.Resources[hpi.UserControl.ToString()].ToString();
                     string boolValue = item.Substring(item.Length - 1, 1);
                     if (boolValue == "1") { hpi.Enabled= true; } else { hpi.Enabled= false; }
+                    this.Add(hpi);
                 }
             }
         }

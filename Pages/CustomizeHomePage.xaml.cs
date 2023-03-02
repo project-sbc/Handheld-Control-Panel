@@ -20,6 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
+using Handheld_Control_Panel.Classes.Global_Variables;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -36,6 +37,8 @@ namespace Handheld_Control_Panel.Pages
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+
+           
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -45,6 +48,9 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
             getUserControlsOnPage();
 
+
+            controlList.ItemsSource = Global_Variables.homePageItems;
+            controlList.Items.Refresh();
         }
 
         private void getUserControlsOnPage()
