@@ -1,4 +1,5 @@
-﻿using Nefarius.Drivers.HidHide;
+﻿using Handheld_Control_Panel.Classes.Controller_Management;
+using Nefarius.Drivers.HidHide;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,14 +46,10 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
             set
             {
                 brightness = value;
-                raiseBrightnessChanged();
+                raiseValueChanged("Brightness");
             }
         }
-        public static event EventHandler brightnessChanged;
-        public static void raiseBrightnessChanged()
-        {
-            brightnessChanged?.Invoke(null, EventArgs.Empty);
-        }
+    
 
         public static int brightness { get; set; } = -1;
         #endregion
@@ -68,14 +65,10 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
             set
             {
                 volume = value;
-                raiseVolumeChanged();
+                raiseValueChanged("Volume"); 
             }
         }
-        public static event EventHandler volumeChanged;
-        public static void raiseVolumeChanged()
-        {
-            volumeChanged?.Invoke(null, EventArgs.Empty);
-        }
+        
 
         public static int volume { get; set; } = 0;
         #endregion
@@ -91,15 +84,10 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
             set
             {
                 mute = value;
-                raiseVolumeMuteChanged();
+                raiseValueChanged("VolumeMute");
             }
         }
-        public static event EventHandler volumeMuteChanged;
-        public static void raiseVolumeMuteChanged()
-        {
-            volumeMuteChanged?.Invoke(null, EventArgs.Empty);
-        }
-
+      
         public static bool mute { get; set; } = false;
         #endregion
 
@@ -173,8 +161,26 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //language pack
         public static ResourceDictionary languageDict = new ResourceDictionary();
 
-    }
 
+
+
+        public static event EventHandler<valueChangedEventArgs> valueChanged;
+
+        public static void raiseValueChanged(string parameter)
+        {
+
+            valueChanged?.Invoke(null, new valueChangedEventArgs(parameter));
+        }
+    }
+    public class valueChangedEventArgs : EventArgs
+    {
+        public string Parameter { get; set; }
+        public valueChangedEventArgs(string parameter)
+        {
+           
+            this.Parameter = parameter;
+        }
+    }
     public struct ActionParameter
     {
         public string Action;

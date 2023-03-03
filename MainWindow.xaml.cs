@@ -178,24 +178,23 @@ namespace Handheld_Control_Panel
             //get action from custom event args for controller
             Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
             
-            
-            if (args.Action == "LB")
+            switch(args.Action)
             {
-                navigateListBox(true);
-            }
-            else
-            {
-                if (args.Action == "RB")
-                {
+                case "LB":
+                    navigateListBox(true);
+                    break;
+                case "RB":
                     navigateListBox(false);
-                }
-                else
-                {
+                    break;
+                case "B":
+                    this.WindowState = WindowState.Minimized;
+                    break;
+                default:
                     Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
-                }
+                    break;
+
             }
-
-
+          
         }
 
         #region navigation
@@ -303,12 +302,13 @@ namespace Handheld_Control_Panel
         {
             if (this.WindowState == WindowState.Minimized)
             {
-               
+                frame.Source = null;
                 updateTimer.Interval = new TimeSpan(0,0,15);
                
             }
             if (this.WindowState == WindowState.Normal)
             {
+                navigation.SelectedIndex = 0;
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
             }
         }

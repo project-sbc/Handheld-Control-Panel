@@ -51,10 +51,12 @@ namespace Handheld_Control_Panel.Pages
             List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
             foreach (HomePageItem item in Global_Variables.homePageItems)
             {
+
                 if (item.UserControl != "")
                 {
                     if (item.Enabled)
                     {
+                        
                         switch (item.UserControl)
                         {
                             case "Usercontrol_Wifi":
@@ -71,6 +73,9 @@ namespace Handheld_Control_Panel.Pages
                                 break;
                             case "Usercontrol_Volume":
                                 stackPanel.Children.Add(new Volume_Slider());
+                                break;
+                            case "Usercontrol_Resolution":
+                                stackPanel.Children.Add(new Resolution_Dropdown());
                                 break;
                             default: break;
                         }

@@ -24,6 +24,19 @@ namespace Handheld_Control_Panel.Classes
             Parallel.Invoke(updateTasks.ToArray());
 
         }
+        public static void UpdateTaskAlternate()
+        {
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Brightness_Management.WindowsSettingsBrightnessController.getBrightness());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.GetMasterVolume());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.GetMasterVolumeMute());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.readTDP());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Display_Management.Display_Management.getCurrentDisplaySettings());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.MaxProcFreq_Management.MaxProcFreq_Management.readCPUMaxFrequency());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.CoreParking_Management.CoreParking_Management.readActiveCores());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.EPP_Management.EPP_Management.readEPP());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.getRTSSFPSLimit());
+
+        }
 
 
     }

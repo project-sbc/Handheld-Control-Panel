@@ -6,6 +6,7 @@ using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
+using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,74 +29,61 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Brightness_Slider : UserControl
+    public partial class Resolution_Dropdown : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Brightness_Slider()
+        public Resolution_Dropdown()
         {
             InitializeComponent();
-            //setControlValue();
-            UserControl_Management.setupControl(control);
-            label.Content = Application.Current.Resources["Usercontrol_Brightness"] + " - " + control.Value.ToString() + "%";
-            
+            setControlValue();
+          
         }
 
-       
+        private  void setControlValue()
+        {
+            label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + Global_Variables.resolution;
+            controlList.ItemsSource = Global_Variables.resolutions;
+            controlList.SelectedItem = Global_Variables.resolution;
+            controlList.Visibility = Visibility.Collapsed;
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-           //UserControl_Management.setThumbSize(control);
-
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            Global_Variables.valueChanged += Global_Variables_brightnessChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
         }
-
-        private void Global_Variables_brightnessChanged(object? sender, EventArgs e)
-        {
-
-            valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "Brightness")
-            {
-                this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.Brightness != control.Value)
-                    {
-                        control.Value = Global_Variables.Brightness;
-                    }
-
-                });
-            }
-        
-        }
-
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
 
             }
         }
 
 
-     
-      
+    
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            Global_Variables.valueChanged -= Global_Variables_brightnessChanged;
         }
 
-        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
+            if (controlList.Visibility == Visibility.Visible)
             {
-                label.Content = Application.Current.Resources["Usercontrol_Brightness"] + " - " + control.Value.ToString() + "%";
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                controlList.Visibility = Visibility.Collapsed;
+                PackIconUnicons icon = (PackIconUnicons)button.Content;
+                icon.RotationAngle = 0;
+            }
+            else
+            {
+                controlList.Visibility = Visibility.Visible;
+                PackIconUnicons icon = (PackIconUnicons)button.Content;
+                icon.RotationAngle = 90;
             }
         }
     }

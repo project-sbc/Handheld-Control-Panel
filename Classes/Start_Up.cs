@@ -28,7 +28,7 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //test code here
-
+   
 
             //test code
 

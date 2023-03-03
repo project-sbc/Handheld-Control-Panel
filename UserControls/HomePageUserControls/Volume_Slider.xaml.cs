@@ -48,7 +48,7 @@ namespace Handheld_Control_Panel.UserControls
            //UserControl_Management.setThumbSize(control);
 
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            Global_Variables.volumeChanged += Global_Variables_volumeChanged;
+            Global_Variables.valueChanged += Global_Variables_volumeChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
@@ -56,14 +56,19 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Global_Variables_volumeChanged(object? sender, EventArgs e)
         {
+            valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
+            if (valueChangedEventArgs.Parameter == "Volume")
+            {
+                this.Dispatcher.BeginInvoke(() => {
+                    if (Global_Variables.Volume != control.Value)
+                    {
+                        control.Value = Global_Variables.Volume;
+                    }
 
-            this.Dispatcher.BeginInvoke(() => {
-                if (Global_Variables.Volume != control.Value)
-                {
-                    control.Value = Global_Variables.Volume;
-                }
+                });
+            }
 
-            });
+             
 
         }
 
@@ -85,7 +90,7 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            Global_Variables.brightnessChanged -= Global_Variables_volumeChanged;
+            Global_Variables.valueChanged -= Global_Variables_volumeChanged;
         }
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

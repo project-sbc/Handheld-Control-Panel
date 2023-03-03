@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Arrange}" />
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF095;" />
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF096;" />
 
 
             <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Close}" />
