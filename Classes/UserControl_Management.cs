@@ -134,7 +134,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
-                        slider.Value = Global_Variables.Global_Variables.readPL1;
+                        slider.Value = Global_Variables.Global_Variables.ReadPL1;
                         break;
                     case "Slider_GPUCLK":
                         slider.Minimum = 400;
@@ -179,7 +179,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
-                        slider.Value = Global_Variables.Global_Variables.readPL2;
+                        slider.Value = Global_Variables.Global_Variables.ReadPL2;
                         break;
                     case "Slider_Volume":
                         slider.Minimum = 0;
@@ -425,10 +425,10 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     Properties.Settings.Default.Save();
                     break;
                 case "Slider_TDP":
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.readPL2));
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.ReadPL2));
                     break;
                 case "Slider_TDP2":
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.readPL1, (int)sliderValue));
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.ReadPL1, (int)sliderValue));
                     break;
                 case "Slider_Volume":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume((int)sliderValue));

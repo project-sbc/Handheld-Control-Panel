@@ -26,7 +26,7 @@ namespace Handheld_Control_Panel.Classes
 
                     if (Int32.TryParse(actionParameter.Parameter, out param))
                     {
-                        param = (int)(param + Global_Variables.Global_Variables.readPL1);
+                        param = (int)(param + Global_Variables.Global_Variables.ReadPL1);
                         Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(param, param));
                     }
                     break;

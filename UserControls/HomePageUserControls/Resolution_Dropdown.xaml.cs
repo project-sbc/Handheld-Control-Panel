@@ -42,9 +42,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + Global_Variables.resolution;
+            label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + Global_Variables.Resolution;
             controlList.ItemsSource = Global_Variables.resolutions;
-            controlList.SelectedItem = Global_Variables.resolution;
+            controlList.SelectedItem = Global_Variables.Resolution;
             controlList.Visibility = Visibility.Collapsed;
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

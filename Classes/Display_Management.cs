@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                     //get actual resolution by dividing scaled width/height with scaling factor
                     double primaryWidth = Screen.PrimaryScreen.Bounds.Width;
                     double primaryHeight = Screen.PrimaryScreen.Bounds.Height;
-                    Global_Variables.Global_Variables.resolution = primaryWidth.ToString() + "x" + primaryHeight.ToString();
+                    Global_Variables.Global_Variables.Resolution = primaryWidth.ToString() + "x" + primaryHeight.ToString();
 
                     //display refresh rate
                     int findStartStringRate = result.IndexOf("@") + 1;
@@ -58,7 +58,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
 
                     string displayRate = result.Substring(findStartStringRate, 1 + findEndStringRate - findStartStringRate).Trim();
 
-                    Global_Variables.Global_Variables.refreshRate = displayRate;
+                    Global_Variables.Global_Variables.RefreshRate = displayRate;
                 }
             }
             catch (Exception ex)
@@ -281,14 +281,14 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             string result = "";
 
             //check if current refresh rate is supported at the display resolution, otherwise change
-            if (!Global_Variables.Global_Variables.resolution_refreshrates[resolution].Contains(Global_Variables.Global_Variables.refreshRate))
+            if (!Global_Variables.Global_Variables.resolution_refreshrates[resolution].Contains(Global_Variables.Global_Variables.RefreshRate))
             {
 
                 commandArguments = commandArguments + " /R:" + Global_Variables.Global_Variables.resolution_refreshrates[resolution][0] + " /D";
             }
             else
             {
-                commandArguments =  commandArguments + " /R:" + Global_Variables.Global_Variables.refreshRate + " /D";
+                commandArguments =  commandArguments + " /R:" + Global_Variables.Global_Variables.RefreshRate + " /D";
             }
             try
             {
@@ -325,7 +325,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 {
                     result = SetDPICLIResult(commandArguments);
                     Thread.Sleep(200);
-                    Global_Variables.Global_Variables.scaling = scaling;
+                    Global_Variables.Global_Variables.Scaling = scaling;
                 }
                 catch (Exception ex)
                 {

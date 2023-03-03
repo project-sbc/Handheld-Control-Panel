@@ -22,11 +22,40 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static string processorName = "";
 
         //TDP global
+        #region TDP
+        public static double ReadPL1
+        {
+            get
+            {
+               return readPL1 ;
+            } 
+            set
+            {
+                readPL1 = value;
+                raiseValueChanged("TDPPL1");
+            }
+        }
+        public static double ReadPL2
+        {
+            get
+            {
+                return readPL2;
+            }
+            set
+            {
+                readPL2 = value;
+                raiseValueChanged("TDPPL2");
+            }
+        }
+
         public static double readPL1 = 0;
         public static double readPL2 = 0;
-        public static double setPL1 = 0;
-        public static double setPL2 = 0;
+        public static double SetPL1 = 0;
+        public static double SetPL2 = 0;
 
+
+
+        #endregion
         //AMD GPU CLOCK
         public static string gpuclk = "Default";
 
@@ -34,7 +63,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static bool useRoutineThread = true;
 
 
-        //brightness and volume setting
+      
         #region brightness
         public static int Brightness 
         {
@@ -131,10 +160,11 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //kill controller loop thread
         public static bool killControllerThread = false;
 
-        //display settings
-        public static string resolution = "";
-        public static string refreshRate = "";
-        public static string scaling = "Default";
+# region display settings
+        public static string Resolution = "";
+        public static string RefreshRate = "";
+        public static string Scaling = "Default";
+
 
         public static List<string> resolutions = new List<string>();
         public static Dictionary<string, List<string>> resolution_refreshrates = new Dictionary<string, List<string>>();
@@ -143,7 +173,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static List<string> FPSLimits = new List<string>();
         public static List<string> FanModes = new List<string>();
 
-   
+        #endregion
 
         //amd power slide
         public static int AMDPowerSlide;
