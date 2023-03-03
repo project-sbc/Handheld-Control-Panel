@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Display_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
@@ -17,6 +18,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,6 +35,7 @@ namespace Handheld_Control_Panel.UserControls
     {
         private string windowpage = "";
         private string usercontrol = "";
+        private object selectedObject = "";
         public Resolution_Dropdown()
         {
             InitializeComponent();
@@ -59,13 +62,38 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
+                switch(args.Action)
+                {
+                    case "A":
+
+                        break;
+                    case "B":
+
+                        break;
+                    default:
+                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
+
+                        break;
+                }
 
             }
         }
+        private void handleListboxChange()
+        {
+            if (controlList.IsLoaded)
+            {
+                if (controlList.SelectedItem != null)
+                {
+                    string resolution = controlList.SelectedItem.ToString();
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(resolution));
+                    selectedObject = controlList.SelectedItem;
+                }
+
+            }
+
+        }
 
 
-    
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;

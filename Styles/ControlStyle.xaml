@@ -7,6 +7,13 @@
                  xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+
+    <Style x:Key="userControls" TargetType="UserControl">
+        <Setter Property="Margin" Value="0,3,0,0" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+       
+    </Style>
+    
     <!--textblock-->
     <Style x:Key="controllerButtonTextblock" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />

@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
 
                 if (Properties.Settings.Default.autoApplySetTDP)
                 {
-                    Task_Scheduler.Task_Scheduler.runTask(() => TDP_Management.changeTDP((int)Global_Variables.Global_Variables.setPL1, (int)Global_Variables.Global_Variables.setPL2));
+                    Task_Scheduler.Task_Scheduler.runTask(() => TDP_Management.changeTDP((int)Global_Variables.Global_Variables.SetPL1, (int)Global_Variables.Global_Variables.SetPL2));
                 }
 
 
@@ -106,8 +106,8 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                         runAMDTDPChange(pl1TDP, pl2TDP);
                     }
                 }
-                Global_Variables.Global_Variables.setPL1 = pl1TDP;
-                Global_Variables.Global_Variables.setPL2 = pl2TDP;
+                Global_Variables.Global_Variables.SetPL1 = pl1TDP;
+                Global_Variables.Global_Variables.SetPL2 = pl2TDP;
 
                 //read tdp after changing
                 readTDP();
@@ -480,8 +480,8 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
     
             if (Global_Variables.Global_Variables.processorName.Contains("APU 0405"))
             {
-                Global_Variables.Global_Variables.readPL1 = Global_Variables.Global_Variables.setPL1;
-                Global_Variables.Global_Variables.readPL2 = Global_Variables.Global_Variables.setPL2;
+                Global_Variables.Global_Variables.readPL1 = Global_Variables.Global_Variables.SetPL1;
+                Global_Variables.Global_Variables.readPL2 = Global_Variables.Global_Variables.SetPL2;
             }
             else
             {

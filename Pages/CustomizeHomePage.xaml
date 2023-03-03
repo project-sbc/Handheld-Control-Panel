@@ -16,7 +16,7 @@
             <ListBox.Resources>
 
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
                     <Style.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="0"/>

@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel.UserControls
         private void getDPIScaling()
         {
             //used to get absolute resolution (not scaled resolution)
-            Global_Variables.scaling = (VisualTreeHelper.GetDpi(this).DpiScaleX * 100).ToString();
+            Global_Variables.Scaling = (VisualTreeHelper.GetDpi(this).DpiScaleX * 100).ToString();
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -69,7 +69,7 @@ namespace Handheld_Control_Panel.UserControls
             control.Items.Add("175");
             control.Items.Add("200");
             control.Items.Add("225");
-            control.SelectedItem = Global_Variables.scaling;
+            control.SelectedItem = Global_Variables.Scaling;
         }
 
      

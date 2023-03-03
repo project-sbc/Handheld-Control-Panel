@@ -160,11 +160,36 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //kill controller loop thread
         public static bool killControllerThread = false;
 
-# region display settings
-        public static string Resolution = "";
-        public static string RefreshRate = "";
+        # region display settings
+        public static string Resolution
+        {
+            get
+            {
+                return resolution;
+            }
+            set
+            {
+                resolution= value;
+                raiseValueChanged("Resolution");
+            }
+        }
+        public static string RefreshRate
+        {
+            get
+            {
+                return refreshRate;
+            }
+            set
+            {
+                refreshRate = value;
+                raiseValueChanged("RefreshRate");
+            }
+        }
         public static string Scaling = "Default";
 
+
+        public static string resolution = "";
+        public static string refreshRate = "";
 
         public static List<string> resolutions = new List<string>();
         public static Dictionary<string, List<string>> resolution_refreshrates = new Dictionary<string, List<string>>();

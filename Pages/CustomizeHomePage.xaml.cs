@@ -198,9 +198,10 @@ namespace Handheld_Control_Panel.Pages
                     {
                         selectedItem.updownVisibility = Visibility.Collapsed;
                         selectedItem.enableMovementVisibility = Visibility.Visible;
+                        controlList.Items.Refresh();
                     }
                     selectedItem = newHomePageItem;
-                    controlList.Items.Refresh();
+                    
                 }
             }
 

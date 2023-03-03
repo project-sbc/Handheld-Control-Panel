@@ -278,7 +278,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                     break;
                 case "Select":
-                    border.Style = (Style)res["userControlBorderSelected"];
+                    border.Style = (Style)res["userControlBorderHighlight"];
 
                     break;
                 case "Unhighlight":

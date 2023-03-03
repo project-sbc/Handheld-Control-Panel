@@ -29,7 +29,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
 
         public static bool suspendEventsForGamepadHotKeyProgramming = false;
 
-        public static DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
+        public static DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Send);
 
         public static buttonEvents buttonEvents = new buttonEvents();
 
@@ -149,7 +149,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(70);
+            timerController.Interval = TimeSpan.FromMilliseconds(40);
             timerController.Tick += controller_Tick;
             timerController.Start();
 
@@ -327,7 +327,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     if (controller.IsConnected)
                     {
                         controllerNum = 6;
-                        timerController.Interval = TimeSpan.FromMilliseconds(60);
+                        timerController.Interval = TimeSpan.FromMilliseconds(40);
                         if (Global_Variables.Global_Variables.controllerConnected == false)
                         {
                             Global_Variables.Global_Variables.controllerConnected = true;

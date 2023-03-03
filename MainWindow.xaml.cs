@@ -312,6 +312,17 @@ namespace Handheld_Control_Panel
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
             }
         }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            getDPIScaling();
+        }
+        private void getDPIScaling()
+        {
+            //used to get absolute resolution (not scaled resolution). IT NEEDS TO RUN ON MAINWINDOW to use the visual tree helper
+            Global_Variables.Scaling = (VisualTreeHelper.GetDpi(this).DpiScaleX * 100).ToString();
+
+        }
     }
     public static class CheckForegroundWindowQAM
     {
