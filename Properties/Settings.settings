@@ -66,7 +66,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="qamUserControls" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volume0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;</Value>
+      <Value Profile="(Default)">Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volume0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

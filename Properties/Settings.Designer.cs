@@ -277,7 +277,7 @@ namespace Handheld_Control_Panel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volu" +
-            "me0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;")]
+            "me0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;")]
         public string qamUserControls {
             get {
                 return ((string)(this["qamUserControls"]));

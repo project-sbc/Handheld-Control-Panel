@@ -26,6 +26,7 @@
     <system:String x:Key="Usercontrol_Volume">Volume</system:String>
     <system:String x:Key="Usercontrol_VolumeMute">Volume Mute</system:String>
     <system:String x:Key="Usercontrol_Resolution">Resolution</system:String>
+    <system:String x:Key="Usercontrol_RefreshRate">Refresh Rate</system:String>
     
     
     
