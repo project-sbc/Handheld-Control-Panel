@@ -86,7 +86,7 @@ namespace Handheld_Control_Panel.UserControls
                     if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate)
                     {
                         controlList.SelectedItem = Global_Variables.Resolution;
-                        label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + controlList.SelectedItem.ToString();
+                        label.Content = Application.Current.Resources["Usercontrol_RefreshRate"] + " - " + controlList.SelectedItem.ToString() + " Hz";
                     }
 
 

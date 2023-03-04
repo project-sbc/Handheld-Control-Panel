@@ -78,6 +78,9 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_Resolution":
                                 stackPanel.Children.Add(new Resolution_Dropdown());
                                 break;
+                            case "Usercontrol_RefreshRate":
+                                stackPanel.Children.Add(new RefreshRate_Dropdown());
+                                break;
                             default: break;
                         }
                     }

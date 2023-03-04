@@ -17,7 +17,7 @@
                 </Button>
                 
             </DockPanel>
-            <ListBox x:Name="controlList" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="450" Height="300" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
+            <ListBox x:Name="controlList" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="450" Height="180" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">
