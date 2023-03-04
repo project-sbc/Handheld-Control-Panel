@@ -28,7 +28,7 @@
     <system:String x:Key="Usercontrol_Resolution">Resolution</system:String>
     <system:String x:Key="Usercontrol_RefreshRate">Refresh Rate</system:String>
     <system:String x:Key="Usercontrol_TDP">TDP</system:String>
-    <system:String x:Key="Usercontrol_TDP2">TDP2</system:String>
+    <system:String x:Key="Usercontrol_TDP2">Boost TDP</system:String>
     
     
     

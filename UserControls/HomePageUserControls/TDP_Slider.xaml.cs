@@ -57,18 +57,29 @@ namespace Handheld_Control_Panel.UserControls
         private void Global_Variables_valueChanged(object? sender, EventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "TDP")
+            if (valueChangedEventArgs.Parameter == "TDP2" || valueChangedEventArgs.Parameter == "TDP1")
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.ReadPL1 != control.Value)
+                    if (valueChangedEventArgs.Parameter == "TDP2")
                     {
-                        control.Value = Global_Variables.ReadPL1;
+                        if (Global_Variables.ReadPL1 > Global_Variables.ReadPL2)
+                        {
+                            control.Value = Global_Variables.ReadPL2;
+                        }
                     }
+                    if (valueChangedEventArgs.Parameter == "TDP1")
+                    {
+                        if (Global_Variables.ReadPL1 != control.Value)
+                        {
+                            control.Value = Global_Variables.ReadPL1;
+                        }
+                    }
+
 
                 });
             }
 
-             
+
 
         }
 

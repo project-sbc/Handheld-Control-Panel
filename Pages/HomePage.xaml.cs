@@ -57,7 +57,7 @@ namespace Handheld_Control_Panel.Pages
                 {
                     if (item.Enabled)
                     {
-                        
+                        Debug.WriteLine(item.UserControl);
                         switch (item.UserControl)
                         {
                             case "Usercontrol_Wifi":
@@ -83,6 +83,9 @@ namespace Handheld_Control_Panel.Pages
                                 break;
                             case "Usercontrol_TDP":
                                 stackPanel.Children.Add(new TDP_Slider());
+                                break;
+                            case "Usercontrol_TDP2":
+                                stackPanel.Children.Add(new TDP2_Slider());
                                 break;
                             default: break;
                         }

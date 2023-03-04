@@ -32,7 +32,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
             set
             {
                 readPL1 = value;
-                raiseValueChanged("TDPPL1");
+                raiseValueChanged("TDP1");
             }
         }
         public static double ReadPL2
@@ -44,7 +44,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
             set
             {
                 readPL2 = value;
-                raiseValueChanged("TDPPL2");
+                raiseValueChanged("TDP2");
             }
         }
 

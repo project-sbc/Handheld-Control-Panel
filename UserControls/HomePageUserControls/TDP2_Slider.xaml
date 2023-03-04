@@ -11,7 +11,7 @@
         <DockPanel >
 
             <Label x:Name="label"  DockPanel.Dock="Top"  Style="{StaticResource userControlMainLabel}" />
-            <Slider  x:Name="control" DockPanel.Dock="Bottom" Width="404"  HorizontalAlignment="Center" Tag="Slider_TDP" ValueChanged="control_ValueChanged"    />
+            <Slider  x:Name="control" DockPanel.Dock="Bottom" Width="404"  HorizontalAlignment="Center" Tag="Slider_TDP2" ValueChanged="control_ValueChanged"    />
 
         </DockPanel>
 

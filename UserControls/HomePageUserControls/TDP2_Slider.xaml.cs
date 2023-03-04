@@ -38,7 +38,7 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-            label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
+            label.Content = Application.Current.Resources["Usercontrol_TDP2"] + " - " + control.Value.ToString() + "W";
             
         }
 
@@ -57,13 +57,24 @@ namespace Handheld_Control_Panel.UserControls
         private void Global_Variables_valueChanged(object? sender, EventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "TDP2")
+            if (valueChangedEventArgs.Parameter == "TDP2" || valueChangedEventArgs.Parameter == "TDP1")
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.ReadPL2 != control.Value)
+                    if (valueChangedEventArgs.Parameter == "TDP1")
                     {
-                        control.Value = Global_Variables.ReadPL2;
+                        if (Global_Variables.ReadPL1 > Global_Variables.ReadPL2)
+                        {
+                            control.Value = Global_Variables.ReadPL1;
+                        }
                     }
+                    if (valueChangedEventArgs.Parameter == "TDP2")
+                    {
+                        if (Global_Variables.ReadPL2 != control.Value)
+                        {
+                            control.Value = Global_Variables.ReadPL2;
+                        }
+                    }
+                   
 
                 });
             }
@@ -98,7 +109,7 @@ namespace Handheld_Control_Panel.UserControls
             
             if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
             {
-                label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
+                label.Content = Application.Current.Resources["Usercontrol_TDP2"] + " - " + control.Value.ToString() + "W";
                 UserControl_Management.Slider_ValueChanged(sender, e);
             }
         }

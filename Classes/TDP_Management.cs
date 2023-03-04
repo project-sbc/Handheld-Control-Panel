@@ -515,7 +515,11 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                                         tdp = tdp.Replace(" ", "");
                                         tdp = tdp.Replace("stapm-limit", "");
                                         tdp = tdp.Substring(0, tdp.IndexOf("."));
-                                        Global_Variables.Global_Variables.readPL1 = Convert.ToDouble(tdp);
+                                        if (Global_Variables.Global_Variables.ReadPL1 != Convert.ToDouble(tdp))
+                                        {
+                                            Global_Variables.Global_Variables.ReadPL1 = Convert.ToDouble(tdp);
+                                        }
+
                                     }
                                     if (line.Contains("PPT LIMIT SLOW"))
                                     {
@@ -525,7 +529,10 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                                         tdp = tdp.Replace(" ", "");
                                         tdp = tdp.Replace("slow-limit", "");
                                         tdp = tdp.Substring(0, tdp.IndexOf("."));
-                                        Global_Variables.Global_Variables.readPL2 = Convert.ToDouble(tdp);
+                                        if (Global_Variables.Global_Variables.ReadPL2 != Convert.ToDouble(tdp))
+                                        {
+                                            Global_Variables.Global_Variables.ReadPL2 = Convert.ToDouble(tdp);
+                                        }
                                         break;
                                     }
                                 }
