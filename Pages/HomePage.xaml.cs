@@ -81,6 +81,9 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_RefreshRate":
                                 stackPanel.Children.Add(new RefreshRate_Dropdown());
                                 break;
+                            case "Usercontrol_TDP":
+                                stackPanel.Children.Add(new TDP_Slider());
+                                break;
                             default: break;
                         }
                     }

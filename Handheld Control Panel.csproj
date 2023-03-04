@@ -164,7 +164,13 @@
     <Compile Update="UserControls\HomePageUserControls\Resolution_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\TDP2_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\VolumeMute_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\TDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Volume_Slider.xaml.cs">
@@ -272,10 +278,10 @@
     <Compile Update="UserControls\RegularControlsOLD\Scaling_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\RegularControlsOLD\TDP2_Slider.xaml.cs">
+    <Compile Update="UserControls\RegularControlsOLD\TDP2_Sliderold.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\RegularControlsOLD\TDP_Slider.xaml.cs">
+    <Compile Update="UserControls\RegularControlsOLD\TDP_Sliderold.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\RegularControlsOLD\Volume_SliderOLD.xaml.cs">
