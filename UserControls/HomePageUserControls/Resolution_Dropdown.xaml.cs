@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 
@@ -48,6 +49,7 @@ namespace Handheld_Control_Panel.UserControls
             label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + Global_Variables.Resolution;
             controlList.ItemsSource = Global_Variables.resolutions;
             controlList.SelectedItem = Global_Variables.Resolution;
+            selectedObject = Global_Variables.Resolution;
             controlList.Visibility = Visibility.Collapsed;
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -55,8 +57,29 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-
+            Global_Variables.valueChanged += Global_Variables_valueChanged;
         }
+
+        private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
+        {
+            valueChangedEventArgs valueChangedEventArgs = e as valueChangedEventArgs;
+            if (valueChangedEventArgs.Parameter == "Resolution")
+            {
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (controlList.Items.Contains(Global_Variables.Resolution) && controlList.SelectedItem != Global_Variables.Resolution)
+                    {
+                        controlList.SelectedItem = Global_Variables.Resolution;
+                        label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + controlList.SelectedItem.ToString();
+                    }
+
+
+                }));
+               
+             
+            }
+        }
+
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
@@ -65,10 +88,37 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
+                        if (controlList.Visibility == Visibility.Visible)
+                        {
+                            handleListboxChange();
+                        }
+                        else
+                        {
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                            wnd.changeUserInstruction("SelectedListBox_Instruction");
+                            wnd = null;
+                         
+                        }
 
                         break;
                     case "B":
+                        MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
+                        wnd2.changeUserInstruction("HomePage_Instruction");
+                        wnd2 = null;
+                        if (controlList.Visibility == Visibility.Visible)
+                        {
+                            
 
+                            if (selectedObject != null)
+                            {
+                                controlList.SelectedItem = selectedObject;
+                            }
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                        }
+  
                         break;
                     default:
                         Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
@@ -87,6 +137,11 @@ namespace Handheld_Control_Panel.UserControls
                     string resolution = controlList.SelectedItem.ToString();
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(resolution));
                     selectedObject = controlList.SelectedItem;
+                    label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + controlList.SelectedItem.ToString();
+                    if (controlList.Visibility == Visibility.Visible)
+                    {
+                        button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    }
                 }
 
             }
@@ -97,6 +152,7 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+            Global_Variables.valueChanged -= Global_Variables_valueChanged;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -113,6 +169,17 @@ namespace Handheld_Control_Panel.UserControls
                 PackIconUnicons icon = (PackIconUnicons)button.Content;
                 icon.RotationAngle = 90;
             }
+        }
+
+
+        private void controlList_TouchUp(object sender, TouchEventArgs e)
+        {
+            handleListboxChange();
+        }
+
+        private void controlList_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            handleListboxChange();
         }
     }
 }

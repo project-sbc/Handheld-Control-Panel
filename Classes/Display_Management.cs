@@ -50,15 +50,22 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                     //get actual resolution by dividing scaled width/height with scaling factor
                     double primaryWidth = Screen.PrimaryScreen.Bounds.Width;
                     double primaryHeight = Screen.PrimaryScreen.Bounds.Height;
-                    Global_Variables.Global_Variables.Resolution = primaryWidth.ToString() + "x" + primaryHeight.ToString();
+                    string resolution = primaryWidth.ToString() + "x" + primaryHeight.ToString();
+                    if (Global_Variables.Global_Variables.Resolution != resolution)
+                    {
+                        Global_Variables.Global_Variables.Resolution = resolution;
+                    }
 
                     //display refresh rate
                     int findStartStringRate = result.IndexOf("@") + 1;
                     int findEndStringRate = result.IndexOf("Hz") - 2;
 
                     string displayRate = result.Substring(findStartStringRate, 1 + findEndStringRate - findStartStringRate).Trim();
-
-                    Global_Variables.Global_Variables.RefreshRate = displayRate;
+                    if (Global_Variables.Global_Variables.RefreshRate != displayRate)
+                    {
+                       Global_Variables.Global_Variables.RefreshRate = displayRate;
+                    }
+        
                 }
             }
             catch (Exception ex)
@@ -276,7 +283,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
         public static void SetDisplayResolution(string resolution)
         {
             string resolutionX = resolution.Substring(0, resolution.IndexOf("x"));
-            string resolutionY = resolution.Substring(resolution.IndexOf("x")+1, resolution.Length - (1+resolution.IndexOf("x")));
+            string resolutionY = resolution.Substring(resolution.IndexOf("x") + 1, resolution.Length - (1 + resolution.IndexOf("x")));
             string commandArguments = " /X:" + resolutionX + " /Y:" + resolutionY;
             string result = "";
 
@@ -288,7 +295,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             }
             else
             {
-                commandArguments =  commandArguments + " /R:" + Global_Variables.Global_Variables.RefreshRate + " /D";
+                commandArguments = commandArguments + " /R:" + Global_Variables.Global_Variables.RefreshRate + " /D";
             }
             try
             {
@@ -307,7 +314,6 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 System.Windows.Forms.MessageBox.Show(errorMsg);
 
             }
-
 
 
 

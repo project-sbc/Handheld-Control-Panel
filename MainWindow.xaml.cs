@@ -38,7 +38,7 @@ namespace Handheld_Control_Panel
         private string window = "MainWindow";
         private string page = "";
         private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
-
+        private bool disable_B_ToClose = false;
         public MainWindow()
         {
             
@@ -187,7 +187,15 @@ namespace Handheld_Control_Panel
                     navigateListBox(false);
                     break;
                 case "B":
-                    this.WindowState = WindowState.Minimized;
+                    if (disable_B_ToClose)
+                    {
+                        Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
+                    }
+                    else
+                    {
+                        this.WindowState = WindowState.Minimized;
+                    }
+                 
                     break;
                 default:
                     Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
@@ -280,7 +288,9 @@ namespace Handheld_Control_Panel
 
         public void changeUserInstruction(string newInstructionUserControl)
         {
+
             this.Dispatcher.BeginInvoke(() => {
+                disable_B_ToClose = false;
                 instructionStackPanel.Children.Clear(); 
                 switch (newInstructionUserControl)
                 {
@@ -289,6 +299,10 @@ namespace Handheld_Control_Panel
                         break;
                     case "CustomizeHomePage_Instruction":
                         instructionStackPanel.Children.Add(new CustomizeHomePage_Instruction());
+                        break;
+                    case "SelectedListBox_Instruction":
+                        disable_B_ToClose= true;
+                        instructionStackPanel.Children.Add(new SelectedListBox_Instruction());
                         break;
                     default: break;
                 }
@@ -303,13 +317,17 @@ namespace Handheld_Control_Panel
             if (this.WindowState == WindowState.Minimized)
             {
                 frame.Source = null;
+                //change interval to 15 seconds
                 updateTimer.Interval = new TimeSpan(0,0,15);
-               
+                //change controller timer interval to 100 ms to hot key recognition when not open
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(100);
             }
             if (this.WindowState == WindowState.Normal)
             {
                 navigation.SelectedIndex = 0;
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
+                //change controller timer interval to 20 ms for active use
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(20);
             }
         }
 

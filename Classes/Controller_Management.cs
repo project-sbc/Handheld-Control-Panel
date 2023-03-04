@@ -149,7 +149,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(40);
+            timerController.Interval = TimeSpan.FromMilliseconds(20);
             timerController.Tick += controller_Tick;
             timerController.Start();
 
@@ -327,7 +327,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     if (controller.IsConnected)
                     {
                         controllerNum = 6;
-                        timerController.Interval = TimeSpan.FromMilliseconds(40);
+                        timerController.Interval = TimeSpan.FromMilliseconds(20);
                         if (Global_Variables.Global_Variables.controllerConnected == false)
                         {
                             Global_Variables.Global_Variables.controllerConnected = true;

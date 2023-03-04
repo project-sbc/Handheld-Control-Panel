@@ -188,6 +188,9 @@
     <Compile Update="UserControls\InstructionUserControls\CustomizeHomePage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\SelectedListBox_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InstructionUserControls\HomePage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
