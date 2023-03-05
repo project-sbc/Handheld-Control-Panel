@@ -59,7 +59,7 @@ namespace Handheld_Control_Panel.UserControls
             if (valueChangedEventArgs.Parameter == "Volume" && !dragStarted )
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.Volume != control.Value && border.Tag == "")
+                    if (Global_Variables.Volume != control.Value && border.Tag == "" && control.IsLoaded)
                     {
                         control.Value = Global_Variables.Volume;
                     }
@@ -108,7 +108,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!dragStarted)
+            if (!dragStarted && control.IsLoaded)
             {
                 sliderValueChanged();
             }

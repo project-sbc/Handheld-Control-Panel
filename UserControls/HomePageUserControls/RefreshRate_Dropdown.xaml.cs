@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            label.Content = Application.Current.Resources["Usercontrol_RefreshRate"] + " - " + Global_Variables.RefreshRate + " Hz";
+          
             controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
             controlList.SelectedItem = Global_Variables.RefreshRate;
             selectedObject = Global_Variables.RefreshRate;
@@ -68,10 +68,10 @@ namespace Handheld_Control_Panel.UserControls
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
-                    if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate)
+                    if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
                     {
                         controlList.SelectedItem = Global_Variables.RefreshRate;
-                        label.Content = Application.Current.Resources["Usercontrol_RefreshRate"] + " - " + controlList.SelectedItem.ToString() + " Hz";
+                    
                     }
 
 
@@ -83,10 +83,10 @@ namespace Handheld_Control_Panel.UserControls
             {
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate)
+                    if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
                     {
                         controlList.SelectedItem = Global_Variables.Resolution;
-                        label.Content = Application.Current.Resources["Usercontrol_RefreshRate"] + " - " + controlList.SelectedItem.ToString() + " Hz";
+                     
                     }
 
 
@@ -153,7 +153,7 @@ namespace Handheld_Control_Panel.UserControls
                     string refreshrate = controlList.SelectedItem.ToString();
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayRefreshRate(refreshrate));
                     selectedObject = controlList.SelectedItem;
-                    label.Content = Application.Current.Resources["Usercontrol_RefreshRate"] + " - " + controlList.SelectedItem.ToString();
+                 
                     if (controlList.Visibility == Visibility.Visible)
                     {
                         button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));

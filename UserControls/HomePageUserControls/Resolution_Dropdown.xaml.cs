@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + Global_Variables.Resolution;
+            
             controlList.ItemsSource = Global_Variables.resolutions;
             controlList.SelectedItem = Global_Variables.Resolution;
             selectedObject = Global_Variables.Resolution;
@@ -67,10 +67,9 @@ namespace Handheld_Control_Panel.UserControls
             {
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (controlList.Items.Contains(Global_Variables.Resolution) && controlList.SelectedItem != Global_Variables.Resolution)
+                    if (controlList.Items.Contains(Global_Variables.Resolution) && controlList.SelectedItem != Global_Variables.Resolution && controlList.IsLoaded)
                     {
                         controlList.SelectedItem = Global_Variables.Resolution;
-                        label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + controlList.SelectedItem.ToString();
                     }
 
 
@@ -137,7 +136,6 @@ namespace Handheld_Control_Panel.UserControls
                     string resolution = controlList.SelectedItem.ToString();
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(resolution));
                     selectedObject = controlList.SelectedItem;
-                    label.Content = Application.Current.Resources["Usercontrol_Resolution"] + " - " + controlList.SelectedItem.ToString();
                     if (controlList.Visibility == Visibility.Visible)
                     {
                         button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));

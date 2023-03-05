@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Windows.Devices.Radios;
 
 namespace Handheld_Control_Panel.UserControls
@@ -33,15 +34,25 @@ namespace Handheld_Control_Panel.UserControls
         private string windowpage = "";
         private string usercontrol = "";
         private bool dragStarted= false;
+        private DispatcherTimer changeValue = new DispatcherTimer();
         public TDP_Slider()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
          
+
+            //set up timer
+            changeValue.Interval = new TimeSpan(0,0,2);
+            changeValue.Tick += ChangeValue_Tick;
         }
 
-       
+        private void ChangeValue_Tick(object? sender, EventArgs e)
+        {
+            sliderValueChanged();
+            changeValue.Stop();
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
            //UserControl_Management.setThumbSize(control);
@@ -56,10 +67,10 @@ namespace Handheld_Control_Panel.UserControls
         private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "TDP" && !dragStarted )
+            if (valueChangedEventArgs.Parameter == "TDP" && !dragStarted)
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.ReadPL1 != control.Value && border.Tag == "")
+                    if (Global_Variables.ReadPL1 != control.Value && border.Tag == "" && control.IsLoaded)
                     {
                         control.Value = Global_Variables.ReadPL1;
                     }
@@ -88,6 +99,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
             Global_Variables.valueChanged -= Global_Variables_valueChanged;
+            changeValue.Stop();
+            changeValue.Tick -= ChangeValue_Tick;
         }
         private void sliderValueChanged()
         {
@@ -108,10 +121,21 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!dragStarted)
+            if (!dragStarted && control.IsLoaded)
             {
-                sliderValueChanged();
+                if (border.Tag == "")
+                {
+                    sliderValueChanged();
+                }
+                else
+                {
+                    changeValue.Stop(); 
+                    changeValue.Start();
+                }
+               
             }
         }
+
+        
     }
 }

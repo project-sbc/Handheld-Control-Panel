@@ -59,7 +59,7 @@ namespace Handheld_Control_Panel.UserControls
             if (valueChangedEventArgs.Parameter == "EPP" && !dragStarted )
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.EPP != control.Value && border.Tag == "")
+                    if (Global_Variables.EPP != control.Value && border.Tag == "" && control.IsLoaded)
                     {
                         control.Value = Global_Variables.EPP;
                     }
@@ -108,7 +108,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!dragStarted)
+            if (!dragStarted && control.IsLoaded)
             {
                 sliderValueChanged();
             }

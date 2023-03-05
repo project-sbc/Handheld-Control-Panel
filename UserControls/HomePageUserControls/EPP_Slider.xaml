@@ -11,7 +11,7 @@
         <DockPanel >
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                 <Label x:Name="label" Content="{DynamicResource Usercontrol_EPP}"   Style="{StaticResource userControlMainLabel}" />
-                <Label   DockPanel.Dock="Top" Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} %"  Style="{StaticResource userControlMainLabel}" />
+                <Label   DockPanel.Dock="Top" Content="{Binding ElementName=control, Path=Value}" Margin="0,0,0,0" ContentStringFormat="{}- {0} %"  Style="{StaticResource userControlMainLabel}" />
             </StackPanel>
     
             <Slider  x:Name="control" DockPanel.Dock="Bottom" Width="404"  HorizontalAlignment="Center" Tag="Slider_EPP" Thumb.DragStarted="control_DragStarted" Thumb.DragCompleted="control_DragCompleted" ValueChanged="control_ValueChanged"  />

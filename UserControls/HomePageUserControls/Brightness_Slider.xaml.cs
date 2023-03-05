@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.UserControls
         private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "Brightness" && !dragStarted )
+            if (valueChangedEventArgs.Parameter == "Brightness" && !dragStarted && control.IsLoaded)
             {
                 this.Dispatcher.BeginInvoke(() => {
                     if (Global_Variables.Brightness != control.Value && border.Tag == "")
@@ -108,7 +108,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!dragStarted)
+            if (!dragStarted && control.IsLoaded)
             {
                 sliderValueChanged();
             }

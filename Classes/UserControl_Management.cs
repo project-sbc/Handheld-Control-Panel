@@ -128,7 +128,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
 
 
-                    case "Slider_TDP":
+                    case "Slider_TDP-TickChange":
                         slider.Minimum = Properties.Settings.Default.minTDP;
                         slider.Maximum = Properties.Settings.Default.maxTDP;
                         slider.TickFrequency = 1;
@@ -173,7 +173,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Properties.Settings.Default.maxTDP;
                         break;
-                    case "Slider_TDP2":
+                    case "Slider_TDP2-TickChange":
                         slider.Minimum = Properties.Settings.Default.minTDP;
                         slider.Maximum = Properties.Settings.Default.maxTDP;
                         slider.TickFrequency = 1;
@@ -193,7 +193,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Minimum = 0;
                         slider.Maximum = 100;
                         slider.TickFrequency = 1;
-                        slider.SmallChange = 1;
+                        slider.SmallChange = 5;
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.EPP;
                         break;
@@ -305,9 +305,10 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                             case "Left":
                                 slider.Value = slider.Value - slider.SmallChange;
                                 break;
+                      
                             default:break;
                         }
-                        if (originalValue != slider.Value)
+                        if (originalValue != slider.Value && !slider.Tag.ToString().Contains("-TickChange"))
                         {
                             Slider_ValueChanged(slider, null);
                         }
@@ -428,10 +429,10 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     Properties.Settings.Default.maxRTSSFPSLimit = (int)sliderValue;
                     Properties.Settings.Default.Save();
                     break;
-                case "Slider_TDP":
+                case "Slider_TDP-TickChange":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.ReadPL2));
                     break;
-                case "Slider_TDP2":
+                case "Slider_TDP2-TickChange":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.ReadPL1, (int)sliderValue));
                     break;
                 case "Slider_Volume":
