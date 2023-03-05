@@ -87,6 +87,9 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_TDP2":
                                 stackPanel.Children.Add(new TDP2_Slider());
                                 break;
+                            case "Usercontrol_EPP":
+                                stackPanel.Children.Add(new EPP_Slider());
+                                break;
                             default: break;
                         }
                     }

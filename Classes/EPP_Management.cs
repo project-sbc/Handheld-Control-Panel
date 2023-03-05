@@ -47,7 +47,11 @@ namespace Handheld_Control_Panel.Classes.EPP_Management
                     intEPP = Convert.ToInt32(EPP, 16);
 
                 }
-                Global_Variables.Global_Variables.EPP = intEPP;
+                if(Global_Variables.Global_Variables.EPP != intEPP)
+                {
+                    Global_Variables.Global_Variables.EPP = intEPP;
+                }
+                
             }
 
        

@@ -275,21 +275,22 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             {
                 case "Highlight":
                     border.Style = (Style)res["userControlBorderHighlight"];
-
+                    border.Tag = "Highlight";
                     break;
                 case "Select":
                     border.Style = (Style)res["userControlBorderHighlight"];
-
+                    border.Tag = "Highlight";
                     break;
                 case "Unhighlight":
                     border.Style = (Style)res["userControlBorder"];
-                    
+                    border.Tag = "";
                     break;
 
                 default: 
                     if (control is Slider)
                     {
                         Slider slider = (Slider)control;
+                        double originalValue = slider.Value;
                         switch(action)
                         {
                             case "Up":
@@ -306,7 +307,10 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                                 break;
                             default:break;
                         }
-
+                        if (originalValue != slider.Value)
+                        {
+                            Slider_ValueChanged(slider, null);
+                        }
                     }
                     if (control is ToggleSwitch)
                     {
@@ -363,9 +367,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             }
         }
 
-        public static void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public static void Slider_ValueChanged(Object Slider, RoutedPropertyChangedEventArgs<double> e)
         {
-            Slider slider = (Slider)sender;
+            Slider slider = (Slider)Slider;
             string sliderTag = slider.Tag.ToString();
             double sliderValue = slider.Value;
             switch (sliderTag)
@@ -432,6 +436,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_Volume":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume((int)sliderValue));
+                    break;
+                case "Slider_Brightness":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Brightness_Management.WindowsSettingsBrightnessController.setBrightness((int)sliderValue));
                     break;
                 case "Slider_EPP":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.EPP_Management.EPP_Management.changeEPP((int)sliderValue));

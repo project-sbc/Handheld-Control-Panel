@@ -85,7 +85,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if(control.IsLoaded && control.Visibility == Visibility.Visible)
             {
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                UserControl_Management.Slider_ValueChanged((Slider)sender, e);
             }
        
         }

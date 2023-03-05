@@ -158,6 +158,15 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Brightness_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Volume_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\EPP_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\RefreshRate_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -171,12 +180,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\TDP_Slider.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UserControls\HomePageUserControls\Volume_Slider.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UserControls\HomePageUserControls\Brightness_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Bluetooth_Toggle.xaml.cs">
@@ -257,7 +260,7 @@
     <Compile Update="UserControls\RegularControlsOLD\Customize_QAM.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\RegularControlsOLD\EPP_Slider.xaml.cs">
+    <Compile Update="UserControls\RegularControlsOLD\EPP_SliderOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\RegularControlsOLD\FPSLimit_Slider.xaml.cs">

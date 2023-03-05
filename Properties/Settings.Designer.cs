@@ -25,7 +25,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Emerald")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Steel")]
         public string systemAccent {
             get {
                 return ((string)(this["systemAccent"]));
@@ -133,7 +133,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Light")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dark")]
         public string SystemTheme {
             get {
                 return ((string)(this["SystemTheme"]));
@@ -278,7 +278,7 @@ namespace Handheld_Control_Panel.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volu" +
             "me0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Use" +
-            "rcontrol_TDP1;Usercontrol_TDP21;")]
+            "rcontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;")]
         public string qamUserControls {
             get {
                 return ((string)(this["qamUserControls"]));

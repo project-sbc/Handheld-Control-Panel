@@ -133,7 +133,24 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int maxCpuCores = 1;
         public static int baseCPUSpeed = 1100;
 
-        public static int EPP;
+
+        #region EPP
+        public static int EPP
+        {
+            get
+            {
+                return ePP;
+            }
+            set
+            {
+                ePP = value;
+                raiseValueChanged("EPP");
+            }
+        }
+
+
+        public static int ePP = 0;
+        #endregion
         //RTSS fps limit
         public static int FPSLimit = 0;
 

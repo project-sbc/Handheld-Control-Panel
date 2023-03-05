@@ -32,13 +32,13 @@ namespace Handheld_Control_Panel.UserControls
     {
         private string windowpage = "";
         private string usercontrol = "";
+        private bool dragStarted= false;
         public Brightness_Slider()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-            label.Content = Application.Current.Resources["Usercontrol_Brightness"] + " - " + control.Value.ToString() + "%";
-            
+         
         }
 
        
@@ -47,28 +47,29 @@ namespace Handheld_Control_Panel.UserControls
            //UserControl_Management.setThumbSize(control);
 
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            Global_Variables.valueChanged += Global_Variables_brightnessChanged;
+            Global_Variables.valueChanged += Global_Variables_valueChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
         }
 
-        private void Global_Variables_brightnessChanged(object? sender, EventArgs e)
+        private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
-
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "Brightness")
+            if (valueChangedEventArgs.Parameter == "Brightness" && !dragStarted )
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.Brightness != control.Value)
+                    if (Global_Variables.Brightness != control.Value && border.Tag == "")
                     {
                         control.Value = Global_Variables.Brightness;
                     }
 
                 });
             }
-        
+
         }
+
+      
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -86,16 +87,30 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            Global_Variables.valueChanged -= Global_Variables_brightnessChanged;
+            Global_Variables.valueChanged -= Global_Variables_valueChanged;
+        }
+        private void sliderValueChanged()
+        {
+            UserControl_Management.Slider_ValueChanged((Slider)control, null);
+        }
+       
+
+        private void control_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            dragStarted = true;
+        }
+
+        private void control_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            dragStarted = false;
+            sliderValueChanged();
         }
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            
-            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
+            if (!dragStarted)
             {
-                label.Content = Application.Current.Resources["Usercontrol_Brightness"] + " - " + control.Value.ToString() + "%";
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                sliderValueChanged();
             }
         }
     }

@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -41,8 +42,8 @@ namespace Handheld_Control_Panel.UserControls
             label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
             
         }
+   
 
-       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
            //UserControl_Management.setThumbSize(control);
@@ -59,24 +60,32 @@ namespace Handheld_Control_Panel.UserControls
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
             if (valueChangedEventArgs.Parameter == "TDP2" || valueChangedEventArgs.Parameter == "TDP1")
             {
+             
                 this.Dispatcher.BeginInvoke(() => {
-                    if (valueChangedEventArgs.Parameter == "TDP2")
+                    Debug.WriteLine(border.Tag.ToString());
+                    if (!dragStarted && border.Tag.ToString() == "")
                     {
-                        if (Global_Variables.ReadPL1 > Global_Variables.ReadPL2)
+                        if (valueChangedEventArgs.Parameter == "TDP2")
                         {
-                            control.Value = Global_Variables.ReadPL2;
+                            if (Global_Variables.ReadPL1 > Global_Variables.ReadPL2)
+                            {
+                                control.Value = Global_Variables.ReadPL2;
+                                label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
+                            }
                         }
-                    }
-                    if (valueChangedEventArgs.Parameter == "TDP1")
-                    {
-                        if (Global_Variables.ReadPL1 != control.Value)
+                        if (valueChangedEventArgs.Parameter == "TDP1")
                         {
-                            control.Value = Global_Variables.ReadPL1;
+                            if (Global_Variables.ReadPL1 != control.Value)
+                            {
+                                control.Value = Global_Variables.ReadPL1;
+                                label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
+                            }
                         }
                     }
 
 
                 });
+
             }
 
 
@@ -103,15 +112,38 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
             Global_Variables.valueChanged -= Global_Variables_valueChanged;
         }
-
-        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void sliderChanged(object sender)
         {
-            
-            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
+            if (control.IsLoaded && control.Visibility != Visibility.Collapsed && !dragStarted)
             {
                 label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                UserControl_Management.Slider_ValueChanged((Slider)sender, null);
             }
+        }
+
+
+        private bool dragStarted = false;
+
+        private void Slider_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+
+            this.dragStarted = false;
+            sliderChanged(sender);
+        }
+
+        private void Slider_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            this.dragStarted = true;
+        }
+
+        private void control_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            sliderChanged(sender);
+        }
+
+        private void control_TouchUp(object sender, TouchEventArgs e)
+        {
+            sliderChanged(sender);
         }
     }
 }

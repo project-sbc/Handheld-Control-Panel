@@ -79,8 +79,6 @@ namespace Handheld_Control_Panel.UserControls
                 });
             }
 
-             
-
         }
 
       

@@ -28,17 +28,17 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Volume_Slider : UserControl
+    public partial class EPP_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        private bool dragStarted= false;
-        public Volume_Slider()
+        public EPP_Slider()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-         
+            label.Content = Application.Current.Resources["Usercontrol_EPP"] + " - " + control.Value.ToString();
+            
         }
 
        
@@ -47,29 +47,28 @@ namespace Handheld_Control_Panel.UserControls
            //UserControl_Management.setThumbSize(control);
 
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
-            Global_Variables.valueChanged += Global_Variables_valueChanged;
+            Global_Variables.valueChanged += Global_Variables_brightnessChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
         }
 
-        private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
+        private void Global_Variables_brightnessChanged(object? sender, EventArgs e)
         {
+
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "Volume" && !dragStarted )
+            if (valueChangedEventArgs.Parameter == "EPP")
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.Volume != control.Value && border.Tag == "")
+                    if (Global_Variables.EPP != control.Value)
                     {
-                        control.Value = Global_Variables.Volume;
+                        control.Value = Global_Variables.EPP;
                     }
 
                 });
             }
-
+        
         }
-
-      
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -87,30 +86,16 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            Global_Variables.valueChanged -= Global_Variables_valueChanged;
-        }
-        private void sliderValueChanged()
-        {
-            UserControl_Management.Slider_ValueChanged((Slider)control, null);
-        }
-       
-
-        private void control_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
-        {
-            dragStarted = true;
-        }
-
-        private void control_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            dragStarted = false;
-            sliderValueChanged();
+            Global_Variables.valueChanged -= Global_Variables_brightnessChanged;
         }
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!dragStarted)
+            
+            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
             {
-                sliderValueChanged();
+                label.Content = Application.Current.Resources["Usercontrol_EPP"] + " - " + control.Value.ToString();
+                UserControl_Management.Slider_ValueChanged(sender, e);
             }
         }
     }

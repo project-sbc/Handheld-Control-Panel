@@ -24,11 +24,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class EPP_Slider : UserControl
+    public partial class EPP_SliderOLD : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public EPP_Slider()
+        public EPP_SliderOLD()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);

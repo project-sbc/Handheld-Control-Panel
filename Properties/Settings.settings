@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="systemAccent" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Emerald</Value>
+      <Value Profile="(Default)">Steel</Value>
     </Setting>
     <Setting Name="language" Type="System.String" Scope="User">
       <Value Profile="(Default)">English</Value>
@@ -30,7 +30,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="SystemTheme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Light</Value>
+      <Value Profile="(Default)">Dark</Value>
     </Setting>
     <Setting Name="autoApplySetTDP" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -66,7 +66,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="qamUserControls" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volume0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_TDP1;Usercontrol_TDP21;</Value>
+      <Value Profile="(Default)">Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volume0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
