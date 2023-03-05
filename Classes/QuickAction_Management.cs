@@ -19,7 +19,14 @@ namespace Handheld_Control_Panel.Classes
             switch (actionParameter.Action)
             {
                 case "Show_Hide_HCP":
-                    //MessageBox.Show("make the quick access menu!!!");
+                    if (Global_Variables.Global_Variables.mainWindow.WindowState == System.Windows.WindowState.Minimized)
+                    {
+                        Global_Variables.Global_Variables.mainWindow.WindowState = System.Windows.WindowState.Normal;
+                    }
+                    else
+                    {
+                        Global_Variables.Global_Variables.mainWindow.WindowState = System.Windows.WindowState.Minimized;
+                    }
                     break;
                 case "Change_TDP":
                     int param;

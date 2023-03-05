@@ -44,6 +44,7 @@ namespace Handheld_Control_Panel
             
             InitializeComponent();
 
+            Global_Variables.mainWindow = this;
 
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
@@ -51,7 +52,7 @@ namespace Handheld_Control_Panel
             //check controller usb device info GUID instance ID
             Controller_Management.getDefaultControllerDeviceInformation();
 
-            //MouseKeyHook.Subscribe();
+            MouseKeyHook.Subscribe();
 
             //subscribe to controller events
             Controller_Management.buttonEvents.controllerInput += handleControllerInputs;
@@ -328,6 +329,7 @@ namespace Handheld_Control_Panel
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
                 //change controller timer interval to 20 ms for active use
                 Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(20);
+                setWindowSizePosition();
             }
         }
 
