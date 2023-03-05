@@ -14,7 +14,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,7 +21,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using Windows.Devices.Radios;
 
 namespace Handheld_Control_Panel.UserControls
@@ -34,16 +32,16 @@ namespace Handheld_Control_Panel.UserControls
     {
         private string windowpage = "";
         private string usercontrol = "";
+        private bool dragStarted= false;
         public TDP_Slider()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-            label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
-            
+         
         }
-   
 
+       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
            //UserControl_Management.setThumbSize(control);
@@ -55,40 +53,19 @@ namespace Handheld_Control_Panel.UserControls
 
         }
 
-        private void Global_Variables_valueChanged(object? sender, EventArgs e)
+        private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "TDP2" || valueChangedEventArgs.Parameter == "TDP1")
+            if (valueChangedEventArgs.Parameter == "TDP" && !dragStarted )
             {
-             
                 this.Dispatcher.BeginInvoke(() => {
-                    Debug.WriteLine(border.Tag.ToString());
-                    if (!dragStarted && border.Tag.ToString() == "")
+                    if (Global_Variables.ReadPL1 != control.Value && border.Tag == "")
                     {
-                        if (valueChangedEventArgs.Parameter == "TDP2")
-                        {
-                            if (Global_Variables.ReadPL1 > Global_Variables.ReadPL2)
-                            {
-                                control.Value = Global_Variables.ReadPL2;
-                                label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
-                            }
-                        }
-                        if (valueChangedEventArgs.Parameter == "TDP1")
-                        {
-                            if (Global_Variables.ReadPL1 != control.Value)
-                            {
-                                control.Value = Global_Variables.ReadPL1;
-                                label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
-                            }
-                        }
+                        control.Value = Global_Variables.ReadPL1;
                     }
 
-
                 });
-
             }
-
-
 
         }
 
@@ -112,38 +89,29 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
             Global_Variables.valueChanged -= Global_Variables_valueChanged;
         }
-        private void sliderChanged(object sender)
+        private void sliderValueChanged()
         {
-            if (control.IsLoaded && control.Visibility != Visibility.Collapsed && !dragStarted)
+            UserControl_Management.Slider_ValueChanged((Slider)control, null);
+        }
+       
+
+        private void control_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            dragStarted = true;
+        }
+
+        private void control_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            dragStarted = false;
+            sliderValueChanged();
+        }
+
+        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!dragStarted)
             {
-                label.Content = Application.Current.Resources["Usercontrol_TDP"] + " - " + control.Value.ToString() + "W";
-                UserControl_Management.Slider_ValueChanged((Slider)sender, null);
+                sliderValueChanged();
             }
-        }
-
-
-        private bool dragStarted = false;
-
-        private void Slider_DragCompleted(object sender, DragCompletedEventArgs e)
-        {
-
-            this.dragStarted = false;
-            sliderChanged(sender);
-        }
-
-        private void Slider_DragStarted(object sender, DragStartedEventArgs e)
-        {
-            this.dragStarted = true;
-        }
-
-        private void control_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            sliderChanged(sender);
-        }
-
-        private void control_TouchUp(object sender, TouchEventArgs e)
-        {
-            sliderChanged(sender);
         }
     }
 }

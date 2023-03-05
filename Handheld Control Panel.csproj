@@ -158,6 +158,12 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\TDP2_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\TDP_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\EPP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -173,13 +179,7 @@
     <Compile Update="UserControls\HomePageUserControls\Resolution_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\HomePageUserControls\TDP2_Slider.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UserControls\HomePageUserControls\VolumeMute_Toggle.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UserControls\HomePageUserControls\TDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Bluetooth_Toggle.xaml.cs">

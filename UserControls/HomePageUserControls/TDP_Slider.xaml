@@ -9,9 +9,12 @@
              d:DesignWidth="450" Height="85" Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel >
-
-            <Label x:Name="label"  DockPanel.Dock="Top"  Style="{StaticResource userControlMainLabel}" />
-            <Slider  x:Name="control" Thumb.DragStarted="Slider_DragStarted" Thumb.DragCompleted="Slider_DragCompleted"  DockPanel.Dock="Bottom" Width="404"  HorizontalAlignment="Center" Tag="Slider_TDP" MouseUp="control_MouseUp" TouchUp="control_TouchUp"    />
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label x:Name="label" Content="{DynamicResource Usercontrol_TDP}"   Style="{StaticResource userControlMainLabel}" />
+                <Label   DockPanel.Dock="Top" Content="{Binding ElementName=control, Path=Value}" ContentStringFormat="{}{0} W"  Style="{StaticResource userControlMainLabel}" />
+            </StackPanel>
+    
+            <Slider  x:Name="control" DockPanel.Dock="Bottom" Width="404"  HorizontalAlignment="Center" Tag="Slider_TDP" Thumb.DragStarted="control_DragStarted" Thumb.DragCompleted="control_DragCompleted" ValueChanged="control_ValueChanged"  />
 
         </DockPanel>
 

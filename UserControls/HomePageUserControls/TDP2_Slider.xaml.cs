@@ -21,7 +21,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using Windows.Devices.Radios;
 
 namespace Handheld_Control_Panel.UserControls
@@ -33,13 +32,13 @@ namespace Handheld_Control_Panel.UserControls
     {
         private string windowpage = "";
         private string usercontrol = "";
+        private bool dragStarted= false;
         public TDP2_Slider()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-            label.Content = Application.Current.Resources["Usercontrol_TDP2"] + " - " + control.Value.ToString() + "W";
-            
+         
         }
 
        
@@ -54,27 +53,16 @@ namespace Handheld_Control_Panel.UserControls
 
         }
 
-        private void Global_Variables_valueChanged(object? sender, EventArgs e)
+        private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "TDP2" || valueChangedEventArgs.Parameter == "TDP1")
+            if (valueChangedEventArgs.Parameter == "TDP2" && !dragStarted )
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (valueChangedEventArgs.Parameter == "TDP1")
+                    if (Global_Variables.ReadPL2 != control.Value && border.Tag == "")
                     {
-                        if (Global_Variables.ReadPL1 > Global_Variables.ReadPL2)
-                        {
-                            control.Value = Global_Variables.ReadPL1;
-                        }
+                        control.Value = Global_Variables.ReadPL2;
                     }
-                    if (valueChangedEventArgs.Parameter == "TDP2")
-                    {
-                        if (Global_Variables.ReadPL2 != control.Value)
-                        {
-                            control.Value = Global_Variables.ReadPL2;
-                        }
-                    }
-                   
 
                 });
             }
@@ -101,14 +89,28 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
             Global_Variables.valueChanged -= Global_Variables_valueChanged;
         }
+        private void sliderValueChanged()
+        {
+            UserControl_Management.Slider_ValueChanged((Slider)control, null);
+        }
+       
+
+        private void control_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            dragStarted = true;
+        }
+
+        private void control_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            dragStarted = false;
+            sliderValueChanged();
+        }
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            
-            if (control.IsLoaded && control.Visibility != Visibility.Collapsed)
+            if (!dragStarted)
             {
-                label.Content = Application.Current.Resources["Usercontrol_TDP2"] + " - " + control.Value.ToString() + "W";
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                sliderValueChanged();
             }
         }
     }
