@@ -95,6 +95,11 @@ namespace Handheld_Control_Panel.Classes
                                 intReturn[1] = highlightedIndex;
                                 Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent(action, windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                             }
+                            else
+                            {
+                                Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent(action, windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
+
+                            }
 
                             break;
                         case "Up":

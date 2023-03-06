@@ -30,6 +30,7 @@
     <system:String x:Key="Usercontrol_TDP">TDP</system:String>
     <system:String x:Key="Usercontrol_TDP2">Boost TDP</system:String>
     <system:String x:Key="Usercontrol_EPP">EPP</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit">FPS Limit</system:String>
     
     
     
