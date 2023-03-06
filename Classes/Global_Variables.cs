@@ -57,7 +57,20 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 
         #endregion
         //AMD GPU CLOCK
-        public static string gpuclk = "Default";
+        public static int gpuclk = 0;
+
+        public static int GPUCLK
+        {
+            set
+            {
+                gpuclk = value;
+                raiseValueChanged("GPUCLK");
+            }
+            get
+            {
+                return gpuclk;
+            }
+        }
 
         //Shut down boolean to stop threads
         public static bool useRoutineThread = true;

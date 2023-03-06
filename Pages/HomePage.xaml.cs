@@ -99,7 +99,9 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_MaxCPUFrequency":
                                 stackPanel.Children.Add(new MaxCPU_Slider());
                                 break;
-                                
+                            case "Usercontrol_GPUCLK":
+                                stackPanel.Children.Add(new GPUCLK_Slider());
+                                break;
                             default: break;
                         }
                     }

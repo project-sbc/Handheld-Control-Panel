@@ -51,12 +51,12 @@ namespace Handheld_Control_Panel.Classes
 
                     if (Int32.TryParse(actionParameter.Parameter, out paramGPU))
                     {
-                        if (Global_Variables.Global_Variables.gpuclk != "Default")
+                        if (Global_Variables.Global_Variables.GPUCLK != 0)
                         {
-                            param = (int)(paramGPU +  Convert.ToInt32(Global_Variables.Global_Variables.gpuclk));
+                            param = paramGPU + Global_Variables.Global_Variables.GPUCLK;
                             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock(paramGPU));
                         }
-                     
+                        else { Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock(400)); }
                     }
                     break;
                 case "Toggle_MouseMode":

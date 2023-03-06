@@ -143,9 +143,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.SmallChange = 50;
                         slider.LargeChange = 100;
                         slider.Value = slider.Minimum;
-                        if (Global_Variables.Global_Variables.gpuclk != "Default")
+                        if (Global_Variables.Global_Variables.gpuclk != 0)
                         {
-                            slider.Value = Int32.Parse(Global_Variables.Global_Variables.gpuclk);
+                            slider.Value = Global_Variables.Global_Variables.gpuclk;
                         }
                         
                         break;

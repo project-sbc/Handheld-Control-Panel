@@ -170,6 +170,9 @@
     <Compile Update="UserControls\HomePageUserControls\TDP2_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\GPUCLK_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\TDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -275,7 +278,7 @@
     <Compile Update="UserControls\RegularControlsOLD\FPSLimit_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\RegularControlsOLD\GPUCLK_Slider.xaml.cs">
+    <Compile Update="UserControls\RegularControlsOLD\GPUCLK_Sliderold.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\RegularControlsOLD\QuickAction_Wrappanel.xaml.cs">

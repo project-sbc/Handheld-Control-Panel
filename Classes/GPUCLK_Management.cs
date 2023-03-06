@@ -37,7 +37,7 @@ namespace Handheld_Control_Panel.Classes.GPUCLK_Management
 
                             result = Run_CLI.Run_CLI.RunCommand(commandArguments, false, processRyzenAdj);
 
-                            Global_Variables.Global_Variables.gpuclk = gpuclk.ToString();
+                            Global_Variables.Global_Variables.GPUCLK = gpuclk;
 
                         }
 

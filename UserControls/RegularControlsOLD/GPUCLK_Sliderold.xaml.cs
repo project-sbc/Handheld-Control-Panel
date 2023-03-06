@@ -25,11 +25,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class GPUCLK_Slider : UserControl
+    public partial class GPUCLK_Sliderold : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public GPUCLK_Slider()
+        public GPUCLK_Sliderold()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);
@@ -39,7 +39,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void handleGPUCLK()
         {
-            if (Global_Variables.gpuclk == "Default")
+            if (Global_Variables.GPUCLK == 0)
             {
                 toggleSwitch.IsOn = false;
                 unitLabel.Visibility = Visibility.Hidden;
