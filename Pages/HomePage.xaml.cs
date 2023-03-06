@@ -93,6 +93,13 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_FPSLimit":
                                 stackPanel.Children.Add(new FPS_Slider());
                                 break;
+                            case "Usercontrol_ActiveCores":
+                                stackPanel.Children.Add(new ActiveCores_Slider());
+                                break;
+                            case "Usercontrol_MaxCPUFrequency":
+                                stackPanel.Children.Add(new MaxCPU_Slider());
+                                break;
+                                
                             default: break;
                         }
                     }

@@ -203,7 +203,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 2;
-                        slider.Value = Global_Variables.Global_Variables.cpuActiveCores;
+                        slider.Value = Global_Variables.Global_Variables.CPUActiveCores;
                         break;
                     case "Slider_Brightness":
                         slider.Minimum = 0;
@@ -236,13 +236,13 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 100;
                         slider.SmallChange = 100;
                         slider.LargeChange = 500;
-                        if (Global_Variables.Global_Variables.cpuMaxFrequency == 0)
+                        if (Global_Variables.Global_Variables.CPUMaxFrequency == 0)
                         {
                             slider.Value = slider.Maximum;
                         }
                         else
                         {
-                            slider.Value = Global_Variables.Global_Variables.cpuMaxFrequency;
+                            slider.Value = Global_Variables.Global_Variables.CPUMaxFrequency;
                         }
                    
 

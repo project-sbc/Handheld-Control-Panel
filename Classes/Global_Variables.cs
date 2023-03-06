@@ -129,7 +129,35 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 
         //cpu settings
         public static int cpuMaxFrequency = 0;
+        public static int CPUMaxFrequency
+        {
+            get
+            {
+                return cpuMaxFrequency;
+            }
+            set
+            {
+                cpuMaxFrequency = value;
+                raiseValueChanged("CPUMaxFrequency");
+            }
+        }
+
+
+
         public static int cpuActiveCores = 0;
+        public static int CPUActiveCores
+        {
+            get
+            {
+                return cpuActiveCores;
+            }
+            set
+            {
+                cpuActiveCores = value;
+                raiseValueChanged("ActiveCores");
+            }
+        }
+
         public static int maxCpuCores = 1;
         public static int baseCPUSpeed = 1100;
 
@@ -151,9 +179,22 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 
         public static int ePP = 0;
         #endregion
-        //RTSS fps limit
-        public static int FPSLimit = 0;
+        #region fpslimit
+        public static int fpsLimit = 0;
+        public static int FPSLimit
+        {
+            get
+            {
+                return fpsLimit;
+            }
 
+            set
+            {
+                fpsLimit = value;
+                raiseValueChanged("FPSLimit");
+            }
+        }
+        #endregion
         //Profile 
         public static bool profileAutoApplied = false;
       

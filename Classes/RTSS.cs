@@ -19,7 +19,12 @@ namespace Handheld_Control_Panel.Classes
             if (RTSSRunning())
             {
                 RTSS.LoadProfile();
-                RTSS.GetProfileProperty("FramerateLimit", out Global_Variables.Global_Variables.FPSLimit);
+                int fpsLimit = 0;
+                RTSS.GetProfileProperty("FramerateLimit", out fpsLimit);
+                if (fpsLimit != Global_Variables.Global_Variables.FPSLimit)
+                {
+                    Global_Variables.Global_Variables.FPSLimit = fpsLimit;
+                }
             }
         }
 
