@@ -11,7 +11,8 @@ namespace Handheld_Control_Panel.Classes
     {
         static ushort reg_addr = 0x4E;
         static ushort reg_data = 0x4F;
-        static OpenLibSys ols;
+        static Ols ols = new Ols();
+
         public static void ECRamWrite(ushort address, byte data)
         {
             if (ols == null)
@@ -112,7 +113,7 @@ namespace Handheld_Control_Panel.Classes
             }
             if (ols == null)
             {
-                RaiseOlsInitFailedEvent();
+                //RaiseOlsInitFailedEvent();
                 return;
             }
 
@@ -148,7 +149,7 @@ namespace Handheld_Control_Panel.Classes
             }
             if (ols == null)
             {
-                RaiseOlsInitFailedEvent();
+                //RaiseOlsInitFailedEvent();
                 return;
             }
         }

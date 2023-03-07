@@ -194,18 +194,21 @@ namespace Handheld_Control_Panel.Classes
                 string installPath = "";
                 RegistryKey keyReg = Registry.LocalMachine.OpenSubKey(epicGamesReg);
 
-                if (keyReg.GetValue("AppDataPath") != null)
+                if (keyReg != null)
                 {
-                    installPath = keyReg.GetValue("AppDataPath").ToString();
+                    if (keyReg.GetValue("AppDataPath") != null)
+                    {
+                        installPath = keyReg.GetValue("AppDataPath").ToString();
 
-                    //need to go up 3 directory levels
-                    installPath = Directory.GetParent(@installPath).ToString();
-                    installPath = Directory.GetParent(@installPath).ToString();
-                    installPath = Directory.GetParent(@installPath).ToString();
-                    Properties.Settings.Default.directoryEpicGames = installPath + "\\UnrealEngineLauncher";
-                    
-                    //\UnrealEngineLauncher\\LauncherInstalled.dat
-                    Properties.Settings.Default.Save();
+                        //need to go up 3 directory levels
+                        installPath = Directory.GetParent(@installPath).ToString();
+                        installPath = Directory.GetParent(@installPath).ToString();
+                        installPath = Directory.GetParent(@installPath).ToString();
+                        Properties.Settings.Default.directoryEpicGames = installPath + "\\UnrealEngineLauncher";
+
+                        //\UnrealEngineLauncher\\LauncherInstalled.dat
+                        Properties.Settings.Default.Save();
+                    }
                 }
                 
 
