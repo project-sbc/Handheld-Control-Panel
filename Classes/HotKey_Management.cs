@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
+using MahApps.Metro.IconPacks;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -220,13 +221,21 @@ namespace Handheld_Control_Panel.Classes
                 {
                     DisplayType = Application.Current.Resources["Hotkeys_Type_" + value].ToString();
                 }
-
+                if (value == "Controller")
+                {
+                    Kind = PackIconMaterialKind.MicrosoftXboxController;
+                }
+                else
+                {
+                    Kind = PackIconMaterialKind.Keyboard;
+                }
                 type = value;
             }
 
         }
         public string DisplayType { get; set; } = "";
 
+        public PackIconMaterialKind Kind { get; set; }
 
         private string action { get; set; } = "";
         public string Action

@@ -29,21 +29,16 @@
                 <DataTemplate>
                     <Grid  Height="53">
 
-                        <StackPanel Margin="8,0,0,0" Orientation="Vertical">
-                            <DockPanel >
-                                <Label Content="{Binding DisplayAction}" ContentStringFormat="{}{0}: " FontSize="22" />
-                                <Label Content="{Binding DisplayParameter}" FontSize="22" />
-                              
-                            </DockPanel>
-                            <DockPanel>
-                                <Label Content="{Binding DisplayType}" ContentStringFormat="{}{0}: " FontSize="14"/>
-                                <Label Content="{Binding DisplayHotkey}" FontSize="14"/>
-                                
-                            </DockPanel>
-                           
-
-                        </StackPanel>
-           
+                        <DockPanel >
+                            <iconPacks:PackIconMaterial Kind="{Binding Kind}" Height="20" Width="20" Margin="6,0,6,0" VerticalAlignment="Center" />
+                            <StackPanel>
+                                <Label Content="{Binding DisplayAction}"  FontSize="22" Margin="0,-7,0,0" />
+                                <Label Content="{Binding DisplayHotkey}" FontSize="14" Margin="0,-7,0,0" />
+                            </StackPanel>
+                            <Label Content="{Binding DisplayParameter}" FontSize="22" HorizontalAlignment="Right" />
+                        </DockPanel>
+                        
+                               
         
                     
 
