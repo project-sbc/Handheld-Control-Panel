@@ -35,6 +35,8 @@
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
+    <None Remove="WinRing0x64.dll" />
+    <None Remove="WinRing0x64.sys" />
   </ItemGroup>
 
   <ItemGroup>
@@ -102,6 +104,12 @@
     <Content Include="Resources\SetDPI\SetDpi.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="WinRing0x64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WinRing0x64.sys">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -132,6 +140,9 @@
     <Compile Update="Pages\CustomizeHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\HotKeyPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ProfilesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -150,7 +161,7 @@
     <Compile Update="Pages\ProfileDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeysPage.xaml.cs">
+    <Compile Update="Pages\HotKeysPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ProfilesPageOLD.xaml.cs">

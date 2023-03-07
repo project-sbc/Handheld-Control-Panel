@@ -280,6 +280,8 @@ namespace Handheld_Control_Panel.Classes
         public string DisplayHotkey{ get; set; } = "";
 
         private string parameter { get; set; } = "";
+
+        public string DisplayParameter { get; set; }
         public string Parameter
         {
 
@@ -317,7 +319,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-        public string DisplayParameter { get; set; } = "";
+     
 
 
         public string convertControllerUshortToString(string hotkey)

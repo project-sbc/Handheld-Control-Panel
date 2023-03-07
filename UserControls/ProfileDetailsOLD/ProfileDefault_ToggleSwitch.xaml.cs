@@ -42,14 +42,8 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
             //UserControl_Management.setupControl(control);
 
-            if (Global_Variables.profiles.editingProfile.DefaultProfile == "True")
-            {
-                control.IsOn=true;
-            }
-            else
-            {
-                control.IsOn=false;
-            }
+            control.IsOn = Global_Variables.profiles.editingProfile.DefaultProfile;
+           
             
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -88,16 +82,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-
-                if (!control.IsOn)
-                {
-                    Global_Variables.profiles.editingProfile.DefaultProfile = "False";               
-                   
-                }
-                else
-                {
-                    Global_Variables.profiles.editingProfile.DefaultProfile = "True";
-                }
+                Global_Variables.profiles.editingProfile.DefaultProfile = control.IsOn;
+              
             }
 
         }

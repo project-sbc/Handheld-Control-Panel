@@ -25,6 +25,7 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
+           
             foreach (XmlNode node in xmlNode.ChildNodes)
             {
                 Profile profile = new Profile();
@@ -33,7 +34,7 @@ namespace Handheld_Control_Panel.Classes
                 if (node.SelectSingleNode("DefaultProfile").InnerText == "True") { defaultProfile = profile; }
                 this.Add(profile);
             }
-            
+           // this.OrderBy(o => o.ProfileName);
             xmlDocument = null;          
         }
 
@@ -44,7 +45,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (profile.ID == ID)
                 {
-                    profile.DefaultProfile = "False";
+                    profile.DefaultProfile = false;
                 }
             }
 
@@ -152,7 +153,18 @@ namespace Handheld_Control_Panel.Classes
     public class Profile
     {
         public string ID { get; set; }
-        public string DefaultProfile { get; set; }
+        public bool DefaultProfile
+        {
+            get { return defaultProfile; }
+            set
+            {
+                defaultProfile = value;
+                if (value == true) { VisibilityDefaultProfile = Visibility.Visible; } else { VisibilityDefaultProfile = Visibility.Collapsed; }
+            }
+        }
+        public bool defaultProfile { get; set; }
+
+        public Visibility VisibilityDefaultProfile { get; set; } = Visibility.Collapsed;
         public string ProfileName { get; set; } = "";
         public string Exe { get; set; } = "";
         public string Resolution { get; set; } = "";
@@ -219,7 +231,7 @@ namespace Handheld_Control_Panel.Classes
                     parentNode.SelectSingleNode("Exe").InnerText = Exe;
 
                     //if ID isnt 0, which is the default profile, and its been saved to be the default profile, then make this ID 0 and change the other profile
-                    if (DefaultProfile != parentNode.SelectSingleNode("DefaultProfile").InnerText && DefaultProfile == "True")
+                    if (DefaultProfile.ToString() != parentNode.SelectSingleNode("DefaultProfile").InnerText && DefaultProfile)
                     {
                         //check to see if a default profile exists
                         XmlNode xmlCurrentDefault = xmlNode.SelectSingleNode("Profile/DefaultProfile[text()='True']");
@@ -233,7 +245,7 @@ namespace Handheld_Control_Panel.Classes
                         }
                         
                     }
-                    parentNode.SelectSingleNode("DefaultProfile").InnerText = DefaultProfile;
+                    parentNode.SelectSingleNode("DefaultProfile").InnerText = DefaultProfile.ToString();
 
                 }
 
@@ -291,7 +303,7 @@ namespace Handheld_Control_Panel.Classes
 
                     ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
                     Exe = parentNode.SelectSingleNode("Exe").InnerText;
-                    DefaultProfile = parentNode.SelectSingleNode("DefaultProfile").InnerText;
+                    if (parentNode.SelectSingleNode("DefaultProfile").InnerText == "True") { DefaultProfile = true; } else { DefaultProfile = false; }
                     ID = loadID;
                     
 

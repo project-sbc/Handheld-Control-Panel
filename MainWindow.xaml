@@ -64,7 +64,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ListBoxItem Tag="Profiles" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
                 </ListBoxItem>
-                <ListBoxItem Tag="Keyboard" >
+                <ListBoxItem Tag="HotKey" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE92E;" />
                 </ListBoxItem>
                 

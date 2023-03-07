@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.HotKeysPage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.HotKeysPageOLD"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

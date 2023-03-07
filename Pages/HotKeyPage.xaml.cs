@@ -27,11 +27,11 @@ namespace Handheld_Control_Panel.Pages
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class ProfilesPage : Page
+    public partial class HotKeyPage : Page
     {
         private string windowpage;
 
-        public ProfilesPage()
+        public HotKeyPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -39,6 +39,7 @@ namespace Handheld_Control_Panel.Pages
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
             wnd.changeUserInstruction("CustomizeHomePage_Instruction");
             wnd = null;
+          
         }
       
       
@@ -50,13 +51,13 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
 
 
-            controlList.ItemsSource = Global_Variables.profiles;
+            controlList.ItemsSource = Global_Variables.hotKeys;
 
             if (controlList.Items.Count > 0)
             {
-                if (Global_Variables.profiles.activeProfile != null)
+                if (Global_Variables.hotKeys.editingHotkey != null)
                 {
-                    controlList.SelectedItem = Global_Variables.profiles.activeProfile;
+                    controlList.SelectedItem = Global_Variables.hotKeys.editingHotkey;
                 }
                 else
                 {

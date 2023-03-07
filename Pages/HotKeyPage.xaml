@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.ProfilesPage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.HotKeyPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -31,11 +31,16 @@
 
                         <StackPanel Margin="8,0,0,0" Orientation="Vertical">
                             <DockPanel >
-                                <TextBlock Text="{Binding ProfileName}" FontSize="22" />
-                                <TextBlock  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="20" />
+                                <Label Content="{Binding DisplayAction}" ContentStringFormat="{}{0}: " FontSize="22" />
+                                <Label Content="{Binding DisplayParameter}" FontSize="22" />
+                              
                             </DockPanel>
-                      
-                            <TextBlock Grid.Column="0"  Text="{Binding Exe}" FontSize="14" FontStyle="Italic"/>
+                            <DockPanel>
+                                <Label Content="{Binding DisplayType}" ContentStringFormat="{}{0}: " FontSize="14"/>
+                                <Label Content="{Binding DisplayHotkey}" FontSize="14"/>
+                                
+                            </DockPanel>
+                           
 
                         </StackPanel>
            

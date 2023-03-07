@@ -4,7 +4,7 @@
 		<Profile >
 			<ID>1</ID>
 			<ProfileName>Default</ProfileName>
-			<Exe></Exe>
+			<Exe>anotherone.exe</Exe>
 			<DefaultProfile>True</DefaultProfile>
 			<LaunchOptions>
 				<Resolution></Resolution>
@@ -32,7 +32,37 @@
 				<GPUCLK></GPUCLK>
 			</Online>
 		</Profile>
-
+		<Profile >
+			<ID>2</ID>
+			<ProfileName>BLAH2</ProfileName>
+			<Exe>Test.exe</Exe>
+			<DefaultProfile>False</DefaultProfile>
+			<LaunchOptions>
+				<Resolution></Resolution>
+				<RefreshRate></RefreshRate>
+				<Path></Path>
+				<AppType></AppType>
+				<GameID></GameID>
+			</LaunchOptions>
+			<Offline>
+				<TDP1>9</TDP1>
+				<TDP2>12</TDP2>
+				<ActiveCores></ActiveCores>
+				<MAXCPU></MAXCPU>
+				<FPSLimit></FPSLimit>
+				<EPP></EPP>
+				<GPUCLK></GPUCLK>
+			</Offline>
+			<Online>
+				<TDP1>10</TDP1>
+				<TDP2>11</TDP2>
+				<ActiveCores></ActiveCores>
+				<MAXCPU></MAXCPU>
+				<FPSLimit></FPSLimit>
+				<EPP></EPP>
+				<GPUCLK></GPUCLK>
+			</Online>
+		</Profile>
 	</Profiles>
 
 	<ControllerHotKeys>

@@ -26,13 +26,13 @@ namespace Handheld_Control_Panel.Pages
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HotKeysPage : Page
+    public partial class HotKeysPageOLD : Page
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
         private int selectedUserControl = -1;
         private int highlightedUserControl = -1;
-        public HotKeysPage()
+        public HotKeysPageOLD()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
