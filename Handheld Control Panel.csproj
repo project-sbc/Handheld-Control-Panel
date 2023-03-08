@@ -140,6 +140,9 @@
     <Compile Update="Pages\CustomizeHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\HotKeyEditPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\HotKeyPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -219,6 +222,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HotKeyDetailsOLD\HotKeyAction_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\HotKeyEditPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\HotKeyPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\CustomizeHomePage_Instruction.xaml.cs">
@@ -391,6 +400,10 @@
     <Page Update="UserControls\SettingsOLD\Autostart_Toggleswitch.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserControls\EditHotKeyUserControls\" />
   </ItemGroup>
 
 </Project>

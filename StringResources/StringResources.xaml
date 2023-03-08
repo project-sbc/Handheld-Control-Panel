@@ -46,6 +46,9 @@
     <system:String x:Key="Instruction_Arrange">ARRANGE</system:String>
     <system:String x:Key="Instruction_Back">BACK</system:String>
     <system:String x:Key="Instruction_Select">SELECT</system:String>
+    <system:String x:Key="Instruction_Edit">EDIT</system:String>
+    <system:String x:Key="Instruction_Delete">DELETE</system:String>
+    <system:String x:Key="Instruction_Add">ADD NEW</system:String>
     
     
     

@@ -52,8 +52,8 @@
     <Style x:Key="HeaderLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontSize" Value="27" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Margin" Value="5,-5,0,0" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Margin" Value="8,-7,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="DockPanel.Dock" Value="Top" />
     </Style>
@@ -61,8 +61,8 @@
     <Style x:Key="SubheaderLabel" TargetType="Label">
         <Setter Property="FontStyle" Value="Italic"/>
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Margin" Value="5,-8,0,0" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Margin" Value="8,-18,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="DockPanel.Dock" Value="Bottom" />
     </Style>

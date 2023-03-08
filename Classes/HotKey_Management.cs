@@ -52,7 +52,11 @@ namespace Handheld_Control_Panel.Classes
                         ActionParameter ap = new ActionParameter();
                         ap.Action = node.SelectSingleNode("Action").InnerText;
                         ap.Parameter = node.SelectSingleNode("Parameter").InnerText;
-                        returnDictionary.Add(hotkey, ap);
+                        if (!returnDictionary.ContainsKey(hotkey))
+                        {
+                            returnDictionary.Add(hotkey, ap);
+                        }
+                     
                     }
 
                 }

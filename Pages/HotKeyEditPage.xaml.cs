@@ -21,52 +21,53 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.UserControls;
 
 namespace Handheld_Control_Panel.Pages
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HotKeyPage : Page
+    public partial class HotKeyEditPage : Page
     {
         private string windowpage;
+        private List<UserControl> userControls = new List<UserControl>();
 
-        public HotKeyPage()
+        private int highlightedUserControl = -1;
+        private int selectedUserControl = -1;
+        public HotKeyEditPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+           
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HotKeyPage_Instruction");
+            wnd.changeUserInstruction("HomePage_Instruction");
             wnd = null;
-          
         }
-      
-      
+       
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //get unique window page combo from getwindow to string
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-
-
-            controlList.ItemsSource = Global_Variables.hotKeys;
-
-            if (controlList.Items.Count > 0)
-            {
-                if (Global_Variables.hotKeys.editingHotkey != null)
-                {
-                    controlList.SelectedItem = Global_Variables.hotKeys.editingHotkey;
-                }
-                else
-                {
-                    controlList.SelectedIndex = 0;
-                }
-            }
+            getUserControlsOnPage();
 
         }
 
+        private void getUserControlsOnPage()
+        {
+            foreach (object child in stackPanel.Children)
+            {
+                if (child is UserControl)
+                {
+                    userControls.Add((UserControl)child);
+                }
+
+            }
+        }
+        //
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
@@ -76,44 +77,14 @@ namespace Handheld_Control_Panel.Pages
             if (args.WindowPage == windowpage)
             {
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                if (controlList.SelectedItem != null)
-                {
-                    Profile profile = controlList.SelectedItem as Profile;
-                    int index = controlList.SelectedIndex;
-                    switch (action)
-                    {
-                        case "A":
-                            if (controlList.SelectedItem != null)
-                            {
-                                Global_Variables.hotKeys.editingHotkey = (HotkeyItem)controlList.SelectedItem;
-                                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                                wnd.navigateFrame("HotKeyEditPage");
-                            }
-                            break;
-
-                        case "Y":
-                            Global_Variables.hotKeys.addNewHotkey();
-                            controlList.Items.Refresh();
-                            break;
-
-                        case "Up":
-                            if (index > 0) { controlList.SelectedIndex = index - 1; }
-                            break;
-                        case "Down":
-                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; }
-                            break;
-                            default: break;
-
-                    }
-
-                }
-
-
+                int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+              
+                highlightedUserControl = intReturn[0];
+                selectedUserControl = intReturn[1];
+   
             }
 
         }
-
-     
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {

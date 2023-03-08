@@ -25,6 +25,7 @@ using System.Windows.Threading;
 using System.Management;
 using System.Net.NetworkInformation;
 using Handheld_Control_Panel.UserControls;
+using ControlzEx.Standard;
 
 namespace Handheld_Control_Panel
 {
@@ -231,6 +232,11 @@ namespace Handheld_Control_Panel
                 page = lbi.Tag.ToString() + "Page";
             }
         }
+        public void navigateFrame(string pageName)
+        {
+            frame.Navigate(new Uri("Pages\\" + pageName + ".xaml" , UriKind.RelativeOrAbsolute));
+        }
+
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             //page = frame.Source.ToString().Replace("Pages/","").Replace(".xaml","");
@@ -300,6 +306,13 @@ namespace Handheld_Control_Panel
                         break;
                     case "CustomizeHomePage_Instruction":
                         instructionStackPanel.Children.Add(new CustomizeHomePage_Instruction());
+                        break;
+                    case "HotKeyPage_Instruction":
+                        instructionStackPanel.Children.Add(new HotKeyPage_Instruction());
+                        break;
+                    case "HotKeyEditPage_Instruction":
+                        disable_B_ToClose = true;
+                        instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());
                         break;
                     case "SelectedListBox_Instruction":
                         disable_B_ToClose= true;
