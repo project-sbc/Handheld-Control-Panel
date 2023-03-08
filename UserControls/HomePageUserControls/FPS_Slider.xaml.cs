@@ -50,17 +50,25 @@ namespace Handheld_Control_Panel.UserControls
             Global_Variables.valueChanged += Global_Variables_valueChanged;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-
-            if (Global_Variables.FPSLimit == 0)
+            if (RTSS.directoryRTSSExists())
+            {
+                if (Global_Variables.FPSLimit == 0)
+                {
+                    controlToggle.IsOn = false;
+                    secondLabel.Visibility = Visibility.Collapsed;
+                    control.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    controlToggle.IsOn = true;
+                    control.Value = Global_Variables.FPSLimit;
+                }
+            }
+            else
             {
                 controlToggle.IsOn = false;
                 secondLabel.Visibility = Visibility.Collapsed;
                 control.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                controlToggle.IsOn = true;
-                control.Value = Global_Variables.FPSLimit;
             }
         }
 
@@ -137,18 +145,37 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (controlToggle.IsLoaded)
             {
-                if (controlToggle.IsOn)
+                if (RTSS.RTSSRunning())
                 {
-                    double value = control.Value;
-                    control.Visibility = Visibility.Visible;
-                    secondLabel.Visibility = Visibility.Visible;
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.setRTSSFPSLimit((int)value));
+                    if (controlToggle.IsOn)
+                    {
+                        double value = control.Value;
+                        control.Visibility = Visibility.Visible;
+                        secondLabel.Visibility = Visibility.Visible;
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.setRTSSFPSLimit((int)value));
+                    }
+                    else
+                    {
+                        control.Visibility = Visibility.Collapsed;
+                        secondLabel.Visibility = Visibility.Collapsed;
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.setRTSSFPSLimit(0));
+                    }
                 }
                 else
-                {
-                    control.Visibility = Visibility.Collapsed;
-                    secondLabel.Visibility = Visibility.Collapsed;
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.setRTSSFPSLimit(0));
+                { 
+                    if (controlToggle.IsOn)
+                    {
+                        if (RTSS.directoryRTSSExists())
+                        {
+                            RTSS.startRTSS();
+                        }
+                        else
+                        {
+                            controlToggle.IsOn = false;
+                            MessageBox.Show("RTSS is not installed. Install RTSS before enabling this feature.");
+                        }
+                    }
+                 
                 }
             }
         }
