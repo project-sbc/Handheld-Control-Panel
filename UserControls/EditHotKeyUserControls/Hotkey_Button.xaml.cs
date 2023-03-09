@@ -1,14 +1,17 @@
-﻿using Handheld_Control_Panel.Classes;
+﻿using ControlzEx.Theming;
+using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Display_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
+using MahApps.Metro.IconPacks;
 using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -18,23 +21,25 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Windows.Devices.Radios;
+using static Vanara.Interop.KnownShellItemPropertyKeys;
 
 namespace Handheld_Control_Panel.UserControls
 {
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class HotKey_Textbox : UserControl
+    public partial class Hotkey_Button : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-
 
         //var for hotkey input
         private DispatcherTimer gamepadTimer = new DispatcherTimer(DispatcherPriority.Render);
@@ -43,35 +48,37 @@ namespace Handheld_Control_Panel.UserControls
         private DateTime gamepadTimerTickCounter;
         private ushort currentGamepad = 0;
         private ushort previousGamepad = 0;
-      
-        public HotKey_Textbox()
+        public Hotkey_Button()
         {
             InitializeComponent();
-            //UserControl_Management.setupControl(control);
-            control.Content = Global_Variables.hotKeys.editingHotkey.DisplayHotkey;
-
-
-            Global_Variables.hotKeys.hotkeyClearedEvent += HotKeys_hotkeyClearedEvent;
+        
+          
         }
 
-        private void HotKeys_hotkeyClearedEvent(object? sender, EventArgs e)
-        {
-            //event triggered when hotkey is changed from controller to keyboard or vice versa
-            control.Content = "";
-            
-
-        }
-
-    
+      
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-            
+            Global_Variables.hotKeys.hotkeyClearedEvent += HotKeys_hotkeyClearedEvent;
+            if (Global_Variables.hotKeys.editingHotkey.DisplayHotkey != "")
+            {
+                control.Content = Global_Variables.hotKeys.editingHotkey.DisplayHotkey;
+            }
+            else
+            {
+                control.Content = "...";
+            }
+
         }
 
-       
+        private void HotKeys_hotkeyClearedEvent(object? sender, EventArgs e)
+        {
+            //event triggered when hotkey is changed from controller to keyboard or vice versa
+            control.Content = "...";
+        }
+
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
@@ -79,23 +86,27 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (args.Action == "A" && control.Visibility == Visibility.Visible)
                 {
-                    button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    control.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                 }
                 else
                 {
                     Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
                 }
 
-               
             }
         }
+       
 
-      
 
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+            
+        }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (button.IsLoaded)
+            if (control.IsLoaded)
             {
                 if (Global_Variables.hotKeys.editingHotkey.Type == "Controller")
                 {
@@ -114,7 +125,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             currentGamepad = ((ushort)Controller_Management.currentGamePad.Buttons);
 
-            
+
             //timeout after 100 ticks or just over 5 seconds
             if (DateTime.Now > gamepadTimerTickCounter)
             {
@@ -138,7 +149,7 @@ namespace Handheld_Control_Panel.UserControls
                     stopGamepadTimer(false);
                     //string gamepadCombo = convertControllerUshortToString(controllerButtons.ToString());
 
-                    
+
                     Global_Variables.hotKeys.editingHotkey.Hotkey = controllerButtons.ToString();
                     control.Content = Global_Variables.hotKeys.editingHotkey.DisplayHotkey;
                 }
@@ -243,7 +254,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             keyboardTimer.Stop();
             MouseKeyHook.programmingKeystroke = false;
-           
+
         }
 
         #endregion
@@ -257,9 +268,8 @@ namespace Handheld_Control_Panel.UserControls
 
         #endregion
 
-        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-        }
+
+    
     }
+   
 }

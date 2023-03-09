@@ -191,7 +191,7 @@ namespace Handheld_Control_Panel.UserControls
         }
     }
 
-    public class HotKeyAction
+    public class HotKeyActionOLD
     {
         public string DisplayHotkeyAction { get; set; }
         public string HotkeyAction { get; set; }

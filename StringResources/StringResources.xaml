@@ -37,6 +37,10 @@
     <system:String x:Key="Usercontrol_ActiveCores">Active CPU Cores</system:String>
     <system:String x:Key="Usercontrol_MaxCPUFrequency">Max CPU</system:String>
     <system:String x:Key="Usercontrol_GPUCLK">GPU Clock</system:String>
+    <system:String x:Key="Usercontrol_HotKeyAction">Action</system:String>
+    <system:String x:Key="Usercontrol_HotKeyType">Input Method</system:String>
+    <system:String x:Key="Usercontrol_HotKeyParameter">Parameter</system:String>
+    <system:String x:Key="Usercontrol_HotKey">Hot Key</system:String>
     
     
     

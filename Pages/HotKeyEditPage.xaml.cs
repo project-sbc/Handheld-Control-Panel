@@ -53,6 +53,7 @@ namespace Handheld_Control_Panel.Pages
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
             getUserControlsOnPage();
+         
 
         }
 

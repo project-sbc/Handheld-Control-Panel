@@ -137,7 +137,7 @@ namespace Handheld_Control_Panel.UserControls
         }
     }
 
-    public class HotKeyTypes
+    public class HotKeyTypesOLD
     {
         public string DisplayHotKeyType { get; set; }
         public string HotKeyType { get; set; }

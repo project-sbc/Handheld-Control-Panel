@@ -235,6 +235,7 @@ namespace Handheld_Control_Panel
         public void navigateFrame(string pageName)
         {
             frame.Navigate(new Uri("Pages\\" + pageName + ".xaml" , UriKind.RelativeOrAbsolute));
+            page = pageName;
         }
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
