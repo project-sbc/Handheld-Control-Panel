@@ -170,7 +170,7 @@
     <Compile Update="Pages\ProfilesPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingsPage.xaml.cs">
+    <Compile Update="Pages\SettingsPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditHotKeyUserControls\Parameter_Dropdown.xaml.cs">
@@ -183,6 +183,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Divider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\ActiveCores_Slider.xaml.cs">

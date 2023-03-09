@@ -23,6 +23,7 @@ using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using MahApps.Metro.Controls;
 
+
 namespace Handheld_Control_Panel.Pages
 {
     /// <summary>
@@ -102,7 +103,12 @@ namespace Handheld_Control_Panel.Pages
                             }
                             else
                             {
-                                if (index > 0) { controlList.SelectedIndex = index - 1; }
+                                if (index > 0) 
+                                { 
+                                    controlList.SelectedIndex = index - 1;
+
+                                    controlList.ScrollIntoView(controlList.SelectedItem);
+                                }
                             }
                             break;
                         case "Down":
@@ -112,7 +118,14 @@ namespace Handheld_Control_Panel.Pages
                             }
                             else
                             {
-                                if (index < controlList.Items.Count -1) { controlList.SelectedIndex = index + 1; }
+                                if (index < controlList.Items.Count -1) 
+                                { 
+                                    controlList.SelectedIndex = index + 1;
+                            
+
+                                    controlList.ScrollIntoView(controlList.SelectedItem);
+
+                                }
                             }
                             break;
 

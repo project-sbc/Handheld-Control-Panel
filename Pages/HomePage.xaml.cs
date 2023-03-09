@@ -102,6 +102,9 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_GPUCLK":
                                 stackPanel.Children.Add(new GPUCLK_Slider());
                                 break;
+                            case "Divider":
+                                stackPanel.Children.Add(new Divider());
+                                break;
                             default: break;
                         }
                     }
@@ -127,7 +130,11 @@ namespace Handheld_Control_Panel.Pages
             {
                 if (child is UserControl)
                 {
-                    userControls.Add((UserControl)child);
+                    if (!child.ToString().Contains(".Divider"))
+                    {
+                        userControls.Add((UserControl)child);
+                    }
+                   
                 }
 
             }

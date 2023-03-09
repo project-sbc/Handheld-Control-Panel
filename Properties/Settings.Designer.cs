@@ -12,7 +12,7 @@ namespace Handheld_Control_Panel.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -276,7 +276,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volume0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_FPSLimit1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Usercontrol_Wifi1;Usercontrol_Bluetooth0;Usercontrol_Brightness1;Usercontrol_Volume0;Usercontrol_VolumeMute1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_FPSLimit1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;Divider1;Divider1;Divider1;")]
         public string qamUserControls {
             get {
                 return ((string)(this["qamUserControls"]));

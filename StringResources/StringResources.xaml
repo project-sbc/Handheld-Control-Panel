@@ -41,6 +41,7 @@
     <system:String x:Key="Usercontrol_HotKeyType">Input Method</system:String>
     <system:String x:Key="Usercontrol_HotKeyParameter">Parameter</system:String>
     <system:String x:Key="Usercontrol_HotKey">Hot Key</system:String>
+    <system:String x:Key="Divider">Divider</system:String>
     
     
     

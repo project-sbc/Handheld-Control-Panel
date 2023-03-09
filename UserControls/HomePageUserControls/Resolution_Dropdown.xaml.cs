@@ -87,12 +87,13 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.Visibility == Visibility.Visible)
+                        if (controlList.SelectedItem.ToString() != Global_Variables.resolution)
                         {
                             handleListboxChange();
                         }
                         else
                         {
+              
                             button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
                             MainWindow wnd = (MainWindow)Application.Current.MainWindow;

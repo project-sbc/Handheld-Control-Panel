@@ -104,7 +104,7 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.Visibility == Visibility.Visible)
+                        if (controlList.SelectedItem.ToString() != Global_Variables.refreshRate)
                         {
                             handleListboxChange();
                         }

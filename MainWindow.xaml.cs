@@ -26,6 +26,8 @@ using System.Management;
 using System.Net.NetworkInformation;
 using Handheld_Control_Panel.UserControls;
 using ControlzEx.Standard;
+using System.Reflection;
+
 
 namespace Handheld_Control_Panel
 {
@@ -93,28 +95,37 @@ namespace Handheld_Control_Panel
         }
         #endregion
         #region update status bar
-        private void updateStatusBar()
+        private async void updateStatusBar()
         {
-            checkNetworkInterface();
-            checkPowerStatus();
+            await Task.Run(() =>
+            {
+                checkNetworkInterface();
+                checkPowerStatus();
+       
+            });
             Time.Text = DateTime.Now.ToString("h:mm tt");
         }
         private void checkNetworkInterface()
         {
-            InternetStatus.Text = "\uF384";
-            //Gets internet status to display on overlay
-            NetworkInterface[] networkCards = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces();
-            bool connectedDevice = false;
-            foreach (NetworkInterface networkCard in networkCards)
-            {
-                if (networkCard.OperationalStatus == OperationalStatus.Up)
+            this.Dispatcher.BeginInvoke(() => {
+                InternetStatus.Text = "\uF384";
+                //Gets internet status to display on overlay
+                NetworkInterface[] networkCards = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces();
+                bool connectedDevice = false;
+                foreach (NetworkInterface networkCard in networkCards)
                 {
-                    if (networkCard.NetworkInterfaceType == NetworkInterfaceType.Ethernet) { InternetStatus.Text = "\uE839";  }
-                    if (networkCard.NetworkInterfaceType == NetworkInterfaceType.Wireless80211) { InternetStatus.Text = "\uE701";  }
+                    if (networkCard.OperationalStatus == OperationalStatus.Up)
+                    {
+
+                        if (networkCard.NetworkInterfaceType == NetworkInterfaceType.Ethernet) { InternetStatus.Text = "\uE839"; }
+                        if (networkCard.NetworkInterfaceType == NetworkInterfaceType.Wireless80211) { InternetStatus.Text = "\uE701"; }
+                    }
+
+
                 }
 
-
-            }
+            });
+          
            
         }
 
@@ -137,40 +148,43 @@ namespace Handheld_Control_Panel
             }
             else { powerStatus = "AC"; }
 
+            this.Dispatcher.BeginInvoke(() => {
+                switch (powerStatus)
+                {
 
-            switch (powerStatus)
-            {
-                case "Online":
-                    if (batterylevel < 10 && batterylevel >= 0) { BatteryStatus.Text = "\uE85A"; }
-                    if (batterylevel < 20 && batterylevel >= 10) { BatteryStatus.Text = "\uE85B"; }
-                    if (batterylevel < 30 && batterylevel >= 20) { BatteryStatus.Text = "\uE85C"; }
-                    if (batterylevel < 40 && batterylevel >= 30) { BatteryStatus.Text = "\uE85D"; }
-                    if (batterylevel < 50 && batterylevel >= 40) { BatteryStatus.Text = "\uE85E"; }
-                    if (batterylevel < 60 && batterylevel >= 50) { BatteryStatus.Text = "\uE85F"; }
-                    if (batterylevel < 70 && batterylevel >= 60) { BatteryStatus.Text = "\uE860"; }
-                    if (batterylevel < 80 && batterylevel >= 70) { BatteryStatus.Text = "\uE861"; }
-                    if (batterylevel < 90 && batterylevel >= 80) { BatteryStatus.Text = "\uE862"; }
-                    if (batterylevel <= 100 && batterylevel >= 90) { BatteryStatus.Text = "\uE83E"; }
-                    BatteryPercentage.Text = batterylevel.ToString() + "%";
-                    break;
-                case "Offline":
-                    if (batterylevel < 10 && batterylevel >= 0) { BatteryStatus.Text = "\uE850"; }
-                    if (batterylevel < 20 && batterylevel >= 10) { BatteryStatus.Text = "\uE851"; }
-                    if (batterylevel < 30 && batterylevel >= 20) { BatteryStatus.Text = "\uE852"; }
-                    if (batterylevel < 40 && batterylevel >= 30) { BatteryStatus.Text = "\uE853"; }
-                    if (batterylevel < 50 && batterylevel >= 40) { BatteryStatus.Text = "\uE854"; }
-                    if (batterylevel < 60 && batterylevel >= 50) { BatteryStatus.Text = "\uE855"; }
-                    if (batterylevel < 70 && batterylevel >= 60) { BatteryStatus.Text = "\uE856"; }
-                    if (batterylevel < 80 && batterylevel >= 70) { BatteryStatus.Text = "\uE857"; }
-                    if (batterylevel < 90 && batterylevel >= 80) { BatteryStatus.Text = "\uE858"; }
-                    if (batterylevel < 100 && batterylevel >= 90) { BatteryStatus.Text = "\uE859"; }
-                    BatteryPercentage.Text = batterylevel.ToString() + "%";
-                    break;
-                default:
-                    BatteryPercentage.Text = "";
-                    BatteryStatus.Text = "";
-                    break;
-            }
+                    case "Online":
+                        if (batterylevel < 10 && batterylevel >= 0) { BatteryStatus.Text = "\uE85A"; }
+                        if (batterylevel < 20 && batterylevel >= 10) { BatteryStatus.Text = "\uE85B"; }
+                        if (batterylevel < 30 && batterylevel >= 20) { BatteryStatus.Text = "\uE85C"; }
+                        if (batterylevel < 40 && batterylevel >= 30) { BatteryStatus.Text = "\uE85D"; }
+                        if (batterylevel < 50 && batterylevel >= 40) { BatteryStatus.Text = "\uE85E"; }
+                        if (batterylevel < 60 && batterylevel >= 50) { BatteryStatus.Text = "\uE85F"; }
+                        if (batterylevel < 70 && batterylevel >= 60) { BatteryStatus.Text = "\uE860"; }
+                        if (batterylevel < 80 && batterylevel >= 70) { BatteryStatus.Text = "\uE861"; }
+                        if (batterylevel < 90 && batterylevel >= 80) { BatteryStatus.Text = "\uE862"; }
+                        if (batterylevel <= 100 && batterylevel >= 90) { BatteryStatus.Text = "\uE83E"; }
+                        BatteryPercentage.Text = batterylevel.ToString() + "%";
+                        break;
+                    case "Offline":
+                        if (batterylevel < 10 && batterylevel >= 0) { BatteryStatus.Text = "\uE850"; }
+                        if (batterylevel < 20 && batterylevel >= 10) { BatteryStatus.Text = "\uE851"; }
+                        if (batterylevel < 30 && batterylevel >= 20) { BatteryStatus.Text = "\uE852"; }
+                        if (batterylevel < 40 && batterylevel >= 30) { BatteryStatus.Text = "\uE853"; }
+                        if (batterylevel < 50 && batterylevel >= 40) { BatteryStatus.Text = "\uE854"; }
+                        if (batterylevel < 60 && batterylevel >= 50) { BatteryStatus.Text = "\uE855"; }
+                        if (batterylevel < 70 && batterylevel >= 60) { BatteryStatus.Text = "\uE856"; }
+                        if (batterylevel < 80 && batterylevel >= 70) { BatteryStatus.Text = "\uE857"; }
+                        if (batterylevel < 90 && batterylevel >= 80) { BatteryStatus.Text = "\uE858"; }
+                        if (batterylevel < 100 && batterylevel >= 90) { BatteryStatus.Text = "\uE859"; }
+                        BatteryPercentage.Text = batterylevel.ToString() + "%";
+                        break;
+                    default:
+                        BatteryPercentage.Text = "";
+                        BatteryStatus.Text = "";
+                        break;
+                }
+            });
+          
            
         }
 
