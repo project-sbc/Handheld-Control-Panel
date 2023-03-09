@@ -42,18 +42,16 @@ namespace Handheld_Control_Panel.Classes
                     runningKeyStroke = e.KeyCode.ToString(); 
                 } 
                 else 
-                { 
-                    if(!runningKeyStroke.Contains(e.KeyCode.ToString()))
-                    {
-                        runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
-                    }
-                   
+                {
+                    runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
+
                 }
                
                 if (Global_Variables.Global_Variables.KBHotKeyDictionary.Count != null)
                 {
                     if (Global_Variables.Global_Variables.KBHotKeyDictionary.ContainsKey(runningKeyStroke) && !programmingKeystroke)
                     {
+                       
                         args.SuppressKeyPress = true;
                         ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
                         //HotKey_Management.runHotKeyAction(action);
@@ -66,6 +64,7 @@ namespace Handheld_Control_Panel.Classes
             if (args.IsKeyUp)
             {
                 keyboardEvents.raiseKeyboardStringPress(runningKeyStroke);
+    
                 runningKeyStroke = "";
             }
 

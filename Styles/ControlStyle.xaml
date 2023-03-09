@@ -42,7 +42,8 @@
 
     <Style x:Key="userControlHotkeyLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="DockPanel.Dock" Value="Left" />
         <Setter Property="Margin" Value="8,0,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />

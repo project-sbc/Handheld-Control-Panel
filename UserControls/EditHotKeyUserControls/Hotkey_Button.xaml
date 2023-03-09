@@ -15,7 +15,7 @@
                     <Label x:Name="label" Content="{DynamicResource Usercontrol_HotKey}"   Style="{StaticResource userControlHotkeyLabel}" />
                     <Label  x:Name="actionLabel" Margin="0,0,0,0" ContentStringFormat="{}- {0}"  Style="{StaticResource userControlHotkeyLabel}" />
                 </StackPanel>
-                <Button x:Name="control" Background="Transparent" Click="button_Click" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="220" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <Button x:Name="control" Background="Transparent" Click="button_Click" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="280" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
 
             </DockPanel>
             

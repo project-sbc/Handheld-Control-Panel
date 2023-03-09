@@ -13,7 +13,7 @@
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                     <Label x:Name="label" Content="{DynamicResource Usercontrol_HotKeyParameter}"   Style="{StaticResource userControlHotkeyLabel}" />
-                    <Label  x:Name="actionLabel" Margin="0,0,0,0" ContentStringFormat="{}- {0}"  Style="{StaticResource userControlHotkeyLabel}" />
+                    <Label  x:Name="actionLabel" Margin="0,0,0,0" ContentStringFormat="{}  {0}"  Style="{StaticResource userControlHotkeyLabel}" />
                 </StackPanel>
                 <Button x:Name="button" Background="Transparent" Click="button_Click" BorderThickness="0" BorderBrush="Transparent" Height="40" Width="40" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <iconPacks:PackIconUnicons x:Name="icon" Kind="AngleRight" Height="26" Width="26"  />
