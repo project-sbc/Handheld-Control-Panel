@@ -43,6 +43,7 @@
     <system:String x:Key="Usercontrol_HotKey">Hot Key</system:String>
     <system:String x:Key="Usercontrol_HotKeySaved">Hot Key Saved</system:String>
     <system:String x:Key="Usercontrol_ProfileSaved">Profile Saved</system:String>
+    <system:String x:Key="Usercontrol_ProfileName">Profile Name</system:String>
     <system:String x:Key="Divider">Divider</system:String>
     
     

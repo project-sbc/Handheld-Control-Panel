@@ -134,10 +134,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\CustomizationPage.xaml.cs">
+    <Compile Update="Pages\OLD\CustomizationPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\CustomizeHomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ProfileEditPage.xaml.cs">
@@ -155,25 +158,25 @@
     <Compile Update="Pages\HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\QAMHomePage.xaml.cs">
+    <Compile Update="Pages\OLD\QAMHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeyDetailsPage.xaml.cs">
+    <Compile Update="Pages\OLD\HotKeyDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ProfileDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeysPageOLD.xaml.cs">
+    <Compile Update="Pages\OLD\HotKeysPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\ProfilesPageOLD.xaml.cs">
+    <Compile Update="Pages\OLD\ProfilesPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingsPageOLD.xaml.cs">
+    <Compile Update="Pages\OLD\SettingsPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditHotKeyUserControls\Parameter_Dropdown.xaml.cs">
@@ -186,6 +189,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\Profile_Textbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Divider.xaml.cs">
@@ -421,10 +427,6 @@
     <Page Update="UserControls\OLD\SettingsOLD\Autostart_Toggleswitch.xaml">
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UserControls\EditProfileUserControls\" />
   </ItemGroup>
 
 </Project>
