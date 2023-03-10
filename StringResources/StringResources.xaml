@@ -41,6 +41,8 @@
     <system:String x:Key="Usercontrol_HotKeyType">Input Method</system:String>
     <system:String x:Key="Usercontrol_HotKeyParameter">Parameter</system:String>
     <system:String x:Key="Usercontrol_HotKey">Hot Key</system:String>
+    <system:String x:Key="Usercontrol_HotKeySaved">Hot Key Saved</system:String>
+    <system:String x:Key="Usercontrol_ProfileSaved">Profile Saved</system:String>
     <system:String x:Key="Divider">Divider</system:String>
     
     
@@ -54,6 +56,8 @@
     <system:String x:Key="Instruction_Edit">EDIT</system:String>
     <system:String x:Key="Instruction_Delete">DELETE</system:String>
     <system:String x:Key="Instruction_Add">ADD NEW</system:String>
+    <system:String x:Key="Instruction_Save">SAVE</system:String>
+   
     
     
     

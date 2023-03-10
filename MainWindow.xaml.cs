@@ -333,6 +333,7 @@ namespace Handheld_Control_Panel
                         disable_B_ToClose= true;
                         instructionStackPanel.Children.Add(new SelectedListBox_Instruction());
                         break;
+
                     default: break;
                 }
 
@@ -358,6 +359,14 @@ namespace Handheld_Control_Panel
                 //change controller timer interval to 20 ms for active use
                 Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(20);
                 setWindowSizePosition();
+                if (navigation.SelectedItem != null)
+                {
+
+                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+                   
+                }
             }
         }
 

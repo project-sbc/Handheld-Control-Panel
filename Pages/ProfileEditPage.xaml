@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.HotKeyEditPage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.ProfileEditPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,13 +9,10 @@
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <StackPanel>
-        <Label Content="{DynamicResource Usercontrol_HotKeySaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+        <Label Content="{DynamicResource Usercontrol_ProfileSaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
-                <uc:Type_Dropdown />
-                <uc:Action_Dropdown />
-                <uc:Parameter_Dropdown/>
-                <uc:Hotkey_Button />
+               
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

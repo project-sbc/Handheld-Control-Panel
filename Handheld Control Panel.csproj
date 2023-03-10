@@ -140,6 +140,9 @@
     <Compile Update="Pages\CustomizeHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ProfileEditPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\HotKeyEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -228,6 +231,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Wifi_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\OLD\HotKeyDetailsOLD\HotKeyParameter_Listbox.xaml.cs">
@@ -415,6 +421,10 @@
     <Page Update="UserControls\OLD\SettingsOLD\Autostart_Toggleswitch.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserControls\EditProfileUserControls\" />
   </ItemGroup>
 
 </Project>
