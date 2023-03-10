@@ -115,7 +115,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             string result = "";
 
             result = Run_CLI.Run_CLI.RunCommand(argument, false, processEC, 2000);
-            Thread.Sleep(400);
+            Task.Delay(400);
             readSoftwareFanControl();
         }
         public static void disableSoftwareFanControl()
@@ -126,7 +126,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             string result = "";
 
             result = Run_CLI.Run_CLI.RunCommand(argument, false, processEC, 2000);
-            Thread.Sleep(400);
+            Task.Delay(400);
             readSoftwareFanControl();
         }
         public static void setFanSpeed(int fanSpeed)

@@ -91,7 +91,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 lock (objLock)
                 {
                     result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processSDPI);
-                    Thread.Sleep(100);
+                    Task.Delay(100);
                 }
             }
             catch (Exception ex)
@@ -113,9 +113,9 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             {
                 lock (objLock)
                 {
-                    Thread.Sleep(100);
+                    Task.Delay(100);
                     result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processQRes,1000);
-                    Thread.Sleep(100);
+                    Task.Delay(100);
                 }
             }
             catch (Exception ex)
@@ -300,7 +300,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             try
             {
                 result = QResCLIResult(commandArguments);
-                Thread.Sleep(200);
+                Task.Delay(200);
                 getCurrentDisplaySettings();
                 if (result.Contains("Mode Ok"))
                 {
@@ -330,7 +330,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 try
                 {
                     result = SetDPICLIResult(commandArguments);
-                    Thread.Sleep(200);
+                    Task.Delay(200);
                     Global_Variables.Global_Variables.Scaling = scaling;
                 }
                 catch (Exception ex)
@@ -356,7 +356,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             try
             {
                 result = QResCLIResult(commandArguments);
-                Thread.Sleep(200);
+                Task.Delay(200);
                 getCurrentDisplaySettings();
 
             }

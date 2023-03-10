@@ -206,7 +206,7 @@ namespace Handheld_Control_Panel.UserControls
             gamepadTimer.Tick += gamepad_Tick;
             gamepadTimer.Interval = TimeSpan.FromMilliseconds(70);
             gamepadTimerTickCounter = DateTime.Now.AddSeconds(5);
-            Thread.Sleep(70);
+            Task.Delay(70);
             gamepadTimer.Start();
             control.Content = "...";
         }

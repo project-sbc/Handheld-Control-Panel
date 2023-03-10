@@ -18,6 +18,7 @@ using WindowsInput;
 using Nefarius.Utilities.DeviceManagement.PnP;
 using Nefarius.Utilities.DeviceManagement.Extensions;
 using Windows.Devices.Usb;
+using System.Timers;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -149,7 +150,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(20);
+            timerController.Interval = TimeSpan.FromMilliseconds(40);
             timerController.Tick += controller_Tick;
             timerController.Start();
 
@@ -178,14 +179,16 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             {
                 if (controller.IsConnected)
                 {
+                    //var watch = System.Diagnostics.Stopwatch.StartNew();
                     currentGamePad = controller.GetState().Gamepad;
+
                     ushort btnShort = ((ushort)currentGamePad.Buttons);
 
 
                     if (!suspendEventsForGamepadHotKeyProgramming)
                     {
                         //check if controller combo is in controller hot key dictionary
-                        
+
                         if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null)
                         {
                             if (Global_Variables.Global_Variables.controllerHotKeyDictionary.ContainsKey(btnShort))
@@ -198,9 +201,11 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                 }
                             }
                         }
-    
+
                         if (!MouseMode_Management.MouseMode_Management.status_MouseMode())
                         {
+
+
                             if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
                             {
                                 buttonEvents.raiseControllerInput("Back");
@@ -272,12 +277,13 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                 buttonEvents.raiseControllerInput("Down");
                             }
                         }
-                     
+
 
 
                     }
-
-
+                    //watch.Stop();
+                    //Debug.WriteLine($"Total Execution Time: {watch.ElapsedMilliseconds} ms");
+                    //doSomeWork();
 
                     previousGamePad = currentGamePad;
                 }
@@ -285,6 +291,14 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             }
 
         }
+
+        public static void doSomeWork()
+        {
+           
+
+        }
+
+
         private static void getController()
         {
             int controllerNum = 1;
@@ -343,7 +357,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         }
 
     }
-
+  
     public class buttonEvents
     {
 

@@ -28,7 +28,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
             {
                 //add small delay to prevent write and read operations from interfering
                 //Log_Writer.writeLog("Read TDP start: determine CPU type");
-                Thread.Sleep(100);
+                Task.Delay(100);
    
                 //Log_Writer.writeLog("CPU type is " + cpuType);
                 if (Global_Variables.Global_Variables.cpuType == "Intel")
@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                         runAMDReadTDP();
                     }
                 }
-                Thread.Sleep(200);
+                Task.Delay(200);
                 
 
 
@@ -144,12 +144,12 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                         commandArgumentsPL1 = " /wrmem16 " + Global_Variables.Global_Variables.MCHBAR + "a0 0x" + hexPL1;
                         //Log_Writer.writeLog("Change TDP MMIO commandargumentPL1=" + commandArgumentsPL1);
                         Run_CLI.Run_CLI.RunCommand(commandArgumentsPL1, true, processKX);
-                        Thread.Sleep(500);
+                        Task.Delay(500);
                         commandArgumentsPL2 = " /wrmem16 " + Global_Variables.Global_Variables.MCHBAR + "a4 0x" + hexPL2;
                         //Log_Writer.writeLog("Change TDP MMIO commandargumentPL2=" + commandArgumentsPL2);
                         Run_CLI.Run_CLI.RunCommand(commandArgumentsPL2, true, processKX);
                         //Log_Writer.writeLog("Change TDP MMIO complete");
-                        Thread.Sleep(100);
+                        Task.Delay(100);
                     }
                 }
             }
@@ -198,7 +198,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                         //Log_Writer.writeLog("Change TDP MSR processMSR=" + processMSR + "; Hex PL1 PL2=" + hexPL1 + "," + hexPL2);
                         Run_CLI.Run_CLI.RunCommand(commandArguments, false, processMSR);
                         //Log_Writer.writeLog("Change TDP MSR complete");
-                        Thread.Sleep(100);
+                        Task.Delay(100);
                     }
                 }
             }
@@ -320,7 +320,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                             Global_Variables.Global_Variables.readPL1 = dblPL1;
                             //Log_Writer.writeLog("Read TDP MMIO pl1=" + dblPL1.ToString());
                         }
-                        Thread.Sleep(300);
+                        Task.Delay(300);
                         commandArgumentsPL2 = " /rdmem16 " + Global_Variables.Global_Variables.MCHBAR + "a4";
                         //Log_Writer.writeLog("Read TDP MMIO processKX=" + processKX + "; commandarugmentPL2=" + commandArgumentsPL2);
                         resultPL2 = Run_CLI.Run_CLI.RunCommand(commandArgumentsPL2, true, processKX);
@@ -568,11 +568,11 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                     commandArguments = " --stapm-limit=" + (pl1TDP * 1000).ToString() + " --slow-limit=" + (pl2TDP * 1000).ToString() + " --fast-limit=" + (pl2TDP * 1000).ToString();
          
                     result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
-                    Thread.Sleep(100);
+                    Task.Delay(100);
                     commandArguments = " --apu-slow-limit=" + (pl1TDP * 1000).ToString();
 
                     result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
-                    Thread.Sleep(100);
+                    Task.Delay(100);
                     //6800U MessageBox.Show(result);
                     //Log_Writer.writeLog("Read TDP AMD complete");
                 }
