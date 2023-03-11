@@ -10,7 +10,7 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel VerticalAlignment="Center" >
 
-            <Label Content="{DynamicResource Usercontrol_VolumeMute}"  Style="{StaticResource userControlMainLabel}"/>
+            <Label Content="{DynamicResource Usercontrol_DefaultProfile}"  Style="{StaticResource userControlMainLabel}"/>
             <mah:ToggleSwitch x:Name="control" Style="{DynamicResource userControlToggle}"  Toggled="toggleSwitch_Toggled" >
                 <mah:ToggleSwitch.LayoutTransform>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>

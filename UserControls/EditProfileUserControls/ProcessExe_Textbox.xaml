@@ -16,7 +16,7 @@
                     <Label  x:Name="actionLabel" Margin="0,0,0,0" ContentStringFormat="{}- {0}"  Style="{StaticResource userControlHotkeyLabel}" />
                 </StackPanel>
                 <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="240" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <Button x:Name="button" Width="40"  Style="{StaticResource userControlButton}" Height="30" Click="button_Click" >
+                <Button x:Name="button" Width="40"  Style="{StaticResource userControlButton}" Height="30"  >
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
