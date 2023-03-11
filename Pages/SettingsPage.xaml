@@ -12,8 +12,8 @@
         <Label Content="{DynamicResource Usercontrol_ProfileSaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
-   
-                
+                <uc:Autostart_Toggle/>
+
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

@@ -167,7 +167,7 @@
     <Compile Update="Pages\OLD\HotKeyDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\ProfileDetailsPage.xaml.cs">
+    <Compile Update="Pages\OLD\ProfileDetailsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\OLD\HotKeysPageOLD.xaml.cs">
@@ -191,7 +191,13 @@
     <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\ProcessExe_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditProfileUserControls\Profile_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\Default_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Divider.xaml.cs">
@@ -242,13 +248,16 @@
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\HotKeyDetailsOLD\HotKeyParameter_Listbox.xaml.cs">
+    <Compile Update="UserControls\SettingsUserControls\Autostart_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\HotKeyDetailsOLD\HotKeyType_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\HotKeyDetailsOLD\HotKeyParameter_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\HotKeyDetailsOLD\HotKeyAction_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\HotKeyDetailsOLD\HotKeyType_Listbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\zOLD\HotKeyDetailsOLD\HotKeyAction_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\HotKeyEditPage_Instruction.xaml.cs">
@@ -266,133 +275,133 @@
     <Compile Update="UserControls\InstructionUserControls\HomePage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_GPUCLK.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_GPUCLK.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_GPUCLK.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_GPUCLK.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_FPSLimit.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_FPSLimit.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_FPSLimit.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_FPSLimit.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_ActiveCores.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_ActiveCores.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_ActiveCores.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_ActiveCores.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_MaxCPU.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_MaxCPU.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_MaxCPU.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_MaxCPU.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_EPP.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_EPP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_EPP.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_EPP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileDefault_ToggleSwitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileDefault_ToggleSwitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileResolution_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileResolution_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileRefresh_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileRefresh_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\HotKeyDetailsOLD\HotKeys_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\HotKeyDetailsOLD\HotKeys_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\Brightness_SliderOLD.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\Brightness_SliderOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\CoreParking_Slider.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\CoreParking_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\CPUFrequency_Slider.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\CPUFrequency_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\Customize_QAM.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\Customize_QAM.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\EPP_SliderOLD.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\EPP_SliderOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\FPSLimit_Slider.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\FPSLimit_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\GPUCLK_Sliderold.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\GPUCLK_Sliderold.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\QuickAction_Wrappanel.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\QuickAction_Wrappanel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\Refresh_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\Refresh_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\Resolution_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\Resolution_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\Scaling_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\Scaling_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\TDP2_Sliderold.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\TDP2_Sliderold.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\TDP_Sliderold.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\TDP_Sliderold.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\RegularControlsOLD\Volume_SliderOLD.xaml.cs">
+    <Compile Update="UserControls\zOLD\RegularControlsOLD\Volume_SliderOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\DockSide_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\DockSide_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\CombineTDP_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\CombineTDP_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\CheckUpdates_Button.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\CheckUpdates_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_TDP.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_TDP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOffline_TDP2.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOffline_TDP2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_TDP2.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_TDP2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\ProfileOnline_TDP.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\ProfileOnline_TDP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\IntelTDPType_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\IntelTDPType_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\Language_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\Language_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\ProfileDetailsOLD\Profiles_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\ProfileDetailsOLD\Profiles_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\Autostart_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\Autostart_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\AutoUpdate_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\AutoUpdate_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\StartRTSS_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\StartRTSS_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\Theme_Toggleswitch.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\Theme_Toggleswitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\OLD\SettingsOLD\AccentColor_Listbox.xaml.cs">
+    <Compile Update="UserControls\zOLD\SettingsOLD\AccentColor_Listbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
@@ -421,10 +430,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="UserControls\OLD\ProfileDetailsOLD\Profiles_AppType.xaml">
+    <Page Update="UserControls\zOLD\ProfileDetailsOLD\Profiles_AppType.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\OLD\SettingsOLD\Autostart_Toggleswitch.xaml">
+    <Page Update="UserControls\zOLD\SettingsOLD\Autostart_Toggleswitch.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

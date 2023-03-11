@@ -13,7 +13,7 @@
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
                 <uc:Profile_Textbox/>
-                
+                <uc:ProcessExe_Textbox/>
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

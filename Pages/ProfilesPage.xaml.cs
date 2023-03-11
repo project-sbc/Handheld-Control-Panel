@@ -82,7 +82,12 @@ namespace Handheld_Control_Panel.Pages
                     switch (action)
                     {
                         case "A":
-                           
+                            if (controlList.SelectedItem != null)
+                            {
+                                Global_Variables.profiles.editingProfile = (Profile)controlList.SelectedItem;
+                                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                                wnd.navigateFrame("ProfileEditPage");
+                            }
                             break;
 
                         case "X":
