@@ -15,6 +15,10 @@
                 <uc:AccentColor_Dropdown/>
                 <uc:Autostart_Toggle/>
                 <uc:StartRTSS_Toggle />
+                <uc:DockRight_Toggle/>
+                <uc:MaxFPS_Slider/>
+                <uc:MinTDP_Slider/>
+                <uc:MaxTDP_Slider/>
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

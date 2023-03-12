@@ -1,7 +1,8 @@
-﻿using Handheld_Control_Panel.Classes.Controller_Management;
-
+﻿using ControlzEx.Theming;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
@@ -20,32 +21,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Windows.Devices.Radios;
 
 namespace Handheld_Control_Panel.UserControls
 {
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class MaxTDP_SliderOLD : UserControl
+    public partial class MaxTDP_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-
-        public MaxTDP_SliderOLD()
+        private bool dragStarted= false;
+        public MaxTDP_Slider()
         {
             InitializeComponent();
+            //setControlValue();
             UserControl_Management.setupControl(control);
+         
         }
+
+       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+           //UserControl_Management.setThumbSize(control);
+
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
+         
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-            if (control is Slider) { UserControl_Management.setThumbSize((Slider)control); }
-            if (Window.GetWindow(this).ActualWidth < 650) { subText.Visibility = Visibility.Collapsed; }
+
         }
 
-
+       
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -53,21 +61,41 @@ namespace Handheld_Control_Panel.UserControls
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
                 Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+
             }
+        }
+
+
+     
+      
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+        
+        }
+        private void sliderValueChanged()
+        {
+            UserControl_Management.Slider_ValueChanged((Slider)control, null);
+        }
+       
+
+        private void control_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            dragStarted = true;
+        }
+
+        private void control_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            dragStarted = false;
+            sliderValueChanged();
         }
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(control.IsLoaded && control.Visibility != Visibility.Collapsed)
+            if (!dragStarted && control.IsLoaded)
             {
-                UserControl_Management.Slider_ValueChanged(sender, e);
+                sliderValueChanged();
             }
-       
-        }
-
-        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
         }
     }
 }

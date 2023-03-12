@@ -48,6 +48,13 @@
     <system:String x:Key="Usercontrol_DefaultProfile">Default Profile</system:String>
     <system:String x:Key="Usercontrol_Autostart">Autostart</system:String>
     <system:String x:Key="Usercontrol_StartRTSS">Autostart RTSS</system:String>
+    <system:String x:Key="Usercontrol_MaxTDP">Max TDP</system:String>
+    <system:String x:Key="Usercontrol_MinTDP">Min TDP</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS">Max RTSS FPS</system:String>
+    <system:String x:Key="Usercontrol_Right">Right</system:String>
+    <system:String x:Key="Usercontrol_Left">Left</system:String>
+    <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
+    <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
     <system:String x:Key="Divider">Divider</system:String>
     
     

@@ -251,10 +251,22 @@
     <Compile Update="UserControls\SettingsUserControls\AccentColor_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\SettingsUserControls\MaxFPS_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\MinTDP_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\DockRight_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\SettingsUserControls\StartRTSS_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\Autostart_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\MaxTDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\zOLD\HotKeyDetailsOLD\HotKeyParameter_Listbox.xaml.cs">

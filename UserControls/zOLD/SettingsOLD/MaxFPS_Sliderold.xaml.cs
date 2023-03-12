@@ -24,12 +24,12 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class MaxFPS_Slider : UserControl
+    public partial class MaxFPS_Sliderold : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
 
-        public MaxFPS_Slider()
+        public MaxFPS_Sliderold()
         {
             InitializeComponent();
             UserControl_Management.setupControl(control);

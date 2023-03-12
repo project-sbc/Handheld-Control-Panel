@@ -262,7 +262,7 @@ namespace Handheld_Control_Panel
         #endregion
 
         #region windows events
-        private void setWindowSizePosition()
+        public void setWindowSizePosition()
         {
 
             //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
