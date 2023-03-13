@@ -15,6 +15,7 @@
                 <uc:Profile_Textbox/>
                 <uc:ProcessExe_Textbox/>
                 <uc:Default_Toggle/>
+                <uc:OnlineFPS_Slider/>
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

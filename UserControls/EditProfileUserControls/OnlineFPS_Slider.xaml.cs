@@ -38,7 +38,19 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-         
+
+
+            if (Global_Variables.profiles.editingProfile.Online_FPSLimit != "")
+            {
+                controlToggle.IsOn = true;
+                control.Value = Convert.ToDouble(Global_Variables.profiles.editingProfile.Online_FPSLimit);
+            }
+            else
+            {
+                controlToggle.IsOn = false;
+                secondLabel.Visibility = Visibility.Collapsed;
+                control.Visibility = Visibility.Collapsed;
+            }
         }
 
        
@@ -51,17 +63,7 @@ namespace Handheld_Control_Panel.UserControls
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
-            if (Global_Variables.profiles.editingProfile.Online_FPSLimit != "")
-            {
-                controlToggle.IsOn = true;
-                control.Value = Global_Variables.FPSLimit;
-            }
-            else
-            {
-                controlToggle.IsOn = false;
-                secondLabel.Visibility = Visibility.Collapsed;
-                control.Visibility = Visibility.Collapsed;
-            }
+           
 
           
         }
