@@ -139,6 +139,7 @@ namespace Handheld_Control_Panel.Pages
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
+            Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
         }
     }
 }
