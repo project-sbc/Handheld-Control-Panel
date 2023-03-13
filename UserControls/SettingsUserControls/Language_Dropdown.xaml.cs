@@ -1,5 +1,4 @@
-﻿using ControlzEx.Standard;
-using ControlzEx.Theming;
+﻿using ControlzEx.Theming;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Display_Management;
@@ -34,13 +33,13 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class AccentColor_Dropdown : UserControl
+    public partial class Language_Dropdown : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
         private object selectedObject = "";
-        public ReadOnlyObservableCollection<Theme> themes = ThemeManager.Current.Themes;
-        public AccentColor_Dropdown()
+        
+        public Language_Dropdown()
         {
             InitializeComponent();
             setControlValue();
@@ -49,35 +48,10 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            foreach (Theme theme in themes)
-            {
-                if (theme.ToString().Contains("(Light)"))
-                {
-                    colorRectangle color = new colorRectangle();
-                    color.theme = theme.DisplayName;
-                    color.brush = theme.ShowcaseBrush;
-                    controlList.Items.Add(color);
-                    if (color.theme.Contains(Properties.Settings.Default.systemAccent))
-                    {
-                        controlList.SelectedIndex = controlList.Items.Count - 1;
-                        colorBorder.Background = color.brush;
-                        selectedObject = controlList.SelectedItem;
-
-                    }
-                }
-
-            }
-
-            //foreach (colorRectangle lbi in controlList.Items)
-            //{
-                //if (lbi.theme.Contains(Properties.Settings.Default.systemAccent))
-                //{
-                   // controlList.SelectedItem = lbi;
-                   //selectedObject = lbi;
-                   
-                //}
-
-           // }
+            controlList.Items.Add("English");
+            controlList.Items.Add("中文");
+            controlList.Items.Add("Pусский");
+            controlList.SelectedItem = Properties.Settings.Default.language;
 
 
             controlList.Visibility = Visibility.Collapsed;
@@ -114,26 +88,20 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.SelectedItem !=null)
+                        if (controlList.SelectedItem.ToString() != Properties.Settings.Default.language)
                         {
-                            colorRectangle lbi = controlList.SelectedItem as colorRectangle;
-                            if (!lbi.theme.ToString().Contains(Properties.Settings.Default.systemAccent))
-                            {
-                                handleListboxChange();
-                            }
-
-                            else
-                            {
-
-                                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
-                                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                                wnd.changeUserInstruction("SelectedListBox_Instruction");
-                                wnd = null;
-
-                            }
+                            handleListboxChange();
                         }
-                      
+                        else
+                        {
+              
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                            wnd.changeUserInstruction("SelectedListBox_Instruction");
+                            wnd = null;
+                         
+                        }
 
                         break;
                     case "B":
@@ -167,18 +135,28 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (controlList.SelectedItem != null)
                 {
-                    colorRectangle themeShape = (colorRectangle)controlList.SelectedItem;
-                    string theme = themeShape.theme;
-                    theme = theme.Substring(0, theme.IndexOf("(")).Trim();
-                    ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + theme);
-                    Properties.Settings.Default.systemAccent = theme;
+                    string selectedItem = controlList.SelectedValue.ToString();
+
+                    Properties.Settings.Default.language = selectedItem;
                     Properties.Settings.Default.Save();
-                    selectedObject = controlList.SelectedItem;
-                    colorBorder.Background = themeShape.brush;              
-                    if (controlList.Visibility == Visibility.Visible)
+                    selectedObject = selectedItem;
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.languageDict);
+                    switch (selectedItem)
                     {
-                        button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        default:
+                        case "English":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+                        case "中文":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.zh-Hans.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+                        case "Pусский":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.ru.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+
+
                     }
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.languageDict);
                 }
 
             }
@@ -218,10 +196,5 @@ namespace Handheld_Control_Panel.UserControls
         {
             handleListboxChange();
         }
-    }
-    public class colorRectangle
-    {
-        public string theme { get; set; }
-        public Brush brush { get; set; }
     }
 }

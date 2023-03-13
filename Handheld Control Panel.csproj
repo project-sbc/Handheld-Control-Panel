@@ -248,7 +248,16 @@
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\SettingsUserControls\Language_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\SettingsUserControls\AccentColor_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\Autoupdate_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\CombineTDP_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\MaxFPS_Slider.xaml.cs">
@@ -258,6 +267,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\DockRight_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\Theme_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\StartRTSS_Toggle.xaml.cs">

@@ -430,7 +430,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     Properties.Settings.Default.Save();
                     break;
                 case "Slider_TDP-TickChange":
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.ReadPL2));
+                    if (Properties.Settings.Default.combineTDP)
+                    {
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)sliderValue));
+
+                    }
+                    else
+                    {
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)Global_Variables.Global_Variables.ReadPL2));
+                    }
                     break;
                 case "Slider_TDP2-TickChange":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.ReadPL1, (int)sliderValue));

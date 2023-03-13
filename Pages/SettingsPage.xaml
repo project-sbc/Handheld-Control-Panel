@@ -12,13 +12,16 @@
         <Label Content="{DynamicResource Usercontrol_ProfileSaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
+                <uc:Theme_Toggle />
                 <uc:AccentColor_Dropdown/>
                 <uc:Autostart_Toggle/>
+                <uc:Autoupdate_Toggle/>
                 <uc:StartRTSS_Toggle />
                 <uc:DockRight_Toggle/>
                 <uc:MaxFPS_Slider/>
                 <uc:MinTDP_Slider/>
                 <uc:MaxTDP_Slider/>
+                <uc:CombineTDP_Toggle/>
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

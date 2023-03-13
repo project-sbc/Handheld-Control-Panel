@@ -51,14 +51,19 @@
     <system:String x:Key="Usercontrol_MaxTDP">Max TDP</system:String>
     <system:String x:Key="Usercontrol_MinTDP">Min TDP</system:String>
     <system:String x:Key="Usercontrol_MaxFPS">Max RTSS FPS</system:String>
-    <system:String x:Key="Usercontrol_Right">Right</system:String>
-    <system:String x:Key="Usercontrol_Left">Left</system:String>
+    <system:String x:Key="Usercontrol_Theme">Theme</system:String>
+    <system:String x:Key="Usercontrol_CombineTDP">Sync TDP Values</system:String>
+
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
+    <system:String x:Key="Usercontrol_Autoupdate">Auto Check For Updates</system:String>
     <system:String x:Key="Divider">Divider</system:String>
-    
-    
-    
+    <system:String x:Key="Usercontrol_Right">Right</system:String>
+    <system:String x:Key="Usercontrol_Left">Left</system:String>
+    <system:String x:Key="Usercontrol_Dark">Dark</system:String>
+    <system:String x:Key="Usercontrol_Light">Light</system:String>
+
+
     <system:String x:Key="Instruction_Toggle">TOGGLE</system:String>
     <system:String x:Key="Instruction_Confirm">CONFIRM</system:String>
     <system:String x:Key="Instruction_Close">CLOSE</system:String>
