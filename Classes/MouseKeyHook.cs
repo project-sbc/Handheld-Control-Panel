@@ -43,8 +43,12 @@ namespace Handheld_Control_Panel.Classes
                 } 
                 else 
                 {
-                    runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
-
+                    if (runningKeyStroke != e.KeyCode.ToString() && !runningKeyStroke.Contains("+" + e.KeyCode.ToString()))
+                    {
+                        runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
+                        Debug.WriteLine(runningKeyStroke);
+                    }
+         
                 }
                
                 if (Global_Variables.Global_Variables.KBHotKeyDictionary.Count != null)
@@ -54,7 +58,7 @@ namespace Handheld_Control_Panel.Classes
                        
                         args.SuppressKeyPress = true;
                         ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
-                        //HotKey_Management.runHotKeyAction(action);
+                        QuickAction_Management.runHotKeyAction(action);
                         runningKeyStroke = "";
 
                     }

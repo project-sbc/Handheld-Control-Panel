@@ -71,7 +71,7 @@
 			<Type>Controller</Type>
 			<Action>Show_Hide_HCP</Action>
 			<Parameter></Parameter>
-			<Hotkey>776</Hotkey>
+			<Hotkey></Hotkey>
 		</ControllerHotKey>
 
 	</ControllerHotKeys>

@@ -88,7 +88,15 @@ namespace Handheld_Control_Panel.Pages
                         break;
                     case "Start":
                         Global_Variables.hotKeys.editingHotkey.SaveToXML();
-                        Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
+                        if (Global_Variables.hotKeys.editingHotkey.Type == "Controller")
+                        {
+                            Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
+                        }
+                        else
+                        {
+                            Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
+                        }
+       
                         runSaveMessage();
                         break;
 
