@@ -53,6 +53,7 @@
     <system:String x:Key="Usercontrol_MaxFPS">Max RTSS FPS</system:String>
     <system:String x:Key="Usercontrol_Theme">Theme</system:String>
     <system:String x:Key="Usercontrol_CombineTDP">Sync TDP Values</system:String>
+    <system:String x:Key="Usercontrol_Scaling">Display Scaling</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>

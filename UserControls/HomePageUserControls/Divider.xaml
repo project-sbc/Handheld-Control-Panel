@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Handheld_Control_Panel.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
               xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignWidth="450" Height="2" Style="{DynamicResource userControls}" Background="{DynamicResource MahApps.Brushes.ThemeForeground}" >
+             d:DesignWidth="450" Height="3" Style="{DynamicResource userControls}" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" >
     <Grid    >
        
 

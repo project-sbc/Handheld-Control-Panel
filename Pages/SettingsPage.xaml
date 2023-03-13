@@ -14,14 +14,18 @@
             <StackPanel x:Name="stackPanel" >
                 <uc:Theme_Toggle />
                 <uc:AccentColor_Dropdown/>
+                <uc:DockRight_Toggle/>
+                <uc:Divider/>
                 <uc:Autostart_Toggle/>
                 <uc:Autoupdate_Toggle/>
                 <uc:StartRTSS_Toggle />
-                <uc:DockRight_Toggle/>
-                <uc:MaxFPS_Slider/>
+                <uc:Divider/>
+
                 <uc:MinTDP_Slider/>
                 <uc:MaxTDP_Slider/>
                 <uc:CombineTDP_Toggle/>
+                <uc:Divider/>
+                <uc:MaxFPS_Slider/>
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

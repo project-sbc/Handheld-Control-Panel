@@ -109,6 +109,11 @@ namespace Handheld_Control_Panel.Pages
                             case "Divider":
                                 stackPanel.Children.Add(new Divider());
                                 break;
+                            case "Usercontrol_Scaling":
+                                stackPanel.Children.Add(new Scaling_Dropdown());
+                                break;
+
+                                
                             default: break;
                         }
                     }
