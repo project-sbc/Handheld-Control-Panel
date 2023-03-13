@@ -290,28 +290,32 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     if (control is Slider)
                     {
                         Slider slider = (Slider)control;
-                        double originalValue = slider.Value;
-                        switch(action)
+                        if (slider.Visibility == Visibility.Visible)
                         {
-                            case "Up":
-                                slider.Value = slider.Value + slider.LargeChange;
-                                break;
-                            case "Down":
-                                slider.Value = slider.Value - slider.LargeChange;
-                                break;
-                            case "Right":
-                                slider.Value = slider.Value + slider.SmallChange;
-                                break;
-                            case "Left":
-                                slider.Value = slider.Value - slider.SmallChange;
-                                break;
+                            double originalValue = slider.Value;
+                            switch (action)
+                            {
+                                case "Up":
+                                    slider.Value = slider.Value + slider.LargeChange;
+                                    break;
+                                case "Down":
+                                    slider.Value = slider.Value - slider.LargeChange;
+                                    break;
+                                case "Right":
+                                    slider.Value = slider.Value + slider.SmallChange;
+                                    break;
+                                case "Left":
+                                    slider.Value = slider.Value - slider.SmallChange;
+                                    break;
+
+                                default: break;
+                            }
+                            if (originalValue != slider.Value && !slider.Tag.ToString().Contains("-TickChange"))
+                            {
+                                Slider_ValueChanged(slider, null);
+                            }
+                        }
                       
-                            default:break;
-                        }
-                        if (originalValue != slider.Value && !slider.Tag.ToString().Contains("-TickChange"))
-                        {
-                            Slider_ValueChanged(slider, null);
-                        }
                     }
                     if (control is ToggleSwitch)
                     {
@@ -399,6 +403,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_ProfileOfflineGPUCLK":
                     Global_Variables.Global_Variables.profiles.editingProfile.Offline_GPUCLK = sliderValue.ToString();
+                    break;
+                case "Slider_ProfileOnlineFPS":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Online_FPSLimit = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineMaxCPU":
                     Global_Variables.Global_Variables.profiles.editingProfile.Online_MAXCPU = sliderValue.ToString();

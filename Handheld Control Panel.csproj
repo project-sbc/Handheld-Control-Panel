@@ -191,6 +191,9 @@
     <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\OnlineFPS_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditProfileUserControls\ProcessExe_Textbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

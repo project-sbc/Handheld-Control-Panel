@@ -13,20 +13,21 @@
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                     <Label x:Name="label" Content="{DynamicResource Usercontrol_Exe}"   Style="{StaticResource userControlHotkeyLabel}" />
-                    <Label  x:Name="actionLabel" Margin="0,0,0,0" ContentStringFormat="{}- {0}"  Style="{StaticResource userControlHotkeyLabel}" />
+             
                 </StackPanel>
-                <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="240" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <Button x:Name="button" Width="40"  Style="{StaticResource userControlButton}" Height="30"  >
+                <Button x:Name="button" Width="40" Margin="0,0,12,0"  Height="30" DockPanel.Dock="Right" HorizontalAlignment="Right">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock  FontFamily="Segoe MDL2 Assets" Text="&#xEC50;" Margin="0,0,6,0"  />
-                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xF095;" Margin="0,0,6,0"  />
+                        <TextBlock  FontFamily="Segoe MDL2 Assets" Text="&#xEC50;" FontSize="18" Margin="0,0,0,0"  />
+
                     </StackPanel>
                 </Button>
+                <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" DockPanel.Dock="Right" HorizontalAlignment="Right" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="188" Margin="0,0,10,0" VerticalAlignment="Center" />
+                
             </DockPanel>
             
         </DockPanel>
