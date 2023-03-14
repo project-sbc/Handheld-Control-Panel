@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    <StackPanel>
+    <DockPanel>
         <Label Content="{DynamicResource Usercontrol_ProfileSaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
@@ -18,13 +18,21 @@
                 <uc:OnlineTDP_Slider />
                 <uc:OnlineTDP2_Slider />
                 <uc:OnlineFPS_Slider/>
+                <uc:OnlineEPP_Slider/>
+                <uc:OnlineMaxCPU_Slider/>
+                <uc:OnlineGPUCLK_Slider/>
+                <uc:OnlineActiveCore_Slider/>
 
                 <uc:OfflineTDP_Slider />
                 <uc:OfflineTDP2_Slider />
                 <uc:OfflineFPS_Slider/>
+                <uc:OfflineEPP_Slider/>
+                <uc:OfflineMaxCPU_Slider/>
+                <uc:OfflineGPUCLK_Slider/>
+                <uc:OfflineActiveCore_Slider/>
             </StackPanel>
         </ScrollViewer>
-    </StackPanel>
+    </DockPanel>
    
   
 </Page>

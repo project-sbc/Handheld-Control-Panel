@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.OfflineGPUCLK_Slider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Handheld_Control_Panel.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="450"  Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
+    <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
+        <DockPanel >
+            <DockPanel Height="50" DockPanel.Dock="Top" >
+                <Label x:Name="label" Content="{DynamicResource Usercontrol_GPUCLK}"   Style="{StaticResource userControlMainLabel}" />
+                <Label  x:Name="secondLabel"  Content="{Binding ElementName=control, Path=Value}" Margin="0,0,0,0" ContentStringFormat="{}- {0} MHz"  Style="{StaticResource userControlMainLabel}" />
+                <mah:ToggleSwitch x:Name="controlToggle"   Style="{DynamicResource userControlToggle}"  Toggled="controlToggle_Toggled" >
+                    <mah:ToggleSwitch.LayoutTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    </mah:ToggleSwitch.LayoutTransform>
+                </mah:ToggleSwitch>
+            </DockPanel>
+
+            <Slider  x:Name="control" DockPanel.Dock="Bottom" Width="404" Height="40"  HorizontalAlignment="Center" Tag="Slider_ProfileOfflineGPUCLK" Thumb.DragStarted="control_DragStarted" Thumb.DragCompleted="control_DragCompleted" ValueChanged="control_ValueChanged"  />
+
+        </DockPanel>
+
+    </Border>
+</UserControl>

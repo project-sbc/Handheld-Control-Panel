@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    <StackPanel>
+    <DockPanel>
         <Label Content="{DynamicResource Usercontrol_HotKeySaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
@@ -18,7 +18,7 @@
                 <uc:Hotkey_Button />
             </StackPanel>
         </ScrollViewer>
-    </StackPanel>
+    </DockPanel>
    
   
 </Page>
