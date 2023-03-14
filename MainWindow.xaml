@@ -7,92 +7,102 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True" 
-        Title="Handheld Control Panel" Height="750" Width="450" Top="0" ResizeMode="NoResize" UseNoneWindowStyle="True"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" StateChanged="MetroWindow_StateChanged" Loaded="MetroWindow_Loaded" >
-    <Grid Background="{DynamicResource MahApps.Brushes.Accent4}"  >
+        xmlns:ui="http://schemas.modernwpf.com/2019"   Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="Transparent" UseNoneWindowStyle="True" BorderThickness="0"
+        Title="Handheld Control Panel" Height="750" Width="450"  Top="0" ResizeMode="NoResize"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" StateChanged="MetroWindow_StateChanged" Loaded="MetroWindow_Loaded" >
+    <Border Background="{DynamicResource MahApps.Brushes.ThemeBackground}"   BorderThickness="0"  CornerRadius="11,0,0,11"  >
+        <Border    BorderThickness="0"  CornerRadius="11,0,0,11"  >
+            <Grid   >
 
-        <Grid.Resources>
+                <Grid.Resources>
 
-            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
+                    
 
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="2" />
-            <RowDefinition Height="62" />
-            <RowDefinition  />
-            <RowDefinition Height="50" />
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="2" />
+                    <RowDefinition Height="62" />
+                    <RowDefinition  />
+               
+                    <RowDefinition Height="50" />
 
-        </Grid.RowDefinitions>
+                </Grid.RowDefinitions>
 
-        <DockPanel>
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" />
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="InternetStatus" FontFamily="Segoe MDL2 Assets" FontSize="28"  Margin="0,0,5,5"/>
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="BatteryStatus" FontFamily="Segoe MDL2 Assets" FontSize="36"  Margin="5,0,5,0"/>
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" />
-            <TextBlock DockPanel.Dock="Right" />
-        </DockPanel>
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" />
+                    <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="InternetStatus" FontFamily="Segoe MDL2 Assets" FontSize="28"  Margin="0,0,5,5"/>
+                    <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="BatteryStatus" FontFamily="Segoe MDL2 Assets" FontSize="36"  Margin="5,0,5,0"/>
+                    <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" />
+                    <TextBlock DockPanel.Dock="Right" />
+                </DockPanel>
 
-        <DockPanel Grid.Row="1" Background="{DynamicResource MahApps.Brushes.Accent3}">
-            <TextBlock Width="35" Margin="13,0,0,0" HorizontalAlignment="Left" FontSize="35" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10C;" />
-            <ListBox x:Name="navigation" FontSize="16" Width="350" Background="Transparent" SelectionChanged="navigation_SelectionChanged"  >
-                <ListBox.Resources>
+                <DockPanel Grid.Row="1" Background="{DynamicResource MahApps.Brushes.Accent3}">
+                    <TextBlock Width="35" Margin="13,0,0,0" HorizontalAlignment="Left" FontSize="35" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10C;" />
+                    <ListBox x:Name="navigation" FontSize="16" Width="350" Background="Transparent" SelectionChanged="navigation_SelectionChanged"  >
+                        <ListBox.Resources>
 
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Style.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="2"/>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="2"/>
 
+                                    </Style>
+                                </Style.Resources>
                             </Style>
-                        </Style.Resources>
-                    </Style>
-                </ListBox.Resources>
-                <ListBox.ItemsPanel>
+                        </ListBox.Resources>
+                        <ListBox.ItemsPanel>
 
-                    <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBoxItem Tag="Home" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE80F;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="CustomizeHome" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="Profiles" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="HotKey" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE92E;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="MouseMode" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE962;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="AppLauncher" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="Information" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE946;" />
-                </ListBoxItem>
-                <ListBoxItem Tag="Settings" >
-                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE713;" />
-                </ListBoxItem>
-            </ListBox>
-            <TextBlock Width="35" HorizontalAlignment="Right" FontSize="35" Margin="0,0,13,0" TextAlignment="Right" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10D;" />
-        </DockPanel>
-        <DockPanel Background="{DynamicResource MahApps.Brushes.Badged.Foreground}" Grid.Row="2"/>
+                            <ItemsPanelTemplate>
+                                <StackPanel HorizontalAlignment="Center" Background="Transparent" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBoxItem Tag="Home" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE80F;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="CustomizeHome" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="Profiles" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="HotKey" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE92E;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="MouseMode" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE962;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="AppLauncher" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="Information" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE946;" />
+                        </ListBoxItem>
+                        <ListBoxItem Tag="Settings" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE713;" />
+                        </ListBoxItem>
+                    </ListBox>
+                    <TextBlock Width="35" HorizontalAlignment="Right" FontSize="35" Margin="0,0,13,0" TextAlignment="Right" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10D;" />
+                </DockPanel>
+                <DockPanel Background="{DynamicResource MahApps.Brushes.Badged.Foreground}" Grid.Row="2"/>
 
-        <DockPanel Grid.Row="3"  Background="{DynamicResource MahApps.Brushes.Accent3}">
-            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}"/>
-            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}"/>
-        </DockPanel>
+                <DockPanel Grid.Row="3"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+                    <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}"/>
+                    <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}"/>
+                </DockPanel>
 
-        <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />
+                <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />
 
-        <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Grid.Row="5" Height="50" Width="450" />
-    </Grid>
+                <Border Background="{DynamicResource MahApps.Brushes.Accent2}" Grid.Row="5">
+                    <StackPanel x:Name="instructionStackPanel" Grid.Row="6" Height="50" Width="450" />
+                </Border>
+            
+            </Grid>
+
+        </Border>
+    </Border>
+    
 
 
 </mah:MetroWindow>
