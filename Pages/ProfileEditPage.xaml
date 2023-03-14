@@ -15,7 +15,13 @@
                 <uc:Profile_Textbox/>
                 <uc:ProcessExe_Textbox/>
                 <uc:Default_Toggle/>
+                <uc:OnlineTDP_Slider />
+                <uc:OnlineTDP2_Slider />
                 <uc:OnlineFPS_Slider/>
+
+                <uc:OfflineTDP_Slider />
+                <uc:OfflineTDP2_Slider />
+                <uc:OfflineFPS_Slider/>
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

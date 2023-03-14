@@ -33,25 +33,26 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Language_Dropdown : UserControl
+    public partial class IntelTDP_Dropdown : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
         private object selectedObject = "";
         
-        public Language_Dropdown()
+        public IntelTDP_Dropdown()
         {
             InitializeComponent();
             setControlValue();
-          
+            if (Global_Variables.cpuType == "AMD") { this.Visibility = Visibility.Collapsed; }
         }
 
         private  void setControlValue()
         {
-            controlList.Items.Add("English");
-            controlList.Items.Add("中文");
-            controlList.Items.Add("Pусский");
-            controlList.SelectedItem = Properties.Settings.Default.language;
+ 
+            controlList.Items.Add("MMIO");
+            controlList.Items.Add("MSR");
+            controlList.Items.Add("MMIO+MSR");
+            controlList.SelectedItem = Properties.Settings.Default.IntelMMIOMSR;
 
 
             controlList.Visibility = Visibility.Collapsed;
@@ -75,7 +76,7 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.SelectedItem.ToString() != Properties.Settings.Default.language)
+                        if (controlList.SelectedItem.ToString() != Properties.Settings.Default.IntelMMIOMSR)
                         {
                             handleListboxChange();
                         }
@@ -120,30 +121,14 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (controlList.IsLoaded)
             {
-                if (controlList.SelectedItem != null)
+                if (controlList.SelectedItem != null & controlList.Visibility == Visibility.Visible)
                 {
                     string selectedItem = controlList.SelectedValue.ToString();
 
-                    Properties.Settings.Default.language = selectedItem;
+                    Properties.Settings.Default.IntelMMIOMSR = selectedItem;
                     Properties.Settings.Default.Save();
                     selectedObject = selectedItem;
-                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.languageDict);
-                    switch (selectedItem)
-                    {
-                        default:
-                        case "English":
-                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
-                            break;
-                        case "中文":
-                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.zh-Hans.xaml", UriKind.RelativeOrAbsolute);
-                            break;
-                        case "Pусский":
-                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.ru.xaml", UriKind.RelativeOrAbsolute);
-                            break;
-
-
-                    }
-                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.languageDict);
+                   
                 }
 
             }

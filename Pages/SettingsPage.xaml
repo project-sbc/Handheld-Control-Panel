@@ -15,12 +15,13 @@
                 <uc:Theme_Toggle />
                 <uc:AccentColor_Dropdown/>
                 <uc:DockRight_Toggle/>
+                <uc:Language_Dropdown/>
                 <uc:Divider/>
                 <uc:Autostart_Toggle/>
                 <uc:Autoupdate_Toggle/>
                 <uc:StartRTSS_Toggle />
                 <uc:Divider/>
-
+                <uc:IntelTDP_Dropdown/>
                 <uc:MinTDP_Slider/>
                 <uc:MaxTDP_Slider/>
                 <uc:CombineTDP_Toggle/>

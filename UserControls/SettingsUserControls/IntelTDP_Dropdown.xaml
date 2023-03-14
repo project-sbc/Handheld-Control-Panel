@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Language_Dropdown"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.IntelTDP_Dropdown"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,14 +11,14 @@
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Height="50" VerticalAlignment="Center" >
 
-                <Label x:Name="label" Content="{DynamicResource Usercontrol_Language}"   Style="{StaticResource userControlMainLabel}" />
+                <Label x:Name="label" Content="{DynamicResource Usercontrol_IntelTDP}"   Style="{StaticResource userControlMainLabel}" />
                 <Label  Content="{Binding ElementName=controlList, Path=SelectedItem}" ContentStringFormat="{}- {0}" HorizontalAlignment="Right" Width="150"   Margin="0,0,0,0"   Style="{StaticResource userControlMainLabel}" />
                 <Button x:Name="button" Background="Transparent" Click="button_Click" BorderThickness="0" BorderBrush="Transparent" Height="40" Width="40" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <iconPacks:PackIconUnicons x:Name="icon" Kind="AngleRight" Height="26" Width="26"  />
                 </Button>
                 
             </DockPanel>
-            <ListBox x:Name="controlList" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="450" Height="160" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
+            <ListBox x:Name="controlList" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="450" Height="140" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">

@@ -407,6 +407,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 case "Slider_ProfileOnlineFPS":
                     Global_Variables.Global_Variables.profiles.editingProfile.Online_FPSLimit = sliderValue.ToString();
                     break;
+                case "Slider_ProfileOfflineFPS":
+                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_FPSLimit = sliderValue.ToString();
+                    break;
                 case "Slider_ProfileOnlineMaxCPU":
                     Global_Variables.Global_Variables.profiles.editingProfile.Online_MAXCPU = sliderValue.ToString();
                     break;
