@@ -94,7 +94,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
 
                 <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.Row="4" />
 
-                <Border Background="{DynamicResource MahApps.Brushes.Accent2}" Grid.Row="5">
+                <Border Background="{DynamicResource MahApps.Brushes.Accent2}" Grid.Row="5" CornerRadius="0,0,0,11">
                     <StackPanel x:Name="instructionStackPanel" Grid.Row="6" Height="50" Width="450" />
                 </Border>
             
