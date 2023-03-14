@@ -10,10 +10,17 @@ Topmost="True"
     WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
-        Height="170"
-        Width="300">
+        Background="Transparent"
+        Height="169"
+        Width="300" BorderBrush="Transparent">
+    <Border CornerRadius="10" >
+        <Border.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/ProjectSBC.png"/>
+        </Border.Background>
         <Grid>
-        <Image x:Name="image" Source="/ProjectSBC.png" HorizontalAlignment="Stretch" Height="Auto"  VerticalAlignment="Stretch" Width="Auto"/>
-<Label Foreground="White" Content="Loading..." VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-    </Grid>
+           
+            <Label Foreground="White" Content="Loading..." VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        </Grid>
+    </Border>
+       
     </Window>
