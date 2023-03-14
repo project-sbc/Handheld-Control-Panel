@@ -276,7 +276,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"Usercontrol_Bluetooth1;Usercontrol_Wifi1;Divider1;Usercontrol_Volume1;Usercontrol_VolumeMute1;Usercontrol_Brightness1;Divider1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_Scaling1;Usercontrol_FPSLimit1;Divider1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Usercontrol_Bluetooth1;Usercontrol_Wifi1;Usercontrol_MouseMode1;Usercontrol_Controller1;Divider1;Usercontrol_Volume1;Usercontrol_VolumeMute1;Usercontrol_Brightness1;Divider1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_Scaling1;Usercontrol_FPSLimit1;Divider1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;")]
         public string qamUserControls {
             get {
                 return ((string)(this["qamUserControls"]));

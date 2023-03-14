@@ -242,6 +242,12 @@
     <Compile Update="UserControls\EditProfileUserControls\Default_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Controller_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\MouseMode_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\Divider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

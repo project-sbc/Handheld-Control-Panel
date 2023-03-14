@@ -7,14 +7,14 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True"
+        xmlns:ui="http://schemas.modernwpf.com/2019" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Topmost="True" 
         Title="Handheld Control Panel" Height="750" Width="450" Top="0" ResizeMode="NoResize" UseNoneWindowStyle="True"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" StateChanged="MetroWindow_StateChanged" Loaded="MetroWindow_Loaded" >
-    <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
-        
+    <Grid Background="{DynamicResource MahApps.Brushes.Accent4}"  >
+
         <Grid.Resources>
-    
+
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource MahApps.Colors.Accent2}" />
-      
+
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -23,7 +23,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             <RowDefinition Height="62" />
             <RowDefinition  />
             <RowDefinition Height="50" />
-            
+
         </Grid.RowDefinitions>
 
         <DockPanel>
@@ -33,7 +33,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" />
             <TextBlock DockPanel.Dock="Right" />
         </DockPanel>
-        
+
         <DockPanel Grid.Row="1" Background="{DynamicResource MahApps.Brushes.Accent3}">
             <TextBlock Width="35" Margin="13,0,0,0" HorizontalAlignment="Left" FontSize="35" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10C;" />
             <ListBox x:Name="navigation" FontSize="16" Width="350" Background="Transparent" SelectionChanged="navigation_SelectionChanged"  >
@@ -67,7 +67,9 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                 <ListBoxItem Tag="HotKey" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE92E;" />
                 </ListBoxItem>
-                
+                <ListBoxItem Tag="MouseMode" >
+                    <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE962;" />
+                </ListBoxItem>
                 <ListBoxItem Tag="AppLauncher" >
                     <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
                 </ListBoxItem>
@@ -91,5 +93,6 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
 
         <StackPanel x:Name="instructionStackPanel" Background="{DynamicResource MahApps.Brushes.Accent4}" Grid.Row="5" Height="50" Width="450" />
     </Grid>
-   
+
+
 </mah:MetroWindow>

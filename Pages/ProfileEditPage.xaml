@@ -15,6 +15,7 @@
                 <uc:Profile_Textbox/>
                 <uc:ProcessExe_Textbox/>
                 <uc:Default_Toggle/>
+                <uc:Divider />
                 <uc:OnlineTDP_Slider />
                 <uc:OnlineTDP2_Slider />
                 <uc:OnlineFPS_Slider/>
@@ -22,7 +23,7 @@
                 <uc:OnlineMaxCPU_Slider/>
                 <uc:OnlineGPUCLK_Slider/>
                 <uc:OnlineActiveCore_Slider/>
-
+                <uc:Divider/>
                 <uc:OfflineTDP_Slider />
                 <uc:OfflineTDP2_Slider />
                 <uc:OfflineFPS_Slider/>

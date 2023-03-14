@@ -112,8 +112,12 @@ namespace Handheld_Control_Panel.Pages
                             case "Usercontrol_Scaling":
                                 stackPanel.Children.Add(new Scaling_Dropdown());
                                 break;
-
-                                
+                            case "Usercontrol_MouseMode":
+                                stackPanel.Children.Add(new MouseMode_Toggle());
+                                break;
+                            case "Usercontrol_Controller":
+                                stackPanel.Children.Add(new Controller_Toggle());
+                                break;
                             default: break;
                         }
                     }
