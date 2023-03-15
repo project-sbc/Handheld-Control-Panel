@@ -9,8 +9,8 @@
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <DockPanel>
-        <Label Content="{DynamicResource Usercontrol_ProfileSaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
-        <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
+        <Label Content="{DynamicResource Usercontrol_ProfileSaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+        <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}" DockPanel.Dock="Bottom">
             <StackPanel x:Name="stackPanel" >
                 <uc:Profile_Textbox/>
                 <uc:ProcessExe_Textbox/>

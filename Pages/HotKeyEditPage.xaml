@@ -9,8 +9,8 @@
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <DockPanel>
-        <Label Content="{DynamicResource Usercontrol_HotKeySaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
-        <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
+        <Label Content="{DynamicResource Usercontrol_HotKeySaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+        <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
                 <uc:Type_Dropdown />
                 <uc:Action_Dropdown />
