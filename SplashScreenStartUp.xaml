@@ -13,7 +13,7 @@ Topmost="True"
         Background="Transparent"
         Height="169"
         Width="300" BorderBrush="Transparent">
-    <Border CornerRadius="10" >
+    <Border CornerRadius="13" >
         <Border.Background>
             <ImageBrush Stretch="Fill" ImageSource="/ProjectSBC.png"/>
         </Border.Background>

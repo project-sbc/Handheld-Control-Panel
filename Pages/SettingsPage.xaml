@@ -10,7 +10,7 @@
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <StackPanel>
         <Label Content="{DynamicResource Usercontrol_ProfileSaved}" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
-        <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
+        <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
                 <uc:Theme_Toggle />
                 <uc:AccentColor_Dropdown/>
