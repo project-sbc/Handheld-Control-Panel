@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using static Vanara.Interop.KnownShellItemPropertyKeys;
 using System.Windows.Input;
 using Windows.Devices.Radios;
+using System.Windows;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -16,17 +17,12 @@ namespace Handheld_Control_Panel.Classes
             
         public static void runHotKeyAction(ActionParameter actionParameter)
         {
+            Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString(), "");
             switch (actionParameter.Action)
             {
                 case "Show_Hide_HCP":
-                    if (Global_Variables.Global_Variables.mainWindow.WindowState == System.Windows.WindowState.Minimized)
-                    {
-                        Global_Variables.Global_Variables.mainWindow.WindowState = System.Windows.WindowState.Normal;
-                    }
-                    else
-                    {
-                        Global_Variables.Global_Variables.mainWindow.WindowState = System.Windows.WindowState.Minimized;
-                    }
+                    Global_Variables.Global_Variables.mainWindow.toggleWindow();
+                   
                     break;
                 case "Change_TDP":
                     int param;

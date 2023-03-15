@@ -241,35 +241,38 @@ namespace Handheld_Control_Panel
         {
             //get action from custom event args for controller
             Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
-            
-            switch(args.Action)
+            if (this.Visibility == Visibility.Visible)
             {
-                case "LB":
-                    navigateListBox(true);
-                    break;
-                case "RB":
-                    navigateListBox(false);
-                    break;
-                case "B":
-                    if (disable_B_ToClose)
-                    {
-                        Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
-                    }
-                    else
-                    {
-                        toggleWindow();
-                    }
-                 
-                    break;
-                default:
-                    Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
-                    break;
+                switch (args.Action)
+                {
+                    case "LB":
+                        navigateListBox(true);
+                        break;
+                    case "RB":
+                        navigateListBox(false);
+                        break;
+                    case "B":
+                        if (disable_B_ToClose)
+                        {
+                            Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
+                        }
+                        else
+                        {
+                            toggleWindow();
+                        }
 
+                        break;
+                    default:
+                        Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
+                        break;
+
+                }
             }
+       
           
         }
 
-        private void toggleWindow()
+        public void toggleWindow()
         {
             if (this.WindowState == WindowState.Minimized) 
             {
@@ -279,6 +282,7 @@ namespace Handheld_Control_Panel
             }
             else
             {
+               
                 this.Hide();
                 this.WindowState = WindowState.Minimized;
                 m_notifyIcon.Visible = true;

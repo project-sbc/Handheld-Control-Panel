@@ -79,15 +79,25 @@
     <system:String x:Key="Instruction_Delete">DELETE</system:String>
     <system:String x:Key="Instruction_Add">ADD NEW</system:String>
     <system:String x:Key="Instruction_Save">SAVE</system:String>
-   
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+    <system:String x:Key="Hotkeys_Action_Open_Program">Open Program</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">Change TDP</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Toggle Quick Access Menu</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Open Steam Big Picture</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Playnite">Open Playnite</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">Change Brightness</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Change GPU Clock</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Toggle_MouseMode">Toggle Mouse Mode</system:String>
+
+    <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
+    <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
+
+
+
+
+
     <!-- break from old stuff-->
     
     
@@ -243,17 +253,7 @@
     <system:String x:Key="Usercontrol_QuickAction_MainText">Quick Action Menu</system:String>
     
     
-    <system:String x:Key="Hotkeys_Action_Open_Program">Open Program</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_TDP">Change TDP</system:String>
-    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Toggle Quick Access Menu</system:String>
-    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Open Steam Big Picture</system:String>
-    <system:String x:Key="Hotkeys_Action_Open_Playnite">Open Playnite</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Brightness">Change Brightness</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Change GPU Clock</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Toggle_MouseMode">Toggle Mouse Mode</system:String>
-    
-    <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
-    <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
+
 
 
     <system:String x:Key="Usercontrol_HotkeyType_MainText">Hotkey Input Type</system:String>
