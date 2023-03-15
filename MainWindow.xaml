@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Handheld_Control_Panel"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019"   Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="Transparent" UseNoneWindowStyle="True" BorderThickness="0"
+     
+        xmlns:ui="http://schemas.modernwpf.com/2019"    Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="Transparent" UseNoneWindowStyle="True" BorderThickness="0"
         Title="Handheld Control Panel" Height="750" Width="450"  Top="0" ResizeMode="NoResize"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" StateChanged="MetroWindow_StateChanged" Loaded="MetroWindow_Loaded" >
     <Border Background="{DynamicResource MahApps.Brushes.ThemeBackground}"   BorderThickness="0"  CornerRadius="11,0,0,11"  >
         <Border    BorderThickness="0"  CornerRadius="11,0,0,11"  >
@@ -28,6 +29,7 @@ xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                     <RowDefinition Height="50" />
 
                 </Grid.RowDefinitions>
+               
 
                 <DockPanel>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" />

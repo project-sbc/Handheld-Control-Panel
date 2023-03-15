@@ -27,7 +27,7 @@ using System.Net.NetworkInformation;
 using Handheld_Control_Panel.UserControls;
 using ControlzEx.Standard;
 using System.Reflection;
-
+using System.Windows.Interop;
 
 namespace Handheld_Control_Panel
 {
@@ -42,6 +42,9 @@ namespace Handheld_Control_Panel
         private string page = "";
         private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
         private bool disable_B_ToClose = false;
+
+
+        private System.Windows.Forms.NotifyIcon m_notifyIcon;
         public MainWindow()
         {
             
@@ -72,8 +75,53 @@ namespace Handheld_Control_Panel
 
             //run timer to update time, wifi and battery status  and other stuff
             startTimer();
+
+
+            //notifyicon stuff
+            m_notifyIcon = new System.Windows.Forms.NotifyIcon();
+            m_notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            m_notifyIcon.Click += M_notifyIcon_Click;
+            m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
+
         }
 
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern IntPtr SetForegroundWindow(IntPtr hwnd);
+
+        
+        private void M_notifyIcon_Click(object? sender, EventArgs e)
+        {
+            var contextMenu = new ContextMenu();
+            var menuItem = new MenuItem();
+            menuItem.Header = "Close";
+            var menuItemOpen = new MenuItem();
+            menuItemOpen.Header = "Open";
+            menuItem.Click += MenuItem_Click;
+            menuItemOpen.Click += MenuItemOpen_Click;
+            contextMenu.Items.Add(menuItemOpen);
+            contextMenu.Items.Add(menuItem);
+     
+            contextMenu.IsOpen = true;
+
+            // Get context menu handle and bring it to the foreground
+            if (PresentationSource.FromVisual(contextMenu) is HwndSource hwndSource)
+            {
+                _ = SetForegroundWindow(hwndSource.Handle);
+            }
+        }
+        private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            toggleWindow();
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void M_notifyIcon_DoubleClick(object? sender, EventArgs e)
+        {
+            toggleWindow();
+        }
         #region timer
         private void startTimer()
         {
@@ -209,7 +257,7 @@ namespace Handheld_Control_Panel
                     }
                     else
                     {
-                        this.WindowState = WindowState.Minimized;
+                        toggleWindow();
                     }
                  
                     break;
@@ -219,6 +267,23 @@ namespace Handheld_Control_Panel
 
             }
           
+        }
+
+        private void toggleWindow()
+        {
+            if (this.WindowState == WindowState.Minimized) 
+            {
+                this.Show();
+                this.WindowState = WindowState.Normal;
+                m_notifyIcon.Visible = false;
+            }
+            else
+            {
+                this.Hide();
+                this.WindowState = WindowState.Minimized;
+                m_notifyIcon.Visible = true;
+            }
+
         }
 
         #region navigation
@@ -346,6 +411,7 @@ namespace Handheld_Control_Panel
         {
             if (this.WindowState == WindowState.Minimized)
             {
+                this.ShowInTaskbar = false;
                 frame.Source = null;
                 //change interval to 15 seconds
                 updateTimer.Interval = new TimeSpan(0,0,15);
@@ -354,6 +420,7 @@ namespace Handheld_Control_Panel
             }
             if (this.WindowState == WindowState.Normal)
             {
+                this.ShowInTaskbar = true;
                 navigation.SelectedIndex = 0;
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
                 //change controller timer interval to 20 ms for active use

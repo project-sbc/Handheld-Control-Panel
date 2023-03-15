@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="HCP.ico" />
     <None Remove="ProjectSBC.png" />
     <None Remove="Resources\AMD\RyzenAdj\inpoutx64.dll" />
     <None Remove="Resources\AMD\RyzenAdj\libryzenadj.dll" />
@@ -114,7 +115,6 @@
 
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official" Version="1.7.6" />
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="InputSimulatorCore" Version="1.0.5" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.11.0" />
@@ -124,7 +124,7 @@
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="ModernWpfUI.MahApps" Version="0.9.5" />
     <PackageReference Include="MouseKeyHook" Version="5.6.0" />
-    <PackageReference Include="Nefarius.Drivers.HidHide" Version="1.8.54" />
+    <PackageReference Include="Nefarius.Drivers.HidHide" Version="1.8.60" />
     <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.8.228" />
     <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
     <PackageReference Include="SecretNest.SequentialScheduler" Version="1.1.0" />
@@ -510,6 +510,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="HCP.ico" />
     <Resource Include="ProjectSBC.png" />
   </ItemGroup>
 
