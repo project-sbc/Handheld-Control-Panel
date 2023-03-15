@@ -126,8 +126,9 @@ namespace Handheld_Control_Panel.Classes
                                 intReturn[0] = highlightedIndex + newIndexOffset;
                                 if (intReturn[0] == 0) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
                                 //((IScrollInfo)stackPanel).MouseWheelDown();
-                                userControls[intReturn[0]].BringIntoView();
+                                
                             }
+                            userControls[intReturn[0]].BringIntoView();
 
                             break;
 
@@ -154,9 +155,9 @@ namespace Handheld_Control_Panel.Classes
                                 intReturn[0] = highlightedIndex + newIndexOffset;
                                 if (intReturn[0] == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
                                 //((IScrollInfo)stackPanel).MouseWheelDown();
-                                userControls[intReturn[0]].BringIntoView();
+                                
                             }
-                           
+                            userControls[intReturn[0]].BringIntoView();
                             break;
                         default:
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent(action, windowpage, correctUserControl(userControls[highlightedIndex].ToString()));

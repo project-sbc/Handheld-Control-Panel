@@ -67,7 +67,7 @@ namespace Handheld_Control_Panel.UserControls
         private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "TDP" && !dragStarted)
+            if (valueChangedEventArgs.Parameter == "TDP1" && !dragStarted)
             {
                 this.Dispatcher.BeginInvoke(() => {
                     if (Global_Variables.ReadPL1 != control.Value && border.Tag == "" && control.IsLoaded)
