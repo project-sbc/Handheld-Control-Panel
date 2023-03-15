@@ -9,6 +9,7 @@ using static Vanara.Interop.KnownShellItemPropertyKeys;
 using System.Windows.Input;
 using Windows.Devices.Radios;
 using System.Windows;
+using Notification.Wpf;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -18,6 +19,7 @@ namespace Handheld_Control_Panel.Classes
         public static void runHotKeyAction(ActionParameter actionParameter)
         {
             Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString(), "");
+
             switch (actionParameter.Action)
             {
                 case "Show_Hide_HCP":

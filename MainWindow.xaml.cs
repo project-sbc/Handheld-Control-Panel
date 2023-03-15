@@ -340,7 +340,7 @@ namespace Handheld_Control_Panel
 
             this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight*0.03,0);
 
-            this.Height =Math.Round( System.Windows.SystemParameters.PrimaryScreenHeight*0.93,0);
+            this.Height =Math.Round( System.Windows.SystemParameters.PrimaryScreenHeight*0.91,0);
             if (Properties.Settings.Default.dockWindowRight && this.Left != System.Windows.SystemParameters.PrimaryScreenWidth - this.Width)
             {
                 //if dockWindowRight is true, move to right side of screen
