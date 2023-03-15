@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Handheld_Control_Panel.Classes.UserControl_Management
@@ -367,6 +368,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         }
                         
 
+                    }
+                    if (control is Hyperlink)
+                    {
+                        Hyperlink hyperlink = (Hyperlink)control;
+                        if (action == "A")
+                        {
+                            System.Diagnostics.Process.Start(new ProcessStartInfo(hyperlink.NavigateUri.AbsoluteUri) { UseShellExecute = true });
+
+                        }
                     }
                     break;
             }

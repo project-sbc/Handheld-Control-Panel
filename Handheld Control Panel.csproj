@@ -141,6 +141,9 @@
     <Compile Update="Pages\CustomizeHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\InformationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -295,6 +298,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Wifi_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\DonateKofi_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\DonatePaypal_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">

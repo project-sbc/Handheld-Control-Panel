@@ -8,6 +8,7 @@
     <system:String x:Key="MainWindow_NavigationView_Gamelauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Information">Information</system:String>
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
@@ -15,6 +16,7 @@
     <system:String x:Key="MainWindow_NavigationView_Sub_Gamelauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Information">Information</system:String>
 
 
     <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
@@ -58,6 +60,7 @@
     <system:String x:Key="Usercontrol_IntelTDP">Intel TDP Type</system:String>
     <system:String x:Key="Usercontrol_MouseMode">Mouse Mode</system:String>
     <system:String x:Key="Usercontrol_Controller">Controller Status</system:String>
+    <system:String x:Key="Usercontrol_Donate">Donate</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>

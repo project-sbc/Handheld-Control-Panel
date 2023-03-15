@@ -346,9 +346,15 @@ namespace Handheld_Control_Panel
                 //if dockWindowRight is true, move to right side of screen
                 this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
                 //packIconFontAwesome.RotationAngle = 0;
+                borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
             }
             if (!Properties.Settings.Default.dockWindowRight && this.Left != 0)
             {
+                borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
                 this.Left = 0;
                 //packIconFontAwesome.RotationAngle = 180;
             }
