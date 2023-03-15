@@ -164,7 +164,7 @@ namespace Handheld_Control_Panel.Classes.MouseMode_Management
             mouseMode.Clear();
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfiguration");
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations/MouseModeConfiguration");
 
             foreach (XmlNode node in xmlNode.ChildNodes)
             {

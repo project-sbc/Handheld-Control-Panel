@@ -76,29 +76,29 @@
 
 	</ControllerHotKeys>
 
-	<QuickAccessMenu>
-		<Usercontrol>TDP_Slider</Usercontrol>
-	</QuickAccessMenu>
-	<MouseModeConfiguration>
-		<LeftThumb>Mouse</LeftThumb>
-		<RightThumb>WASD</RightThumb>
-		<LT></LT>
-		<RT></RT>
-		<A>LeftMouseClick</A>
-		<B>RightMouseClick</B>
-		<X></X>
-		<Y></Y>
-		<L3></L3>
-		<R3></R3>
-		<LB></LB>
-		<RB></RB>
-		<DPadUp>W</DPadUp>
-		<DPadDown>S</DPadDown>
-		<DPadRight>D</DPadRight>
-		<DPadLeft>A</DPadLeft>
-		<Start></Start>
-		<Select></Select>
-	</MouseModeConfiguration>
+
+	<MouseModeConfigurations>
+		<MouseModeConfiguration>
+			<LeftThumb>Mouse</LeftThumb>
+			<RightThumb>WASD</RightThumb>
+			<LT></LT>
+			<RT></RT>
+			<A>LeftMouseClick</A>
+			<B>RightMouseClick</B>
+			<X></X>
+			<Y></Y>
+			<L3></L3>
+			<R3></R3>
+			<LB></LB>
+			<RB></RB>
+			<DPadUp>W</DPadUp>
+			<DPadDown>S</DPadDown>
+			<DPadRight>D</DPadRight>
+			<DPadLeft>A</DPadLeft>
+			<Start></Start>
+			<Select></Select>
+		</MouseModeConfiguration>
+	</MouseModeConfigurations>
 	<ProfileTemplate>
 		<Profile >
 			<ID></ID>
