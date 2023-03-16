@@ -316,6 +316,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                         Gamepad swapGamepad = swapController.GetState().Gamepad;
                         if (swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Start) && swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Back))
                         {
+                            
                             controller = swapController;
                         }
                     }

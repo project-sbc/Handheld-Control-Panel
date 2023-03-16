@@ -96,6 +96,12 @@
 
     <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
+    
+    
+    
+    <system:String x:Key="ContextMenu_Hide">Hide</system:String>
+    <system:String x:Key="ContextMenu_Close">Close</system:String>
+    <system:String x:Key="ContextMenu_ShutDownPC">Power Off</system:String>
 
 
 

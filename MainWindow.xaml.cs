@@ -457,6 +457,36 @@ namespace Handheld_Control_Panel
             Global_Variables.Scaling = (VisualTreeHelper.GetDpi(this).DpiScaleX * 100).ToString();
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            powerContextMenu.IsOpen = !powerContextMenu.IsOpen;
+        }
+
+        private void CMItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+            if(mi != null)
+            {
+                switch (mi.Tag.ToString()) 
+                {
+                    case "Hide":
+                        toggleWindow();
+                        break;
+                    case "Close":
+                        this.Close();
+                        break;
+                    case "Shutdown":
+                        var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+                        psi.CreateNoWindow = true;
+                        psi.UseShellExecute = false;
+                        Process.Start(psi);
+                        break;
+                    default:break;
+                }
+
+            }
+        }
     }
     public static class CheckForegroundWindowQAM
     {

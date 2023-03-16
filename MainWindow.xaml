@@ -33,6 +33,22 @@
 
                 <DockPanel>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0" Name="Time" FontSize="20" />
+                    <Button DockPanel.Dock="Right" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" FontSize="23" Content="&#xE7E8;" Margin="15,0,15,0" Click="Button_Click" >
+                        <Button.ContextMenu>
+                            <ContextMenu Name="powerContextMenu" >
+                                <MenuItem Header="{DynamicResource ContextMenu_Hide}" Tag="Hide" Click="CMItem_Click">
+                                    
+                                </MenuItem>
+                                <MenuItem Header="{DynamicResource ContextMenu_Close}" Tag="Close" Click="CMItem_Click">
+
+                                </MenuItem>
+                                <MenuItem Header="{DynamicResource ContextMenu_ShutDownPC}" Tag="Shutdown" Click="CMItem_Click">
+
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                   
                     <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="InternetStatus" FontFamily="Segoe MDL2 Assets" FontSize="28"  Margin="0,0,5,5"/>
                     <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Name="BatteryStatus" FontFamily="Segoe MDL2 Assets" FontSize="36"  Margin="5,0,5,0"/>
                     <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="20" Name="BatteryPercentage" />
