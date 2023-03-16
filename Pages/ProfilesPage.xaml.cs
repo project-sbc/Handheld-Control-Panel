@@ -82,30 +82,47 @@ namespace Handheld_Control_Panel.Pages
                     switch (action)
                     {
                         case "A":
-                            if (controlList.SelectedItem != null)
-                            {
-                                Global_Variables.profiles.editingProfile = (Profile)controlList.SelectedItem;
-                                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                                wnd.navigateFrame("ProfileEditPage");
-                            }
+                            Global_Variables.profiles.editingProfile = (Profile)controlList.SelectedItem;
+                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                            wnd.navigateFrame("ProfileEditPage");
                             break;
 
                         case "X":
-                            
+                            Global_Variables.profiles.deleteProfile(profile);
+                            controlList.Items.Refresh();
+                            if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
-
+                        case "Y":
+                            Global_Variables.profiles.addNewProfile();
+                            controlList.Items.Refresh();
+                            break;
                         case "Up":
-                            if (index > 0) { controlList.SelectedIndex = index - 1; }
+                            if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
                             break;
                         case "Down":
-                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; }
+                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
                             break;
-                            default: break;
+                        default: break;
 
                     }
 
                 }
+                else
+                {
+                    if (action == "Y")
+                    {
+                        Global_Variables.profiles.addNewProfile();
+                        controlList.Items.Refresh();
+                    }
+                    if (action == "Up" || action == "Down")
+                    {
+                        if (controlList.Items.Count > 0) { controlList.SelectedIndex = 0; controlList.ScrollIntoView(controlList.SelectedItem); }
 
+                    }
+                }
+
+
+              
 
             }
 
