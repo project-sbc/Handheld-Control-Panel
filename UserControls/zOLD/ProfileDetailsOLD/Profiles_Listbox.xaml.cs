@@ -121,7 +121,7 @@ namespace Handheld_Control_Panel.UserControls
                     handleListboxChange();
                     break;
                 case "AddProfile":
-                    Global_Variables.profiles.addNewProfile();
+                    Global_Variables.profiles.addNewProfile(null);
                     setListboxItemsource();
                     control.SelectedIndex = control.Items.Count - 1;
                     break;

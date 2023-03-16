@@ -91,15 +91,31 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        public void addNewProfile()
+        public void addNewProfile(Profile copyProfile)
         {
+         
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
             XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+
             XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
+            if (copyProfile != null)
+            {
+
+                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+                {
+                    if (node.SelectSingleNode("ID").InnerText == copyProfile.ID)
+                    {
+                        xmlNodeTemplate = node;
+                        break;
+                    }
+
+                }
+            }
 
             string newProfileName = "NewProfile";
+            if (copyProfile != null) { newProfileName = copyProfile.ProfileName; }
             int countProfile = 0;
             XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + "']");
 
@@ -119,6 +135,9 @@ namespace Handheld_Control_Panel.Classes
             newNode.InnerXml = xmlNodeTemplate.InnerXml;
             newNode.SelectSingleNode("ProfileName").InnerText = newProfileName;
             newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile(xmlDocument);
+            newNode.SelectSingleNode("DefaultProfile").InnerText = "False";
+
+
             xmlNodeProfiles.AppendChild(newNode);
 
             Profile profile = new Profile();

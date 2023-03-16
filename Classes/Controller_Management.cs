@@ -33,6 +33,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         public static DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Send);
 
         public static buttonEvents buttonEvents = new buttonEvents();
+        public static int activeTimerTickInterval = 60;
+        public static int passiveTimerTickInterval = 100;
 
 
         public static void getDefaultControllerDeviceInformation()
@@ -150,7 +152,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(40);
+            timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
             timerController.Tick += controller_Tick;
             timerController.Start();
 
@@ -179,6 +181,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             {
                 if (controller.IsConnected)
                 {
+                    //a quick routine to check other controllers for the swap controller command
+                    checkSwapController();
+
                     //var watch = System.Diagnostics.Stopwatch.StartNew();
                     currentGamePad = controller.GetState().Gamepad;
 
@@ -292,9 +297,34 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
 
         }
 
-        public static void doSomeWork()
+        private static void checkSwapController()
         {
+            List<Controller> controllerList = new List<Controller>();
+
+            controllerList.Add(new Controller(UserIndex.One));
+            controllerList.Add(new Controller(UserIndex.Two));
+            controllerList.Add(new Controller(UserIndex.Three));
+            controllerList.Add(new Controller(UserIndex.Four));
+
+            foreach (Controller swapController in controllerList)
+            {
+
+                if (swapController != null)
+                {
+                    if (swapController.IsConnected)
+                    {
+                        Gamepad swapGamepad = swapController.GetState().Gamepad;
+                        if (swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Start) && swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                        {
+                            controller = swapController;
+                        }
+                    }
+                }
+
+            }
+
            
+
 
         }
 
@@ -341,7 +371,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     if (controller.IsConnected)
                     {
                         controllerNum = 6;
-                        timerController.Interval = TimeSpan.FromMilliseconds(20);
+                        timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
                         if (Global_Variables.Global_Variables.controllerConnected == false)
                         {
                             Global_Variables.Global_Variables.controllerConnected = true;

@@ -426,7 +426,7 @@ namespace Handheld_Control_Panel
                 //change interval to 15 seconds
                 updateTimer.Interval = new TimeSpan(0,0,15);
                 //change controller timer interval to 100 ms to hot key recognition when not open
-                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(100);
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
             }
             if (this.WindowState == WindowState.Normal)
             {
@@ -434,7 +434,7 @@ namespace Handheld_Control_Panel
                 navigation.SelectedIndex = 0;
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
                 //change controller timer interval to 20 ms for active use
-                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(20);
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
                 setWindowSizePosition();
                 if (navigation.SelectedItem != null)
                 {

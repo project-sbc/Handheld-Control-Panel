@@ -93,7 +93,7 @@ namespace Handheld_Control_Panel.Pages
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
                         case "Y":
-                            Global_Variables.profiles.addNewProfile();
+                            Global_Variables.profiles.addNewProfile(null);
                             controlList.Items.Refresh();
                             break;
                         case "Up":
@@ -101,6 +101,10 @@ namespace Handheld_Control_Panel.Pages
                             break;
                         case "Down":
                             if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            break;
+                        case "Start":
+                            Global_Variables.profiles.addNewProfile(profile);
+                            controlList.Items.Refresh();
                             break;
                         default: break;
 
@@ -111,7 +115,7 @@ namespace Handheld_Control_Panel.Pages
                 {
                     if (action == "Y")
                     {
-                        Global_Variables.profiles.addNewProfile();
+                        Global_Variables.profiles.addNewProfile(null);
                         controlList.Items.Refresh();
                     }
                     if (action == "Up" || action == "Down")
