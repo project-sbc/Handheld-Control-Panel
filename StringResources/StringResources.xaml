@@ -9,6 +9,7 @@
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
     <system:String x:Key="MainWindow_NavigationView_Information">Information</system:String>
+    <system:String x:Key="MainWindow_NavigationView_MouseMode">Mouse Mode</system:String>
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
@@ -17,6 +18,7 @@
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Information">Information</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">Information</system:String>
 
 
     <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
