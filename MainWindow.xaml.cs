@@ -82,7 +82,7 @@ namespace Handheld_Control_Panel
 
             //notifyicon stuff
             m_notifyIcon = new System.Windows.Forms.NotifyIcon();
-            m_notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            m_notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(AppDomain.CurrentDomain.BaseDirectory + "\\Handheld Control Panel.exe");
             m_notifyIcon.Click += M_notifyIcon_Click;
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 

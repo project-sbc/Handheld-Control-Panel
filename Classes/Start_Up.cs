@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using Windows.Devices.Sensors;
 using Windows.UI.Core;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -23,13 +24,14 @@ namespace Handheld_Control_Panel.Classes
         public static void Start_Routine()
         {
             //error catch
-
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
 
             //run all routines to get device ready
 
             //test code here
-            AutoTDP_Management.test();
-          
+
+
 
             //test code
 
@@ -38,22 +40,21 @@ namespace Handheld_Control_Panel.Classes
 
             //Load XML profile file
             XML_Management.Load_XML_File.load_XML_File();
-            
+
 
             //check steam/playnite installed for added features
             Steam_Management.setSteamDirectory();
             Playnite_Management.setPlayniteDirectory();
             EpicGames_Management.setEpicGamesDirectory();
 
-            //load controller hotkey dictionary
-            //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForControllerHotKeys();
-            //XML_Management.Manage_XML_ControllerHotKeys.loadGlobalDictionaryForKBHotKeys();
+
+
 
             //get cpu information
             TDP_Management.TDP_Management.determineCPU();
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
-            TDP_Management.TDP_Management.checkDriverBlockRegistry();
+            //TDP_Management.TDP_Management.checkDriverBlockRegistry();
 
             //Make sure powercfg profile has coreparking and maxprocfreq unhidden or otherwise those wont work
             MaxProcFreq_Management.MaxProcFreq_Management.unhidePowercfgMaxProcFreq();
@@ -67,7 +68,7 @@ namespace Handheld_Control_Panel.Classes
             Display_Management.Display_Management.generateDisplayResolutionAndRateList();
             
             //XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
-
+             
             //load language resource
             loadLanguage();
 
@@ -103,7 +104,14 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
 
         }
-
+        public static void MyHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Exception e = (Exception)args.ExceptionObject;
+            string error = DateTime.Now.ToString() + " Error: " + e.Message;
+            Log_Writer.writeLog(error);
+            MessageBox.Show(error);
+     
+        }
 
         public static void loadLanguage()
         {

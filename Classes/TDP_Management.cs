@@ -64,8 +64,9 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
             catch (Exception ex)
             {
                 string errorMsg = "Error: ChangeTDP.cs:  Reading TDP: " + ex.Message;
-                Log_Writer.writeLog(errorMsg);
                 MessageBox.Show(errorMsg);
+                Log_Writer.writeLog(errorMsg);
+         
 
                 //return "Error";
             }
