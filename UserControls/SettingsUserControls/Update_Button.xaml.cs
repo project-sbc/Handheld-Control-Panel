@@ -3,13 +3,16 @@ using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
+using Handheld_Control_Panel.Classes.Update_Software;
 using Handheld_Control_Panel.Classes.UserControl_Management;
+using Handheld_Control_Panel.Classes.Volume_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,30 +31,26 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Controller_Toggle : UserControl
+    public partial class Update_Button : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public Controller_Toggle()
+        public Update_Button()
         {
             InitializeComponent();
-            setControlValue();
-          
+            version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        private  void setControlValue()
-        {
-
-            control.IsOn = Controller_Management.controller.IsConnected;
-
-        }
+       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-
+          
         }
+              
+
         private void handleControllerInputs(object sender, EventArgs e)
         {
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
@@ -63,19 +62,19 @@ namespace Handheld_Control_Panel.UserControls
         }
 
 
-        private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (control.IsLoaded)
-            {
-                control.IsOn=Controller_Management.toggleEnableDisableController();
-
-            }
-          
-        }
-    
+       
+      
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
+          
+        }
+
+       
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Update_Software.checkForUpdates(false);
         }
     }
 }

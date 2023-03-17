@@ -25,7 +25,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Handheld_Control_Panel.Classes.Volume_Management;
 using Windows.Devices.Radios;
-using Handheld_Control_Panel.Classes.MouseMode_Management;
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -85,7 +84,7 @@ namespace Handheld_Control_Panel.UserControls
             quickactionItem qaiMouse = new quickactionItem();
             qaiMouse.ID = "Toggle_MouseMode";
             qaiMouse.iconKind = PackIconMaterialKind.Mouse;
-            if (!MouseMode_Management.status_MouseMode()) { qaiMouse.disabled = PackIconUniconsKind.LineAlt; }
+            if (!Global_Variables.mousemodes.status_MouseMode()) { qaiMouse.disabled = PackIconUniconsKind.LineAlt; }
 
 
             items.Add(qaiWifi);
@@ -192,7 +191,7 @@ namespace Handheld_Control_Panel.UserControls
                             break;
                         case "Toggle_MouseMode":
                             //remember calling toggle_mousemode actually changes the mode
-                            if (!MouseMode_Management.toggle_MouseMode()) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
+                            if (!Global_Variables.mousemodes.toggle_MouseMode()) { qai.disabled = PackIconUniconsKind.LineAlt; } else { qai.disabled = PackIconUniconsKind.None; }
                             break;
                         case "Toggle_Controller":
                             

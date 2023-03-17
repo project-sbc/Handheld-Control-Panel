@@ -2,7 +2,6 @@
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
-using Handheld_Control_Panel.Classes.MouseMode_Management;
 using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
@@ -43,7 +42,7 @@ namespace Handheld_Control_Panel.UserControls
         private  void setControlValue()
         {
 
-            control.IsOn = MouseMode_Management.status_MouseMode();
+            control.IsOn = Global_Variables.mousemodes.status_MouseMode();
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -68,10 +67,10 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                if (control.IsOn) { MouseMode_Management.start_MouseMode(); }
+                if (control.IsOn) { Global_Variables.mousemodes.start_MouseMode(); }
                 else
                 {
-                    MouseMode_Management.end_MouseMode();
+                    Global_Variables.mousemodes.end_MouseMode();
                 }
                 
             }

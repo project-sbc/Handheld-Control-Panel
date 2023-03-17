@@ -135,6 +135,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\MouseModePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\OLD\CustomizationPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -307,6 +310,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\Update_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\IntelTDP_Dropdown.xaml.cs">
@@ -525,6 +531,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="UserControls\SettingsUserControls\Update_Button.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\zOLD\ProfileDetailsOLD\Profiles_AppType.xaml">
       <SubType>Designer</SubType>
     </Page>

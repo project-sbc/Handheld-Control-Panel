@@ -207,7 +207,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                             }
                         }
 
-                        if (!MouseMode_Management.MouseMode_Management.status_MouseMode())
+                        if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
                         {
 
 

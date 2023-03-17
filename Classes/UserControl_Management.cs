@@ -318,6 +318,14 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         }
                       
                     }
+                    if (control is Button)
+                    {
+                        Button button = (Button)control;
+                        if (action == "A")
+                        {
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        }
+                    }
                     if (control is ToggleSwitch)
                     {
                         if (action == "A")

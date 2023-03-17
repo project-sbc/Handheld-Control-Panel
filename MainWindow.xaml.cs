@@ -52,6 +52,9 @@ namespace Handheld_Control_Panel
 
             Global_Variables.mainWindow = this;
 
+            //start mouse mode, required because controller management makes call to mousemode
+            Global_Variables.mousemodes = new MouseMode_Management();
+
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
 

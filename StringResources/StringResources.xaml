@@ -61,6 +61,9 @@
     <system:String x:Key="Usercontrol_MouseMode">Mouse Mode</system:String>
     <system:String x:Key="Usercontrol_Controller">Controller Status</system:String>
     <system:String x:Key="Usercontrol_Donate">Donate</system:String>
+    <system:String x:Key="Usercontrol_Update">Update</system:String>
+    <system:String x:Key="Usercontrol_CheckUpdate">Check For Updates</system:String>
+    <system:String x:Key="Usercontrol_Version">Version: </system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>

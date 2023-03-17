@@ -11,6 +11,7 @@
 
     <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
+            <uc:Update_Button/>
             <uc:Theme_Toggle />
             <uc:AccentColor_Dropdown/>
             <uc:DockRight_Toggle/>

@@ -61,7 +61,7 @@ namespace Handheld_Control_Panel.Classes
                     }
                     break;
                 case "Toggle_MouseMode":
-                    MouseMode_Management.MouseMode_Management.toggle_MouseMode();
+                    Global_Variables.Global_Variables.mousemodes.toggle_MouseMode();
                     Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString(), "");
                     break;
                 case "Toggle_Controller":

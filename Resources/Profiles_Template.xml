@@ -79,6 +79,11 @@
 
 	<MouseModeConfigurations>
 		<MouseModeConfiguration>
+			<ID>1</ID>
+			<MouseModeName>Default</MouseModeName>
+			<DefaultMode>True</DefaultMode>
+			<HIDHideEnabled>False</HIDHideEnabled>
+			<PowerCycleWithHIDHide>False</PowerCycleWithHIDHide>
 			<LeftThumb>Mouse</LeftThumb>
 			<RightThumb>WASD</RightThumb>
 			<LT></LT>
@@ -142,6 +147,32 @@
 			<Hotkey>776</Hotkey>
 		</ControllerHotKey>
 	</ControllerHotKeyTemplate>
-	
+	<MouseModeTemplate>
+		<MouseModeConfiguration>
+			<ID></ID>
+			<DefaultMode>False</DefaultMode>
+			<MouseModeName></MouseModeName>
+			<HIDHideEnabled>False</HIDHideEnabled>
+			<PowerCycleWithHIDHide>False</PowerCycleWithHIDHide>
+			<LeftThumb></LeftThumb>
+			<RightThumb></RightThumb>
+			<LT></LT>
+			<RT></RT>
+			<A></A>
+			<B></B>
+			<X></X>
+			<Y></Y>
+			<L3></L3>
+			<R3></R3>
+			<LB></LB>
+			<RB></RB>
+			<DPadUp></DPadUp>
+			<DPadDown></DPadDown>
+			<DPadRight></DPadRight>
+			<DPadLeft></DPadLeft>
+			<Start></Start>
+			<Select></Select>
+		</MouseModeConfiguration>
+	</MouseModeTemplate>
 </Configuration>
 

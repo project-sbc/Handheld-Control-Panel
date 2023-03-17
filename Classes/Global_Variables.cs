@@ -138,7 +138,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static HidHideControlService hidHide;
 
         //mouse mode
-        public static bool mouseMode = false;
+        public static bool mouseModeEnabled = false;
 
         //cpu settings
         public static int cpuMaxFrequency = 0;
@@ -212,6 +212,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static bool profileAutoApplied = false;
       
         public static Profiles_Management profiles;
+        public static MouseMode_Management mousemodes;
         public static HotKey_Management hotKeys;
         public static CustomizeHome_Management homePageItems;
         //Power
