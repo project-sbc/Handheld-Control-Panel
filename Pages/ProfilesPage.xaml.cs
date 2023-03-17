@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using MahApps.Metro.Controls;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -93,8 +94,15 @@ namespace Handheld_Control_Panel.Pages
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
                         case "Y":
-                            Global_Variables.profiles.addNewProfile(null);
-                            controlList.Items.Refresh();
+                            ListBoxItem lbi = controlList.SelectedItem as ListBoxItem;
+                            var contextmenu = lbi.FindChild<ContextMenu>("profileCM");
+                            if (contextmenu != null)
+                            {
+                                ContextMenu cm = (ContextMenu)contextmenu;
+                                cm.IsOpen = !cm.IsOpen;
+                            }
+                            //Global_Variables.profiles.addNewProfile(null);
+                            //controlList.Items.Refresh();
                             break;
                         case "Up":
                             if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
@@ -131,8 +139,8 @@ namespace Handheld_Control_Panel.Pages
             }
 
         }
+      
 
-     
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {

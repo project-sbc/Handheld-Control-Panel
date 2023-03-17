@@ -23,10 +23,9 @@
 
     <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
     <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
-    
-    
+
     <system:String x:Key="Default_Profile">Default Profile</system:String>
-    <system:String x:Key="Active_Profile">Active</system:String>
+    <system:String x:Key="Active_Profile">Active Profile</system:String>
 
     <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
     <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
@@ -86,8 +85,9 @@
     <system:String x:Key="Instruction_Select">SELECT</system:String>
     <system:String x:Key="Instruction_Edit">EDIT</system:String>
     <system:String x:Key="Instruction_Delete">DELETE</system:String>
-    <system:String x:Key="Instruction_Add">ADD NEW</system:String>
+    <system:String x:Key="Instruction_Add">NEW</system:String>
     <system:String x:Key="Instruction_Save">SAVE</system:String>
+    <system:String x:Key="Instruction_Apply">APPLY</system:String>
     <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
 
 

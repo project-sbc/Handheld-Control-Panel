@@ -30,6 +30,7 @@
                     <Grid  Height="53">
 
                         <StackPanel Margin="11,0,9,0" Orientation="Vertical">
+                           
                             <DockPanel >
                                 <TextBlock Text="{Binding ProfileName}" FontSize="22" />
                                 <TextBlock  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="20" />
@@ -41,9 +42,9 @@
                 
 
                         </StackPanel>
-           
-        
-                    
+         
+
+
 
                     </Grid>
                 </DataTemplate>

@@ -13,6 +13,9 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Add}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEECA;" />
+
             <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Duplicate}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEDE3;" />
 
@@ -21,7 +24,7 @@
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF096;" />
 
 
-            <TextBlock  Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Add}" />
+            <TextBlock  Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Apply}" />
             <TextBlock Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF095;" />
 
             <TextBlock  Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Edit}" />
