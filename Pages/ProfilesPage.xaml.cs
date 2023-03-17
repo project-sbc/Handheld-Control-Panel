@@ -37,7 +37,7 @@ namespace Handheld_Control_Panel.Pages
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("CustomizeHomePage_Instruction");
+            wnd.changeUserInstruction("ProfilePage_Instruction");
             wnd = null;
         }
       

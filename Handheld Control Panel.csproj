@@ -309,6 +309,9 @@
     <Compile Update="UserControls\InformationUserControls\DonatePaypal_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\ProfilePage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

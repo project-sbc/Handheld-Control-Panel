@@ -13,15 +13,15 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Delete}" />
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF096;" />
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Delete}" />
+            <TextBlock Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF096;" />
 
 
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Add}" />
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF095;" />
-            
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="21" VerticalAlignment="Center" Text="{DynamicResource Instruction_Edit}" />
-            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" FontSize="27" Text="&#xF093;" />
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Add}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF095;" />
+
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Edit}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
 
         </StackPanel>
      

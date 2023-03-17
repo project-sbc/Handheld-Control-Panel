@@ -403,6 +403,9 @@ namespace Handheld_Control_Panel
                     case "HotKeyPage_Instruction":
                         instructionStackPanel.Children.Add(new HotKeyPage_Instruction());
                         break;
+                    case "ProfilePage_Instruction":
+                        instructionStackPanel.Children.Add(new ProfilePage_Instruction());
+                        break;
                     case "HotKeyEditPage_Instruction":
                         disable_B_ToClose = true;
                         instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());

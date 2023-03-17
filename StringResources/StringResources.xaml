@@ -87,6 +87,7 @@
     <system:String x:Key="Instruction_Delete">DELETE</system:String>
     <system:String x:Key="Instruction_Add">ADD NEW</system:String>
     <system:String x:Key="Instruction_Save">SAVE</system:String>
+    <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
 
 
 
