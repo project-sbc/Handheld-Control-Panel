@@ -31,7 +31,7 @@ namespace Handheld_Control_Panel.Classes
                 Profile profile = new Profile();
 
                 profile.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-                if (node.SelectSingleNode("DefaultProfile").InnerText == "True") { defaultProfile = profile; }
+                if (node.SelectSingleNode("DefaultProfile").InnerText == "True") { defaultProfile = profile; activeProfile = profile; activeProfile.ActiveProfile = true;  }
                 this.Add(profile);
             }
            // this.OrderBy(o => o.ProfileName);
@@ -182,7 +182,17 @@ namespace Handheld_Control_Panel.Classes
             }
         }
         public bool defaultProfile { get; set; }
-
+        public bool activeProfile { get; set; }
+        public bool ActiveProfile
+        {
+            get { return activeProfile; }
+            set
+            {
+                activeProfile = value;
+                if (value == true) { VisibilityActiveProfile = Visibility.Visible; } else { VisibilityActiveProfile = Visibility.Collapsed; }
+            }
+        }
+        public Visibility VisibilityActiveProfile { get; set; } = Visibility.Collapsed;
         public Visibility VisibilityDefaultProfile { get; set; } = Visibility.Collapsed;
         public string ProfileName { get; set; } = "";
         public string Exe { get; set; } = "";
@@ -337,6 +347,15 @@ namespace Handheld_Control_Panel.Classes
 
         public void applyProfile()
         {
+            //remove active profile flag for current
+            if (Global_Variables.Global_Variables.profiles.activeProfile != null) 
+            { 
+                Global_Variables.Global_Variables.profiles.activeProfile.ActiveProfile = false;
+
+            }
+            //apply active profile flag
+            Global_Variables.Global_Variables.profiles.activeProfile = this;
+            ActiveProfile = true;
             string powerStatus = SystemParameters.PowerLineStatus.ToString();
 
 

@@ -26,6 +26,7 @@
     
     
     <system:String x:Key="Default_Profile">Default Profile</system:String>
+    <system:String x:Key="Active_Profile">Active</system:String>
 
     <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
     <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
