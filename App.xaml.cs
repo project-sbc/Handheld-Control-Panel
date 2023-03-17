@@ -12,7 +12,7 @@ using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using Linearstar.Windows.RawInput;
 using ModernWpf;
-
+using RTSSSharedMemoryNET;
 
 namespace Handheld_Control_Panel
 {
@@ -37,6 +37,8 @@ namespace Handheld_Control_Panel
             //set global error handler
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.UnhandledException += new UnhandledExceptionEventHandler(ErrorHandler);
+
+         
 
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start

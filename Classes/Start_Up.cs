@@ -1,5 +1,5 @@
 ﻿using Handheld_Control_Panel.Classes.Global_Variables;
-
+using RTSSSharedMemoryNET;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,7 +28,8 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //test code here
-   
+            AutoTDP_Management.test();
+          
 
             //test code
 

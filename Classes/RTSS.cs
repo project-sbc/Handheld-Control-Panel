@@ -16,6 +16,8 @@ namespace Handheld_Control_Panel.Classes
     {
         public static void getRTSSFPSLimit()
         {
+            
+
             if (RTSSRunning())
             {
                 RTSS.LoadProfile();

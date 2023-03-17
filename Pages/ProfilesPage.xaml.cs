@@ -94,15 +94,8 @@ namespace Handheld_Control_Panel.Pages
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
                         case "Y":
-                            ListBoxItem lbi = controlList.SelectedItem as ListBoxItem;
-                            var contextmenu = lbi.FindChild<ContextMenu>("profileCM");
-                            if (contextmenu != null)
-                            {
-                                ContextMenu cm = (ContextMenu)contextmenu;
-                                cm.IsOpen = !cm.IsOpen;
-                            }
-                            //Global_Variables.profiles.addNewProfile(null);
-                            //controlList.Items.Refresh();
+                            profile.applyProfile();
+                            controlList.Items.Refresh();
                             break;
                         case "Up":
                             if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
@@ -111,6 +104,10 @@ namespace Handheld_Control_Panel.Pages
                             if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
                             break;
                         case "Start":
+                            Global_Variables.profiles.addNewProfile(null);
+                            controlList.Items.Refresh();
+                            break;
+                        case "Back":
                             Global_Variables.profiles.addNewProfile(profile);
                             controlList.Items.Refresh();
                             break;

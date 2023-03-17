@@ -13,10 +13,10 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Add}" />
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Duplicate}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEECA;" />
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Duplicate}" />
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Add}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEDE3;" />
 
 
