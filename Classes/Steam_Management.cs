@@ -156,23 +156,26 @@ namespace Handheld_Control_Panel.Classes
                 string steam64 = "SOFTWARE\\Wow6432Node\\Valve\\STEAM";
                 string installPath = "";
                 RegistryKey keyReg = Registry.LocalMachine.OpenSubKey(steam64);
-
-                if (keyReg.GetValue("InstallPath") != null) 
+                if (keyReg != null )
                 {
-                    Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
-                    Properties.Settings.Default.Save();
-                }
-                else
-                {
-                    //if null might be 32 bit
-                    keyReg = Registry.LocalMachine.OpenSubKey(steam32);
                     if (keyReg.GetValue("InstallPath") != null)
                     {
                         Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
                         Properties.Settings.Default.Save();
                     }
-                    
+                    else
+                    {
+                        //if null might be 32 bit
+                        keyReg = Registry.LocalMachine.OpenSubKey(steam32);
+                        if (keyReg.GetValue("InstallPath") != null)
+                        {
+                            Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
+                            Properties.Settings.Default.Save();
+                        }
+
+                    }
                 }
+
                
                            
             }
