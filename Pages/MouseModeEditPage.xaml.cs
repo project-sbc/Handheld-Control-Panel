@@ -81,7 +81,7 @@ namespace Handheld_Control_Panel.Pages
                 switch(args.Action)
                 {
                     case "B":
-                        Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
+                        Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
                         MainWindow wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("MouseModePage");
                         wnd = null;

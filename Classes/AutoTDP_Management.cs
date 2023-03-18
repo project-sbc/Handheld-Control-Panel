@@ -38,40 +38,44 @@ namespace Handheld_Control_Panel.Classes
        
         private static void test()
         {
-            var OSD = new RTSSSharedMemoryNET.OSD("new");
-
-            AppFlags appFlag = appFlags[0];
-            var appEntries = OSD.GetAppEntries(appFlag); ;
-            while (displayOSD)
+            if (RTSS.RTSSRunning())
             {
+                var OSD = new RTSSSharedMemoryNET.OSD("new");
 
-                appEntries = OSD.GetAppEntries(appFlag); 
-                                
-                while (appEntries.Length == 0)
+                AppFlags appFlag = appFlags[0];
+                var appEntries = OSD.GetAppEntries(appFlag); ;
+                while (displayOSD)
                 {
-                    foreach(AppFlags af in appFlags)
+
+                    appEntries = OSD.GetAppEntries(appFlag);
+
+                    while (appEntries.Length == 0)
                     {
-                        appEntries = OSD.GetAppEntries(af);
-                        if (appEntries.Length > 0) { appFlag = af; break; }
+                        foreach (AppFlags af in appFlags)
+                        {
+                            appEntries = OSD.GetAppEntries(af);
+                            if (appEntries.Length > 0) { appFlag = af; break; }
+                        }
+
                     }
 
-                }
+
+                    foreach (var app in appEntries)
+                    {
+                        string[] osdArr = { app.InstantaneousFrameTime.ToString(), app.InstantaneousFrames.ToString() };
+                        OSD.Update(("Time: " + DateTime.Now + " FPS: " + app.InstantaneousFrames.ToString()) + " Avg FPS: " + app.StatFramerateAvg + " min fps: " + app.StatFramerateMin);
+                        Debug.WriteLine(app.Name);
 
 
-                foreach (var app in appEntries)
-                {
-                    string[] osdArr = { app.InstantaneousFrameTime.ToString(), app.InstantaneousFrames.ToString() };
-                    OSD.Update(("Time: " +DateTime.Now + " FPS: " + app.InstantaneousFrames.ToString()) + " Avg FPS: " + app.StatFramerateAvg + " min fps: " + app.StatFramerateMin);
-                    Debug.WriteLine(app.Name);
-                    
-                    
+                    }
+                    Task.Delay(350);
+
                 }
-                Task.Delay(350);
-                
+                OSD.Update("");
+                OSD.Dispose();
+                osd.Abort();
             }
-            OSD.Update("");
-            OSD.Dispose();
-            osd.Abort();
+           
         }
     }
 }

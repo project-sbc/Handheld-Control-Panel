@@ -19,10 +19,84 @@ using System.Xml;
 using System.Drawing;
 using System.Collections;
 using WindowsInput.Native;
+using System.Windows.Media.Media3D;
 
 
 namespace Handheld_Control_Panel.Classes
 {
+    public static class MouseModeLookup
+    {
+        public static List<string> MouseModeList = new List<string>()
+ {
+           {"A"},
+           {"B"},
+           {"C"},
+           {"D"},
+           {"E" },
+           {"F" },
+      {"G" },
+           {"H" },
+           {"I" },
+           {"J" },
+           {"K" },
+           {"L" },
+           {"M" },
+           {"N" },
+           {"O" },
+           {"P" },
+           {"Q" },
+           {"R" },
+           {"S" },
+           {"T" },
+           {"U" },
+           {"V" },
+           {"W" },
+           {"X" },
+           {"Y" },
+           {"Z" },
+
+           {"1" },
+           {"2" },
+           {"3" },
+           {"4" },
+           {"5" },
+           {"6" },
+           {"7" },
+           {"8" },
+           {"9" },
+           {"0" },
+
+           {"PERIOD" },
+           {"COMMA" },
+
+           {"SPACE"},
+           {"RETURN" },
+
+           {"UP" },
+           {"DOWN" },
+           {"LEFT" },
+           {"RIGHT" },
+
+           {"F1" },
+           {"F2" },
+           {"F3" },
+           {"F4" },
+           {"F5" },
+           {"F6" },
+           {"F7" },
+           {"F8" },
+           {"F9" },
+           {"F10" },
+           {"F11" },
+           {"F12" },
+           {"LeftMouseClick" },
+           {"RightMouseClick" }
+
+
+
+ };
+    }
+
     public class MouseMode_Management: List<MouseMode>
     {
         public InputSimulator inputSimulator = new InputSimulator();
@@ -36,7 +110,7 @@ namespace Handheld_Control_Panel.Classes
        
         public MouseMode activeMouseMode = new MouseMode();
         public MouseMode editingMouseMode = new MouseMode();
-        private Dictionary<string, VirtualKeyCode> keyLookUp =
+        public Dictionary<string, VirtualKeyCode> keyLookUp =
  new Dictionary<string, VirtualKeyCode>()
  {
            {"A", VirtualKeyCode.VK_A },

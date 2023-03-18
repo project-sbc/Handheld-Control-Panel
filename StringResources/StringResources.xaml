@@ -66,7 +66,13 @@
     <system:String x:Key="Usercontrol_Update">Update</system:String>
     <system:String x:Key="Usercontrol_CheckUpdate">Check For Updates</system:String>
     <system:String x:Key="Usercontrol_Version">Version: </system:String>
+    
     <system:String x:Key="Usercontrol_LeftStick">Left Stick</system:String>
+    <system:String x:Key="Usercontrol_RightStick">Right Stick</system:String>
+    <system:String x:Key="Usercontrol_AButton">A Button</system:String>
+    <system:String x:Key="Usercontrol_XButton">X Button</system:String>
+    <system:String x:Key="Usercontrol_YButton">Y Button</system:String>
+    <system:String x:Key="Usercontrol_BButton">B Button</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>

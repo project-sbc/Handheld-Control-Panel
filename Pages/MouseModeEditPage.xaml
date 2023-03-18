@@ -13,7 +13,8 @@
         <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
                 <uc:LeftStick_Dropdown />
-      
+                <uc:RightStick_Dropdown/>
+                <uc:A_Dropdown/>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>
