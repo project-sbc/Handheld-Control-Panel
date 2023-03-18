@@ -51,7 +51,7 @@ namespace Handheld_Control_Panel.Classes
                 {
                     foreach(AppFlags af in appFlags)
                     {
-                        appEntries = OSD.GetAppEntries(appFlag);
+                        appEntries = OSD.GetAppEntries(af);
                         if (appEntries.Length > 0) { appFlag = af; break; }
                     }
 
@@ -61,8 +61,10 @@ namespace Handheld_Control_Panel.Classes
                 foreach (var app in appEntries)
                 {
                     string[] osdArr = { app.InstantaneousFrameTime.ToString(), app.InstantaneousFrames.ToString() };
-                    OSD.Update(("Time: " +DateTime.Now + " " + app.InstantaneousFrames.ToString()));
+                    OSD.Update(("Time: " +DateTime.Now + " FPS: " + app.InstantaneousFrames.ToString()) + " Avg FPS: " + app.StatFramerateAvg + " min fps: " + app.StatFramerateMin);
                     Debug.WriteLine(app.Name);
+                    
+                    
                 }
                 Task.Delay(350);
                 

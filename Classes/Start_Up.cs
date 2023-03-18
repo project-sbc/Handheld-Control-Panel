@@ -32,6 +32,7 @@ namespace Handheld_Control_Panel.Classes
             //test code here
             int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
 
+            AutoTDP_Management.startOSDThread();
 
             //test code
 
