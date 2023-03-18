@@ -219,9 +219,13 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                             {
                                 buttonEvents.raiseControllerInput("Start");
                             }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb))
                             {
-                                buttonEvents.raiseControllerInput("Back");
+                                buttonEvents.raiseControllerInput("L3");
+                            }
+                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb))
+                            {
+                                buttonEvents.raiseControllerInput("R3");
                             }
                             if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
                             {
