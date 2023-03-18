@@ -30,7 +30,8 @@ namespace Handheld_Control_Panel.Classes
         public DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
         public Gamepad currentGamePad;
         public Gamepad previousGamePad;
-        private int sensitivity = 20;
+        private int sensitivityMouse = 20;
+        private int sensitivityScroll = 1;
         private int joystickButtonPressSensivitiy = 6000;
        
         public MouseMode activeMouseMode = new MouseMode();
@@ -209,12 +210,12 @@ namespace Handheld_Control_Panel.Classes
                     switch (activeMouseMode.mouseMode["LeftThumb"])
                     {
                         case "Mouse":
-                            mouseX = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbX);
-                            mouseY = normalizeJoystickInput(sensitivity, -currentGamePad.LeftThumbY);
+                            mouseX = normalizeJoystickInput(sensitivityMouse, currentGamePad.LeftThumbX);
+                            mouseY = normalizeJoystickInput(sensitivityMouse, -currentGamePad.LeftThumbY);
                             break;
                         case "Scroll":
-                            mouseScrollX = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbX);
-                            mouseScrollY = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbY);
+                            mouseScrollX = normalizeJoystickInput(sensitivityScroll, currentGamePad.LeftThumbX);
+                            mouseScrollY = normalizeJoystickInput(sensitivityScroll, currentGamePad.LeftThumbY);
                             break;
                         case "WASD":
                             if (currentGamePad.LeftThumbX > joystickButtonPressSensivitiy)
@@ -339,12 +340,12 @@ namespace Handheld_Control_Panel.Classes
                     switch (activeMouseMode.mouseMode["RightThumb"])
                     {
                         case "Mouse":
-                            mouseX = normalizeJoystickInput(sensitivity, currentGamePad.RightThumbX);
-                            mouseY = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbY);
+                            mouseX = normalizeJoystickInput(sensitivityMouse, currentGamePad.RightThumbX);
+                            mouseY = normalizeJoystickInput(sensitivityMouse, -currentGamePad.RightThumbY);
                             break;
                         case "Scroll":
-                            mouseScrollX = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbX);
-                            mouseScrollY = normalizeJoystickInput(sensitivity, currentGamePad.RightThumbY);
+                            mouseScrollX = normalizeJoystickInput(sensitivityScroll, -currentGamePad.RightThumbX);
+                            mouseScrollY = normalizeJoystickInput(sensitivityScroll, currentGamePad.RightThumbY);
                             break;
                         case "WASD":
                             if (currentGamePad.RightThumbX > joystickButtonPressSensivitiy)
@@ -539,7 +540,7 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        private double normalizeJoystickInput(int sensitivty, double value)
+        private double normalizeJoystickInput(int sensitivity, double value)
         {
             double returnValue;
             if (value != 0)
