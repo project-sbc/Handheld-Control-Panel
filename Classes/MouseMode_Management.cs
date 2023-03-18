@@ -146,7 +146,7 @@ namespace Handheld_Control_Panel.Classes
             timerController.Interval = TimeSpan.FromMilliseconds(10);
             timerController.Tick += controller_Tick;
             timerController.Start();
-
+            Global_Variables.Global_Variables.MouseModeEnabled = true;
         }
         public bool status_MouseMode()
         {
@@ -172,7 +172,7 @@ namespace Handheld_Control_Panel.Classes
             timerController.Stop();
             timerController.Tick -= controller_Tick;
             inputSimulator = null;
-
+            Global_Variables.Global_Variables.MouseModeEnabled = false;
         }
       
         private void controller_Tick(object sender, EventArgs e)

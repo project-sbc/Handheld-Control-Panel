@@ -50,6 +50,23 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
+            Global_Variables.valueChanged += Global_Variables_valueChanged;
+        }
+
+        private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
+        {
+            valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
+            if (valueChangedEventArgs.Parameter == "MouseModeEnabled" && control.IsLoaded)
+            {
+                this.Dispatcher.BeginInvoke(() =>
+                {
+                    if (Global_Variables.MouseModeEnabled != control.IsOn && border.Tag == "")
+                    {
+                        control.IsOn = Global_Variables.MouseModeEnabled;
+
+                    }
+                });
+            }
 
         }
         private void handleControllerInputs(object sender, EventArgs e)
@@ -67,11 +84,16 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                if (control.IsOn) { Global_Variables.mousemodes.start_MouseMode(); }
-                else
+                if (control.IsOn != Global_Variables.mousemodes.status_MouseMode())
                 {
-                    Global_Variables.mousemodes.end_MouseMode();
+                    if (control.IsOn)
+                    { Global_Variables.mousemodes.start_MouseMode(); }
+                    else
+                    {
+                        Global_Variables.mousemodes.end_MouseMode();
+                    }
                 }
+                
                 
             }
           

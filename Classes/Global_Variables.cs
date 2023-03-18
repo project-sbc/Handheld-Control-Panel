@@ -139,6 +139,19 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 
         //mouse mode
         public static bool mouseModeEnabled = false;
+        public static bool MouseModeEnabled
+        {
+            get
+            {
+                return mouseModeEnabled;
+            }
+            set
+            {
+                mouseModeEnabled = value;
+                raiseValueChanged("MouseModeEnabled");
+            }
+
+        }
 
         //cpu settings
         public static int cpuMaxFrequency = 0;
