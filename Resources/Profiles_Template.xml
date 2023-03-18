@@ -70,10 +70,40 @@
 			<ID>1</ID>
 			<Type>Controller</Type>
 			<Action>Show_Hide_HCP</Action>
-			<Parameter></Parameter>
-			<Hotkey></Hotkey>
+			<Parameter>
+			</Parameter>
+			<Hotkey>776</Hotkey>
 		</ControllerHotKey>
-
+		<ControllerHotKey>
+			<ID>0</ID>
+			<Type>Controller</Type>
+			<Action>Open_Steam_BigPicture</Action>
+			<Parameter>
+			</Parameter>
+			<Hotkey>769</Hotkey>
+		</ControllerHotKey>
+		<ControllerHotKey>
+			<ID>2</ID>
+			<Type>Controller</Type>
+			<Action>Toggle_MouseMode</Action>
+			<Parameter>
+			</Parameter>
+			<Hotkey>772</Hotkey>
+		</ControllerHotKey>
+		<ControllerHotKey>
+			<ID>3</ID>
+			<Type>Controller</Type>
+			<Action>Change_TDP</Action>
+			<Parameter>2</Parameter>
+			<Hotkey>17</Hotkey>
+		</ControllerHotKey>
+		<ControllerHotKey>
+			<ID>4</ID>
+			<Type>Controller</Type>
+			<Action>Change_TDP</Action>
+			<Parameter>-2</Parameter>
+			<Hotkey>18</Hotkey>
+		</ControllerHotKey>
 	</ControllerHotKeys>
 
 
@@ -144,7 +174,7 @@
 			<Type>Controller</Type>
 			<Action>Show_Hide_HCP</Action>
 			<Parameter></Parameter>
-			<Hotkey>776</Hotkey>
+			<Hotkey></Hotkey>
 		</ControllerHotKey>
 	</ControllerHotKeyTemplate>
 	<MouseModeTemplate>
