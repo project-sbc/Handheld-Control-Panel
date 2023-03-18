@@ -99,7 +99,7 @@
     <system:String x:Key="Hotkeys_Action_Open_Playnite">Open Playnite</system:String>
     <system:String x:Key="Hotkeys_Action_Change_Brightness">Change Brightness</system:String>
     <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Change GPU Clock</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Toggle_MouseMode">Toggle Mouse Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Toggle Mouse Mode</system:String>
 
     <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>

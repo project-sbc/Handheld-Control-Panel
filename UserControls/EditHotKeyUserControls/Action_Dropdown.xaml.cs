@@ -93,8 +93,8 @@ namespace Handheld_Control_Panel.UserControls
             hotkeyAction.Add(changeBrightness);
 
             HotKeyAction toggleMouseMode = new HotKeyAction();
-            toggleMouseMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Toggle_MouseMode"].ToString();
-            toggleMouseMode.HotkeyAction = "Change_Toggle_MouseMode";
+            toggleMouseMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_MouseMode"].ToString();
+            toggleMouseMode.HotkeyAction = "Toggle_MouseMode";
 
             hotkeyAction.Add(toggleMouseMode);
 

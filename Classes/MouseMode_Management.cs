@@ -179,6 +179,7 @@ namespace Handheld_Control_Panel.Classes
         {
             //start timer to read and compare controller inputs
             //Controller input handler
+            if (inputSimulator == null) { inputSimulator = new InputSimulator(); }
 
             if (controller == null)
             {

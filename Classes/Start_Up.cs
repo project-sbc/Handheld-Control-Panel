@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //test code here
-
+            //AutoTDP_Management.startOSDThread();
 
 
             //test code
@@ -54,7 +54,7 @@ namespace Handheld_Control_Panel.Classes
             TDP_Management.TDP_Management.determineCPU();
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
-            //TDP_Management.TDP_Management.checkDriverBlockRegistry();
+            TDP_Management.TDP_Management.checkDriverBlockRegistry();
 
             //Make sure powercfg profile has coreparking and maxprocfreq unhidden or otherwise those wont work
             MaxProcFreq_Management.MaxProcFreq_Management.unhidePowercfgMaxProcFreq();
