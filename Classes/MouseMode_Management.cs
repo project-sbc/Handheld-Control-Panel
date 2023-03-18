@@ -830,7 +830,7 @@ namespace Handheld_Control_Panel.Classes
                     if (parentNode.SelectSingleNode("HIDHideEnabled").InnerText == "True") { HIDHideEnabled = true; } else { HIDHideEnabled = false; }
                     if (parentNode.SelectSingleNode("PowerCycleWithHIDHide").InnerText == "True") { PowerCycleWithHIDHide = true; } else { PowerCycleWithHIDHide = false; }
 
-
+                    mouseMode.Clear();
                     foreach (XmlNode node in parentNode.ChildNodes)
                     {
 

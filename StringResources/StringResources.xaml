@@ -66,6 +66,7 @@
     <system:String x:Key="Usercontrol_Update">Update</system:String>
     <system:String x:Key="Usercontrol_CheckUpdate">Check For Updates</system:String>
     <system:String x:Key="Usercontrol_Version">Version: </system:String>
+    <system:String x:Key="Usercontrol_LeftStick">Left Stick</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
@@ -100,10 +101,16 @@
     <system:String x:Key="Hotkeys_Action_Change_Brightness">Change Brightness</system:String>
     <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Change GPU Clock</system:String>
     <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Toggle Mouse Mode</system:String>
-
+    
     <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
-    
+
+
+    <system:String x:Key="MouseMode_Action_MouseInput">Mouse Input</system:String>
+    <system:String x:Key="MouseMode_Action_Scroll">Scrolling</system:String>
+    <system:String x:Key="MouseMode_Action_ArrowKeys">Arrow Keys</system:String>
+
+
     
     
     <system:String x:Key="ContextMenu_Hide">Hide</system:String>

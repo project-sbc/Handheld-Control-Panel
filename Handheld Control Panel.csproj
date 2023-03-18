@@ -135,6 +135,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\MouseModeEditPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MouseModePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -196,6 +199,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditMouseModeUserControls\LeftStick_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditProfileUserControls\OfflineEPP_Slider.xaml.cs">
