@@ -214,7 +214,7 @@ namespace Handheld_Control_Panel.Classes
                             break;
                         case "Scroll":
                             mouseScrollX = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbX);
-                            mouseScrollY = normalizeJoystickInput(sensitivity, -currentGamePad.LeftThumbY);
+                            mouseScrollY = normalizeJoystickInput(sensitivity, currentGamePad.LeftThumbY);
                             break;
                         case "WASD":
                             if (currentGamePad.LeftThumbX > joystickButtonPressSensivitiy)
@@ -343,8 +343,8 @@ namespace Handheld_Control_Panel.Classes
                             mouseY = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbY);
                             break;
                         case "Scroll":
-                            mouseScrollX = normalizeJoystickInput(sensitivity, currentGamePad.RightThumbX);
-                            mouseScrollY = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbY);
+                            mouseScrollX = normalizeJoystickInput(sensitivity, -currentGamePad.RightThumbX);
+                            mouseScrollY = normalizeJoystickInput(sensitivity, currentGamePad.RightThumbY);
                             break;
                         case "WASD":
                             if (currentGamePad.RightThumbX > joystickButtonPressSensivitiy)
@@ -771,7 +771,7 @@ namespace Handheld_Control_Panel.Classes
                                 childNode.InnerText = PowerCycleWithHIDHide.ToString();
                                 break;
                             default:
-                                mouseMode[childNode.Name] = childNode.InnerText;
+                                childNode.InnerText = mouseMode[childNode.Name];
 
                                 break;
                         }
