@@ -73,6 +73,14 @@
     <system:String x:Key="Usercontrol_XButton">X Button</system:String>
     <system:String x:Key="Usercontrol_YButton">Y Button</system:String>
     <system:String x:Key="Usercontrol_BButton">B Button</system:String>
+    <system:String x:Key="Usercontrol_StartButton">Start Button</system:String>
+    <system:String x:Key="Usercontrol_BackButton">Back Button</system:String>
+    <system:String x:Key="Usercontrol_DPadUp">DPad Up</system:String>
+    <system:String x:Key="Usercontrol_DPadDown">DPad Down</system:String>
+    <system:String x:Key="Usercontrol_DPadLeft">DPad Left</system:String>
+    <system:String x:Key="Usercontrol_DPadRight">DPad Right</system:String>
+    <system:String x:Key="Usercontrol_LB">LB</system:String>
+    <system:String x:Key="Usercontrol_RB">RB</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
