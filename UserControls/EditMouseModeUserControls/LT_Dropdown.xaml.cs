@@ -33,12 +33,12 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Back_Dropdown : UserControl
+    public partial class LT_Dropdown : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
         private string selectedObject;
-        public Back_Dropdown()
+        public LT_Dropdown()
         {
             InitializeComponent();
             setListboxItemsource();
@@ -50,9 +50,9 @@ namespace Handheld_Control_Panel.UserControls
             
             controlList.ItemsSource = MouseModeLookup.MouseModeList;
 
-            if (Global_Variables.mousemodes.editingMouseMode.mouseMode["Select"] != "")
+            if (Global_Variables.mousemodes.editingMouseMode.mouseMode["LT"] != "")
             {
-                controlList.SelectedItem = Global_Variables.mousemodes.editingMouseMode.mouseMode["Select"];
+                controlList.SelectedItem = Global_Variables.mousemodes.editingMouseMode.mouseMode["LT"];
                 selectedObject = (string)controlList.SelectedItem;
                 actionLabel.Content = selectedObject;
             }
@@ -127,9 +127,9 @@ namespace Handheld_Control_Panel.UserControls
                     string value = controlList.SelectedItem.ToString();
                 
                     selectedObject = (string)controlList.SelectedItem;
-                    if (Global_Variables.mousemodes.editingMouseMode.mouseMode["Select"] != value)
+                    if (Global_Variables.mousemodes.editingMouseMode.mouseMode["LT"] != value)
                     {
-                        Global_Variables.mousemodes.editingMouseMode.mouseMode["Select"] = value;
+                        Global_Variables.mousemodes.editingMouseMode.mouseMode["LT"] = value;
                         actionLabel.Content = value;
                
                     }

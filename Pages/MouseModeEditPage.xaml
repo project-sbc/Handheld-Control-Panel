@@ -15,6 +15,18 @@
                 <uc:LeftStick_Dropdown />
                 <uc:RightStick_Dropdown/>
                 <uc:A_Dropdown/>
+                <uc:B_Dropdown/>
+                <uc:X_Dropdown/>
+                <uc:Y_Dropdown/>
+                <uc:DPU_Dropdown/>
+                <uc:DPD_Dropdown/>
+                <uc:DPR_Dropdown/>
+                <uc:DPL_Dropdown/>
+                <uc:L3_Dropdown/>
+                <uc:R3_Dropdown/>
+                <uc:Start_Dropdown/>
+                <uc:Back_Dropdown/>
+                
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

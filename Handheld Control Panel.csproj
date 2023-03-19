@@ -216,6 +216,12 @@
     <Compile Update="UserControls\EditMouseModeUserControls\Back_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditMouseModeUserControls\RT_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditMouseModeUserControls\LT_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditMouseModeUserControls\R3_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

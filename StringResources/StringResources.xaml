@@ -83,6 +83,8 @@
     <system:String x:Key="Usercontrol_RB">Right Bumper</system:String>
     <system:String x:Key="Usercontrol_L3">Left Stick Button</system:String>
     <system:String x:Key="Usercontrol_R3">Right Stick Button</system:String>
+    <system:String x:Key="Usercontrol_RT">Right Trigger</system:String>
+    <system:String x:Key="Usercontrol_LT">Left Trigger</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
