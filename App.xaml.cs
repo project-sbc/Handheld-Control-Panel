@@ -22,22 +22,19 @@ namespace Handheld_Control_Panel
     
     public partial class App : Application
     {
-
-        public static void ErrorHandler(object sender, UnhandledExceptionEventArgs args)
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            Exception e = (Exception)args.ExceptionObject;
-
-            Log_Writer.writeLog("Error caught: " + e.Message + " Source is " + e.Source);
-
+            MessageBox.Show("An unhandled exception just occurred: " + e.Exception.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
+            Log_Writer.writeLog(e.Exception.Message);
+            e.Handled = true;
         }
+  
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             //set global error handler
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(ErrorHandler);
-
+          
          
 
             bool quietStart = false;

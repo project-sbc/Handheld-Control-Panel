@@ -37,11 +37,11 @@ namespace Handheld_Control_Panel.UserControls
         private string windowpage = "";
         private string usercontrol = "";
         private object selectedObject = "";
+
         public Resolution_Dropdown()
         {
             InitializeComponent();
             setControlValue();
-          
         }
 
         private  void setControlValue()

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Handheld_Control_Panel"
              xmlns:controls="using:Microsoft.UI.Xaml.Controls"
              xmlns:ui="http://schemas.modernwpf.com/2019"
-            
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
             
              >
     <Application.Resources>

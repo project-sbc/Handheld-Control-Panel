@@ -54,6 +54,7 @@ namespace Handheld_Control_Panel.UserControls
             {
                 controlList.SelectedItem = Global_Variables.mousemodes.editingMouseMode.mouseMode["A"];
                 selectedObject = (string)controlList.SelectedItem;
+                actionLabel.Content = selectedObject;
             }
 
 

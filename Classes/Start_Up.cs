@@ -24,15 +24,14 @@ namespace Handheld_Control_Panel.Classes
         public static void Start_Routine()
         {
             //error catch
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
+            
 
             //run all routines to get device ready
 
             //test code here
             int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
 
-            AutoTDP_Management.startOSDThread();
+            //AutoTDP_Management.startOSDThread();
 
             //test code
 
@@ -55,7 +54,7 @@ namespace Handheld_Control_Panel.Classes
             TDP_Management.TDP_Management.determineCPU();
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
-            TDP_Management.TDP_Management.checkDriverBlockRegistry();
+            //TDP_Management.TDP_Management.checkDriverBlockRegistry();
 
             //Make sure powercfg profile has coreparking and maxprocfreq unhidden or otherwise those wont work
             MaxProcFreq_Management.MaxProcFreq_Management.unhidePowercfgMaxProcFreq();
@@ -105,15 +104,7 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
 
         }
-        public static void MyHandler(object sender, UnhandledExceptionEventArgs args)
-        {
-            Exception e = (Exception)args.ExceptionObject;
-            string error = DateTime.Now.ToString() + " Error: " + e.Message;
-            Log_Writer.writeLog(error);
-            MessageBox.Show(error);
-     
-        }
-
+      
         public static void loadLanguage()
         {
             Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);

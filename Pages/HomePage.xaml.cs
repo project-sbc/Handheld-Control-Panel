@@ -48,83 +48,91 @@ namespace Handheld_Control_Panel.Pages
         private void addUserControlsToPage()
         {
 
-
-            List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
-            foreach (HomePageItem item in Global_Variables.homePageItems)
+            try
             {
-
-                if (item.UserControl != "")
+                List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
+                foreach (HomePageItem item in Global_Variables.homePageItems)
                 {
-                    if (item.Enabled)
+
+                    if (item.UserControl != "")
                     {
-                        Debug.WriteLine(item.UserControl);
-                        switch (item.UserControl)
+                        if (item.Enabled)
                         {
-                            case "Usercontrol_Wifi":
-                                stackPanel.Children.Add(new Wifi_Toggle());
-                                break;
-                            case "Usercontrol_Bluetooth":
-                                stackPanel.Children.Add(new Bluetooth_Toggle());
-                                break;
-                            case "Usercontrol_Brightness":
-                                stackPanel.Children.Add(new Brightness_Slider());
-                                break;
-                            case "Usercontrol_VolumeMute":
-                                stackPanel.Children.Add(new VolumeMute_Toggle());
-                                break;
-                            case "Usercontrol_Volume":
-                                stackPanel.Children.Add(new Volume_Slider());
-                                break;
-                            case "Usercontrol_Resolution":
-                                stackPanel.Children.Add(new Resolution_Dropdown());
-                                break;
-                            case "Usercontrol_RefreshRate":
-                                stackPanel.Children.Add(new RefreshRate_Dropdown());
-                                break;
-                            case "Usercontrol_TDP":
-                                stackPanel.Children.Add(new TDP_Slider());
-                                break;
-                            case "Usercontrol_TDP2":
-                                if (!Properties.Settings.Default.combineTDP)
-                                {
-                                    stackPanel.Children.Add(new TDP2_Slider());
-                                }
-                               
-                                break;
-                            case "Usercontrol_EPP":
-                                stackPanel.Children.Add(new EPP_Slider());
-                                break;
-                            case "Usercontrol_FPSLimit":
-                                stackPanel.Children.Add(new FPS_Slider());
-                                break;
-                            case "Usercontrol_ActiveCores":
-                                stackPanel.Children.Add(new ActiveCores_Slider());
-                                break;
-                            case "Usercontrol_MaxCPUFrequency":
-                                stackPanel.Children.Add(new MaxCPU_Slider());
-                                break;
-                            case "Usercontrol_GPUCLK":
-                                stackPanel.Children.Add(new GPUCLK_Slider());
-                                break;
-                            case "Divider":
-                                stackPanel.Children.Add(new Divider());
-                                break;
-                            case "Usercontrol_Scaling":
-                                stackPanel.Children.Add(new Scaling_Dropdown());
-                                break;
-                            case "Usercontrol_MouseMode":
-                                stackPanel.Children.Add(new MouseMode_Toggle());
-                                break;
-                            case "Usercontrol_Controller":
-                                stackPanel.Children.Add(new Controller_Toggle());
-                                break;
-                            default: break;
+                            Debug.WriteLine(item.UserControl);
+                            switch (item.UserControl)
+                            {
+                                case "Usercontrol_Wifi":
+                                    stackPanel.Children.Add(new Wifi_Toggle());
+                                    break;
+                                case "Usercontrol_Bluetooth":
+                                    stackPanel.Children.Add(new Bluetooth_Toggle());
+                                    break;
+                                case "Usercontrol_Brightness":
+                                    stackPanel.Children.Add(new Brightness_Slider());
+                                    break;
+                                case "Usercontrol_VolumeMute":
+                                    stackPanel.Children.Add(new VolumeMute_Toggle());
+                                    break;
+                                case "Usercontrol_Volume":
+                                    stackPanel.Children.Add(new Volume_Slider());
+                                    break;
+                                case "Usercontrol_Resolution":
+                                    stackPanel.Children.Add(new Resolution_Dropdown());
+                                    break;
+                                case "Usercontrol_RefreshRate":
+                                    stackPanel.Children.Add(new RefreshRate_Dropdown());
+                                    break;
+                                case "Usercontrol_TDP":
+                                    stackPanel.Children.Add(new TDP_Slider());
+                                    break;
+                                case "Usercontrol_TDP2":
+                                    if (!Properties.Settings.Default.combineTDP)
+                                    {
+                                        stackPanel.Children.Add(new TDP2_Slider());
+                                    }
+
+                                    break;
+                                case "Usercontrol_EPP":
+                                    stackPanel.Children.Add(new EPP_Slider());
+                                    break;
+                                case "Usercontrol_FPSLimit":
+                                    stackPanel.Children.Add(new FPS_Slider());
+                                    break;
+                                case "Usercontrol_ActiveCores":
+                                    stackPanel.Children.Add(new ActiveCores_Slider());
+                                    break;
+                                case "Usercontrol_MaxCPUFrequency":
+                                    stackPanel.Children.Add(new MaxCPU_Slider());
+                                    break;
+                                case "Usercontrol_GPUCLK":
+                                    stackPanel.Children.Add(new GPUCLK_Slider());
+                                    break;
+                                case "Divider":
+                                    stackPanel.Children.Add(new Divider());
+                                    break;
+                                case "Usercontrol_Scaling":
+                                    stackPanel.Children.Add(new Scaling_Dropdown());
+                                    break;
+                                case "Usercontrol_MouseMode":
+                                    stackPanel.Children.Add(new MouseMode_Toggle());
+                                    break;
+                                case "Usercontrol_Controller":
+                                    stackPanel.Children.Add(new Controller_Toggle());
+                                    break;
+                                default: break;
+                            }
                         }
                     }
+
+
                 }
-             
-              
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " during add controls");
+            }
+            
+        
 
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
