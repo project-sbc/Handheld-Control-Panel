@@ -81,6 +81,8 @@
     <system:String x:Key="Usercontrol_DPadRight">DPad Right</system:String>
     <system:String x:Key="Usercontrol_LB">Left Bumper</system:String>
     <system:String x:Key="Usercontrol_RB">Right Bumper</system:String>
+    <system:String x:Key="Usercontrol_L3">Left Stick Button</system:String>
+    <system:String x:Key="Usercontrol_R3">Right Stick Button</system:String>
 
     <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
