@@ -111,6 +111,8 @@
 		<MouseModeConfiguration>
 			<ID>1</ID>
 			<MouseModeName>Default</MouseModeName>
+			<MouseSensitivity>20</MouseSensitivity>
+			<ScrollSensitivity>1</ScrollSensitivity>
 			<DefaultMode>True</DefaultMode>
 			<HIDHideEnabled>False</HIDHideEnabled>
 			<PowerCycleWithHIDHide>False</PowerCycleWithHIDHide>
@@ -184,6 +186,8 @@
 			<MouseModeName></MouseModeName>
 			<HIDHideEnabled>False</HIDHideEnabled>
 			<PowerCycleWithHIDHide>False</PowerCycleWithHIDHide>
+			<MouseSensitivity></MouseSensitivity>
+			<ScrollSensitivity></ScrollSensitivity>
 			<LeftThumb></LeftThumb>
 			<RightThumb></RightThumb>
 			<LT></LT>

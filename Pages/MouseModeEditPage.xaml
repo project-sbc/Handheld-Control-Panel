@@ -24,6 +24,10 @@
                 <uc:DPL_Dropdown/>
                 <uc:L3_Dropdown/>
                 <uc:R3_Dropdown/>
+                <uc:LT_Dropdown/>
+                <uc:RT_Dropdown/>
+                <uc:LB_Dropdown/>
+                <uc:RB_Dropdown/>
                 <uc:Start_Dropdown/>
                 <uc:Back_Dropdown/>
                 

@@ -201,6 +201,9 @@
     <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditMouseModeUserControls\DefaultMM_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditMouseModeUserControls\DPR_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -214,6 +217,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditMouseModeUserControls\Back_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditMouseModeUserControls\MouseSensitivity_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditMouseModeUserControls\MMName_Textbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditMouseModeUserControls\RT_Dropdown.xaml.cs">

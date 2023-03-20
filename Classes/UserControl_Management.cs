@@ -26,6 +26,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                 switch (slider.Tag)
                 {
+                    case "Slider_MouseSensitivity":
+                        slider.Minimum = 5;
+                        slider.Maximum = 35;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+
+                        break;
+ 
                     case "Slider_ProfileOnlineTDP":
                         slider.Minimum = Properties.Settings.Default.minTDP;
                         slider.Maximum = Properties.Settings.Default.maxTDP;
@@ -397,8 +406,11 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             double sliderValue = slider.Value;
             switch (sliderTag)
             {
-                
-                 case "Slider_ProfileOnlineTDP":
+                case "Slider_MouseSensitivity":
+                    Global_Variables.Global_Variables.mousemodes.editingMouseMode.MouseSensitivity = sliderValue;
+
+                    break;
+                case "Slider_ProfileOnlineTDP":
                     Global_Variables.Global_Variables.profiles.editingProfile.Online_TDP1 = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineTDP":

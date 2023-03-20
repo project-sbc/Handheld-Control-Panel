@@ -36,13 +36,13 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class Profile_Textbox : UserControl
+    public partial class MMName_Textbox : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
 
 
-        public Profile_Textbox()
+        public MMName_Textbox()
         {
             InitializeComponent();
         
@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.UserControls
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
-            control.Text = Global_Variables.profiles.editingProfile.ProfileName;
+            control.Text = Global_Variables.mousemodes.editingMouseMode.MouseModeName;
            
 
         }
@@ -82,7 +82,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_LostFocus(object sender, RoutedEventArgs e)
         {
-            Global_Variables.profiles.editingProfile.ProfileName = control.Text;
+            Global_Variables.mousemodes.editingMouseMode.MouseModeName = control.Text;
         }
     }
    

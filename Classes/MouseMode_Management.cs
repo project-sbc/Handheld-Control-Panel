@@ -104,8 +104,8 @@ namespace Handheld_Control_Panel.Classes
         public DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
         public Gamepad currentGamePad;
         public Gamepad previousGamePad;
-        private int sensitivityMouse = 20;
-        private int sensitivityScroll = 1;
+
+        public double sensitivityScroll = 1;
         private int joystickButtonPressSensivitiy = 6000;
        
         public MouseMode activeMouseMode = new MouseMode();
@@ -284,8 +284,8 @@ namespace Handheld_Control_Panel.Classes
                     switch (activeMouseMode.mouseMode["LeftThumb"])
                     {
                         case "Mouse":
-                            mouseX = normalizeJoystickInput(sensitivityMouse, currentGamePad.LeftThumbX);
-                            mouseY = normalizeJoystickInput(sensitivityMouse, -currentGamePad.LeftThumbY);
+                            mouseX = normalizeJoystickInput(Global_Variables.Global_Variables.mousemodes.activeMouseMode.MouseSensitivity, currentGamePad.LeftThumbX);
+                            mouseY = normalizeJoystickInput(Global_Variables.Global_Variables.mousemodes.activeMouseMode.MouseSensitivity, -currentGamePad.LeftThumbY);
                             break;
                         case "Scroll":
                             mouseScrollX = normalizeJoystickInput(sensitivityScroll, currentGamePad.LeftThumbX);
@@ -414,8 +414,8 @@ namespace Handheld_Control_Panel.Classes
                     switch (activeMouseMode.mouseMode["RightThumb"])
                     {
                         case "Mouse":
-                            mouseX = normalizeJoystickInput(sensitivityMouse, currentGamePad.RightThumbX);
-                            mouseY = normalizeJoystickInput(sensitivityMouse, -currentGamePad.RightThumbY);
+                            mouseX = normalizeJoystickInput(Global_Variables.Global_Variables.mousemodes.activeMouseMode.MouseSensitivity, currentGamePad.RightThumbX);
+                            mouseY = normalizeJoystickInput(Global_Variables.Global_Variables.mousemodes.activeMouseMode.MouseSensitivity, -currentGamePad.RightThumbY);
                             break;
                         case "Scroll":
                             mouseScrollX = normalizeJoystickInput(sensitivityScroll, -currentGamePad.RightThumbX);
@@ -623,7 +623,7 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        private double normalizeJoystickInput(int sensitivity, double value)
+        private double normalizeJoystickInput(double sensitivity, double value)
         {
             double returnValue;
             if (value != 0)
@@ -821,6 +821,10 @@ namespace Handheld_Control_Panel.Classes
         public bool PowerCycleWithHIDHide { get; set; }
         public string ID { get; set; } = "";
 
+        public double MouseSensitivity { get; set; }
+        public double ScrollSensitivity { get; set; }
+
+
         public Dictionary<string, string> mouseMode = new Dictionary<string, string>();
 
         public void SaveToXML()
@@ -853,6 +857,13 @@ namespace Handheld_Control_Panel.Classes
                                 break;
                             case "PowerCycleWithHIDHide":
                                 childNode.InnerText = PowerCycleWithHIDHide.ToString();
+                                break;
+                            case "MouseSensitivity":
+                                childNode.InnerText = MouseSensitivity.ToString();
+                               
+                                break;
+                            case "ScrollSensitivity":
+                                childNode.InnerText = ScrollSensitivity.ToString();
                                 break;
                             default:
                                 childNode.InnerText = mouseMode[childNode.Name];
@@ -914,11 +925,26 @@ namespace Handheld_Control_Panel.Classes
                     if (parentNode.SelectSingleNode("HIDHideEnabled").InnerText == "True") { HIDHideEnabled = true; } else { HIDHideEnabled = false; }
                     if (parentNode.SelectSingleNode("PowerCycleWithHIDHide").InnerText == "True") { PowerCycleWithHIDHide = true; } else { PowerCycleWithHIDHide = false; }
 
+             
+                    double dblSen;
+                    if (double.TryParse(parentNode.SelectSingleNode("MouseSensitivity").InnerText, out dblSen))
+                    {
+                        MouseSensitivity = dblSen;
+                    }
+                    else { MouseSensitivity = 20; }
+
+                    double dblSSen;
+                    if (double.TryParse(parentNode.SelectSingleNode("MouseSensitivity").InnerText, out dblSSen))
+                    {
+                        ScrollSensitivity = dblSSen;
+                    }
+                    else { ScrollSensitivity = 1; }
+
                     mouseMode.Clear();
                     foreach (XmlNode node in parentNode.ChildNodes)
                     {
 
-                        if (node.Name != "MouseModeName" && node.Name != "ID" && node.Name != "DefaultMode" && node.Name != "HIDHideEnabled" && node.Name != "PowerCycleWithHIDHide")
+                        if (node.Name != "MouseSensitivity" && node.Name != "ScrollSensitivity" && node.Name != "MouseModeName" && node.Name != "ID" && node.Name != "DefaultMode" && node.Name != "HIDHideEnabled" && node.Name != "PowerCycleWithHIDHide")
                         {
                             mouseMode.Add(node.Name, node.InnerText);
                         }

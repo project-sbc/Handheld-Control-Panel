@@ -66,6 +66,9 @@
     <system:String x:Key="Usercontrol_Update">Update</system:String>
     <system:String x:Key="Usercontrol_CheckUpdate">Check For Updates</system:String>
     <system:String x:Key="Usercontrol_Version">Version: </system:String>
+    <system:String x:Key="Usercontrol_DefaultMouseMode">Default Mode</system:String>
+    <system:String x:Key="Usercontrol_MouseSensitivity">Mouse Sensitivity</system:String>
+    <system:String x:Key="Usercontrol_ScrollSensitivity">Scroll Sensitivity</system:String>
     
     <system:String x:Key="Usercontrol_LeftStick">Left Stick</system:String>
     <system:String x:Key="Usercontrol_RightStick">Right Stick</system:String>
