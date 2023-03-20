@@ -38,7 +38,7 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-         
+            control.Value = Global_Variables.mousemodes.editingMouseMode.MouseSensitivity;
         }
 
        

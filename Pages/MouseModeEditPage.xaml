@@ -14,6 +14,7 @@
             <StackPanel x:Name="stackPanel" >
                 <uc:LeftStick_Dropdown />
                 <uc:RightStick_Dropdown/>
+                <uc:MouseSensitivity_Slider/>
                 <uc:A_Dropdown/>
                 <uc:B_Dropdown/>
                 <uc:X_Dropdown/>
