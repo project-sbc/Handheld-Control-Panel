@@ -28,19 +28,23 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid  Height="53">
+                        <StackPanel Margin="11,0,9,0" Orientation="Vertical">
 
-                        <DockPanel >
-                            
-                            <StackPanel>
-                                <Label Content="{Binding MouseModeName}"  FontSize="22" Margin="0,-7,0,0" />
-                              
-                            </StackPanel>
-                            
-                        </DockPanel>
+                            <DockPanel >
+                                <TextBlock Text="{Binding MouseModeName}" FontSize="22" />
+                                <TextBlock  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="20" />
+                            </DockPanel>
+                            <DockPanel>
+                                
+                                <TextBlock  HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="20" />
+                            </DockPanel>
+
+
+                        </StackPanel>
                         
-                               
-        
-                    
+
+
+
 
                     </Grid>
                 </DataTemplate>

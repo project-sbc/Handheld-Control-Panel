@@ -208,7 +208,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 MouseMode mouseMode = new MouseMode();
                 mouseMode.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-                if (mouseMode.DefaultMode) { activeMouseMode = mouseMode; }
+                if (mouseMode.DefaultMode) { activeMouseMode = mouseMode; ; activeMouseMode.ActiveProfile = true; }
                 this.Add(mouseMode);
             }
             xmlDocument = null;
@@ -816,7 +816,7 @@ namespace Handheld_Control_Panel.Classes
     public class MouseMode
     {
         public string MouseModeName { get; set; } = "";
-        public bool DefaultMode { get; set; }
+
         public bool HIDHideEnabled { get; set; }
         public bool PowerCycleWithHIDHide { get; set; }
         public string ID { get; set; } = "";
@@ -824,9 +824,44 @@ namespace Handheld_Control_Panel.Classes
         public double MouseSensitivity { get; set; }
         public double ScrollSensitivity { get; set; }
 
-
+        public bool DefaultMode
+        {
+            get { return defaultMode; }
+            set
+            {
+                defaultMode = value;
+                if (value == true) { VisibilityDefaultProfile = Visibility.Visible; } else { VisibilityDefaultProfile = Visibility.Collapsed; }
+            }
+        }
+        public bool defaultMode { get; set; }
+        public bool activeMode { get; set; }
+        public bool ActiveProfile
+        {
+            get { return activeMode; }
+            set
+            {
+                activeMode = value;
+                if (value == true) { VisibilityActiveProfile = Visibility.Visible; } else { VisibilityActiveProfile = Visibility.Collapsed; }
+            }
+        }
+        public Visibility VisibilityActiveProfile { get; set; } = Visibility.Collapsed;
+        public Visibility VisibilityDefaultProfile { get; set; } = Visibility.Collapsed;
         public Dictionary<string, string> mouseMode = new Dictionary<string, string>();
 
+
+
+        public void applyProfile()
+        {
+            //remove active profile flag for current
+            if (Global_Variables.Global_Variables.mousemodes.activeMouseMode != null)
+            {
+                Global_Variables.Global_Variables.mousemodes.activeMouseMode.ActiveProfile = false;
+
+            }
+            //apply active profile flag
+            Global_Variables.Global_Variables.mousemodes.activeMouseMode = this;
+            ActiveProfile = true;
+        }
         public void SaveToXML()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
