@@ -133,6 +133,13 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
             //make sure to load profile to clear any unsaved changes to the profile
             Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+            if (Global_Variables.profiles.activeProfile != null)
+            {
+                if (Global_Variables.profiles.editingProfile == Global_Variables.profiles.activeProfile)
+                {
+                    Global_Variables.profiles.activeProfile.applyProfile();
+                }
+            }
         }
     }
 }

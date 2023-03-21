@@ -37,7 +37,7 @@
                             </DockPanel>
                             <DockPanel>
                                 <TextBlock Grid.Column="0"  Text="{Binding Exe}" FontSize="14" FontStyle="Italic"/>
-                                <TextBlock  HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="20" />
+                                <TextBlock Margin="0,-6,0,0" HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="20" />
                             </DockPanel>
                 
 

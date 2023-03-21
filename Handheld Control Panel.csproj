@@ -375,10 +375,19 @@
     <Compile Update="UserControls\InformationUserControls\DonatePaypal_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\MouseModePage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\MouseModeEditPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InstructionUserControls\ProfilePage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\Update_Button.xaml.cs">

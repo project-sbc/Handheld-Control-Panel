@@ -285,5 +285,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["qamUserControls"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool enableNotifications {
+            get {
+                return ((bool)(this["enableNotifications"]));
+            }
+            set {
+                this["enableNotifications"] = value;
+            }
+        }
     }
 }

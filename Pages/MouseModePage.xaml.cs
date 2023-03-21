@@ -37,7 +37,7 @@ namespace Handheld_Control_Panel.Pages
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HotKeyPage_Instruction");
+            wnd.changeUserInstruction("MouseModePage_Instruction");
             wnd = null;
           
         }
@@ -88,8 +88,16 @@ namespace Handheld_Control_Panel.Pages
                             wnd.navigateFrame("MouseModeEditPage");
                             break;
 
-                        case "Y":
+                        case "Start":
                             Global_Variables.mousemodes.addNewProfile(null);
+                            controlList.Items.Refresh();
+                            break;
+                        case "Back":
+                            Global_Variables.mousemodes.addNewProfile(mousemode);
+                            controlList.Items.Refresh();
+                            break;
+                        case "Y":
+                            mousemode.applyProfile();
                             controlList.Items.Refresh();
                             break;
                         case "X":

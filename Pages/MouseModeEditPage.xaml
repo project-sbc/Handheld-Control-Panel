@@ -9,9 +9,11 @@
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <DockPanel>
-        <Label Content="{DynamicResource Usercontrol_HotKeySaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+        <Label Content="{DynamicResource Usercontrol_MouseModeSaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
+                <uc:MMName_Textbox />
+                <uc:DefaultMM_Toggle/>
                 <uc:LeftStick_Dropdown />
                 <uc:RightStick_Dropdown/>
                 <uc:MouseSensitivity_Slider/>

@@ -88,7 +88,7 @@ namespace Handheld_Control_Panel.Pages
                             wnd.navigateFrame("HotKeyEditPage");
                             break;
 
-                        case "Y":
+                        case "Start":
                             Global_Variables.hotKeys.addNewHotkey();
                             controlList.Items.Refresh();
                             break;

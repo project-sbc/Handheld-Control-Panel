@@ -77,10 +77,12 @@ namespace Handheld_Control_Panel.UserControls
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            
+           
         }
 
-        private void control_LostFocus(object sender, RoutedEventArgs e)
+  
+
+        private void control_TextChanged(object sender, TextChangedEventArgs e)
         {
             Global_Variables.mousemodes.editingMouseMode.MouseModeName = control.Text;
         }

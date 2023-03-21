@@ -46,6 +46,7 @@
     <system:String x:Key="Usercontrol_HotKeyParameter">Parameter</system:String>
     <system:String x:Key="Usercontrol_HotKey">Hot Key</system:String>
     <system:String x:Key="Usercontrol_HotKeySaved">Hot Key Saved</system:String>
+    <system:String x:Key="Usercontrol_MouseModeSaved">Mouse Mode Saved</system:String>
     <system:String x:Key="Usercontrol_ProfileSaved">Profile Saved</system:String>
     <system:String x:Key="Usercontrol_ProfileName">Profile Name</system:String>
     <system:String x:Key="Usercontrol_Exe">Process Exe</system:String>
@@ -57,6 +58,7 @@
     <system:String x:Key="Usercontrol_MaxFPS">Max RTSS FPS</system:String>
     <system:String x:Key="Usercontrol_Theme">Theme</system:String>
     <system:String x:Key="Usercontrol_CombineTDP">Sync TDP Values</system:String>
+    <system:String x:Key="Usercontrol_EnableNotifications">Enable Notifications</system:String>
     <system:String x:Key="Usercontrol_Scaling">Display Scaling</system:String>
     <system:String x:Key="Usercontrol_Language">Language</system:String>
     <system:String x:Key="Usercontrol_IntelTDP">Intel TDP Type</system:String>
@@ -125,6 +127,9 @@
     
     <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
+    
+    
+    <system:String x:Key="Notification_ProfileApplied">Profile Applied</system:String>
 
 
     <system:String x:Key="MouseMode_Action_MouseInput">Mouse Input</system:String>

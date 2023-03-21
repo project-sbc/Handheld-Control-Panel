@@ -405,7 +405,11 @@ namespace Handheld_Control_Panel
                         break;
                     case "ProfilePage_Instruction":
                         instructionStackPanel.Children.Add(new ProfilePage_Instruction());
-                        break;
+                        break; 
+                    case "ProfileEditPage_Instruction":
+                        disable_B_ToClose = true;
+                        instructionStackPanel.Children.Add(new ProfileEditPage_Instruction());
+                        break; 
                     case "HotKeyEditPage_Instruction":
                         disable_B_ToClose = true;
                         instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());
@@ -414,6 +418,15 @@ namespace Handheld_Control_Panel
                         disable_B_ToClose= true;
                         instructionStackPanel.Children.Add(new SelectedListBox_Instruction());
                         break;
+                    case "MouseModePage_Instruction":
+                        instructionStackPanel.Children.Add(new MouseModePage_Instruction());
+                        break;
+                    case "MouseModeEditPage_Instruction":
+                        disable_B_ToClose = true;
+                        instructionStackPanel.Children.Add(new MouseModeEditPage_Instruction());
+                        break;
+                        
+
 
                     default: break;
                 }

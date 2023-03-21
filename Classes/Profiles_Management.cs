@@ -68,6 +68,20 @@ namespace Handheld_Control_Panel.Classes
             {
                 string ID = profile.ID;
 
+                if (Global_Variables.Global_Variables.profiles.activeProfile != null)
+                {
+                    if (Global_Variables.Global_Variables.profiles.activeProfile == profile)
+                    {
+                        Global_Variables.Global_Variables.profiles.activeProfile = null;
+                    }
+                }
+                if (Global_Variables.Global_Variables.profiles.defaultProfile != null)
+                {
+                    if (Global_Variables.Global_Variables.profiles.defaultProfile == profile)
+                    {
+                        Global_Variables.Global_Variables.profiles.defaultProfile = null;
+                    }
+                }
                 System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
                 xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
                 XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
@@ -385,6 +399,8 @@ namespace Handheld_Control_Panel.Classes
                 default: break;
             }
 
+
+            Notification_Management.Show(Application.Current.Resources["Notification_ProfileApplied"] + ": " + ProfileName,"");
 
         }
     }
