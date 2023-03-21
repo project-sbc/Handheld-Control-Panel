@@ -16,10 +16,11 @@
             <uc:AccentColor_Dropdown/>
             <uc:DockRight_Toggle/>
             <uc:Language_Dropdown/>
+            <uc:EnableNotifications_Toggle/>
             <uc:Divider/>
             <uc:Autostart_Toggle/>
             <uc:Autoupdate_Toggle/>
-            <uc:StartRTSS_Toggle />
+    
             <uc:Divider/>
             <uc:IntelTDP_Dropdown/>
             <uc:MinTDP_Slider/>
@@ -27,6 +28,7 @@
             <uc:CombineTDP_Toggle/>
             <uc:Divider/>
             <uc:MaxFPS_Slider/>
+            <uc:StartRTSS_Toggle />
         </StackPanel>
     </ScrollViewer>
 

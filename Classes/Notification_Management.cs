@@ -17,8 +17,11 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Show(string title, string message)
         {
-            
-            __NotificationManager.Show(title, message);
+            if (Properties.Settings.Default.enableNotifications)
+            {
+                __NotificationManager.Show(title, message);
+            }
+      
         }
 
     }
