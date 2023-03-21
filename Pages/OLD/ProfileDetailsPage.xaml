@@ -43,6 +43,7 @@
                 <Label Content="{DynamicResource Header_ProfileLauncher_Settings}" Style="{StaticResource headerLabel}" />
                 <Rectangle Style="{StaticResource rectangle}" />
                 <uc:Profiles_AppType/>
+                
                 <uc:ProfileResolution_Listbox />
                 <uc:ProfileRefresh_Listbox />
                 

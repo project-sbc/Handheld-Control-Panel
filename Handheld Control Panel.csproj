@@ -264,6 +264,9 @@
     <Compile Update="UserControls\EditMouseModeUserControls\LeftStick_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\AppType_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditProfileUserControls\OfflineEPP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -276,7 +279,7 @@
     <Compile Update="UserControls\EditProfileUserControls\OfflineMaxCPU_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditProfileUserControls\OfflineGPUCLK_Slider - Copy.xaml.cs">
+    <Compile Update="UserControls\EditProfileUserControls\OfflineGPUCLK_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditProfileUserControls\OnlineGPUCLK_Slider.xaml.cs">
@@ -313,6 +316,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditProfileUserControls\Default_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\ProfileRefreshRate_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\ProfilesResolution_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Controller_Toggle.xaml.cs">

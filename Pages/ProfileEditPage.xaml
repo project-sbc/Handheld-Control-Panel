@@ -16,6 +16,9 @@
                 <uc:ProcessExe_Textbox/>
                 <uc:Default_Toggle/>
                 <uc:Divider />
+                <uc:ProfilesResolution_Dropdown/>
+                <uc:ProfileRefreshRate_Dropdown />
+                <uc:Divider />
                 <uc:OnlineTDP_Slider />
                 <uc:OnlineTDP2_Slider />
                 <uc:OnlineFPS_Slider/>
