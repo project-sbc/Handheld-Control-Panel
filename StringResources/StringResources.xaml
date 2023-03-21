@@ -71,6 +71,7 @@
     <system:String x:Key="Usercontrol_DefaultMouseMode">Default Mode</system:String>
     <system:String x:Key="Usercontrol_MouseSensitivity">Mouse Sensitivity</system:String>
     <system:String x:Key="Usercontrol_ScrollSensitivity">Scroll Sensitivity</system:String>
+    <system:String x:Key="Usercontrol_AppType">Application Type</system:String>
     
     <system:String x:Key="Usercontrol_LeftStick">Left Stick</system:String>
     <system:String x:Key="Usercontrol_RightStick">Right Stick</system:String>
