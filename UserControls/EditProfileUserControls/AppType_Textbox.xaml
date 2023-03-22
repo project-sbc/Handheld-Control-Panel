@@ -11,13 +11,13 @@
         <DockPanel VerticalAlignment="Center" >
             <DockPanel DockPanel.Dock="Top">
                 <Label Content="{DynamicResource Usercontrol_AppType}"  Style="{StaticResource userControlMainLabel}"/>
-                <Image HorizontalAlignment="Right" Name="controlImage"     />
+                <Image HorizontalAlignment="Right" Name="controlImage"  Margin="10,0,0,0"   />
                 <mah:ToggleSwitch x:Name="controlToggle" Style="{DynamicResource userControlToggle}"  Toggled="toggleSwitch_Toggled" >
                     <mah:ToggleSwitch.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                     </mah:ToggleSwitch.LayoutTransform>
                 </mah:ToggleSwitch>
-                <Button x:Name="controlButton" Width="40" Margin="0,0,12,0"  Height="30" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <Button x:Name="controlButton" Width="40" Margin="0,0,12,0"  Height="30" DockPanel.Dock="Right" HorizontalAlignment="Right" Click="controlButton_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -30,7 +30,7 @@
                 </Button>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom">
-                <TextBox x:Name="controlTextbox" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="430" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" TextChanged="control_TextChanged" />
+                <TextBox x:Name="controlTextbox" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="11" Width="413" Margin="0,0,10,5" HorizontalAlignment="Right" VerticalAlignment="Center" TextChanged="control_TextChanged" />
 
                
             </DockPanel>

@@ -16,6 +16,7 @@
                 <uc:ProcessExe_Textbox/>
                 <uc:Default_Toggle/>
                 <uc:Divider />
+                <uc:AppType_Textbox/>
                 <uc:ProfilesResolution_Dropdown/>
                 <uc:ProfileRefreshRate_Dropdown />
                 <uc:Divider />

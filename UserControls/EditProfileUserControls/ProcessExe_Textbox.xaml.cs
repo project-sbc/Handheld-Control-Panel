@@ -80,8 +80,10 @@ namespace Handheld_Control_Panel.UserControls
             
         }
 
-     
-    
+        private void control_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Global_Variables.profiles.editingProfile.Exe = control.Text;
+        }
     }
    
 }

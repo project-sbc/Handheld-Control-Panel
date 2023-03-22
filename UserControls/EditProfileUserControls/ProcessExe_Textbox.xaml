@@ -26,7 +26,7 @@
 
                     </StackPanel>
                 </Button>
-                <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" DockPanel.Dock="Right" HorizontalAlignment="Right" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="188" Margin="0,0,10,0" VerticalAlignment="Center" />
+                <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" DockPanel.Dock="Right" HorizontalAlignment="Right" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="188" Margin="0,0,10,0" VerticalAlignment="Center" TextChanged="control_TextChanged" />
                 
             </DockPanel>
             

@@ -77,14 +77,21 @@ namespace Handheld_Control_Panel.UserControls
             {
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    RefreshRates.Clear();
-                    RefreshRates = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution];
-                    RefreshRates.Insert(0, "");
-                    controlList.ItemsSource = RefreshRates;
-                    if (controlList.Items.Contains(Global_Variables.profiles.editingProfile.RefreshRate) && controlList.SelectedItem != Global_Variables.profiles.editingProfile.RefreshRate && controlList.IsLoaded)
+                    if (Global_Variables.profiles.editingProfile.Resolution != "")
                     {
-                        controlList.SelectedItem = Global_Variables.profiles.editingProfile.RefreshRate;
-                    
+                        RefreshRates.Clear();
+                        RefreshRates = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution];
+                        RefreshRates.Insert(0, "");
+                        controlList.ItemsSource = RefreshRates;
+                        if (controlList.Items.Contains(Global_Variables.profiles.editingProfile.RefreshRate) && controlList.SelectedItem != Global_Variables.profiles.editingProfile.RefreshRate && controlList.IsLoaded)
+                        {
+                            controlList.SelectedItem = Global_Variables.profiles.editingProfile.RefreshRate;
+
+                        }
+                    }
+                    else
+                    {
+                        controlList.ItemsSource = null;
                     }
 
 
