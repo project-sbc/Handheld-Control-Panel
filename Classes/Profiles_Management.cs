@@ -38,6 +38,144 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;          
         }
 
+        public void createProfileForSteamGame(string profileName, string gameID)
+        {
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+
+
+            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
+            newNode.InnerXml = xmlNodeTemplate.InnerXml;
+            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
+            newNode.SelectSingleNode("ID").InnerText = Global_Variables.Global_Variables.profiles.getNewIDNumberForProfile(xmlDocument);
+            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
+            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "Steam";
+
+            xmlNodeProfiles.AppendChild(newNode);
+
+
+
+            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+            xmlDocument = null;
+
+        }
+        public void createProfileForEpicGame(string profileName, string path, string gameID)
+        {
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+
+
+            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
+            newNode.InnerXml = xmlNodeTemplate.InnerXml;
+            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
+            newNode.SelectSingleNode("ID").InnerText = Global_Variables.Global_Variables.profiles.getNewIDNumberForProfile(xmlDocument);
+            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
+            newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
+            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "EpicGames";
+
+            xmlNodeProfiles.AppendChild(newNode);
+
+
+
+            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+            xmlDocument = null;
+
+        }
+        public void syncSteamGameToProfile()
+        {
+            //gets list of steam games from library.vdf file, then makes profiles for those without one
+
+            Dictionary<string, string> result = Steam_Management.syncSteam_Library();
+
+            if (result.Count > 0)
+            {
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+                foreach (KeyValuePair<string, string> pair in result)
+                {
+                    XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + pair.Key + "']");
+                    if (xmlSelectedNode == null)
+                    {
+                        Global_Variables.Global_Variables.profiles.createProfileForSteamGame(pair.Value, pair.Key);
+                    }
+                }
+
+
+                xmlDocument = null;
+
+            }
+
+
+
+        }
+        public void syncEpicGameToProfile()
+        {
+            //gets list of steam games from library.vdf file, then makes profiles for those without one
+
+            List<EpicGamesLauncherItem> result = EpicGames_Management.syncEpic_Library();
+
+            if (result.Count > 0)
+            {
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+                foreach (EpicGamesLauncherItem item in result)
+                {
+                    XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
+                    if (xmlSelectedNode == null)
+                    {
+                        Global_Variables.Global_Variables.profiles.createProfileForEpicGame(item.gameName, item.installPath, item.gameID);
+                    }
+                }
+
+
+                xmlDocument = null;
+
+            }
+
+
+
+        }
+        public void openProgram(string ID)
+        {
+
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
+
+            if (xmlSelectedNode != null)
+            {
+                XmlNode profileNode = xmlSelectedNode.ParentNode;
+
+                string appType = profileNode.SelectSingleNode("LaunchOptions/AppType").InnerText;
+                string path = profileNode.SelectSingleNode("LaunchOptions/Path").InnerText;
+                if (appType == "Steam")
+                {
+                    Steam_Management.openSteamGame(path);
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(path);
+                }
+            }
+            xmlDocument = null;
+
+        }
         public void setCurrentDefaultProfileToFalse(string ID)
         {
             //changes 

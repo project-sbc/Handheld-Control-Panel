@@ -10,6 +10,7 @@ using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,8 +43,30 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-            
-           
+            if(Global_Variables.profiles.editingProfile.AppType == "Steam")
+            {
+                controlToggle.Visibility = Visibility.Collapsed;
+                controlTextbox.Visibility = Visibility.Collapsed;
+
+                string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + Global_Variables.profiles.editingProfile.GameID + "_header";
+                if (File.Exists(imageDirectory + ".jpg"))
+                {
+                    controlImage.Source = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    if (File.Exists(imageDirectory + ".png"))
+                    {
+                        controlImage.Source = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                    }
+
+                }
+            }
+            else
+            {
+
+
+            }
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -60,7 +83,7 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                //Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
 
             }
         }

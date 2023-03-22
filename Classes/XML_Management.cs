@@ -138,59 +138,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
         }
 
-        public static void createProfileForSteamGame(string profileName, string gameID)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
-            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "Steam";
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-        public static void createProfileForEpicGame(string profileName, string path, string gameID)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
-            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
-            newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "EpicGames";
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
+       
         public static string lookUpExeOfActiveProfile()
         {
             string result = "";
@@ -474,6 +422,60 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                 }
             }
 
+
+        }
+
+        public static void createProfileForSteamGame(string profileName, string gameID)
+        {
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+
+
+            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
+            newNode.InnerXml = xmlNodeTemplate.InnerXml;
+            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
+            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
+            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
+            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "Steam";
+
+            xmlNodeProfiles.AppendChild(newNode);
+
+
+
+            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+            xmlDocument = null;
+
+        }
+        public static void createProfileForEpicGame(string profileName, string path, string gameID)
+        {
+
+            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+
+
+            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
+            newNode.InnerXml = xmlNodeTemplate.InnerXml;
+            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
+            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
+            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
+            newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
+            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "EpicGames";
+
+            xmlNodeProfiles.AppendChild(newNode);
+
+
+
+            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+
+            xmlDocument = null;
 
         }
         public static void syncSteamGameToProfile()
