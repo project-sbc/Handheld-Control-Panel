@@ -14,7 +14,14 @@
 
   <ItemGroup>
     <None Remove="HCP.ico" />
+    <None Remove="kernel32.dll" />
     <None Remove="ProjectSBC.png" />
+    <None Remove="Resources\AMD\ADLX\ADLX_3DSettings.dll" />
+    <None Remove="Resources\AMD\ADLX\ADLX_AutoTuning.dll" />
+    <None Remove="Resources\AMD\ADLX\ADLX_PerformanceMetrics.dll" />
+    <None Remove="Resources\AMD\ADLX\ucrtbased.dll" />
+    <None Remove="Resources\AMD\ADLX\vcruntime140d.dll" />
+    <None Remove="Resources\AMD\ADLX\vcruntime140_1d.dll" />
     <None Remove="Resources\AMD\RyzenAdj\inpoutx64.dll" />
     <None Remove="Resources\AMD\RyzenAdj\libryzenadj.dll" />
     <None Remove="Resources\AMD\RyzenAdj\ryzenadj.exe" />
@@ -41,6 +48,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\AMD\ADLX\ADLX_3DSettings.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AMD\ADLX\ADLX_AutoTuning.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AMD\ADLX\ADLX_PerformanceMetrics.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AMD\ADLX\kernel32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AMD\ADLX\ucrtbased.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AMD\ADLX\vcruntime140d.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\AMD\ADLX\vcruntime140_1d.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\AMD\RyzenAdj\inpoutx64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

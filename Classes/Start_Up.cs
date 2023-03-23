@@ -23,12 +23,14 @@ namespace Handheld_Control_Panel.Classes
         
         public static void Start_Routine()
         {
-            
+
             //run all routines to get device ready
             //librehardwaremonitor librehardwaremonitor = new librehardwaremonitor();
             //librehardwaremonitor.Monitor();
 
             //test code here
+            AutoTDP_Management.writeGPUInfo();
+
             int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
 
             //AutoTDP_Management.startOSDThread();
