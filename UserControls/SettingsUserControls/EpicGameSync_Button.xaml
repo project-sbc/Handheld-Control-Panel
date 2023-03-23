@@ -11,8 +11,8 @@
         <DockPanel VerticalAlignment="Center" >
 
             <Label Content="{DynamicResource Usercontrol_SyncSteamGames}"  Style="{StaticResource userControlMainLabel}"/>
-          
-            <Button FontSize="10" Content="{DynamicResource Usercontrol_CheckUpdate}" Name="control" Width="220" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,22,0" Click="Button_Click" >
+
+            <Button FontSize="10" Content="{DynamicResource Usercontrol_Sync}" Name="control" Width="110" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,22,0" Click="Button_Click" >
                 
             </Button>
         </DockPanel>

@@ -29,23 +29,22 @@
                 <DataTemplate>
                     <Grid  Height="53">
 
-                        <StackPanel Margin="11,0,9,0" Orientation="Vertical">
+                        <DockPanel Margin="6,0,9,0" >
                            
-                            <DockPanel >
+                            <DockPanel DockPanel.Dock="Left" >
                                 <iconPacks:PackIconSimpleIcons Margin="0,0,5,0"  VerticalAlignment="Center" Width="22" Visibility="{Binding iconVisibility}"  Kind="{Binding icon}" Height="22"  />
                                 <iconPacks:PackIconMaterial Margin="0,0,5,0" VerticalAlignment="Center" Kind="{Binding iconMaterial}"  Visibility="{Binding iconMaterialVisibility}"  Width="22" Height="22" />
-                                <TextBlock Text="{Binding ProfileName}" FontSize="16" MaxWidth="300" />
-                                
-                                <TextBlock  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="16" />
-                            </DockPanel>
-                            <DockPanel>
+                                <TextBlock  DockPanel.Dock="Top" Text="{Binding ProfileName}"  FontSize="16" MaxWidth="300" />
                                 <TextBlock  Text="{Binding Exe}" FontSize="14" FontStyle="Italic"/>
-                               
-                                <TextBlock Margin="0,-6,0,0" HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="16" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                <TextBlock  VerticalAlignment="Center" DockPanel.Dock="Top"  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="16" />
+
+                                <TextBlock VerticalAlignment="Center" Margin="0,-6,0,0" HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="16" />
                             </DockPanel>
                 
 
-                        </StackPanel>
+                        </DockPanel>
          
 
 
