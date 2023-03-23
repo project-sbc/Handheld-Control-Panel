@@ -1,4 +1,5 @@
-﻿using SharpDX;
+﻿using MahApps.Metro.IconPacks;
+using SharpDX;
 using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
@@ -112,7 +113,7 @@ namespace Handheld_Control_Panel.Classes
                     }
                 }
 
-
+                Global_Variables.Global_Variables.profiles = new Profiles_Management();
                 xmlDocument = null;
 
             }
@@ -351,7 +352,41 @@ namespace Handheld_Control_Panel.Classes
         public string Resolution { get; set; } = "";
         public string RefreshRate { get; set; } = "";
         public string Path { get; set; } = "";
-        public string AppType { get; set; } = "";
+
+        public string appType = "";
+        public string AppType
+        {
+            get { return appType; }
+            set
+            {
+                appType = value;
+                switch (value)
+                {
+                    case "Steam":
+                        icon = PackIconSimpleIconsKind.Steam;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
+                    case "EpicGames":
+                        icon = PackIconSimpleIconsKind.EpicGames;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
+                    case "Exe":
+                        icon = PackIconSimpleIconsKind.None;
+                        iconMaterial = PackIconMaterialKind.ApplicationCogOutline;
+                        iconMaterialVisibility = Visibility.Visible;
+                        break;
+                    default:
+                        icon = PackIconSimpleIconsKind.None;
+                        iconMaterial = PackIconMaterialKind.None;
+                  
+                        break;
+                }
+
+            }
+        }
+
         public string GameID { get; set; } = "";
         public string Offline_TDP1 { get; set; } = "";
         public string Offline_TDP2 { get; set; } = "";
@@ -368,7 +403,12 @@ namespace Handheld_Control_Panel.Classes
         public string Online_EPP { get; set; } = "";
         public string Online_GPUCLK { get; set; } = "";
 
+        public PackIconSimpleIconsKind icon {get;set;}
+        public PackIconMaterialKind iconMaterial {get;set;}
 
+        public Visibility iconVisibility { get; set; } = Visibility.Collapsed;
+        public Visibility iconMaterialVisibility { get; set; } = Visibility.Collapsed;
+       
         public void SaveToXML()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();

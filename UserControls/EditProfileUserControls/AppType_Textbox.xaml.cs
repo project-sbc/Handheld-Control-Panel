@@ -150,13 +150,8 @@ namespace Handheld_Control_Panel.UserControls
                     controlTextbox.Visibility = Visibility.Visible;
                     controlButton.Visibility = Visibility.Visible;
                     controlImage.Visibility = Visibility.Visible;
-                    if (Global_Variables.profiles.editingProfile.Path != "")
-                    {
-                        updateIconImage();
-                       
+                    updateIconImage();
 
-                    }
-                  
 
                 }
                 else
@@ -181,11 +176,29 @@ namespace Handheld_Control_Panel.UserControls
 
         private void controlButton_Click(object sender, RoutedEventArgs e)
         {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.InitialDirectory = "C:\\";
+            dialog.Filter = "Applications (.exe)|*.exe"; // Filter files by extension
 
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                controlTextbox.Text = dialog.FileName;
+                Global_Variables.profiles.editingProfile.Path = controlTextbox.Text;
+                Global_Variables.profiles.editingProfile.AppType = "Exe";
+
+            }
         }
 
         private void control_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (Global_Variables.profiles.editingProfile.AppType == "")
+            {
+                Global_Variables.profiles.editingProfile.AppType = "Exe";
+            }
             Global_Variables.profiles.editingProfile.Path = controlTextbox.Text;
         }
     }

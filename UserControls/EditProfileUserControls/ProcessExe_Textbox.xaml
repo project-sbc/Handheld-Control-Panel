@@ -15,7 +15,7 @@
                     <Label x:Name="label" Content="{DynamicResource Usercontrol_Exe}"   Style="{StaticResource userControlHotkeyLabel}" />
              
                 </StackPanel>
-                <Button x:Name="button" Width="40" Margin="0,0,12,0"  Height="30" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <Button x:Name="button" Width="40" Margin="0,0,12,0"  Height="30" DockPanel.Dock="Right" HorizontalAlignment="Right" Click="button_Click" >
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>

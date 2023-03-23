@@ -116,6 +116,7 @@
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official" Version="1.7.6" />
     <PackageReference Include="InputSimulatorCore" Version="1.0.5" />
+    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.2" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
@@ -397,6 +398,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\EpicGameSync_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\SteamGameSync_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\Update_Button.xaml.cs">
