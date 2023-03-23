@@ -5,7 +5,7 @@
     <system:String x:Key="MainWindow_NavigationView_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
     <system:String x:Key="MainWindow_NavigationView_HotKey">Hotkeys</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Gamelauncher">App Launcher</system:String>
+    <system:String x:Key="MainWindow_NavigationView_AppLauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
     <system:String x:Key="MainWindow_NavigationView_Information">Information</system:String>
@@ -14,7 +14,7 @@
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_HotKey">Hotkeys</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Gamelauncher">App Launcher</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Information">Information</system:String>
