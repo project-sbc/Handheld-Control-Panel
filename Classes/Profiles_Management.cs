@@ -4,11 +4,13 @@ using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Xml;
 
 namespace Handheld_Control_Panel.Classes
@@ -152,29 +154,28 @@ namespace Handheld_Control_Panel.Classes
         }
         public void openProgram(string ID)
         {
-
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
-
-            if (xmlSelectedNode != null)
+            foreach (Profile profile in Global_Variables.Global_Variables.profiles)
             {
-                XmlNode profileNode = xmlSelectedNode.ParentNode;
-
-                string appType = profileNode.SelectSingleNode("LaunchOptions/AppType").InnerText;
-                string path = profileNode.SelectSingleNode("LaunchOptions/Path").InnerText;
-                if (appType == "Steam")
+                if (profile.ID == ID)
                 {
-                    Steam_Management.openSteamGame(path);
+                    profile.applyProfile(true);
+                    if (profile.AppType == "Steam" && profile.GameID != "")
+                    {
+                        Steam_Management.openSteamGame(profile.GameID);
+                    }
+                    else
+                    {
+                        if (File.Exists(profile.Path))
+                        {
+                            System.Diagnostics.Process.Start(profile.Path);
+                        }
+                        
+                    }
                 }
-                else
-                {
-                    System.Diagnostics.Process.Start(path);
-                }
+                
             }
-            xmlDocument = null;
+
+           
 
         }
         public void setCurrentDefaultProfileToFalse(string ID)
@@ -537,7 +538,7 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        public void applyProfile()
+        public void applyProfile(bool changeDisplay=false)
         {
             //remove active profile flag for current
             if (Global_Variables.Global_Variables.profiles.activeProfile != null) 
@@ -550,6 +551,17 @@ namespace Handheld_Control_Panel.Classes
             ActiveProfile = true;
             string powerStatus = SystemParameters.PowerLineStatus.ToString();
 
+            if (changeDisplay)
+            {
+                if (Resolution != "")
+                {
+                    Display_Management.Display_Management.SetDisplayResolution(Resolution);
+                }
+                if (RefreshRate != "")
+                {
+                    Display_Management.Display_Management.SetDisplayRefreshRate(RefreshRate);
+                }
+            }
 
             switch (powerStatus)
             {

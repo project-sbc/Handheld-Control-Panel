@@ -145,7 +145,7 @@ namespace Handheld_Control_Panel.Pages
                     switch (action)
                     {
                         case "A":
-                            
+                            Global_Variables.profiles.openProgram(lbai.ID);
                             break;
 
                       
