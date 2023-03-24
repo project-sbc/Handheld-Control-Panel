@@ -99,7 +99,16 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                if (args.Action == "A")
+                {
+                    controlToggle.IsOn = !controlToggle.IsOn;
+                }
+                else
+                {
+                    Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                }
+
+                  
 
             }
         }

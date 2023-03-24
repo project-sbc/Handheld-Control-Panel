@@ -146,7 +146,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
                         slider.Value = Global_Variables.Global_Variables.ReadPL1;
                         break;
-                    case "Slider_GPUCLK":
+                    case "Slider_GPUCLK-TickChange":
                         slider.Minimum = 400;
                         slider.Maximum = Properties.Settings.Default.maxGPUCLK;
                         slider.TickFrequency = 50;
@@ -482,6 +482,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_TDP2-TickChange":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)Global_Variables.Global_Variables.ReadPL1, (int)sliderValue));
+                    break;
+                case "Slider_GPUCLK-TickChange":
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)sliderValue)); ;
                     break;
                 case "Slider_Volume":
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume((int)sliderValue));
