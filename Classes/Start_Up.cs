@@ -30,9 +30,9 @@ namespace Handheld_Control_Panel.Classes
 
             //test code here
             //AutoTDP_Management.writeGPUInfo();
-            OSD_Management.startOSDThread();
+            //OSD_Management.startOSDThread();
 
-            int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
+            //int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
 
             //AutoTDP_Management.startOSDThread();
 

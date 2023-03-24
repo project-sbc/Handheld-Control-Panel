@@ -10,7 +10,20 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    <Page.Resources>
+        <Style x:Key="fontAwesomeSpinner" TargetType="iconPacks:PackIconFontAwesome">
+            <Style.Triggers>
+                <Trigger Property="Spin" Value="False">
+                    <Trigger.EnterActions>
 
+
+                    </Trigger.EnterActions>
+
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
             <ListBox.Resources>
@@ -25,33 +38,58 @@
                     </Style.Resources>
                 </Style>
             </ListBox.Resources>
+            <ListBox.Template>
+                <ControlTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ControlTemplate>
+            </ListBox.Template>
             <ListBox.ItemTemplate>
+
                 <DataTemplate>
-                    <Grid  Height="53">
-
-                        <DockPanel Margin="6,0,9,0" >
-                           
-                            <DockPanel DockPanel.Dock="Left" >
-                                <iconPacks:PackIconSimpleIcons Margin="0,0,5,0"  VerticalAlignment="Center" Width="22" Visibility="{Binding iconVisibility}"  Kind="{Binding icon}" Height="22"  />
-                                <iconPacks:PackIconMaterial Margin="0,0,5,0" VerticalAlignment="Center" Kind="{Binding iconMaterial}"  Visibility="{Binding iconMaterialVisibility}"  Width="22" Height="22" />
-                                <TextBlock  DockPanel.Dock="Top" Text="{Binding ProfileName}"  FontSize="16" MaxWidth="300" />
-                                <TextBlock  Text="{Binding Exe}" FontSize="14" FontStyle="Italic"/>
-                            </DockPanel>
-                            <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-                                <TextBlock  VerticalAlignment="Center" DockPanel.Dock="Top"  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="16" />
-
-                                <TextBlock VerticalAlignment="Center" Margin="0,-6,0,0" HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="16" />
-                            </DockPanel>
-                
-
-                        </DockPanel>
-         
-
+                    <Border>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderThickness" Value="2" />
+                                <Setter Property="CornerRadius" Value="3" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                 Value="True">
+                                        <Setter Property="BorderBrush" Value="{StaticResource MahApps.Brushes.ThemeBackground}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
+                                <ColumnDefinition Width="135" SharedSizeGroup="Column1"/>
 
 
-                    </Grid>
+                            </Grid.ColumnDefinitions>
+                            <!-- Assumes MVVM and you wish to bind to properties and commands -->
+
+                            <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="1">
+                                <TextBlock  Grid.Column="0" Width="0"  Text="{Binding ID}" />
+                                <iconPacks:PackIconFontAwesome Style="{StaticResource fontAwesomeSpinner}" Kind="SpinnerSolid" Height="30" Width="30" Spin="True" Panel.ZIndex="3" Visibility="Collapsed" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <Image  Height="65" Panel.ZIndex="1"   Source="{Binding imageSteam}" />
+                                <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                    <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding image}" />
+                                    <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding Exe}"/>
+
+                                </DockPanel>
+
+                            </Grid>
+
+
+
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
+
+        
         </ListBox>
 
     </Grid>

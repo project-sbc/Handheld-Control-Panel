@@ -22,6 +22,10 @@ using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using MahApps.Metro.Controls;
+using Handheld_Control_Panel.Classes.XML_Management;
+using System.Drawing;
+using System.Windows.Interop;
+using System.IO;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -31,7 +35,7 @@ namespace Handheld_Control_Panel.Pages
     public partial class AppLauncherPage : Page
     {
         private string windowpage;
-
+        private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
         public AppLauncherPage()
         {
             InitializeComponent();
@@ -51,20 +55,78 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
 
 
-            controlList.ItemsSource = Global_Variables.profiles;
+            loadValues();
 
-            if (controlList.Items.Count > 0)
+         
+
+        }
+        private void loadValues()
+        {
+            // add panels to wrap panel
+
+           
+
+            foreach (Profile profile in Global_Variables.profiles)
             {
-                if (Global_Variables.profiles.activeProfile != null)
+                if (profile.AppType != "")
                 {
-                    controlList.SelectedItem = Global_Variables.profiles.activeProfile;
+                    ListBoxAppItem lbai = new ListBoxAppItem();
+                    lbai.ID = profile.ID;
+
+                    switch (profile.AppType)
+                    {
+                        case "Steam":
+                            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + profile.GameID + "_header";
+                            if (File.Exists(imageDirectory + ".jpg"))
+                            {
+                                lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
+                            }
+                            else
+                            {
+                                if (File.Exists(imageDirectory + ".png"))
+                                {
+                                    lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                                }
+
+                            }
+                            if (lbai.imageSteam != null)
+                            {
+                                items.Add(lbai);
+                            }
+
+                            break;
+                        default:
+                            if (profile.Path != null)
+                            {
+                                
+                                if (File.Exists(profile.Path))
+                                {
+                                    lbai.Exe = profile.Exe;
+                                    using (Icon ico = Icon.ExtractAssociatedIcon(profile.Path))
+                                    {
+                                        lbai.image = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                                    }
+                                    items.Add(lbai);
+                                }
+                            }
+                           
+
+                            break;
+
+
+
+
+                    }
+
+
+
                 }
-                else
-                {
-                    controlList.SelectedIndex = 0;
-                }
+
+
+
             }
 
+            controlList.ItemsSource = items;
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
@@ -78,38 +140,26 @@ namespace Handheld_Control_Panel.Pages
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 if (controlList.SelectedItem != null)
                 {
-                    Profile profile = controlList.SelectedItem as Profile;
+                    ListBoxAppItem lbai = controlList.SelectedItem as ListBoxAppItem;
                     int index = controlList.SelectedIndex;
                     switch (action)
                     {
                         case "A":
-                            Global_Variables.profiles.editingProfile = (Profile)controlList.SelectedItem;
-                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.navigateFrame("ProfileEditPage");
+                            
                             break;
 
-                        case "X":
-                            Global_Variables.profiles.deleteProfile(profile);
-                            controlList.Items.Refresh();
-                            if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
-                            break;
-                        case "Y":
-                            profile.applyProfile();
-                            controlList.Items.Refresh();
-                            break;
+                      
                         case "Up":
-                            if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            if (index > 2) { controlList.SelectedIndex = index - 3; controlList.ScrollIntoView(controlList.SelectedItem); }
                             break;
                         case "Down":
+                            if (index +3  < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 3; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            break;
+                        case "Left":
+                            if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            break;
+                        case "Right":
                             if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
-                            break;
-                        case "Start":
-                            Global_Variables.profiles.addNewProfile(null);
-                            controlList.Items.Refresh();
-                            break;
-                        case "Back":
-                            Global_Variables.profiles.addNewProfile(profile);
-                            controlList.Items.Refresh();
                             break;
                         default: break;
 
@@ -118,19 +168,8 @@ namespace Handheld_Control_Panel.Pages
                 }
                 else
                 {
-                    if (action == "Y")
-                    {
-                        Global_Variables.profiles.addNewProfile(null);
-                        controlList.Items.Refresh();
-                    }
-                    if (action == "Up" || action == "Down")
-                    {
-                        if (controlList.Items.Count > 0) { controlList.SelectedIndex = 0; controlList.ScrollIntoView(controlList.SelectedItem); }
-
-                    }
+                    controlList.SelectedIndex = 0;
                 }
-
-
               
 
             }
@@ -143,5 +182,14 @@ namespace Handheld_Control_Panel.Pages
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
+    }
+    public class ListBoxAppItem
+    {
+        public string ID { get; set; }
+        public ImageSource image { get; set; }
+        public ImageSource imageSteam { get; set; }
+
+        public string Exe { get; set; }
+  
     }
 }
