@@ -29,7 +29,8 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-            AutoTDP_Management.writeGPUInfo();
+            //AutoTDP_Management.writeGPUInfo();
+            OSD_Management.startOSDThread();
 
             int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
 
@@ -65,9 +66,20 @@ namespace Handheld_Control_Panel.Classes
 
             //get max core count
             Global_Variables.Global_Variables.maxCpuCores = new ManagementObjectSearcher("Select * from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["NumberOfCores"].ToString()));
-            
+
             //load lists (resolutions, refresh rates, scalings)
-            Display_Management.Display_Management.generateDisplayResolutionAndRateList();
+
+
+            try
+            {
+                Display_Management.Display_Management.generateDisplayResolutionAndRateList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " : during resolution refresh");
+            }
+
+            
             
             //XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
              

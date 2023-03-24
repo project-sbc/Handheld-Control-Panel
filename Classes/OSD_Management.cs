@@ -36,8 +36,7 @@ namespace Handheld_Control_Panel.Classes
             {AppFlags.Vulkan }
         };
 
-
-        private static void test()
+        private static void test2()
         {
             if (RTSS.RTSSRunning())
             {
@@ -68,6 +67,32 @@ namespace Handheld_Control_Panel.Classes
                         Debug.WriteLine(app.Name);
 
 
+                    }
+                    Task.Delay(350);
+
+                }
+                OSD.Update("");
+                OSD.Dispose();
+                osd.Abort();
+            }
+
+        }
+        private static void test()
+        {
+            if (RTSS.RTSSRunning())
+            {
+                var OSD = new RTSSSharedMemoryNET.OSD("new");
+
+          
+                while (displayOSD)
+                {
+
+
+
+                    string[] osdArr = AutoTDP_Management.writeGPUInfo();
+                    foreach (string osd in osdArr)
+                    {
+                        OSD.Update(osd);
                     }
                     Task.Delay(350);
 

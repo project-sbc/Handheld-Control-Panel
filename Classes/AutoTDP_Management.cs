@@ -10,11 +10,7 @@ using System.Threading.Tasks;
 
 namespace Handheld_Control_Panel.Classes
 {
-    internal class Backend
-    {
-       
-    }
-
+   
     public static class AutoTDP_Management
     {
         public const string CppFunctionsDLL = @"Resources\AMD\ADLX\ADLX_PerformanceMetrics.dll";
@@ -33,7 +29,7 @@ namespace Handheld_Control_Panel.Classes
 
         [DllImport(CppFunctionsDLL3, CallingConvention = CallingConvention.Cdecl)] public static extern int SetFPSLimit(int GPU, bool isEnabled, int FPS);
 
-        public static void writeGPUInfo()
+        public static string[] writeGPUInfoOLD()
         {
            
 
@@ -94,12 +90,41 @@ namespace Handheld_Control_Panel.Classes
                 else Debug.WriteLine($"GPU Power: {gpuPower} W");
 
 
-                Thread.Sleep(2000);
+                Task.Delay(200);
             }
 
 
         }
 
+        public static string[] writeGPUInfo()
+        {
+            int isFactory = GetFactoryStatus(0);
+            int autoTuning = GetAutoTuning(0);
 
+            int fpsLimit = SetFPSLimit(0, true, 256);
+
+            int gpuTotalPower = GetGPUMetrics(0, 5);
+            int fps = GetFPSData();
+            int gpuHotSpot = GetGPUMetrics(0, 2);
+            int gpuTemp = GetGPUMetrics(0, 3);
+            int gpuClock = GetGPUMetrics(0, 0);
+            int gpuVRAMClock = GetGPUMetrics(0, 1);
+            int gpuPower = GetGPUMetrics(0, 4);
+            int gpuVRAM = GetGPUMetrics(0, 6);
+            int gpuUsage = GetGPUMetrics(0, 7);
+            int gpuVolt = GetGPUMetrics(0, 8);
+            int gpuFan = GetGPUMetrics(0, 9);
+
+
+            string[] returnString = new string[3];
+            returnString[0] = "FPS is: " + fps.ToString();
+            returnString[1] = "GPUclock is: " + gpuClock.ToString();
+            returnString[2] = "GPU temp is: " + gpuTemp.ToString();
+
+
+            return returnString;
+
+
+        }
     }
 }
