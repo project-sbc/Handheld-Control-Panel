@@ -41,6 +41,7 @@ namespace Handheld_Control_Panel.Pages
 
         private static PackIconFontAwesome packIconFontAwesome;
         private static DispatcherTimer spinStopTimer = new DispatcherTimer();
+ 
         private string windowpage;
         private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
         public AppLauncherPage()
@@ -187,49 +188,50 @@ where childItem : DependencyObject
                         case "A":
                             if (controlList.SelectedItem != null)
                             {
-                                this.Dispatcher.BeginInvoke(() => {
-                                    if (packIconFontAwesome != null)
-                                    {
-                                        packIconFontAwesome.Spin = false;
-                                        packIconFontAwesome.Visibility = Visibility.Collapsed;
-                                    }
+                              
+                                if (packIconFontAwesome != null)
+                                {
+                                    packIconFontAwesome.Spin = false;
+                                    packIconFontAwesome.Visibility = Visibility.Collapsed;
+                                }
 
-                                    ListBoxAppItem lbai = (ListBoxAppItem)controlList.SelectedItem;
+                            
 
-                                    // IsSynchronizedWithCurrentItem set to True for this to work
-                                    ListBoxItem myListBoxItem =
-                                        (ListBoxItem)(controlList.ItemContainerGenerator.ContainerFromItem(controlList.SelectedItem));
+                                // IsSynchronizedWithCurrentItem set to True for this to work
+                                ListBoxItem myListBoxItem =
+                                    (ListBoxItem)(controlList.ItemContainerGenerator.ContainerFromItem(controlList.SelectedItem));
 
-                                    // Getting the ContentPresenter of myListBoxItem
-                                    ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+                                // Getting the ContentPresenter of myListBoxItem
+                                ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
 
-                                    // Finding textBlock from the DataTemplate that is set on that ContentPresenter
-                                    DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+                                // Finding textBlock from the DataTemplate that is set on that ContentPresenter
+                                DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
 
-                                    packIconFontAwesome = (PackIconFontAwesome)myDataTemplate.FindName("fontAwesomeIcon", myContentPresenter);
-                                    if (packIconFontAwesome != null)
-                                    {
-                                        packIconFontAwesome.Spin = true;
-                                        packIconFontAwesome.Visibility = Visibility.Visible;
-                                        if (lbai.imageSteam != null)
-                                        {
-                                            spinStopTimer.Interval = new TimeSpan(0, 0, 20);
-                                        }
-                                        else
-                                        {
-                                            spinStopTimer.Interval = new TimeSpan(0, 0, 5);
-                                        }
-
-                                        spinStopTimer.Tick += spinner_Stop_Tick;
-                                        spinStopTimer.Start();
-                                    }
-
-
-
-                                    
-
-                                });
                                 Global_Variables.profiles.openProgram(lbai.ID);
+
+                                packIconFontAwesome = (PackIconFontAwesome)myDataTemplate.FindName("fontAwesomeIcon", myContentPresenter);
+                                if (packIconFontAwesome != null)
+                                {
+                                    packIconFontAwesome.Spin = true;
+                                    packIconFontAwesome.Visibility = Visibility.Visible;
+                                    if (lbai.imageSteam != null)
+                                    {
+                                        spinStopTimer.Interval = new TimeSpan(0, 0, 15);
+                                    }
+                                    else
+                                    {
+                                        spinStopTimer.Interval = new TimeSpan(0, 0, 5);
+                                    }
+
+                                    spinStopTimer.Tick += spinner_Stop_Tick;
+
+                                    spinStopTimer.Start();
+
+
+                                }
+                                
+
+
                             }
                             break;
 
@@ -260,8 +262,10 @@ where childItem : DependencyObject
             }
 
         }
-      
 
+
+
+      
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {

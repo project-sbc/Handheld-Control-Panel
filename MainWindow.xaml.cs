@@ -143,7 +143,7 @@ namespace Handheld_Control_Panel
                 updateStatusBar();
                
             }
-            ParallelTaskUpdate_Management.UpdateTask();
+            ParallelTaskUpdate_Management.UpdateTaskAlternate();
         }
         #endregion
         #region update status bar

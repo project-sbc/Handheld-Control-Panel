@@ -158,7 +158,8 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (profile.ID == ID)
                 {
-                    //profile.applyProfile(true);
+                    
+                    profile.applyProfile(true);
                     if (profile.AppType == "Steam" && profile.GameID != "")
                     {
                         Steam_Management.openSteamGame(profile.GameID);

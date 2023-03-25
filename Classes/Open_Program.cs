@@ -24,9 +24,10 @@ namespace Handheld_Control_Panel.Classes
 
                 string appType = profileNode.SelectSingleNode("LaunchOptions/AppType").InnerText;
                 string path = profileNode.SelectSingleNode("LaunchOptions/Path").InnerText;
+                string gameID = profileNode.SelectSingleNode("LaunchOptions/GameID").InnerText;
                 if (appType == "Steam")
                 {
-                    Steam_Management.openSteamGame(path);
+                    Steam_Management.openSteamGame(gameID);
                 }
                 else
                 {

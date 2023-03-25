@@ -25,7 +25,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
+        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Center"     >
             <ListBox.Resources>
 
                 <Style TargetType="ListBoxItem">

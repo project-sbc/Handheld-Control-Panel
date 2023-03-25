@@ -74,26 +74,20 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.SelectedItem.ToString() != Global_Variables.resolution)
+                        if (controlList.Visibility == Visibility.Collapsed)
                         {
-                            handleListboxChange();
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
                         }
                         else
                         {
-              
-                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                            handleListboxChange();
 
-                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.changeUserInstruction("SelectedListBox_Instruction");
-                            wnd = null;
-                         
                         }
-
+                    
                         break;
                     case "B":
-                        MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
-                        wnd2.changeUserInstruction("HomePage_Instruction");
-                        wnd2 = null;
+                 
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             
@@ -149,12 +143,18 @@ namespace Handheld_Control_Panel.UserControls
                 controlList.Visibility = Visibility.Collapsed;
                 PackIconUnicons icon = (PackIconUnicons)button.Content;
                 icon.RotationAngle = 0;
+                MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
+                wnd2.changeUserInstruction("HomePage_Instruction");
+                wnd2 = null;
             }
             else
             {
                 controlList.Visibility = Visibility.Visible;
                 PackIconUnicons icon = (PackIconUnicons)button.Content;
                 icon.RotationAngle = 90;
+                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                wnd.changeUserInstruction("SelectedListBox_Instruction");
+                wnd = null;
             }
         }
 
