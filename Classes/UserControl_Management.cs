@@ -122,14 +122,14 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.SmallChange = 1;
                         slider.LargeChange = 2;
                         break;
-                    case "Slider_ProfileOfflineFPSLimit":
+                    case "Slider_ProfileOfflineFPS":
                         slider.Minimum = 0;
                         slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
                         break;
-                    case "Slider_ProfileOnlineFPSLimit":
+                    case "Slider_ProfileOnlineFPS":
                         slider.Minimum = 0;
                         slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
                         slider.TickFrequency = 1;

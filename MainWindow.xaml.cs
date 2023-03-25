@@ -298,11 +298,11 @@ namespace Handheld_Control_Panel
         {
             if (left)
             {
-                if (navigation.SelectedIndex > 0) { navigation.SelectedIndex = navigation.SelectedIndex -1; }
+                if (navigation.SelectedIndex > 0) { navigation.SelectedIndex = navigation.SelectedIndex -1; } else { navigation.SelectedIndex = navigation.Items.Count-1; }
             }
             else
             {
-                if (navigation.SelectedIndex < (navigation.Items.Count - 1)) { navigation.SelectedIndex=navigation.SelectedIndex + 1; }
+                if (navigation.SelectedIndex < (navigation.Items.Count - 1)) { navigation.SelectedIndex=navigation.SelectedIndex + 1; } else { navigation.SelectedIndex = 0; }
             }
         }
         private void navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -382,6 +382,7 @@ namespace Handheld_Control_Panel
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
         {
+            Task.Delay(1500);
             setWindowSizePosition();
         }
         #endregion

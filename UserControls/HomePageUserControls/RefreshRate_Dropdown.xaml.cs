@@ -46,11 +46,19 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-          
-            controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
-            controlList.SelectedItem = Global_Variables.RefreshRate;
-            selectedObject = Global_Variables.RefreshRate;
-            controlList.Visibility = Visibility.Collapsed;
+            try
+            {
+                controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
+                controlList.SelectedItem = Global_Variables.RefreshRate;
+                selectedObject = Global_Variables.RefreshRate;
+                controlList.Visibility = Visibility.Collapsed;
+            }
+            catch 
+            {
+                MessageBox.Show("Check log file Max to see if " + Global_Variables.Resolution + " is in there");
+            }
+
+           
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

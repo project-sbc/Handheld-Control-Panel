@@ -243,8 +243,12 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 {
                     ResolutionRefresh rr = new ResolutionRefresh();
                     rr.resolution = line.Substring(0, line.IndexOf(",")).Trim();
+            
                     rr.refreshrate = line.Substring(line.IndexOf("@") + 1, 4).Trim();
-                    if (!Global_Variables.Global_Variables.resolutions.Contains(rr.resolution)) { Global_Variables.Global_Variables.resolutions.Insert(0,rr.resolution); }
+
+                    Log_Writer.writeLog(rr.resolution + " " + rr.refreshrate);
+                   
+                    if (!Global_Variables.Global_Variables.resolutions.Contains(rr.resolution)) { Global_Variables.Global_Variables.resolutions.Insert(0,rr.resolution); Debug.WriteLine(rr.resolution); }
                     resolutionRefreshList.Add(rr);
                 }
 
@@ -257,8 +261,10 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 {
                     if (rr.resolution == GVresolution)
                     {
+                        Log_Writer.writeLog(rr.resolution + " Added to array");
                         if (!refreshrates.Contains(rr.refreshrate))
                         {
+                            Log_Writer.writeLog(rr.refreshrate + "Hz Added to resolution");
                             refreshrates.Add(rr.refreshrate);
                         }
                       
