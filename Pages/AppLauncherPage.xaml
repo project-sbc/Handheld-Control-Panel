@@ -25,73 +25,74 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Center"     >
-            <ListBox.Resources>
+        <ScrollViewer Name="scrollviewer" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"   >
+                <ListBox.Resources>
 
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
-                    <Style.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="0"/>
-
-                        </Style>
-                    </Style.Resources>
-                </Style>
-            </ListBox.Resources>
-            <ListBox.Template>
-                <ControlTemplate>
-                    <WrapPanel IsItemsHost="True" />
-                </ControlTemplate>
-            </ListBox.Template>
-            <ListBox.ItemTemplate>
-
-                <DataTemplate>
-                    <Border>
-                        <Border.Style>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+                        <Style.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="BorderThickness" Value="2" />
-                                <Setter Property="CornerRadius" Value="3" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                                 Value="True">
-                                        <Setter Property="BorderBrush" Value="{StaticResource MahApps.Brushes.ThemeBackground}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                <Setter Property="CornerRadius" Value="0"/>
+
                             </Style>
-                        </Border.Style>
-                        <Grid HorizontalAlignment="Center" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
-                                <ColumnDefinition Width="135" SharedSizeGroup="Column1"/>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <WrapPanel IsItemsHost="True" />
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="BorderThickness" Value="2" />
+                                    <Setter Property="CornerRadius" Value="3" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                 Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource MahApps.Brushes.ThemeBackground}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid HorizontalAlignment="Center" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
+                                    <ColumnDefinition Width="135" SharedSizeGroup="Column1"/>
 
 
-                            </Grid.ColumnDefinitions>
-                            <!-- Assumes MVVM and you wish to bind to properties and commands -->
+                                </Grid.ColumnDefinitions>
+                                <!-- Assumes MVVM and you wish to bind to properties and commands -->
 
-                            <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="1">
-                                <TextBlock  Grid.Column="0" Width="0"  Text="{Binding ID}" />
-                                <iconPacks:PackIconFontAwesome Style="{StaticResource fontAwesomeSpinner}" Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                <Image  Height="65"    Source="{Binding imageSteam}" />
-                                <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                                    <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding image}" />
-                                    <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding Exe}"/>
+                                <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="1">
+                                    <TextBlock  Grid.Column="0" Width="0"  Text="{Binding ID}" />
+                                    <iconPacks:PackIconFontAwesome Style="{StaticResource fontAwesomeSpinner}" Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <Image  Height="65"    Source="{Binding imageSteam}" />
+                                    <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                        <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding image}" />
+                                        <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding Exe}"/>
 
-                                </DockPanel>
+                                    </DockPanel>
+
+                                </Grid>
+
+
 
                             </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
 
 
 
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-
-        
-        </ListBox>
-
+            </ListBox>
+        </ScrollViewer>
     </Grid>
 
 </Page>
