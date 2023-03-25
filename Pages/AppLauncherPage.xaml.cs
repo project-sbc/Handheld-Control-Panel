@@ -26,6 +26,10 @@ using Handheld_Control_Panel.Classes.XML_Management;
 using System.Drawing;
 using System.Windows.Interop;
 using System.IO;
+using MahApps.Metro.IconPacks;
+using System.Windows.Threading;
+using Handheld_Control_Panel.Classes.Task_Scheduler;
+
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -34,6 +38,9 @@ namespace Handheld_Control_Panel.Pages
     /// </summary>
     public partial class AppLauncherPage : Page
     {
+
+        private static PackIconFontAwesome packIconFontAwesome;
+        private static DispatcherTimer spinStopTimer = new DispatcherTimer();
         private string windowpage;
         private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
         public AppLauncherPage()
@@ -129,6 +136,39 @@ namespace Handheld_Control_Panel.Pages
             controlList.ItemsSource = items;
         }
 
+        private void spinner_Stop_Tick(object sender, EventArgs e)
+        {
+            spinStopTimer.Stop();
+            if (controlList.SelectedItem != null)
+            {
+               packIconFontAwesome.Visibility = Visibility.Hidden;
+               packIconFontAwesome.Spin = false;
+
+            }
+         
+        }
+
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj)
+where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                {
+                    return (childItem)child;
+                }
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
+        }
+
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
@@ -145,7 +185,52 @@ namespace Handheld_Control_Panel.Pages
                     switch (action)
                     {
                         case "A":
-                            Global_Variables.profiles.openProgram(lbai.ID);
+                            if (controlList.SelectedItem != null)
+                            {
+                                this.Dispatcher.BeginInvoke(() => {
+                                    if (packIconFontAwesome != null)
+                                    {
+                                        packIconFontAwesome.Spin = false;
+                                        packIconFontAwesome.Visibility = Visibility.Collapsed;
+                                    }
+
+                                    ListBoxAppItem lbai = (ListBoxAppItem)controlList.SelectedItem;
+
+                                    // IsSynchronizedWithCurrentItem set to True for this to work
+                                    ListBoxItem myListBoxItem =
+                                        (ListBoxItem)(controlList.ItemContainerGenerator.ContainerFromItem(controlList.SelectedItem));
+
+                                    // Getting the ContentPresenter of myListBoxItem
+                                    ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+
+                                    // Finding textBlock from the DataTemplate that is set on that ContentPresenter
+                                    DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+
+                                    packIconFontAwesome = (PackIconFontAwesome)myDataTemplate.FindName("fontAwesomeIcon", myContentPresenter);
+                                    if (packIconFontAwesome != null)
+                                    {
+                                        packIconFontAwesome.Spin = true;
+                                        packIconFontAwesome.Visibility = Visibility.Visible;
+                                        if (lbai.imageSteam != null)
+                                        {
+                                            spinStopTimer.Interval = new TimeSpan(0, 0, 20);
+                                        }
+                                        else
+                                        {
+                                            spinStopTimer.Interval = new TimeSpan(0, 0, 5);
+                                        }
+
+                                        spinStopTimer.Tick += spinner_Stop_Tick;
+                                        spinStopTimer.Start();
+                                    }
+
+
+
+                                    
+
+                                });
+                                Global_Variables.profiles.openProgram(lbai.ID);
+                            }
                             break;
 
                       
@@ -189,6 +274,7 @@ namespace Handheld_Control_Panel.Pages
         public ImageSource image { get; set; }
         public ImageSource imageSteam { get; set; }
 
+     
         public string Exe { get; set; }
   
     }

@@ -28,6 +28,7 @@ using Handheld_Control_Panel.UserControls;
 using ControlzEx.Standard;
 using System.Reflection;
 using System.Windows.Interop;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Handheld_Control_Panel
 {
@@ -244,7 +245,8 @@ namespace Handheld_Control_Panel
         {
             //get action from custom event args for controller
             Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
-            if (this.Visibility == Visibility.Visible)
+            var mainWindowHandle = new WindowInteropHelper(this).Handle;
+            if (this.Visibility == Visibility.Visible && CheckForegroundWindowQAM.IsActive(mainWindowHandle))
             {
                 switch (args.Action)
                 {

@@ -158,7 +158,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (profile.ID == ID)
                 {
-                    profile.applyProfile(true);
+                    //profile.applyProfile(true);
                     if (profile.AppType == "Steam" && profile.GameID != "")
                     {
                         Steam_Management.openSteamGame(profile.GameID);
@@ -167,10 +167,12 @@ namespace Handheld_Control_Panel.Classes
                     {
                         if (File.Exists(profile.Path))
                         {
-                            System.Diagnostics.Process.Start(profile.Path);
+                            Task.Run(()=> System.Diagnostics.Process.Start(profile.Path));
                         }
                         
                     }
+              
+                    break;
                 }
                 
             }

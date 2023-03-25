@@ -122,7 +122,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 //string steamLaunch = "steam://rungameid/" + gameID;
                 //System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Steam\steam.exe", steamLaunch);
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://rungameid/" + gameID, false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false));
+               Run_CLI.Run_CLI.RunCommand(" \"steam://rungameid/" + gameID, false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 1000, false);
             }
 
 

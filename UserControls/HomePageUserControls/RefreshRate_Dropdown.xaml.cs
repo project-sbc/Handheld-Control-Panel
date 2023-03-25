@@ -55,7 +55,7 @@ namespace Handheld_Control_Panel.UserControls
             }
             catch 
             {
-                MessageBox.Show("Check log file Max to see if " + Global_Variables.Resolution + " is in there");
+                MessageBox.Show("Check Resources\\logs for log file Max to see if " + Global_Variables.Resolution + " is in there with refresh rate of " + Global_Variables.refreshRate);
             }
 
            
