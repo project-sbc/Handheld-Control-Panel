@@ -47,10 +47,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-
-
             if (Global_Variables.profiles.editingProfile.Resolution != "")
             {
+               
                 RefreshRates = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution];
                 RefreshRates.Insert(0, "");
 
@@ -61,6 +60,8 @@ namespace Handheld_Control_Panel.UserControls
             }
 
             controlList.Visibility = Visibility.Collapsed;
+         
+
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

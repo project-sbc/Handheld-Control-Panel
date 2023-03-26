@@ -48,7 +48,10 @@ namespace Handheld_Control_Panel.UserControls
         {
             try
             {
-                controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
+                Log_Writer.writeLog("current res: " + Global_Variables.resolution);
+                Log_Writer.writeLog("# dictionary items: " + Global_Variables.resolution_refreshrates.Count.ToString());
+                List<string> refreshrates = Global_Variables.resolution_refreshrates[Global_Variables.Resolution.Trim()];
+                controlList.ItemsSource = refreshrates;
                 controlList.SelectedItem = Global_Variables.RefreshRate;
                 selectedObject = Global_Variables.RefreshRate;
                 controlList.Visibility = Visibility.Collapsed;
@@ -56,6 +59,7 @@ namespace Handheld_Control_Panel.UserControls
             catch 
             {
                 MessageBox.Show("Check Resources\\logs for log file Max to see if " + Global_Variables.Resolution + " is in there with refresh rate of " + Global_Variables.refreshRate);
+                this.Visibility = Visibility.Collapsed;
             }
 
            
