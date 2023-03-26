@@ -144,7 +144,7 @@ namespace Handheld_Control_Panel.UserControls
                 PackIconUnicons icon = (PackIconUnicons)button.Content;
                 icon.RotationAngle = 0;
                 MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
-                wnd2.changeUserInstruction("HomePage_Instruction");
+                wnd2.changeUserInstruction("ProfileEditPage_Instruction");
                 wnd2 = null;
             }
             else

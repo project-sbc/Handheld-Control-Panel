@@ -12,7 +12,7 @@
             <DockPanel DockPanel.Dock="Top">
                 <Label Content="{DynamicResource Usercontrol_AppType}"  Style="{StaticResource userControlMainLabel}"/>
                 <Image HorizontalAlignment="Right" Name="controlImage"  Margin="10,0,0,0"   />
-                <mah:ToggleSwitch x:Name="controlToggle" Style="{DynamicResource userControlToggle}"  Toggled="toggleSwitch_Toggled" >
+                <mah:ToggleSwitch x:Name="control" Style="{DynamicResource userControlToggle}"  Toggled="toggleSwitch_Toggled" >
                     <mah:ToggleSwitch.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                     </mah:ToggleSwitch.LayoutTransform>

@@ -82,24 +82,42 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                switch(args.Action)
+                int[] intReturn;
+                MainWindow wnd;
+                switch (args.Action)
                 {
+                    
                     case "B":
-                        Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
-                        MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                        wnd.navigateFrame("ProfilesPage");
-                        wnd = null;
+                        if (selectedUserControl < 0)
+                        {
+                            Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+                            wnd = (MainWindow)Application.Current.MainWindow;
+                            wnd.navigateFrame("ProfilesPage");
+                            wnd = null;
+                        }
+                        else
+                        {
+                            intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+
+                            highlightedUserControl = intReturn[0];
+                            selectedUserControl = intReturn[1];
+                        }
                         break;
                     case "Start":
+                        Notification_Management.Show(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), true);
                         Global_Variables.profiles.editingProfile.SaveToXML();
-                        
-                        runSaveMessage();
+
+                        Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+                        wnd = (MainWindow)Application.Current.MainWindow;
+                        wnd.navigateFrame("ProfilesPage");
+                        wnd = null;
+                        //runSaveMessage();
                         break;
 
 
                     default:
                         //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                        int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                        intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
 
                         highlightedUserControl = intReturn[0];
                         selectedUserControl = intReturn[1];

@@ -49,13 +49,13 @@ namespace Handheld_Control_Panel.UserControls
             switch (Global_Variables.profiles.editingProfile.AppType)
             {
                 case "Steam":
-                    controlToggle.Visibility = Visibility.Collapsed;
+                    control.Visibility = Visibility.Collapsed;
                     controlTextbox.Visibility = Visibility.Collapsed;
                     updateSteamImage();
                     
                     break;
                 case "EpicGames":
-                    controlToggle.Visibility = Visibility.Collapsed;
+                    control.Visibility = Visibility.Collapsed;
                     controlTextbox.IsReadOnly = true;
                     controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;
                     updateIconImage();
@@ -66,12 +66,12 @@ namespace Handheld_Control_Panel.UserControls
                     {
                         updateIconImage();
                         controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;
-                        controlToggle.IsOn = true;
+                        control.IsOn = true;
 
                     }
                     else
                     {
-                        controlToggle.IsOn = false;
+                        control.IsOn = false;
                         controlTextbox.Visibility = Visibility.Collapsed;
                         controlButton.Visibility = Visibility.Collapsed;
                     }
@@ -132,10 +132,13 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlToggle.Visibility == Visibility.Visible)
+                        if (control.Visibility == Visibility.Visible)
                         {
-                            controlToggle.IsOn = !controlToggle.IsOn;
+                            control.IsOn = !control.IsOn;
                         }
+                        break;
+                    default:
+                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
                         break;
                 }
             }
@@ -143,9 +146,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (controlToggle.IsLoaded)
+            if (control.IsLoaded)
             {
-                if (controlToggle.IsOn)
+                if (control.IsOn)
                 {
                     controlTextbox.Visibility = Visibility.Visible;
                     controlButton.Visibility = Visibility.Visible;

@@ -78,11 +78,12 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                switch(args.Action)
+                MainWindow wnd;
+                switch (args.Action)
                 {
                     case "B":
                         Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
-                        MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                        wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("HotKeyPage");
                         wnd = null;
                         break;
@@ -96,8 +97,12 @@ namespace Handheld_Control_Panel.Pages
                         {
                             Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
                         }
-       
-                        runSaveMessage();
+                        Notification_Management.Show(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), true);
+                        wnd = (MainWindow)Application.Current.MainWindow;
+                        wnd.navigateFrame("HotKeyPage");
+                        wnd = null;
+
+                        //runSaveMessage();
                         break;
 
 

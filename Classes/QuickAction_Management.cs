@@ -24,7 +24,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 case "Show_Hide_HCP":
                     Global_Variables.Global_Variables.mainWindow.toggleWindow();
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString(),"");
+                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
                     break;
                 case "Change_TDP":
                    
@@ -33,23 +33,23 @@ namespace Handheld_Control_Panel.Classes
                     if (Int32.TryParse(actionParameter.Parameter, out param))
                     {
                         param = (int)(param + Global_Variables.Global_Variables.ReadPL1);
-                        Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " W", "TDP: " + param.ToString() + " W");
+                        Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " W, TDP: " + param.ToString() + " W");
                         Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(param, param));
                     }
                     break;
                 case "Open_Steam_BigPicture":
                     Steam_Management.openSteamBigPicture();
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString(),"");
+                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
                     break;
                 case "Open_Playnite":
                     Playnite_Management.playniteToggle();
                     break;
                 case "Change_Brightness":
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %", "");
+                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
                     break;
                 case "Change_GPUCLK":
                     int paramGPU;
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " MHz", "");
+                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " MHz");
                     if (Int32.TryParse(actionParameter.Parameter, out paramGPU))
                     {
                         if (Global_Variables.Global_Variables.GPUCLK != 0)
@@ -62,7 +62,7 @@ namespace Handheld_Control_Panel.Classes
                     break;
                 case "Toggle_MouseMode":
                     Global_Variables.Global_Variables.mousemodes.toggle_MouseMode();
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString(), "");
+                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
                     break;
                 case "Toggle_Controller":
                     Controller_Management.Controller_Management.powerCycleController();

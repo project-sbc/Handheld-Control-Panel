@@ -593,7 +593,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
 
-            Notification_Management.Show(Application.Current.Resources["Notification_ProfileApplied"] + ": " + ProfileName,"");
+            Notification_Management.Show(Application.Current.Resources["Notification_ProfileApplied"] + ": " + ProfileName,false);
 
         }
     }

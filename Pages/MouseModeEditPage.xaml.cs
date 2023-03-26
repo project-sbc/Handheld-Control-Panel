@@ -78,18 +78,22 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                switch(args.Action)
+                MainWindow wnd;
+                switch (args.Action)
                 {
                     case "B":
                         Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
-                        MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                        wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("MouseModePage");
                         wnd = null;
                         break;
                     case "Start":
                         Global_Variables.mousemodes.editingMouseMode.SaveToXML();
-                               
-                        runSaveMessage();
+                        Notification_Management.Show(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), true);
+                        wnd = (MainWindow)Application.Current.MainWindow;
+                        wnd.navigateFrame("MouseModePage");
+                        wnd = null;
+                        //runSaveMessage();
                         break;
 
 
