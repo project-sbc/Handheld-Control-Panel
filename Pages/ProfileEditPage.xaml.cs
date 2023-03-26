@@ -64,7 +64,11 @@ namespace Handheld_Control_Panel.Pages
             {
                 if (child is UserControl)
                 {
-                    userControls.Add((UserControl)child);
+                    if (!child.ToString().Contains("Divider"))
+                    {
+                        userControls.Add((UserControl)child);
+                    }
+                  
                 }
 
             }
