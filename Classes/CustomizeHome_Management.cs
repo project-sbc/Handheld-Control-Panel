@@ -21,25 +21,32 @@ namespace Handheld_Control_Panel.Classes
         public CustomizeHome_Management()
         {
             //populates list
-            List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList(); 
-            foreach(string item in list)
+            populateList();
+        }
+        public void populateList()
+        {
+            if (this.Count > 0) { this.Clear(); }
+
+            //populates list
+            List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
+            foreach (string item in list)
             {
-             
+
                 if (item != "")
                 {
                     HomePageItem hpi = new HomePageItem();
-                    hpi.UserControl = item.Substring(0,item.Length - 1);
+                    hpi.UserControl = item.Substring(0, item.Length - 1);
                     hpi.DisplayUsercontrol = Application.Current.Resources[hpi.UserControl.ToString()].ToString();
                     string boolValue = item.Substring(item.Length - 1, 1);
-                    if (boolValue == "1") { hpi.Enabled= true; } else { hpi.Enabled= false; }
+                    if (boolValue == "1") { hpi.Enabled = true; } else { hpi.Enabled = false; }
                     hpi.UpArrowTag = hpi.UserControl + "_Up";
                     hpi.DownArrowTag = hpi.UserControl + "_Down";
                     hpi.EnableMovementTag = hpi.UserControl + "_EnableMovement";
                     this.Add(hpi);
                 }
             }
-        }
 
+        }
         public void saveList()
         {
             string newList = "";

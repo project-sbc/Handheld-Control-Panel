@@ -49,7 +49,7 @@ namespace Handheld_Control_Panel.UserControls
         private  void setControlValue()
         {
             controlList.Items.Add("English");
-            controlList.Items.Add("中文");
+            controlList.Items.Add("简体中文");
             controlList.Items.Add("Pусский");
             controlList.SelectedItem = Properties.Settings.Default.language;
 
@@ -134,7 +134,7 @@ namespace Handheld_Control_Panel.UserControls
                         case "English":
                             Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
                             break;
-                        case "中文":
+                        case "简体中文":
                             Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.zh-Hans.xaml", UriKind.RelativeOrAbsolute);
                             break;
                         case "Pусский":
@@ -143,7 +143,9 @@ namespace Handheld_Control_Panel.UserControls
 
 
                     }
+                   
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.languageDict);
+                    Global_Variables.homePageItems.populateList();
                 }
 
             }

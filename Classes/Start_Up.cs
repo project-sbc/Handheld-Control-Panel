@@ -129,7 +129,7 @@ namespace Handheld_Control_Panel.Classes
                     //do nothing, it is default added
                     break;
 
-                case "中文":
+                case "简体中文":
                     System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
                     Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.zh-Hans.xaml", UriKind.RelativeOrAbsolute);
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
