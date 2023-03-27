@@ -148,7 +148,7 @@
     
     <system:String x:Key="ContextMenu_Hide">Hide</system:String>
     <system:String x:Key="ContextMenu_Close">Close</system:String>
-    <system:String x:Key="ContextMenu_ShutDownPC">Power Off</system:String>
+    <system:String x:Key="ContextMenu_ShutDownPC">Shut Down PC</system:String>
 
 
 <!-- new 27mar2023-->
@@ -158,8 +158,10 @@
     <system:String x:Key="UserControl_CloseActiveProgram">Close Program</system:String>
     <system:String x:Key="UserControl_HideHCP">Hide HCP</system:String>
     <system:String x:Key="UserControl_CloseHCP">Close HCP</system:String>
-    <system:String x:Key="UserControl_Restart">Restart PC</system:String>
-    <system:String x:Key="UserControl_Shutdown">Shutdown PC</system:String>
+    <system:String x:Key="UserControl_RestartPC">Restart PC</system:String>
+    <system:String x:Key="UserControl_Restart">Restart</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">Shut Down PC</system:String>
+    <system:String x:Key="UserControl_Shutdown">Shut Down</system:String>
 
 
 </ResourceDictionary>

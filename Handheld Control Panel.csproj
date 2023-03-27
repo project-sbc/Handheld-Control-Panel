@@ -437,6 +437,9 @@
     <Compile Update="UserControls\PowerUserControls\HideHCP_Button - Copy.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\PowerUserControls\Restart_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\PowerUserControls\Shutdown_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

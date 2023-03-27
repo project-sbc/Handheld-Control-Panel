@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Shutdown_Button"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Restart_Button"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,8 @@
         <DockPanel VerticalAlignment="Center" >
 
 
-            <Label  x:Name="controlLabel"  HorizontalAlignment="Right" Content="{DynamicResource UserControl_ShutdownPC}"   Margin="0,0,0,0"  VerticalAlignment="Center"   Style="{StaticResource userControlMainLabel}" />
-            <Button FontSize="10" Content="{DynamicResource UserControl_Shutdown}" Name="control" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,22,0" Click="Button_Click" >
+            <Label  x:Name="controlLabel"  HorizontalAlignment="Right" Content="{DynamicResource UserControl_RestartPC}"   Margin="0,0,0,0"  VerticalAlignment="Center"   Style="{StaticResource userControlMainLabel}" />
+            <Button FontSize="10" Content="{DynamicResource UserControl_Restart}" Name="control" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,22,0" Click="Button_Click" >
                 
             </Button>
         </DockPanel>

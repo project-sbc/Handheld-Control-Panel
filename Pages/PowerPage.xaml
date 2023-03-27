@@ -14,7 +14,8 @@
             <uc:CloseGame_Button/>
             <uc:HideHCP_Button/>
             <uc:CloseHCP_Button/>
-            
+            <uc:Restart_Button/>
+            <uc:Shutdown_Button/>
         </StackPanel>
     </ScrollViewer>
 
