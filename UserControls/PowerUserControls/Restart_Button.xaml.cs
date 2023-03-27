@@ -79,6 +79,8 @@ namespace Handheld_Control_Panel.UserControls
             var mainWindowHandle = new WindowInteropHelper(wnd).Handle;
             if (CheckForegroundWindowQAM.IsActive(mainWindowHandle))
             {
+
+
                 var psi = new ProcessStartInfo("shutdown", "/r /t 0");
                 psi.CreateNoWindow = true;
                 psi.UseShellExecute = false;
