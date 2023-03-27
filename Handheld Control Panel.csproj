@@ -182,6 +182,9 @@
     <Compile Update="Pages\AppLauncherPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\PowerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -426,6 +429,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\ProfileEditPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\PowerUserControls\CloseHCP_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\PowerUserControls\HideHCP_Button - Copy.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\PowerUserControls\Shutdown_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\PowerUserControls\CloseGame_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">

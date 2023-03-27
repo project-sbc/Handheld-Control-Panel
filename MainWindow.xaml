@@ -100,6 +100,9 @@
                         <ListBoxItem Tag="Settings" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE713;" />
                         </ListBoxItem>
+                        <ListBoxItem Tag="Power" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE7E8;" />
+                        </ListBoxItem>
                     </ListBox>
                     <TextBlock Width="35" HorizontalAlignment="Right" FontSize="35" Margin="0,0,13,0" TextAlignment="Right" Style="{StaticResource controllerButtonTextblock}" Text="&#xF10D;" />
                 </DockPanel>

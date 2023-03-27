@@ -29,6 +29,7 @@ using ControlzEx.Standard;
 using System.Reflection;
 using System.Windows.Interop;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO;
 
 namespace Handheld_Control_Panel
 {
@@ -87,6 +88,12 @@ namespace Handheld_Control_Panel
             m_notifyIcon.Click += M_notifyIcon_Click;
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
+
+            //minimize if autostart
+            if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
+            {
+                this.WindowState = WindowState.Minimized;
+            }
         }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
@@ -246,7 +253,7 @@ namespace Handheld_Control_Panel
             //get action from custom event args for controller
             Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs args = (Handheld_Control_Panel.Classes.Controller_Management.controllerInputEventArgs)e;
             var mainWindowHandle = new WindowInteropHelper(this).Handle;
-            if (this.Visibility == Visibility.Visible && CheckForegroundWindowQAM.IsActive(mainWindowHandle))
+            if (this.Visibility == Visibility.Visible)
             {
                 switch (args.Action)
                 {
@@ -309,7 +316,7 @@ namespace Handheld_Control_Panel
         }
         private void navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (navigation.SelectedItem != null)
+            if (navigation.SelectedItem != null && this.WindowState !=WindowState.Minimized)
             {
                
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
@@ -444,6 +451,8 @@ namespace Handheld_Control_Panel
             if (this.WindowState == WindowState.Minimized)
             {
                 this.ShowInTaskbar = false;
+                
+                navigation.SelectedIndex = 0;
                 frame.Source = null;
                 //change interval to 15 seconds
                 updateTimer.Interval = new TimeSpan(0,0,15);
@@ -453,7 +462,7 @@ namespace Handheld_Control_Panel
             if (this.WindowState == WindowState.Normal)
             {
                 this.ShowInTaskbar = true;
-                navigation.SelectedIndex = 0;
+                //navigation.SelectedIndex = 0;
                 updateTimer.Interval = new TimeSpan(0, 0, 3);
                 //change controller timer interval to 20 ms for active use
                 Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);

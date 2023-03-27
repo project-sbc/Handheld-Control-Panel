@@ -65,7 +65,7 @@ namespace Handheld_Control_Panel.Classes
                         string[] osdArr = { app.InstantaneousFrameTime.ToString(), app.InstantaneousFrames.ToString() };
                         OSD.Update(("Time: " + DateTime.Now + " FPS: " + app.InstantaneousFrames.ToString()) + " Avg FPS: " + app.StatFramerateAvg + " min fps: " + app.StatFramerateMin);
                         Debug.WriteLine(app.Name);
-
+                        
 
                     }
                     Task.Delay(350);
@@ -77,6 +77,100 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
+        public static void closeGame()
+        {
+          
+            if (RTSS.RTSSRunning())
+            {
+                var OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning");
+
+                AppFlags appFlag = appFlags[0];
+                var appEntries = OSD.GetAppEntries(appFlag);
+
+                appEntries = OSD.GetAppEntries(appFlag);
+
+                while (appEntries.Length == 0)
+                {
+                    foreach (AppFlags af in appFlags)
+                    {
+                        appEntries = OSD.GetAppEntries(af);
+                        if (appEntries.Length > 0) { appFlag = af; break; }
+                    }
+
+                }
+
+                foreach (var app in appEntries)
+                {
+                    int processID = app.ProcessId;
+                    System.Diagnostics.Process procs = null;
+
+                    try
+                    {
+                        procs = Process.GetProcessById(processID);
+
+                        
+
+                        if (!procs.HasExited)
+                        {
+                            procs.CloseMainWindow();
+                        }
+                    }
+                    finally
+                    {
+                        if (procs != null)
+                        {
+                            procs.Dispose();
+                        }
+                    }
+                }
+
+                OSD.Dispose();
+
+            }
+
+
+
+        }
+        public static string gameRunning()
+        {
+            string gameRunning = "";
+            if (RTSS.RTSSRunning())
+            {
+                var OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning");
+
+                AppFlags appFlag = appFlags[0];
+                var appEntries = OSD.GetAppEntries(appFlag);
+
+                appEntries = OSD.GetAppEntries(appFlag);
+
+                foreach (AppFlags af in appFlags)
+                {
+                    appEntries = OSD.GetAppEntries(af);
+                    if (appEntries.Length > 0) { appFlag = af; break; }
+                }
+
+                foreach (var app in appEntries)
+                {
+                    string[] gamedir = app.Name.Split('\\');
+                    if (gamedir.Length > 0)
+                    {
+                        string currGameName = gamedir[gamedir.Length - 1];
+                        gameRunning = currGameName.Substring(0,currGameName.Length-4);
+                    }
+                   
+
+
+                }
+
+                OSD.Dispose();
+            
+            }
+
+
+
+            return gameRunning;
+        }
+
         private static void test()
         {
             if (RTSS.RTSSRunning())
