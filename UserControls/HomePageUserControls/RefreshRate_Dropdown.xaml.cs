@@ -46,6 +46,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
+            //error number RRDD01
             try
             {
                 Log_Writer.writeLog("current res: " + Global_Variables.resolution);
@@ -56,11 +57,12 @@ namespace Handheld_Control_Panel.UserControls
                 selectedObject = Global_Variables.RefreshRate;
                 controlList.Visibility = Visibility.Collapsed;
             }
-            catch 
+            catch (Exception ex)
             {
-                MessageBox.Show("Check Resources\\logs for log file Max to see if " + Global_Variables.Resolution + " is in there with refresh rate of " + Global_Variables.refreshRate);
-                this.Visibility = Visibility.Collapsed;
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RRDD01");
+
             }
+           
 
            
         }
@@ -74,105 +76,137 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
-            valueChangedEventArgs valueChangedEventArgs = e as valueChangedEventArgs;
-            if (valueChangedEventArgs.Parameter == "Resolution")
+            //error number RRDD02
+            try
             {
-                this.Dispatcher.BeginInvoke(new Action(() =>
+                valueChangedEventArgs valueChangedEventArgs = e as valueChangedEventArgs;
+                if (valueChangedEventArgs.Parameter == "Resolution")
                 {
-                    controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
-                    if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
+                    this.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        controlList.SelectedItem = Global_Variables.RefreshRate;
-                    
-                    }
+                        controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
+                        if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
+                        {
+                            controlList.SelectedItem = Global_Variables.RefreshRate;
+
+                        }
 
 
-                }));
-               
-             
+                    }));
+
+
+                }
+                if (valueChangedEventArgs.Parameter == "RefreshRate")
+                {
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
+                        {
+                            controlList.SelectedItem = Global_Variables.Resolution;
+
+                        }
+
+
+                    }));
+
+
+                }
             }
-            if (valueChangedEventArgs.Parameter == "RefreshRate")
+            catch (Exception ex)
             {
-                this.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
-                    {
-                        controlList.SelectedItem = Global_Variables.Resolution;
-                     
-                    }
-
-
-                }));
-
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RRDD02");
 
             }
+
+           
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
-            controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
-            if (args.WindowPage == windowpage && args.UserControl==usercontrol)
+            //error number RRDD03
+            try
             {
-                switch(args.Action)
+                controllerUserControlInputEventArgs args = (controllerUserControlInputEventArgs)e;
+                if (args.WindowPage == windowpage && args.UserControl == usercontrol)
                 {
-                    case "A":
-                        if (controlList.SelectedItem.ToString() != Global_Variables.refreshRate)
-                        {
-                            handleListboxChange();
-                        }
-                        else
-                        {
-                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
-                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.changeUserInstruction("SelectedListBox_Instruction");
-                            wnd = null;
-                         
-                        }
-
-                        break;
-                    case "B":
-                        MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
-                        wnd2.changeUserInstruction("HomePage_Instruction");
-                        wnd2 = null;
-                        if (controlList.Visibility == Visibility.Visible)
-                        {
-                            
-
-                            if (selectedObject != null)
+                    switch (args.Action)
+                    {
+                        case "A":
+                            if (controlList.SelectedItem.ToString() != Global_Variables.refreshRate)
                             {
-                                controlList.SelectedItem = selectedObject;
+                                handleListboxChange();
                             }
-                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                            else
+                            {
+                                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
-                        }
-  
-                        break;
-                    default:
-                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
+                                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                                wnd.changeUserInstruction("SelectedListBox_Instruction");
+                                wnd = null;
 
-                        break;
+                            }
+
+                            break;
+                        case "B":
+                            MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
+                            wnd2.changeUserInstruction("HomePage_Instruction");
+                            wnd2 = null;
+                            if (controlList.Visibility == Visibility.Visible)
+                            {
+
+
+                                if (selectedObject != null)
+                                {
+                                    controlList.SelectedItem = selectedObject;
+                                }
+                                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                            }
+
+                            break;
+                        default:
+                            Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
+
+                            break;
+                    }
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RRDD03");
 
             }
+
+           
         }
         private void handleListboxChange()
         {
-            if (controlList.IsLoaded)
+            //error number RRDD04
+            try
             {
-                if (controlList.SelectedItem != null)
+                if (controlList.IsLoaded)
                 {
-                    string refreshrate = controlList.SelectedItem.ToString();
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayRefreshRate(refreshrate));
-                    selectedObject = controlList.SelectedItem;
-                 
-                    if (controlList.Visibility == Visibility.Visible)
+                    if (controlList.SelectedItem != null)
                     {
-                        button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        string refreshrate = controlList.SelectedItem.ToString();
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayRefreshRate(refreshrate));
+                        selectedObject = controlList.SelectedItem;
+
+                        if (controlList.Visibility == Visibility.Visible)
+                        {
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        }
                     }
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RRDD04");
 
             }
+           
 
         }
 

@@ -19,6 +19,7 @@ using Nefarius.Utilities.DeviceManagement.PnP;
 using Nefarius.Utilities.DeviceManagement.Extensions;
 using Windows.Devices.Usb;
 using System.Timers;
+using System.Windows.Controls;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -86,66 +87,88 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
        
         public static bool toggleEnableDisableController()
         {
-            bool deviceEnable;
-
-            if (controller != null)
+            //error number CM01
+            try
             {
-                //apply ! so that when the controller is connected the bool tells to disable and vice versa
-                deviceEnable = !controller.IsConnected;
-            }
-            else
-            {
-                deviceEnable = true;
-            }
-            if (Properties.Settings.Default.GUID != "" && Properties.Settings.Default.instanceID != "")
-            {
-                var instance = 0;
+                bool deviceEnable;
 
-                
-
-                Guid guid = new Guid(Properties.Settings.Default.GUID);
-                string instanceID = Properties.Settings.Default.instanceID;
-
-                enabledevice.DeviceHelper.SetDeviceEnabled(guid, instanceID, deviceEnable);
-
-
-                if (!deviceEnable)
+                if (controller != null)
                 {
-                    Task.Delay(2000);
-                    powerCycleController();
+                    //apply ! so that when the controller is connected the bool tells to disable and vice versa
+                    deviceEnable = !controller.IsConnected;
                 }
+                else
+                {
+                    deviceEnable = true;
+                }
+                if (Properties.Settings.Default.GUID != "" && Properties.Settings.Default.instanceID != "")
+                {
+                    var instance = 0;
 
 
-                return deviceEnable;
+
+                    Guid guid = new Guid(Properties.Settings.Default.GUID);
+                    string instanceID = Properties.Settings.Default.instanceID;
+
+                    enabledevice.DeviceHelper.SetDeviceEnabled(guid, instanceID, deviceEnable);
+
+
+                    if (!deviceEnable)
+                    {
+                        Task.Delay(2000);
+                        powerCycleController();
+                    }
+
+
+                    return deviceEnable;
+                }
+                else
+                {
+                    return !deviceEnable;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return !deviceEnable;
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "CM01");
+                return false;
             }
+
+          
       
 
         }
 
         public static void powerCycleController()
         {
-            var instance = 0;
-   
-            while (Devcon.FindByInterfaceGuid(DeviceInterfaceIds.UsbDevice, out var path,
-                       out var instanceId, instance++))
-            {
 
-                var usbDevice = PnPDevice
-                    .GetDeviceByInterfaceId(path)
-                    .ToUsbPnPDevice();
-                               
-                //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
-                if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
+            //error number CM02
+            try
+            {
+                var instance = 0;
+
+                while (Devcon.FindByInterfaceGuid(DeviceInterfaceIds.UsbDevice, out var path,
+                           out var instanceId, instance++))
                 {
-                   
-                    //Apply power port cycle to finish disable
-                    usbDevice.CyclePort();
+
+                    var usbDevice = PnPDevice
+                        .GetDeviceByInterfaceId(path)
+                        .ToUsbPnPDevice();
+
+                    //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
+                    if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
+                    {
+
+                        //Apply power port cycle to finish disable
+                        usbDevice.CyclePort();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "CM02");
+                
+            }
+         
         }
 
         public static void start_Controller_Management()
@@ -155,178 +178,199 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
             timerController.Tick += controller_Tick;
             timerController.Start();
-
+           
         }
     
         private static void controller_Tick(object sender, EventArgs e)
         {
             //start timer to read and compare controller inputs
             //Controller input handler
-
-            if (controller == null)
+            //error number CM05
+            try
             {
-                getController();
-                if (controller.IsConnected == false)
+                if (controller == null)
+                {
+                    getController();
+                    if (controller.IsConnected == false)
+                    {
+                        getController();
+                    }
+                }
+                else if (!controller.IsConnected)
                 {
                     getController();
                 }
-            }
-            else if (!controller.IsConnected)
-            {
-                getController();
-            }
 
 
-            if (controller != null)
-            {
-                if (controller.IsConnected)
+                if (controller != null)
                 {
-                    //a quick routine to check other controllers for the swap controller command
-                    checkSwapController();
-
-                    //var watch = System.Diagnostics.Stopwatch.StartNew();
-                    currentGamePad = controller.GetState().Gamepad;
-
-                    ushort btnShort = ((ushort)currentGamePad.Buttons);
-
-
-                    if (!suspendEventsForGamepadHotKeyProgramming)
+                    if (controller.IsConnected)
                     {
-                        //check if controller combo is in controller hot key dictionary
+                        //a quick routine to check other controllers for the swap controller command
+                        checkSwapController();
 
-                        if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null)
+                        //var watch = System.Diagnostics.Stopwatch.StartNew();
+                        currentGamePad = controller.GetState().Gamepad;
+
+                        ushort btnShort = ((ushort)currentGamePad.Buttons);
+
+
+                        if (!suspendEventsForGamepadHotKeyProgramming)
                         {
-                            if (Global_Variables.Global_Variables.controllerHotKeyDictionary.ContainsKey(btnShort))
-                            {
+                            //check if controller combo is in controller hot key dictionary
 
-                                if (((ushort)previousGamePad.Buttons) != btnShort)
+                            if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null)
+                            {
+                                if (Global_Variables.Global_Variables.controllerHotKeyDictionary.ContainsKey(btnShort))
                                 {
-                                    ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
-                                    QuickAction_Management.runHotKeyAction(action);
+
+                                    if (((ushort)previousGamePad.Buttons) != btnShort)
+                                    {
+                                        ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
+                                        QuickAction_Management.runHotKeyAction(action);
+                                    }
                                 }
                             }
+
+                            if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
+                            {
+
+
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                                {
+                                    buttonEvents.raiseControllerInput("Back");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Start) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Start))
+                                {
+                                    buttonEvents.raiseControllerInput("Start");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb))
+                                {
+                                    buttonEvents.raiseControllerInput("L3");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb))
+                                {
+                                    buttonEvents.raiseControllerInput("R3");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
+                                {
+                                    buttonEvents.raiseControllerInput("A");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.X) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.X))
+                                {
+                                    buttonEvents.raiseControllerInput("X");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Y) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Y))
+                                {
+                                    buttonEvents.raiseControllerInput("Y");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp))
+                                {
+                                    buttonEvents.raiseControllerInput("Up");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown))
+                                {
+                                    buttonEvents.raiseControllerInput("Down");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight))
+                                {
+                                    buttonEvents.raiseControllerInput("Right");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft))
+                                {
+                                    buttonEvents.raiseControllerInput("Left");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.B) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.B))
+                                {
+                                    buttonEvents.raiseControllerInput("B");
+                                }
+
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
+                                {
+                                    buttonEvents.raiseControllerInput("LB");
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder))
+                                {
+                                    buttonEvents.raiseControllerInput("RB");
+                                }
+
+                                if (currentGamePad.LeftThumbX > 12000 && previousGamePad.LeftThumbX <= 12000)
+                                {
+                                    buttonEvents.raiseControllerInput("Right");
+                                }
+                                if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)
+                                {
+                                    buttonEvents.raiseControllerInput("Left");
+                                }
+                                if (currentGamePad.LeftThumbY > 12000 && previousGamePad.LeftThumbY <= 12000)
+                                {
+                                    buttonEvents.raiseControllerInput("Up");
+                                }
+                                if (currentGamePad.LeftThumbY < -12000 && previousGamePad.LeftThumbY >= -12000)
+                                {
+                                    buttonEvents.raiseControllerInput("Down");
+                                }
+                            }
+
+
+
                         }
+                        //watch.Stop();
+                        //Debug.WriteLine($"Total Execution Time: {watch.ElapsedMilliseconds} ms");
+                        //doSomeWork();
 
-                        if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
-                        {
-
-
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
-                            {
-                                buttonEvents.raiseControllerInput("Back");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Start) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Start))
-                            {
-                                buttonEvents.raiseControllerInput("Start");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb))
-                            {
-                                buttonEvents.raiseControllerInput("L3");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb))
-                            {
-                                buttonEvents.raiseControllerInput("R3");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
-                            {
-                                buttonEvents.raiseControllerInput("A");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.X) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.X))
-                            {
-                                buttonEvents.raiseControllerInput("X");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Y) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Y))
-                            {
-                                buttonEvents.raiseControllerInput("Y");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp))
-                            {
-                                buttonEvents.raiseControllerInput("Up");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown))
-                            {
-                                buttonEvents.raiseControllerInput("Down");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight))
-                            {
-                                buttonEvents.raiseControllerInput("Right");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft))
-                            {
-                                buttonEvents.raiseControllerInput("Left");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.B) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.B))
-                            {
-                                buttonEvents.raiseControllerInput("B");
-                            }
-
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
-                            {
-                                buttonEvents.raiseControllerInput("LB");
-                            }
-                            if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder))
-                            {
-                                buttonEvents.raiseControllerInput("RB");
-                            }
-
-                            if (currentGamePad.LeftThumbX > 12000 && previousGamePad.LeftThumbX <= 12000)
-                            {
-                                buttonEvents.raiseControllerInput("Right");
-                            }
-                            if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)
-                            {
-                                buttonEvents.raiseControllerInput("Left");
-                            }
-                            if (currentGamePad.LeftThumbY > 12000 && previousGamePad.LeftThumbY <= 12000)
-                            {
-                                buttonEvents.raiseControllerInput("Up");
-                            }
-                            if (currentGamePad.LeftThumbY < -12000 && previousGamePad.LeftThumbY >= -12000)
-                            {
-                                buttonEvents.raiseControllerInput("Down");
-                            }
-                        }
-
-
-
+                        previousGamePad = currentGamePad;
                     }
-                    //watch.Stop();
-                    //Debug.WriteLine($"Total Execution Time: {watch.ElapsedMilliseconds} ms");
-                    //doSomeWork();
 
-                    previousGamePad = currentGamePad;
                 }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "CM05");
 
             }
+
+           
 
         }
 
         private static void checkSwapController()
         {
-            List<Controller> controllerList = new List<Controller>();
 
-            controllerList.Add(new Controller(UserIndex.One));
-            controllerList.Add(new Controller(UserIndex.Two));
-            controllerList.Add(new Controller(UserIndex.Three));
-            controllerList.Add(new Controller(UserIndex.Four));
-
-            foreach (Controller swapController in controllerList)
+            //error number CM03
+            try
             {
+                List<Controller> controllerList = new List<Controller>();
 
-                if (swapController != null)
+                controllerList.Add(new Controller(UserIndex.One));
+                controllerList.Add(new Controller(UserIndex.Two));
+                controllerList.Add(new Controller(UserIndex.Three));
+                controllerList.Add(new Controller(UserIndex.Four));
+
+                foreach (Controller swapController in controllerList)
                 {
-                    if (swapController.IsConnected)
+
+                    if (swapController != null)
                     {
-                        Gamepad swapGamepad = swapController.GetState().Gamepad;
-                        if (swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Start) && swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                        if (swapController.IsConnected)
                         {
-                            
-                            controller = swapController;
+                            Gamepad swapGamepad = swapController.GetState().Gamepad;
+                            if (swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Start) && swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                            {
+
+                                controller = swapController;
+                            }
                         }
                     }
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "CM03");
 
             }
+           
 
            
 
@@ -336,59 +380,70 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
 
         private static void getController()
         {
-            int controllerNum = 1;
-            //get controller used, loop controller number if less than 5, so if controller is connected make num = 5 to get out of while loop
-            while (controllerNum < 6)
+            //error number CM04
+            try
             {
-                switch (controllerNum)
+                int controllerNum = 1;
+                //get controller used, loop controller number if less than 5, so if controller is connected make num = 5 to get out of while loop
+                while (controllerNum < 6)
                 {
-                    default:
-                        break;
-                    case 1:
-                        controller = new Controller(UserIndex.One);
-                        break;
-                    case 2:
-                        controller = new Controller(UserIndex.Two);
-                        break;
-                    case 3:
-                        controller = new Controller(UserIndex.Three);
-                        break;
-                    case 4:
-                        controller = new Controller(UserIndex.Four);
-                        break;
-                    case 5:
-                        timerController.Interval = TimeSpan.FromMilliseconds(1500);
-                        controllerNum = 6;
-
-                        if (Global_Variables.Global_Variables.controllerConnected == true)
-                        {
-                            Global_Variables.Global_Variables.controllerConnected = false;
-                            buttonEvents.raiseControllerStatusChanged();
-                        }
-                        break;
-                }
-                if (controller == null)
-                {
-                    controllerNum++;
-                }
-                else
-                {
-                    if (controller.IsConnected)
+                    switch (controllerNum)
                     {
-                        controllerNum = 6;
-                        timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
-                        if (Global_Variables.Global_Variables.controllerConnected == false)
-                        {
-                            Global_Variables.Global_Variables.controllerConnected = true;
-                            buttonEvents.raiseControllerStatusChanged();
-                        }
+                        default:
+                            break;
+                        case 1:
+                            controller = new Controller(UserIndex.One);
+                            break;
+                        case 2:
+                            controller = new Controller(UserIndex.Two);
+                            break;
+                        case 3:
+                            controller = new Controller(UserIndex.Three);
+                            break;
+                        case 4:
+                            controller = new Controller(UserIndex.Four);
+                            break;
+                        case 5:
+                            timerController.Interval = TimeSpan.FromMilliseconds(1500);
+                            controllerNum = 6;
+
+                            if (Global_Variables.Global_Variables.controllerConnected == true)
+                            {
+                                Global_Variables.Global_Variables.controllerConnected = false;
+                                buttonEvents.raiseControllerStatusChanged();
+                            }
+                            break;
                     }
-                    else
+                    if (controller == null)
                     {
                         controllerNum++;
                     }
+                    else
+                    {
+                        if (controller.IsConnected)
+                        {
+                            controllerNum = 6;
+                            timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
+                            if (Global_Variables.Global_Variables.controllerConnected == false)
+                            {
+                                Global_Variables.Global_Variables.controllerConnected = true;
+                                buttonEvents.raiseControllerStatusChanged();
+                            }
+                        }
+                        else
+                        {
+                            controllerNum++;
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "CM04");
+
+            }
+
+         
         }
 
     }
