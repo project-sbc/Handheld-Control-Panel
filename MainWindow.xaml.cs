@@ -30,6 +30,7 @@ using System.Reflection;
 using System.Windows.Interop;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
+using Handheld_Control_Panel.Classes.Fan_Management;
 
 namespace Handheld_Control_Panel
 {
@@ -386,7 +387,10 @@ namespace Handheld_Control_Panel
 
             //stop timers
            
-            updateTimer.Stop(); 
+            updateTimer.Stop();
+
+            //disable software fan control if on an enabled device
+            Fan_Management.setFanControlHardware();
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
@@ -404,6 +408,9 @@ namespace Handheld_Control_Panel
                 instructionStackPanel.Children.Clear(); 
                 switch (newInstructionUserControl)
                 {
+                    
+                
+                   
                     case "HomePage_Instruction":
                         instructionStackPanel.Children.Add(new HomePage_Instruction());
                         break;

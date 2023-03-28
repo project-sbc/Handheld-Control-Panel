@@ -64,6 +64,9 @@ namespace Handheld_Control_Panel.Classes
             Fan_Management.Fan_Management.determineFanDevice();
 
             Fan_Management.Fan_Management.readSoftwareFanControl();
+            
+
+         
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
             //TDP_Management.TDP_Management.checkDriverBlockRegistry();

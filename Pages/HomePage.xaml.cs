@@ -61,6 +61,10 @@ namespace Handheld_Control_Panel.Pages
                             Debug.WriteLine(item.UserControl);
                             switch (item.UserControl)
                             {
+                                
+                                case "UserControl_FanControl":
+                                    stackPanel.Children.Add(new Fan_Slider());
+                                    break;
                                 case "Usercontrol_Wifi":
                                     stackPanel.Children.Add(new Wifi_Toggle());
                                     break;

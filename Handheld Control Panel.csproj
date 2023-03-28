@@ -386,6 +386,9 @@
     <Compile Update="UserControls\HomePageUserControls\GPUCLK_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Fan_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\TDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

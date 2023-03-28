@@ -207,6 +207,14 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 10;
                         slider.Value = Global_Variables.Global_Variables.EPP;
                         break;
+                    case "Slider_Fan-TickChange":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 5;
+                        slider.LargeChange = 10;
+                        slider.Value = Global_Variables.Global_Variables.FanSpeed;
+                        break;
                     case "Slider_CoreParking":
                         slider.Minimum = 1;
                         slider.Maximum = Global_Variables.Global_Variables.maxCpuCores;
@@ -406,6 +414,12 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             double sliderValue = slider.Value;
             switch (sliderTag)
             {
+                case "Slider_Fan-TickChange":
+                    if (Global_Variables.Global_Variables.fanControlDevice & Global_Variables.Global_Variables.fanControlEnable)
+                    {
+
+                    }
+                    break;
                 case "Slider_MouseSensitivity":
                     Global_Variables.Global_Variables.mousemodes.editingMouseMode.MouseSensitivity = sliderValue;
 

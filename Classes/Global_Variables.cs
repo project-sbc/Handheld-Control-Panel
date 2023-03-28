@@ -293,7 +293,21 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static bool fanControlDevice = false;
         public static bool fanControlEnable = false;
         public static string fanControlMode = "Hardware";
-        public static int fanSpeed = 0;
+        public static double fanSpeed = 0;
+
+        public static double FanSpeed
+        {
+            get
+            {
+                return fanSpeed;
+            }
+            set
+            {
+                fanSpeed = value;
+                raiseValueChanged("FanSpeed");
+            }
+        }
+
 
         //cpu values
         public static double cpuTemp = 0;

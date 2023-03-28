@@ -10,6 +10,8 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.Run_CLI;
 using System.Drawing.Text;
 using OpenLibSys;
+using SharpDX;
+using Linearstar.Windows.RawInput;
 
 namespace Handheld_Control_Panel.Classes.Fan_Management
 {
@@ -38,19 +40,21 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
 
         public static string processEC = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\EC\\EC.exe";
 
-        private static Dictionary<string, string> ecEnableLookUp = new Dictionary<string, string>()
+        private static Dictionary<string, ushort> ecEnableLookUp = new Dictionary<string, ushort>()
         {
-           {"OXP_AMD", "0x4A"},
+           {"OXP_AMD", 0x4A},
+           {"AyaNeo2", 0x44A},
            //{"OXP_Intel", "0x4A"},
-           {"WM2_AMD", "0x275" },
+           {"WM2_AMD", 0x275 },
 
         };
 
-        private static Dictionary<string, string> ecReadWriteLookUp = new Dictionary<string, string>()
+        private static Dictionary<string, ushort> ecReadWriteLookUp = new Dictionary<string, ushort>()
         {
-           {"OXP_AMD", "0x4B"},
+           {"OXP_AMD", 0x4B},
+           {"AyaNeo2", 0x44B},
            //{"OXP_Intel", "0x4B"},
-           {"WM2_AMD", "0x1809" },
+           {"WM2_AMD", 0x1809},
 
         };
         private static Dictionary<string, double> ecFanRange = new Dictionary<string, double>()
@@ -58,28 +62,166 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
            {"OXP_AMD", 100},
            //{"OXP_Intel", 255},
            {"WM2_AMD", 184 },
+           {"AyaNeo2", 100},
         };
         public static void readSoftwareFanControl()
         {
-            switch(Global_Variables.Global_Variables.fanDevice)
+            //error FM01
+            try
             {
-                case "OXP_AMD":
-                    readSoftwareFanControlOXPAya();
+                if (Global_Variables.Global_Variables.fanControlDevice)
+                {
+                    byte returnvalue;
 
-                    break;
+                    ushort lookup = ecEnableLookUp[Global_Variables.Global_Variables.fanDevice];
+                    if (lookup > 0)
+                    {
+                        returnvalue = WinRingEC_Management.ECRamRead(lookup);
+                        if (returnvalue == 0)
+                        {
+                            Global_Variables.Global_Variables.fanControlEnable = false;
+                            Global_Variables.Global_Variables.fanControlMode = "Hardware";
+                        }
+                        else
+                        {
+                            Global_Variables.Global_Variables.fanControlEnable = true;
+                            Global_Variables.Global_Variables.fanControlMode = "Manual";
+                        }
 
-                case "WM2_AMD":
-                    readSoftwareFanControlWM2();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(ex.Message, "FM01");
 
-                    break;
-
-                default: break;
             }
 
-          
+
         }
 
-        public static void readSoftwareFanControlOXPAya()
+        public static void readFanSpeed()
+        {
+            //error FM02
+            try
+            {
+                if (Global_Variables.Global_Variables.fanControlDevice)
+                {
+                    byte returnvalue;
+
+                    ushort lookup = ecReadWriteLookUp[Global_Variables.Global_Variables.fanDevice];
+                    if (lookup > 0)
+                    {
+                        returnvalue = WinRingEC_Management.ECRamRead(lookup);
+
+                        double dblValue = Convert.ToDouble(returnvalue);
+
+                        double fanPercentage = Math.Round(100 * (dblValue / ecFanRange[Global_Variables.Global_Variables.fanDevice]), 0);
+                        Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(ex.Message, "FM02");
+
+            }
+
+        }
+
+        public static void setFanSpeed(double speedPercentage)
+        {
+            //error FM03
+            try
+            {
+                if (Global_Variables.Global_Variables.fanControlDevice && Global_Variables.Global_Variables.fanControlEnable)
+                {
+                    byte setValue = 0;
+                    double fanRange = ecFanRange[Global_Variables.Global_Variables.fanDevice];
+                    if (fanRange > 0)
+                    {
+                        if (ecFanRange[Global_Variables.Global_Variables.fanDevice] == 100)
+                        {
+                            setValue = (byte)speedPercentage;
+                        }
+                        else
+                        {
+                            double normalizedFanSpeed = Math.Round(((double)speedPercentage / 100) * fanRange, 0);
+                            setValue = (byte)normalizedFanSpeed;
+                        }
+
+                        ushort lookup = ecReadWriteLookUp[Global_Variables.Global_Variables.fanDevice];
+                        if (lookup > 0)
+                        {
+                            WinRingEC_Management.ECRamWrite(lookup, setValue);
+
+                            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(ex.Message, "FM03");
+
+            }
+
+        }
+
+        public static void setFanControlManual()
+        {
+            //error FM03
+            try
+            {
+                if (Global_Variables.Global_Variables.fanControlDevice)
+                {
+                   
+                    ushort lookup = ecEnableLookUp[Global_Variables.Global_Variables.fanDevice];
+                    if (lookup > 0)
+                    {
+                        WinRingEC_Management.ECRamWrite(lookup, 0x01);
+
+                        Global_Variables.Global_Variables.fanControlEnable = true;
+                        Global_Variables.Global_Variables.fanControlMode = "Manual";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(ex.Message, "FM03");
+
+            }
+
+        }
+        public static void setFanControlHardware()
+        {
+            //error FM04
+            try
+            {
+                if (Global_Variables.Global_Variables.fanControlDevice)
+                {
+
+                    ushort lookup = ecEnableLookUp[Global_Variables.Global_Variables.fanDevice];
+                    if (lookup > 0)
+                    {
+                        WinRingEC_Management.ECRamWrite(lookup, 0x00);
+
+                        Global_Variables.Global_Variables.fanControlEnable = false;
+                        Global_Variables.Global_Variables.fanControlMode = "Hardware";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(ex.Message, "FM04");
+
+            }
+
+        }
+        private static void readSoftwareFanControlOXPAyaOLDDONTUSEFORREFERENCE()
         {
             string argument = " -winring0 -r " + ecEnableLookUp[Global_Variables.Global_Variables.fanDevice];
             string result = "";
@@ -100,45 +242,38 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                 }
             }
         }
-        public static void readSoftwareFanControlWM2()
+     
+
+     
+
+        private static void readFanSpeedWM2()
         {
-            byte returnvalue = WinRingEC_Management.ECRamRead(0x275);
-            if (returnvalue == 0) 
+            byte returnvalue = WinRingEC_Management.ECRamRead(0x1809);
+
+            double dblValue = Convert.ToDouble(returnvalue);
+
+            double fanPercentage = Math.Round(100 * (dblValue / ecFanRange[Global_Variables.Global_Variables.fanDevice]), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+
+        }
+        private static void readFanSpeedOXP()
+        {
+            string argument = " -winring0 -r " + ecReadWriteLookUp[Global_Variables.Global_Variables.fanDevice];
+            string result = "";
+
+            result = Run_CLI.Run_CLI.RunCommand(argument, true, processEC, 2000);
+
+            if (result != null)
             {
-                Global_Variables.Global_Variables.fanControlEnable = false;
-                Global_Variables.Global_Variables.fanControlMode = "Hardware";
-            }
-            else
-            {
-                Global_Variables.Global_Variables.fanControlEnable = true;
-                Global_Variables.Global_Variables.fanControlMode = "Manual";
+                result = result.Replace("\r", "").Trim();
+                result = result.Replace("\n", "").ToUpper();
+                int decValue = Convert.ToInt32(result, 16);
+
+                double fanPercentage = Math.Round(100 * ((double)decValue / ecFanRange[Global_Variables.Global_Variables.fanDevice]), 0);
+                Global_Variables.Global_Variables.FanSpeed = (double)fanPercentage;
             }
         }
 
-        public static void readFanSpeed()
-        {
-            try
-            {
-                string argument = " -winring0 -r " + ecReadWriteLookUp[Global_Variables.Global_Variables.fanDevice];
-                string result = "";
-
-                result = Run_CLI.Run_CLI.RunCommand(argument, true, processEC, 2000);
-
-                if (result != null)
-                {
-                    result = result.Replace("\r", "").Trim();
-                    result = result.Replace("\n", "").ToUpper();
-                    int decValue = Convert.ToInt32(result, 16);
-
-                    double fanPercentage = Math.Round(100 * ((double)decValue / ecFanRange[Global_Variables.Global_Variables.fanDevice]), 0);
-                    Global_Variables.Global_Variables.fanSpeed = (int)fanPercentage;
-                }
-            }
-            catch { 
-            
-            }
-
-        }
         public static void generateFanControlModeList()
         {
             Global_Variables.Global_Variables.FanModes.Add("Hardware");
@@ -156,16 +291,49 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
         }
         public static void disableSoftwareFanControl()
         {
+            if (Global_Variables.Global_Variables.fanControlDevice)
+            {
+                try
+                {
+                    switch (Global_Variables.Global_Variables.fanDevice)
+                    {
+                        case "OXP_AMD":
+                            disableSoftwareFanControlOXPAMD();
+
+                            break;
+
+                        case "WM2_AMD":
+                            
+
+                            break;
+
+                        default: break;
+
+                    }
+
+
+                }
+                catch
+                {
+
+                }
+            }
+
+
+         
+        }
+
+        private static void disableSoftwareFanControlOXPAMD()
+        {
             string processEC = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\EC\\EC.exe";
-            string argument = " -winring0 -w "+ ecEnableLookUp[Global_Variables.Global_Variables.fanDevice] + " 0x00";
+            string argument = " -winring0 -w " + ecEnableLookUp[Global_Variables.Global_Variables.fanDevice] + " 0x00";
 
             string result = "";
 
             result = Run_CLI.Run_CLI.RunCommand(argument, false, processEC, 2000);
-            Task.Delay(400);
-            readSoftwareFanControl();
+          
         }
-        public static void setFanSpeed(int fanSpeed)
+        public static void setFanSpeedOLDGARBAGE(int fanSpeed)
         {
             if (Global_Variables.Global_Variables.fanControlEnable)
             {
@@ -191,7 +359,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
 
         }
 
-      
+       
     }
 
     public static class WinRingEC_Management
