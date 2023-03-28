@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -12,7 +13,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static string BaseDir = AppDomain.CurrentDomain.BaseDirectory;
         public static Object objLock = new Object();
-        public static void writeLog(string newLog)
+        public static void writeLog(string newLog, string errorNum = "")
         {
             try
             {
@@ -21,6 +22,8 @@ namespace Handheld_Control_Panel.Classes
                     if (!File.Exists(BaseDir + "\\Resources\\Logs\\application_log.txt")) { createLogFile(); }
                     using (StreamWriter w = File.AppendText(BaseDir + "\\Resources\\Logs\\application_log.txt"))
                     {
+                        if (errorNum != "") { newLog = "Error " + errorNum + ": " + newLog; }
+
                         Log(newLog, w);
 
                     }
@@ -30,7 +33,7 @@ namespace Handheld_Control_Panel.Classes
 
             catch (Exception ex)
             {
-
+                MessageBox.Show("Error writing to log file. " + ex.Message);
             }
 
 

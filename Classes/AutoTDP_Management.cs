@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using LibreHardwareMonitor;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -117,9 +118,10 @@ namespace Handheld_Control_Panel.Classes
 
 
             string[] returnString = new string[3];
-            returnString[0] = "FPS is: " + fps.ToString();
-            returnString[1] = "GPUclock is: " + gpuClock.ToString();
-            returnString[2] = "GPU temp is: " + gpuTemp.ToString();
+    
+            returnString[1] = "GPU clock is: " + gpuClock.ToString();
+            returnString[2] = "GPU usage is: " + gpuUsage.ToString();
+            returnString[0] = "GPU temp is: " + gpuTemp.ToString();
 
 
             return returnString;

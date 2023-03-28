@@ -74,15 +74,25 @@ namespace Handheld_Control_Panel.UserControls
           
         }
         public async Task<bool> GetBTIsEnabledAsync()
-        {
-            bool value = false;
-            var radios = await Radio.GetRadiosAsync();
-            var btRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
-            value = btRadio != null && btRadio.State == RadioState.On;
-            btRadio = null;
-            radios = null;
+        {//error number BTT01
+            try
+            {
+                bool value = false;
+                var radios = await Radio.GetRadiosAsync();
+                var btRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
+                value = btRadio != null && btRadio.State == RadioState.On;
+                btRadio = null;
+                radios = null;
 
-            return value;
+                return value;
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "BTT01");
+
+                return false;
+            }
+
         }
         public async Task ToggleBT(bool value)
         {

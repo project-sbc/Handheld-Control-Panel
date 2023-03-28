@@ -46,11 +46,20 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            
-            controlList.ItemsSource = Global_Variables.resolutions;
-            controlList.SelectedItem = Global_Variables.Resolution;
-            selectedObject = Global_Variables.Resolution;
-            controlList.Visibility = Visibility.Collapsed;
+            //error number RDD01
+            try
+            {
+                controlList.ItemsSource = Global_Variables.resolutions;
+                controlList.SelectedItem = Global_Variables.Resolution;
+                selectedObject = Global_Variables.Resolution;
+                controlList.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RDD01");
+
+            }
+
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -62,88 +71,119 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
-            valueChangedEventArgs valueChangedEventArgs = e as valueChangedEventArgs;
-            if (valueChangedEventArgs.Parameter == "Resolution")
+            //error number RDD02
+            try
             {
-                this.Dispatcher.BeginInvoke(new Action(() =>
+                valueChangedEventArgs valueChangedEventArgs = e as valueChangedEventArgs;
+                if (valueChangedEventArgs.Parameter == "Resolution")
                 {
-                    if (controlList.Items.Contains(Global_Variables.Resolution) && controlList.SelectedItem != Global_Variables.Resolution && controlList.IsLoaded)
+                    this.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        controlList.SelectedItem = Global_Variables.Resolution;
-                    }
+                        if (controlList.Items.Contains(Global_Variables.Resolution) && controlList.SelectedItem != Global_Variables.Resolution && controlList.IsLoaded)
+                        {
+                            controlList.SelectedItem = Global_Variables.Resolution;
+                        }
 
 
-                }));
-               
-             
+                    }));
+                }
+
+                }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RDD02");
+
             }
+
+           
         }
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
-            controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
-            if (args.WindowPage == windowpage && args.UserControl==usercontrol)
+            //error number RDD04
+            try
             {
-                switch(args.Action)
+                controllerUserControlInputEventArgs args = (controllerUserControlInputEventArgs)e;
+                if (args.WindowPage == windowpage && args.UserControl == usercontrol)
                 {
-                    case "A":
-                        if (controlList.SelectedItem.ToString() != Global_Variables.resolution)
-                        {
-                            handleListboxChange();
-                        }
-                        else
-                        {
-              
-                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
-                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.changeUserInstruction("SelectedListBox_Instruction");
-                            wnd = null;
-                         
-                        }
-
-                        break;
-                    case "B":
-                        MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
-                        wnd2.changeUserInstruction("HomePage_Instruction");
-                        wnd2 = null;
-                        if (controlList.Visibility == Visibility.Visible)
-                        {
-                            
-
-                            if (selectedObject != null)
+                    switch (args.Action)
+                    {
+                        case "A":
+                            if (controlList.SelectedItem.ToString() != Global_Variables.resolution)
                             {
-                                controlList.SelectedItem = selectedObject;
+                                handleListboxChange();
                             }
-                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                            else
+                            {
 
-                        }
-  
-                        break;
-                    default:
-                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
+                                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
-                        break;
+                                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                                wnd.changeUserInstruction("SelectedListBox_Instruction");
+                                wnd = null;
+
+                            }
+
+                            break;
+                        case "B":
+                            MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
+                            wnd2.changeUserInstruction("HomePage_Instruction");
+                            wnd2 = null;
+                            if (controlList.Visibility == Visibility.Visible)
+                            {
+
+
+                                if (selectedObject != null)
+                                {
+                                    controlList.SelectedItem = selectedObject;
+                                }
+                                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                            }
+
+                            break;
+                        default:
+                            Classes.UserControl_Management.UserControl_Management.handleUserControl(border, controlList, args.Action);
+
+                            break;
+                    }
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RDD04");
 
             }
+
+           
         }
         private void handleListboxChange()
         {
-            if (controlList.IsLoaded)
+            //error number RDD03
+            try
             {
-                if (controlList.SelectedItem != null)
+                if (controlList.IsLoaded)
                 {
-                    string resolution = controlList.SelectedItem.ToString();
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(resolution));
-                    selectedObject = controlList.SelectedItem;
-                    if (controlList.Visibility == Visibility.Visible)
+                    if (controlList.SelectedItem != null)
                     {
-                        button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        string resolution = controlList.SelectedItem.ToString();
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayResolution(resolution));
+                        selectedObject = controlList.SelectedItem;
+                        if (controlList.Visibility == Visibility.Visible)
+                        {
+                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        }
                     }
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RDD03");
 
             }
+            
 
         }
 

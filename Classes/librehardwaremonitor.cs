@@ -24,9 +24,9 @@ namespace Handheld_Control_Panel.Classes
     }
 
     
-    public class librehardwaremonitor
+    public static class librehardwaremonitor
     {
-        public void Monitor()
+        public static void Monitor()
         {
             Computer computer = new Computer
             {
@@ -42,30 +42,40 @@ namespace Handheld_Control_Panel.Classes
             };
 
             computer.Open();
-
+            int i = 1;
             while (1==1)
             {
                 computer.Accept(new UpdateVisitor());
 
                 foreach (IHardware hardware in computer.Hardware)
                 {
-                    Debug.WriteLine("Hardware: {0}", hardware.Name);
+                    //Debug.WriteLine("Hardware: {0}", hardware.Name);
 
                     foreach (IHardware subhardware in hardware.SubHardware)
                     {
-                        Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
+                        //Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
 
                         foreach (ISensor sensor in subhardware.Sensors)
                         {
-                            Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                           
+                            if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
+                            {
+                                Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                            }
+                            
                         }
                     }
 
                     foreach (ISensor sensor in hardware.Sensors)
                     {
-                        Debug.WriteLine("\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                        
+                        if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
+                        {
+                            Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                        }
                     }
                 }
+                i = 0;
                 Task.Delay(400);
             }
            

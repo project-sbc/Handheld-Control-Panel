@@ -491,7 +491,7 @@ namespace Handheld_Control_Panel
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            powerContextMenu.IsOpen = !powerContextMenu.IsOpen;
+            toggleWindow();
         }
 
         private void CMItem_Click(object sender, RoutedEventArgs e)

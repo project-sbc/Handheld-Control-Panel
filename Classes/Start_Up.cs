@@ -7,6 +7,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
@@ -31,6 +32,8 @@ namespace Handheld_Control_Panel.Classes
             //test code here
             //AutoTDP_Management.writeGPUInfo();
             //OSD_Management.startOSDThread();
+            //librehardwaremonitor.Monitor();
+
 
             //int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
 
@@ -56,6 +59,12 @@ namespace Handheld_Control_Panel.Classes
             //get cpu information
             TDP_Management.TDP_Management.determineCPU();
 
+
+            //check fan control device capability
+            Fan_Management.Fan_Management.determineFanDevice();
+
+            Fan_Management.Fan_Management.readSoftwareFanControl();
+
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
             //TDP_Management.TDP_Management.checkDriverBlockRegistry();
 
@@ -68,18 +77,8 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.maxCpuCores = new ManagementObjectSearcher("Select * from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["NumberOfCores"].ToString()));
 
             //load lists (resolutions, refresh rates, scalings)
-
-
-            try
-            {
-                Display_Management.Display_Management.generateDisplayResolutionAndRateList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + " : during resolution refresh");
-            }
-
-            
+            Display_Management.Display_Management.generateDisplayResolutionAndRateList();
+          
             
             //XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
              
