@@ -11,7 +11,7 @@
 
     <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-            <uc:CloseGame_Button/>
+           
             <uc:HideHCP_Button/>
             <uc:CloseHCP_Button/>
             <uc:Restart_Button/>
