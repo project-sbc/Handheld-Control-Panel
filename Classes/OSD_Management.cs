@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Handheld_Control_Panel.Classes
 {
-    class OSD_Management
+    public static class OSD_Management
     {
 
         private static Thread osd;
@@ -133,41 +134,60 @@ namespace Handheld_Control_Panel.Classes
         }
         public static string gameRunning()
         {
+            MessageBox.Show("start the routine");
             string gameRunning = "";
-            if (RTSS.RTSSRunning())
+            try
             {
-                var OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning");
-
-                AppFlags appFlag = appFlags[0];
-                var appEntries = OSD.GetAppEntries(appFlag);
-
-                appEntries = OSD.GetAppEntries(appFlag);
-
-                foreach (AppFlags af in appFlags)
+                MessageBox.Show("rtss running?");
+                if (RTSS.RTSSRunning())
                 {
-                    appEntries = OSD.GetAppEntries(af);
-                    if (appEntries.Length > 0) { appFlag = af; break; }
-                }
+                    MessageBox.Show("about to start osd");
+                    var OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning2");
 
-                foreach (var app in appEntries)
-                {
-                    string[] gamedir = app.Name.Split('\\');
-                    if (gamedir.Length > 0)
+                    AppFlags appFlag = appFlags[0];
+                    MessageBox.Show("Get app entries is next");
+                    var appEntries = OSD.GetAppEntries(appFlag);
+
+                    //appEntries = OSD.GetAppEntries(appFlag);
+                    MessageBox.Show("Get ready to loop");
+                    foreach (AppFlags af in appFlags)
                     {
-                        string currGameName = gamedir[gamedir.Length - 1];
-                        gameRunning = currGameName.Substring(0,currGameName.Length-4);
+                        appEntries = OSD.GetAppEntries(af);
+                        if (appEntries.Length > 0) { appFlag = af; break; }
+                        MessageBox.Show("next loop");
                     }
-                   
+                    MessageBox.Show("looping through name");
+                    foreach (var app in appEntries)
+                    {
+                        MessageBox.Show(app.Name);
+                        string[] gamedir = app.Name.Split('\\');
+                        if (gamedir.Length > 0)
+                        {
+                            MessageBox.Show("splitting name");
+                            string currGameName = gamedir[gamedir.Length - 1];
+                            gameRunning = currGameName.Substring(0, currGameName.Length - 4);
+                            MessageBox.Show(gameRunning);
+                            break;
+                        }
 
+
+
+                    }
+                    MessageBox.Show("dispose");
+                    OSD.Dispose();
 
                 }
 
-                OSD.Dispose();
-            
+
+
+               
             }
-
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Log_Writer.writeLog(ex.Message, "OSDM01");
+                return "";
+            }
             return gameRunning;
         }
 

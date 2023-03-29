@@ -162,7 +162,7 @@
     <system:String x:Key="UserControl_Restart">Restart</system:String>
     <system:String x:Key="UserControl_ShutdownPC">Shut Down PC</system:String>
     <system:String x:Key="UserControl_Shutdown">Shut Down</system:String>
-    <system:String x:Key="UserControl_FanControl">Fan Control- Speed </system:String>
+    <system:String x:Key="UserControl_FanControl">Fan Control</system:String>
 
 
 </ResourceDictionary>

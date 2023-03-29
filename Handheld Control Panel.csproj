@@ -42,6 +42,8 @@
     <None Remove="Resources\Logs\application_log.txt" />
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
+    <None Remove="Resources\RTSS\RTSSHooks64.dll" />
+    <None Remove="Resources\RTSS\RTSSSharedMemoryNET.dll" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
     <None Remove="WinRing0x64.dll" />
     <None Remove="WinRing0x64.sys" />
@@ -128,6 +130,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\QRes\QRes.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\RTSS\RTSSHooks64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\RTSS\RTSSSharedMemoryNET.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\SetDPI\SetDpi.exe">

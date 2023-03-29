@@ -37,16 +37,34 @@ namespace Handheld_Control_Panel.UserControls
         private string usercontrol = "";
         public CloseGame_Button()
         {
-            InitializeComponent();
-            string gameName = OSD_Management.gameRunning();
-            if (gameName == "")
+            try
             {
-                this.Visibility = Visibility.Collapsed;
+                InitializeComponent();
+                if (RTSS.RTSSRunning())
+                {
+                    MessageBox.Show("about to get value");
+                    string gameName = OSD_Management.gameRunning();
+                    if (gameName == "")
+                    {
+                        this.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        controlLabel.Content = gameName;
+                    }
+                }
+                else
+                {
+                    this.Visibility = Visibility.Collapsed;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                controlLabel.Content = gameName;
+                MessageBox.Show(ex.Message);
             }
+           
+
+           
         }
 
        
@@ -82,18 +100,22 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OSD_Management.closeGame();
+            if (1 == 0)
+            {
+                OSD_Management.closeGame();
 
-            Task.Delay(4000);
-            string gameName = OSD_Management.gameRunning();
-            if (gameName == "")
-            {
-                this.Visibility = Visibility.Collapsed;
+                Task.Delay(4000);
+                string gameName = OSD_Management.gameRunning();
+                if (gameName == "")
+                {
+                    this.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    controlLabel.Content = gameName;
+                }
             }
-            else
-            {
-                controlLabel.Content = gameName;
-            }
+         
         }
     }
 }

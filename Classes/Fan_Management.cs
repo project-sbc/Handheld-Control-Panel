@@ -136,6 +136,10 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             {
                 if (Global_Variables.Global_Variables.fanControlDevice && Global_Variables.Global_Variables.fanControlEnable)
                 {
+                    if (speedPercentage < 30 && speedPercentage > 0)
+                    {
+                        speedPercentage = 30;
+                    }
                     byte setValue = 0;
                     double fanRange = ecFanRange[Global_Variables.Global_Variables.fanDevice];
                     if (fanRange > 0)
@@ -158,7 +162,8 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                             Global_Variables.Global_Variables.FanSpeed = speedPercentage;
                         }
                     }
-                    
+
+
                 }
             }
             catch (Exception ex)
@@ -221,6 +226,9 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             }
 
         }
+
+
+        //SEPARATE FROM GOOD STUFF
         private static void readSoftwareFanControlOXPAyaOLDDONTUSEFORREFERENCE()
         {
             string argument = " -winring0 -r " + ecEnableLookUp[Global_Variables.Global_Variables.fanDevice];
@@ -274,12 +282,12 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             }
         }
 
-        public static void generateFanControlModeList()
+        public static void generateFanControlModeListOLD()
         {
             Global_Variables.Global_Variables.FanModes.Add("Hardware");
             Global_Variables.Global_Variables.FanModes.Add("Manual");
         }
-        public static void enableSoftwareFanControl()
+        public static void enableSoftwareFanControlOLD()
         {
             string argument = " -winring0 -w " + ecEnableLookUp[Global_Variables.Global_Variables.fanDevice] + " 0x01";
 
@@ -289,7 +297,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             Task.Delay(400);
             readSoftwareFanControl();
         }
-        public static void disableSoftwareFanControl()
+        public static void disableSoftwareFanControlOLDDDDD()
         {
             if (Global_Variables.Global_Variables.fanControlDevice)
             {
@@ -298,7 +306,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                     switch (Global_Variables.Global_Variables.fanDevice)
                     {
                         case "OXP_AMD":
-                            disableSoftwareFanControlOXPAMD();
+                            //disableSoftwareFanControlOXPAMD();
 
                             break;
 
@@ -323,7 +331,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
          
         }
 
-        private static void disableSoftwareFanControlOXPAMD()
+        private static void disableSoftwareFanControlOXPAMDOLDGARABAGE()
         {
             string processEC = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\EC\\EC.exe";
             string argument = " -winring0 -w " + ecEnableLookUp[Global_Variables.Global_Variables.fanDevice] + " 0x00";

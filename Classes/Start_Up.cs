@@ -30,14 +30,8 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-            //AutoTDP_Management.writeGPUInfo();
-            //OSD_Management.startOSDThread();
-            //librehardwaremonitor.Monitor();
-
-
-            //int baseClockSpeed = new ManagementObjectSearcher("select MaxClockSpeed from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["MaxClockSpeed"].ToString()));
-
-            //AutoTDP_Management.startOSDThread();
+            MessageBox.Show("start thread osd");
+            OSD_Management.startOSDThread();
 
             //test code
 

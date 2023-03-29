@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+
 using System.Windows.Media;
 
 namespace Handheld_Control_Panel.Classes.UserControl_Management
@@ -208,12 +209,27 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Value = Global_Variables.Global_Variables.EPP;
                         break;
                     case "Slider_Fan-TickChange":
-                        slider.Minimum = 0;
+                        slider.Minimum = 29;
                         slider.Maximum = 100;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 5;
                         slider.LargeChange = 10;
-                        slider.Value = Global_Variables.Global_Variables.FanSpeed;
+                        if (Global_Variables.Global_Variables.FanSpeed == 0)
+                        {
+                            slider.Value = 29;
+                        }
+                        else
+                        {
+                            if (Global_Variables.Global_Variables.FanSpeed <30)
+                            {
+                                slider.Value = 30;
+                            }
+                            else
+                            {
+                                slider.Value = Global_Variables.Global_Variables.FanSpeed;
+                            }
+                        }
+                        
                         break;
                     case "Slider_CoreParking":
                         slider.Minimum = 1;
@@ -417,7 +433,24 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 case "Slider_Fan-TickChange":
                     if (Global_Variables.Global_Variables.fanControlDevice & Global_Variables.Global_Variables.fanControlEnable)
                     {
+                        if (sliderValue == 29)
+                        {
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(0));
+                        }
+                        else
+                        {
+                            if (sliderValue < 30)
+                            {
+                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(30));
+                            }
+                            else
+                            {
+                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed((int)sliderValue));
+                            }
+                        }
 
+
+                        
                     }
                     break;
                 case "Slider_MouseSensitivity":

@@ -40,7 +40,7 @@ namespace Handheld_Control_Panel.Pages
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
-           
+
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
             wnd.changeUserInstruction("ProfileEditPage_Instruction");

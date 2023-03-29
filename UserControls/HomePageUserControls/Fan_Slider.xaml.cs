@@ -45,13 +45,33 @@ namespace Handheld_Control_Panel.UserControls
 
 
                 //set initial fanspeed value
-                control.Value = Global_Variables.FanSpeed;
+                if (Global_Variables.FanSpeed == 0)
+                {
+                    control.Value = 29;
+                    labelControl.Content = "0";
+                }
+                else
+                {
+                    if (Global_Variables.FanSpeed < 30)
+                    {
+                        control.Value = 30;
+                        labelControl.Content = "30";
+                    }
+                    else
+                    {
+                        control.Value = Global_Variables.FanSpeed;
+                        labelControl.Content = Global_Variables.FanSpeed.ToString();
+                    }
+                }
+              
+          
 
                 if (!Global_Variables.fanControlEnable)
                 {
                     control.Visibility = Visibility.Collapsed;
+                    
                 }
-
+                controlToggle.IsOn = Global_Variables.fanControlEnable;
                 //set up timer
                 changeValue.Interval = new TimeSpan(0, 0, 2);
                 changeValue.Tick += ChangeValue_Tick;
@@ -82,9 +102,29 @@ namespace Handheld_Control_Panel.UserControls
             if (valueChangedEventArgs.Parameter == "FanSpeed" && !dragStarted)
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.FanSpeed != control.Value && border.Tag == "" && control.IsLoaded)
+                    if (border.Tag == "" && control.IsLoaded)
                     {
-                        control.Value = Global_Variables.FanSpeed;
+     
+
+
+                        if (Global_Variables.FanSpeed == 0 && control.Value != 29)
+                        {
+                            control.Value = 29;
+                            labelControl.Content = "0";
+                        }
+                        if (Global_Variables.FanSpeed < 30 && Global_Variables.FanSpeed>0 && control.Value != 30)
+                        {
+                            control.Value = 30;
+                            labelControl.Content = "30";
+                        }
+                        if (Global_Variables.FanSpeed >= 30 && control.Value != Global_Variables.fanSpeed)
+                        {
+                            control.Value = Global_Variables.FanSpeed;
+                            labelControl.Content = Global_Variables.FanSpeed.ToString();
+                        }
+
+
+                        
                     }
 
                 });
@@ -119,6 +159,7 @@ namespace Handheld_Control_Panel.UserControls
             if (Global_Variables.fanControlEnable)
             {
                 UserControl_Management.Slider_ValueChanged((Slider)control, null);
+              
             }
      
         }
@@ -137,24 +178,51 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!dragStarted && control.IsLoaded)
+            if (control.IsLoaded)
             {
-                if (border.Tag == "")
+                if (control.Value == 29)
                 {
-                    sliderValueChanged();
+                    labelControl.Content = "0";
                 }
                 else
                 {
-                    changeValue.Stop(); 
-                    changeValue.Start();
+                    labelControl.Content = control.Value.ToString();
                 }
-               
+                if (!dragStarted)
+                {
+                    if (border.Tag == "")
+                    {
+                        sliderValueChanged();
+                    }
+                    else
+                    {
+                        changeValue.Stop();
+                        changeValue.Start();
+                    }
+
+                }
+            }
+        
+        }
+        private void controlToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (controlToggle.IsLoaded)
+            {
+                if (controlToggle.IsOn)
+                {
+                   
+                    control.Visibility = Visibility.Visible;
+                 
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlManual());
+                }
+                else
+                {
+                    control.Visibility = Visibility.Collapsed;
+                    
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlHardware());
+                }
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
