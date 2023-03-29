@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel
         private System.Windows.Forms.NotifyIcon m_notifyIcon;
         public MainWindow()
         {
-            
+          
             InitializeComponent();
 
             Global_Variables.mainWindow = this;

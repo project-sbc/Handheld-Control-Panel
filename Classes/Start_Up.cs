@@ -30,8 +30,12 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-            MessageBox.Show("start thread osd");
-            OSD_Management.startOSDThread();
+            MessageBox.Show("testing");
+            TEMPTEST tt = new TEMPTEST();
+            MessageBox.Show("created new class");
+            tt.gameRunning();
+
+
 
             //test code
 

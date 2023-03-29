@@ -10,6 +10,8 @@
     <ApplicationIcon>Resources\HCP.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,8 +44,6 @@
     <None Remove="Resources\Logs\application_log.txt" />
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
-    <None Remove="Resources\RTSS\RTSSHooks64.dll" />
-    <None Remove="Resources\RTSS\RTSSSharedMemoryNET.dll" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
     <None Remove="WinRing0x64.dll" />
     <None Remove="WinRing0x64.sys" />
@@ -132,10 +132,10 @@
     <Content Include="Resources\QRes\QRes.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\RTSS\RTSSHooks64.dll">
+    <Content Include="RTSSHooks64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\RTSS\RTSSSharedMemoryNET.dll">
+    <Content Include="RTSSSharedMemoryNET.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\SetDPI\SetDpi.exe">

@@ -41,7 +41,7 @@ namespace Handheld_Control_Panel.Classes
         {
             if (RTSS.RTSSRunning())
             {
-                var OSD = new RTSSSharedMemoryNET.OSD("new");
+                var OSD = new OSD("new");
 
                 AppFlags appFlag = appFlags[0];
                 var appEntries = OSD.GetAppEntries(appFlag); ;
