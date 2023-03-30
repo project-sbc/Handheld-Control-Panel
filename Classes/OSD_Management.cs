@@ -78,9 +78,9 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-        public static unsafe void closeGame()
+        public static unsafe int closeGame()
         {
-          
+            int processID = 0;
             if (RTSS.RTSSRunning())
             {
   
@@ -100,7 +100,8 @@ namespace Handheld_Control_Panel.Classes
 
                 foreach (var app in appEntries)
                 {
-                    int processID = app.ProcessId;
+                    processID = app.ProcessId;
+                 
                     System.Diagnostics.Process procs = null;
 
                     try
@@ -126,54 +127,44 @@ namespace Handheld_Control_Panel.Classes
        
 
             }
-
+            return processID;
 
 
         }
         public static unsafe string gameRunning()
         {
-            MessageBox.Show("start the routine");
+          
             string gameRunning = "";
             try
             {
-                MessageBox.Show("rtss running?");
+      
                 if (RTSS.RTSSRunning())
                 {
-                    MessageBox.Show("about to start osd");
-              
-
+           
                     AppFlags appFlag = appFlags[0];
-                    MessageBox.Show("Get app entries is next");
                     AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
-
-                    //appEntries = OSD.GetAppEntries(appFlag);
-                    MessageBox.Show("Get ready to loop");
+                  
                     foreach (AppFlags af in appFlags)
                     {
                         appEntries = OSD.GetAppEntries(af);
                         if (appEntries.Length > 0) { appFlag = af; break; }
-                        MessageBox.Show("next loop");
                     }
-                    MessageBox.Show("looping through name");
+          
                     foreach (var app in appEntries)
                     {
-                        MessageBox.Show(app.Name);
+              
                         string[] gamedir = app.Name.Split('\\');
                         if (gamedir.Length > 0)
                         {
-                            MessageBox.Show("splitting name");
+                  
                             string currGameName = gamedir[gamedir.Length - 1];
                             gameRunning = currGameName.Substring(0, currGameName.Length - 4);
-                            MessageBox.Show(gameRunning);
+                 
                             break;
                         }
 
-
-
                     }
-                    MessageBox.Show("dispose");
-                
-
+              
                 }
 
 
@@ -188,7 +179,46 @@ namespace Handheld_Control_Panel.Classes
             }
             return gameRunning;
         }
+        public static unsafe int gameRunningProcessID()
+        {
 
+            int gameRunning = 0;
+            try
+            {
+
+                if (RTSS.RTSSRunning())
+                {
+
+                    AppFlags appFlag = appFlags[0];
+                    AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
+
+                    foreach (AppFlags af in appFlags)
+                    {
+                        appEntries = OSD.GetAppEntries(af);
+                        if (appEntries.Length > 0) { appFlag = af; break; }
+                    }
+
+                    foreach (var app in appEntries)
+                    {
+                        gameRunning = app.ProcessId;
+                        break;
+
+                    }
+
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Log_Writer.writeLog(ex.Message, "OSDM01");
+                return 0;
+            }
+            return gameRunning;
+        }
         private static void test()
         {
             if (RTSS.RTSSRunning())

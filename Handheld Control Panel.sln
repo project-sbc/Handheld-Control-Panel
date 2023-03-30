@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Handheld Control Panel", "Handheld Control Panel.csproj", "{011B7CF4-05DF-4835-91F7-7E982F3EC71B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HCP_Installer", "..\HCP_Installer\HCP_Installer.vdproj", "{27910559-3915-49F8-A2EF-F535917623E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,13 @@ Global
 		{011B7CF4-05DF-4835-91F7-7E982F3EC71B}.Release|x64.Build.0 = Release|x64
 		{011B7CF4-05DF-4835-91F7-7E982F3EC71B}.Release|x86.ActiveCfg = Release|x86
 		{011B7CF4-05DF-4835-91F7-7E982F3EC71B}.Release|x86.Build.0 = Release|x86
+		{27910559-3915-49F8-A2EF-F535917623E2}.Debug|Any CPU.ActiveCfg = Debug
+		{27910559-3915-49F8-A2EF-F535917623E2}.Debug|x64.ActiveCfg = Release
+		{27910559-3915-49F8-A2EF-F535917623E2}.Debug|x64.Build.0 = Release
+		{27910559-3915-49F8-A2EF-F535917623E2}.Debug|x86.ActiveCfg = Debug
+		{27910559-3915-49F8-A2EF-F535917623E2}.Release|Any CPU.ActiveCfg = Release
+		{27910559-3915-49F8-A2EF-F535917623E2}.Release|x64.ActiveCfg = Release
+		{27910559-3915-49F8-A2EF-F535917623E2}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

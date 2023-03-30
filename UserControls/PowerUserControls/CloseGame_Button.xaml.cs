@@ -42,7 +42,7 @@ namespace Handheld_Control_Panel.UserControls
                 InitializeComponent();
                 if (RTSS.RTSSRunning())
                 {
-                    MessageBox.Show("about to get value");
+                  
                     string gameName = OSD_Management.gameRunning();
                     if (gameName == "")
                     {
@@ -100,22 +100,33 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (1 == 0)
+            int processID = OSD_Management.closeGame();
+            if (processID != 0)
             {
-                OSD_Management.closeGame();
+                System.Diagnostics.Process procs = null;
 
-                Task.Delay(4000);
-                string gameName = OSD_Management.gameRunning();
-                if (gameName == "")
+                try
                 {
+                    procs = Process.GetProcessById(processID);
+
+
+
+                    if (!procs.HasExited)
+                    {
+                        procs.CloseMainWindow();
+                    }
+                }
+                finally
+                {
+                    if (procs != null)
+                    {
+                        procs.Dispose();
+                    }
                     this.Visibility = Visibility.Collapsed;
                 }
-                else
-                {
-                    controlLabel.Content = gameName;
-                }
             }
-         
+                 
+
         }
     }
 }
