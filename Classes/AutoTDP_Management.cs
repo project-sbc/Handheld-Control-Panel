@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using LibreHardwareMonitor;
+using LibreHardwareMonitor.Hardware;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -98,6 +99,18 @@ namespace Handheld_Control_Panel.Classes
         }
 
         public static Thread autoTDPThread;
+        private static List<AppFlags> appFlags = new List<AppFlags>()
+        {
+            {AppFlags.OpenGL },
+            {AppFlags.Direct3D9Ex },
+            {AppFlags.Direct3D9 },
+            {AppFlags.Direct3D10 },
+            {AppFlags.Direct3D11 },
+            {AppFlags.Direct3D12 },
+            {AppFlags.Direct3D12AFR },
+            {AppFlags.OpenGL },
+            {AppFlags.Vulkan }
+        };
 
         public static void startAutoTDPThread()
         {
@@ -106,18 +119,86 @@ namespace Handheld_Control_Panel.Classes
         }
 
 
-        private static List<int> gpuUsage = new List<int>();
-        private static double gpuUsage_Avg;
-        private static double gpuUsage_Min;
-        private static double gpuUsage_Max;
-        private static double gpuUsage_Slope;
+
+
+
+        private static Computer computer = new Computer
+            {
+                IsCpuEnabled = true,
+                IsGpuEnabled = true,
+                IsMemoryEnabled = false,
+                IsMotherboardEnabled = false,
+                IsControllerEnabled = false,
+                IsNetworkEnabled = false,
+                IsStorageEnabled = false,
+                IsBatteryEnabled = false,
+                IsPsuEnabled = false
+            };
+        private static void openComputerLibreHardwareMonitor()
+        {
+            computer.Open();
+        }
         private static void getInformationForAutoTDP()
         {
-            
-            int gpuTotalPower = GetGPUMetrics(0, 5);
-            int gpuClock = GetGPUMetrics(0, 0);
-            int gpuPower = GetGPUMetrics(0, 4);
+            //get fps from rtss statistics
+            getFPS();
+            //get d3d usage, cpu usage
+            getLibreHardwareMonitorInfo();
 
+
+
+        }
+        #region fps get data
+        private static List<int> fps = new List<int>();
+        private static double fps_Avg;
+        private static double fps_Min;
+        private static double fps_Max;
+        private static double fps_Slope;
+        private static void getFPS()
+        {
+
+            if (RTSS.RTSSRunning())
+            {
+
+                AppFlags appFlag = appFlags[0];
+                AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
+
+                foreach (AppFlags af in appFlags)
+                {
+                    appEntries = OSD.GetAppEntries(af);
+                    if (appEntries.Length > 0) { appFlag = af; break; }
+                }
+
+                foreach (var app in appEntries)
+                {
+                    int currFps = (int)app.InstantaneousFrames;
+                    fps.Add(currFps);
+                    if (fps.Count > 5)
+                    {
+                        fps.RemoveAt(0);
+                        fps_Avg = fps.Average();
+                        fps_Min = fps.Min();
+                        fps_Max = fps.Max();
+                        fps_Slope = (fps_Avg - ((fps[3] + fps[4]) / 2) / 2);
+                    }
+                 
+                    break;
+
+                }
+
+
+            }
+        }
+        #endregion
+        #region get gpu usage from AMD driver
+        private static List<int> gpuUsage = new List<int>();
+        private static double gpuUsage_Avg;
+        private static int gpuUsage_Min;
+        private static int gpuUsage_Max;
+        private static double gpuUsage_Slope;
+        private static void getGPUUsage()
+        {
+           
             gpuUsage.Add(GetGPUMetrics(0, 7));
             if (gpuUsage.Count > 5)
             {
@@ -125,17 +206,82 @@ namespace Handheld_Control_Panel.Classes
                 gpuUsage_Avg = gpuUsage.Average();
                 gpuUsage_Min = gpuUsage.Min();
                 gpuUsage_Max = gpuUsage.Max();
-                gpuUsage_Slope = (gpuUsage_Avg - gpuUsage[4])/5;
+                gpuUsage_Slope = (gpuUsage_Avg - ((gpuUsage[3] + gpuUsage[4]) / 2) / 2);
+            }
+        }
+        #endregion
+        public static void getLibreHardwareMonitorInfo()
+        {
+            computer.Open();
+            computer.Accept(new UpdateVisitor());
+
+          
+
+            foreach (IHardware hardware in computer.Hardware)
+            {
+                
+                Debug.WriteLine("Hardware: {0}", hardware.Name);
+
+                foreach (IHardware subhardware in hardware.SubHardware)
+                {
+                    Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
+
+                    foreach (ISensor sensor in subhardware.Sensors)
+                    {
+                        Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                        if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
+                        {
+
+                        }
+
+                    }
+                }
+
+                foreach (ISensor sensor in hardware.Sensors)
+                {
+                    Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                    if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
+                    {
+
+                    }
+                }
             }
 
 
-            Debug.WriteLine("FPS: " + GetFPSData().ToString());
-
-
-
+            computer.Close();
         }
+
+        #region gpu D3D usage from libre hardware monitor
+        private static List<float> gpuD3DUsage = new List<float>();
+        private static double gpuD3DUsage_Avg;
+        private static float gpuD3DUsage_Min;
+        private static float gpuD3DUsage_Max;
+        private static double gpuD3DUsage_Slope;
+        private static void getLibre_GPUD3D()
+        {
+            IHardware amdRadeon = computer.Hardware.FirstOrDefault(c => c.Name.StartsWith("AMD Radeon"));
+
+            if (amdRadeon != null)
+            {
+                ISensor D3D = amdRadeon.Sensors.FirstOrDefault(c => c.Name == "D3D 3D");
+                if (D3D != null)
+                {
+                    gpuUsage.Add((int)D3D.Value);
+                    if (gpuUsage.Count > 5)
+                    {
+                        gpuUsage.RemoveAt(0);
+                        gpuUsage_Avg = gpuUsage.Average();
+                        gpuUsage_Min = gpuUsage.Min();
+                        gpuUsage_Max = gpuUsage.Max();
+                        gpuUsage_Slope = (gpuUsage_Avg - ((gpuUsage[3] + gpuUsage[4]) / 2) / 2);
+                    }
+                }
+            }
+        }
+        #endregion
         private static void mainAutoTDPLoop()
         {
+            //make sure main window is still around (otherwise its closed) and make sure autoTDP is true
             while (Global_Variables.Global_Variables.mainWindow != null && Global_Variables.Global_Variables.autoTDP)
             {
                 getInformationForAutoTDP();

@@ -409,9 +409,12 @@ namespace Handheld_Control_Panel
                 instructionStackPanel.Children.Clear(); 
                 switch (newInstructionUserControl)
                 {
-                    
+
+
                 
-                   
+                    case "AppLauncherPage_Instruction":
+                        instructionStackPanel.Children.Add(new AppLauncherPage_Instruction());
+                    break;
                     case "HomePage_Instruction":
                         instructionStackPanel.Children.Add(new HomePage_Instruction());
                         break;

@@ -120,6 +120,7 @@
     <system:String x:Key="Instruction_Save">SAVE</system:String>
     <system:String x:Key="Instruction_Apply">APPLY</system:String>
     <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
+    <system:String x:Key="Instruction_Launch">LAUNCH</system:String>
 
 
 

@@ -385,6 +385,9 @@
     <Compile Update="UserControls\HomePageUserControls\FPS_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\AppLauncherPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\PowerUserControls\CloseProgram_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
