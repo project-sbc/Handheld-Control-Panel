@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-            
+            MessageBox.Show(OSD_Management.gameRunning());
 
 
 

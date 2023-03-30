@@ -78,17 +78,15 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-        public static void closeGame()
+        public static unsafe void closeGame()
         {
           
             if (RTSS.RTSSRunning())
             {
-                var OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning");
-
+  
                 AppFlags appFlag = appFlags[0];
-                var appEntries = OSD.GetAppEntries(appFlag);
-
-                appEntries = OSD.GetAppEntries(appFlag);
+                AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
+                              
 
                 while (appEntries.Length == 0)
                 {
@@ -125,14 +123,14 @@ namespace Handheld_Control_Panel.Classes
                     }
                 }
 
-                OSD.Dispose();
+       
 
             }
 
 
 
         }
-        public static string gameRunning()
+        public static unsafe string gameRunning()
         {
             MessageBox.Show("start the routine");
             string gameRunning = "";
@@ -142,11 +140,11 @@ namespace Handheld_Control_Panel.Classes
                 if (RTSS.RTSSRunning())
                 {
                     MessageBox.Show("about to start osd");
-                    var OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning2");
+              
 
                     AppFlags appFlag = appFlags[0];
                     MessageBox.Show("Get app entries is next");
-                    var appEntries = OSD.GetAppEntries(appFlag);
+                    AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
 
                     //appEntries = OSD.GetAppEntries(appFlag);
                     MessageBox.Show("Get ready to loop");
@@ -174,7 +172,7 @@ namespace Handheld_Control_Panel.Classes
 
                     }
                     MessageBox.Show("dispose");
-                    OSD.Dispose();
+                
 
                 }
 

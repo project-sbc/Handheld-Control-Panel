@@ -75,10 +75,10 @@ namespace Handheld_Control_Panel.UserControls
         private void Global_Variables_valueChanged(object? sender, valueChangedEventArgs e)
         {
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "FPSLimit" && !dragStarted && control.IsLoaded)
+            if (valueChangedEventArgs.Parameter == "FPSLimit" && !dragStarted )
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.FPSLimit != control.Value && border.Tag == "")
+                    if (Global_Variables.FPSLimit != control.Value && border.Tag == "" && control.IsLoaded)
                     {
                         control.Value = Global_Variables.FPSLimit;
                     }
