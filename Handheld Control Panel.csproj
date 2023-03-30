@@ -385,6 +385,9 @@
     <Compile Update="UserControls\HomePageUserControls\FPS_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\PowerUserControls\CloseProgram_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\HomePageUserControls\Scaling_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -445,7 +448,7 @@
     <Compile Update="UserControls\PowerUserControls\CloseHCP_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\PowerUserControls\HideHCP_Button - Copy.xaml.cs">
+    <Compile Update="UserControls\PowerUserControls\HideHCP_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\PowerUserControls\Restart_Button.xaml.cs">

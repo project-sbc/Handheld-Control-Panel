@@ -19,7 +19,7 @@ namespace Handheld_Control_Panel.Classes
         {
             MessageBox.Show("TEST LITTLE");
         }
-        public void gameRunning()
+        public unsafe void gameRunning()
         {
             MessageBox.Show("will it work");
 
@@ -32,8 +32,10 @@ namespace Handheld_Control_Panel.Classes
                 if (RTSS.RTSSRunning())
                 {
                     MessageBox.Show("about to start osd");
-                    RTSSSharedMemoryNET.OSD OSD = new RTSSSharedMemoryNET.OSD("checkgamerunning2");
-                                       
+                  
+                            
+                    
+
                     MessageBox.Show("Get app entries is next");
                     var appEntries = OSD.GetAppEntries(AppFlags.Direct3D12);
 
@@ -57,7 +59,7 @@ namespace Handheld_Control_Panel.Classes
 
                     }
                     MessageBox.Show("dispose");
-                    OSD.Dispose();
+                   
 
                 }
 

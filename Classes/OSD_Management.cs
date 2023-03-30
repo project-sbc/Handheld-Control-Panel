@@ -203,12 +203,9 @@ namespace Handheld_Control_Panel.Classes
 
 
 
-                    string[] osdArr = AutoTDP_Management.writeGPUInfo();
+                    //string[] osdArr = AutoTDP_Management.writeGPUInfo();
                     string total = "";
-                    foreach (string osd in osdArr)
-                    {
-                        total = total + osd + "\n";
-                    }
+                  
                     OSD.Update(total);
                     Task.Delay(350);
 

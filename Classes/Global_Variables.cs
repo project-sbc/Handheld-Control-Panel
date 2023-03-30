@@ -23,6 +23,8 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
 
         //TDP global
         #region TDP
+
+        public static bool autoTDP = true;
         public static double ReadPL1
         {
             get

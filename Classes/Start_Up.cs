@@ -30,7 +30,8 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-           
+            
+
 
 
             //test code

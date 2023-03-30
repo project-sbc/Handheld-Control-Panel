@@ -11,7 +11,7 @@ using LibreHardwareMonitor;
 
 namespace Handheld_Control_Panel.Classes
 {
-   
+    
     public static class AutoTDP_Management
     {
         public const string CppFunctionsDLL = @"Resources\AMD\ADLX\ADLX_PerformanceMetrics.dll";
@@ -30,9 +30,9 @@ namespace Handheld_Control_Panel.Classes
 
         [DllImport(CppFunctionsDLL3, CallingConvention = CallingConvention.Cdecl)] public static extern int SetFPSLimit(int GPU, bool isEnabled, int FPS);
 
-        public static string[] writeGPUInfoOLD()
+        public static string[] writeGPUInfoOLD_FOR_REFERENCE()
         {
-           
+            
 
             while (true)
             {
@@ -97,36 +97,56 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        public static string[] writeGPUInfo()
+        public static Thread autoTDPThread;
+
+        public static void startAutoTDPThread()
         {
-            int isFactory = GetFactoryStatus(0);
-            int autoTuning = GetAutoTuning(0);
+            autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
+            autoTDPThread.Start();
+        }
 
-            int fpsLimit = SetFPSLimit(0, true, 256);
 
+        private static List<int> gpuUsage = new List<int>();
+        private static double gpuUsage_Avg;
+        private static double gpuUsage_Min;
+        private static double gpuUsage_Max;
+        private static double gpuUsage_Slope;
+        private static void getInformationForAutoTDP()
+        {
+            
             int gpuTotalPower = GetGPUMetrics(0, 5);
-            int fps = GetFPSData();
-            int gpuHotSpot = GetGPUMetrics(0, 2);
-            int gpuTemp = GetGPUMetrics(0, 3);
             int gpuClock = GetGPUMetrics(0, 0);
-            int gpuVRAMClock = GetGPUMetrics(0, 1);
             int gpuPower = GetGPUMetrics(0, 4);
-            int gpuVRAM = GetGPUMetrics(0, 6);
-            int gpuUsage = GetGPUMetrics(0, 7);
-            int gpuVolt = GetGPUMetrics(0, 8);
-            int gpuFan = GetGPUMetrics(0, 9);
+
+            gpuUsage.Add(GetGPUMetrics(0, 7));
+            if (gpuUsage.Count > 5)
+            {
+                gpuUsage.RemoveAt(0);
+                gpuUsage_Avg = gpuUsage.Average();
+                gpuUsage_Min = gpuUsage.Min();
+                gpuUsage_Max = gpuUsage.Max();
+                gpuUsage_Slope = (gpuUsage_Avg - gpuUsage[4])/5;
+            }
 
 
-            string[] returnString = new string[3];
-    
-            returnString[1] = "GPU clock is: " + gpuClock.ToString();
-            returnString[2] = "GPU usage is: " + gpuUsage.ToString();
-            returnString[0] = "GPU temp is: " + gpuTemp.ToString();
+            Debug.WriteLine("FPS: " + GetFPSData().ToString());
 
-
-            return returnString;
 
 
         }
+        private static void mainAutoTDPLoop()
+        {
+            while (Global_Variables.Global_Variables.mainWindow != null && Global_Variables.Global_Variables.autoTDP)
+            {
+                getInformationForAutoTDP();
+
+
+
+                Task.Delay(500);
+            }
+            autoTDPThread.Abort();
+        }
+
+     
     }
 }

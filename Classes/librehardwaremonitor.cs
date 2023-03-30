@@ -49,18 +49,18 @@ namespace Handheld_Control_Panel.Classes
 
                 foreach (IHardware hardware in computer.Hardware)
                 {
-                    //Debug.WriteLine("Hardware: {0}", hardware.Name);
+                    Debug.WriteLine("Hardware: {0}", hardware.Name);
 
                     foreach (IHardware subhardware in hardware.SubHardware)
                     {
-                        //Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
+                        Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
 
                         foreach (ISensor sensor in subhardware.Sensors)
                         {
-                           
+                            Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
                             if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
                             {
-                                Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                                
                             }
                             
                         }
@@ -68,10 +68,10 @@ namespace Handheld_Control_Panel.Classes
 
                     foreach (ISensor sensor in hardware.Sensors)
                     {
-                        
+                        Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
                         if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
                         {
-                            Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
+                           
                         }
                     }
                 }
