@@ -143,7 +143,8 @@ namespace Handheld_Control_Panel.Classes
            
                     AppFlags appFlag = appFlags[0];
                     AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
-                  
+                   
+
                     foreach (AppFlags af in appFlags)
                     {
                         appEntries = OSD.GetAppEntries(af);
