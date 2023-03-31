@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Handheld_Control_Panel"
-
+        xmlns:local="clr-namespace:Handheld_Control_Panel" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="SplashScreenStartUp" 
 Topmost="True"
     WindowStartupLocation="CenterScreen"
@@ -18,9 +17,9 @@ Topmost="True"
             <ImageBrush Stretch="Fill" ImageSource="/ProjectSBC.png"/>
         </Border.Background>
         <Grid>
-           
-            <Label Foreground="White" Content="Loading..." VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+            <iconPacks:PackIconFontAwesome Foreground="White" Kind="SpinnerSolid" Height="30" Width="30" Spin="True" Panel.ZIndex="3"  Name="fontAwesomeIcon" HorizontalAlignment="Center" Margin="0,125,0,0" />
         </Grid>
     </Border>
-       
-    </Window>
+
+</Window>
