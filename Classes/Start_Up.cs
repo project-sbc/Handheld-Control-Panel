@@ -21,7 +21,7 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class Start_Up
     {
-        private static PerformanceCounter theCPUCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total");
+       
 
         public static void Start_Routine()
         {
@@ -33,12 +33,6 @@ namespace Handheld_Control_Panel.Classes
             //test code here
             //AutoTDP_Management.getLibreHardwareMonitorInfo();
 
-            while (true)
-            {
-                float cpuUsage = theCPUCounter.NextValue();
-                Debug.WriteLine(cpuUsage.ToString());
-                Thread.Sleep(500);
-            }
 
 
 

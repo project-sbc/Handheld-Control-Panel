@@ -124,7 +124,7 @@ namespace Handheld_Control_Panel.Classes
 
         private static Computer computer = new Computer
             {
-                IsCpuEnabled = true,
+                IsCpuEnabled = false,
                 IsGpuEnabled = true,
                 IsMemoryEnabled = false,
                 IsMotherboardEnabled = false,
@@ -134,17 +134,15 @@ namespace Handheld_Control_Panel.Classes
                 IsBatteryEnabled = false,
                 IsPsuEnabled = false
             };
-        private static void openComputerLibreHardwareMonitor()
-        {
-            computer.Open();
-        }
+      
         private static void getInformationForAutoTDP()
         {
             //get fps from rtss statistics
             getFPS();
             //get d3d usage, cpu usage
             getLibreHardwareMonitorInfo();
-
+            //get proc utility
+            getProcUtility();
 
 
         }
@@ -212,44 +210,33 @@ namespace Handheld_Control_Panel.Classes
         #endregion
         public static void getLibreHardwareMonitorInfo()
         {
-            computer.Open();
+
             computer.Accept(new UpdateVisitor());
-
+            getLibre_GPUD3D();
           
-
-            foreach (IHardware hardware in computer.Hardware)
-            {
-                
-                Debug.WriteLine("Hardware: {0}", hardware.Name);
-
-                foreach (IHardware subhardware in hardware.SubHardware)
-                {
-                    Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
-
-                    foreach (ISensor sensor in subhardware.Sensors)
-                    {
-                        Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
-                        if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
-                        {
-
-                        }
-
-                    }
-                }
-
-                foreach (ISensor sensor in hardware.Sensors)
-                {
-                    Debug.WriteLine("\t\tSensor: {0}, value: {1}", sensor.Name, sensor.Value);
-                    if (sensor.Name.Contains("Package") || sensor.Name.Contains("ddCPU Total"))
-                    {
-
-                    }
-                }
-            }
-
-
-            computer.Close();
         }
+
+        #region processor utility
+        private static List<float> procUtility = new List<float>();
+        private static double procUtility_Avg;
+        private static float procUtility_Min;
+        private static float procUtility_Max;
+        private static double procUtility_Slope;
+        private static PerformanceCounter theCPUCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total");
+        private static void getProcUtility()
+        {
+           
+            procUtility.Add(theCPUCounter.NextValue());
+            if (procUtility.Count > 5)
+            {
+                procUtility.RemoveAt(0);
+                procUtility_Avg = gpuUsage.Average();
+                procUtility_Min = gpuUsage.Min();
+                procUtility_Max = gpuUsage.Max();
+                procUtility_Slope = (procUtility_Avg - ((procUtility[3] + procUtility[4]) / 2) / 2);
+            }
+        }
+        #endregion
 
         #region gpu D3D usage from libre hardware monitor
         private static List<float> gpuD3DUsage = new List<float>();
@@ -281,6 +268,7 @@ namespace Handheld_Control_Panel.Classes
         #endregion
         private static void mainAutoTDPLoop()
         {
+            computer.Open();
             //make sure main window is still around (otherwise its closed) and make sure autoTDP is true
             while (Global_Variables.Global_Variables.mainWindow != null && Global_Variables.Global_Variables.autoTDP)
             {
@@ -291,6 +279,8 @@ namespace Handheld_Control_Panel.Classes
                 Task.Delay(500);
             }
             autoTDPThread.Abort();
+
+            computer.Close();
         }
 
      

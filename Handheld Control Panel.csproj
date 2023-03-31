@@ -45,7 +45,6 @@
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
-    <None Remove="WinRing0x64.dll" />
     <None Remove="WinRing0x64.sys" />
   </ItemGroup>
 
@@ -150,7 +149,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autoupdater.NET.Official" Version="1.7.6" />
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.7.7" />
     <PackageReference Include="InputSimulatorCore" Version="1.0.5" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.2" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
