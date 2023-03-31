@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using LibreHardwareMonitor;
 using LibreHardwareMonitor.Hardware;
 using Windows.Devices.Perception.Provider;
+using System.Windows.Media.Animation;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -83,12 +84,22 @@ namespace Handheld_Control_Panel.Classes
 
         private static void getInformationForAutoTDP()
         {
+            start:
             //get fps from rtss statistics
             getFPS();
             //get d3d usage, cpu usage
             getLibreHardwareMonitorInfo();
             //get proc utility
             getProcUtility();
+            //get cpu
+            getCPUClock();
+
+            if (fps.Count < 5)
+            {
+                goto start;
+            }
+
+            
 
 
         }
@@ -131,6 +142,10 @@ namespace Handheld_Control_Panel.Classes
                 }
 
 
+            }
+            else
+            {
+                RTSS.startRTSS();
             }
         }
         #endregion
