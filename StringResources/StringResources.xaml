@@ -155,7 +155,7 @@
 <!-- new 27mar2023-->
     <system:String x:Key="MainWindow_NavigationView_Power">Power</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Power">Power</system:String>
-    <system:String x:Key="UserControl_CloseGame">Close Game</system:String>
+    <system:String x:Key="UserControl_CloseGame">Close </system:String>
     <system:String x:Key="UserControl_CloseActiveProgram">Close Program</system:String>
     <system:String x:Key="UserControl_HideHCP">Hide HCP</system:String>
     <system:String x:Key="UserControl_CloseHCP">Close HCP</system:String>

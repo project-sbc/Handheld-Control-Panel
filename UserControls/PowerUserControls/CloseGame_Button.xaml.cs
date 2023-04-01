@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (RTSS.RTSSRunning())
                 {
                   
-                    string gameName = OSD_Management.gameRunning();
+                    string gameName = "";
                     if (gameName == "")
                     {
                         this.Visibility = Visibility.Collapsed;
