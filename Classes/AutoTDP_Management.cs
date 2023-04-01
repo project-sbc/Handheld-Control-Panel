@@ -32,7 +32,7 @@ namespace Handheld_Control_Panel.Classes
             //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources
             computer.Open();
             //Check to make sure main window is open. We dont want someone closing the program and this autotdp thread is preventing it from ending the overall process. Also make sure autoTDP is still enabled, as soon as someone says we dont want auto tdp anymore thatwill be the last cycle
-            while (Global_Variables.Global_Variables.mainWindow.IsLoaded && Global_Variables.Global_Variables.autoTDP)
+            while (Global_Variables.Global_Variables.autoTDP)
             {
                 getInformationForAutoTDP();
 
@@ -44,18 +44,18 @@ namespace Handheld_Control_Panel.Classes
                 // to change TDP we use  this:      Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)SustainedTDP, (int)BoostTDP));
                 //Just put a number in for SustainedTDP  and BoostTDP. They can be the same.   Its a lot of code to change TDP, but its important to use the that line because I have a
                 //dedicated task scheduler that prevents multiple calls to ryzenadj at the same time (if two threads try it at the same time it yells at you big time).
-               
+
                 //to  change gpu clock we use something similiar:      Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)GPUCLK));
                 //  you can change the GPUCLK value in the line above
 
 
 
-                //task delay just adds a 500 ms pause before looping
-                Task.Delay(500);
+                //thread sleep just adds a 500 ms pause before looping
+                Thread.Sleep(250);
             }
 
-            //when autotdp is set to false the loop will end and its important to close the thread it was running on
-            autoTDPThread.Abort();
+            //when autotdp is set to false the loop will end 
+         
             //close librehardware monitor instance
             computer.Close();
         }
@@ -94,8 +94,9 @@ namespace Handheld_Control_Panel.Classes
             //get cpu
             getCPUClock();
 
-            if (fps.Count < 5)
+            if (fps.Count < 5 && Global_Variables.Global_Variables.autoTDP)
             {
+                Thread.Sleep(250);
                 goto start;
             }
 

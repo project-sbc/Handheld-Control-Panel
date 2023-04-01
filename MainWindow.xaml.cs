@@ -396,6 +396,9 @@ namespace Handheld_Control_Panel
 
             //disable software fan control if on an enabled device
             Fan_Management.setFanControlHardware();
+
+            //set auto tdp to false to make sure the autoTDP thread closes properly
+            Global_Variables.autoTDP = false;
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
