@@ -296,9 +296,11 @@ namespace Handheld_Control_Panel
 
         public void toggleWindow()
         {
-            if (this.Visibility == Visibility.Hidden) 
-            {
 
+
+            if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
+            {
+                this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
                 {
 

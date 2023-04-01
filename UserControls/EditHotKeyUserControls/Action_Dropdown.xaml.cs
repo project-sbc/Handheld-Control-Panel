@@ -99,6 +99,13 @@ namespace Handheld_Control_Panel.UserControls
             hotkeyAction.Add(toggleMouseMode);
 
 
+            HotKeyAction gotoDesktop = new HotKeyAction();
+            gotoDesktop.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Desktop"].ToString();
+            gotoDesktop.HotkeyAction = "Desktop";
+
+            hotkeyAction.Add(gotoDesktop);
+
+
             controlList.ItemsSource = hotkeyAction;
 
             foreach (HotKeyAction hka in hotkeyAction)

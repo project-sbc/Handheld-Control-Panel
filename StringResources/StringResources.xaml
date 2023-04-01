@@ -165,5 +165,8 @@
     <system:String x:Key="UserControl_Shutdown">Shut Down</system:String>
     <system:String x:Key="UserControl_FanControl">Fan Control</system:String>
 
+        <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">Go To Desktop</system:String>
 
+    
 </ResourceDictionary>
