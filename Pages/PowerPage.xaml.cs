@@ -225,6 +225,11 @@ namespace Handheld_Control_Panel.Pages
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
+
+        private void controlList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            handleListChange();
+        }
     }
     public class powerpageitem
     {
