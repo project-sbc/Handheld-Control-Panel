@@ -26,15 +26,15 @@ namespace Handheld_Control_Panel.Classes
 
         private static List<AppFlags> appFlags = new List<AppFlags>()
         {
-            {AppFlags.OpenGL },
+            {AppFlags.Direct3D12 },
+            {AppFlags.Direct3D12AFR },
             {AppFlags.Direct3D9Ex },
             {AppFlags.Direct3D9 },
             {AppFlags.Direct3D10 },
             {AppFlags.Direct3D11 },
-            {AppFlags.Direct3D12 },
-            {AppFlags.Direct3D12AFR },
-            {AppFlags.OpenGL },
-            {AppFlags.Vulkan }
+            {AppFlags.Vulkan },
+            {AppFlags.OpenGL }
+
         };
 
         private static void test2()
