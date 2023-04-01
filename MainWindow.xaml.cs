@@ -75,12 +75,7 @@ namespace Handheld_Control_Panel
 
             //set selected item of hamburger nav menu
             navigation.SelectedIndex = 0;
-            ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-            frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
-
-            HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
-            SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
-            page = lbi.Tag.ToString() + "Page";
+          
 
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -303,6 +298,16 @@ namespace Handheld_Control_Panel
         {
             if (this.Visibility == Visibility.Hidden) 
             {
+
+                if (navigation.SelectedIndex != -1)
+                {
+
+                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+
+                }
+       
                 this.Show();
                 //this.WindowState = WindowState.Normal;
                 m_notifyIcon.Visible = false;
@@ -331,7 +336,7 @@ namespace Handheld_Control_Panel
         }
         private void navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (navigation.SelectedItem != null && this.Visibility == Visibility.Visible)
+            if (navigation.SelectedItem != null )
             {
                
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
@@ -572,14 +577,7 @@ namespace Handheld_Control_Panel
                 //change controller timer interval to 20 ms for active use
                 Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
                 setWindowSizePosition();
-                if (navigation.SelectedItem != null)
-                {
-
-                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
-
-
-                }
+               
             }
         }
     }
