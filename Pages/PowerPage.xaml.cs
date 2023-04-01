@@ -21,8 +21,8 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
-using Handheld_Control_Panel.UserControls;
-using System.Windows.Threading;
+using System.Windows.Interop;
+using MahApps.Metro.IconPacks;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -32,47 +32,71 @@ namespace Handheld_Control_Panel.Pages
     public partial class PowerPage : Page
     {
         private string windowpage;
-        private List<UserControl> userControls = new List<UserControl>();
-
-        private int highlightedUserControl = -1;
-        private int selectedUserControl = -1;
+        private List<powerpageitem> powerpageitems = new List<powerpageitem>();
         public PowerPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
-
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("ProfileEditPage_Instruction");
+            wnd.changeUserInstruction("HomePage_Instruction");
             wnd = null;
+
+
+            
+
+            string gamerunning = OSD_Management.gameRunning();
+
+            if (gamerunning != "")
+            {
+                powerpageitem gameppi = new powerpageitem();
+                gameppi.displayitem = Application.Current.Resources["UserControl_CloseGame"].ToString() + " " + gamerunning;
+                gameppi.item = "CloseGame";
+                gameppi.Kind = PackIconMaterialKind.MicrosoftXboxController;
+                powerpageitems.Add(gameppi);
+            }
+
+            powerpageitem hideppi = new powerpageitem();
+            hideppi.displayitem = Application.Current.Resources["UserControl_HideHCP"].ToString();
+            hideppi.item = "HideHCP";
+            hideppi.Kind = PackIconMaterialKind.DockRight;
+            powerpageitems.Add(hideppi);
+
+            powerpageitem closeppi = new powerpageitem();
+            closeppi.displayitem = Application.Current.Resources["UserControl_CloseHCP"].ToString();
+            closeppi.item = "CloseHCP";
+            closeppi.Kind = PackIconMaterialKind.WindowClose;
+            powerpageitems.Add(closeppi);
+
+            powerpageitem restartppi = new powerpageitem();
+            restartppi.displayitem = Application.Current.Resources["UserControl_RestartPC"].ToString();
+            restartppi.item = "RestartPC";
+            restartppi.Kind = PackIconMaterialKind.Restart;
+            powerpageitems.Add(restartppi);
+
+            powerpageitem shutdownppi = new powerpageitem();
+            shutdownppi.displayitem = Application.Current.Resources["UserControl_ShutdownPC"].ToString();
+            shutdownppi.item = "ShutdownPC";
+            shutdownppi.Kind = PackIconMaterialKind.Power;
+            powerpageitems.Add(shutdownppi);
+
+
+            controlList.ItemsSource = powerpageitems;
         }
-       
+      
+      
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //get unique window page combo from getwindow to string
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-            getUserControlsOnPage();
-         
+
+
+            
 
         }
 
-        private void getUserControlsOnPage()
-        {
-            foreach (object child in stackPanel.Children)
-            {
-                if (child is UserControl)
-                {
-                    if (!child.ToString().Contains(".Divider"))
-                    {
-                        userControls.Add((UserControl)child);
-                    }
-                }
-
-            }
-        }
-        //
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
@@ -81,33 +105,131 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                switch(args.Action)
+                //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
+                if (controlList.SelectedItem != null)
                 {
-                   
-                  
-                    default:
-                        //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                        int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                    powerpageitem ppi = controlList.SelectedItem as powerpageitem;
+                    int index = controlList.SelectedIndex;
+                    switch (action)
+                    {
+                        case "A":
+                            handleListChange();
+                            break;
+                                                  
+                       
+                        case "Up":
+                            if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            break;
+                        case "Down":
+                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            break;
+                            default: break;
 
-                        highlightedUserControl = intReturn[0];
-                        selectedUserControl = intReturn[1];
-
-                        break;
-
+                    }
 
                 }
-              
-   
+                else
+                {
+                    
+                    if (action == "Up" || action == "Down")
+                    {
+                        if (controlList.Items.Count > 0) { controlList.SelectedIndex = 0; controlList.ScrollIntoView(controlList.SelectedItem); }
+                    
+                    }
+                }
+
+
             }
 
         }
-       
 
-      
+
+        private void handleListChange()
+        {
+            if (controlList.SelectedItem != null)
+            {
+                powerpageitem ppi = controlList.SelectedItem as powerpageitem;
+                int index = controlList.SelectedIndex;
+
+                MainWindow wnd = (MainWindow)Application.Current.MainWindow;
+                var mainWindowHandle = new WindowInteropHelper(wnd).Handle;
+                switch (ppi.item)
+                {
+                    case "CloseGame":
+                        int processID = OSD_Management.closeGame();
+                        if (processID != 0)
+                        {
+                            System.Diagnostics.Process procs = null;
+
+                            try
+                            {
+                                procs = Process.GetProcessById(processID);
+
+
+
+                                if (!procs.HasExited)
+                                {
+                                    procs.CloseMainWindow();
+                                }
+                            }
+                            finally
+                            {
+                                if (procs != null)
+                                {
+                                    procs.Dispose();
+                                }
+                                powerpageitems.Remove(ppi);
+                                controlList.Items.Refresh();
+                            }
+                        }
+                        break;
+
+
+                    case "HideHCP":
+                        wnd.toggleWindow();
+                        break;
+                    case "CloseHCP":
+                        wnd.Close();
+                        wnd = null;
+                        break;
+                    case "RestartPC":
+                        if (CheckForegroundWindowQAM.IsActive(mainWindowHandle))
+                        {
+                            var psi = new ProcessStartInfo("shutdown", "/r /t 0");
+                            psi.CreateNoWindow = true;
+                            psi.UseShellExecute = false;
+                            Process.Start(psi);
+                        }
+                        break;
+                    case "ShutdownPC":
+                        if (CheckForegroundWindowQAM.IsActive(mainWindowHandle))
+                        {
+                            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+                            psi.CreateNoWindow = true;
+                            psi.UseShellExecute = false;
+                            Process.Start(psi);
+                        }
+                        break;
+                    default: break;
+
+                }
+
+            }
+          
+           
+
+        }
+     
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
+    }
+    public class powerpageitem
+    {
+        public string displayitem { get; set; }
+        public string item { get; set; }
+        public PackIconMaterialKind Kind { get; set; }
     }
 }
