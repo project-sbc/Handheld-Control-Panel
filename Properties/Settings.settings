@@ -71,5 +71,8 @@
     <Setting Name="enableNotifications" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="appSortMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">App Type</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

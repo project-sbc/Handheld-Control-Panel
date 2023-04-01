@@ -44,7 +44,19 @@ namespace Handheld_Control_Panel.Pages
  
         private string windowpage;
         private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
-        public AppLauncherPage()
+
+        private string currentSortMethod = Properties.Settings.Default.appSortMethod;
+        private Dictionary<string,string> sortMethods = 
+        new Dictionary<string, string>()
+        {
+              {"App Name", Application.Current.Resources["Sort_Method_AppName"].ToString()},
+            {"App Type", Application.Current.Resources["Sort_Method_AppType"].ToString()},
+            {"Frequently Launched", Application.Current.Resources["Sort_Method_FrequentlyLaunched"].ToString()},
+            {"Recently Launched", Application.Current.Resources["Sort_Method_RecentlyLaunched"].ToString()}
+          
+        };
+
+public AppLauncherPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -71,8 +83,11 @@ namespace Handheld_Control_Panel.Pages
         private void loadValues()
         {
             // add panels to wrap panel
+            if (items.Count > 0)
+            {
+                items.Clear();
+            }
 
-           
 
             foreach (Profile profile in Global_Variables.profiles)
             {
@@ -80,7 +95,9 @@ namespace Handheld_Control_Panel.Pages
                 {
                     ListBoxAppItem lbai = new ListBoxAppItem();
                     lbai.ID = profile.ID;
-
+                    lbai.programType = profile.AppType;
+                    lbai.LastLaunched = profile.LastLaunched;
+                    lbai.NumberLaunches = profile.NumberLaunches;
                     switch (profile.AppType)
                     {
                         case "Steam":
@@ -106,7 +123,7 @@ namespace Handheld_Control_Panel.Pages
                         default:
                             if (profile.Path != null)
                             {
-                                
+
                                 if (File.Exists(profile.Path))
                                 {
                                     lbai.Exe = profile.Exe;
@@ -117,7 +134,7 @@ namespace Handheld_Control_Panel.Pages
                                     items.Add(lbai);
                                 }
                             }
-                           
+
 
                             break;
 
@@ -133,8 +150,23 @@ namespace Handheld_Control_Panel.Pages
 
 
             }
+            switch(currentSortMethod)
+            {
+                case "App Type":
+                    controlList.ItemsSource = items.OrderBy(o => o.programType).ToList();
+                    break;
+                case "Recently Launched":
+                    controlList.ItemsSource = items.OrderBy(o => o.NumberLaunches).ToList();
+                    break;
+                case "Frequently Launched":
+                    controlList.ItemsSource = items.OrderBy(o => o.LastLaunched).ToList();
+                    break;
+                default:
+                    controlList.ItemsSource = items;
+                    break;
 
-            controlList.ItemsSource = items;
+            }
+            
         }
 
         private void spinner_Stop_Tick(object sender, EventArgs e)
@@ -277,8 +309,9 @@ where childItem : DependencyObject
         public string ID { get; set; }
         public ImageSource image { get; set; }
         public ImageSource imageSteam { get; set; }
-
-     
+        public int NumberLaunches { get; set; }
+        public int LastLaunched { get; set; }
+        public string programType { get; set; }
         public string Exe { get; set; }
   
     }

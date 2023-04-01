@@ -167,6 +167,11 @@
 
         <!--new 01Apr2023-->
     <system:String x:Key="Hotkeys_Action_Desktop">Go To Desktop</system:String>
+        
+    <system:String x:Key="Sort_Method_AppType">App Type</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">Frequently Launched</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">Recently Launched</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">Profile Name</system:String>
 
     
 </ResourceDictionary>

@@ -152,6 +152,11 @@ namespace Handheld_Control_Panel.Classes
 
 
         }
+        private int DaysBetween(DateTime d1, DateTime d2)
+        {
+            TimeSpan span = d2.Subtract(d1);
+            return (int)span.TotalDays;
+        }
         public void openProgram(string ID)
         {
             foreach (Profile profile in Global_Variables.Global_Variables.profiles)
@@ -172,7 +177,12 @@ namespace Handheld_Control_Panel.Classes
                         }
                         
                     }
-              
+                    profile.NumberLaunches = profile.NumberLaunches + 1;
+
+
+                    profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
+                    profile.SaveToXML();
                     break;
                 }
                 
@@ -358,6 +368,9 @@ namespace Handheld_Control_Panel.Classes
         public string Path { get; set; } = "";
 
         public string appType = "";
+
+        public int LastLaunched { get; set; } = 0;
+        public int NumberLaunches { get; set; } = 0;
         public string AppType
         {
             get { return appType; }
@@ -450,6 +463,8 @@ namespace Handheld_Control_Panel.Classes
                     LaunchOptions.SelectSingleNode("Path").InnerText = Path;
                     LaunchOptions.SelectSingleNode("AppType").InnerText = AppType;
                     LaunchOptions.SelectSingleNode("GameID").InnerText = GameID;
+                    LaunchOptions.SelectSingleNode("LastLaunched").InnerText = LastLaunched.ToString();
+                    LaunchOptions.SelectSingleNode("NumberLaunches").InnerText = NumberLaunches.ToString();
 
 
                     parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
@@ -525,6 +540,23 @@ namespace Handheld_Control_Panel.Classes
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                    if (LaunchOptions.SelectSingleNode("NumberLaunches").InnerText != "")
+                    {
+                        NumberLaunches = Int32.Parse(LaunchOptions.SelectSingleNode("NumberLaunches").InnerText);
+                    }
+                    else
+                    {
+                        NumberLaunches = 0;
+                    }
+                    if (LaunchOptions.SelectSingleNode("LastLaunched").InnerText != "")
+                    {
+                        LastLaunched = Int32.Parse(LaunchOptions.SelectSingleNode("LastLaunched").InnerText);
+                    }
+                    else
+                    {
+                        LastLaunched = 0;
+                    }
+                    
 
                     ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
                     Exe = parentNode.SelectSingleNode("Exe").InnerText;
