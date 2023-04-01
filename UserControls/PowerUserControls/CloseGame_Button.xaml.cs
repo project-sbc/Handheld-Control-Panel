@@ -100,31 +100,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int processID = OSD_Management.closeGame();
-            if (processID != 0)
-            {
-                System.Diagnostics.Process procs = null;
-
-                try
-                {
-                    procs = Process.GetProcessById(processID);
-
-
-
-                    if (!procs.HasExited)
-                    {
-                        procs.CloseMainWindow();
-                    }
-                }
-                finally
-                {
-                    if (procs != null)
-                    {
-                        procs.Dispose();
-                    }
-                    this.Visibility = Visibility.Collapsed;
-                }
-            }
+        
                  
 
         }

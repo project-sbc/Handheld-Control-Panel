@@ -53,8 +53,7 @@ namespace Handheld_Control_Panel
           
             InitializeComponent();
 
-            //start auto tdp
-            AutoTDP_Management.startAutoTDPThread();
+           
 
 
             Global_Variables.mainWindow = this;

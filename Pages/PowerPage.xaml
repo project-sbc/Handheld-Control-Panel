@@ -5,19 +5,45 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Handheld_Control_Panel.Pages"
       xmlns:uc="clr-namespace:Handheld_Control_Panel.UserControls"
+            xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
-    <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
-        <StackPanel x:Name="stackPanel" >
-            <uc:CloseGame_Button/>
-            <uc:HideHCP_Button/>
-            <uc:CloseHCP_Button/>
-            <uc:Restart_Button/>
-            <uc:Shutdown_Button/>
-        </StackPanel>
-    </ScrollViewer>
+    <Grid>
+        <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"  ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"     >
+            <ListBox.Resources>
 
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="0"/>
+
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid  Height="53">
+
+                        <DockPanel >
+                            <iconPacks:PackIconMaterial Kind="{Binding Kind}" Height="20" Width="20" Margin="12,0,11,0" VerticalAlignment="Center" />
+                            <Label Content="{Binding displayitem}" VerticalAlignment="Center" FontSize="22" Margin="0,-7,0,0" />
+
+                        </DockPanel>
+
+
+
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
 
 </Page>
