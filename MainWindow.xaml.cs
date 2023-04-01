@@ -75,6 +75,12 @@ namespace Handheld_Control_Panel
 
             //set selected item of hamburger nav menu
             navigation.SelectedIndex = 0;
+            ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+            frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+            HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
+            SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
+            page = lbi.Tag.ToString() + "Page";
 
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -94,10 +100,14 @@ namespace Handheld_Control_Panel
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
 
-            //minimize if autostart
+            //hide if autostart
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-                this.WindowState = WindowState.Minimized;
+                this.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.Visibility = Visibility.Visible;
             }
         }
 
@@ -150,7 +160,7 @@ namespace Handheld_Control_Panel
 
         private void UpdateTimer_Tick(object? sender, EventArgs e)
         {
-            if (this.WindowState != WindowState.Minimized)
+            if (this.Visibility != Visibility.Visible)
             {
                 updateStatusBar();
                
@@ -262,10 +272,10 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
-                    case "LB":
+                    case "LT":
                         navigateListBox(true);
                         break;
-                    case "RB":
+                    case "RT":
                         navigateListBox(false);
                         break;
                     case "B":
@@ -291,17 +301,17 @@ namespace Handheld_Control_Panel
 
         public void toggleWindow()
         {
-            if (this.WindowState == WindowState.Minimized) 
+            if (this.Visibility == Visibility.Hidden) 
             {
                 this.Show();
-                this.WindowState = WindowState.Normal;
+                //this.WindowState = WindowState.Normal;
                 m_notifyIcon.Visible = false;
             }
             else
             {
-               
+                
                 this.Hide();
-                this.WindowState = WindowState.Minimized;
+                //this.WindowState = WindowState.Minimized;
                 m_notifyIcon.Visible = true;
             }
 
@@ -321,7 +331,7 @@ namespace Handheld_Control_Panel
         }
         private void navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (navigation.SelectedItem != null && this.WindowState !=WindowState.Minimized)
+            if (navigation.SelectedItem != null && this.Visibility == Visibility.Visible)
             {
                
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
@@ -465,38 +475,43 @@ namespace Handheld_Control_Panel
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
-            if (this.WindowState == WindowState.Minimized)
+            if (false)
             {
-                this.ShowInTaskbar = false;
-                
-                navigation.SelectedIndex = 0;
-                frame.Source = null;
-                //change interval to 15 seconds
-                updateTimer.Interval = new TimeSpan(0,0,15);
-                //change controller timer interval to 100 ms to hot key recognition when not open
-                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
-            }
-            if (this.WindowState == WindowState.Normal)
-            {
-                this.ShowInTaskbar = true;
-                //navigation.SelectedIndex = 0;
-                updateTimer.Interval = new TimeSpan(0, 0, 3);
-                //change controller timer interval to 20 ms for active use
-                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
-                setWindowSizePosition();
-                if (navigation.SelectedItem != null)
+                if (this.WindowState == WindowState.Minimized)
                 {
+                    this.ShowInTaskbar = false;
 
-                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                    navigation.SelectedIndex = 0;
+                    frame.Source = null;
+                    //change interval to 15 seconds
+                    updateTimer.Interval = new TimeSpan(0, 0, 15);
+                    //change controller timer interval to 100 ms to hot key recognition when not open
+                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
+                }
+                if (this.WindowState == WindowState.Normal)
+                {
+                    this.ShowInTaskbar = true;
+                    //navigation.SelectedIndex = 0;
+                    updateTimer.Interval = new TimeSpan(0, 0, 3);
+                    //change controller timer interval to 20 ms for active use
+                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
+                    setWindowSizePosition();
+                    if (navigation.SelectedItem != null)
+                    {
 
-                   
+                        ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                        frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+
+                    }
                 }
             }
+          
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+          
             getDPIScaling();
         }
         private void getDPIScaling()
@@ -533,6 +548,38 @@ namespace Handheld_Control_Panel
                     default:break;
                 }
 
+            }
+        }
+
+        private void MetroWindow_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.Visibility == Visibility.Hidden)
+            {
+                this.ShowInTaskbar = false;
+
+                navigation.SelectedIndex = 0;
+                frame.Source = null;
+                //change interval to 15 seconds
+                updateTimer.Interval = new TimeSpan(0, 0, 15);
+                //change controller timer interval to 100 ms to hot key recognition when not open
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
+            }
+            if (this.Visibility == Visibility.Visible)
+            {
+                this.ShowInTaskbar = true;
+                //navigation.SelectedIndex = 0;
+                updateTimer.Interval = new TimeSpan(0, 0, 3);
+                //change controller timer interval to 20 ms for active use
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
+                setWindowSizePosition();
+                if (navigation.SelectedItem != null)
+                {
+
+                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+
+                }
             }
         }
     }

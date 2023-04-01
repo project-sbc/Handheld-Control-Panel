@@ -310,6 +310,14 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                 {
                                     buttonEvents.raiseControllerInput("Down");
                                 }
+                                if (currentGamePad.LeftTrigger >200 && previousGamePad.LeftTrigger <= 200)
+                                {
+                                    buttonEvents.raiseControllerInput("LT");
+                                }
+                                if (currentGamePad.RightTrigger > 200 && previousGamePad.RightTrigger <= 200)
+                                {
+                                    buttonEvents.raiseControllerInput("RT");
+                                }
                             }
 
 
