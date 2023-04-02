@@ -204,7 +204,7 @@
     <Compile Update="Pages\AppLauncherPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\PowerPageOLD.xaml.cs">
+    <Compile Update="Pages\OLD\PowerPageOLD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\SettingsPage.xaml.cs">

@@ -8,7 +8,18 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    <DockPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_MouseMode}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_MouseMode}"/>
+        </DockPanel>
+        
+         <DockPanel Grid.Row="1">
         <Label Content="{DynamicResource Usercontrol_MouseModeSaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
         <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
@@ -37,6 +48,9 @@
             </StackPanel>
         </ScrollViewer>
     </DockPanel>
+    </Grid>
+    
+   
    
   
 </Page>
