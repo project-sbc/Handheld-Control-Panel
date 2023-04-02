@@ -20,7 +20,7 @@
         </DockPanel>
         
         <DockPanel Grid.Row="1">
-        <Label Content="{DynamicResource Usercontrol_ProfileSaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+ 
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}" DockPanel.Dock="Bottom">
             <StackPanel x:Name="stackPanel" >
                 <uc:Profile_Textbox/>

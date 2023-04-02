@@ -33,7 +33,7 @@ namespace Handheld_Control_Panel.Pages
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
-        private DispatcherTimer saveDT = new DispatcherTimer();
+  
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
         public ProfileEditPage()
@@ -131,23 +131,7 @@ namespace Handheld_Control_Panel.Pages
             }
 
         }
-        private void runSaveMessage()
-        {
-           
-            saveDT.Interval = new TimeSpan(0, 0, 3);
-            saveDT.Tick += SaveDT_Tick;
-            saveDT.Start();
-            SaveLabel.Visibility = Visibility.Visible;
-
-        }
-
-        private void SaveDT_Tick(object? sender, EventArgs e)
-        {
-           
-            SaveLabel.Visibility = Visibility.Collapsed;
-            saveDT.Stop();
-        }
-
+      
       
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
