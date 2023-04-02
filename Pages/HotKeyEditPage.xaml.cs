@@ -97,7 +97,8 @@ namespace Handheld_Control_Panel.Pages
                         {
                             Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
                         }
-                        Notification_Management.Show(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), true);
+                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_MouseModeSaved"].ToString(), Notification.Wpf.NotificationType.Success);
+
                         wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("HotKeyPage");
                         wnd = null;

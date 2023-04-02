@@ -20,7 +20,7 @@
         </DockPanel>
         
          <DockPanel Grid.Row="1">
-        <Label Content="{DynamicResource Usercontrol_MouseModeSaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+       
         <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
             <StackPanel x:Name="stackPanel" >
                 <uc:MMName_Textbox />
