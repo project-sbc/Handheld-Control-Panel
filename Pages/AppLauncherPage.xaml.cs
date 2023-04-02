@@ -68,22 +68,22 @@ namespace Handheld_Control_Panel.Pages
             sortLabel.Content = Application.Current.Resources["Sort_Method_SortBy"].ToString()+Application.Current.Resources[currentSortMethod].ToString();
     
             SortMethods sm = new SortMethods();
-            sm.SortMethod = "App Type";
+            sm.SortMethod = "Sort_Method_AppType";
             sm.DisplaySortMethod = Application.Current.Resources["Sort_Method_AppType"].ToString();
             sortMethods.Add(sm);
 
             SortMethods sm1 = new SortMethods();
-            sm1.SortMethod = "Profile Name";
+            sm1.SortMethod = "Sort_Method_ProfileName";
             sm1.DisplaySortMethod = Application.Current.Resources["Sort_Method_ProfileName"].ToString();
             sortMethods.Add(sm1);
 
             SortMethods sm2 = new SortMethods();
-            sm2.SortMethod = "Frequently Launched";
+            sm2.SortMethod = "Sort_Method_FrequentlyLaunched";
             sm2.DisplaySortMethod = Application.Current.Resources["Sort_Method_FrequentlyLaunched"].ToString();
             sortMethods.Add(sm2);
 
             SortMethods sm3 = new SortMethods();
-            sm3.SortMethod = "Recently Launched";
+            sm3.SortMethod = "Sort_Method_RecentlyLaunched";
             sm3.DisplaySortMethod = Application.Current.Resources["Sort_Method_RecentlyLaunched"].ToString();
             sortMethods.Add(sm3);
         }
