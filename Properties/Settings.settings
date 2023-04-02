@@ -72,7 +72,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="appSortMethod" Type="System.String" Scope="User">
-      <Value Profile="(Default)">App Type</Value>
+      <Value Profile="(Default)">Profile Name</Value>
     </Setting>
   </Settings>
 </SettingsFile>

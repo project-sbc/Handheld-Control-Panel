@@ -120,7 +120,7 @@ namespace Handheld_Control_Panel
             }
             else
             {
-                QuickAction_Management.toggleQuickAccessMenu();
+                //QuickAction_Management.toggleQuickAccessMenu();
             }
             
             

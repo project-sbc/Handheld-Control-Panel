@@ -36,27 +36,27 @@ namespace Handheld_Control_Panel.Pages
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
+    /// 
+    public class SortMethods
+    {
+        public string DisplaySortMethod { get; set; }
+        public string SortMethod { get; set; }
+    }
+
     public partial class AppLauncherPage : Page
     {
 
         private static PackIconFontAwesome packIconFontAwesome;
         private static DispatcherTimer spinStopTimer = new DispatcherTimer();
- 
+
         private string windowpage;
         private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
 
         private string currentSortMethod = Properties.Settings.Default.appSortMethod;
-        private Dictionary<string,string> sortMethods = 
-        new Dictionary<string, string>()
-        {
-              {"App Name", Application.Current.Resources["Sort_Method_AppName"].ToString()},
-            {"App Type", Application.Current.Resources["Sort_Method_AppType"].ToString()},
-            {"Frequently Launched", Application.Current.Resources["Sort_Method_FrequentlyLaunched"].ToString()},
-            {"Recently Launched", Application.Current.Resources["Sort_Method_RecentlyLaunched"].ToString()}
-          
-        };
 
-public AppLauncherPage()
+        private List<SortMethods> sortMethods = new List<SortMethods>();
+
+        public AppLauncherPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -64,6 +64,28 @@ public AppLauncherPage()
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
             wnd.changeUserInstruction("AppLauncherPage_Instruction");
             wnd = null;
+
+
+
+            SortMethods sm = new SortMethods();
+            sm.SortMethod = "App Type";
+            sm.DisplaySortMethod = Application.Current.Resources["Sort_Method_AppType"].ToString();
+            sortMethods.Add(sm);
+
+            SortMethods sm1 = new SortMethods();
+            sm1.SortMethod = "Profile Name";
+            sm1.DisplaySortMethod = Application.Current.Resources["Sort_Method_ProfileName"].ToString();
+            sortMethods.Add(sm1);
+
+            SortMethods sm2 = new SortMethods();
+            sm2.SortMethod = "Frequently Launched";
+            sm2.DisplaySortMethod = Application.Current.Resources["Sort_Method_FrequentlyLaunched"].ToString();
+            sortMethods.Add(sm2);
+
+            SortMethods sm3 = new SortMethods();
+            sm3.SortMethod = "Recently Launched";
+            sm3.DisplaySortMethod = Application.Current.Resources["Sort_Method_RecentlyLaunched"].ToString();
+            sortMethods.Add(sm3);
         }
       
       
@@ -95,6 +117,7 @@ public AppLauncherPage()
                 {
                     ListBoxAppItem lbai = new ListBoxAppItem();
                     lbai.ID = profile.ID;
+                    lbai.ProfileName = profile.ProfileName;
                     lbai.programType = profile.AppType;
                     lbai.LastLaunched = profile.LastLaunched;
                     lbai.NumberLaunches = profile.NumberLaunches;
@@ -156,17 +179,25 @@ public AppLauncherPage()
                     controlList.ItemsSource = items.OrderBy(o => o.programType).ToList();
                     break;
                 case "Recently Launched":
-                    controlList.ItemsSource = items.OrderBy(o => o.NumberLaunches).ToList();
+                    items = items.OrderBy(o => o.NumberLaunches).ToList();
+                    items.Reverse();
+                    controlList.ItemsSource = items;
+         
                     break;
                 case "Frequently Launched":
-                    controlList.ItemsSource = items.OrderBy(o => o.LastLaunched).ToList();
+                    items = items.OrderBy(o => o.LastLaunched).ToList();
+                    items.Reverse();
+                    controlList.ItemsSource = items;
+                    break;
+                case "Profile Name":
+                    controlList.ItemsSource = items.OrderBy(o => o.ProfileName).ToList();
                     break;
                 default:
                     controlList.ItemsSource = items;
                     break;
 
             }
-            
+            controlList.Items.Refresh();
         }
 
         private void spinner_Stop_Tick(object sender, EventArgs e)
@@ -267,7 +298,9 @@ where childItem : DependencyObject
                             }
                             break;
 
-                      
+                        case "X":
+                            changeSortMethod();
+                            break;
                         case "Up":
                             if (index > 2) { controlList.SelectedIndex = index - 3; controlList.ScrollIntoView(controlList.SelectedItem); }
                             break;
@@ -288,6 +321,10 @@ where childItem : DependencyObject
                 else
                 {
                     controlList.SelectedIndex = 0;
+                    if (args.Action == "X")
+                    {
+                            changeSortMethod();
+                    }
                 }
               
 
@@ -295,7 +332,28 @@ where childItem : DependencyObject
 
         }
 
+        private void changeSortMethod()
+        {
+            foreach(SortMethods sm in sortMethods) 
+            {
+               if (currentSortMethod == sm.SortMethod)
+                {
+                    int index = sortMethods.IndexOf(sm);
+                    if (index == sortMethods.Count - 1)
+                    {
+                        currentSortMethod = sortMethods[0].SortMethod;
 
+                    }
+                    else
+                    {
+                        currentSortMethod = sortMethods[index + 1].SortMethod;
+                    }
+                    loadValues();
+                    break;
+                }
+            }
+
+        }
 
       
 
@@ -307,6 +365,7 @@ where childItem : DependencyObject
     public class ListBoxAppItem
     {
         public string ID { get; set; }
+        public string ProfileName { get; set; }
         public ImageSource image { get; set; }
         public ImageSource imageSteam { get; set; }
         public int NumberLaunches { get; set; }

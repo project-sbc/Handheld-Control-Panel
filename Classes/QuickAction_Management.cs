@@ -71,6 +71,7 @@ namespace Handheld_Control_Panel.Classes
              
                     Shell32.Shell shellObject = new Shell32.Shell();
                     shellObject.ToggleDesktop();
+                    
                     break;
                 default: break;
             }
@@ -78,9 +79,6 @@ namespace Handheld_Control_Panel.Classes
 
   
 
-        public static void toggleQuickAccessMenu()
-        {
-
-        }
+      
     }
 }
