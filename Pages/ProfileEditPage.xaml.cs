@@ -104,7 +104,7 @@ namespace Handheld_Control_Panel.Pages
                         }
                         break;
                     case "Start":
-                        Notification_Management.Show(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), true);
+                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), Notification.Wpf.NotificationType.Success);
                         Global_Variables.profiles.editingProfile.SaveToXML();
 
                         Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);

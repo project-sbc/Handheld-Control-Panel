@@ -8,11 +8,23 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    
-    <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
-        <StackPanel x:Name="stackPanel" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition />
+            
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Home}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_Home}"/>
+        </DockPanel>
+
+        <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}">
+            <StackPanel x:Name="stackPanel" >
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
    
-        </StackPanel>
-    </ScrollViewer>
   
 </Page>

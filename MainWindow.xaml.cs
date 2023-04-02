@@ -31,6 +31,8 @@ using System.Windows.Interop;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
 using Handheld_Control_Panel.Classes.Fan_Management;
+using Notification.Wpf;
+using Notification.Wpf.Classes;
 
 namespace Handheld_Control_Panel
 {
@@ -344,8 +346,6 @@ namespace Handheld_Control_Panel
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
                 frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
                 
-                HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
-                SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
                 page = lbi.Tag.ToString() + "Page";
             }
         }
@@ -353,6 +353,32 @@ namespace Handheld_Control_Panel
         {
             frame.Navigate(new Uri("Pages\\" + pageName + ".xaml" , UriKind.RelativeOrAbsolute));
             page = pageName;
+        }
+
+        public void ShowNotificationInWindow(string title, NotificationType notificationType)
+        {
+            var notificationManager = new NotificationManager();
+
+            var content = new NotificationContent
+            {
+                Title = title,
+  
+                Type = notificationType,
+                
+                TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
+                RowsCount = 3, //Will show 3 rows and trim after
+
+                CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
+
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Foreground = new SolidColorBrush(Colors.White)
+
+            };
+
+    
+            notificationManager.Show(content, "WindowArea");
+
+           
         }
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
