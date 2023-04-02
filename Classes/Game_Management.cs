@@ -22,14 +22,16 @@ namespace Handheld_Control_Panel.Classes
         {
             if (appType =="App")
             {
-
+                if (File.Exists(appLocation))
+                {
+                    Task.Run(() => System.Diagnostics.Process.Start(appLocation));
+                }
 
             }
             else
             {
                 if (gameID != "")
                 {
-
 
                     Guid LauncherID = new Guid(launcherID);
                     var game = Global_Variables.Global_Variables.gameLauncher.GetAllGames().First(l => l.LauncherId == LauncherID && l.Id == gameID);
@@ -108,12 +110,14 @@ namespace Handheld_Control_Panel.Classes
 
 
 
-        public static void syncBattleNet_Library()
+
+
+
+        public static List<GameLauncherItem> syncBattleNet_Library()
         {
             List<GameLauncherItem> list = new List<GameLauncherItem>(); 
 
             
-
             foreach (var launcher in Global_Variables.Global_Variables.gameLauncher.GetLaunchers())
             {
                 switch(launcher.Name)
@@ -130,19 +134,10 @@ namespace Handheld_Control_Panel.Classes
                             list.Add(launcherItem);
                         }
                         break;
-
-
                 }
 
-
-
-
-                Console.WriteLine($"Launcher name: {launcher.Name}");
-                Console.WriteLine("Games:");
-
-               
             }
-
+            return list;
 
         }
      

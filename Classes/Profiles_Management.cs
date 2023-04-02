@@ -167,27 +167,24 @@ namespace Handheld_Control_Panel.Classes
         }
         public void openProgram(string ID)
         {
-            foreach (Profile profile in Global_Variables.Global_Variables.profiles)
+            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID== ID);
+
+            if (profile.ID == ID)
             {
-                if (profile.ID == ID)
-                {
-                    
-                    profile.applyProfile(true);
 
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LauncherID, profile.Path));
+                profile.applyProfile(true);
 
-                    profile.NumberLaunches = profile.NumberLaunches + 1;
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LauncherID, profile.Path));
+
+                profile.NumberLaunches = profile.NumberLaunches + 1;
 
 
-                    profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
-                    profile.SaveToXML();
-                    break;
-                }
-                
+                profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
+                                   System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
+                profile.SaveToXML();
+        
             }
 
-           
 
         }
         public void setCurrentDefaultProfileToFalse(string ID)
