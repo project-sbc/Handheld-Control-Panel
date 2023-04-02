@@ -18,7 +18,7 @@ namespace Handheld_Control_Panel.Classes
     public static class Game_Management
     {
  
-        public static void LaunchApp(string gameID, string appType, string appLocation)
+        public static void LaunchApp(string gameID, string appType, string launcherID, string appLocation)
         {
             if (appType =="App")
             {
@@ -29,10 +29,10 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (gameID != "")
                 {
-          
-                    var launcher = Global_Variables.Global_Variables.gameLauncher.GetLaunchers().First(l => l.Name == appType);
-                    Guid launcherID = launcher.Id;
-                    var game = Global_Variables.Global_Variables.gameLauncher.GetAllGames().First(l => l.LauncherId == launcherID && l.Id == gameID);
+
+
+                    Guid LauncherID = new Guid(launcherID);
+                    var game = Global_Variables.Global_Variables.gameLauncher.GetAllGames().First(l => l.LauncherId == LauncherID && l.Id == gameID);
                     if (game != null)
                     {
                         switch (appType)
@@ -118,50 +118,14 @@ namespace Handheld_Control_Panel.Classes
             {
                 switch(launcher.Name)
                 {
-                    case "Battle.net":
-                        foreach (var game in launcher.Games)
-                        {
-                            GameLauncherItem launcherItem = new GameLauncherItem();
-                            launcherItem.gameName = game.Name;
-                            launcherItem.gameID = game.Id;
-                            launcherItem.installPath = "";
-                            launcherItem.appType = launcher.Name;
-                            list.Add(launcherItem);
-                        }
-
-                        break;
-                    case "Steam":
-                        foreach (var game in launcher.Games)
-                        {
-                            GameLauncherItem launcherItem = new GameLauncherItem();
-                            launcherItem.gameName = game.Name;
-                            launcherItem.gameID = game.Id;
-                            launcherItem.installPath = "";
-                            launcherItem.appType = launcher.Name;
-                            list.Add(launcherItem);
-                        }
-                        break;
-                    case "Epic Games":
-                        foreach (var game in launcher.Games)
-                        {
-                            GameLauncherItem launcherItem = new GameLauncherItem();
-                            launcherItem.gameName = game.Name;
-                            launcherItem.gameID = game.Id;
-                            launcherItem.installPath = "";
-                            launcherItem.appType = launcher.Name;
-                            list.Add(launcherItem);
-                        }
-                        break;
-
-                        
-
+                   
                     default:
                         foreach (var game in launcher.Games)
                         {
                             GameLauncherItem launcherItem = new GameLauncherItem();
                             launcherItem.gameName = game.Name;
                             launcherItem.gameID = game.Id;
-                            launcherItem.installPath = "";
+                            launcherItem.launcherID = game.LauncherId.ToString();
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
                         }
@@ -190,7 +154,7 @@ namespace Handheld_Control_Panel.Classes
     {
         public string gameID { get; set; }
         public string gameName { get; set; }
-        public string installPath { get; set; }
         public string appType { get; set; }
+        public string launcherID { get; set; }
     }
 }

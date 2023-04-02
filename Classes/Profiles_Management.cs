@@ -174,7 +174,7 @@ namespace Handheld_Control_Panel.Classes
                     
                     profile.applyProfile(true);
 
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.Path));
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LauncherID, profile.Path));
 
                     profile.NumberLaunches = profile.NumberLaunches + 1;
 
