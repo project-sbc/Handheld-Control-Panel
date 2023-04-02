@@ -89,7 +89,7 @@ namespace Handheld_Control_Panel.Pages
                         break;
                     case "Start":
                         Global_Variables.mousemodes.editingMouseMode.SaveToXML();
-                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_HotKeySaved"].ToString(), Notification.Wpf.NotificationType.Success);
+                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_MouseModeSaved"].ToString(), Notification.Wpf.NotificationType.Success);
                       
                         wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("MouseModePage");
