@@ -74,7 +74,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Global_Variables.profiles.syncEpicGameToProfile();
+           // Global_Variables.profiles.syncEpicGameToProfile();
         }
     }
 }

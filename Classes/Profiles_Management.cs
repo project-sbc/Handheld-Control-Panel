@@ -67,7 +67,7 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
-        public void createProfileForEpicGame(string profileName, string path, string gameID)
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype)
         {
 
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
@@ -83,7 +83,8 @@ namespace Handheld_Control_Panel.Classes
             newNode.SelectSingleNode("ID").InnerText = Global_Variables.Global_Variables.profiles.getNewIDNumberForProfile(xmlDocument);
             newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
             newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "EpicGames";
+            newNode.SelectSingleNode("LaunchOptions/LaunchCommand").InnerText = launchcommand;
+            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = apptype;
 
             xmlNodeProfiles.AppendChild(newNode);
 
@@ -131,11 +132,12 @@ namespace Handheld_Control_Panel.Classes
 
 
         }
-        public void syncEpicGameToProfile()
+
+        public void syncGamesToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
 
-            List<EpicGamesLauncherItem> result = EpicGames_Management.syncEpic_Library();
+            List<GameLauncherItem> result = Game_Management.syncGame_Library();
 
             if (result.Count > 0)
             {
@@ -143,12 +145,12 @@ namespace Handheld_Control_Panel.Classes
                 xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
                 XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
-                foreach (EpicGamesLauncherItem item in result)
+                foreach (GameLauncherItem item in result)
                 {
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForEpicGame(item.gameName, item.installPath, item.gameID);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType);
                     }
                 }
 
@@ -160,6 +162,8 @@ namespace Handheld_Control_Panel.Classes
 
 
         }
+
+       
         private int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
@@ -169,12 +173,12 @@ namespace Handheld_Control_Panel.Classes
         {
             Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID== ID);
 
-            if (profile.ID == ID)
+            if (profile != null)
             {
 
                 profile.applyProfile(true);
 
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LauncherID, profile.Path));
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LaunchCommand, profile.Path));
 
                 profile.NumberLaunches = profile.NumberLaunches + 1;
 
@@ -364,7 +368,7 @@ namespace Handheld_Control_Panel.Classes
         public string Path { get; set; } = "";
 
         public string appType = "";
-        public string LauncherID = "";
+        public string LaunchCommand = "";
         public string ImageLocation = "";
 
         public int LastLaunched { get; set; } = 0;
@@ -463,7 +467,7 @@ namespace Handheld_Control_Panel.Classes
                     LaunchOptions.SelectSingleNode("GameID").InnerText = GameID;
                     LaunchOptions.SelectSingleNode("LastLaunched").InnerText = LastLaunched.ToString();
                     LaunchOptions.SelectSingleNode("NumberLaunches").InnerText = NumberLaunches.ToString();
-                    LaunchOptions.SelectSingleNode("LauncherID").InnerText = LauncherID.ToString();
+                    LaunchOptions.SelectSingleNode("LaunchCommand").InnerText = LaunchCommand.ToString();
                     LaunchOptions.SelectSingleNode("ImageLocation").InnerText = ImageLocation.ToString();
 
 
@@ -541,7 +545,7 @@ namespace Handheld_Control_Panel.Classes
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
 
-                    LauncherID= LaunchOptions.SelectSingleNode("LauncherID").InnerText;
+                    LaunchCommand = LaunchOptions.SelectSingleNode("LaunchCommand").InnerText;
                     ImageLocation=LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
 
 

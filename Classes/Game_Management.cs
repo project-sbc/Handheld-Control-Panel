@@ -10,6 +10,7 @@ using static System.Net.Mime.MediaTypeNames;
 using GameLib;
 using GameLib.Core;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using System.Windows;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -18,7 +19,7 @@ namespace Handheld_Control_Panel.Classes
     public static class Game_Management
     {
  
-        public static void LaunchApp(string gameID, string appType, string launcherID, string appLocation)
+        public static void LaunchApp(string gameID, string appType, string launchcommand, string appLocation)
         {
             if (appType =="App")
             {
@@ -32,25 +33,17 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (gameID != "")
                 {
-
-                    Guid LauncherID = new Guid(launcherID);
-                    var game = Global_Variables.Global_Variables.gameLauncher.GetAllGames().First(l => l.LauncherId == LauncherID && l.Id == gameID);
-                    if (game != null)
+                    switch (appType)
                     {
-                        switch (appType)
-                        {
-                            case "Epic Games":
-                                RunLaunchString(game);
-                                break;
-                            case "Steam":
-                                RunLaunchString(game);
-                                break;
+                        case "Epic Games":
+                            RunLaunchString(launchcommand);
+                            break;
+                        case "Steam":
+                            RunLaunchString(launchcommand);
+                            break;
 
-                            default: break;
-                        }
+                        default: break;
                     }
-                  
-
                 }
             
             }
@@ -58,51 +51,32 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        private static void RunGame(IGame? game)
+        private static void RunGame(string command)
         {
-            if (game is null)
-            {
-                return;
-            }
-
-            if (game.IsRunning)
-            {
-               
-                return;
-            }
-
             try
             {
-                Process.Start(new ProcessStartInfo()
-                {
-                    UseShellExecute = true,
-                    FileName = game.Executable,
-                    WorkingDirectory = game.WorkingDir
-                });
+                Task.Run(() => System.Diagnostics.Process.Start(command));
+
+                //Process.Start(new ProcessStartInfo()
+                //{
+                    //UseShellExecute = true,
+                    //FileName = game.Executable,
+                    //WorkingDirectory = game.WorkingDir
+                //});
             }
             catch { /* ignore */ }
         }
 
       
-        public static void RunLaunchString(IGame? game)
+        public static void RunLaunchString(string command)
         {
-            if (game is null)
-            {
-                return;
-            }
-
-            if (game.IsRunning)
-            {
-               
-                return;
-            }
-
+           
             try
             {
                 Process.Start(new ProcessStartInfo()
                 {
                     UseShellExecute = true,
-                    FileName = game.LaunchString
+                    FileName = command
                 });
             }
             catch { /* ignore */ }
@@ -113,12 +87,13 @@ namespace Handheld_Control_Panel.Classes
 
 
 
-        public static List<GameLauncherItem> syncBattleNet_Library()
+        public static List<GameLauncherItem> syncGame_Library()
         {
-            List<GameLauncherItem> list = new List<GameLauncherItem>(); 
-
+            List<GameLauncherItem> list = new List<GameLauncherItem>();
+             //gamelauncher
+            LauncherManager gameLauncher = new LauncherManager(new LauncherOptions() { QueryOnlineData = false });
             
-            foreach (var launcher in Global_Variables.Global_Variables.gameLauncher.GetLaunchers())
+            foreach (var launcher in gameLauncher.GetLaunchers())
             {
                 switch(launcher.Name)
                 {
@@ -129,7 +104,8 @@ namespace Handheld_Control_Panel.Classes
                             GameLauncherItem launcherItem = new GameLauncherItem();
                             launcherItem.gameName = game.Name;
                             launcherItem.gameID = game.Id;
-                            launcherItem.launcherID = game.LauncherId.ToString();
+                            launcherItem.launchCommand = game.LaunchString;
+                            launcherItem.path = game.WorkingDir + "\\" + game.Executable;
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
                         }
@@ -150,6 +126,7 @@ namespace Handheld_Control_Panel.Classes
         public string gameID { get; set; }
         public string gameName { get; set; }
         public string appType { get; set; }
-        public string launcherID { get; set; }
+        public string launchCommand { get; set; }
+        public string path { get; set; }
     }
 }

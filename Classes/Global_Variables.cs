@@ -23,8 +23,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static string MCHBAR = "";
         public static string processorName = "";
 
-        //gamelauncher
-        public static GameLib.LauncherManager gameLauncher = new LauncherManager(new LauncherOptions() { QueryOnlineData = false });
+       
 
         //TDP global
         #region TDP

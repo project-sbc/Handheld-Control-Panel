@@ -11,7 +11,7 @@
 				<RefreshRate></RefreshRate>
 				<Path></Path>
 				<AppType></AppType>
-				<LauncherID></LauncherID>
+				<LaunchCommand></LaunchCommand>
 				<GameID></GameID>
 				<ImageLocation></ImageLocation>
 				<LastLaunched>0</LastLaunched>
@@ -121,7 +121,7 @@
 				<RefreshRate></RefreshRate>
 				<Path></Path>
 				<AppType></AppType>
-				<LauncherID></LauncherID>
+				<LaunchCommand></LaunchCommand>
 				<GameID></GameID>
 				<ImageLocation></ImageLocation>
 				<LastLaunched>0</LastLaunched>
