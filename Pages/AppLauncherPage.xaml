@@ -84,7 +84,7 @@
                                 <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="1">
                                     <TextBlock  Grid.Column="0" Width="0"  Text="{Binding ID}" />
                                     <iconPacks:PackIconFontAwesome Style="{StaticResource fontAwesomeSpinner}" Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <Image  Height="75"    Source="{Binding imageSteam}" />
+                                    <Image  Height="65"    Source="{Binding imageSteam}" />
                                     <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
                                         <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding image}" />
                                         <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding Exe}"/>

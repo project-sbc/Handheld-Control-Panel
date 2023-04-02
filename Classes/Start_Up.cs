@@ -31,9 +31,7 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-            
-
-
+            //Game_Management.LaunchApp("965680","Steam","");
 
 
              //test code

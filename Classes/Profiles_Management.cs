@@ -94,6 +94,14 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
+
+        public void syncGameLibrariesToProfile()
+        {
+
+
+
+        }
+
         public void syncSteamGameToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
@@ -165,18 +173,9 @@ namespace Handheld_Control_Panel.Classes
                 {
                     
                     profile.applyProfile(true);
-                    if (profile.AppType == "Steam" && profile.GameID != "")
-                    {
-                        Steam_Management.openSteamGame(profile.GameID);
-                    }
-                    else
-                    {
-                        if (File.Exists(profile.Path))
-                        {
-                            Task.Run(()=> System.Diagnostics.Process.Start(profile.Path));
-                        }
-                        
-                    }
+
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.Path));
+
                     profile.NumberLaunches = profile.NumberLaunches + 1;
 
 
@@ -368,6 +367,8 @@ namespace Handheld_Control_Panel.Classes
         public string Path { get; set; } = "";
 
         public string appType = "";
+        public string LauncherID = "";
+        public string ImageLocation = "";
 
         public int LastLaunched { get; set; } = 0;
         public int NumberLaunches { get; set; } = 0;
@@ -465,6 +466,8 @@ namespace Handheld_Control_Panel.Classes
                     LaunchOptions.SelectSingleNode("GameID").InnerText = GameID;
                     LaunchOptions.SelectSingleNode("LastLaunched").InnerText = LastLaunched.ToString();
                     LaunchOptions.SelectSingleNode("NumberLaunches").InnerText = NumberLaunches.ToString();
+                    LaunchOptions.SelectSingleNode("LauncherID").InnerText = LauncherID.ToString();
+                    LaunchOptions.SelectSingleNode("ImageLocation").InnerText = ImageLocation.ToString();
 
 
                     parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
@@ -540,6 +543,11 @@ namespace Handheld_Control_Panel.Classes
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+
+                    LauncherID= LaunchOptions.SelectSingleNode("LauncherID").InnerText;
+                    ImageLocation=LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
+
+
                     if (LaunchOptions.SelectSingleNode("NumberLaunches").InnerText != "")
                     {
                         NumberLaunches = Int32.Parse(LaunchOptions.SelectSingleNode("NumberLaunches").InnerText);
