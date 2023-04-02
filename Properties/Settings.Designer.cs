@@ -300,7 +300,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Profile Name")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sort_Method_ProfileName")]
         public string appSortMethod {
             get {
                 return ((string)(this["appSortMethod"]));

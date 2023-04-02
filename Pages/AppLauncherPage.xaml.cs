@@ -65,8 +65,8 @@ namespace Handheld_Control_Panel.Pages
             wnd.changeUserInstruction("AppLauncherPage_Instruction");
             wnd = null;
 
-
-
+            sortLabel.Content = Application.Current.Resources["Sort_Method_SortBy"].ToString()+Application.Current.Resources[currentSortMethod].ToString();
+    
             SortMethods sm = new SortMethods();
             sm.SortMethod = "App Type";
             sm.DisplaySortMethod = Application.Current.Resources["Sort_Method_AppType"].ToString();
@@ -175,21 +175,21 @@ namespace Handheld_Control_Panel.Pages
             }
             switch(currentSortMethod)
             {
-                case "App Type":
+                case "Sort_Method_AppType":
                     controlList.ItemsSource = items.OrderBy(o => o.programType).ToList();
                     break;
-                case "Recently Launched":
+                case "Sort_Method_RecentlyLaunched":
                     items = items.OrderBy(o => o.NumberLaunches).ToList();
                     items.Reverse();
                     controlList.ItemsSource = items;
          
                     break;
-                case "Frequently Launched":
+                case "Sort_Method_FrequentlyLaunched":
                     items = items.OrderBy(o => o.LastLaunched).ToList();
                     items.Reverse();
                     controlList.ItemsSource = items;
                     break;
-                case "Profile Name":
+                case "Sort_Method_ProfileName":
                     controlList.ItemsSource = items.OrderBy(o => o.ProfileName).ToList();
                     break;
                 default:
@@ -349,6 +349,10 @@ where childItem : DependencyObject
                         currentSortMethod = sortMethods[index + 1].SortMethod;
                     }
                     loadValues();
+                    sortLabel.Content= Application.Current.Resources["Sort_Method_SortBy"].ToString() + Application.Current.Resources[currentSortMethod].ToString();
+                    Properties.Settings.Default.appSortMethod = currentSortMethod;
+                    Properties.Settings.Default.Save();
+
                     break;
                 }
             }

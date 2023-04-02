@@ -27,13 +27,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="62"/>
+          
             <RowDefinition />
 
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
             <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_AppLauncher}"/>
-            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_AppLauncher}"/>
+            <Label Name="sortLabel" Style="{DynamicResource SubheaderLabel}" />
         </DockPanel>
+      
         <ScrollViewer Name="scrollviewer" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"   >
                 <ListBox.Resources>
