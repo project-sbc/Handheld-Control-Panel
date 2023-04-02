@@ -45,15 +45,21 @@ namespace Handheld_Control_Panel.Pages
 
             
 
-            string gamerunning = OSD_Management.gameRunning();
+            Dictionary<string,int> gamerunning = RunningGames.gameRunningDictionary();
 
-            if (gamerunning != "")
+            if (gamerunning.Count >0)
             {
-                powerpageitem gameppi = new powerpageitem();
-                gameppi.displayitem = Application.Current.Resources["UserControl_CloseGame"].ToString() + " " + gamerunning;
-                gameppi.item = "CloseGame";
-                gameppi.Kind = PackIconMaterialKind.MicrosoftXboxController;
-                powerpageitems.Add(gameppi);
+                foreach (KeyValuePair<string,int> keyValuePair in gamerunning)
+                {
+                    powerpageitem gameppi = new powerpageitem();
+                    gameppi.displayitem = Application.Current.Resources["UserControl_CloseGame"].ToString() + " " + keyValuePair.Key;
+                    gameppi.item = "CloseGame";
+                    gameppi.processID = keyValuePair.Value;
+                    gameppi.Kind = PackIconMaterialKind.MicrosoftXboxController;
+                    powerpageitems.Add(gameppi);
+                }
+
+              
             }
 
             powerpageitem hideppi = new powerpageitem();
@@ -156,7 +162,7 @@ namespace Handheld_Control_Panel.Pages
                 switch (ppi.item)
                 {
                     case "CloseGame":
-                        int processID = OSD_Management.closeGame();
+                        int processID = ppi.processID;
                         if (processID != 0)
                         {
                             System.Diagnostics.Process procs = null;
@@ -225,11 +231,17 @@ namespace Handheld_Control_Panel.Pages
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
+
+        private void controlList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            handleListChange();
+        }
     }
     public class powerpageitem
     {
         public string displayitem { get; set; }
         public string item { get; set; }
         public PackIconMaterialKind Kind { get; set; }
+        public int processID { get; set; } = 0;
     }
 }

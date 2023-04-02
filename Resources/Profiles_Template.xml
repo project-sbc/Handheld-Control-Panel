@@ -12,6 +12,8 @@
 				<Path></Path>
 				<AppType></AppType>
 				<GameID></GameID>
+				<LastLaunched>0</LastLaunched>
+				<NumberLaunches>0</NumberLaunches>
 			</LaunchOptions>
 			<Offline>
 				<TDP1>9</TDP1>
@@ -43,6 +45,8 @@
 				<Path></Path>
 				<AppType></AppType>
 				<GameID></GameID>
+				<LastLaunched>0</LastLaunched>
+				<NumberLaunches>0</NumberLaunches>
 			</LaunchOptions>
 			<Offline>
 				<TDP1>9</TDP1>
@@ -148,6 +152,8 @@
 				<Path></Path>
 				<GameID></GameID>
 				<AppType></AppType>
+				<LastLaunched>0</LastLaunched>
+				<NumberLaunches>0</NumberLaunches>
 			</LaunchOptions>
 			<Offline>
 				<TDP1></TDP1>

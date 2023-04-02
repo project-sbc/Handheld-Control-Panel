@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel.Classes
                     if (runningKeyStroke != e.KeyCode.ToString() && !runningKeyStroke.Contains("+" + e.KeyCode.ToString()))
                     {
                         runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
-                        Debug.WriteLine(runningKeyStroke);
+                      
                     }
          
                 }

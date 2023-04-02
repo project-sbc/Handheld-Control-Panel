@@ -121,6 +121,7 @@
     <system:String x:Key="Instruction_Apply">APPLY</system:String>
     <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
     <system:String x:Key="Instruction_Launch">LAUNCH</system:String>
+  
 
 
 
@@ -155,7 +156,7 @@
 <!-- new 27mar2023-->
     <system:String x:Key="MainWindow_NavigationView_Power">Power</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Power">Power</system:String>
-    <system:String x:Key="UserControl_CloseGame">Close Game</system:String>
+    <system:String x:Key="UserControl_CloseGame">Close </system:String>
     <system:String x:Key="UserControl_CloseActiveProgram">Close Program</system:String>
     <system:String x:Key="UserControl_HideHCP">Hide HCP</system:String>
     <system:String x:Key="UserControl_CloseHCP">Close HCP</system:String>
@@ -165,5 +166,14 @@
     <system:String x:Key="UserControl_Shutdown">Shut Down</system:String>
     <system:String x:Key="UserControl_FanControl">Fan Control</system:String>
 
+        <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">Go To Desktop</system:String>
+    <system:String x:Key="Sort_Method_SortBy">Sort By-</system:String>
+    <system:String x:Key="Sort_Method_AppType">App Type</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">Frequently Launched</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">Recently Launched</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">Profile Name</system:String>
+        
+    <system:String x:Key="Instruction_Sort">SORT</system:String>
 
 </ResourceDictionary>

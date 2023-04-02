@@ -33,7 +33,7 @@ namespace Handheld_Control_Panel.Pages
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
-        private DispatcherTimer saveDT = new DispatcherTimer();
+
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
         public HotKeyEditPage()
@@ -97,7 +97,8 @@ namespace Handheld_Control_Panel.Pages
                         {
                             Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
                         }
-                        Notification_Management.Show(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), true);
+                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_MouseModeSaved"].ToString(), Notification.Wpf.NotificationType.Success);
+
                         wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("HotKeyPage");
                         wnd = null;
@@ -122,22 +123,7 @@ namespace Handheld_Control_Panel.Pages
             }
 
         }
-        private void runSaveMessage()
-        {
-           
-            saveDT.Interval = new TimeSpan(0, 0, 3);
-            saveDT.Tick += SaveDT_Tick;
-            saveDT.Start();
-            SaveLabel.Visibility = Visibility.Visible;
-
-        }
-
-        private void SaveDT_Tick(object? sender, EventArgs e)
-        {
-           
-            SaveLabel.Visibility = Visibility.Collapsed;
-            saveDT.Stop();
-        }
+      
 
       
 

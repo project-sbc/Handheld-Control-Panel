@@ -8,17 +8,30 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    <DockPanel>
-        <Label Content="{DynamicResource Usercontrol_HotKeySaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
-        <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
-            <StackPanel x:Name="stackPanel" >
-                <uc:Type_Dropdown />
-                <uc:Action_Dropdown />
-                <uc:Parameter_Dropdown/>
-                <uc:Hotkey_Button />
-            </StackPanel>
-        </ScrollViewer>
-    </DockPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_HotKey}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_HotKey}"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1">
+            <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
+                <StackPanel x:Name="stackPanel" >
+                    <uc:Type_Dropdown />
+                    <uc:Action_Dropdown />
+                    <uc:Parameter_Dropdown/>
+                    <uc:Hotkey_Button />
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+    
+   
    
   
 </Page>

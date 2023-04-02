@@ -31,6 +31,8 @@ using System.Windows.Interop;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
 using Handheld_Control_Panel.Classes.Fan_Management;
+using Notification.Wpf;
+using Notification.Wpf.Classes;
 
 namespace Handheld_Control_Panel
 {
@@ -75,6 +77,7 @@ namespace Handheld_Control_Panel
 
             //set selected item of hamburger nav menu
             navigation.SelectedIndex = 0;
+          
 
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -94,10 +97,14 @@ namespace Handheld_Control_Panel
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
 
-            //minimize if autostart
+            //hide if autostart
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-                this.WindowState = WindowState.Minimized;
+                this.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.Visibility = Visibility.Visible;
             }
         }
 
@@ -150,7 +157,7 @@ namespace Handheld_Control_Panel
 
         private void UpdateTimer_Tick(object? sender, EventArgs e)
         {
-            if (this.WindowState != WindowState.Minimized)
+            if (this.Visibility != Visibility.Visible)
             {
                 updateStatusBar();
                
@@ -262,10 +269,10 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
-                    case "LB":
+                    case "LT":
                         navigateListBox(true);
                         break;
-                    case "RB":
+                    case "RT":
                         navigateListBox(false);
                         break;
                     case "B":
@@ -291,17 +298,29 @@ namespace Handheld_Control_Panel
 
         public void toggleWindow()
         {
-            if (this.WindowState == WindowState.Minimized) 
+
+
+            if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
             {
-                this.Show();
                 this.WindowState = WindowState.Normal;
+                if (navigation.SelectedIndex != -1)
+                {
+
+                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+
+                }
+       
+                this.Show();
+                //this.WindowState = WindowState.Normal;
                 m_notifyIcon.Visible = false;
             }
             else
             {
-               
+                
                 this.Hide();
-                this.WindowState = WindowState.Minimized;
+                //this.WindowState = WindowState.Minimized;
                 m_notifyIcon.Visible = true;
             }
 
@@ -321,14 +340,12 @@ namespace Handheld_Control_Panel
         }
         private void navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (navigation.SelectedItem != null && this.WindowState !=WindowState.Minimized)
+            if (navigation.SelectedItem != null )
             {
                
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
                 frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
                 
-                HeaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_" + lbi.Tag].ToString();
-                SubheaderLabel.Content = Application.Current.Resources["MainWindow_NavigationView_Sub_" + lbi.Tag].ToString();
                 page = lbi.Tag.ToString() + "Page";
             }
         }
@@ -336,6 +353,32 @@ namespace Handheld_Control_Panel
         {
             frame.Navigate(new Uri("Pages\\" + pageName + ".xaml" , UriKind.RelativeOrAbsolute));
             page = pageName;
+        }
+
+        public void ShowNotificationInWindow(string title, NotificationType notificationType)
+        {
+            var notificationManager = new NotificationManager();
+
+            var content = new NotificationContent
+            {
+                Title = title,
+  
+                Type = notificationType,
+                
+                TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
+                RowsCount = 3, //Will show 3 rows and trim after
+
+                CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
+
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Foreground = new SolidColorBrush(Colors.White)
+
+            };
+
+    
+            notificationManager.Show(content, "WindowArea");
+
+           
         }
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
@@ -465,38 +508,43 @@ namespace Handheld_Control_Panel
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
-            if (this.WindowState == WindowState.Minimized)
+            if (false)
             {
-                this.ShowInTaskbar = false;
-                
-                navigation.SelectedIndex = 0;
-                frame.Source = null;
-                //change interval to 15 seconds
-                updateTimer.Interval = new TimeSpan(0,0,15);
-                //change controller timer interval to 100 ms to hot key recognition when not open
-                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
-            }
-            if (this.WindowState == WindowState.Normal)
-            {
-                this.ShowInTaskbar = true;
-                //navigation.SelectedIndex = 0;
-                updateTimer.Interval = new TimeSpan(0, 0, 3);
-                //change controller timer interval to 20 ms for active use
-                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
-                setWindowSizePosition();
-                if (navigation.SelectedItem != null)
+                if (this.WindowState == WindowState.Minimized)
                 {
+                    this.ShowInTaskbar = false;
 
-                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                    navigation.SelectedIndex = 0;
+                    frame.Source = null;
+                    //change interval to 15 seconds
+                    updateTimer.Interval = new TimeSpan(0, 0, 15);
+                    //change controller timer interval to 100 ms to hot key recognition when not open
+                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
+                }
+                if (this.WindowState == WindowState.Normal)
+                {
+                    this.ShowInTaskbar = true;
+                    //navigation.SelectedIndex = 0;
+                    updateTimer.Interval = new TimeSpan(0, 0, 3);
+                    //change controller timer interval to 20 ms for active use
+                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
+                    setWindowSizePosition();
+                    if (navigation.SelectedItem != null)
+                    {
 
-                   
+                        ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                        frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+
+
+                    }
                 }
             }
+          
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+          
             getDPIScaling();
         }
         private void getDPIScaling()
@@ -533,6 +581,31 @@ namespace Handheld_Control_Panel
                     default:break;
                 }
 
+            }
+        }
+
+        private void MetroWindow_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.Visibility == Visibility.Hidden)
+            {
+                this.ShowInTaskbar = false;
+
+                navigation.SelectedIndex = 0;
+                frame.Source = null;
+                //change interval to 15 seconds
+                updateTimer.Interval = new TimeSpan(0, 0, 15);
+                //change controller timer interval to 100 ms to hot key recognition when not open
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
+            }
+            if (this.Visibility == Visibility.Visible)
+            {
+                this.ShowInTaskbar = true;
+                //navigation.SelectedIndex = 0;
+                updateTimer.Interval = new TimeSpan(0, 0, 3);
+                //change controller timer interval to 20 ms for active use
+                Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
+                setWindowSizePosition();
+               
             }
         }
     }

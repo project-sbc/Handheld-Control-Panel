@@ -67,16 +67,18 @@ namespace Handheld_Control_Panel.Classes
                 case "Toggle_Controller":
                     Controller_Management.Controller_Management.powerCycleController();
                     break;
-
+                case "Desktop":
+             
+                    Shell32.Shell shellObject = new Shell32.Shell();
+                    shellObject.ToggleDesktop();
+                    
+                    break;
                 default: break;
             }
         }
 
   
 
-        public static void toggleQuickAccessMenu()
-        {
-
-        }
+      
     }
 }

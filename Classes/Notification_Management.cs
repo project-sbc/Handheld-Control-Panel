@@ -24,5 +24,13 @@ namespace Handheld_Control_Panel.Classes
       
         }
 
+        public static void ShowInWindow(string title, NotificationType notificationType)
+        {
+            Global_Variables.Global_Variables.mainWindow.ShowNotificationInWindow(title,  notificationType);
+
+
+        }
+
+
     }
 }

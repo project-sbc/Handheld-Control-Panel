@@ -151,10 +151,21 @@
     <system:String x:Key="ContextMenu_ShutDownPC">关机</system:String>
 
 
+    <!-- new 27mar2023-->
+    <system:String x:Key="MainWindow_NavigationView_Power">Power</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Power">Power</system:String>
+    <system:String x:Key="UserControl_CloseGame">Close</system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">Close Program</system:String>
+    <system:String x:Key="UserControl_HideHCP">Hide HCP</system:String>
+    <system:String x:Key="UserControl_CloseHCP">Close HCP</system:String>
+    <system:String x:Key="UserControl_RestartPC">Restart PC</system:String>
+    <system:String x:Key="UserControl_Restart">Restart</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">Shut Down PC</system:String>
+    <system:String x:Key="UserControl_Shutdown">Shut Down</system:String>
+    <system:String x:Key="UserControl_FanControl">Fan Control</system:String>
 
 
 
-  
 
- 
+
 </ResourceDictionary>

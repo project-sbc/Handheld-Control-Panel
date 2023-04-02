@@ -8,13 +8,24 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition />
 
-    <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Information}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_Information}"/>
+        </DockPanel>
+         <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
             <uc:DonatePaypal_Link />
             <uc:DonateKofi_Link/>
         </StackPanel>
     </ScrollViewer>
+    </Grid>
+   
 
 
 </Page>

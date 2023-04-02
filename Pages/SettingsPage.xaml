@@ -8,8 +8,17 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition />
 
-    <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Settings}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_Settings}"/>
+        </DockPanel>
+         <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}" Grid.Row="1">
         <StackPanel x:Name="stackPanel" >
             <uc:Update_Button/>
             <uc:Theme_Toggle />
@@ -34,6 +43,9 @@
             <uc:EpicGameSync_Button/>
         </StackPanel>
     </ScrollViewer>
+    </Grid>
+    
+   
 
 
 </Page>

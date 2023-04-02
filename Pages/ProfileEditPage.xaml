@@ -8,8 +8,19 @@
       mc:Ignorable="d" 
       d:DesignWidth="445" 
       Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    <DockPanel>
-        <Label Content="{DynamicResource Usercontrol_ProfileSaved}" DockPanel.Dock="Top" Style="{StaticResource userControlMainLabel}" Visibility="Collapsed" Name="SaveLabel" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Profiles}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_Profiles}"/>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="1">
+ 
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}" DockPanel.Dock="Bottom">
             <StackPanel x:Name="stackPanel" >
                 <uc:Profile_Textbox/>
@@ -38,6 +49,9 @@
             </StackPanel>
         </ScrollViewer>
     </DockPanel>
+    </Grid>
+    
+    
    
   
 </Page>

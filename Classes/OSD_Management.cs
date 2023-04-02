@@ -26,15 +26,15 @@ namespace Handheld_Control_Panel.Classes
 
         private static List<AppFlags> appFlags = new List<AppFlags>()
         {
-            {AppFlags.OpenGL },
+            {AppFlags.Direct3D12 },
+            {AppFlags.Direct3D12AFR },
             {AppFlags.Direct3D9Ex },
             {AppFlags.Direct3D9 },
             {AppFlags.Direct3D10 },
             {AppFlags.Direct3D11 },
-            {AppFlags.Direct3D12 },
-            {AppFlags.Direct3D12AFR },
-            {AppFlags.OpenGL },
-            {AppFlags.Vulkan }
+            {AppFlags.Vulkan },
+            {AppFlags.OpenGL }
+
         };
 
         private static void test2()
@@ -78,148 +78,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-        public static unsafe int closeGame()
-        {
-            int processID = 0;
-            if (RTSS.RTSSRunning())
-            {
-  
-                AppFlags appFlag = appFlags[0];
-                AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
-                              
-
-                while (appEntries.Length == 0)
-                {
-                    foreach (AppFlags af in appFlags)
-                    {
-                        appEntries = OSD.GetAppEntries(af);
-                        if (appEntries.Length > 0) { appFlag = af; break; }
-                    }
-
-                }
-
-                foreach (var app in appEntries)
-                {
-                    processID = app.ProcessId;
-                 
-                    System.Diagnostics.Process procs = null;
-
-                    try
-                    {
-                        procs = Process.GetProcessById(processID);
-
-                        
-
-                        if (!procs.HasExited)
-                        {
-                            procs.CloseMainWindow();
-                        }
-                    }
-                    finally
-                    {
-                        if (procs != null)
-                        {
-                            procs.Dispose();
-                        }
-                    }
-                }
-
-       
-
-            }
-            return processID;
-
-
-        }
-        public static unsafe string gameRunning()
-        {
-          
-            string gameRunning = "";
-            try
-            {
-      
-                if (RTSS.RTSSRunning())
-                {
-           
-                    AppFlags appFlag = appFlags[0];
-                    AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
-                   
-
-                    foreach (AppFlags af in appFlags)
-                    {
-                        appEntries = OSD.GetAppEntries(af);
-                        if (appEntries.Length > 0) { appFlag = af; break; }
-                    }
-          
-                    foreach (var app in appEntries)
-                    {
-              
-                        string[] gamedir = app.Name.Split('\\');
-                        if (gamedir.Length > 0)
-                        {
-                  
-                            string currGameName = gamedir[gamedir.Length - 1];
-                            gameRunning = currGameName.Substring(0, currGameName.Length - 4);
-                 
-                            break;
-                        }
-
-                    }
-              
-                }
-
-
-
-               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Log_Writer.writeLog(ex.Message, "OSDM01");
-                return "";
-            }
-            return gameRunning;
-        }
-        public static unsafe int gameRunningProcessID()
-        {
-
-            int gameRunning = 0;
-            try
-            {
-
-                if (RTSS.RTSSRunning())
-                {
-
-                    AppFlags appFlag = appFlags[0];
-                    AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
-
-                    foreach (AppFlags af in appFlags)
-                    {
-                        appEntries = OSD.GetAppEntries(af);
-                        if (appEntries.Length > 0) { appFlag = af; break; }
-                    }
-
-                    foreach (var app in appEntries)
-                    {
-                        gameRunning = app.ProcessId;
-                        break;
-
-                    }
-
-                }
-
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Log_Writer.writeLog(ex.Message, "OSDM01");
-                return 0;
-            }
-            return gameRunning;
-        }
+     
         private static void test()
         {
             if (RTSS.RTSSRunning())

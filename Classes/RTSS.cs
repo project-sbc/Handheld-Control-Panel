@@ -1,4 +1,5 @@
-﻿using RTSSSharedMemoryNET;
+﻿using Mono.Unix.Native;
+using RTSSSharedMemoryNET;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +10,7 @@ using System.Security.AccessControl;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -195,5 +197,159 @@ namespace Handheld_Control_Panel.Classes
         public const uint RTSSHOOKSFLAG_OSD_VISIBLE = 1;
         public const uint RTSSHOOKSFLAG_LIMITER_DISABLED = 4;
         public const string GLOBAL_PROFILE = "";
+    }
+
+    public static class RunningGames
+    {
+        private static List<AppFlags> appFlags = new List<AppFlags>()
+        {
+            {AppFlags.Direct3D12 },
+            {AppFlags.Direct3D12AFR },
+            {AppFlags.Direct3D9Ex },
+            {AppFlags.Direct3D9 },
+            {AppFlags.Direct3D10 },
+            {AppFlags.Direct3D11 },
+            {AppFlags.Vulkan },
+            {AppFlags.OpenGL }
+
+        };
+        public static unsafe int closeGame()
+        {
+            int processID = 0;
+            if (RTSS.RTSSRunning())
+            {
+
+                AppFlags appFlag = appFlags[0];
+                AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
+
+
+                while (appEntries.Length == 0)
+                {
+                    foreach (AppFlags af in appFlags)
+                    {
+                        appEntries = OSD.GetAppEntries(af);
+                        if (appEntries.Length > 0) { appFlag = af; break; }
+                    }
+
+                }
+
+                foreach (var app in appEntries)
+                {
+                    processID = app.ProcessId;
+
+                    System.Diagnostics.Process procs = null;
+
+                    try
+                    {
+                        procs = Process.GetProcessById(processID);
+
+
+
+                        if (!procs.HasExited)
+                        {
+                            procs.CloseMainWindow();
+                        }
+                    }
+                    finally
+                    {
+                        if (procs != null)
+                        {
+                            procs.Dispose();
+                        }
+                    }
+                }
+
+
+
+            }
+            return processID;
+
+
+        }
+        public static Dictionary<string, int> gameRunningDictionary()
+        {
+            //RTSS01
+            Dictionary<string, int> returnDictionary = new Dictionary<string, int>();
+            try
+            {
+
+                if (RTSS.RTSSRunning())
+                {
+
+                
+                    AppEntry[] appEntries;
+
+
+                    foreach (AppFlags af in appFlags)
+                    {
+                        appEntries = OSD.GetAppEntries(af);
+                        if (appEntries.Length > 0) 
+                        {
+                            foreach (var app in appEntries)
+                            {
+                                string[] gamedir = app.Name.Split('\\');
+                                if (gamedir.Length > 0)
+                                {
+                                    string currGameName = gamedir[gamedir.Length - 1].Substring(0, gamedir[gamedir.Length - 1].Length - 4);
+                                    returnDictionary.Add(currGameName, app.ProcessId);
+                                }
+
+                            }
+
+                            break; 
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Log_Writer.writeLog(ex.Message, "RTSS01");
+                return returnDictionary;
+            }
+            return returnDictionary;
+        }
+        public static unsafe int gameRunningProcessID()
+        {
+
+            int gameRunning = 0;
+            try
+            {
+
+                if (RTSS.RTSSRunning())
+                {
+
+                    AppFlags appFlag = appFlags[0];
+                    AppEntry[] appEntries = OSD.GetAppEntries(appFlag);
+
+                    foreach (AppFlags af in appFlags)
+                    {
+                        appEntries = OSD.GetAppEntries(af);
+                        if (appEntries.Length > 0) { appFlag = af; break; }
+                    }
+
+                    foreach (var app in appEntries)
+                    {
+                        gameRunning = app.ProcessId;
+                        break;
+
+                    }
+
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Log_Writer.writeLog(ex.Message, "OSDM01");
+                return 0;
+            }
+            return gameRunning;
+        }
+
+
     }
 }

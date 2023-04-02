@@ -24,7 +24,18 @@ namespace Handheld_Control_Panel.Classes
             {
                 updateTasks.Add(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
             }
-            Parallel.Invoke(updateTasks.ToArray());
+            if (Global_Variables.Global_Variables.mainWindow == null)
+            {
+                foreach (Action action in updateTasks)
+                {
+                    action.Invoke();
+                }
+            }
+            else
+            {
+                Parallel.Invoke(updateTasks.ToArray());
+            }
+            
 
         }
         public static void UpdateTaskAlternate()
