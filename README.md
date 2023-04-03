@@ -28,12 +28,12 @@ The controls on the home can be rearranged in any order or disabled.
 Configure per app/game settings including FPS limits, power controls, and display controls that will apply if launched from my app OR will be detected automatically. Exception: display changes won't occur if game is detected automatically.
 
 ### Hot Keys
-Configure controller or keyboard hotkeys for numerous actions. As many hotkeys can be made as desired. Actions include:
-Adjusting TDP, brightness, gpu clock (on supported devices), and volume
-Launching a game/app
-Launching steam big picture mode or playnite full screen
-Toggling mouse mode
-Toggling on screen keyboard
+<p>Configure controller or keyboard hotkeys for numerous actions. As many hotkeys can be made as desired. Actions include:
+Adjusting TDP, brightness, gpu clock (on supported devices), and volume</p>
+<p>Launching a game/app</p>
+<p>Launching steam big picture mode or playnite full screen</p>
+<p>Toggling mouse mode</p>
+<p>Toggling on screen keyboard</p>
 
 ### Mouse Mode
 Configure your controller to act as a mouse/keyboard. 
