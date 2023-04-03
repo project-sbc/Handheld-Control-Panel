@@ -39,7 +39,7 @@ Toggling on screen keyboard
 Configure your controller to act as a mouse/keyboard. 
 
 ### Game Launcher
-Convenient way to launch games from popular game launchers including Steam, Epic Games, Battle.net, Origin, and Rockstar games. Profiles will auto apply including display changes when using this.
+Convenient way to launch games from popular game launchers including Steam, Epic Games, Battle.net, Origin, GOG, and Rockstar games. Profiles will auto apply including display changes when using this.
 
 ### Settings
 Ability to change appearances such as light/dark mode, accent colors, menu on left or right and update settings. For Intel devices, you can change the TDP mode to best suit your device. Auto start and auto update are additional setting parameters. Ability to change max/min parameters can also be configured.
