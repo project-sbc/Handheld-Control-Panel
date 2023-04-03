@@ -31,11 +31,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class SteamGameSync_Button : UserControl
+    public partial class GameSync_Button : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public SteamGameSync_Button()
+        public GameSync_Button()
         {
             InitializeComponent();
             
@@ -74,7 +74,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Global_Variables.profiles.syncSteamGameToProfile();
+            Global_Variables.profiles.syncGamesToProfile();
         }
     }
 }

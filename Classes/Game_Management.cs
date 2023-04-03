@@ -25,7 +25,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (File.Exists(appLocation))
                 {
-                    Task.Run(() => System.Diagnostics.Process.Start(appLocation));
+                    RunGame(appLocation);
                 }
 
             }
@@ -41,7 +41,23 @@ namespace Handheld_Control_Panel.Classes
                         case "Steam":
                             RunLaunchString(launchcommand);
                             break;
+                        case "Battle.net":
+                            string battlenetfile = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "Battle.net\\Battle.net.exe");
+                            if (BattleNetRunning())
+                            {
+                                Run_CLI.Run_CLI.RunCommand(" --exec=\"launch " + gameID.ToUpper() + "\"", false, battlenetfile, 3000, true);
+                            }
+                            else
+                            {
 
+                                RunGame(battlenetfile);
+                                Run_CLI.Run_CLI.RunCommand(" --exec=\"launch " + gameID.ToUpper() + "\"", false, battlenetfile, 3000, true);
+
+                            }
+                           
+                           
+                           
+                            break;
                         default: break;
                     }
                 }
@@ -55,14 +71,18 @@ namespace Handheld_Control_Panel.Classes
         {
             try
             {
-                Task.Run(() => System.Diagnostics.Process.Start(command));
+                if (File.Exists(command))
+                {
+                    
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        UseShellExecute = true,
+                        FileName = Path.GetFileName(command),
+                        WorkingDirectory = Path.GetDirectoryName(command)
+                    });
+                }
 
-                //Process.Start(new ProcessStartInfo()
-                //{
-                    //UseShellExecute = true,
-                    //FileName = game.Executable,
-                    //WorkingDirectory = game.WorkingDir
-                //});
+              
             }
             catch { /* ignore */ }
         }
@@ -73,18 +93,30 @@ namespace Handheld_Control_Panel.Classes
            
             try
             {
-                Process.Start(new ProcessStartInfo()
+                ProcessStartInfo psi = new ProcessStartInfo()
                 {
                     UseShellExecute = true,
                     FileName = command
-                });
+                };
+                System.Diagnostics.Process.Start(psi);
+              
             }
             catch { /* ignore */ }
         }
 
 
-
-
+        public static bool BattleNetRunning()
+        {
+            Process[] pname = Process.GetProcessesByName("Battle.net.exe");
+            if (pname.Length != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
         public static List<GameLauncherItem> syncGame_Library()
@@ -97,6 +129,56 @@ namespace Handheld_Control_Panel.Classes
             {
                 switch(launcher.Name)
                 {
+                    case "Steam":
+                        foreach (var game in launcher.Games)
+                        {
+                            GameLauncherItem launcherItem = new GameLauncherItem();
+                            launcherItem.gameName = game.Name;
+                            launcherItem.gameID = game.Id;
+                            launcherItem.launchCommand = game.LaunchString;
+                            launcherItem.path = game.WorkingDir + "\\" + game.Executable;
+                            launcherItem.appType = launcher.Name;
+                            list.Add(launcherItem);
+                        }
+                        break;
+                    case "Battle.net":
+                        foreach (var game in launcher.Games)
+                        {
+                            GameLauncherItem launcherItem = new GameLauncherItem();
+                            launcherItem.gameName = game.Name;
+                            launcherItem.gameID = game.Id;
+                            launcherItem.launchCommand = game.LaunchString;
+                            switch(game.Name)
+                            {
+                                case "Call of Duty Black Ops Cold War":
+                                    launcherItem.path = game.WorkingDir + "\\BlackOpsColdWar.exe";
+                                    break;
+
+                                default:
+                                    launcherItem.path = game.Executables.First();
+                                    break;
+                            }
+                      
+                            launcherItem.appType = launcher.Name;
+                            list.Add(launcherItem);
+
+                          
+
+                        }
+                        break;
+                    case "Epic Games":
+                        foreach (var game in launcher.Games)
+                        {
+                            GameLauncherItem launcherItem = new GameLauncherItem();
+                            launcherItem.gameName = game.Name;
+                            launcherItem.gameID = game.Id;
+                            launcherItem.launchCommand = game.LaunchString;
+                            launcherItem.path = game.Executable.Replace("/","\\");
+                            launcherItem.appType = launcher.Name;
+                            list.Add(launcherItem);
+  
+                        }
+                        break;
                    
                     default:
                         foreach (var game in launcher.Games)
@@ -110,6 +192,7 @@ namespace Handheld_Control_Panel.Classes
                             list.Add(launcherItem);
                         }
                         break;
+
                 }
 
             }

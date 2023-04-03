@@ -75,7 +75,7 @@
     <system:String x:Key="Usercontrol_MouseSensitivity">Mouse Sensitivity</system:String>
     <system:String x:Key="Usercontrol_ScrollSensitivity">Scroll Sensitivity</system:String>
     <system:String x:Key="Usercontrol_AppType">Application Type</system:String>
-    <system:String x:Key="Usercontrol_SyncSteamGames">Sync Steam Games</system:String>
+    <system:String x:Key="Usercontrol_SyncGames">Sync Games</system:String>
     <system:String x:Key="Usercontrol_SyncEpicGames">Sync Epic Games</system:String>
     <system:String x:Key="Usercontrol_Sync">Sync</system:String>
     

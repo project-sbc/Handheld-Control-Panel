@@ -144,29 +144,25 @@ namespace Handheld_Control_Panel.Pages
 
                             break;
                         default:
+                            lbai.Exe = profile.ProfileName;
                             if (profile.Path != null)
                             {
 
                                 if (File.Exists(profile.Path))
                                 {
-                                    lbai.Exe = profile.Exe;
+                            
                                     using (Icon ico = Icon.ExtractAssociatedIcon(profile.Path))
                                     {
                                         lbai.image = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                                     }
-                                    items.Add(lbai);
+                                    
                                 }
                             }
-
+                            items.Add(lbai);
 
                             break;
 
-
-
-
                     }
-
-
 
                 }
 

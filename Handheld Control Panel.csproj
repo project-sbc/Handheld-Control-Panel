@@ -485,7 +485,7 @@
     <Compile Update="UserControls\SettingsUserControls\EpicGameSync_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\SettingsUserControls\SteamGameSync_Button.xaml.cs">
+    <Compile Update="UserControls\SettingsUserControls\GameSync_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\Update_Button.xaml.cs">

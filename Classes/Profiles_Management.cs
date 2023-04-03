@@ -67,11 +67,10 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
-        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype)
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument)
         {
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+         
             XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
             XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
@@ -92,16 +91,10 @@ namespace Handheld_Control_Panel.Classes
 
             xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
 
-            xmlDocument = null;
+       
 
         }
-
-        public void syncGameLibrariesToProfile()
-        {
-
-
-
-        }
+                
 
         public void syncSteamGameToProfile()
         {
@@ -150,11 +143,11 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument);
                     }
                 }
 
-
+                Global_Variables.Global_Variables.profiles = new Profiles_Management();
                 xmlDocument = null;
 
             }
