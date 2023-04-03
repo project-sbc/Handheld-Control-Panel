@@ -27,7 +27,7 @@ All one netbook devices are compatible with most features. Only new devices such
 All GPD devices are compatible with most features. Only new devices such as the Win Max 2 AMD and win 4 will have fan support.
 
 ## Steam
-Steam Deck is compatible but some features may not work due to the way the controller. No fan support.
+Steam Deck is compatible but some features may not work due to the controller implementation. No fan support.
 
 ## Anbernic
 Win600. No fan support.
