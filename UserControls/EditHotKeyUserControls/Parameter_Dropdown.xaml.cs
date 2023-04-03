@@ -47,6 +47,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             //event triggered when hotkey is changed from controller to keyboard or vice versa
             actionLabel.Content = "";
+            Global_Variables.hotKeys.editingHotkey.Parameter = "";
             setListboxItemsource();
 
         }

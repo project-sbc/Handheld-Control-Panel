@@ -10,6 +10,9 @@ using System.Windows.Input;
 using Windows.Devices.Radios;
 using System.Windows;
 using Notification.Wpf;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -22,6 +25,31 @@ namespace Handheld_Control_Panel.Classes
 
             switch (actionParameter.Action)
             {
+                case "Toggle_HCP_OSK":
+                    Global_Variables.Global_Variables.mainWindow.toggleOSK();
+
+                    break;
+
+                case "Toggle_Windows_OSK":
+                    Process[] pname = Process.GetProcessesByName("tabtip");
+                    OSKTablet oskt = new OSKTablet();
+                    if (pname.Length == 0)
+                    {
+                        ProcessStartInfo psi = new ProcessStartInfo()
+                        {
+                            UseShellExecute = true,
+                            FileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "microsoft shared\\ink\\TabTip.exe")
+                        };
+                        System.Diagnostics.Process.Start(psi);
+                        oskt.Main();
+                    }
+                    else
+                    {
+                        oskt.Main();
+                    }
+
+
+                    break;
                 case "Show_Hide_HCP":
                     Global_Variables.Global_Variables.mainWindow.toggleWindow();
                     Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
@@ -80,5 +108,30 @@ namespace Handheld_Control_Panel.Classes
   
 
       
+    }
+    public class OSKTablet
+    {
+        public void Main()
+        {
+            var uiHostNoLaunch = new UIHostNoLaunch();
+            var tipInvocation = (ITipInvocation)uiHostNoLaunch;
+            tipInvocation.Toggle(GetDesktopWindow());
+            Marshal.ReleaseComObject(uiHostNoLaunch);
+        }
+
+        [ComImport, Guid("4ce576fa-83dc-4F88-951c-9d0782b4e376")]
+        class UIHostNoLaunch
+        {
+        }
+
+        [ComImport, Guid("37c994e7-432b-4834-a2f7-dce1f13b834b")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface ITipInvocation
+        {
+            void Toggle(IntPtr hwnd);
+        }
+
+        [DllImport("user32.dll", SetLastError = false)]
+        static extern IntPtr GetDesktopWindow();
     }
 }

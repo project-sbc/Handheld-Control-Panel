@@ -20,7 +20,8 @@
         </DockPanel>
          <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-            <uc:DonatePaypal_Link />
+                <uc:GitHub_Link/>
+                <uc:DonatePaypal_Link />
             <uc:DonateKofi_Link/>
         </StackPanel>
     </ScrollViewer>

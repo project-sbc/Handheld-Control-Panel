@@ -47,7 +47,7 @@ namespace Handheld_Control_Panel
         private string page = "";
         private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
         private bool disable_B_ToClose = false;
-
+        public OSK osk;
 
         private System.Windows.Forms.NotifyIcon m_notifyIcon;
         public MainWindow()
@@ -139,6 +139,21 @@ namespace Handheld_Control_Panel
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void toggleOSK()
+        {
+            if (osk == null)
+            {
+                osk = new OSK();
+                osk.Show();
+            }
+            else
+            {
+                osk.Close();
+                osk = null;
+            }
+
         }
 
         private void M_notifyIcon_DoubleClick(object? sender, EventArgs e)
@@ -546,6 +561,8 @@ namespace Handheld_Control_Panel
         {
           
             getDPIScaling();
+
+         
         }
         private void getDPIScaling()
         {

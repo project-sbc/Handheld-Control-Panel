@@ -326,6 +326,7 @@ namespace Handheld_Control_Panel.Classes
                         }
                     }
                 }
+                else { DisplayParameter = ""; }
             
 
                 parameter = value;

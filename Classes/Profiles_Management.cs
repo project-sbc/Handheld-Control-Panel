@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
 using System.Xml;
+using Path = System.IO.Path;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -67,7 +68,7 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
-        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument)
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe)
         {
 
          
@@ -84,7 +85,23 @@ namespace Handheld_Control_Panel.Classes
             newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
             newNode.SelectSingleNode("LaunchOptions/LaunchCommand").InnerText = launchcommand;
             newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = apptype;
+            if (exe != null)
+            {
+                if (File.Exists(exe))
+                {
+                    exe = Path.GetFileNameWithoutExtension(exe);
+                }
+                if (exe.Length > 4)
+                {
+                    if (exe.Contains(".exe"))
+                    {
+                        exe = exe.Substring(0, exe.Length - 4);
+                    }
+                }
 
+                newNode.SelectSingleNode("Exe").InnerText = exe;
+            }
+           
             xmlNodeProfiles.AppendChild(newNode);
 
 
@@ -143,7 +160,7 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe);
                     }
                 }
 
@@ -379,7 +396,12 @@ namespace Handheld_Control_Panel.Classes
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;
                         break;
-                    case "EpicGames":
+                    case "Battle.net":
+                        icon = PackIconSimpleIconsKind.Battledotnet;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
+                    case "Epic Games":
                         icon = PackIconSimpleIconsKind.EpicGames;
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;

@@ -134,13 +134,25 @@ namespace Handheld_Control_Panel.Classes
                     case "Steam":
                         foreach (var game in launcher.Games)
                         {
-                            GameLauncherItem launcherItem = new GameLauncherItem();
-                            launcherItem.gameName = game.Name;
-                            launcherItem.gameID = game.Id;
-                            launcherItem.launchCommand = game.LaunchString;
-                            launcherItem.path = game.WorkingDir + "\\" + game.Executable;
-                            launcherItem.appType = launcher.Name;
-                            list.Add(launcherItem);
+                            if (game.Id != "228980")
+                            {
+                                GameLauncherItem launcherItem = new GameLauncherItem();
+                                launcherItem.gameName = game.Name;
+                                launcherItem.gameID = game.Id;
+                                launcherItem.launchCommand = game.LaunchString;
+
+                                foreach (string exe in game.Executables)
+                                {
+                                    if (!exe.Contains("Unity") && !exe.Contains("Crash"))
+                                    {
+                                        launcherItem.path = exe;
+                                    }
+
+                                }
+                                launcherItem.appType = launcher.Name;
+                                list.Add(launcherItem);
+                            }
+                            
                         }
                         break;
                     case "Battle.net":
@@ -154,6 +166,7 @@ namespace Handheld_Control_Panel.Classes
                             {
                                 case "Call of Duty Black Ops Cold War":
                                     launcherItem.path = game.WorkingDir + "\\BlackOpsColdWar.exe";
+                                    launcherItem.exe = "BlackOpsColdWar.exe";
                                     break;
 
                                 default:
@@ -213,5 +226,6 @@ namespace Handheld_Control_Panel.Classes
         public string appType { get; set; }
         public string launchCommand { get; set; }
         public string path { get; set; }
+        public string exe { get; set; }
     }
 }

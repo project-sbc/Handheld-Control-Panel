@@ -106,6 +106,19 @@ namespace Handheld_Control_Panel.UserControls
             hotkeyAction.Add(gotoDesktop);
 
 
+            HotKeyAction toggleWinOSK = new HotKeyAction();
+            toggleWinOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_Windows_OSK"].ToString();
+            toggleWinOSK.HotkeyAction = "Toggle_Windows_OSK";
+
+            hotkeyAction.Add(toggleWinOSK);
+
+            HotKeyAction toggleHCPOSK = new HotKeyAction();
+            toggleHCPOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_HCP_OSK"].ToString();
+            toggleHCPOSK.HotkeyAction = "Toggle_HCP_OSK";
+
+            hotkeyAction.Add(toggleHCPOSK);
+
+            
             controlList.ItemsSource = hotkeyAction;
 
             foreach (HotKeyAction hka in hotkeyAction)
