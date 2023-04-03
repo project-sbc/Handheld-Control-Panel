@@ -1,19 +1,51 @@
 # Handheld-Control-Panel
 
-This software is aimed to be a one stop shop for windows gaming handhelds. It is designed to be conveint to use and not instrusive while working with other software seamlessly. 
+This software is aimed to be a one stop shop for windows gaming handhelds. It is designed to be controller friendly and convenient to use and not instrusive while working with other software seamlessly. 
 
 # PLEASE READ THIS:
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. MISUSE OF THIS SOFTWARE COULD CAUSE SYSTEM INSTABILITY OR MALFUNCTION.
 
-## Current Features.
-### Power Controls
-TDP, cpu clock, max cores, EPP, and gpu clock (for amd 4000 and amd 6000 and newer devices).
-
-### Display Controls
-Change resolution, refresh rate, and scaling quickly.
-
 ## Download
 Head to the link [here](https://github.com/project-sbc/Handheld-Control-Panel/releases) to download the latest version.
+
+## Current Features.
+### Power Controls
+TDP, max cpu clock, max cores, EPP, and gpu clock (for amd 4000 and amd 6000 and newer devices).
+
+### Display Controls
+Change resolution, refresh rate, and display scaling quickly.
+
+### RTSS
+FPS limiter integration with RTSS. Can limit FPS for your games. Also used for on screen displays.
+
+### System Controls
+Change brightness and volume and toggle mute, wifi and BT.
+
+### Customizable Home Page
+The controls on the home can be rearranged in any order or disabled.
+
+### Profiles
+Configure per app/game settings including FPS limits, power controls, and display controls that will apply if launched from my app OR will be detected automatically. Exception: display changes won't occur if game is detected automatically.
+
+### Hot Keys
+Configure controller or keyboard hotkeys for numerous actions. As many hotkeys can be made as desired. Actions include:
+Adjusting TDP, brightness, gpu clock (on supported devices), and volume
+Launching a game/app
+Launching steam big picture mode or playnite full screen
+Toggling mouse mode
+Toggling on screen keyboard
+
+### Mouse Mode
+Configure your controller to act as a mouse/keyboard. 
+
+### Game Launcher
+Convenient way to launch games from popular game launchers including Steam, Epic Games, Battle.net, Origin, and Rockstar games. Profiles will auto apply including display changes when using this.
+
+### Settings
+Ability to change appearances such as light/dark mode, accent colors, menu on left or right and update settings. For Intel devices, you can change the TDP mode to best suit your device. Auto start and auto update are additional setting parameters. Ability to change max/min parameters can also be configured.
+
+### Power Menu
+Ability to hide or close handheld control panel, ability to close a running game (detected by RTSS), or restart/shutdown computer.
 
 # Compatible Devices (Windows only)
 ## Aya
@@ -56,3 +88,4 @@ RyzenAdj
 GameLib.net
 EC controller
 QRes
+RTSS support - for changing FPS limits and displaying OSDs
