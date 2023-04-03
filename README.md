@@ -70,7 +70,7 @@ Win600. No fan support.
 Most ryzen laptops or mini PCs. No fan support.
 
 # Donate
-If you feel this software has helped you, please consider donating. I enjoy doing this for the community and am a consumer of my own software, so I don't do it for the money, but I have easily put 100's of hours into this project to bring you the best possible experience. Thank you.
+<p>If you feel this software has helped you, please consider donating. I enjoy doing this for the community and am a consumer of my own software, so I don't do it for the money, but I have easily put 100's of hours into this project to bring you the best possible experience. Thank you.</p>
 https://ko-fi.com/project_sbc
 
 https://www.paypal.com/donate?business=NQFQSSJBTTYY4&currency_code=USD
@@ -84,8 +84,15 @@ Restart the computer
 ![Intel22H2](https://github.com/project-sbc/Power-Control-Panel-v2/blob/master/Intel%2022H2%20driver%20fix.jpg?raw=true "Intel 22H2 fix")
 
 # Projects incorporated into this
-RyzenAdj
-GameLib.net
-EC controller
-QRes
-RTSS support - for changing FPS limits and displaying OSDs
+<ul>
+  <li>RyzenAdj</li>
+  <li>GameLib.net</li>
+  <li>TEC controller</li>
+  <li>QRes</li>
+  <li>RTSS support - for changing FPS limits and displaying OSDs</li>
+</ul>
+
+
+
+
+
