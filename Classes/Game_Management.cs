@@ -11,6 +11,7 @@ using GameLib;
 using GameLib.Core;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using System.Windows;
+using System.Threading;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -51,6 +52,7 @@ namespace Handheld_Control_Panel.Classes
                             {
 
                                 RunGame(battlenetfile);
+                                Thread.Sleep(15000);
                                 Run_CLI.Run_CLI.RunCommand(" --exec=\"launch " + gameID.ToUpper() + "\"", false, battlenetfile, 3000, true);
 
                             }

@@ -16,7 +16,7 @@ namespace Handheld_Control_Panel.Classes.Run_CLI
         public static string RunCommand(string arguments, bool readOutput, string processName = "cmd.exe",  int waitExit=6000, bool runasadmin=true)
         {
             //Runs CLI, if readOutput is true then returns output
-            Debug.WriteLine(arguments);
+          
             try
             {
 
