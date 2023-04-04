@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel
         private string window = "MainWindow";
         private string page = "";
         private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
-        private bool disable_B_ToClose = false;
+        public bool disable_B_ToClose = false;
         public OSK osk;
 
         private System.Windows.Forms.NotifyIcon m_notifyIcon;
@@ -297,7 +297,25 @@ namespace Handheld_Control_Panel
                         }
                         else
                         {
-                            toggleWindow();
+                            switch (page)
+                            {
+                                case "HotKeyEditPage":
+                                    Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
+                                    navigateFrame("HotKeyPage");
+                                    break;
+                                case "MouseModeEditPage":
+                                    Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
+                                    navigateFrame("MouseModePage");
+                                    break;
+                                case "ProfileEditPage":
+                                    Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+                                    navigateFrame("ProfilesPage");
+                                    break;
+                                default:
+                                    toggleWindow();
+                                    break;
+                            }
+               
                         }
 
                         break;
@@ -492,11 +510,11 @@ namespace Handheld_Control_Panel
                         instructionStackPanel.Children.Add(new ProfilePage_Instruction());
                         break; 
                     case "ProfileEditPage_Instruction":
-                        disable_B_ToClose = true;
+          
                         instructionStackPanel.Children.Add(new ProfileEditPage_Instruction());
                         break; 
                     case "HotKeyEditPage_Instruction":
-                        disable_B_ToClose = true;
+       
                         instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());
                         break;
                     case "SelectedListBox_Instruction":

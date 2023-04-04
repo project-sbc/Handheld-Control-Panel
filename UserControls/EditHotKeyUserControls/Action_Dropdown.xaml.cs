@@ -152,22 +152,18 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             handleListboxChange();
+                            Global_Variables.mainWindow.changeUserInstruction("HotKeyEditPage_Instruction");
                         }
                         else
                         {
                             button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
-                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.changeUserInstruction("SelectedListBox_Instruction");
-                            wnd = null;
-                         
+                            Global_Variables.mainWindow.changeUserInstruction("SelectedListBox_Instruction");
+                    
                         }
 
                         break;
                     case "B":
-                        MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
-                        wnd2.changeUserInstruction("HomePage_Instruction");
-                        wnd2 = null;
+                        Global_Variables.mainWindow.changeUserInstruction("HotKeyEditPage_Instruction");
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             

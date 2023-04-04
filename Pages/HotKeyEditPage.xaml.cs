@@ -79,13 +79,25 @@ namespace Handheld_Control_Panel.Pages
             if (args.WindowPage == windowpage)
             {
                 MainWindow wnd;
+                int[] intReturn;
                 switch (args.Action)
                 {
                     case "B":
-                        Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
-                        wnd = (MainWindow)Application.Current.MainWindow;
-                        wnd.navigateFrame("HotKeyPage");
-                        wnd = null;
+                        if (Global_Variables.mainWindow.disable_B_ToClose)
+                        {
+                            intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+
+                            highlightedUserControl = intReturn[0];
+                            selectedUserControl = intReturn[1];
+                        }
+                        else
+                        {
+                            
+                            wnd = (MainWindow)Application.Current.MainWindow;
+                            wnd.navigateFrame("HotKeyPage");
+                            wnd = null;
+                        }
+    
                         break;
                     case "Start":
                         Global_Variables.hotKeys.editingHotkey.SaveToXML();
@@ -109,7 +121,7 @@ namespace Handheld_Control_Panel.Pages
 
                     default:
                         //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                        int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                        intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
 
                         highlightedUserControl = intReturn[0];
                         selectedUserControl = intReturn[1];

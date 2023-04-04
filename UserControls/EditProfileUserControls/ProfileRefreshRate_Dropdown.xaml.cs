@@ -114,12 +114,14 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             handleListboxChange();
+                     
+                            Global_Variables.mainWindow.changeUserInstruction("ProfileEditPage_Instruction");
                         }
                         else
                         {
                             button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                            Global_Variables.mainWindow.changeUserInstruction("SelectedListBox_Instruction");
 
-                           
                         }
 
                         break;
@@ -127,7 +129,7 @@ namespace Handheld_Control_Panel.UserControls
                  
                         if (controlList.Visibility == Visibility.Visible)
                         {
-                            
+                            Global_Variables.mainWindow.changeUserInstruction("ProfileEditPage_Instruction");
 
                             if (selectedObject != null)
                             {

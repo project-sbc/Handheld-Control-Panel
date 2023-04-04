@@ -135,12 +135,12 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (steamRunning())
                 {
-                    Run_CLI.Run_CLI.RunCommand(" \"steam://open/bigpicture\"", false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false);
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://open/bigpicture\"", false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false));
 
                 }
                 else
                 {
-                    Run_CLI.Run_CLI.RunCommand(" -bigpicture", false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false);
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" -bigpicture", false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false));
                 }
             }
 
