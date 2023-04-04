@@ -22,6 +22,8 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using ControlzEx.Theming;
 using System.Windows.Interop;
+using Handheld_Control_Panel.Classes.Global_Variables;
+using Handheld_Control_Panel.Classes;
 
 namespace Handheld_Control_Panel
 {
@@ -124,6 +126,7 @@ namespace Handheld_Control_Panel
         const UInt32 SWP_NOMOVE = 0x0010;
         const UInt32 SWP_SHOWWINDOW = 0x0040;
 
+        private bool reenableMouseModeOnExit = false;
         // Call this way:
 
         [DllImport("user32.dll")]
@@ -154,6 +157,10 @@ namespace Handheld_Control_Panel
             swapAlphaUpperLower(false);
             IntPtr windowHandle = new WindowInteropHelper(this).Handle;
             SetWindowPos(windowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+
+
+            if (Global_Variables.mousemodes.status_MouseMode()) { Global_Variables.mousemodes.timerController.Stop(); reenableMouseModeOnExit = true; }
+
         }
 
         #region Controller press events
@@ -788,8 +795,7 @@ namespace Handheld_Control_Panel
             if (Console.CapsLock) { sim.Keyboard.KeyPress(VirtualKeyCode.CAPITAL); }
 
             dispatcherTimer.Stop();
-
-            //Make null so it can be called again
+            if (reenableMouseModeOnExit) { Global_Variables.mousemodes.timerController.Start(); }
           
 
             

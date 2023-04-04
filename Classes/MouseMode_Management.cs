@@ -90,8 +90,8 @@ namespace Handheld_Control_Panel.Classes
            {"F11" },
            {"F12" },
            {"LeftMouseClick" },
-           {"RightMouseClick" }
-
+           {"RightMouseClick" },
+            {"HCP OSK" }
 
 
  };
@@ -554,28 +554,40 @@ namespace Handheld_Control_Panel.Classes
                                     GamepadButtonFlags flag = buttonLookup[entry.Key];
                                     if (!entry.Value.Contains("Mouse"))
                                     {
-                                        VirtualKeyCode vkc = keyLookUp[entry.Value];
-                                        if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
+                                        if (entry.Value == "HCP OSK")
                                         {
-                                            inputSimulator.Keyboard.KeyPress(vkc);
-                                        }
-                                        if (1 == 0)
-                                        {
-                                            if (currentGamePad.Buttons.HasFlag(flag))
+                                            if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
                                             {
-                                                if (!inputSimulator.InputDeviceState.IsKeyDown(vkc))
+                                                Global_Variables.Global_Variables.mainWindow.toggleOSK();
+                                            }
+                                           
+                                        }
+                                        else
+                                        {
+                                            VirtualKeyCode vkc = keyLookUp[entry.Value];
+                                            if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
+                                            {
+                                                inputSimulator.Keyboard.KeyPress(vkc);
+                                            }
+                                            if (1 == 0)
+                                            {
+                                                if (currentGamePad.Buttons.HasFlag(flag))
                                                 {
-                                                    inputSimulator.Keyboard.KeyDown(vkc);
+                                                    if (!inputSimulator.InputDeviceState.IsKeyDown(vkc))
+                                                    {
+                                                        inputSimulator.Keyboard.KeyDown(vkc);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (inputSimulator.InputDeviceState.IsKeyDown(vkc))
+                                                    {
+                                                        inputSimulator.Keyboard.KeyUp(vkc);
+                                                    }
                                                 }
                                             }
-                                            else
-                                            {
-                                                if (inputSimulator.InputDeviceState.IsKeyDown(vkc))
-                                                {
-                                                    inputSimulator.Keyboard.KeyUp(vkc);
-                                                }
-                                            }
                                         }
+                                      
 
 
                                     }
