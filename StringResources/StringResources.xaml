@@ -180,5 +180,6 @@
         <!-- new strings 03apr2023-->
     <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">Toggle Windows OSK</system:String>
     <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">Toggle HCP OSK</system:String>
-    
+    <!-- 04apr2023 -->
+    <system:String x:Key="Usercontrol_Deadzone">Joystick Deadzone</system:String>
 </ResourceDictionary>

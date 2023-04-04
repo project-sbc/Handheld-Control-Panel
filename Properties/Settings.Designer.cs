@@ -309,5 +309,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["appSortMethod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1200")]
+        public double joystickDeadzone {
+            get {
+                return ((double)(this["joystickDeadzone"]));
+            }
+            set {
+                this["joystickDeadzone"] = value;
+            }
+        }
     }
 }

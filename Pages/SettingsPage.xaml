@@ -40,8 +40,9 @@
             <uc:StartRTSS_Toggle />
             <uc:Divider/>
             <uc:GameSync_Button/>
-          
-        </StackPanel>
+                <uc:Divider/>
+                <uc:Deadzone_Slider/>
+            </StackPanel>
     </ScrollViewer>
     </Grid>
     

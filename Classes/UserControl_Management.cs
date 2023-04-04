@@ -35,7 +35,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.LargeChange = 5;
 
                         break;
- 
+                    case "Slider_Deadzone":
+                        slider.Minimum = 0;
+                        slider.Maximum = 20;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 5;
+                        slider.Value = Math.Round(Properties.Settings.Default.joystickDeadzone*100 / 32768, 0);
+                        break;
+
                     case "Slider_ProfileOnlineTDP":
                         slider.Minimum = Properties.Settings.Default.minTDP;
                         slider.Maximum = Properties.Settings.Default.maxTDP;
@@ -506,6 +514,10 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
                 case "Slider_MinTDP":
                     Properties.Settings.Default.minTDP = (int)sliderValue;
+                    Properties.Settings.Default.Save();
+                    break;
+                case "Slider_Deadzone":
+                    Properties.Settings.Default.joystickDeadzone = Math.Round((sliderValue/100)*32768,0);
                     Properties.Settings.Default.Save();
                     break;
                 case "Slider_MaxTDP":

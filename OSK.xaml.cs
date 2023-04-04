@@ -62,7 +62,8 @@ namespace Handheld_Control_Panel
         private bool keyShift = false;
         private bool keyWin = false;
 
-
+        private double sensitivity = 16;
+        private double deadzone = Properties.Settings.Default.joystickDeadzone;
         buttonEvents events = new buttonEvents();
 
         Dictionary<string, VirtualKeyCode> keyLookUp =
@@ -199,19 +200,21 @@ namespace Handheld_Control_Panel
         #endregion controler press events
 
         #region joystick point math
-
-        private double offset_calculator(short Input)
+        private double offset_calculator(double value)
         {
-            //Convert short from joystick to double, divide by largest value, and round to largest nubmer away from zero
-            if (Input < 500 && Input > 0)
+            double returnValue;
+            if (value> deadzone || value < -deadzone)
             {
-                return 1;
+                returnValue = (sensitivity * (value / 32768) / Math.Sqrt((value / 32768 * value / 32768) + 1));
+                returnValue = Math.Round(returnValue, 0);
+                return returnValue;
             }
             else
             {
-                return Math.Round(10 * Convert.ToDouble(Input) / 32768, 0, MidpointRounding.AwayFromZero);
+                return 0;
             }
         }
+     
         private Point offset_point(Point mp, Double dx, Double dy)
         {
             if ((mp.X + dx >= LLx) && (mp.X + dx <= ULx))

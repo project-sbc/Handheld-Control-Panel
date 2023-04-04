@@ -74,5 +74,8 @@
     <Setting Name="appSortMethod" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sort_Method_ProfileName</Value>
     </Setting>
+    <Setting Name="joystickDeadzone" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1200</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

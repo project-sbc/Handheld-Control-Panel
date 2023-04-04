@@ -107,7 +107,7 @@ namespace Handheld_Control_Panel.Classes
 
         public double sensitivityScroll = 1;
         private int joystickButtonPressSensivitiy = 6000;
-       
+        private double deadzone = Properties.Settings.Default.joystickDeadzone;
         public MouseMode activeMouseMode = new MouseMode();
   
         public MouseMode editingMouseMode = new MouseMode();
@@ -643,7 +643,7 @@ namespace Handheld_Control_Panel.Classes
         private double normalizeJoystickInput(double sensitivity, double value)
         {
             double returnValue;
-            if (value != 0)
+            if (value > deadzone || value < -deadzone)
             {
                 returnValue = (sensitivity * (value / 32768) / Math.Sqrt((value / 32768 * value / 32768) + 1));
                 returnValue = Math.Round(returnValue, 0);

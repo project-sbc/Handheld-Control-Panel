@@ -64,8 +64,9 @@ namespace Handheld_Control_Panel.Classes
                     }
                     break;
                 case "Open_Steam_BigPicture":
-                    Steam_Management.openSteamBigPicture();
                     Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
+                    Steam_Management.openSteamBigPicture();
+                 
                     break;
                 case "Open_Playnite":
                     Playnite_Management.playniteToggle();
