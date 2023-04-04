@@ -35,6 +35,26 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                 Global_Variables.Global_Variables.fanControlDevice = true;
                 Global_Variables.Global_Variables.fanDevice = "WM2_AMD";
             }
+            if (manufacturer == "GPD" && product.Contains("G1618") && Global_Variables.Global_Variables.cpuType == "AMD")
+            {
+                Global_Variables.Global_Variables.fanControlDevice = true;
+                Global_Variables.Global_Variables.fanDevice = "WIN4_AMD";
+
+                //check win4 ec is enabled, if not enable it
+                //GPDWIN4_EC_Enable();
+            }
+        }
+
+        private static void  GPDWIN4_EC_Enable()
+        {
+            byte EC_Chip_ID1 = WinRingEC_Management.ECRamRead(0x2000);
+
+            if (EC_Chip_ID1 == 0x55)
+            {
+                byte EC_Chip_Ver = WinRingEC_Management.ECRamRead(0x1060);
+                EC_Chip_Ver = (Byte)(EC_Chip_Ver | 0x80);
+                WinRingEC_Management.ECRamWrite(0x1060, EC_Chip_Ver);
+            }
         }
 
 
@@ -45,7 +65,9 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
            {"OXP_AMD", 0x4A},
            {"AyaNeo2", 0x44A},
            //{"OXP_Intel", "0x4A"},
-           {"WM2_AMD", 0x275 },
+           {"WIN4_AMD", 0xC311 },
+           {"WM2_AMD", 0x275 }
+
 
         };
 
@@ -54,6 +76,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
            {"OXP_AMD", 0x4B},
            {"AyaNeo2", 0x44B},
            //{"OXP_Intel", "0x4B"},
+             {"WIN4_AMD", 0xC311 },
            {"WM2_AMD", 0x1809},
 
         };
@@ -62,6 +85,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
            {"OXP_AMD", 100},
            //{"OXP_Intel", 255},
            {"WM2_AMD", 184 },
+             {"WIN4_AMD", 127 },
            {"AyaNeo2", 100},
         };
         public static void readSoftwareFanControl()
