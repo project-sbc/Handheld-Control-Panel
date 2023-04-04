@@ -96,6 +96,8 @@ namespace Handheld_Control_Panel.Pages
    
                             Global_Variables.hotKeys.deleteHotkey(hotkey);
                             controlList.Items.Refresh();
+                            Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
+                            Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
                         case "Up":

@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             controlList.Items.Add("English");
             controlList.Items.Add("简体中文");
-            controlList.Items.Add("Pусский");
+            //controlList.Items.Add("Pусский");
             controlList.SelectedItem = Properties.Settings.Default.language;
 
 
@@ -146,6 +146,7 @@ namespace Handheld_Control_Panel.UserControls
                    
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.languageDict);
                     Global_Variables.homePageItems.populateList();
+                    Global_Variables.hotKeys.updateLanguage();
                 }
 
             }

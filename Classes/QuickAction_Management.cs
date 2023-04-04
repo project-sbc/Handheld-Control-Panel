@@ -41,12 +41,10 @@ namespace Handheld_Control_Panel.Classes
                             FileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "microsoft shared\\ink\\TabTip.exe")
                         };
                         System.Diagnostics.Process.Start(psi);
-                        oskt.Main();
+                     
                     }
-                    else
-                    {
-                        oskt.Main();
-                    }
+                    oskt.Main();
+
 
 
                     break;

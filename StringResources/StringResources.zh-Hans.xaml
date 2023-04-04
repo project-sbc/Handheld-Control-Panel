@@ -154,17 +154,30 @@
     <!-- new 27mar2023-->
     <system:String x:Key="MainWindow_NavigationView_Power">Power</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Power">Power</system:String>
-    <system:String x:Key="UserControl_CloseGame">Close</system:String>
-    <system:String x:Key="UserControl_CloseActiveProgram">Close Program</system:String>
-    <system:String x:Key="UserControl_HideHCP">Hide HCP</system:String>
-    <system:String x:Key="UserControl_CloseHCP">Close HCP</system:String>
-    <system:String x:Key="UserControl_RestartPC">Restart PC</system:String>
-    <system:String x:Key="UserControl_Restart">Restart</system:String>
-    <system:String x:Key="UserControl_ShutdownPC">Shut Down PC</system:String>
-    <system:String x:Key="UserControl_Shutdown">Shut Down</system:String>
+    <system:String x:Key="UserControl_CloseGame">关</system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">关 Program</system:String>
+    <system:String x:Key="UserControl_HideHCP">隐蔽HCP</system:String>
+    <system:String x:Key="UserControl_CloseHCP">关闭HCP</system:String>
+    <system:String x:Key="UserControl_RestartPC">重启PC</system:String>
+    <system:String x:Key="UserControl_Restart">重启</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">停机PC</system:String>
+    <system:String x:Key="UserControl_Shutdown">停机</system:String>
     <system:String x:Key="UserControl_FanControl">Fan Control</system:String>
 
+    <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">Go To Desktop</system:String>
+    <system:String x:Key="Sort_Method_SortBy">排序-</system:String>
+    <system:String x:Key="Sort_Method_AppType">软件种</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">经常开启</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">最近开启</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">名字</system:String>
 
+    <system:String x:Key="Instruction_Sort">排序</system:String>
+
+
+    <!-- new strings 03apr2023-->
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">切换Windows OSK</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">切换HCP OSK</system:String>
 
 
 
