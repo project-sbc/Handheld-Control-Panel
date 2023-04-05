@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.IconPacks;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.IconPacks;
 using SharpDX;
 using SharpDX.XInput;
 using System;
@@ -10,6 +11,7 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Xml;
 using Path = System.IO.Path;
@@ -168,7 +170,11 @@ namespace Handheld_Control_Panel.Classes
                 xmlDocument = null;
 
             }
+            Application.Current.BeginInvoke(() => {
+                Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
+            });
+         
 
 
         }
