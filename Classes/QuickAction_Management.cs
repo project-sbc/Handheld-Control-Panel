@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.Classes
                     break;
                 case "Show_Hide_HCP":
                     Global_Variables.Global_Variables.mainWindow.toggleWindow();
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
+                   
                     break;
                 case "Change_TDP":
                    
