@@ -42,7 +42,7 @@ namespace Handheld_Control_Panel.UserControls
         private  void setControlValue()
         {
 
-            control.IsOn = Controller_Management.controller.IsConnected;
+            control.IsOn = !Controller_Management.controller.IsConnected;
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -80,7 +80,7 @@ namespace Handheld_Control_Panel.UserControls
             {
                 controllerIsOn = Controller_Management.toggleEnableDisableController();
             });
-            control.IsOn = controllerIsOn;
+            control.IsOn = !controllerIsOn;
         }
     
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

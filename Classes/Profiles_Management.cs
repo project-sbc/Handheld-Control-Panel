@@ -657,9 +657,10 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
                     Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
                     RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
+                    Path = LaunchOptions.SelectSingleNode("Path").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
                     ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
-                    Path = LaunchOptions.SelectSingleNode("Path").InnerText;
+               
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                    
                     if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
