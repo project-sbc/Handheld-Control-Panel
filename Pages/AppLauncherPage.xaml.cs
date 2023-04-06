@@ -193,7 +193,7 @@ namespace Handheld_Control_Panel.Pages
                             
                                     using (Icon ico = Icon.ExtractAssociatedIcon(profile.Path))
                                     {
-                                        lbai.image = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                                        lbai.imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                                     }
                                     
                                 }
@@ -472,8 +472,7 @@ where childItem : DependencyObject
     {
         public string ID { get; set; }
         public string ProfileName { get; set; }
-        public ImageSource image { get; set; }
-        public ImageSource imageSteam { get; set; }
+
         public int NumberLaunches { get; set; }
         public int LastLaunched { get; set; }
         public string programType { get; set; }
@@ -485,10 +484,11 @@ where childItem : DependencyObject
             set
             {
                 favorite = value;
-                if (value == true) { favoriteIcon = Visibility.Visible; } else { favoriteIcon = Visibility.Collapsed; }
+                if (value == true) { favoriteIconVisibility = Visibility.Visible; } else { favoriteIconVisibility = Visibility.Collapsed; }
             }
         }
-        public Visibility favoriteIcon { get; set; } = Visibility.Collapsed;
-
+        public Visibility favoriteIconVisibility { get; set; } = Visibility.Collapsed;
+        public ImageSource imageIcon { get; set; }
+        public ImageSource imageSteam { get; set; }
     }
 }

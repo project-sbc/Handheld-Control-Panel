@@ -12,8 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using YamlDotNet.Core.Tokens;
 using Path = System.IO.Path;
 
 namespace Handheld_Control_Panel.Classes
@@ -399,8 +402,39 @@ namespace Handheld_Control_Panel.Classes
 
         public string appType { get; set; } = "";
         public string LaunchCommand { get; set; } = "";
-        public string ImageLocation { get; set; } = "";
-        public bool Favorite { get; set; }
+
+        public string imageLocation { get; set; } = "";
+        public string ImageLocation
+        {
+            get
+            {
+                return imageLocation;
+            }
+            set
+            {
+                if (value != "" && imageApp != null)
+                {
+
+                }
+                
+            }
+        }
+
+
+        public bool Favorite
+        {
+            get {
+                if (favoriteIconVisibility == Visibility.Visible) { return true; } else { return false; }
+            }
+            set
+            {
+             
+                if (value == true) { favoriteIconVisibility = Visibility.Visible; } else { favoriteIconVisibility = Visibility.Collapsed; }
+            }
+        }
+        public Visibility favoriteIconVisibility { get; set; } = Visibility.Collapsed;
+        public ImageSource imageIcon { get; set; } = null;
+        public ImageSource imageApp { get; set; } = null;
         public int LastLaunched { get; set; } = 0;
         public int NumberLaunches { get; set; } = 0;
         public string AppType
@@ -415,6 +449,22 @@ namespace Handheld_Control_Panel.Classes
                         icon = PackIconSimpleIconsKind.Steam;
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;
+                        if (ImageLocation == "")
+                        {
+                            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + GameID + "_header";
+                            if (File.Exists(imageDirectory + ".jpg"))
+                            {
+                                imageApp = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
+                            }
+                            else
+                            {
+                                if (File.Exists(imageDirectory + ".png"))
+                                {
+                                    imageApp = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                                }
+
+                            }
+                        }
                         break;
                     case "Battle.net":
                         icon = PackIconSimpleIconsKind.Battledotnet;
@@ -463,6 +513,11 @@ namespace Handheld_Control_Panel.Classes
         public Visibility iconVisibility { get; set; } = Visibility.Collapsed;
         public Visibility iconMaterialVisibility { get; set; } = Visibility.Collapsed;
        
+
+
+
+
+
         public void SaveToXML()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
@@ -577,6 +632,7 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
                     Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
                     RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
+                    ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
@@ -590,7 +646,7 @@ namespace Handheld_Control_Panel.Classes
                     }
 
                     LaunchCommand = LaunchOptions.SelectSingleNode("LaunchCommand").InnerText;
-                    ImageLocation=LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
+                    
 
 
                     if (LaunchOptions.SelectSingleNode("NumberLaunches").InnerText != "")
@@ -682,4 +738,6 @@ namespace Handheld_Control_Panel.Classes
 
         }
     }
+
+  
 }
