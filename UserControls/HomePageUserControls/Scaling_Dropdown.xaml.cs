@@ -87,7 +87,7 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.SelectedItem.ToString() != Global_Variables.resolution)
+                        if (controlList.SelectedItem.ToString() != Global_Variables.Scaling)
                         {
                             handleListboxChange();
                         }
@@ -135,7 +135,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (controlList.SelectedItem != null)
                 {
                     string scaling = controlList.SelectedItem.ToString();
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Display_Management.SetDisplayScaling(scaling));
+                    Display_Management.SetDisplayScaling(scaling);
                     selectedObject = controlList.SelectedItem;
                     if (controlList.Visibility == Visibility.Visible)
                     {

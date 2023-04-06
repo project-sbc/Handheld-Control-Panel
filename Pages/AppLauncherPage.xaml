@@ -160,7 +160,7 @@
 
                                     </DockPanel>
                                     <Border Margin="0,0,-7,2" HorizontalAlignment="Right"   VerticalAlignment="Bottom" CornerRadius="4" Background="White" Panel.ZIndex="3">
-                                        <TextBlock   Text="&#xE735;"  FontFamily="Segoe MDL2 Assets"  Foreground="{DynamicResource MahApps.Brushes.AccentBase}"  Visibility="{Binding favoriteIconVisibility}" FontSize="22"  />
+                                        <TextBlock   Text="&#xE735;" Margin="2,2,2,2"  FontFamily="Segoe MDL2 Assets"  Foreground="{DynamicResource MahApps.Brushes.AccentBase}"  Visibility="{Binding favoriteIconVisibility}" FontSize="22"  />
                                    
                                     </Border>
                                      

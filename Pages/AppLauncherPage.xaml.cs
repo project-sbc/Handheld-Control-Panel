@@ -433,6 +433,12 @@ where childItem : DependencyObject
                         case "Right":
                             handleListBoxIndexChange(controlList, 1);
                             break;
+                        case "LB":
+                            handleListBoxIndexChange(controlList, -15);
+                            break;
+                        case "RB":
+                            handleListBoxIndexChange(controlList, 15);
+                            break;
                         default: break;
 
                     }

@@ -122,6 +122,8 @@
     <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
     <system:String x:Key="Instruction_Launch">LAUNCH</system:String>
   
+        
+  
 
 
 
@@ -176,6 +178,10 @@
     <system:String x:Key="Sort_Method_Favorite">Favorite</system:String>
         
     <system:String x:Key="Instruction_Sort">SORT</system:String>
+    <system:String x:Key="Instruction_Filter">FILTER</system:String>
+    <system:String x:Key="Instruction_Favorite">FAVORITE</system:String>
+    <system:String x:Key="Instruction_PageDown">PAGE DOWN</system:String>
+    <system:String x:Key="Instruction_PageUp">PAGE UP</system:String>
 
         
         <!-- new strings 03apr2023-->

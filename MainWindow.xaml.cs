@@ -33,6 +33,7 @@ using System.IO;
 using Handheld_Control_Panel.Classes.Fan_Management;
 using Notification.Wpf;
 using Notification.Wpf.Classes;
+using System.Threading;
 
 namespace Handheld_Control_Panel
 {
@@ -284,6 +285,9 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
+                    case "Start":
+                        setWindowSizePosition();
+                        break;
                     case "LT":
                         navigateListBox(true);
                         break;
@@ -431,26 +435,58 @@ namespace Handheld_Control_Panel
             //icon needs to be rotated for which side it is on
             //PackIconFontAwesome packIconFontAwesome = (PackIconFontAwesome)Close.Content;
 
-            this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight*0.03,0);
+            //var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            //this.Left = desktopWorkingArea.Right - this.Width;
+            
+            double scaling;
+            if (Double.TryParse(Global_Variables.Scaling, out scaling))
+            {
+                scaling = scaling / 100;
+                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.03, 0);
 
-            this.Height =Math.Round( System.Windows.SystemParameters.PrimaryScreenHeight*0.91,0);
-            if (Properties.Settings.Default.dockWindowRight && this.Left != System.Windows.SystemParameters.PrimaryScreenWidth - this.Width)
-            {
-                //if dockWindowRight is true, move to right side of screen
-                this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
-                //packIconFontAwesome.RotationAngle = 0;
-                borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.91, 0);
+                if (Properties.Settings.Default.dockWindowRight)
+                {
+                    //if dockWindowRight is true, move to right side of screen
+                    this.Left = Math.Round((System.Windows.SystemParameters.PrimaryScreenWidth/scaling) - this.Width,0);
+                    //packIconFontAwesome.RotationAngle = 0;
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                }
+                if (!Properties.Settings.Default.dockWindowRight)
+                {
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                    this.Left = 0;
+                    //packIconFontAwesome.RotationAngle = 180;
+                }
             }
-            if (!Properties.Settings.Default.dockWindowRight && this.Left != 0)
+            else
             {
-                borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
-                this.Left = 0;
-                //packIconFontAwesome.RotationAngle = 180;
+                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.03, 0);
+
+                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.91, 0);
+                if (Properties.Settings.Default.dockWindowRight)
+                {
+                    //if dockWindowRight is true, move to right side of screen
+                    this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
+                    //packIconFontAwesome.RotationAngle = 0;
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                }
+                if (!Properties.Settings.Default.dockWindowRight)
+                {
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                    this.Left = 0;
+                    //packIconFontAwesome.RotationAngle = 180;
+                }
             }
+           
 
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
