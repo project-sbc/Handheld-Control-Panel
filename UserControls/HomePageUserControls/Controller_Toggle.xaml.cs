@@ -67,10 +67,20 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                control.IsOn=Controller_Management.toggleEnableDisableController();
+                toggleController();
 
             }
           
+        }
+        private bool controllerIsOn;
+        private async void toggleController()
+        {
+           
+            await Task.Run(() =>
+            {
+                controllerIsOn = Controller_Management.toggleEnableDisableController();
+            });
+            control.IsOn = controllerIsOn;
         }
     
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
