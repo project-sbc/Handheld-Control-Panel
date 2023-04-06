@@ -187,5 +187,8 @@
     <system:String x:Key="Notification_GameSyncDone">Game Library Sync Complete</system:String>
     <system:String x:Key="Notification_GameSyncing">Game Library Syncing</system:String>
     
-        
+        <!-- 06apr2023-->
+    <system:String x:Key="Filter_Method_None">None</system:String>
+    <system:String x:Key="Filter_Method_Favorite">Favorite</system:String>
+
 </ResourceDictionary>

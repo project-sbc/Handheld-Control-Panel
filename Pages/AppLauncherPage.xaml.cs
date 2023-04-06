@@ -42,7 +42,11 @@ namespace Handheld_Control_Panel.Pages
         public string DisplaySortMethod { get; set; }
         public string SortMethod { get; set; }
     }
-
+    public class FilterMethods
+    {
+        public string DisplayFilterMethod { get; set; }
+        public string FilterMethod { get; set; }
+    }
     public partial class AppLauncherPage : Page
     {
 
@@ -53,8 +57,10 @@ namespace Handheld_Control_Panel.Pages
         private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
 
         private string currentSortMethod = Properties.Settings.Default.appSortMethod;
+        private string currentFilterMethod = "None";
 
         private List<SortMethods> sortMethods = new List<SortMethods>();
+        private List<FilterMethods> filterMethods = new List<FilterMethods>();
 
         public AppLauncherPage()
         {
@@ -86,6 +92,38 @@ namespace Handheld_Control_Panel.Pages
             sm3.SortMethod = "Sort_Method_RecentlyLaunched";
             sm3.DisplaySortMethod = Application.Current.Resources["Sort_Method_RecentlyLaunched"].ToString();
             sortMethods.Add(sm3);
+
+
+
+            FilterMethods fm0 = new FilterMethods();
+            fm0.FilterMethod = "None";
+            fm0.DisplayFilterMethod = Application.Current.Resources["Filter_Method_None"].ToString();
+            filterMethods.Add(fm0);
+
+            FilterMethods fm = new FilterMethods();
+            fm.FilterMethod = "Favorite";
+            fm.DisplayFilterMethod = Application.Current.Resources["Filter_Method_Favorite"].ToString();
+            filterMethods.Add(fm);
+
+            FilterMethods fm1 = new FilterMethods();
+            fm1.FilterMethod = "Steam";
+            fm1.DisplayFilterMethod = "Steam";
+            filterMethods.Add(fm1);
+
+            FilterMethods fm2 = new FilterMethods();
+            fm2.FilterMethod = "Epic Games";
+            fm2.DisplayFilterMethod = "Epic Games";
+            filterMethods.Add(fm2);
+
+            FilterMethods fm3 = new FilterMethods();
+            fm3.FilterMethod = "Battle.net";
+            fm3.DisplayFilterMethod = "Battle.net";
+            filterMethods.Add(fm3);
+
+            FilterMethods fm4 = new FilterMethods();
+            fm4.FilterMethod = "App";
+            fm4.DisplayFilterMethod = "Applications";
+            filterMethods.Add(fm4);
         }
       
       
@@ -115,12 +153,14 @@ namespace Handheld_Control_Panel.Pages
             {
                 if (profile.AppType != "")
                 {
+                   
                     ListBoxAppItem lbai = new ListBoxAppItem();
                     lbai.ID = profile.ID;
                     lbai.ProfileName = profile.ProfileName;
                     lbai.programType = profile.AppType;
                     lbai.LastLaunched = profile.LastLaunched;
                     lbai.NumberLaunches = profile.NumberLaunches;
+                    lbai.Favorite = profile.Favorite;
                     switch (profile.AppType)
                     {
                         case "Steam":
@@ -169,7 +209,13 @@ namespace Handheld_Control_Panel.Pages
 
 
             }
-            switch(currentSortMethod)
+
+            applySort();
+        }
+
+        private void applySort()
+        {
+            switch (currentSortMethod)
             {
                 case "Sort_Method_AppType":
                     controlList.ItemsSource = items.OrderBy(o => o.programType).ToList();
@@ -178,7 +224,7 @@ namespace Handheld_Control_Panel.Pages
                     items = items.OrderBy(o => o.NumberLaunches).ToList();
                     items.Reverse();
                     controlList.ItemsSource = items;
-         
+
                     break;
                 case "Sort_Method_FrequentlyLaunched":
                     items = items.OrderBy(o => o.LastLaunched).ToList();
@@ -194,6 +240,7 @@ namespace Handheld_Control_Panel.Pages
 
             }
             controlList.Items.Refresh();
+
         }
 
         private void spinner_Stop_Tick(object sender, EventArgs e)
@@ -296,6 +343,16 @@ where childItem : DependencyObject
 
                         case "X":
                             changeSortMethod();
+           
+                            break;
+                        case "RB":
+                            changeFilterMethod();
+                            break;
+
+                        case "Y":
+                            Global_Variables.profiles.changeProfileFavorite(lbai.ID);
+                            lbai.Favorite = !lbai.Favorite;
+                            controlList.Items.Refresh();
                             break;
                         case "Up":
                             if (index > 2) { controlList.SelectedIndex = index - 3; controlList.ScrollIntoView(controlList.SelectedItem); }
@@ -321,6 +378,10 @@ where childItem : DependencyObject
                     {
                             changeSortMethod();
                     }
+                    if (args.Action == "RB")
+                    {
+                        changeFilterMethod();
+                    }
                 }
               
 
@@ -344,7 +405,7 @@ where childItem : DependencyObject
                     {
                         currentSortMethod = sortMethods[index + 1].SortMethod;
                     }
-                    loadValues();
+                    applySort();
                     sortLabel.Content= Application.Current.Resources["Sort_Method_SortBy"].ToString() + Application.Current.Resources[currentSortMethod].ToString();
                     Properties.Settings.Default.appSortMethod = currentSortMethod;
                     Properties.Settings.Default.Save();
@@ -355,7 +416,52 @@ where childItem : DependencyObject
 
         }
 
-      
+        private void applyFilter()
+        {
+            switch (currentFilterMethod)
+            {
+
+                case "None":
+                    controlList.ItemsSource = items;
+                    break;
+                case "Favorite":
+                    controlList.ItemsSource = items.Where(o => o.favorite == true);
+                    break;
+                default:
+                    controlList.ItemsSource = items.Where(o => o.programType == currentFilterMethod);
+                    break;
+
+            }
+            controlList.Items.Refresh();
+
+        }
+
+
+        private void changeFilterMethod()
+        {
+            foreach (FilterMethods sm in filterMethods)
+            {
+                if (currentFilterMethod == sm.FilterMethod)
+                {
+                    int index = filterMethods.IndexOf(sm);
+                    if (index == filterMethods.Count - 1)
+                    {
+                        currentFilterMethod = filterMethods[0].FilterMethod;
+
+                    }
+                    else
+                    {
+                        currentFilterMethod = filterMethods[index + 1].FilterMethod;
+                    }
+                    applyFilter();
+                    //sortLabel.Content = Application.Current.Resources["Sort_Method_SortBy"].ToString() + sm.DisplayFilterMethod;
+
+
+                    break;
+                }
+            }
+
+        }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -372,6 +478,17 @@ where childItem : DependencyObject
         public int LastLaunched { get; set; }
         public string programType { get; set; }
         public string Exe { get; set; }
-  
+        public bool favorite { get; set; }
+        public bool Favorite
+        {
+            get { return favorite; }
+            set
+            {
+                favorite = value;
+                if (value == true) { favoriteIcon = Visibility.Visible; } else { favoriteIcon = Visibility.Collapsed; }
+            }
+        }
+        public Visibility favoriteIcon { get; set; } = Visibility.Collapsed;
+
     }
 }

@@ -16,6 +16,7 @@
 				<ImageLocation></ImageLocation>
 				<LastLaunched>0</LastLaunched>
 				<NumberLaunches>0</NumberLaunches>
+				<Favorite>False</Favorite>
 			</LaunchOptions>
 			<Offline>
 				<TDP1>9</TDP1>
@@ -126,6 +127,7 @@
 				<ImageLocation></ImageLocation>
 				<LastLaunched>0</LastLaunched>
 				<NumberLaunches>0</NumberLaunches>
+				<Favorite>False</Favorite>
 			</LaunchOptions>
 			<Offline>
 				<TDP1></TDP1>

@@ -185,6 +185,20 @@ namespace Handheld_Control_Panel.Classes
             TimeSpan span = d2.Subtract(d1);
             return (int)span.TotalDays;
         }
+        public void changeProfileFavorite(string ID)
+        {
+            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID == ID);
+
+            if (profile != null)
+            {
+                profile.Favorite = !profile.Favorite;
+                profile.SaveToXML();
+
+            }
+
+
+        }
+
         public void openProgram(string ID)
         {
             Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID== ID);
@@ -383,10 +397,10 @@ namespace Handheld_Control_Panel.Classes
         public string RefreshRate { get; set; } = "";
         public string Path { get; set; } = "";
 
-        public string appType = "";
-        public string LaunchCommand = "";
-        public string ImageLocation = "";
-
+        public string appType { get; set; } = "";
+        public string LaunchCommand { get; set; } = "";
+        public string ImageLocation { get; set; } = "";
+        public bool Favorite { get; set; }
         public int LastLaunched { get; set; } = 0;
         public int NumberLaunches { get; set; } = 0;
         public string AppType
@@ -490,6 +504,7 @@ namespace Handheld_Control_Panel.Classes
                     LaunchOptions.SelectSingleNode("NumberLaunches").InnerText = NumberLaunches.ToString();
                     LaunchOptions.SelectSingleNode("LaunchCommand").InnerText = LaunchCommand.ToString();
                     LaunchOptions.SelectSingleNode("ImageLocation").InnerText = ImageLocation.ToString();
+                    LaunchOptions.SelectSingleNode("Favorite").InnerText = Favorite.ToString();
 
 
                     parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
@@ -565,6 +580,14 @@ namespace Handheld_Control_Panel.Classes
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                    if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
+                    {
+                        Favorite = true;
+                    }
+                    else
+                    {
+                        Favorite = false;
+                    }
 
                     LaunchCommand = LaunchOptions.SelectSingleNode("LaunchCommand").InnerText;
                     ImageLocation=LaunchOptions.SelectSingleNode("ImageLocation").InnerText;

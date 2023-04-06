@@ -90,7 +90,12 @@
                                         <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding Exe}"/>
 
                                     </DockPanel>
-
+                                    <Border Margin="0,0,-7,2" HorizontalAlignment="Right"   VerticalAlignment="Bottom" CornerRadius="4" Background="White">
+                                        <TextBlock   Text="&#xE735;"  FontFamily="Segoe MDL2 Assets"  Foreground="{DynamicResource MahApps.Brushes.AccentBase}" Panel.ZIndex="3" Visibility="{Binding favoriteIcon}" FontSize="22"  />
+                                   
+                                    </Border>
+                                     
+                                    
                                 </Grid>
 
 
