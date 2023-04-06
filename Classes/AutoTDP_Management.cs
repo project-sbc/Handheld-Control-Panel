@@ -32,8 +32,48 @@ namespace Handheld_Control_Panel.Classes
             //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources
             computer.Open();
             //Check to make sure main window is open. We dont want someone closing the program and this autotdp thread is preventing it from ending the overall process. Also make sure autoTDP is still enabled, as soon as someone says we dont want auto tdp anymore thatwill be the last cycle
+
+
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+
+
+            if (Global_Variables.Global_Variables.autoTDP)
+            {
+                //First time when autoTDP enabled only
+                //HYATICE - Define a CPU_Last Variable; can be temp to the AutoTDP thread as a whole but must survive between loops.
+                //set proposedCPU=CPU_Max - as defined by the user in the game/global profile; default to max CPU clock/9999?
+                //set proposedGPU=GPU_Min - as defined by the user in the game/global profile; default to 533mhz
+                //ryzenadj.exe --max-performance - This will need to be re-ran if autoTDP is running and power is unplugged, or on wake from sleep.
+                //change power plan EPP to 0% - Be sure to save the original EPP to go back to after AutoTDP stops
+                //  powercfg -setacvalueindex sub_processor perfepp 0
+                //  powercfg -setacvalueindex sub_processor perfepp1 0
+                //  powercfg -setdcvalueindex sub_processor perfepp 0
+                //  powercfg -setdcvalueindex sub_processor perfepp1 0
+                //  powercfg / s scheme_current
+
+                // Will need to apply the same CPU/GPU clocks when exiting AutoTDP
+                // Will need to apply ryzenadj --power-saving when exiting AutoTDP if on battery
+                // Will need to restore EPP to what it was before AutoTDP ran/probably what's set in the game/global profile
+                // Possibly prompt to reset GPU clocks to defaults by restarting the GPU driver?
+            }
+
+
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+
+
             while (Global_Variables.Global_Variables.autoTDP)
             {
+                //HYATICE - If proposedCPU different than lastCPU Apply CPU changes and update lastCPU
+                //HYATICE - If proposedGPU different than lastGPU Apply GPU changes and update lastGPU
+
+                //thread sleep just adds a pause (in ms)
+                Thread.Sleep(1000);
+
+
                 getInformationForAutoTDP();
 
                 // use   gpuD3DUsage[gpuD3DUsage.Count-1]   for latest 3D usage value-------- or use gpuD3DUsage_Avg,gpuD3DUsage_Min, gpuD3DUsage_Max, gpuD3DUsage_Slope
@@ -48,14 +88,54 @@ namespace Handheld_Control_Panel.Classes
                 //to  change gpu clock we use something similiar:      Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)GPUCLK));
                 //  you can change the GPUCLK value in the line above
 
-
-
-                //thread sleep just adds a 500 ms pause before looping
-                Thread.Sleep(250);
+                //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+                //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+                //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+                //
+                //
+                //      Need the following variables from global/per-game profiles
+                //      minCPU (default 1100 for 6800U)
+                //      maxCPU (default 4700 for 6800U)
+                //      offsetCPU (default 0)
+                //      minGPU (default 533 for 6800U; behavior gets wonky below 533)
+                //      maxGPU (default 2200 for 6800U)
+                //      offsetGPU (default 0)
+                //      autoOffsetMaxGPU (set in profiles, default 125)
+                //      autoMaxGPU (calculate based on current TDP using the below formula)
+                //          Math.Min(Math.Max(minGPU, -8708.3367 + 1045.3643 * log(TDP) - autoOffsetMaxGPU), maxGPU)
+                //
+                //
+                //      Ensure that measured CPU Actual Clock is at least 1Mhz
+                //
+                //      Ensure that measured CPU Utility is at least 1%
+                //      utilCPU should be measured as a float with at least 1 point of decimal precision
+                //
+                //      useCPU = Math.Max(1, utilCPU * baseCPU)/actCPU)
+                //      useCPU should be measured as a float with at least 1 point of decimal precision
+                //      Need average of useCPU over previous 2 cycles + current cycle
+                //
+                //      tarCPU = Math.Min(96, average(useCPU)+.5)
+                //          The .5 (as a percent) is small enough that it almost never causes FPS dips during actual gameplay, but prevents runaway.
+                //
+                //      The min(96, x) makes it so that the max tarCPU value is 96%. This means that an average of 99% will still have some headroom to push clocks higher when necessary.
+                //
+                //      proposedCPU = Math.Min(Math.Max(minCPU, actCPU*useCPU/tarCPU+offsetCPU), maxCPU)
+                //
+                //      Ensure that measured GPU Usage is at least 1%
+                //      useGPU should be measured as a float with at least 1 point of decimal precision
+                //      Need average of useGPU over previous 2 cycles + current cycle
+                //      
+                //      tarGPU = Math.Min(96, average(useGPU)+.5) - See above re: CPU
+                //      proposedGPU = Math.Min(Math.Max(minGPU, actGPU*useGPU/tarGPU+offsetGPU), autoMaxGPU)
+                //
+                //
+                //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+                //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+                //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
             }
 
             //when autotdp is set to false the loop will end 
-         
+
             //close librehardware monitor instance
             computer.Close();
         }
