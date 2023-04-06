@@ -424,10 +424,8 @@ where childItem : DependencyObject
                                 else
                                 {
                                     handleListBoxIndexChange(controlList, 3);
-
                                 }
                             }
-                            
                             break;
                         case "Left":
                             handleListBoxIndexChange(controlList, -1);
