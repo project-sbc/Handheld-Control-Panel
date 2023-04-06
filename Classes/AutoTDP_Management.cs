@@ -27,6 +27,12 @@ namespace Handheld_Control_Panel.Classes
         }
 
 
+        private static double CPU_Last;
+        //proposedCPU is user defined or default of highest cpu clock (set to 9999 because cpu wont reach that clock)
+        private static double proposedCPU = 9999;
+        private static double proposedGPU = 533;
+
+
         private static void mainAutoTDPLoop()
         {
             //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources

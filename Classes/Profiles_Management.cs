@@ -5,6 +5,7 @@ using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.RightsManagement;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -412,10 +414,33 @@ namespace Handheld_Control_Panel.Classes
             }
             set
             {
-                if (value != "" && imageApp != null)
+                if (value != "")
                 {
+                    if (File.Exists(value))
+                    {
+                        imageApp = new BitmapImage(new Uri(value));
+                    }
+
 
                 }
+                else
+                {
+                    if (Path != "")
+                    {
+
+                        if (File.Exists(Path))
+                        {
+
+                            using (Icon ico = Icon.ExtractAssociatedIcon(Path))
+                            {
+                                imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                            }
+
+                        }
+                    }
+
+                }
+                imageLocation = value;
                 
             }
         }
@@ -632,10 +657,11 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
                     Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
                     RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
+                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
                     ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
                     AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
-                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                   
                     if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
                     {
                         Favorite = true;

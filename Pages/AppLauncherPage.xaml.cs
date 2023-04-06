@@ -54,7 +54,7 @@ namespace Handheld_Control_Panel.Pages
         private static DispatcherTimer spinStopTimer = new DispatcherTimer();
 
         private string windowpage;
-        private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
+        private List<Profile> items = new List<Profile>();
 
         private string currentSortMethod = Properties.Settings.Default.appSortMethod;
         private string currentFilterMethod = "None";
@@ -148,67 +148,73 @@ namespace Handheld_Control_Panel.Pages
                 items.Clear();
             }
 
-
-            foreach (Profile profile in Global_Variables.profiles)
+            items =  Global_Variables.profiles.Where(o => o.AppType != "").ToList();
+        
+            if (1==0)
             {
-                if (profile.AppType != "")
+                //testing if i can remove this in favor of using profiles directly
+                foreach (Profile profile in Global_Variables.profiles)
                 {
-                   
-                    ListBoxAppItem lbai = new ListBoxAppItem();
-                    lbai.ID = profile.ID;
-                    lbai.ProfileName = profile.ProfileName;
-                    lbai.programType = profile.AppType;
-                    lbai.LastLaunched = profile.LastLaunched;
-                    lbai.NumberLaunches = profile.NumberLaunches;
-                    lbai.Favorite = profile.Favorite;
-                    switch (profile.AppType)
+                    if (profile.AppType != "")
                     {
-                        case "Steam":
-                            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + profile.GameID + "_header";
-                            if (File.Exists(imageDirectory + ".jpg"))
-                            {
-                                lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
-                            }
-                            else
-                            {
-                                if (File.Exists(imageDirectory + ".png"))
+
+                        ListBoxAppItem lbai = new ListBoxAppItem();
+                        lbai.ID = profile.ID;
+                        lbai.ProfileName = profile.ProfileName;
+                        lbai.programType = profile.AppType;
+                        lbai.LastLaunched = profile.LastLaunched;
+                        lbai.NumberLaunches = profile.NumberLaunches;
+                        lbai.Favorite = profile.Favorite;
+                        switch (profile.AppType)
+                        {
+                            case "Steam":
+                                string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + profile.GameID + "_header";
+                                if (File.Exists(imageDirectory + ".jpg"))
                                 {
-                                    lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                                    lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
                                 }
-
-                            }
-                            if (lbai.imageSteam != null)
-                            {
-                                items.Add(lbai);
-                            }
-
-                            break;
-                        default:
-                            lbai.Exe = profile.ProfileName;
-                            if (profile.Path != null)
-                            {
-
-                                if (File.Exists(profile.Path))
+                                else
                                 {
-                            
-                                    using (Icon ico = Icon.ExtractAssociatedIcon(profile.Path))
+                                    if (File.Exists(imageDirectory + ".png"))
                                     {
-                                        lbai.imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                                        //lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
                                     }
-                                    
-                                }
-                            }
-                            items.Add(lbai);
 
-                            break;
+                                }
+                                if (lbai.imageSteam != null)
+                                {
+                                    //items.Add(lbai);
+                                }
+
+                                break;
+                            default:
+                                lbai.Exe = profile.ProfileName;
+                                if (profile.Path != null)
+                                {
+
+                                    if (File.Exists(profile.Path))
+                                    {
+
+                                        using (Icon ico = Icon.ExtractAssociatedIcon(profile.Path))
+                                        {
+                                            lbai.imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                                        }
+
+                                    }
+                                }
+                               //items.Add(lbai);
+
+                                break;
+
+                        }
 
                     }
 
+
+
                 }
-
-
-
             }
+          
 
             applySort();
         }
@@ -218,7 +224,7 @@ namespace Handheld_Control_Panel.Pages
             switch (currentSortMethod)
             {
                 case "Sort_Method_AppType":
-                    controlList.ItemsSource = items.OrderBy(o => o.programType).ToList();
+                    controlList.ItemsSource = items.OrderBy(o => o.AppType).ToList();
                     break;
                 case "Sort_Method_RecentlyLaunched":
                     items = items.OrderBy(o => o.NumberLaunches).ToList();
@@ -425,10 +431,10 @@ where childItem : DependencyObject
                     controlList.ItemsSource = items;
                     break;
                 case "Favorite":
-                    controlList.ItemsSource = items.Where(o => o.favorite == true);
+                    controlList.ItemsSource = items.Where(o => o.Favorite == true);
                     break;
                 default:
-                    controlList.ItemsSource = items.Where(o => o.programType == currentFilterMethod);
+                    controlList.ItemsSource = items.Where(o => o.AppType == currentFilterMethod);
                     break;
 
             }

@@ -16,6 +16,7 @@ namespace Handheld_Control_Panel.Classes.EPP_Management
         public static void unhidePowercfgEPP()
         {
             Run_CLI.Run_CLI.RunCommand(" -attributes SUB_PROCESSOR PERFEPP -ATTRIB_HIDE", false, "C:\\windows\\system32\\powercfg.exe", 1000);
+            Run_CLI.Run_CLI.RunCommand(" -attributes SUB_PROCESSOR PERFEPP1 -ATTRIB_HIDE", false, "C:\\windows\\system32\\powercfg.exe", 1000);
         }
         public static void readEPP()
         {
@@ -64,11 +65,13 @@ namespace Handheld_Control_Panel.Classes.EPP_Management
             if (Power == "Online")
             {
                 Run_CLI.Run_CLI.RunCommand(" /setacvalueindex scheme_current SUB_PROCESSOR PERFEPP " + Convert.ToString(EPP), false, "C:\\windows\\system32\\powercfg.exe", 1000);
+                Run_CLI.Run_CLI.RunCommand(" /setacvalueindex scheme_current SUB_PROCESSOR PERFEPP1 " + Convert.ToString(EPP), false, "C:\\windows\\system32\\powercfg.exe", 1000);
              
             }
             else
             {
                 Run_CLI.Run_CLI.RunCommand(" /setdcvalueindex scheme_current SUB_PROCESSOR PERFEPP " + Convert.ToString(EPP), false, "C:\\windows\\system32\\powercfg.exe", 1000);
+                Run_CLI.Run_CLI.RunCommand(" /setdcvalueindex scheme_current SUB_PROCESSOR PERFEPP1 " + Convert.ToString(EPP), false, "C:\\windows\\system32\\powercfg.exe", 1000);
             
             }
             Run_CLI.Run_CLI.RunCommand(" /S scheme_current", false, "C:\\windows\\system32\\powercfg.exe", 1000);
