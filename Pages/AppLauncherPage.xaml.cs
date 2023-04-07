@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.Pages
 
         private string windowpage;
         private List<Profile> items = new List<Profile>();
-
+        private List<Profile> tempList = new List<Profile>();
         private string currentSortMethod = Properties.Settings.Default.appSortMethod;
         private string currentFilterMethod = "Filter_Method_None";
 
@@ -177,12 +177,15 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
 
 
-            loadValues();
-
-            if( controlList.Items.Count > 0)
+            System.Threading.Tasks.Task.Run(() =>
             {
-                controlList.SelectedIndex = 0;
-            }
+                loadValues();
+
+
+            });
+
+           
+            
  
          
 
@@ -204,7 +207,6 @@ namespace Handheld_Control_Panel.Pages
 
         private void applySortAndFilter()
         {
-            List<Profile> tempList = new List<Profile>();
             tempList = items;
             switch (currentFilterMethod)
             {
@@ -236,21 +238,31 @@ namespace Handheld_Control_Panel.Pages
                     tempList = tempList.OrderByDescending(o => o.NumberLaunches).ToList();
 
                     break;
-                    
-               case "Sort_Method_Favorite":
+
+                case "Sort_Method_Favorite":
                     tempList = tempList.OrderByDescending(o => o.Favorite).ToList();
                     break;
                 case "Sort_Method_ProfileName":
                     tempList = tempList.OrderBy(o => o.ProfileName).ToList();
                     break;
                 default:
-                    
+
                     break;
-
             }
-            controlList.ItemsSource = tempList;
-            controlList.Items.Refresh();
 
+
+            this.Dispatcher.BeginInvoke(() =>
+            {
+                controlList.ItemsSource = tempList;
+                controlList.Items.Refresh();
+                if (controlList.Items.Count > 0)
+                {
+                    if (controlList.SelectedIndex < 0)
+                    {
+                        controlList.SelectedIndex = 0;
+                    }
+                }
+            });
         }
 
         private void spinner_Stop_Tick(object sender, EventArgs e)

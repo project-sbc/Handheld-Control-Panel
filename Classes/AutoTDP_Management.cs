@@ -11,6 +11,8 @@ using LibreHardwareMonitor;
 using LibreHardwareMonitor.Hardware;
 using Windows.Devices.Perception.Provider;
 using System.Windows.Media.Animation;
+using System.Runtime.Intrinsics.Arm;
+using System.Runtime.Intrinsics.X86;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -29,9 +31,23 @@ namespace Handheld_Control_Panel.Classes
 
         private static double CPU_Last;
         //proposedCPU is user defined or default of highest cpu clock (set to 9999 because cpu wont reach that clock)
-        private static double proposedCPU = 9999;
-        private static double proposedGPU = 533;
+        private static int proposedCPU;
+        private static int proposedGPU;
+        private static double originalEPP;
+        private static int cpuLast;
+        private static int gpuLast;
+        private static int minCPU = 1100;
+        private static int maxCPU= 4700;
+        private static int minGPU=533;
+        private static int maxGPU=2200;
+        private static int offSetCPU=0;
+        private static int offSetGPU=0;
+        private static int autoOffsetMaxGPU = 125;
+        private static int autoMaxGPU;
+        private static int tarCPU;
+        private static int tarGPU;
 
+        private static List<float> useCPU = new List<float>();
 
         private static void mainAutoTDPLoop()
         {
@@ -50,14 +66,21 @@ namespace Handheld_Control_Panel.Classes
                 //First time when autoTDP enabled only
                 //HYATICE - Define a CPU_Last Variable; can be temp to the AutoTDP thread as a whole but must survive between loops.
                 //set proposedCPU=CPU_Max - as defined by the user in the game/global profile; default to max CPU clock/9999?
+                proposedCPU = 9999;
                 //set proposedGPU=GPU_Min - as defined by the user in the game/global profile; default to 533mhz
+                proposedGPU = 533;
                 //ryzenadj.exe --max-performance - This will need to be re-ran if autoTDP is running and power is unplugged, or on wake from sleep.
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
+
                 //change power plan EPP to 0% - Be sure to save the original EPP to go back to after AutoTDP stops
+                originalEPP = Global_Variables.Global_Variables.EPP;
+
                 //  powercfg -setacvalueindex sub_processor perfepp 0
                 //  powercfg -setacvalueindex sub_processor perfepp1 0
                 //  powercfg -setdcvalueindex sub_processor perfepp 0
                 //  powercfg -setdcvalueindex sub_processor perfepp1 0
                 //  powercfg / s scheme_current
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(0));
 
                 // Will need to apply the same CPU/GPU clocks when exiting AutoTDP
                 // Will need to apply ryzenadj --power-saving when exiting AutoTDP if on battery
@@ -74,6 +97,16 @@ namespace Handheld_Control_Panel.Classes
             while (Global_Variables.Global_Variables.autoTDP)
             {
                 //HYATICE - If proposedCPU different than lastCPU Apply CPU changes and update lastCPU
+                if (proposedCPU != cpuLast)
+                {
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency(proposedCPU));
+                }
+                cpuLast = proposedCPU;
+                if (proposedGPU != gpuLast)
+                {
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock(proposedGPU));
+                }
+                gpuLast = proposedGPU;
                 //HYATICE - If proposedGPU different than lastGPU Apply GPU changes and update lastGPU
 
                 //thread sleep just adds a pause (in ms)
@@ -82,17 +115,6 @@ namespace Handheld_Control_Panel.Classes
 
                 getInformationForAutoTDP();
 
-                // use   gpuD3DUsage[gpuD3DUsage.Count-1]   for latest 3D usage value-------- or use gpuD3DUsage_Avg,gpuD3DUsage_Min, gpuD3DUsage_Max, gpuD3DUsage_Slope
-                //same applies for fps,   fps[fps.Count-1]    or fps_Avg, fps_Min, fps_Max, fps_Slope
-                //  also     procUtility[procUtility.Count-1] or procUtility_Avg, procUtility_Min, procUtility_Max, procUtility_Slope
-                //lastly cpu clock is  cpuClock[cpuClock.Count-1]   and  cpuClock_Avg, cpuClock_Min, cpuClock_Max cpuClock_Slope
-
-                // to change TDP we use  this:      Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)SustainedTDP, (int)BoostTDP));
-                //Just put a number in for SustainedTDP  and BoostTDP. They can be the same.   Its a lot of code to change TDP, but its important to use the that line because I have a
-                //dedicated task scheduler that prevents multiple calls to ryzenadj at the same time (if two threads try it at the same time it yells at you big time).
-
-                //to  change gpu clock we use something similiar:      Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)GPUCLK));
-                //  you can change the GPUCLK value in the line above
 
                 //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
                 //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
@@ -106,35 +128,54 @@ namespace Handheld_Control_Panel.Classes
                 //      minGPU (default 533 for 6800U; behavior gets wonky below 533)
                 //      maxGPU (default 2200 for 6800U)
                 //      offsetGPU (default 0)
+                        minCPU = 1100;
+                        maxCPU = 4700;
+                        minGPU = 533;
+                        maxGPU = 2200;
+                        offSetCPU = 0;
+                        offSetGPU = 0;
+                autoOffsetMaxGPU = 125;
                 //      autoOffsetMaxGPU (set in profiles, default 125)
                 //      autoMaxGPU (calculate based on current TDP using the below formula)
-                //          Math.Min(Math.Max(minGPU, -8708.3367 + 1045.3643 * log(TDP) - autoOffsetMaxGPU), maxGPU)
-                //
-                //
-                //      Ensure that measured CPU Actual Clock is at least 1Mhz
-                //
-                //      Ensure that measured CPU Utility is at least 1%
-                //      utilCPU should be measured as a float with at least 1 point of decimal precision
-                //
-                //      useCPU = Math.Max(1, utilCPU * baseCPU)/actCPU)
-                //      useCPU should be measured as a float with at least 1 point of decimal precision
-                //      Need average of useCPU over previous 2 cycles + current cycle
-                //
-                //      tarCPU = Math.Min(96, average(useCPU)+.5)
-                //          The .5 (as a percent) is small enough that it almost never causes FPS dips during actual gameplay, but prevents runaway.
-                //
-                //      The min(96, x) makes it so that the max tarCPU value is 96%. This means that an average of 99% will still have some headroom to push clocks higher when necessary.
-                //
-                //      proposedCPU = Math.Min(Math.Max(minCPU, actCPU*useCPU/tarCPU+offsetCPU), maxCPU)
-                //
-                //      Ensure that measured GPU Usage is at least 1%
-                //      useGPU should be measured as a float with at least 1 point of decimal precision
-                //      Need average of useGPU over previous 2 cycles + current cycle
-                //      
-                //      tarGPU = Math.Min(96, average(useGPU)+.5) - See above re: CPU
-                //      proposedGPU = Math.Min(Math.Max(minGPU, actGPU*useGPU/tarGPU+offsetGPU), autoMaxGPU)
-                //
-                //
+                //          
+                autoMaxGPU = (int)Math.Round(Math.Min(Math.Max(minGPU, -8708.3367 + 1045.3643 * Math.Log(Global_Variables.Global_Variables.ReadPL1*1000) - autoOffsetMaxGPU), maxGPU),0);
+        //
+        //      Ensure that measured CPU Actual Clock is at least 1Mhz
+        //
+        //      Ensure that measured CPU Utility is at least 1%
+        //      utilCPU should be measured as a float with at least 1 point of decimal precision
+                if (procUtility[procUtility.Count-1] > 1 && cpuClock[cpuClock.Count-1] > 1)
+                {
+                    useCPU.Add(Math.Max(1, procUtility[procUtility.Count - 1]* minCPU)/ cpuClock[cpuClock.Count - 1]);
+                    if (useCPU.Count > 3)
+                    {
+                        useCPU.RemoveAt(0);
+                    }
+                    tarCPU = (int)Math.Round(Math.Min(96, useCPU.Average() + .5), 0);
+                    proposedCPU = (int)Math.Round(Math.Min(Math.Max(minCPU, cpuClock[cpuClock.Count-1] * useCPU[useCPU.Count-1] / tarCPU + offSetCPU), maxCPU),0);
+                }
+        //      useCPU = Math.Max(1, utilCPU * baseCPU)/actCPU)
+        //      useCPU should be measured as a float with at least 1 point of decimal precision
+        //      Need average of useCPU over previous 2 cycles + current cycle
+        //
+        //      tarCPU = Math.Min(96, average(useCPU)+.5)
+        //          The .5 (as a percent) is small enough that it almost never causes FPS dips during actual gameplay, but prevents runaway.
+        //
+        //      The min(96, x) makes it so that the max tarCPU value is 96%. This means that an average of 99% will still have some headroom to push clocks higher when necessary.
+        //
+        //      proposedCPU = Math.Min(Math.Max(minCPU, actCPU*useCPU/tarCPU+offsetCPU), maxCPU)
+        //
+        //      Ensure that measured GPU Usage is at least 1%
+        //      useGPU should be measured as a float with at least 1 point of decimal precision
+        //      Need average of useGPU over previous 2 cycles + current cycle
+        //      
+        //      tarGPU = Math.Min(96, average(useGPU)+.5) - See above re: CPU
+        //      proposedGPU = Math.Min(Math.Max(minGPU, actGPU*useGPU/tarGPU+offsetGPU), autoMaxGPU)
+                if (gpuUsage[gpuUsage.Count-1] > 1)
+                {
+                    tarGPU = (int)Math.Round(Math.Min(96, gpuUsage_Avg + .5));
+                    proposedGPU = (int)Math.Round((double)Math.Min(Math.Max(minGPU, Global_Variables.Global_Variables.GPUCLK * gpuUsage[gpuUsage.Count - 1] / tarGPU + offSetGPU), autoMaxGPU), 0);
+                }
                 //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
                 //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
                 //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
@@ -171,8 +212,6 @@ namespace Handheld_Control_Panel.Classes
         private static void getInformationForAutoTDP()
         {
             start:
-            //get fps from rtss statistics
-            getFPS();
             //get d3d usage, cpu usage
             getLibreHardwareMonitorInfo();
             //get proc utility
@@ -180,7 +219,7 @@ namespace Handheld_Control_Panel.Classes
             //get cpu
             getCPUClock();
 
-            if (fps.Count < 5 && Global_Variables.Global_Variables.autoTDP)
+            if (cpuClock.Count < 5 && Global_Variables.Global_Variables.autoTDP)
             {
                 Thread.Sleep(250);
                 goto start;
@@ -252,7 +291,7 @@ namespace Handheld_Control_Panel.Classes
                 gpuUsage_Avg = gpuUsage.Average();
                 gpuUsage_Min = gpuUsage.Min();
                 gpuUsage_Max = gpuUsage.Max();
-                gpuUsage_Slope = (gpuUsage_Avg - ((gpuUsage[3] + gpuUsage[4]) / 2) / 2);
+                //gpuUsage_Slope = (gpuUsage_Avg - ((gpuUsage[3] + gpuUsage[4]) / 2) / 2);
             }
         }
         #endregion
@@ -281,7 +320,7 @@ namespace Handheld_Control_Panel.Classes
                 procUtility_Avg = procUtility.Average();
                 procUtility_Min = procUtility.Min();
                 procUtility_Max = procUtility.Max();
-                procUtility_Slope = (procUtility_Avg - ((procUtility[3] + procUtility[4]) / 2) / 2);
+                //procUtility_Slope = (procUtility_Avg - ((procUtility[3] + procUtility[4]) / 2) / 2);
             }
         }
         #endregion
@@ -298,13 +337,14 @@ namespace Handheld_Control_Panel.Classes
 
 
             cpuClock.Add(theCPUClockCounter.NextValue());
+    
             if (cpuClock.Count > 5)
             {
                 cpuClock.RemoveAt(0);
                 cpuClock_Avg = cpuClock.Average();
                 cpuClock_Min = cpuClock.Min();
                 cpuClock_Max = cpuClock.Max();
-                cpuClock_Slope = (cpuClock_Avg - ((cpuClock[3] + cpuClock[4]) / 2) / 2);
+                //cpuClock_Slope = (cpuClock_Avg - ((cpuClock[3] + cpuClock[4]) / 2) / 2);
             }
         }
         #endregion
@@ -324,13 +364,13 @@ namespace Handheld_Control_Panel.Classes
                 if (D3D != null)
                 {
                     gpuUsage.Add((int)D3D.Value);
-                    if (gpuUsage.Count > 5)
+                    if (gpuUsage.Count >1)
                     {
-                        gpuUsage.RemoveAt(0);
+                        if (gpuUsage.Count > 5) { gpuUsage.RemoveAt(0); }
                         gpuUsage_Avg = gpuUsage.Average();
                         gpuUsage_Min = gpuUsage.Min();
                         gpuUsage_Max = gpuUsage.Max();
-                        gpuUsage_Slope = (gpuUsage_Avg - ((gpuUsage[3] + gpuUsage[4]) / 2) / 2);
+                        //gpuUsage_Slope = (gpuUsage_Avg - ((gpuUsage[3] + gpuUsage[4]) / 2) / 2);
                     }
                 }
             }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Handheld_Control_Panel.Classes
 {
-    internal class ADLX_Managmenet
+    public static class ADLX_Managmenet
     {
+      
     }
 }
