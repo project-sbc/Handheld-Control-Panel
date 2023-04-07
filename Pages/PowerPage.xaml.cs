@@ -23,12 +23,17 @@ using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using System.Windows.Interop;
 using MahApps.Metro.IconPacks;
+using System.Runtime.InteropServices;
+
 
 namespace Handheld_Control_Panel.Pages
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
+    /// 
+
+
     public partial class PowerPage : Page
     {
         private string windowpage;
@@ -43,18 +48,33 @@ namespace Handheld_Control_Panel.Pages
             wnd = null;
 
 
-            
 
-            Dictionary<string,int> gamerunning = new Dictionary<string,int>();
+            List<Process> listProcesses = new List<Process>();
 
-            if (gamerunning.Count >0)
+            Process[] pList = Process.GetProcesses();
+            foreach (Process p in pList)
             {
-                foreach (KeyValuePair<string,int> keyValuePair in gamerunning)
+                if (p.MainWindowHandle != IntPtr.Zero)
+                {
+                   
+               
+                    if (!listProcesses.Contains(p) && IsForegroundFullScreen(new HandleRef(null, p.MainWindowHandle), null) && !ExcludeFullScreeProcessList.Contains(p.ProcessName))
+                    {
+                        listProcesses.Add(p);
+                    }
+                }
+            }
+
+           
+
+            if (listProcesses.Count >0)
+            {
+                foreach (Process p in listProcesses)
                 {
                     powerpageitem gameppi = new powerpageitem();
-                    gameppi.displayitem = Application.Current.Resources["UserControl_CloseGame"].ToString() + " " + keyValuePair.Key;
+                    gameppi.displayitem = Application.Current.Resources["UserControl_CloseGame"].ToString() + " " + p.ProcessName;
                     gameppi.item = "CloseGame";
-                    gameppi.processID = keyValuePair.Value;
+                    gameppi.processID = p.Id;
                     gameppi.Kind = PackIconMaterialKind.MicrosoftXboxController;
                     powerpageitems.Add(gameppi);
                 }
@@ -89,8 +109,75 @@ namespace Handheld_Control_Panel.Pages
 
             controlList.ItemsSource = powerpageitems;
         }
-      
-      
+
+        private List<string> ExcludeFullScreeProcessList = new List<string>()
+        {
+           {"TextInputHost"},
+  
+         };
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool GetWindowRect(HandleRef hWnd, [In, Out] ref RECT rect);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+     
+
+        public bool IsForegroundFullScreen(HandleRef hWnd, System.Windows.Forms.Screen screen)
+        {
+            if (screen == null)
+            {
+                screen = System.Windows.Forms.Screen.PrimaryScreen;
+            }
+            RECT rect = new RECT();
+            GetWindowRect(hWnd, ref rect);
+    
+
+            return new System.Drawing.Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top).Contains(screen.Bounds);
+        }
+        private static WINDOWPLACEMENT GetPlacement(IntPtr hwnd)
+        {
+            WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
+            placement.length = Marshal.SizeOf(placement);
+            GetWindowPlacement(hwnd, ref placement);
+            return placement;
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetWindowPlacement(
+            IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [Serializable]
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct WINDOWPLACEMENT
+        {
+            public int length;
+            public int flags;
+            public ShowWindowCommands showCmd;
+            public System.Drawing.Point ptMinPosition;
+            public System.Drawing.Point ptMaxPosition;
+            public System.Drawing.Rectangle rcNormalPosition;
+        }
+
+        internal enum ShowWindowCommands : int
+        {
+            Hide = 0,
+            Normal = 1,
+            Minimized = 2,
+            Maximized = 3,
+        }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //get unique window page combo from getwindow to string
