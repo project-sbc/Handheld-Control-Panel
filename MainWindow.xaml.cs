@@ -1,5 +1,4 @@
 ﻿using Handheld_Control_Panel.Classes.Controller_Management;
-using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -285,19 +284,7 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
-                    case "Start":
-                        if (Global_Variables.autoTDP)
-                        {
-                            Notification_Management.Show("Auto tdp disabled");
-                           Global_Variables.autoTDP = false;
-                        }
-                        else
-                        {
-                            Notification_Management.Show("Auto tdp enabled");
-                            AutoTDP_Management.startAutoTDPThread();
-                        }
-                    
-                        break;
+                   
                     case "LT":
                         navigateListBox(true);
                         break;

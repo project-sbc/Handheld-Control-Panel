@@ -136,6 +136,8 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     string scaling = controlList.SelectedItem.ToString();
                     Display_Management.SetDisplayScaling(scaling);
+                    System.Windows.Forms.Application.Restart();
+                    System.Windows.Application.Current.Shutdown();
                     selectedObject = controlList.SelectedItem;
                     if (controlList.Visibility == Visibility.Visible)
                     {

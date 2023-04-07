@@ -11,7 +11,6 @@ using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using Linearstar.Windows.RawInput;
-using ModernWpf;
 using RTSSSharedMemoryNET;
 
 namespace Handheld_Control_Panel
