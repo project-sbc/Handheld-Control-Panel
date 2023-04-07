@@ -39,9 +39,10 @@
             <uc:MaxFPS_Slider/>
             <uc:StartRTSS_Toggle />
             <uc:Divider/>
-            <uc:SteamGameSync_Button/>
-            <uc:EpicGameSync_Button/>
-        </StackPanel>
+            <uc:GameSync_Button/>
+                <uc:Divider/>
+                <uc:Deadzone_Slider/>
+            </StackPanel>
     </ScrollViewer>
     </Grid>
     

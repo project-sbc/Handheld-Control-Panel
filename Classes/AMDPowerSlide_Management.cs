@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Handheld_Control_Panel.Classes.Run_CLI;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using System.Windows.Documents;
 
 namespace Handheld_Control_Panel.Classes.AMDPowerSlide_Management
 {
@@ -70,6 +71,31 @@ namespace Handheld_Control_Panel.Classes.AMDPowerSlide_Management
 
         }
 
+
+        public static void setAMDRyzenAdjPowerPerformance()
+        {
+            string processRyzenAdj = "";
+            string result = "";
+            string commandArguments = "";
+            string BaseDir = AppDomain.CurrentDomain.BaseDirectory;
+            try
+            {
+                processRyzenAdj = BaseDir + "\\Resources\\AMD\\RyzenAdj\\ryzenadj.exe";
+       
+                commandArguments = " --max-performance";
+
+                result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
+               
+               
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = "Error: ChangeTDP.cs:  Run AMD TDP Change: " + ex.Message + ", processRyzenAdj is " + processRyzenAdj + ", result is " + result + ", commandargument is " + commandArguments; ;
+                Log_Writer.writeLog(errorMsg);
+                MessageBox.Show(errorMsg);
+
+            }
+        }
      
     }
 }

@@ -336,8 +336,10 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 try
                 {
                     result = SetDPICLIResult(commandArguments);
-                    Task.Delay(200);
                     Global_Variables.Global_Variables.Scaling = scaling;
+                    
+                    Global_Variables.Global_Variables.mainWindow.setWindowSizePosition();
+            
                 }
                 catch (Exception ex)
                 {

@@ -25,7 +25,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Radios;
 using static Vanara.Interop.KnownShellItemPropertyKeys;
 
 namespace Handheld_Control_Panel.UserControls
@@ -106,6 +105,19 @@ namespace Handheld_Control_Panel.UserControls
             hotkeyAction.Add(gotoDesktop);
 
 
+            HotKeyAction toggleWinOSK = new HotKeyAction();
+            toggleWinOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_Windows_OSK"].ToString();
+            toggleWinOSK.HotkeyAction = "Toggle_Windows_OSK";
+
+            hotkeyAction.Add(toggleWinOSK);
+
+            HotKeyAction toggleHCPOSK = new HotKeyAction();
+            toggleHCPOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_HCP_OSK"].ToString();
+            toggleHCPOSK.HotkeyAction = "Toggle_HCP_OSK";
+
+            hotkeyAction.Add(toggleHCPOSK);
+
+            
             controlList.ItemsSource = hotkeyAction;
 
             foreach (HotKeyAction hka in hotkeyAction)
@@ -139,22 +151,18 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             handleListboxChange();
+                            Global_Variables.mainWindow.changeUserInstruction("HotKeyEditPage_Instruction");
                         }
                         else
                         {
                             button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
-                            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.changeUserInstruction("SelectedListBox_Instruction");
-                            wnd = null;
-                         
+                            Global_Variables.mainWindow.changeUserInstruction("SelectedListBox_Instruction");
+                    
                         }
 
                         break;
                     case "B":
-                        MainWindow wnd2 = (MainWindow)Application.Current.MainWindow;
-                        wnd2.changeUserInstruction("HomePage_Instruction");
-                        wnd2 = null;
+                        Global_Variables.mainWindow.changeUserInstruction("HotKeyEditPage_Instruction");
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             

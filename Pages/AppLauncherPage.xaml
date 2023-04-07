@@ -26,17 +26,86 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="62"/>
+            <RowDefinition Height="Auto"/>
           
             <RowDefinition />
 
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+        <DockPanel Grid.Row="0" Height="Auto"  Background="{DynamicResource MahApps.Brushes.Accent3}">
             <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_AppLauncher}"/>
-            <Label Name="sortLabel" Style="{DynamicResource SubheaderLabel}" />
+            <Label Name="sortLabel" Content="yes" Style="{DynamicResource SubheaderLabel}" />
+            <DockPanel x:Name="dpFilter">
+                <DockPanel DockPanel.Dock="Top" Height="30" VerticalAlignment="Center" >
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <Label x:Name="label" Content="{DynamicResource Filter_Method_Filter}"   Style="{StaticResource userControlMainLabel}" FontSize="15"/>
+                      
+                    </StackPanel>
+                   
+                </DockPanel>
+                <ListBox x:Name="controlListFilter" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="440" Height="Auto" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
+                    <ListBox.Resources>
+
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Style.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="0"/>
+
+                                </Style>
+                            </Style.Resources>
+                        </Style>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid  Height="25">
+                                <TextBlock Text="{Binding DisplayFilterMethod}" FontSize="15" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </DockPanel>
+
+            <DockPanel x:Name="dpSort" >
+                <DockPanel DockPanel.Dock="Top" Height="30" VerticalAlignment="Center" >
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <Label  Content="{DynamicResource Sort_Method_SortBy}"   Style="{StaticResource userControlMainLabel}" FontSize="15"/>
+                       
+                    </StackPanel>
+                   
+
+                </DockPanel>
+                <ListBox x:Name="controlListSort" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="440" Height="Auto" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
+                    <ListBox.Resources>
+
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Style.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="0"/>
+
+                                </Style>
+                            </Style.Resources>
+                        </Style>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid  Height="25">
+                                <TextBlock Text="{Binding DisplaySortMethod}" FontSize="15" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </DockPanel>
+
+           
         </DockPanel>
       
         <ScrollViewer Name="scrollviewer" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+
             <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"   >
                 <ListBox.Resources>
 
@@ -82,15 +151,20 @@
                                 <!-- Assumes MVVM and you wish to bind to properties and commands -->
 
                                 <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="1">
-                                    <TextBlock  Grid.Column="0" Width="0"  Text="{Binding ID}" />
+                                    
                                     <iconPacks:PackIconFontAwesome Style="{StaticResource fontAwesomeSpinner}" Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <Image  Height="65"    Source="{Binding imageSteam}" />
+                                    <Image  Height="65"    Source="{Binding imageApp}" Panel.ZIndex="2" />
                                     <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                                        <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding image}" />
-                                        <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding Exe}"/>
+                                        <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding imageIcon}" />
+                                        <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding ProfileName}"/>
 
                                     </DockPanel>
-
+                                    <Border Margin="0,0,-7,2" HorizontalAlignment="Right"   VerticalAlignment="Bottom" CornerRadius="4" Background="White" Panel.ZIndex="3">
+                                        <TextBlock   Text="&#xE735;" Margin="2,2,2,2"  FontFamily="Segoe MDL2 Assets"  Foreground="{DynamicResource MahApps.Brushes.AccentBase}"  Visibility="{Binding favoriteIconVisibility}" FontSize="22"  />
+                                   
+                                    </Border>
+                                     
+                                    
                                 </Grid>
 
 

@@ -21,7 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Radios;
+
 using static Vanara.Interop.KnownShellItemPropertyKeys;
 
 namespace Handheld_Control_Panel.UserControls

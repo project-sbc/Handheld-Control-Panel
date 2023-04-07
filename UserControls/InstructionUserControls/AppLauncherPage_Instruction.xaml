@@ -13,15 +13,41 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_PageUp}"  />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF10C;" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_PageDown}" />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF10D;" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Filter}"  />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEECA;"/>
+            </StackPanel>
+            
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Sort}"  />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEDE3;" />
+            </StackPanel>
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Sort}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF096;" />
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Favorite}" />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF095;" />
+            </StackPanel>
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Close}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Close}" />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" Text="&#xF094;" HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Launch}" />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF093;" />
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Launch}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
+            </StackPanel>
+
+
+            
 
         </StackPanel>
      

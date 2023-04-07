@@ -3,16 +3,13 @@ using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
-using Handheld_Control_Panel.Classes.Update_Software;
 using Handheld_Control_Panel.Classes.UserControl_Management;
-using Handheld_Control_Panel.Classes.Volume_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,32 +21,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Radios;
+
 
 namespace Handheld_Control_Panel.UserControls
 {
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class SteamGameSync_Button : UserControl
+    public partial class Deadzone_Slider : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public SteamGameSync_Button()
+        private bool dragStarted= false;
+        public Deadzone_Slider()
         {
             InitializeComponent();
-            
+            //setControlValue();
+            UserControl_Management.setupControl(control);
+         
         }
 
        
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+           //UserControl_Management.setThumbSize(control);
+
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
+         
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-          
+
         }
-              
+
+       
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -62,19 +66,36 @@ namespace Handheld_Control_Panel.UserControls
         }
 
 
-       
+     
       
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            
+        
         }
-
+        private void sliderValueChanged()
+        {
+            UserControl_Management.Slider_ValueChanged((Slider)control, null);
+        }
        
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void control_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
-            Global_Variables.profiles.syncSteamGameToProfile();
+            dragStarted = true;
+        }
+
+        private void control_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            dragStarted = false;
+            sliderValueChanged();
+        }
+
+        private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!dragStarted && control.IsLoaded)
+            {
+                sliderValueChanged();
+            }
         }
     }
 }

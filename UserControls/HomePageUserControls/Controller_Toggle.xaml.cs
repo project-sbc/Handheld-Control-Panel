@@ -21,7 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Radios;
+
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -42,7 +42,7 @@ namespace Handheld_Control_Panel.UserControls
         private  void setControlValue()
         {
 
-            control.IsOn = Controller_Management.controller.IsConnected;
+            control.IsOn = !Controller_Management.controller.IsConnected;
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -67,10 +67,20 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                control.IsOn=Controller_Management.toggleEnableDisableController();
+                toggleController();
 
             }
           
+        }
+        private bool controllerIsOn;
+        private async void toggleController()
+        {
+           
+            await Task.Run(() =>
+            {
+                controllerIsOn = Controller_Management.toggleEnableDisableController();
+            });
+            control.IsOn = !controllerIsOn;
         }
     
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

@@ -66,7 +66,7 @@
     <system:String x:Key="Usercontrol_Language">Language</system:String>
     <system:String x:Key="Usercontrol_IntelTDP">Intel TDP Type</system:String>
     <system:String x:Key="Usercontrol_MouseMode">Mouse Mode</system:String>
-    <system:String x:Key="Usercontrol_Controller">Controller Status</system:String>
+    <system:String x:Key="Usercontrol_Controller">Disable Built-In Controller</system:String>
     <system:String x:Key="Usercontrol_Donate">Donate</system:String>
     <system:String x:Key="Usercontrol_Update">Update</system:String>
     <system:String x:Key="Usercontrol_CheckUpdate">Check For Updates</system:String>
@@ -75,7 +75,7 @@
     <system:String x:Key="Usercontrol_MouseSensitivity">Mouse Sensitivity</system:String>
     <system:String x:Key="Usercontrol_ScrollSensitivity">Scroll Sensitivity</system:String>
     <system:String x:Key="Usercontrol_AppType">Application Type</system:String>
-    <system:String x:Key="Usercontrol_SyncSteamGames">Sync Steam Games</system:String>
+    <system:String x:Key="Usercontrol_SyncGames">Sync Games</system:String>
     <system:String x:Key="Usercontrol_SyncEpicGames">Sync Epic Games</system:String>
     <system:String x:Key="Usercontrol_Sync">Sync</system:String>
     
@@ -121,6 +121,8 @@
     <system:String x:Key="Instruction_Apply">APPLY</system:String>
     <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
     <system:String x:Key="Instruction_Launch">LAUNCH</system:String>
+  
+        
   
 
 
@@ -168,12 +170,37 @@
 
         <!--new 01Apr2023-->
     <system:String x:Key="Hotkeys_Action_Desktop">Go To Desktop</system:String>
-    <system:String x:Key="Sort_Method_SortBy">Sort By-</system:String>
+    <system:String x:Key="Sort_Method_SortBy">Sort By</system:String>
     <system:String x:Key="Sort_Method_AppType">App Type</system:String>
     <system:String x:Key="Sort_Method_FrequentlyLaunched">Frequently Launched</system:String>
     <system:String x:Key="Sort_Method_RecentlyLaunched">Recently Launched</system:String>
     <system:String x:Key="Sort_Method_ProfileName">Profile Name</system:String>
+    <system:String x:Key="Sort_Method_Favorite">Favorite</system:String>
         
     <system:String x:Key="Instruction_Sort">SORT</system:String>
+    <system:String x:Key="Instruction_Filter">FILTER</system:String>
+    <system:String x:Key="Instruction_Favorite">FAVORITE</system:String>
+    <system:String x:Key="Instruction_PageDown">PAGE DOWN</system:String>
+    <system:String x:Key="Instruction_PageUp">PAGE UP</system:String>
+
+        
+        <!-- new strings 03apr2023-->
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">Toggle Windows OSK</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">Toggle HCP OSK</system:String>
+    <!-- 04apr2023 -->
+    <system:String x:Key="Usercontrol_Deadzone">Joystick Deadzone</system:String>
+        
+        <!-- 05apr2023 -->
+    <system:String x:Key="Notification_GameSyncDone">Game Library Sync Complete</system:String>
+    <system:String x:Key="Notification_GameSyncing">Game Library Syncing</system:String>
+    
+        <!-- 06apr2023-->
+    <system:String x:Key="Filter_Method_Filter">Filter</system:String>
+    <system:String x:Key="Filter_Method_None">None</system:String>
+    <system:String x:Key="Filter_Method_Favorite">Favorite</system:String>
+    <system:String x:Key="Filter_Method_Steam">Steam</system:String>
+    <system:String x:Key="Filter_Method_EpicGames">Epic Games</system:String>
+    <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
+    <system:String x:Key="Filter_Method_Applications">Applications</system:String>
 
 </ResourceDictionary>

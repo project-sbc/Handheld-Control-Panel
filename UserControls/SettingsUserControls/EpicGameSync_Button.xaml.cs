@@ -24,7 +24,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Radios;
+
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -74,7 +74,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Global_Variables.profiles.syncEpicGameToProfile();
+           // Global_Variables.profiles.syncEpicGameToProfile();
         }
     }
 }

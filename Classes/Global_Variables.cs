@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms.VisualStyles;
+using GameLib;
+using GameLib.Core;
 
 namespace Handheld_Control_Panel.Classes.Global_Variables
 {
@@ -20,6 +22,8 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static string cpuType = "";
         public static string MCHBAR = "";
         public static string processorName = "";
+
+       
 
         //TDP global
         #region TDP

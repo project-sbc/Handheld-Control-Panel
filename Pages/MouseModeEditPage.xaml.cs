@@ -78,18 +78,32 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
+                int[] intReturn;
                 MainWindow wnd;
                 switch (args.Action)
                 {
                     case "B":
-                        Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
-                        wnd = (MainWindow)Application.Current.MainWindow;
-                        wnd.navigateFrame("MouseModePage");
-                        wnd = null;
+                        if (Global_Variables.mainWindow.disable_B_ToClose)
+                        {
+                            intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+
+                            highlightedUserControl = intReturn[0];
+                            selectedUserControl = intReturn[1];
+                        }
+                        else
+                        {
+                            Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
+                            wnd = (MainWindow)Application.Current.MainWindow;
+                            wnd.navigateFrame("MouseModePage");
+                            wnd = null;
+                        }
+
+
+                     
                         break;
                     case "Start":
                         Global_Variables.mousemodes.editingMouseMode.SaveToXML();
-                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_HotKeySaved"].ToString(), Notification.Wpf.NotificationType.Success);
+                        Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_MouseModeSaved"].ToString(), Notification.Wpf.NotificationType.Success);
                       
                         wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("MouseModePage");
@@ -100,7 +114,7 @@ namespace Handheld_Control_Panel.Pages
 
                     default:
                         //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                        int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                        intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
 
                         highlightedUserControl = intReturn[0];
                         selectedUserControl = intReturn[1];

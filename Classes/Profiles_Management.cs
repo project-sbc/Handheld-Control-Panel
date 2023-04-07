@@ -1,17 +1,25 @@
-﻿using MahApps.Metro.IconPacks;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.IconPacks;
 using SharpDX;
 using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using YamlDotNet.Core.Tokens;
+using Path = System.IO.Path;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -67,11 +75,10 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
-        public void createProfileForEpicGame(string profileName, string path, string gameID)
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe)
         {
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+         
             XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
             XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
@@ -83,17 +90,36 @@ namespace Handheld_Control_Panel.Classes
             newNode.SelectSingleNode("ID").InnerText = Global_Variables.Global_Variables.profiles.getNewIDNumberForProfile(xmlDocument);
             newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
             newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "EpicGames";
+            newNode.SelectSingleNode("LaunchOptions/LaunchCommand").InnerText = launchcommand;
+            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = apptype;
+            if (exe != null)
+            {
+                if (File.Exists(exe))
+                {
+                    exe = Path.GetFileNameWithoutExtension(exe);
+                }
+                if (exe.Length > 4)
+                {
+                    if (exe.Contains(".exe"))
+                    {
+                        exe = exe.Substring(0, exe.Length - 4);
+                    }
+                }
 
+                newNode.SelectSingleNode("Exe").InnerText = exe;
+            }
+           
             xmlNodeProfiles.AppendChild(newNode);
 
 
 
             xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
 
-            xmlDocument = null;
+       
 
         }
+                
+
         public void syncSteamGameToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
@@ -123,11 +149,12 @@ namespace Handheld_Control_Panel.Classes
 
 
         }
-        public void syncEpicGameToProfile()
+
+        public void syncGamesToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
 
-            List<EpicGamesLauncherItem> result = EpicGames_Management.syncEpic_Library();
+            List<GameLauncherItem> result = Game_Management.syncGame_Library();
 
             if (result.Count > 0)
             {
@@ -135,60 +162,68 @@ namespace Handheld_Control_Panel.Classes
                 xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
                 XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
 
-                foreach (EpicGamesLauncherItem item in result)
+                foreach (GameLauncherItem item in result)
                 {
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForEpicGame(item.gameName, item.installPath, item.gameID);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe);
                     }
                 }
 
-
+                Global_Variables.Global_Variables.profiles = new Profiles_Management();
                 xmlDocument = null;
 
             }
+            Application.Current.BeginInvoke(() => {
+                Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
+            });
+         
 
 
         }
+
+       
         private int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
             return (int)span.TotalDays;
         }
-        public void openProgram(string ID)
+        public void changeProfileFavorite(string ID)
         {
-            foreach (Profile profile in Global_Variables.Global_Variables.profiles)
+            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID == ID);
+
+            if (profile != null)
             {
-                if (profile.ID == ID)
-                {
-                    
-                    profile.applyProfile(true);
-                    if (profile.AppType == "Steam" && profile.GameID != "")
-                    {
-                        Steam_Management.openSteamGame(profile.GameID);
-                    }
-                    else
-                    {
-                        if (File.Exists(profile.Path))
-                        {
-                            Task.Run(()=> System.Diagnostics.Process.Start(profile.Path));
-                        }
-                        
-                    }
-                    profile.NumberLaunches = profile.NumberLaunches + 1;
+                profile.Favorite = !profile.Favorite;
+                profile.SaveToXML();
 
-
-                    profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
-                    profile.SaveToXML();
-                    break;
-                }
-                
             }
 
-           
+
+        }
+
+        public void openProgram(string ID)
+        {
+            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID== ID);
+
+            if (profile != null)
+            {
+
+                profile.applyProfile(true);
+
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LaunchCommand, profile.Path));
+
+                profile.NumberLaunches = profile.NumberLaunches + 1;
+
+
+                profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
+                                   System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
+                profile.SaveToXML();
+        
+            }
+
 
         }
         public void setCurrentDefaultProfileToFalse(string ID)
@@ -367,8 +402,64 @@ namespace Handheld_Control_Panel.Classes
         public string RefreshRate { get; set; } = "";
         public string Path { get; set; } = "";
 
-        public string appType = "";
+        public string appType { get; set; } = "";
+        public string LaunchCommand { get; set; } = "";
 
+        public string imageLocation { get; set; } = "";
+        public string ImageLocation
+        {
+            get
+            {
+                return imageLocation;
+            }
+            set
+            {
+                if (value != "")
+                {
+                    if (File.Exists(value))
+                    {
+                        imageApp = new BitmapImage(new Uri(value));
+                    }
+
+
+                }
+                else
+                {
+                    if (Path != "")
+                    {
+
+                        if (File.Exists(Path))
+                        {
+
+                            using (Icon ico = Icon.ExtractAssociatedIcon(Path))
+                            {
+                                imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                            }
+
+                        }
+                    }
+
+                }
+                imageLocation = value;
+                
+            }
+        }
+
+
+        public bool Favorite
+        {
+            get {
+                if (favoriteIconVisibility == Visibility.Visible) { return true; } else { return false; }
+            }
+            set
+            {
+             
+                if (value == true) { favoriteIconVisibility = Visibility.Visible; } else { favoriteIconVisibility = Visibility.Collapsed; }
+            }
+        }
+        public Visibility favoriteIconVisibility { get; set; } = Visibility.Collapsed;
+        public ImageSource imageIcon { get; set; } = null;
+        public ImageSource imageApp { get; set; } = null;
         public int LastLaunched { get; set; } = 0;
         public int NumberLaunches { get; set; } = 0;
         public string AppType
@@ -383,8 +474,29 @@ namespace Handheld_Control_Panel.Classes
                         icon = PackIconSimpleIconsKind.Steam;
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;
+                        if (ImageLocation == "")
+                        {
+                            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + GameID + "_header";
+                            if (File.Exists(imageDirectory + ".jpg"))
+                            {
+                                imageApp = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
+                            }
+                            else
+                            {
+                                if (File.Exists(imageDirectory + ".png"))
+                                {
+                                    imageApp = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                                }
+
+                            }
+                        }
                         break;
-                    case "EpicGames":
+                    case "Battle.net":
+                        icon = PackIconSimpleIconsKind.Battledotnet;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
+                    case "Epic Games":
                         icon = PackIconSimpleIconsKind.EpicGames;
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;
@@ -426,6 +538,11 @@ namespace Handheld_Control_Panel.Classes
         public Visibility iconVisibility { get; set; } = Visibility.Collapsed;
         public Visibility iconMaterialVisibility { get; set; } = Visibility.Collapsed;
        
+
+
+
+
+
         public void SaveToXML()
         {
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
@@ -465,6 +582,9 @@ namespace Handheld_Control_Panel.Classes
                     LaunchOptions.SelectSingleNode("GameID").InnerText = GameID;
                     LaunchOptions.SelectSingleNode("LastLaunched").InnerText = LastLaunched.ToString();
                     LaunchOptions.SelectSingleNode("NumberLaunches").InnerText = NumberLaunches.ToString();
+                    LaunchOptions.SelectSingleNode("LaunchCommand").InnerText = LaunchCommand.ToString();
+                    LaunchOptions.SelectSingleNode("ImageLocation").InnerText = ImageLocation.ToString();
+                    LaunchOptions.SelectSingleNode("Favorite").InnerText = Favorite.ToString();
 
 
                     parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
@@ -538,8 +658,24 @@ namespace Handheld_Control_Panel.Classes
                     Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
                     RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
-                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                    ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
+               
+                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
+                   
+                    if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
+                    {
+                        Favorite = true;
+                    }
+                    else
+                    {
+                        Favorite = false;
+                    }
+
+                    LaunchCommand = LaunchOptions.SelectSingleNode("LaunchCommand").InnerText;
+                    
+
+
                     if (LaunchOptions.SelectSingleNode("NumberLaunches").InnerText != "")
                     {
                         NumberLaunches = Int32.Parse(LaunchOptions.SelectSingleNode("NumberLaunches").InnerText);
@@ -629,4 +765,6 @@ namespace Handheld_Control_Panel.Classes
 
         }
     }
+
+  
 }

@@ -25,7 +25,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Devices.Radios;
+
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -77,12 +77,13 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.Visibility == Visibility.Collapsed)
                         {
                             button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
+               
+                            Global_Variables.mainWindow.changeUserInstruction("SelectedListBox_Instruction");
                         }
                         else
                         {
                             handleListboxChange();
-
+                            Global_Variables.mainWindow.changeUserInstruction("ProfileEditPage_Instruction");
                         }
                     
                         break;
@@ -90,7 +91,7 @@ namespace Handheld_Control_Panel.UserControls
                  
                         if (controlList.Visibility == Visibility.Visible)
                         {
-                            
+                            Global_Variables.mainWindow.changeUserInstruction("ProfileEditPage_Instruction");
 
                             if (selectedObject != null)
                             {

@@ -29,6 +29,7 @@ using System.IO;
 using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
+using ControlzEx.Standard;
 
 
 namespace Handheld_Control_Panel.Pages
@@ -42,7 +43,11 @@ namespace Handheld_Control_Panel.Pages
         public string DisplaySortMethod { get; set; }
         public string SortMethod { get; set; }
     }
-
+    public class FilterMethods
+    {
+        public string DisplayFilterMethod { get; set; }
+        public string FilterMethod { get; set; }
+    }
     public partial class AppLauncherPage : Page
     {
 
@@ -50,11 +55,13 @@ namespace Handheld_Control_Panel.Pages
         private static DispatcherTimer spinStopTimer = new DispatcherTimer();
 
         private string windowpage;
-        private List<ListBoxAppItem> items = new List<ListBoxAppItem>();
-
+        private List<Profile> items = new List<Profile>();
+        private List<Profile> tempList = new List<Profile>();
         private string currentSortMethod = Properties.Settings.Default.appSortMethod;
+        private string currentFilterMethod = "Filter_Method_None";
 
         private List<SortMethods> sortMethods = new List<SortMethods>();
+        private List<FilterMethods> filterMethods = new List<FilterMethods>();
 
         public AppLauncherPage()
         {
@@ -65,30 +72,103 @@ namespace Handheld_Control_Panel.Pages
             wnd.changeUserInstruction("AppLauncherPage_Instruction");
             wnd = null;
 
-            sortLabel.Content = Application.Current.Resources["Sort_Method_SortBy"].ToString()+Application.Current.Resources[currentSortMethod].ToString();
+            updateSortFilterLabel();
+
+
     
             SortMethods sm = new SortMethods();
-            sm.SortMethod = "App Type";
+            sm.SortMethod = "Sort_Method_AppType";
             sm.DisplaySortMethod = Application.Current.Resources["Sort_Method_AppType"].ToString();
             sortMethods.Add(sm);
 
             SortMethods sm1 = new SortMethods();
-            sm1.SortMethod = "Profile Name";
+            sm1.SortMethod = "Sort_Method_ProfileName";
             sm1.DisplaySortMethod = Application.Current.Resources["Sort_Method_ProfileName"].ToString();
             sortMethods.Add(sm1);
 
             SortMethods sm2 = new SortMethods();
-            sm2.SortMethod = "Frequently Launched";
+            sm2.SortMethod = "Sort_Method_FrequentlyLaunched";
             sm2.DisplaySortMethod = Application.Current.Resources["Sort_Method_FrequentlyLaunched"].ToString();
             sortMethods.Add(sm2);
 
             SortMethods sm3 = new SortMethods();
-            sm3.SortMethod = "Recently Launched";
+            sm3.SortMethod = "Sort_Method_RecentlyLaunched";
             sm3.DisplaySortMethod = Application.Current.Resources["Sort_Method_RecentlyLaunched"].ToString();
             sortMethods.Add(sm3);
+
+            SortMethods sm4 = new SortMethods();
+            sm4.SortMethod = "Sort_Method_Favorite";
+            sm4.DisplaySortMethod = Application.Current.Resources["Sort_Method_Favorite"].ToString();
+            sortMethods.Add(sm4);
+
+
+            FilterMethods fm0 = new FilterMethods();
+            fm0.FilterMethod = "Filter_Method_None";
+            fm0.DisplayFilterMethod = Application.Current.Resources["Filter_Method_None"].ToString();
+            filterMethods.Add(fm0);
+
+            FilterMethods fm = new FilterMethods();
+            fm.FilterMethod = "Filter_Method_Favorite";
+            fm.DisplayFilterMethod = Application.Current.Resources["Filter_Method_Favorite"].ToString();
+            filterMethods.Add(fm);
+
+            FilterMethods fm1 = new FilterMethods();
+            fm1.FilterMethod = "Filter_Method_Steam";
+            fm1.DisplayFilterMethod = Application.Current.Resources["Filter_Method_Steam"].ToString(); 
+            filterMethods.Add(fm1);
+
+            FilterMethods fm2 = new FilterMethods();
+            fm2.FilterMethod = "Filter_Method_EpicGames";
+            fm2.DisplayFilterMethod = Application.Current.Resources["Filter_Method_EpicGames"].ToString();
+            filterMethods.Add(fm2);
+
+            FilterMethods fm3 = new FilterMethods();
+            fm3.FilterMethod = "Filter_Method_Battlenet";
+            fm3.DisplayFilterMethod = Application.Current.Resources["Filter_Method_Battlenet"].ToString();
+            filterMethods.Add(fm3);
+
+            FilterMethods fm4 = new FilterMethods();
+            fm4.FilterMethod = "Filter_Method_Applications";
+            fm4.DisplayFilterMethod = Application.Current.Resources["Filter_Method_Applications"].ToString();
+            filterMethods.Add(fm4);
+
+            controlListFilter.ItemsSource = filterMethods;
+            controlListFilter.SelectedIndex = 0;
+            controlListSort.ItemsSource = sortMethods;
+            controlListSort.SelectedValue = currentSortMethod;
+
+            dpFilter.Visibility = Visibility.Collapsed;
+            dpSort.Visibility = Visibility.Collapsed;
+
+
         }
-      
-      
+        private void controlList_TouchUp(object sender, TouchEventArgs e)
+        {
+            ListBox lb = (ListBox)sender;
+            if (lb.Name.Contains("Sort"))
+            {
+                changeSortMethod();
+            }
+            else
+            {
+                changeFilterMethod();
+            }
+    
+        }
+   
+        private void controlList_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ListBox lb = (ListBox)sender;
+            if (lb.Name.Contains("Sort"))
+            {
+                changeSortMethod();
+            }
+            else
+            {
+                changeFilterMethod();
+            }
+        }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //get unique window page combo from getwindow to string
@@ -97,8 +177,16 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
 
 
-            loadValues();
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                loadValues();
 
+
+            });
+
+           
+            
+ 
          
 
         }
@@ -110,94 +198,71 @@ namespace Handheld_Control_Panel.Pages
                 items.Clear();
             }
 
+            items =  Global_Variables.profiles.Where(o => o.AppType != "").ToList();
+        
+       
 
-            foreach (Profile profile in Global_Variables.profiles)
+            applySortAndFilter();
+        }
+
+        private void applySortAndFilter()
+        {
+            tempList = items;
+            switch (currentFilterMethod)
             {
-                if (profile.AppType != "")
-                {
-                    ListBoxAppItem lbai = new ListBoxAppItem();
-                    lbai.ID = profile.ID;
-                    lbai.ProfileName = profile.ProfileName;
-                    lbai.programType = profile.AppType;
-                    lbai.LastLaunched = profile.LastLaunched;
-                    lbai.NumberLaunches = profile.NumberLaunches;
-                    switch (profile.AppType)
-                    {
-                        case "Steam":
-                            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + profile.GameID + "_header";
-                            if (File.Exists(imageDirectory + ".jpg"))
-                            {
-                                lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
-                            }
-                            else
-                            {
-                                if (File.Exists(imageDirectory + ".png"))
-                                {
-                                    lbai.imageSteam = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
-                                }
 
-                            }
-                            if (lbai.imageSteam != null)
-                            {
-                                items.Add(lbai);
-                            }
-
-                            break;
-                        default:
-                            if (profile.Path != null)
-                            {
-
-                                if (File.Exists(profile.Path))
-                                {
-                                    lbai.Exe = profile.Exe;
-                                    using (Icon ico = Icon.ExtractAssociatedIcon(profile.Path))
-                                    {
-                                        lbai.image = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                                    }
-                                    items.Add(lbai);
-                                }
-                            }
-
-
-                            break;
-
-
-
-
-                    }
-
-
-
-                }
-
-
-
-            }
-            switch(currentSortMethod)
-            {
-                case "Sort_Method_AppType":
-                    controlList.ItemsSource = items.OrderBy(o => o.programType).ToList();
+                case "Filter_Method_None":
+                    tempList = items;
                     break;
-                case "Sort_Method_RecentlyLaunched":
-                    items = items.OrderBy(o => o.NumberLaunches).ToList();
-                    items.Reverse();
-                    controlList.ItemsSource = items;
-         
+                case "Filter_Method_Favorite":
+                    tempList = items.Where(o => o.Favorite == true).ToList<Profile>();
                     break;
-                case "Sort_Method_FrequentlyLaunched":
-                    items = items.OrderBy(o => o.LastLaunched).ToList();
-                    items.Reverse();
-                    controlList.ItemsSource = items;
-                    break;
-                case "Sort_Method_ProfileName":
-                    controlList.ItemsSource = items.OrderBy(o => o.ProfileName).ToList();
+                case "Filter_Method_Applications":
+                    tempList = items.Where(o => o.AppType == "Exe").ToList<Profile>();
                     break;
                 default:
-                    controlList.ItemsSource = items;
+                    tempList = items.Where(o => o.AppType == Application.Current.Resources[currentFilterMethod].ToString()).ToList<Profile>();
                     break;
 
             }
-            controlList.Items.Refresh();
+
+            switch (currentSortMethod)
+            {
+                case "Sort_Method_AppType":
+                    tempList = tempList.OrderBy(o => o.AppType).ToList();
+                    break;
+                case "Sort_Method_RecentlyLaunched":
+                    tempList = tempList.OrderByDescending(o => o.LastLaunched).ToList();
+                    break;
+                case "Sort_Method_FrequentlyLaunched":
+                    tempList = tempList.OrderByDescending(o => o.NumberLaunches).ToList();
+
+                    break;
+
+                case "Sort_Method_Favorite":
+                    tempList = tempList.OrderByDescending(o => o.Favorite).ToList();
+                    break;
+                case "Sort_Method_ProfileName":
+                    tempList = tempList.OrderBy(o => o.ProfileName).ToList();
+                    break;
+                default:
+
+                    break;
+            }
+
+
+            this.Dispatcher.BeginInvoke(() =>
+            {
+                controlList.ItemsSource = tempList;
+                controlList.Items.Refresh();
+                if (controlList.Items.Count > 0)
+                {
+                    if (controlList.SelectedIndex < 0)
+                    {
+                        controlList.SelectedIndex = 0;
+                    }
+                }
+            });
         }
 
         private void spinner_Stop_Tick(object sender, EventArgs e)
@@ -244,74 +309,147 @@ where childItem : DependencyObject
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 if (controlList.SelectedItem != null)
                 {
-                    ListBoxAppItem lbai = controlList.SelectedItem as ListBoxAppItem;
+                    Profile lbai = controlList.SelectedItem as Profile;
                     int index = controlList.SelectedIndex;
                     switch (action)
                     {
                         case "A":
-                            if (controlList.SelectedItem != null)
+                            if (dpSort.Visibility == Visibility.Visible)
                             {
-                              
-                                if (packIconFontAwesome != null)
-                                {
-                                    packIconFontAwesome.Spin = false;
-                                    packIconFontAwesome.Visibility = Visibility.Collapsed;
-                                }
-
-                            
-
-                                // IsSynchronizedWithCurrentItem set to True for this to work
-                                ListBoxItem myListBoxItem =
-                                    (ListBoxItem)(controlList.ItemContainerGenerator.ContainerFromItem(controlList.SelectedItem));
-
-                                // Getting the ContentPresenter of myListBoxItem
-                                ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-
-                                // Finding textBlock from the DataTemplate that is set on that ContentPresenter
-                                DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-
-                                Global_Variables.profiles.openProgram(lbai.ID);
-
-                                packIconFontAwesome = (PackIconFontAwesome)myDataTemplate.FindName("fontAwesomeIcon", myContentPresenter);
-                                if (packIconFontAwesome != null)
-                                {
-                                    packIconFontAwesome.Spin = true;
-                                    packIconFontAwesome.Visibility = Visibility.Visible;
-                                    if (lbai.imageSteam != null)
-                                    {
-                                        spinStopTimer.Interval = new TimeSpan(0, 0, 15);
-                                    }
-                                    else
-                                    {
-                                        spinStopTimer.Interval = new TimeSpan(0, 0, 5);
-                                    }
-
-                                    spinStopTimer.Tick += spinner_Stop_Tick;
-
-                                    spinStopTimer.Start();
-
-
-                                }
-                                
-
-
+                                changeSortMethod();
+                                dpSort.Visibility = Visibility.Collapsed;
                             }
+                            else
+                            {
+                                if (dpFilter.Visibility == Visibility.Visible)
+                                {
+                                    changeFilterMethod();
+                                    dpFilter.Visibility = Visibility.Collapsed;
+                                }
+                                else
+                                {
+                                    if (controlList.SelectedItem != null)
+                                    {
+
+                                        if (packIconFontAwesome != null)
+                                        {
+                                            packIconFontAwesome.Spin = false;
+                                            packIconFontAwesome.Visibility = Visibility.Collapsed;
+                                        }
+
+
+
+                                        // IsSynchronizedWithCurrentItem set to True for this to work
+                                        ListBoxItem myListBoxItem =
+                                            (ListBoxItem)(controlList.ItemContainerGenerator.ContainerFromItem(controlList.SelectedItem));
+
+                                        // Getting the ContentPresenter of myListBoxItem
+                                        ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
+
+                                        // Finding textBlock from the DataTemplate that is set on that ContentPresenter
+                                        DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+
+                                        Global_Variables.profiles.openProgram(lbai.ID);
+
+                                        packIconFontAwesome = (PackIconFontAwesome)myDataTemplate.FindName("fontAwesomeIcon", myContentPresenter);
+                                        if (packIconFontAwesome != null)
+                                        {
+                                            packIconFontAwesome.Spin = true;
+                                            packIconFontAwesome.Visibility = Visibility.Visible;
+                                            spinStopTimer.Interval = new TimeSpan(0, 0, 15);
+
+                                            spinStopTimer.Tick += spinner_Stop_Tick;
+
+                                            spinStopTimer.Start();
+
+
+                                        }
+
+
+
+                                    }
+                                }
+                            }
+                           
                             break;
 
                         case "X":
-                            changeSortMethod();
+
+           
+                            break;
+                        case "Start":
+                            if (dpSort.Visibility == Visibility.Collapsed)
+                            {
+                                dpSort.Visibility = Visibility.Visible;
+                                dpFilter.Visibility = Visibility.Collapsed;
+                            }
+                            else
+                            {
+                                dpSort.Visibility = Visibility.Collapsed;
+                            }
+                            break;
+                        case "Back":
+                            if (dpFilter.Visibility == Visibility.Collapsed)
+                            {
+                                dpFilter.Visibility = Visibility.Visible;
+                                dpSort.Visibility = Visibility.Collapsed;
+                            }
+                            else
+                            {
+                                dpFilter.Visibility = Visibility.Collapsed;
+                            }
+                            break;
+                        case "Y":
+                            Global_Variables.profiles.changeProfileFavorite(lbai.ID);
+                            
+                            controlList.Items.Refresh();
                             break;
                         case "Up":
-                            if (index > 2) { controlList.SelectedIndex = index - 3; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            if (dpSort.Visibility == Visibility.Visible)
+                            {
+                                handleListBoxIndexChange(controlListSort, -1);
+                            }
+                            else
+                            {
+                                if (dpFilter.Visibility == Visibility.Visible)
+                                {
+                                    handleListBoxIndexChange(controlListFilter, -1);
+                                }
+                                else
+                                {
+                                    handleListBoxIndexChange(controlList, -3);
+                                }
+                            }
+                            
                             break;
                         case "Down":
-                            if (index +3  < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 3; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            if (dpSort.Visibility == Visibility.Visible)
+                            {
+                                handleListBoxIndexChange(controlListSort, 1);
+                            }
+                            else
+                            {
+                                if (dpFilter.Visibility == Visibility.Visible)
+                                {
+                                    handleListBoxIndexChange(controlListFilter, 1);
+                                }
+                                else
+                                {
+                                    handleListBoxIndexChange(controlList, 3);
+                                }
+                            }
                             break;
                         case "Left":
-                            if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            handleListBoxIndexChange(controlList, -1);
                             break;
                         case "Right":
-                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            handleListBoxIndexChange(controlList, 1);
+                            break;
+                        case "LB":
+                            handleListBoxIndexChange(controlList, -15);
+                            break;
+                        case "RB":
+                            handleListBoxIndexChange(controlList, 15);
                             break;
                         default: break;
 
@@ -325,6 +463,10 @@ where childItem : DependencyObject
                     {
                             changeSortMethod();
                     }
+                    if (args.Action == "RB")
+                    {
+                        changeFilterMethod();
+                    }
                 }
               
 
@@ -332,50 +474,106 @@ where childItem : DependencyObject
 
         }
 
-        private void changeSortMethod()
+        private void handleListBoxIndexChange(ListBox lb, int change)
         {
-            foreach(SortMethods sm in sortMethods) 
+            int selectedIndex = lb.SelectedIndex;
+            int upperIndex = lb.Items.Count-1;
+            if (change < 0 )
             {
-               if (currentSortMethod == sm.SortMethod)
+                if (selectedIndex >= -change)
                 {
-                    int index = sortMethods.IndexOf(sm);
-                    if (index == sortMethods.Count - 1)
-                    {
-                        currentSortMethod = sortMethods[0].SortMethod;
-
-                    }
-                    else
-                    {
-                        currentSortMethod = sortMethods[index + 1].SortMethod;
-                    }
-                    loadValues();
-                    sortLabel.Content= Application.Current.Resources["Sort_Method_SortBy"].ToString() + Application.Current.Resources[currentSortMethod].ToString();
-                    Properties.Settings.Default.appSortMethod = currentSortMethod;
-                    Properties.Settings.Default.Save();
-
-                    break;
+                    lb.SelectedIndex = selectedIndex + change;
+                    lb.ScrollIntoView(lb.SelectedItem);
                 }
+                else if (selectedIndex != 0)
+                {
+                    lb.SelectedIndex = 0;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+
+            }
+            if (change > 0 )
+            {
+                if ((upperIndex - selectedIndex) >= change)
+                {
+                    lb.SelectedIndex = selectedIndex + change;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+                else if(selectedIndex != upperIndex)
+                {
+                    lb.SelectedIndex = upperIndex;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+
+               
             }
 
         }
 
-      
+        private void changeSortMethod()
+        {
+            if (controlListSort.SelectedItem != null)
+            {
+                SortMethods sm = controlListSort.SelectedItem as SortMethods;
+                currentSortMethod = sm.SortMethod;
+                applySortAndFilter();
+                updateSortFilterLabel();
+                Properties.Settings.Default.appSortMethod = currentSortMethod;
+                Properties.Settings.Default.Save();
+
+            }
+
+          
+
+        }
+
+        private void applygarbageFilter()
+        {
+            switch (currentFilterMethod)
+            {
+
+                case "Filter_Method_None":
+                    controlList.ItemsSource = items;
+                    break;
+                case "Filter_Method_Favorite":
+                    controlList.ItemsSource = items.Where(o => o.Favorite == true);
+                    break;
+                case "Filter_Method_Applications":
+                    controlList.ItemsSource = items.Where(o => o.AppType == "Exe");
+                    break;
+                default:
+                    controlList.ItemsSource = items.Where(o => o.AppType == Application.Current.Resources[currentFilterMethod].ToString());
+                    break;
+
+            }
+            controlList.Items.Refresh();
+
+        }
+        private void updateSortFilterLabel()
+        {
+            sortLabel.Content = Application.Current.Resources["Sort_Method_SortBy"].ToString() + ": " + Application.Current.Resources[currentSortMethod].ToString() + "; " + Application.Current.Resources["Filter_Method_Filter"].ToString() + ": " + Application.Current.Resources[currentFilterMethod].ToString();
+        }
+
+        private void changeFilterMethod()
+        {
+
+            if (controlListFilter.SelectedItem != null)
+            {
+                FilterMethods fm = controlListFilter.SelectedItem as FilterMethods;
+                currentFilterMethod = fm.FilterMethod;
+                applySortAndFilter();
+                updateSortFilterLabel();
+
+
+            }
+                 
+
+        }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
         }
     }
-    public class ListBoxAppItem
-    {
-        public string ID { get; set; }
-        public string ProfileName { get; set; }
-        public ImageSource image { get; set; }
-        public ImageSource imageSteam { get; set; }
-        public int NumberLaunches { get; set; }
-        public int LastLaunched { get; set; }
-        public string programType { get; set; }
-        public string Exe { get; set; }
-  
-    }
+   
 }

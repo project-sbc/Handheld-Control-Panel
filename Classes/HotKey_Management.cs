@@ -31,6 +31,16 @@ namespace Handheld_Control_Panel.Classes
         {
             hotkeyActionChangedEvent?.Invoke(null, EventArgs.Empty);
         }
+
+        public void updateLanguage()
+        {
+            foreach (HotkeyItem hki in Global_Variables.Global_Variables.hotKeys)
+            {
+                hki.Action = hki.Action;
+            }
+
+        }
+
         public void generateGlobalControllerHotKeyList()
         {
             Global_Variables.Global_Variables.controllerHotKeyDictionary.Clear();
@@ -326,6 +336,7 @@ namespace Handheld_Control_Panel.Classes
                         }
                     }
                 }
+                else { DisplayParameter = ""; }
             
 
                 parameter = value;

@@ -33,6 +33,7 @@ using System.IO;
 using Handheld_Control_Panel.Classes.Fan_Management;
 using Notification.Wpf;
 using Notification.Wpf.Classes;
+using System.Threading;
 
 namespace Handheld_Control_Panel
 {
@@ -46,8 +47,8 @@ namespace Handheld_Control_Panel
         private string window = "MainWindow";
         private string page = "";
         private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
-        private bool disable_B_ToClose = false;
-
+        public bool disable_B_ToClose = false;
+        public OSK osk;
 
         private System.Windows.Forms.NotifyIcon m_notifyIcon;
         public MainWindow()
@@ -139,6 +140,21 @@ namespace Handheld_Control_Panel
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void toggleOSK()
+        {
+            if (osk == null)
+            {
+                osk = new OSK();
+                osk.Show();
+            }
+            else
+            {
+                osk.Close();
+                osk = null;
+            }
+
         }
 
         private void M_notifyIcon_DoubleClick(object? sender, EventArgs e)
@@ -269,6 +285,19 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
+                    case "Start":
+                        if (Global_Variables.autoTDP)
+                        {
+                            Notification_Management.Show("Auto tdp disabled");
+                           Global_Variables.autoTDP = false;
+                        }
+                        else
+                        {
+                            Notification_Management.Show("Auto tdp enabled");
+                            AutoTDP_Management.startAutoTDPThread();
+                        }
+                    
+                        break;
                     case "LT":
                         navigateListBox(true);
                         break;
@@ -282,7 +311,25 @@ namespace Handheld_Control_Panel
                         }
                         else
                         {
-                            toggleWindow();
+                            switch (page)
+                            {
+                                case "HotKeyEditPage":
+                                    Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
+                                    navigateFrame("HotKeyPage");
+                                    break;
+                                case "MouseModeEditPage":
+                                    Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
+                                    navigateFrame("MouseModePage");
+                                    break;
+                                case "ProfileEditPage":
+                                    Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+                                    navigateFrame("ProfilesPage");
+                                    break;
+                                default:
+                                    toggleWindow();
+                                    break;
+                            }
+               
                         }
 
                         break;
@@ -398,26 +445,58 @@ namespace Handheld_Control_Panel
             //icon needs to be rotated for which side it is on
             //PackIconFontAwesome packIconFontAwesome = (PackIconFontAwesome)Close.Content;
 
-            this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight*0.03,0);
+            //var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            //this.Left = desktopWorkingArea.Right - this.Width;
+            
+            double scaling;
+            if (Double.TryParse(Global_Variables.Scaling, out scaling))
+            {
+                scaling = scaling / 100;
+                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.03, 0);
 
-            this.Height =Math.Round( System.Windows.SystemParameters.PrimaryScreenHeight*0.91,0);
-            if (Properties.Settings.Default.dockWindowRight && this.Left != System.Windows.SystemParameters.PrimaryScreenWidth - this.Width)
-            {
-                //if dockWindowRight is true, move to right side of screen
-                this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
-                //packIconFontAwesome.RotationAngle = 0;
-                borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.91, 0);
+                if (Properties.Settings.Default.dockWindowRight)
+                {
+                    //if dockWindowRight is true, move to right side of screen
+                    this.Left = Math.Round((System.Windows.SystemParameters.PrimaryScreenWidth/scaling) - this.Width,0);
+                    //packIconFontAwesome.RotationAngle = 0;
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                }
+                if (!Properties.Settings.Default.dockWindowRight)
+                {
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                    this.Left = 0;
+                    //packIconFontAwesome.RotationAngle = 180;
+                }
             }
-            if (!Properties.Settings.Default.dockWindowRight && this.Left != 0)
+            else
             {
-                borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
-                this.Left = 0;
-                //packIconFontAwesome.RotationAngle = 180;
+                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.03, 0);
+
+                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.91, 0);
+                if (Properties.Settings.Default.dockWindowRight)
+                {
+                    //if dockWindowRight is true, move to right side of screen
+                    this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
+                    //packIconFontAwesome.RotationAngle = 0;
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                }
+                if (!Properties.Settings.Default.dockWindowRight)
+                {
+                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                    this.Left = 0;
+                    //packIconFontAwesome.RotationAngle = 180;
+                }
             }
+           
 
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -477,11 +556,11 @@ namespace Handheld_Control_Panel
                         instructionStackPanel.Children.Add(new ProfilePage_Instruction());
                         break; 
                     case "ProfileEditPage_Instruction":
-                        disable_B_ToClose = true;
+          
                         instructionStackPanel.Children.Add(new ProfileEditPage_Instruction());
                         break; 
                     case "HotKeyEditPage_Instruction":
-                        disable_B_ToClose = true;
+       
                         instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());
                         break;
                     case "SelectedListBox_Instruction":
@@ -546,6 +625,8 @@ namespace Handheld_Control_Panel
         {
           
             getDPIScaling();
+
+         
         }
         private void getDPIScaling()
         {

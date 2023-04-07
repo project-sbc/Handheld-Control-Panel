@@ -22,7 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using Windows.Devices.Radios;
+
 
 namespace Handheld_Control_Panel.UserControls
 {
