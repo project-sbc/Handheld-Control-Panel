@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using LibreHardwareMonitor;
 using LibreHardwareMonitor.Hardware;
-using Windows.Devices.Perception.Provider;
 using System.Windows.Media.Animation;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;

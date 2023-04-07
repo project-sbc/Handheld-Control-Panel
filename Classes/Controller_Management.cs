@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 using WindowsInput;
 using Nefarius.Utilities.DeviceManagement.PnP;
 using Nefarius.Utilities.DeviceManagement.Extensions;
-using Windows.Devices.Usb;
+
 using System.Timers;
 using System.Windows.Controls;
 

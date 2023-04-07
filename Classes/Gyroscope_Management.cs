@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Devices.Sensors;
+
 
 namespace Handheld_Control_Panel.Classes
 {
     public static class Gyroscope_Management
     {
         private static double number = 0;
-        private static void ReadingChanged(object sender, AccelerometerReadingChangedEventArgs e)
+        private static void ReadingChanged(object sender, EventArgs e)
         {
 
             //Accelerometer acc = Accelerometer.GetDefault();

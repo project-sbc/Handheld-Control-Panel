@@ -45,7 +45,7 @@ namespace Handheld_Control_Panel.Pages
 
             
 
-            Dictionary<string,int> gamerunning = RunningGames.gameRunningDictionary();
+            Dictionary<string,int> gamerunning = new Dictionary<string,int>();
 
             if (gamerunning.Count >0)
             {

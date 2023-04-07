@@ -13,8 +13,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Windows.Threading;
-using Windows.Devices.Sensors;
-using Windows.UI.Core;
+
 using MessageBox = System.Windows.MessageBox;
 
 namespace Handheld_Control_Panel.Classes
