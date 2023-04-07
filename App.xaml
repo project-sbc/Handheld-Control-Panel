@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Handheld_Control_Panel"
              xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
+          
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
             
              >
@@ -11,8 +11,7 @@
         
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources />
-                <ui:XamlControlsResources />
+
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />

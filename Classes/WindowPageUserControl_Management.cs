@@ -36,7 +36,7 @@ namespace Handheld_Control_Panel.Classes
             //global method to switch the page back to the window navigation
             if (window.Contains("MainWindow"))
             {
-                MainWindowNavigation.windowNavigation = true;
+               // MainWindowNavigation.windowNavigation = true;
             }
             if (window.Contains("QuickAccessMenu"))
             {

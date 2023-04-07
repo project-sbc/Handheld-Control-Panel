@@ -25,7 +25,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Steel")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Teal")]
         public string systemAccent {
             get {
                 return ((string)(this["systemAccent"]));
