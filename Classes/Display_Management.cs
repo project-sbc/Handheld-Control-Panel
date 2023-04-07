@@ -337,7 +337,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 {
                     result = SetDPICLIResult(commandArguments);
                     Global_Variables.Global_Variables.Scaling = scaling;
-   
+                    
                     Global_Variables.Global_Variables.mainWindow.setWindowSizePosition();
             
                 }
