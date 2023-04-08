@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Windows.Threading;
 
 using MessageBox = System.Windows.MessageBox;
+using System.Windows.Media.Animation;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -25,13 +26,14 @@ namespace Handheld_Control_Panel.Classes
         public static void Start_Routine()
         {
 
+
             //run all routines to get device ready
             //librehardwaremonitor librehardwaremonitor = new librehardwaremonitor();
             //librehardwaremonitor.Monitor();
 
             //test code here
-          
-             //test code
+
+            //test code
 
             //check for updates first
             Update_Software.Update_Software.checkForUpdates(true);
@@ -98,13 +100,14 @@ namespace Handheld_Control_Panel.Classes
             //apply default profile, 0 is default profile ID and will only apply if 0 exists
             //XML_Management.Manage_XML_Profiles.applyProfile("0", false);
 
+           
             Global_Variables.Global_Variables.profiles = new Profiles_Management();
 
             if (Global_Variables.Global_Variables.profiles.activeProfile != null)
             {
                 Global_Variables.Global_Variables.profiles.activeProfile.applyProfile();
             }
-     
+
             Global_Variables.Global_Variables.hotKeys = new HotKey_Management();
             Global_Variables.Global_Variables.homePageItems = new CustomizeHome_Management();
 

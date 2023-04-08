@@ -456,9 +456,6 @@
     <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\SettingsUserControls\EpicGameSync_Button.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UserControls\SettingsUserControls\GameSync_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

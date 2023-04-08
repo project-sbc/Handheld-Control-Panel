@@ -28,7 +28,7 @@ namespace Handheld_Control_Panel
             e.Handled = true;
         }
   
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
@@ -52,11 +52,14 @@ namespace Handheld_Control_Panel
             }
 
             //you can do additional work here, call start routine
+
             Classes.Start_Up.Start_Routine();
+
+
             MainWindow mainWindow = new MainWindow();
             Task.Factory.StartNew(() =>
             {
-
+                
                 //since we're not on the UI thread
                 //once we're done we need to use the Dispatcher
                 //to create and show the main window

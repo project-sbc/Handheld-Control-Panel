@@ -177,17 +177,11 @@ namespace Handheld_Control_Panel.Pages
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
 
 
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                loadValues();
+            loadValues();
 
 
-            });
 
-           
-            
- 
-         
+
 
         }
         private void loadValues()
@@ -251,7 +245,7 @@ namespace Handheld_Control_Panel.Pages
             }
 
 
-            this.Dispatcher.BeginInvoke(() =>
+            if (tempList.Count > 0)
             {
                 controlList.ItemsSource = tempList;
                 controlList.Items.Refresh();
@@ -262,7 +256,7 @@ namespace Handheld_Control_Panel.Pages
                         controlList.SelectedIndex = 0;
                     }
                 }
-            });
+            }
         }
 
         private void spinner_Stop_Tick(object sender, EventArgs e)

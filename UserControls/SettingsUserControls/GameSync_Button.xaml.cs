@@ -75,7 +75,7 @@ namespace Handheld_Control_Panel.UserControls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncing"].ToString(), Notification.Wpf.NotificationType.Information);
-            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Global_Variables.profiles.syncGamesToProfile());
+            Global_Variables.profiles.syncGamesToProfile();
         }
     }
 }
