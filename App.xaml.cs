@@ -23,9 +23,11 @@ namespace Handheld_Control_Panel
     {
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("An unhandled exception just occurred: " + e.Exception.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
-            Log_Writer.writeLog(e.Exception.Message);
+            string message = "An unhandled exception just occurred: " + e.Exception.Message + ". Stack Trace: " + e.Exception.StackTrace + ". Source: " + e.Exception.Source + ". Inner Exception: " + e.Exception.InnerException;
+            MessageBox.Show(message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
+            Log_Writer.writeLog(message);
             e.Handled = true;
+           
         }
   
         protected override async void OnStartup(StartupEventArgs e)

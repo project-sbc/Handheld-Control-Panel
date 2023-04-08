@@ -189,6 +189,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             try
             {
                 if (controller == null)
+
+
                 {
                     getController();
                     if (controller.IsConnected == false)
