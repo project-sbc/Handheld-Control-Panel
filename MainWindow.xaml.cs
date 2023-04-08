@@ -385,6 +385,8 @@ namespace Handheld_Control_Panel
         }
         public void navigateFrame(string pageName)
         {
+
+            //logic is if launching from game launcher or 
             if (pageName == "ProfilesPage" && navigation.SelectedItem !=null)
             {
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;

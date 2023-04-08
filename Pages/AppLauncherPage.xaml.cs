@@ -228,18 +228,18 @@ namespace Handheld_Control_Panel.Pages
             switch (currentSortMethod)
             {
                 case "Sort_Method_AppType":
-                    tempList = tempList.OrderBy(o => o.AppType).ToList();
+                    tempList = tempList.OrderBy(o => o.AppType).ThenBy(p => p.ProfileName).ToList();
                     break;
                 case "Sort_Method_RecentlyLaunched":
-                    tempList = tempList.OrderByDescending(o => o.LastLaunched).ToList();
+                    tempList = tempList.OrderByDescending(o => o.LastLaunched).ThenBy(p => p.ProfileName).ToList();
                     break;
                 case "Sort_Method_FrequentlyLaunched":
-                    tempList = tempList.OrderByDescending(o => o.NumberLaunches).ToList();
+                    tempList = tempList.OrderByDescending(o => o.NumberLaunches).ThenBy(p => p.ProfileName).ToList();
 
                     break;
 
                 case "Sort_Method_Favorite":
-                    tempList = tempList.OrderByDescending(o => o.Favorite).ToList();
+                    tempList = tempList.OrderByDescending(o => o.Favorite).ThenBy(p => p.ProfileName).ToList();
                     break;
                 case "Sort_Method_ProfileName":
                     tempList = tempList.OrderBy(o => o.ProfileName).ToList();
