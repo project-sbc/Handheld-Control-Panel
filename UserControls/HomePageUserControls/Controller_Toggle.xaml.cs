@@ -6,6 +6,8 @@ using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
 using Handheld_Control_Panel.Styles;
 using MahApps.Metro.Controls;
+using Nefarius.Utilities.DeviceManagement.Extensions;
+using Nefarius.Utilities.DeviceManagement.PnP;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,10 +43,13 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-
-            control.IsOn = !Controller_Management.controller.IsConnected;
+            //make it ! because this is "if the controller is DISABLED" not enabled
+           
+            control.IsOn = !Controller_Management.checkBuiltInControllerStatus();
 
         }
+
+       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;

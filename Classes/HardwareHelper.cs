@@ -9,6 +9,10 @@ using Microsoft.Win32.SafeHandles;
 using System.Security;
 using System.Runtime.ConstrainedExecution;
 using enabledevice;
+using Linearstar.Windows.RawInput.Native;
+using System.Diagnostics;
+using Microsoft.VisualBasic;
+using Windows.Devices.Display.Core;
 
 namespace enabledevice
 {
@@ -178,6 +182,18 @@ namespace enabledevice
         public int HwProfile;
     }
 
+    [Flags]
+    enum DiGetClassFlags : uint
+    {
+        DIGCF_DEFAULT = 0x00000001, // only valid with DIGCF_DEVICEINTERFACE
+        DIGCF_PRESENT = 0x00000002,
+        DIGCF_ALLCLASSES = 0x00000004,
+        DIGCF_PROFILE = 0x00000008,
+        DIGCF_DEVICEINTERFACE = 0x00000010,
+    }
+
+  
+
     internal class NativeMethods
     {
 
@@ -231,7 +247,10 @@ ref int requiredSize);
 ref DeviceInfoData deviceInfoData, [In()]
 ref PropertyChangeParameters classInstallParams, int classInstallParamsSize);
 
-    }
+
+
+
+         }
 
     internal class SafeDeviceInfoSetHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
@@ -289,6 +308,9 @@ ref PropertyChangeParameters classInstallParams, int classInstallParamsSize);
                 }
             }
         }
+
+
+     
 
         private static DeviceInfoData[] GetDeviceInfoData(SafeDeviceInfoSetHandle handle)
         {
@@ -360,4 +382,5 @@ ref PropertyChangeParameters classInstallParams, int classInstallParamsSize);
         }
     }
     
+   
 }
