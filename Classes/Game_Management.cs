@@ -56,9 +56,11 @@ namespace Handheld_Control_Panel.Classes
                                 Run_CLI.Run_CLI.RunCommand(" --exec=\"launch " + gameID.ToUpper() + "\"", false, battlenetfile, 3000, true);
 
                             }
-                           
-                           
-                           
+
+                            break;
+                        case "GOG Galaxy":
+                            Run_CLI.Run_CLI.RunCommand(" /command=runGame /gameId=" + gameID, false, Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "GOG Galaxy", "GalaxyClient.exe"));
+
                             break;
                         default: break;
                     }
@@ -202,7 +204,7 @@ namespace Handheld_Control_Panel.Classes
                             launcherItem.gameName = game.Name;
                             launcherItem.gameID = game.Id;
                             launcherItem.launchCommand = game.LaunchString;
-                            launcherItem.path = game.WorkingDir + "\\" + game.Executable;
+                            launcherItem.path = game.Executable;
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
                         }

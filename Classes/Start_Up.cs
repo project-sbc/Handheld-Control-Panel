@@ -77,8 +77,6 @@ namespace Handheld_Control_Panel.Classes
             Display_Management.Display_Management.generateDisplayResolutionAndRateList();
           
             
-            //XML_Management.Manage_XML_Profiles.generateGlobalVariableProfileToExeList();
-             
             //load language resource
             loadLanguage();
 

@@ -33,7 +33,7 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Height="Auto"  Background="{DynamicResource MahApps.Brushes.Accent3}">
             <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_AppLauncher}"/>
-            <Label Name="sortLabel" Content="yes" Style="{DynamicResource SubheaderLabel}" />
+            <Label Name="sortLabel" DockPanel.Dock="Top" Content="" Style="{DynamicResource SubheaderLabel}" />
             <DockPanel x:Name="dpFilter">
                 <DockPanel DockPanel.Dock="Top" Height="30" VerticalAlignment="Center" >
 
@@ -77,7 +77,7 @@
                    
 
                 </DockPanel>
-                <ListBox x:Name="controlListSort" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="440" Height="Auto" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
+                <ListBox x:Name="controlListSort" DockPanel.Dock="Bottom" FontSize="16" Background="Transparent" Width="450" Height="Auto" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  TouchUp="controlList_TouchUp" MouseUp="controlList_MouseUp"     >
                     <ListBox.Resources>
 
                         <Style TargetType="ListBoxItem">
@@ -104,7 +104,7 @@
            
         </DockPanel>
       
-        <ScrollViewer Name="scrollviewer" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer Name="scrollviewer" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto">
 
             <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"   >
                 <ListBox.Resources>

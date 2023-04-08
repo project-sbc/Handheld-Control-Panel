@@ -132,6 +132,11 @@ namespace Handheld_Control_Panel.Pages
             fm4.DisplayFilterMethod = Application.Current.Resources["Filter_Method_Applications"].ToString();
             filterMethods.Add(fm4);
 
+            FilterMethods fm5 = new FilterMethods();
+            fm5.FilterMethod = "Filter_Method_GOGGalaxy";
+            fm5.DisplayFilterMethod = Application.Current.Resources["Filter_Method_GOGGalaxy"].ToString();
+            filterMethods.Add(fm5);
+
             controlListFilter.ItemsSource = filterMethods;
             controlListFilter.SelectedIndex = 0;
             controlListSort.ItemsSource = sortMethods;
@@ -395,8 +400,15 @@ where childItem : DependencyObject
                             break;
                         case "Y":
                             Global_Variables.profiles.changeProfileFavorite(lbai.ID);
+                            if (currentFilterMethod.Contains("Favorite") || currentSortMethod.Contains("Favorite"))
+                            {
+                                applySortAndFilter();
+                            }
+                            else
+                            {
+                                controlList.Items.Refresh();
+                            }
                             
-                            controlList.Items.Refresh();
                             break;
                         case "Up":
                             if (dpSort.Visibility == Visibility.Visible)
