@@ -385,8 +385,26 @@ namespace Handheld_Control_Panel
         }
         public void navigateFrame(string pageName)
         {
-            frame.Navigate(new Uri("Pages\\" + pageName + ".xaml" , UriKind.RelativeOrAbsolute));
-            page = pageName;
+            if (pageName == "ProfilesPage" && navigation.SelectedItem !=null)
+            {
+                ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                if (lbi.Tag == "AppLauncher")
+                {
+                    frame.Navigate(new Uri("Pages\\AppLauncherPage.xaml", UriKind.RelativeOrAbsolute));
+                    page = "AppLauncherPage";
+                }
+                else
+                {
+                    frame.Navigate(new Uri("Pages\\" + pageName + ".xaml", UriKind.RelativeOrAbsolute));
+                    page = pageName;
+                }
+            }
+            else
+            {
+                frame.Navigate(new Uri("Pages\\" + pageName + ".xaml", UriKind.RelativeOrAbsolute));
+                page = pageName;
+            }
+  
         }
 
         public void ShowNotificationInWindow(string title, NotificationType notificationType)

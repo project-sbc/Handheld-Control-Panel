@@ -55,13 +55,23 @@ namespace Handheld_Control_Panel.Pages
 
             if (controlList.Items.Count > 0)
             {
-                if (Global_Variables.profiles.activeProfile != null)
+                if (Global_Variables.profiles.editingProfile != null)
                 {
-                    controlList.SelectedItem = Global_Variables.profiles.activeProfile;
+                    controlList.SelectedItem = Global_Variables.profiles.editingProfile;
+                    Global_Variables.profiles.editingProfile = null;
                 }
                 else
                 {
-                    controlList.SelectedIndex = 0;
+                    if (Global_Variables.profiles.activeProfile != null)
+                    {
+                        controlList.SelectedItem = Global_Variables.profiles.activeProfile;
+                    }
+                    else
+                    {
+                        controlList.SelectedIndex = 0;
+                    }
+
+                   
                 }
             }
 

@@ -313,6 +313,7 @@ where childItem : DependencyObject
                     switch (action)
                     {
                         case "A":
+                            //if the sort or filter list is open change that, otherwise launch a game
                             if (dpSort.Visibility == Visibility.Visible)
                             {
                                 changeSortMethod();
@@ -373,8 +374,8 @@ where childItem : DependencyObject
                             break;
 
                         case "X":
-
-           
+                            Global_Variables.profiles.editingProfile = lbai;
+                            Global_Variables.mainWindow.navigateFrame("ProfileEditPage");
                             break;
                         case "Start":
                             if (dpSort.Visibility == Visibility.Collapsed)

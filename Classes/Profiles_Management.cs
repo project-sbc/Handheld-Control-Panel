@@ -501,6 +501,11 @@ namespace Handheld_Control_Panel.Classes
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;
                         break;
+                    case "GOG Galaxy":
+                        icon = PackIconSimpleIconsKind.GoGdotcom;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
                     case "Exe":
                         icon = PackIconSimpleIconsKind.None;
                         iconMaterial = PackIconMaterialKind.ApplicationCogOutline;
