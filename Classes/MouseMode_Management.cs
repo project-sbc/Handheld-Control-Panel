@@ -28,6 +28,9 @@ namespace Handheld_Control_Panel.Classes
     {
         public static List<string> MouseModeList = new List<string>()
  {
+             {"LeftMouseClick" },
+           {"RightMouseClick" },
+            {"HCP OSK" },
            {"A"},
            {"B"},
            {"C"},
@@ -88,10 +91,8 @@ namespace Handheld_Control_Panel.Classes
            {"F9" },
            {"F10" },
            {"F11" },
-           {"F12" },
-           {"LeftMouseClick" },
-           {"RightMouseClick" },
-            {"HCP OSK" }
+           {"F12" }
+          
 
 
  };
@@ -567,25 +568,16 @@ namespace Handheld_Control_Panel.Classes
                                             VirtualKeyCode vkc = keyLookUp[entry.Value];
                                             if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
                                             {
-                                                inputSimulator.Keyboard.KeyPress(vkc);
-                                            }
-                                            if (1 == 0)
-                                            {
-                                                if (currentGamePad.Buttons.HasFlag(flag))
+                                                try
                                                 {
-                                                    if (!inputSimulator.InputDeviceState.IsKeyDown(vkc))
-                                                    {
-                                                        inputSimulator.Keyboard.KeyDown(vkc);
-                                                    }
+                                                    inputSimulator.Keyboard.KeyPress(vkc);
                                                 }
-                                                else
+                                                catch
                                                 {
-                                                    if (inputSimulator.InputDeviceState.IsKeyDown(vkc))
-                                                    {
-                                                        inputSimulator.Keyboard.KeyUp(vkc);
-                                                    }
+
                                                 }
                                             }
+                                            
                                         }
                                       
 
@@ -593,29 +585,36 @@ namespace Handheld_Control_Panel.Classes
                                     }
                                     else
                                     {
-                                        switch (entry.Value)
+                                        try
                                         {
-                                            case "LeftMouseClick":
-                                                if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.LeftButtonDown();
-                                                }
-                                                if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.LeftButtonUp();
-                                                }
-                                                break;
-                                            case "RightMouseClick":
-                                                if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.RightButtonDown();
-                                                }
-                                                if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.RightButtonUp();
-                                                }
-                                                break;
-                                            default: break;
+                                            switch (entry.Value)
+                                            {
+                                                case "LeftMouseClick":
+                                                    if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.LeftButtonDown();
+                                                    }
+                                                    if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.LeftButtonUp();
+                                                    }
+                                                    break;
+                                                case "RightMouseClick":
+                                                    if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.RightButtonDown();
+                                                    }
+                                                    if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.RightButtonUp();
+                                                    }
+                                                    break;
+                                                default: break;
+
+                                            }
+                                        }
+                                        catch
+                                        {
 
                                         }
                                     }
@@ -626,10 +625,16 @@ namespace Handheld_Control_Panel.Classes
                             }
 
                         }
+                        try
+                        {
+                            inputSimulator.Mouse.MoveMouseBy((int)mouseX, (int)mouseY);
+                            inputSimulator.Mouse.HorizontalScroll((int)mouseScrollX);
+                            inputSimulator.Mouse.VerticalScroll((int)mouseScrollY);
+                        }
+                        catch
+                        {
 
-                        inputSimulator.Mouse.MoveMouseBy((int)mouseX, (int)mouseY);
-                        inputSimulator.Mouse.HorizontalScroll((int)mouseScrollX);
-                        inputSimulator.Mouse.VerticalScroll((int)mouseScrollY);
+                        }
 
                         previousGamePad = currentGamePad;
                     }
