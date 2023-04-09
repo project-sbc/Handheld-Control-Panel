@@ -38,17 +38,8 @@ namespace Handheld_Control_Panel.Pages
     /// Interaction logic for HomePage.xaml
     /// </summary>
     /// 
-    public class SortMethods
-    {
-        public string DisplaySortMethod { get; set; }
-        public string SortMethod { get; set; }
-    }
-    public class FilterMethods
-    {
-        public string DisplayFilterMethod { get; set; }
-        public string FilterMethod { get; set; }
-    }
-    public partial class AppLauncherPage : Page
+   
+    public partial class AppLauncherLargePage : Page
     {
 
         private static PackIconFontAwesome packIconFontAwesome;
@@ -63,7 +54,7 @@ namespace Handheld_Control_Panel.Pages
         private List<SortMethods> sortMethods = new List<SortMethods>();
         private List<FilterMethods> filterMethods = new List<FilterMethods>();
 
-        public AppLauncherPage()
+        public AppLauncherLargePage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -185,11 +176,7 @@ namespace Handheld_Control_Panel.Pages
             loadValues();
 
 
-            if (controlList.Items.Contains(Global_Variables.profiles.editingProfile))
-            {
-                controlList.SelectedItem = Global_Variables.profiles.editingProfile;
-                controlList.ScrollIntoView(controlList.SelectedItem);
-            }
+
 
 
         }
@@ -467,7 +454,19 @@ where childItem : DependencyObject
                     }
 
                 }
-                
+                else
+                {
+                    controlList.SelectedIndex = 0;
+                    if (args.Action == "X")
+                    {
+                            changeSortMethod();
+                    }
+                    if (args.Action == "RB")
+                    {
+                        changeFilterMethod();
+                    }
+                }
+              
 
             }
 

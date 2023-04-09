@@ -390,7 +390,7 @@ namespace Handheld_Control_Panel
             if (pageName == "ProfilesPage" && navigation.SelectedItem !=null)
             {
                 ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                if (lbi.Tag == "AppLauncher")
+                if (lbi.Tag.ToString() == "AppLauncher")
                 {
                     frame.Navigate(new Uri("Pages\\AppLauncherPage.xaml", UriKind.RelativeOrAbsolute));
                     page = "AppLauncherPage";

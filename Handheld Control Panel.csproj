@@ -180,6 +180,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\AppLauncherLargePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
