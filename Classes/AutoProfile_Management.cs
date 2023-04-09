@@ -63,7 +63,7 @@ namespace Handheld_Control_Panel.Classes
                 }
             }
 
-            //lastly, we check if 
+            //lastly, we check if the active profile needs a 
 
 
 
