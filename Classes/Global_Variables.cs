@@ -188,7 +188,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
                 cpuActiveCores = value;
                 raiseValueChanged("ActiveCores");
             }
-        } 
+        }
 
         public static int maxCpuCores = 1;
         public static int baseCPUSpeed = 1100;
