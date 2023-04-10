@@ -220,7 +220,7 @@ namespace Handheld_Control_Panel.Classes
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(10);
+            timerController.Interval = TimeSpan.FromMilliseconds(20);
             timerController.Tick += controller_Tick;
             timerController.Start();
             Global_Variables.Global_Variables.MouseModeEnabled = true;
@@ -648,11 +648,27 @@ namespace Handheld_Control_Panel.Classes
         private double normalizeJoystickInput(double sensitivity, double value)
         {
             double returnValue;
-            if (value > deadzone || value < -deadzone)
+            if (Math.Abs(value) > deadzone)
             {
-                returnValue = (sensitivity * (value / 32768) / Math.Sqrt((value / 32768 * value / 32768) + 1));
-                returnValue = Math.Round(returnValue, 0);
-                return returnValue;
+                if (Math.Abs(value) < (deadzone + (0.5 * 32768)))
+                {
+                    returnValue = 1 + (4 / (0.5 * 32768)) * (Math.Abs(value) - deadzone);
+                    returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
+                    Debug.WriteLine(returnValue);
+                    if (value < 0) { return -returnValue; } else { return returnValue; }
+                }
+                else
+                {
+                    returnValue = 5 + Math.Log10(15*Math.Abs(value)/(deadzone + (0.5 * 32768)));
+                    //returnValue = (sensitivity * (Math.Abs(value) / 32768) / Math.Sqrt((Math.Abs(value) / 32768 * Math.Abs(value) / 32768) + 1));
+                    //returnValue = 2 + 50 * (1 - Math.Exp(-( Math.Abs(value)- (deadzone + (0.4 * 32768))) / 32768));
+                    returnValue = Math.Round(returnValue, 0);
+                    if (value < 0) { returnValue = -returnValue; }
+                    Debug.WriteLine(returnValue.ToString());
+                    return returnValue;
+                }
+
+
             }
             else
             {
