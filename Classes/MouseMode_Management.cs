@@ -659,10 +659,10 @@ namespace Handheld_Control_Panel.Classes
                 }
                 else
                 {
-                    returnValue = 5 + Math.Log10(15*Math.Abs(value)/(deadzone + (0.5 * 32768)));
+                    returnValue = 5 + sensitivity * Math.Log10(Math.Abs(value) / (deadzone + (0.5 * 32768))) / Math.Log10(32768 / (deadzone + (0.5 * 32768)));
                     //returnValue = (sensitivity * (Math.Abs(value) / 32768) / Math.Sqrt((Math.Abs(value) / 32768 * Math.Abs(value) / 32768) + 1));
                     //returnValue = 2 + 50 * (1 - Math.Exp(-( Math.Abs(value)- (deadzone + (0.4 * 32768))) / 32768));
-                    returnValue = Math.Round(returnValue, 0);
+                    returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
                     if (value < 0) { returnValue = -returnValue; }
                     Debug.WriteLine(returnValue.ToString());
                     return returnValue;
