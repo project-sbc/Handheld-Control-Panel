@@ -681,11 +681,12 @@ namespace Handheld_Control_Panel.Classes
             double returnValue;
             if (lastScrollOutput0)
             {
+                lastScrollOutput0 = false;
                 if (Math.Abs(value) > deadzone)
                 {
-
-                    returnValue = 1 + Math.Pow(Math.Abs(value) / deadzone, 1 / 4.6);
-                    returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
+                    returnValue = 5 * (1 - Math.Pow(0.75, (Math.Abs(value) - 1000) / 9000));
+                    //returnValue = Math.Pow(Math.Abs(value) / deadzone, 1 / 4.6);
+                    //returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
                     Debug.WriteLine(returnValue);
                     if (value < 0) { return -returnValue; } else { return returnValue; }
 
@@ -697,6 +698,7 @@ namespace Handheld_Control_Panel.Classes
             }
             else
             {
+                lastScrollOutput0 = true;
                 return 0;
             }
         }
