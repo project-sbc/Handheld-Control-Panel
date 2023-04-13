@@ -15,6 +15,7 @@ using System.Threading;
 using System.Xml.Linq;
 using Windows.Management.Deployment;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -120,11 +121,21 @@ namespace Handheld_Control_Panel.Classes
             {
                 string install = package.InstalledLocation.Path;
                 string sig = package.SignatureKind.ToString();
+                
                 if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
                 {
                     Debug.WriteLine(package.DisplayName);
-                    Debug.WriteLine(package.Description);
-                    Debug.WriteLine(package.Id.FamilyName);
+                    //Debug.WriteLine(package.Description);
+                    //Debug.WriteLine(package.Id.FamilyName);
+                    //Debug.WriteLine(package.GetType().ToString());
+                    Debug.WriteLine(package.InstalledPath);
+                    foreach( AppListEntry appListEntry in package.GetAppListEntries())
+                    {
+                        //Debug.WriteLine(appListEntry.AppInfo.);
+                        Debug.WriteLine(appListEntry.DisplayInfo.DisplayName);
+                        Debug.WriteLine(appListEntry.LaunchAsync());
+                    }
+
                 }
       
 
