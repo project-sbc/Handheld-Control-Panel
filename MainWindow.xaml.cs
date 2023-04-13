@@ -84,7 +84,7 @@ namespace Handheld_Control_Panel
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
-            setWindowSizePosition();
+          
 
             updateStatusBar();
 
@@ -444,62 +444,69 @@ namespace Handheld_Control_Panel
         #endregion
 
         #region windows events
-     
-        public void setWindowSizePosition()
+
+        public void setWindowSizePosition(bool forceRun = false)
         {
-
-            //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
-            //icon needs to be rotated for which side it is on
-            WindowInteropHelper _windowInteropHelper = new WindowInteropHelper(this);
-            Screen screen = Screen.FromHandle(_windowInteropHelper.Handle);
-
-            double scaling;
-            if (Double.TryParse(Global_Variables.Scaling, out scaling))
+            if (this.IsLoaded || forceRun)
             {
-                scaling = scaling / 100;
-                this.Top = Math.Round(screen.Bounds.Height / scaling * 0.03, 0);
+                getDPIScaling();
+                //this relies on getting dpi to scale correctly to the display. This NEEDS to be done after loaded or during loading right after getting DPI. Otherwise
+                //scaling might not be correct. Added if check for loaded or forceRun
 
-                this.Height = Math.Round(screen.Bounds.Height / scaling * 0.91, 0);
-                if (Properties.Settings.Default.dockWindowRight)
-                {
-                    //if dockWindowRight is true, move to right side of screen
-                    this.Left = Math.Round((screen.Bounds.Width / scaling) - this.Width, 0);
-                    //packIconFontAwesome.RotationAngle = 0;
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
-                }
-                if (!Properties.Settings.Default.dockWindowRight)
-                {
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
-                    this.Left = 0;
-                    //packIconFontAwesome.RotationAngle = 180;
-                }
-            }
-            else
-            {
-                this.Top = Math.Round(screen.Bounds.Height * 0.03, 0);
+                //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
+                //icon needs to be rotated for which side it is on
+                WindowInteropHelper _windowInteropHelper = new WindowInteropHelper(this);
+                Screen screen = Screen.FromHandle(_windowInteropHelper.Handle);
 
-                this.Height = Math.Round(screen.Bounds.Height * 0.91, 0);
-                if (Properties.Settings.Default.dockWindowRight)
+                double scaling;
+                if (Double.TryParse(Global_Variables.Scaling, out scaling))
                 {
-                    //if dockWindowRight is true, move to right side of screen
-                    this.Left = screen.Bounds.Width - this.Width;
-                    //packIconFontAwesome.RotationAngle = 0;
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                    scaling = scaling / 100;
+                    this.Top = Math.Round(screen.Bounds.Height / scaling * 0.03, 0);
+
+                    this.Height = Math.Round(screen.Bounds.Height / scaling * 0.91, 0);
+                    if (Properties.Settings.Default.dockWindowRight)
+                    {
+                        //if dockWindowRight is true, move to right side of screen
+                        this.Left = Math.Round((screen.Bounds.Width / scaling) - this.Width, 0);
+                        //packIconFontAwesome.RotationAngle = 0;
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                    }
+                    if (!Properties.Settings.Default.dockWindowRight)
+                    {
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                        this.Left = 0;
+                        //packIconFontAwesome.RotationAngle = 180;
+                    }
                 }
-                if (!Properties.Settings.Default.dockWindowRight)
+                else
                 {
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
-                    this.Left = 0;
-                    //packIconFontAwesome.RotationAngle = 180;
+                    this.Top = Math.Round(screen.Bounds.Height * 0.03, 0);
+
+                    this.Height = Math.Round(screen.Bounds.Height * 0.91, 0);
+                    if (Properties.Settings.Default.dockWindowRight)
+                    {
+                        //if dockWindowRight is true, move to right side of screen
+                        this.Left = screen.Bounds.Width - this.Width;
+                        //packIconFontAwesome.RotationAngle = 0;
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                    }
+                    if (!Properties.Settings.Default.dockWindowRight)
+                    {
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                        this.Left = 0;
+                        //packIconFontAwesome.RotationAngle = 180;
+                    }
                 }
+
             }
 
 
@@ -629,9 +636,10 @@ namespace Handheld_Control_Panel
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
           
-            getDPIScaling();
+           
+            //added a DPI call to the setWindowSizePosition routine, set parameter to true to force run it
+            setWindowSizePosition(true);
 
-         
         }
         private void getDPIScaling()
         {

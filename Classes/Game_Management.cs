@@ -13,6 +13,8 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using System.Windows;
 using System.Threading;
 using System.Xml.Linq;
+using Windows.Management.Deployment;
+using Windows.ApplicationModel;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -109,7 +111,28 @@ namespace Handheld_Control_Panel.Classes
             catch { /* ignore */ }
         }
 
+        public static void GetMicrosoftStoreApps()
+        {
+            PackageManager packageManager = new PackageManager();
+            IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
 
+            foreach (Package package in packages)
+            {
+                string install = package.InstalledLocation.Path;
+                string sig = package.SignatureKind.ToString();
+                if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                {
+                    Debug.WriteLine(package.DisplayName);
+                    Debug.WriteLine(package.Description);
+                    Debug.WriteLine(package.Id.FamilyName);
+                }
+      
+
+            }
+
+
+
+        }
         public static bool BattleNetRunning()
         {
             Process[] pname = Process.GetProcessesByName("Battle.net.exe");
@@ -151,23 +174,40 @@ namespace Handheld_Control_Panel.Classes
                                 }
                                 else
                                 {
+                                   Debug.WriteLine(game.Name);
                                     string[] array = launcherItem.gameName.Split(' ');
                                     foreach (string exe in game.Executables)
                                     {
+                 
                                         string exeName = Path.GetFileNameWithoutExtension(exe);
-                                        foreach (string arr in array)
+                                        if (game.Name.Contains("Call of duty", StringComparison.OrdinalIgnoreCase))
                                         {
-                                            if (exeName.Contains(arr))
+                                            if (exeName.Contains("cod", StringComparison.OrdinalIgnoreCase))
                                             {
                                                 launcherItem.path = exe;
                                                 launcherItem.exe = exeName;
                                                 break;
                                             }
                                         }
-                                        if (launcherItem.path != "") { break; }
+                                        foreach (string arr in array)
+                                        {
+                                            if (exeName.Contains(arr, StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                launcherItem.path = exe;
+                                                launcherItem.exe = exeName;
+                                                break;
+                                            }
+                                        }
+                                        if (launcherItem.path != null) { break; }
                                     }
                                 }
-                                
+                                if (launcherItem.path == "" || launcherItem.exe == "")
+                                {
+                                    launcherItem.path = game.Executables.Last();
+                                    launcherItem.exe = Path.GetFileNameWithoutExtension(game.Executables.Last());
+                                }
+
+
                                 launcherItem.appType = launcher.Name;
                                 list.Add(launcherItem);
                             }
