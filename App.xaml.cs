@@ -76,7 +76,9 @@ namespace Handheld_Control_Panel
                     {
                         //close splashscreen if open
                         splashScreen.Close();
+
                     }
+                  
 
                 });
             });

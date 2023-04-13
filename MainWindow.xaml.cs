@@ -33,6 +33,8 @@ using Handheld_Control_Panel.Classes.Fan_Management;
 using Notification.Wpf;
 using Notification.Wpf.Classes;
 using System.Threading;
+using System.Printing;
+using System.Windows.Forms;
 
 namespace Handheld_Control_Panel
 {
@@ -100,12 +102,9 @@ namespace Handheld_Control_Panel
             //hide if autostart
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-                this.Visibility = Visibility.Hidden;
+                this.Hide();
             }
-            else
-            {
-                this.Visibility = Visibility.Visible;
-            }
+           
         }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
@@ -445,27 +444,26 @@ namespace Handheld_Control_Panel
         #endregion
 
         #region windows events
+     
         public void setWindowSizePosition()
         {
 
             //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
             //icon needs to be rotated for which side it is on
-            //PackIconFontAwesome packIconFontAwesome = (PackIconFontAwesome)Close.Content;
+            WindowInteropHelper _windowInteropHelper = new WindowInteropHelper(this);
+            Screen screen = Screen.FromHandle(_windowInteropHelper.Handle);
 
-            //var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-            //this.Left = desktopWorkingArea.Right - this.Width;
-            
             double scaling;
             if (Double.TryParse(Global_Variables.Scaling, out scaling))
             {
                 scaling = scaling / 100;
-                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.03, 0);
+                this.Top = Math.Round(screen.Bounds.Height / scaling * 0.03, 0);
 
-                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.91, 0);
+                this.Height = Math.Round(screen.Bounds.Height / scaling * 0.91, 0);
                 if (Properties.Settings.Default.dockWindowRight)
                 {
                     //if dockWindowRight is true, move to right side of screen
-                    this.Left = Math.Round((System.Windows.SystemParameters.PrimaryScreenWidth/scaling) - this.Width,0);
+                    this.Left = Math.Round((screen.Bounds.Width / scaling) - this.Width, 0);
                     //packIconFontAwesome.RotationAngle = 0;
                     borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
                     borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
@@ -482,13 +480,13 @@ namespace Handheld_Control_Panel
             }
             else
             {
-                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.03, 0);
+                this.Top = Math.Round(screen.Bounds.Height * 0.03, 0);
 
-                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.91, 0);
+                this.Height = Math.Round(screen.Bounds.Height * 0.91, 0);
                 if (Properties.Settings.Default.dockWindowRight)
                 {
                     //if dockWindowRight is true, move to right side of screen
-                    this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
+                    this.Left = screen.Bounds.Width - this.Width;
                     //packIconFontAwesome.RotationAngle = 0;
                     borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
                     borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
@@ -503,7 +501,7 @@ namespace Handheld_Control_Panel
                     //packIconFontAwesome.RotationAngle = 180;
                 }
             }
-           
+
 
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -531,7 +529,7 @@ namespace Handheld_Control_Panel
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
         {
-            Task.Delay(1500);
+            
             setWindowSizePosition();
         }
         #endregion
@@ -647,31 +645,7 @@ namespace Handheld_Control_Panel
             toggleWindow();
         }
 
-        private void CMItem_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem mi = (MenuItem)sender;
-            if(mi != null)
-            {
-                switch (mi.Tag.ToString()) 
-                {
-                    case "Hide":
-                        toggleWindow();
-                        break;
-                    case "Close":
-                        this.Close();
-                        break;
-                    case "Shutdown":
-                        var psi = new ProcessStartInfo("shutdown", "/s /t 0");
-                        psi.CreateNoWindow = true;
-                        psi.UseShellExecute = false;
-                        Process.Start(psi);
-                        break;
-                    default:break;
-                }
-
-            }
-        }
-
+        
         private void MetroWindow_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.Visibility == Visibility.Hidden)
