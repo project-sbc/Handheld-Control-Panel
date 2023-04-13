@@ -16,6 +16,9 @@ using System.Xml.Linq;
 using Windows.Management.Deployment;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
+using System.Drawing.Drawing2D;
+using Windows.System;
+using System.Windows.Documents;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -114,36 +117,55 @@ namespace Handheld_Control_Panel.Classes
 
         public static void GetMicrosoftStoreApps()
         {
+
+
+            //microsoft store apps below
             PackageManager packageManager = new PackageManager();
             IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
 
-            foreach (Package package in packages)
+            string[] filesInDirectory;
+            string xboxGameDirectory = "C:\\XboxGames";
+            if (Directory.Exists(xboxGameDirectory))
             {
-                string install = package.InstalledLocation.Path;
-                string sig = package.SignatureKind.ToString();
-                
-                if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                filesInDirectory = Directory.GetDirectories(xboxGameDirectory);
+
+                if (filesInDirectory.Length > 0)
                 {
-                    Debug.WriteLine(package.DisplayName);
-                    //Debug.WriteLine(package.Description);
-                    //Debug.WriteLine(package.Id.FamilyName);
-                    //Debug.WriteLine(package.GetType().ToString());
-                    Debug.WriteLine(package.InstalledPath);
-                    foreach( AppListEntry appListEntry in package.GetAppListEntries())
+                    string[] strings = filesInDirectory.Select(x => Path.GetFileName(x)).ToArray();
+
+                    if (strings.Length > 0)
                     {
-                        //Debug.WriteLine(appListEntry.AppInfo.);
-                        Debug.WriteLine(appListEntry.DisplayInfo.DisplayName);
-                        Debug.WriteLine(appListEntry.LaunchAsync());
+                        foreach (Package package in packages)
+                        {
+                            string install = package.InstalledLocation.Path;
+                            string sig = package.SignatureKind.ToString();
+
+                            if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                            {
+                                if (strings.Contains(package.DisplayName))
+                                {
+                                    //Debug.WriteLine(package.Logo);
+                                    //Debug.WriteLine(package.GetAppListEntries().First().DisplayInfo.icon)
+                                }
+
+
+
+                            }
+
+
+                        }
+
+
                     }
 
+
+
+
+
                 }
-      
-
             }
-
-
-
         }
+
         public static bool BattleNetRunning()
         {
             Process[] pname = Process.GetProcessesByName("Battle.net.exe");
@@ -162,7 +184,7 @@ namespace Handheld_Control_Panel.Classes
         {
             List<GameLauncherItem> list = new List<GameLauncherItem>();
              //gamelauncher
-            LauncherManager gameLauncher = new LauncherManager(new LauncherOptions() { QueryOnlineData = false });
+            LauncherManager gameLauncher = new LauncherManager(new GameLib.Core.LauncherOptions() { QueryOnlineData = false });
             
             foreach (var launcher in gameLauncher.GetLaunchers())
             {
@@ -284,6 +306,65 @@ namespace Handheld_Control_Panel.Classes
                 }
 
             }
+
+            //microsoft store apps below
+            PackageManager packageManager = new PackageManager();
+            IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
+
+            string[] filesInDirectory;
+            string xboxGameDirectory = "C:\\XboxGames";
+            if (Directory.Exists(xboxGameDirectory))
+            {
+                filesInDirectory = Directory.GetDirectories(xboxGameDirectory);
+
+                if (filesInDirectory.Length > 0)
+                {
+                    string[] strings = filesInDirectory.Select(x => Path.GetFileName(x)).ToArray();
+
+                    if (strings.Length > 0)
+                    {
+                        foreach (Package package in packages)
+                        {
+                            string install = package.InstalledLocation.Path;
+                            string sig = package.SignatureKind.ToString();
+
+                            if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                            {
+                                if (strings.Contains(package.DisplayName))
+                                {
+                                    GameLauncherItem launcherItem = new GameLauncherItem();
+                                    launcherItem.gameName = package.DisplayName;
+                                    launcherItem.gameID = package.Id.FullName;
+                                    launcherItem.launchCommand = package.Id.FullName;
+
+
+                                    //launcherItem.path = game.Executable;
+                                    //launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
+                                    launcherItem.appType = "Microsoft Store";
+                                    launcherItem.imageLocation = package.Logo.AbsolutePath;
+                                    list.Add(launcherItem);
+
+                                }
+
+
+
+                            }
+
+
+                        }
+
+
+                    }
+
+
+
+                }
+
+            }
+
+
+
+
             return list;
 
         }
@@ -300,5 +381,6 @@ namespace Handheld_Control_Panel.Classes
         public string launchCommand { get; set; }
         public string path { get; set; }
         public string exe { get; set; }
+        public string imageLocation { get; set; } = "";
     }
 }

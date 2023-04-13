@@ -75,7 +75,7 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
-        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe)
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe, string imageLocation)
         {
 
          
@@ -108,7 +108,11 @@ namespace Handheld_Control_Panel.Classes
 
                 newNode.SelectSingleNode("Exe").InnerText = exe;
             }
-           
+            if (imageLocation != null)
+            {
+                newNode.SelectSingleNode("LaunchOptions/ImageLocation").InnerText = imageLocation;
+            }
+
             xmlNodeProfiles.AppendChild(newNode);
 
 
@@ -167,7 +171,7 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe, item.imageLocation);
                     }
                 }
 
@@ -416,16 +420,25 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (value != "")
                 {
-                    if (File.Exists(value))
+                    if (File.Exists(value.Replace("%20", " ")))
                     {
-                        imageApp = new BitmapImage(new Uri(value));
+                        if (appType == "Microsoft Store")
+                        {
+                            imageIcon = new BitmapImage(new Uri(value.Replace("%20", " ")));
+                        }
+                        else
+                        {
+                            imageApp = new BitmapImage(new Uri(value.Replace("%20", " ")));
+                        }
+                        
                     }
+                   
 
 
                 }
                 else
                 {
-                    if (Path != "")
+                    if (Path != "" && appType != "Steam")
                     {
 
                         if (File.Exists(Path))
@@ -511,6 +524,12 @@ namespace Handheld_Control_Panel.Classes
                         iconMaterial = PackIconMaterialKind.ApplicationCogOutline;
                         iconMaterialVisibility = Visibility.Visible;
                         break;
+                    case "Microsoft Store":
+                        icon = PackIconSimpleIconsKind.Microsoft;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
+
                     default:
                         icon = PackIconSimpleIconsKind.None;
                         iconMaterial = PackIconMaterialKind.None;
@@ -660,13 +679,15 @@ namespace Handheld_Control_Panel.Classes
                     Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
 
                     XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
+                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
                     RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
-                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                   
                     ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
                
-                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
+                   
                    
                     if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
                     {
