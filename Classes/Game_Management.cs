@@ -12,6 +12,7 @@ using GameLib.Core;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using System.Windows;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -143,21 +144,30 @@ namespace Handheld_Control_Panel.Classes
                                 launcherItem.gameID = game.Id;
                                 launcherItem.launchCommand = game.LaunchString;
 
-                                string[] array = launcherItem.gameName.Split(' ');
-                                foreach (string exe in game.Executables)
+                                if (game.Executables.Count() == 1)
                                 {
-                                    string exeName = Path.GetFileNameWithoutExtension(exe);
-                                    foreach (string arr in array)
-                                    {
-                                        if (exeName.Contains(arr))
-                                        {
-                                            launcherItem.path = exe;
-                                            launcherItem.exe = exeName;
-                                            break;
-                                        }
-                                    }
-                                    if (launcherItem.path != "") { break; }
+                                    launcherItem.path = game.Executables.First();
+                                    launcherItem.exe = Path.GetFileNameWithoutExtension(game.Executables.First());
                                 }
+                                else
+                                {
+                                    string[] array = launcherItem.gameName.Split(' ');
+                                    foreach (string exe in game.Executables)
+                                    {
+                                        string exeName = Path.GetFileNameWithoutExtension(exe);
+                                        foreach (string arr in array)
+                                        {
+                                            if (exeName.Contains(arr))
+                                            {
+                                                launcherItem.path = exe;
+                                                launcherItem.exe = exeName;
+                                                break;
+                                            }
+                                        }
+                                        if (launcherItem.path != "") { break; }
+                                    }
+                                }
+                                
                                 launcherItem.appType = launcher.Name;
                                 list.Add(launcherItem);
                             }
