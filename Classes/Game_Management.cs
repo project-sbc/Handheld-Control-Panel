@@ -143,13 +143,20 @@ namespace Handheld_Control_Panel.Classes
                                 launcherItem.gameID = game.Id;
                                 launcherItem.launchCommand = game.LaunchString;
 
+                                string[] array = launcherItem.gameName.Split(' ');
                                 foreach (string exe in game.Executables)
                                 {
-                                    if (!exe.Contains("Unity") && !exe.Contains("Crash"))
+                                    string exeName = Path.GetFileNameWithoutExtension(exe);
+                                    foreach (string arr in array)
                                     {
-                                        launcherItem.path = exe;
+                                        if (exeName.Contains(arr))
+                                        {
+                                            launcherItem.path = exe;
+                                            launcherItem.exe = exeName;
+                                            break;
+                                        }
                                     }
-
+                                    if (launcherItem.path != "") { break; }
                                 }
                                 launcherItem.appType = launcher.Name;
                                 list.Add(launcherItem);
@@ -168,11 +175,12 @@ namespace Handheld_Control_Panel.Classes
                             {
                                 case "Call of Duty Black Ops Cold War":
                                     launcherItem.path = game.WorkingDir + "\\BlackOpsColdWar.exe";
-                                    launcherItem.exe = "BlackOpsColdWar.exe";
+                                    launcherItem.exe = "BlackOpsColdWar";
                                     break;
 
                                 default:
                                     launcherItem.path = game.Executables.First();
+                                    launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
                                     break;
                             }
                       
@@ -191,6 +199,7 @@ namespace Handheld_Control_Panel.Classes
                             launcherItem.gameID = game.Id;
                             launcherItem.launchCommand = game.LaunchString;
                             launcherItem.path = game.Executable.Replace("/","\\");
+                            launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
   
@@ -205,6 +214,7 @@ namespace Handheld_Control_Panel.Classes
                             launcherItem.gameID = game.Id;
                             launcherItem.launchCommand = game.LaunchString;
                             launcherItem.path = game.Executable;
+                            launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
                         }
