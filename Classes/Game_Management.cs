@@ -69,6 +69,10 @@ namespace Handheld_Control_Panel.Classes
                             Run_CLI.Run_CLI.RunCommand(" /command=runGame /gameId=" + gameID, false, Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "GOG Galaxy", "GalaxyClient.exe"));
 
                             break;
+                        case "Microsoft Store":
+                            PackageManager pm = new PackageManager();
+                            pm.FindPackage(gameID).GetAppListEntries().First().LaunchAsync();
+                            break;
                         default: break;
                     }
                 }
@@ -117,7 +121,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void GetMicrosoftStoreApps()
         {
-
+            //this is obsolete, i can keep this for reference
 
             //microsoft store apps below
             PackageManager packageManager = new PackageManager();
@@ -144,8 +148,12 @@ namespace Handheld_Control_Panel.Classes
                             {
                                 if (strings.Contains(package.DisplayName))
                                 {
-                                    //Debug.WriteLine(package.Logo);
-                                    //Debug.WriteLine(package.GetAppListEntries().First().DisplayInfo.icon)
+                                    //get full name   like unique ID
+                                    Debug.WriteLine(package.Id.FullName);
+
+                                    //launch game using this
+                                    packageManager.FindPackage(package.Id.FullName).GetAppListEntries().FirstOrDefault().LaunchAsync();
+                                   
                                 }
 
 

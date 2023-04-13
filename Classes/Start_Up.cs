@@ -32,7 +32,7 @@ namespace Handheld_Control_Panel.Classes
             //librehardwaremonitor.Monitor();
 
             //test code here
-            Game_Management.GetMicrosoftStoreApps();
+           
             //test code
 
             //check for updates first
