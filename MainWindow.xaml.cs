@@ -102,7 +102,7 @@ namespace Handheld_Control_Panel
             //hide if autostart
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-                this.Hide();
+               // this.Hide();
             }
            
         }

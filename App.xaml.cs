@@ -71,14 +71,17 @@ namespace Handheld_Control_Panel
                     //and close the splash screen
 
                     this.MainWindow = mainWindow;
-                    mainWindow.Show();
+                    
                     if (!quietStart)
                     {
                         //close splashscreen if open
                         splashScreen.Close();
-
+                        mainWindow.Show();
                     }
-                  
+                    else
+                    {
+                        mainWindow.Hide();
+                    }
 
                 });
             });
