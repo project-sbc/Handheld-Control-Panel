@@ -72,6 +72,7 @@ namespace Handheld_Control_Panel.Classes
                         case "Microsoft Store":
                             PackageManager pm = new PackageManager();
                             pm.FindPackage(gameID).GetAppListEntries().First().LaunchAsync();
+                            pm = null;
                             break;
                         default: break;
                     }
