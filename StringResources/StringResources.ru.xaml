@@ -203,6 +203,9 @@
     <system:String x:Key="Filter_Method_GOGGalaxy">GOG Galaxy</system:String>
     <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
     <system:String x:Key="Filter_Method_Applications">Приложения</system:String>
+    <!-- 14apr2023 -->
+    <system:String x:Key="Filter_Method_MicrosoftStore">Microsoft Store</system:String>
+
 
 
 </ResourceDictionary>
