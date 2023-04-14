@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.AppLauncherPage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.AppLauncherLargePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -144,18 +144,18 @@
                             <Grid HorizontalAlignment="Center" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0" SharedSizeGroup="Column1"/>
-                                    <ColumnDefinition Width="135" SharedSizeGroup="Column1"/>
+                                    <ColumnDefinition Width="205" SharedSizeGroup="Column1"/>
 
 
                                 </Grid.ColumnDefinitions>
                                 <!-- Assumes MVVM and you wish to bind to properties and commands -->
 
-                                <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="1">
+                                <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="111"   Grid.Column="1">
                                     
                                     <iconPacks:PackIconFontAwesome Style="{StaticResource fontAwesomeSpinner}" Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <Image  Height="65"    Source="{Binding imageApp}" Panel.ZIndex="2" />
+                                    <Image  Height="111"    Source="{Binding imageApp}" Panel.ZIndex="2" />
                                     <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                                        <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding imageIcon}" />
+                                        <Image   Height="50" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding imageIcon}" />
                                         <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding ProfileName}"/>
 
                                     </DockPanel>

@@ -12,6 +12,15 @@ using GameLib.Core;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using System.Windows;
 using System.Threading;
+using System.Xml.Linq;
+using Windows.Management.Deployment;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
+using System.Drawing.Drawing2D;
+using Windows.System;
+using System.Windows.Documents;
+using static Vanara.Interop.KnownShellItemPropertyKeys;
+using System.Reflection;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -56,9 +65,16 @@ namespace Handheld_Control_Panel.Classes
                                 Run_CLI.Run_CLI.RunCommand(" --exec=\"launch " + gameID.ToUpper() + "\"", false, battlenetfile, 3000, true);
 
                             }
-                           
-                           
-                           
+
+                            break;
+                        case "GOG Galaxy":
+                            Run_CLI.Run_CLI.RunCommand(" /command=runGame /gameId=" + gameID, false, Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "GOG Galaxy", "GalaxyClient.exe"));
+
+                            break;
+                        case "Microsoft Store":
+                            PackageManager pm = new PackageManager();
+                            pm.FindPackage(gameID).GetAppListEntries().First().LaunchAsync();
+                            pm = null;
                             break;
                         default: break;
                     }
@@ -106,6 +122,60 @@ namespace Handheld_Control_Panel.Classes
             catch { /* ignore */ }
         }
 
+        public static void GetMicrosoftStoreApps()
+        {
+            //this is obsolete, i can keep this for reference
+
+            //microsoft store apps below
+            PackageManager packageManager = new PackageManager();
+            IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
+
+            string[] filesInDirectory;
+            string xboxGameDirectory = "C:\\XboxGames";
+            if (Directory.Exists(xboxGameDirectory))
+            {
+                filesInDirectory = Directory.GetDirectories(xboxGameDirectory);
+
+                if (filesInDirectory.Length > 0)
+                {
+                    string[] strings = filesInDirectory.Select(x => Path.GetFileName(x)).ToArray();
+
+                    if (strings.Length > 0)
+                    {
+                        foreach (Package package in packages)
+                        {
+                            string install = package.InstalledLocation.Path;
+                            string sig = package.SignatureKind.ToString();
+
+                            if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                            {
+                                if (strings.Contains(package.DisplayName))
+                                {
+                                    //get full name   like unique ID
+                                    Debug.WriteLine(package.Id.FullName);
+
+                                    //launch game using this
+                                    packageManager.FindPackage(package.Id.FullName).GetAppListEntries().FirstOrDefault().LaunchAsync();
+                                   
+                                }
+
+
+
+                            }
+
+
+                        }
+
+
+                    }
+
+
+
+
+
+                }
+            }
+        }
 
         public static bool BattleNetRunning()
         {
@@ -125,10 +195,11 @@ namespace Handheld_Control_Panel.Classes
         {
             List<GameLauncherItem> list = new List<GameLauncherItem>();
              //gamelauncher
-            LauncherManager gameLauncher = new LauncherManager(new LauncherOptions() { QueryOnlineData = false });
+            LauncherManager gameLauncher = new LauncherManager(new GameLib.Core.LauncherOptions() { QueryOnlineData = false });
             
             foreach (var launcher in gameLauncher.GetLaunchers())
             {
+               
                 switch(launcher.Name)
                 {
                     case "Steam":
@@ -141,14 +212,47 @@ namespace Handheld_Control_Panel.Classes
                                 launcherItem.gameID = game.Id;
                                 launcherItem.launchCommand = game.LaunchString;
 
-                                foreach (string exe in game.Executables)
+                                if (game.Executables.Count() == 1)
                                 {
-                                    if (!exe.Contains("Unity") && !exe.Contains("Crash"))
-                                    {
-                                        launcherItem.path = exe;
-                                    }
-
+                                    launcherItem.path = game.Executables.First();
+                                    launcherItem.exe = Path.GetFileNameWithoutExtension(game.Executables.First());
                                 }
+                                else
+                                {
+                                 
+                                    string[] array = launcherItem.gameName.Split(' ');
+                                    foreach (string exe in game.Executables)
+                                    {
+                 
+                                        string exeName = Path.GetFileNameWithoutExtension(exe);
+                                        if (game.Name.Contains("Call of duty", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            if (exeName.Contains("cod", StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                launcherItem.path = exe;
+                                                launcherItem.exe = exeName;
+                                                break;
+                                            }
+                                        }
+                                        foreach (string arr in array)
+                                        {
+                                            if (exeName.Contains(arr, StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                launcherItem.path = exe;
+                                                launcherItem.exe = exeName;
+                                                break;
+                                            }
+                                        }
+                                        if (launcherItem.path != null) { break; }
+                                    }
+                                }
+                                if (launcherItem.path == "" || launcherItem.exe == "")
+                                {
+                                    launcherItem.path = game.Executables.Last();
+                                    launcherItem.exe = Path.GetFileNameWithoutExtension(game.Executables.Last());
+                                }
+
+
                                 launcherItem.appType = launcher.Name;
                                 list.Add(launcherItem);
                             }
@@ -166,11 +270,12 @@ namespace Handheld_Control_Panel.Classes
                             {
                                 case "Call of Duty Black Ops Cold War":
                                     launcherItem.path = game.WorkingDir + "\\BlackOpsColdWar.exe";
-                                    launcherItem.exe = "BlackOpsColdWar.exe";
+                                    launcherItem.exe = "BlackOpsColdWar";
                                     break;
 
                                 default:
                                     launcherItem.path = game.Executables.First();
+                                    launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
                                     break;
                             }
                       
@@ -189,6 +294,7 @@ namespace Handheld_Control_Panel.Classes
                             launcherItem.gameID = game.Id;
                             launcherItem.launchCommand = game.LaunchString;
                             launcherItem.path = game.Executable.Replace("/","\\");
+                            launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
   
@@ -202,7 +308,8 @@ namespace Handheld_Control_Panel.Classes
                             launcherItem.gameName = game.Name;
                             launcherItem.gameID = game.Id;
                             launcherItem.launchCommand = game.LaunchString;
-                            launcherItem.path = game.WorkingDir + "\\" + game.Executable;
+                            launcherItem.path = game.Executable;
+                            launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
                             launcherItem.appType = launcher.Name;
                             list.Add(launcherItem);
                         }
@@ -211,6 +318,66 @@ namespace Handheld_Control_Panel.Classes
                 }
 
             }
+
+            //microsoft store apps below
+
+            PackageManager packageManager = new PackageManager();
+            IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
+
+            string[] filesInDirectory;
+            string xboxGameDirectory = "C:\\XboxGames";
+            if (Directory.Exists(xboxGameDirectory))
+            {
+                filesInDirectory = Directory.GetDirectories(xboxGameDirectory);
+
+                if (filesInDirectory.Length > 0)
+                {
+                    string[] strings = filesInDirectory.Select(x => Path.GetFileName(x)).ToArray();
+
+                    if (strings.Length > 0)
+                    {
+                        foreach (Package package in packages)
+                        {
+                            string install = package.InstalledLocation.Path;
+                            string sig = package.SignatureKind.ToString();
+
+                            if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                            {
+                                if (strings.Contains(package.DisplayName))
+                                {
+                                    GameLauncherItem launcherItem = new GameLauncherItem();
+                                    launcherItem.gameName = package.DisplayName;
+                                    launcherItem.gameID = package.Id.FullName;
+                                    launcherItem.launchCommand = package.Id.FullName;
+
+
+                                    //launcherItem.path = game.Executable;
+                                    //launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
+                                    launcherItem.appType = "Microsoft Store";
+                                    launcherItem.imageLocation = package.Logo.AbsolutePath;
+                                    list.Add(launcherItem);
+
+                                }
+
+
+
+                            }
+
+
+                        }
+
+
+                    }
+
+
+
+                }
+
+            }
+
+
+
+
             return list;
 
         }
@@ -227,5 +394,6 @@ namespace Handheld_Control_Panel.Classes
         public string launchCommand { get; set; }
         public string path { get; set; }
         public string exe { get; set; }
+        public string imageLocation { get; set; } = "";
     }
 }

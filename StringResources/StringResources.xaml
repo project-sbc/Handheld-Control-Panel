@@ -200,7 +200,9 @@
     <system:String x:Key="Filter_Method_Favorite">Favorite</system:String>
     <system:String x:Key="Filter_Method_Steam">Steam</system:String>
     <system:String x:Key="Filter_Method_EpicGames">Epic Games</system:String>
+    <system:String x:Key="Filter_Method_GOGGalaxy">GOG Galaxy</system:String>
     <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
     <system:String x:Key="Filter_Method_Applications">Applications</system:String>
+
 
 </ResourceDictionary>

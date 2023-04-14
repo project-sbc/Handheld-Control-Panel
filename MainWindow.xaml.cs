@@ -33,6 +33,8 @@ using Handheld_Control_Panel.Classes.Fan_Management;
 using Notification.Wpf;
 using Notification.Wpf.Classes;
 using System.Threading;
+using System.Printing;
+using System.Windows.Forms;
 
 namespace Handheld_Control_Panel
 {
@@ -82,7 +84,7 @@ namespace Handheld_Control_Panel
             //set theme
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
-            setWindowSizePosition();
+          
 
             updateStatusBar();
 
@@ -100,12 +102,9 @@ namespace Handheld_Control_Panel
             //hide if autostart
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-                this.Visibility = Visibility.Hidden;
+               // this.Hide();
             }
-            else
-            {
-                this.Visibility = Visibility.Visible;
-            }
+           
         }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
@@ -385,32 +384,66 @@ namespace Handheld_Control_Panel
         }
         public void navigateFrame(string pageName)
         {
-            frame.Navigate(new Uri("Pages\\" + pageName + ".xaml" , UriKind.RelativeOrAbsolute));
-            page = pageName;
+
+            //logic is if launching from game launcher or 
+            if (pageName == "ProfilesPage" && navigation.SelectedItem !=null)
+            {
+                ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                if (lbi.Tag.ToString() == "AppLauncher")
+                {
+                    frame.Navigate(new Uri("Pages\\AppLauncherPage.xaml", UriKind.RelativeOrAbsolute));
+                    page = "AppLauncherPage";
+                }
+                else
+                {
+                    frame.Navigate(new Uri("Pages\\" + pageName + ".xaml", UriKind.RelativeOrAbsolute));
+                    page = pageName;
+                }
+            }
+            else
+            {
+                frame.Navigate(new Uri("Pages\\" + pageName + ".xaml", UriKind.RelativeOrAbsolute));
+                page = pageName;
+            }
+  
+        }
+
+        public void reinitializeProfiles()
+        {
+            this.BeginInvoke(new Action(() =>
+            {
+                Global_Variables.profiles = new Profiles_Management();
+            }));
         }
 
         public void ShowNotificationInWindow(string title, NotificationType notificationType)
         {
-            var notificationManager = new NotificationManager();
-
-            var content = new NotificationContent
+            this.BeginInvoke(new Action(() =>
             {
-                Title = title,
-  
-                Type = notificationType,
-                
-                TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
-                RowsCount = 3, //Will show 3 rows and trim after
+                var notificationManager = new NotificationManager();
 
-                CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
+                var content = new NotificationContent
+                {
+                    Title = title,
 
-                Background = new SolidColorBrush(Colors.DarkGray),
-                Foreground = new SolidColorBrush(Colors.White)
+                    Type = notificationType,
 
-            };
+                    TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
+                    RowsCount = 3, //Will show 3 rows and trim after
 
-    
-            notificationManager.Show(content, "WindowArea");
+                    CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
+
+                    Background = new SolidColorBrush(Colors.DarkGray),
+                    Foreground = new SolidColorBrush(Colors.White)
+
+                };
+
+
+                notificationManager.Show(content, "WindowArea");
+
+
+            }));
+           
 
            
         }
@@ -425,65 +458,71 @@ namespace Handheld_Control_Panel
         #endregion
 
         #region windows events
-        public void setWindowSizePosition()
+
+        public void setWindowSizePosition(bool forceRun = false)
         {
-
-            //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
-            //icon needs to be rotated for which side it is on
-            //PackIconFontAwesome packIconFontAwesome = (PackIconFontAwesome)Close.Content;
-
-            //var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-            //this.Left = desktopWorkingArea.Right - this.Width;
-            
-            double scaling;
-            if (Double.TryParse(Global_Variables.Scaling, out scaling))
+            if (this.IsLoaded || forceRun)
             {
-                scaling = scaling / 100;
-                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.03, 0);
+                getDPIScaling();
+                //this relies on getting dpi to scale correctly to the display. This NEEDS to be done after loaded or during loading right after getting DPI. Otherwise
+                //scaling might not be correct. Added if check for loaded or forceRun
 
-                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight/scaling * 0.91, 0);
-                if (Properties.Settings.Default.dockWindowRight)
-                {
-                    //if dockWindowRight is true, move to right side of screen
-                    this.Left = Math.Round((System.Windows.SystemParameters.PrimaryScreenWidth/scaling) - this.Width,0);
-                    //packIconFontAwesome.RotationAngle = 0;
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
-                }
-                if (!Properties.Settings.Default.dockWindowRight)
-                {
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
-                    this.Left = 0;
-                    //packIconFontAwesome.RotationAngle = 180;
-                }
-            }
-            else
-            {
-                this.Top = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.03, 0);
+                //this is used to set the side which the control panel sits on and can be used to fix position after resolution changes
+                //icon needs to be rotated for which side it is on
+                WindowInteropHelper _windowInteropHelper = new WindowInteropHelper(this);
+                Screen screen = Screen.FromHandle(_windowInteropHelper.Handle);
 
-                this.Height = Math.Round(System.Windows.SystemParameters.PrimaryScreenHeight * 0.91, 0);
-                if (Properties.Settings.Default.dockWindowRight)
+                double scaling;
+                if (Double.TryParse(Global_Variables.Scaling, out scaling))
                 {
-                    //if dockWindowRight is true, move to right side of screen
-                    this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
-                    //packIconFontAwesome.RotationAngle = 0;
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                    scaling = scaling / 100;
+                    this.Top = Math.Round(screen.Bounds.Height / scaling * 0.03, 0);
+
+                    this.Height = Math.Round(screen.Bounds.Height / scaling * 0.91, 0);
+                    if (Properties.Settings.Default.dockWindowRight)
+                    {
+                        //if dockWindowRight is true, move to right side of screen
+                        this.Left = Math.Round((screen.Bounds.Width / scaling) - this.Width, 0);
+                        //packIconFontAwesome.RotationAngle = 0;
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                    }
+                    if (!Properties.Settings.Default.dockWindowRight)
+                    {
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                        this.Left = 0;
+                        //packIconFontAwesome.RotationAngle = 180;
+                    }
                 }
-                if (!Properties.Settings.Default.dockWindowRight)
+                else
                 {
-                    borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
-                    borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
-                    this.Left = 0;
-                    //packIconFontAwesome.RotationAngle = 180;
+                    this.Top = Math.Round(screen.Bounds.Height * 0.03, 0);
+
+                    this.Height = Math.Round(screen.Bounds.Height * 0.91, 0);
+                    if (Properties.Settings.Default.dockWindowRight)
+                    {
+                        //if dockWindowRight is true, move to right side of screen
+                        this.Left = screen.Bounds.Width - this.Width;
+                        //packIconFontAwesome.RotationAngle = 0;
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
+                    }
+                    if (!Properties.Settings.Default.dockWindowRight)
+                    {
+                        borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
+                        borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 11, 0);
+                        this.Left = 0;
+                        //packIconFontAwesome.RotationAngle = 180;
+                    }
                 }
+
             }
-           
+
 
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -511,7 +550,7 @@ namespace Handheld_Control_Panel
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
         {
-            Task.Delay(1500);
+            
             setWindowSizePosition();
         }
         #endregion
@@ -611,9 +650,10 @@ namespace Handheld_Control_Panel
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
           
-            getDPIScaling();
+           
+            //added a DPI call to the setWindowSizePosition routine, set parameter to true to force run it
+            setWindowSizePosition(true);
 
-         
         }
         private void getDPIScaling()
         {
@@ -627,31 +667,7 @@ namespace Handheld_Control_Panel
             toggleWindow();
         }
 
-        private void CMItem_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem mi = (MenuItem)sender;
-            if(mi != null)
-            {
-                switch (mi.Tag.ToString()) 
-                {
-                    case "Hide":
-                        toggleWindow();
-                        break;
-                    case "Close":
-                        this.Close();
-                        break;
-                    case "Shutdown":
-                        var psi = new ProcessStartInfo("shutdown", "/s /t 0");
-                        psi.CreateNoWindow = true;
-                        psi.UseShellExecute = false;
-                        Process.Start(psi);
-                        break;
-                    default:break;
-                }
-
-            }
-        }
-
+        
         private void MetroWindow_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.Visibility == Visibility.Hidden)

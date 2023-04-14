@@ -23,12 +23,14 @@ namespace Handheld_Control_Panel
     {
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("An unhandled exception just occurred: " + e.Exception.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
-            Log_Writer.writeLog(e.Exception.Message);
+            string message = "An unhandled exception just occurred: " + e.Exception.Message + ". Stack Trace: " + e.Exception.StackTrace + ". Source: " + e.Exception.Source + ". Inner Exception: " + e.Exception.InnerException;
+            MessageBox.Show(message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
+            Log_Writer.writeLog(message);
             e.Handled = true;
+           
         }
   
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
@@ -52,11 +54,14 @@ namespace Handheld_Control_Panel
             }
 
             //you can do additional work here, call start routine
+
             Classes.Start_Up.Start_Routine();
+
+
             MainWindow mainWindow = new MainWindow();
             Task.Factory.StartNew(() =>
             {
-
+                
                 //since we're not on the UI thread
                 //once we're done we need to use the Dispatcher
                 //to create and show the main window
@@ -66,11 +71,16 @@ namespace Handheld_Control_Panel
                     //and close the splash screen
 
                     this.MainWindow = mainWindow;
-                    mainWindow.Show();
+                    
                     if (!quietStart)
                     {
                         //close splashscreen if open
                         splashScreen.Close();
+                        mainWindow.Show();
+                    }
+                    else
+                    {
+                        mainWindow.Hide();
                     }
 
                 });

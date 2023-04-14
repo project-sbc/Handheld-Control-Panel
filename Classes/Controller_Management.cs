@@ -20,6 +20,7 @@ using Nefarius.Utilities.DeviceManagement.Extensions;
 
 using System.Timers;
 using System.Windows.Controls;
+using enabledevice;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -84,23 +85,45 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             }
         }
 
+        public static bool checkBuiltInControllerStatus()
+        {
+
+            bool controllerEnabled = false;
+            try
+            {
+                var instance = 0;
+
+                while (Devcon.FindByInterfaceGuid(DeviceInterfaceIds.UsbDevice, out var path,
+                           out var instanceId, instance++))
+                {
+
+                    var usbDevice = PnPDevice
+                        .GetDeviceByInterfaceId(path)
+                        .ToUsbPnPDevice();
+
+                    //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
+                    if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
+                    {
+
+                        controllerEnabled = true;
+                    }
+                }
+                return controllerEnabled;
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "CM02");
+                return false;
+            }
+        }
        
         public static bool toggleEnableDisableController()
         {
             //error number CM01
             try
             {
-                bool deviceEnable;
-
-                if (controller != null)
-                {
-                    //apply ! so that when the controller is connected the bool tells to disable and vice versa
-                    deviceEnable = !controller.IsConnected;
-                }
-                else
-                {
-                    deviceEnable = true;
-                }
+                //make this negative because we want to do the opposite of its current state (so if enabled lets disable)
+                bool deviceEnable = !checkBuiltInControllerStatus();
                 if (Properties.Settings.Default.GUID != "" && Properties.Settings.Default.instanceID != "")
                 {
                     var instance = 0;
@@ -157,7 +180,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
                     if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
                     {
-
+                        
                         //Apply power port cycle to finish disable
                         usbDevice.CyclePort();
                     }
@@ -189,6 +212,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             try
             {
                 if (controller == null)
+
+
                 {
                     getController();
                     if (controller.IsConnected == false)

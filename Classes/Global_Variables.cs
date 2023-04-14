@@ -237,10 +237,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //Power
         public static string powerStatus = "";
         public static int batteryLevel = -1;
-        //network
-        public static string networkStatus = "";
-        //time
-        public static string time = "";
+
         //controller status
         public static bool controllerConnected = false;
 

@@ -13,10 +13,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml;
 using YamlDotNet.Core.Tokens;
 using Path = System.IO.Path;
@@ -75,7 +77,7 @@ namespace Handheld_Control_Panel.Classes
             xmlDocument = null;
 
         }
-        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe)
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe, string imageLocation)
         {
 
          
@@ -108,7 +110,11 @@ namespace Handheld_Control_Panel.Classes
 
                 newNode.SelectSingleNode("Exe").InnerText = exe;
             }
-           
+            if (imageLocation != null)
+            {
+                newNode.SelectSingleNode("LaunchOptions/ImageLocation").InnerText = imageLocation;
+            }
+
             xmlNodeProfiles.AppendChild(newNode);
 
 
@@ -120,39 +126,11 @@ namespace Handheld_Control_Panel.Classes
         }
                 
 
-        public void syncSteamGameToProfile()
+        public async Task syncGamesToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
-
-            Dictionary<string, string> result = Steam_Management.syncSteam_Library();
-
-            if (result.Count > 0)
-            {
-                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-                foreach (KeyValuePair<string, string> pair in result)
-                {
-                    XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + pair.Key + "']");
-                    if (xmlSelectedNode == null)
-                    {
-                        Global_Variables.Global_Variables.profiles.createProfileForSteamGame(pair.Value, pair.Key);
-                    }
-                }
-
-                Global_Variables.Global_Variables.profiles = new Profiles_Management();
-                xmlDocument = null;
-
-            }
-
-
-
-        }
-
-        public void syncGamesToProfile()
-        {
-            //gets list of steam games from library.vdf file, then makes profiles for those without one
+            Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncing"].ToString(), Notification.Wpf.NotificationType.Information);
+            
 
             List<GameLauncherItem> result = Game_Management.syncGame_Library();
 
@@ -167,24 +145,23 @@ namespace Handheld_Control_Panel.Classes
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe, item.imageLocation);
                     }
                 }
-
-                Global_Variables.Global_Variables.profiles = new Profiles_Management();
+                
+                
                 xmlDocument = null;
 
             }
-            Application.Current.BeginInvoke(() => {
-                Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
-            });
-         
+            Global_Variables.Global_Variables.mainWindow.reinitializeProfiles();
+
+            Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
 
         }
 
-       
+
         private int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
@@ -416,16 +393,25 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (value != "")
                 {
-                    if (File.Exists(value))
+                    if (File.Exists(value.Replace("%20", " ")))
                     {
-                        imageApp = new BitmapImage(new Uri(value));
+                        if (appType == "Microsoft Store")
+                        {
+                            imageIcon = new BitmapImage(new Uri(value.Replace("%20", " ")));
+                        }
+                        else
+                        {
+                            imageApp = new BitmapImage(new Uri(value.Replace("%20", " ")));
+                        }
+                        
                     }
+                   
 
 
                 }
                 else
                 {
-                    if (Path != "")
+                    if (Path != "" && appType != "Steam")
                     {
 
                         if (File.Exists(Path))
@@ -501,11 +487,22 @@ namespace Handheld_Control_Panel.Classes
                         iconMaterial = PackIconMaterialKind.None;
                         iconVisibility = Visibility.Visible;
                         break;
+                    case "GOG Galaxy":
+                        icon = PackIconSimpleIconsKind.GoGdotcom;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
                     case "Exe":
                         icon = PackIconSimpleIconsKind.None;
                         iconMaterial = PackIconMaterialKind.ApplicationCogOutline;
                         iconMaterialVisibility = Visibility.Visible;
                         break;
+                    case "Microsoft Store":
+                        icon = PackIconSimpleIconsKind.Microsoft;
+                        iconMaterial = PackIconMaterialKind.None;
+                        iconVisibility = Visibility.Visible;
+                        break;
+
                     default:
                         icon = PackIconSimpleIconsKind.None;
                         iconMaterial = PackIconMaterialKind.None;
@@ -655,13 +652,15 @@ namespace Handheld_Control_Panel.Classes
                     Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
 
                     XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
+                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
                     Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
                     RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
                     Path = LaunchOptions.SelectSingleNode("Path").InnerText;
-                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
+                   
                     ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
                
-                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
+                   
                    
                     if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
                     {

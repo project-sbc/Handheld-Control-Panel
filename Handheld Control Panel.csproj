@@ -180,6 +180,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\AppLauncherLargePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -454,9 +457,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UserControls\SettingsUserControls\EpicGameSync_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\GameSync_Button.xaml.cs">

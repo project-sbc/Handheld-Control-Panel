@@ -28,6 +28,9 @@ namespace Handheld_Control_Panel.Classes
     {
         public static List<string> MouseModeList = new List<string>()
  {
+             {"LeftMouseClick" },
+           {"RightMouseClick" },
+            {"HCP OSK" },
            {"A"},
            {"B"},
            {"C"},
@@ -88,10 +91,8 @@ namespace Handheld_Control_Panel.Classes
            {"F9" },
            {"F10" },
            {"F11" },
-           {"F12" },
-           {"LeftMouseClick" },
-           {"RightMouseClick" },
-            {"HCP OSK" }
+           {"F12" }
+          
 
 
  };
@@ -219,7 +220,7 @@ namespace Handheld_Control_Panel.Classes
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(10);
+            timerController.Interval = TimeSpan.FromMilliseconds(30);
             timerController.Tick += controller_Tick;
             timerController.Start();
             Global_Variables.Global_Variables.MouseModeEnabled = true;
@@ -291,8 +292,8 @@ namespace Handheld_Control_Panel.Classes
                                 mouseY = normalizeJoystickInput(Global_Variables.Global_Variables.mousemodes.activeMouseMode.MouseSensitivity, -currentGamePad.LeftThumbY);
                                 break;
                             case "Scroll":
-                                mouseScrollX = normalizeJoystickInput(sensitivityScroll, currentGamePad.LeftThumbX);
-                                mouseScrollY = normalizeJoystickInput(sensitivityScroll, currentGamePad.LeftThumbY);
+                                mouseScrollX = normalizeJoystickInputScroll(sensitivityScroll, currentGamePad.LeftThumbX);
+                                mouseScrollY = normalizeJoystickInputScroll(sensitivityScroll, currentGamePad.LeftThumbY);
                                 break;
                             case "WASD":
                                 if (currentGamePad.LeftThumbX > joystickButtonPressSensivitiy)
@@ -421,8 +422,8 @@ namespace Handheld_Control_Panel.Classes
                                 mouseY = normalizeJoystickInput(Global_Variables.Global_Variables.mousemodes.activeMouseMode.MouseSensitivity, -currentGamePad.RightThumbY);
                                 break;
                             case "Scroll":
-                                mouseScrollX = normalizeJoystickInput(sensitivityScroll, -currentGamePad.RightThumbX);
-                                mouseScrollY = normalizeJoystickInput(sensitivityScroll, currentGamePad.RightThumbY);
+                                mouseScrollX = normalizeJoystickInputScroll(sensitivityScroll, -currentGamePad.RightThumbX);
+                                mouseScrollY = normalizeJoystickInputScroll(sensitivityScroll, currentGamePad.RightThumbY);
                                 break;
                             case "WASD":
                                 if (currentGamePad.RightThumbX > joystickButtonPressSensivitiy)
@@ -567,25 +568,16 @@ namespace Handheld_Control_Panel.Classes
                                             VirtualKeyCode vkc = keyLookUp[entry.Value];
                                             if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
                                             {
-                                                inputSimulator.Keyboard.KeyPress(vkc);
-                                            }
-                                            if (1 == 0)
-                                            {
-                                                if (currentGamePad.Buttons.HasFlag(flag))
+                                                try
                                                 {
-                                                    if (!inputSimulator.InputDeviceState.IsKeyDown(vkc))
-                                                    {
-                                                        inputSimulator.Keyboard.KeyDown(vkc);
-                                                    }
+                                                    inputSimulator.Keyboard.KeyPress(vkc);
                                                 }
-                                                else
+                                                catch
                                                 {
-                                                    if (inputSimulator.InputDeviceState.IsKeyDown(vkc))
-                                                    {
-                                                        inputSimulator.Keyboard.KeyUp(vkc);
-                                                    }
+
                                                 }
                                             }
+                                            
                                         }
                                       
 
@@ -593,29 +585,36 @@ namespace Handheld_Control_Panel.Classes
                                     }
                                     else
                                     {
-                                        switch (entry.Value)
+                                        try
                                         {
-                                            case "LeftMouseClick":
-                                                if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.LeftButtonDown();
-                                                }
-                                                if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.LeftButtonUp();
-                                                }
-                                                break;
-                                            case "RightMouseClick":
-                                                if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.RightButtonDown();
-                                                }
-                                                if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
-                                                {
-                                                    inputSimulator.Mouse.RightButtonUp();
-                                                }
-                                                break;
-                                            default: break;
+                                            switch (entry.Value)
+                                            {
+                                                case "LeftMouseClick":
+                                                    if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.LeftButtonDown();
+                                                    }
+                                                    if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.LeftButtonUp();
+                                                    }
+                                                    break;
+                                                case "RightMouseClick":
+                                                    if (currentGamePad.Buttons.HasFlag(flag) && !previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.RightButtonDown();
+                                                    }
+                                                    if (!currentGamePad.Buttons.HasFlag(flag) && previousGamePad.Buttons.HasFlag(flag))
+                                                    {
+                                                        inputSimulator.Mouse.RightButtonUp();
+                                                    }
+                                                    break;
+                                                default: break;
+
+                                            }
+                                        }
+                                        catch
+                                        {
 
                                         }
                                     }
@@ -626,10 +625,16 @@ namespace Handheld_Control_Panel.Classes
                             }
 
                         }
+                        try
+                        {
+                            inputSimulator.Mouse.MoveMouseBy((int)mouseX, (int)mouseY);
+                            inputSimulator.Mouse.HorizontalScroll(-(int)mouseScrollX);
+                            inputSimulator.Mouse.VerticalScroll((int)mouseScrollY);
+                        }
+                        catch
+                        {
 
-                        inputSimulator.Mouse.MoveMouseBy((int)mouseX, (int)mouseY);
-                        inputSimulator.Mouse.HorizontalScroll((int)mouseScrollX);
-                        inputSimulator.Mouse.VerticalScroll((int)mouseScrollY);
+                        }
 
                         previousGamePad = currentGamePad;
                     }
@@ -643,14 +648,57 @@ namespace Handheld_Control_Panel.Classes
         private double normalizeJoystickInput(double sensitivity, double value)
         {
             double returnValue;
-            if (value > deadzone || value < -deadzone)
+            if (Math.Abs(value) > deadzone)
             {
-                returnValue = (sensitivity * (value / 32768) / Math.Sqrt((value / 32768 * value / 32768) + 1));
-                returnValue = Math.Round(returnValue, 0);
-                return returnValue;
+                if (Math.Abs(value) < (deadzone + (0.5 * 32768)))
+                {
+                    returnValue = 1 + (4 / (0.5 * 32768)) * (Math.Abs(value) - deadzone);
+                    returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
+                    Debug.WriteLine(returnValue);
+                    if (value < 0) { return -returnValue; } else { return returnValue; }
+                }
+                else
+                {
+                    returnValue = 5 + sensitivity * Math.Log10(Math.Abs(value) / (deadzone + (0.5 * 32768))) / Math.Log10(32768 / (deadzone + (0.5 * 32768)));
+                    //returnValue = (sensitivity * (Math.Abs(value) / 32768) / Math.Sqrt((Math.Abs(value) / 32768 * Math.Abs(value) / 32768) + 1));
+                    //returnValue = 2 + 50 * (1 - Math.Exp(-( Math.Abs(value)- (deadzone + (0.4 * 32768))) / 32768));
+                    returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
+                    if (value < 0) { returnValue = -returnValue; }
+                    Debug.WriteLine(returnValue.ToString());
+                    return returnValue;
+                }
+
+
             }
             else
             {
+                return 0;
+            }
+        }
+        private bool lastScrollOutput0 = false;
+        private double normalizeJoystickInputScroll(double sensitivity, double value)
+        {
+            double returnValue;
+            if (lastScrollOutput0)
+            {
+                lastScrollOutput0 = false;
+                if (Math.Abs(value) > deadzone)
+                {
+                    returnValue = 5 * (1 - Math.Pow(0.75, (Math.Abs(value) - 1000) / 9000));
+                    //returnValue = Math.Pow(Math.Abs(value) / deadzone, 1 / 4.6);
+                    //returnValue = Math.Round(returnValue, 0, MidpointRounding.ToZero);
+                    Debug.WriteLine(returnValue);
+                    if (value < 0) { return -returnValue; } else { return returnValue; }
+
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                lastScrollOutput0 = true;
                 return 0;
             }
         }

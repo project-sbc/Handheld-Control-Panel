@@ -41,9 +41,8 @@ namespace Handheld_Control_Panel.Pages
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
             addUserControlsToPage();
 
-            MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HomePage_Instruction");
-            wnd = null;
+            Global_Variables.mainWindow.changeUserInstruction("HomePage_Instruction");
+    
         }
         private void addUserControlsToPage()
         {
