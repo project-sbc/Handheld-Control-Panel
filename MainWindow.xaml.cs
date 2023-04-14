@@ -408,28 +408,42 @@ namespace Handheld_Control_Panel
   
         }
 
+        public void reinitializeProfiles()
+        {
+            this.BeginInvoke(new Action(() =>
+            {
+                Global_Variables.profiles = new Profiles_Management();
+            }));
+        }
+
         public void ShowNotificationInWindow(string title, NotificationType notificationType)
         {
-            var notificationManager = new NotificationManager();
-
-            var content = new NotificationContent
+            this.BeginInvoke(new Action(() =>
             {
-                Title = title,
-  
-                Type = notificationType,
-                
-                TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
-                RowsCount = 3, //Will show 3 rows and trim after
+                var notificationManager = new NotificationManager();
 
-                CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
+                var content = new NotificationContent
+                {
+                    Title = title,
 
-                Background = new SolidColorBrush(Colors.DarkGray),
-                Foreground = new SolidColorBrush(Colors.White)
+                    Type = notificationType,
 
-            };
+                    TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
+                    RowsCount = 3, //Will show 3 rows and trim after
 
-    
-            notificationManager.Show(content, "WindowArea");
+                    CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
+
+                    Background = new SolidColorBrush(Colors.DarkGray),
+                    Foreground = new SolidColorBrush(Colors.White)
+
+                };
+
+
+                notificationManager.Show(content, "WindowArea");
+
+
+            }));
+           
 
            
         }

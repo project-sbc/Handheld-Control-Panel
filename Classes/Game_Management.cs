@@ -19,6 +19,8 @@ using Windows.ApplicationModel.Core;
 using System.Drawing.Drawing2D;
 using Windows.System;
 using System.Windows.Documents;
+using static Vanara.Interop.KnownShellItemPropertyKeys;
+using System.Reflection;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -216,7 +218,7 @@ namespace Handheld_Control_Panel.Classes
                                 }
                                 else
                                 {
-                                   Debug.WriteLine(game.Name);
+                                 
                                     string[] array = launcherItem.gameName.Split(' ');
                                     foreach (string exe in game.Executables)
                                     {

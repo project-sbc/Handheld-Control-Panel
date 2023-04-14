@@ -13,10 +13,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml;
 using YamlDotNet.Core.Tokens;
 using Path = System.IO.Path;
@@ -124,39 +126,11 @@ namespace Handheld_Control_Panel.Classes
         }
                 
 
-        public void syncSteamGameToProfile()
+        public async Task syncGamesToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
-
-            Dictionary<string, string> result = Steam_Management.syncSteam_Library();
-
-            if (result.Count > 0)
-            {
-                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-                foreach (KeyValuePair<string, string> pair in result)
-                {
-                    XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + pair.Key + "']");
-                    if (xmlSelectedNode == null)
-                    {
-                        Global_Variables.Global_Variables.profiles.createProfileForSteamGame(pair.Value, pair.Key);
-                    }
-                }
-
-                Global_Variables.Global_Variables.profiles = new Profiles_Management();
-                xmlDocument = null;
-
-            }
-
-
-
-        }
-
-        public void syncGamesToProfile()
-        {
-            //gets list of steam games from library.vdf file, then makes profiles for those without one
+            Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncing"].ToString(), Notification.Wpf.NotificationType.Information);
+            
 
             List<GameLauncherItem> result = Game_Management.syncGame_Library();
 
@@ -174,21 +148,20 @@ namespace Handheld_Control_Panel.Classes
                         Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe, item.imageLocation);
                     }
                 }
-
-                Global_Variables.Global_Variables.profiles = new Profiles_Management();
+                
+                
                 xmlDocument = null;
 
             }
-            Application.Current.BeginInvoke(() => {
-                Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
-            });
-         
+            Global_Variables.Global_Variables.mainWindow.reinitializeProfiles();
+
+            Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
 
         }
 
-       
+
         private int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
