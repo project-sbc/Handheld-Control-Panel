@@ -283,7 +283,7 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
-                   
+           
                     case "LT":
                         navigateListBox(true);
                         break;

@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Handheld_Control_Panel"
         mc:Ignorable="d"
+        Background="{DynamicResource backgroundImage}"
         Title="GameLauncher"  Width="1920"  Height="1080"  WindowState="Maximized"
     WindowStyle="None">
+    <Window.Resources>
+
+        <ImageSource x:Key="imgSource">Resources\Pictures\gamelauncher_background.jpg</ImageSource>
+        <ImageBrush x:Key="backgroundImage" ImageSource="{DynamicResource imgSource}" Opacity="0.7"></ImageBrush>
+
+    </Window.Resources>
     <Grid>
         
     </Grid>

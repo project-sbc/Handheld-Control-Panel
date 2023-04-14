@@ -42,6 +42,7 @@
     <None Remove="Resources\Intel\MSR\WinRing0x64.sys" />
     <None Remove="Resources\Intel\RW\Rw.exe" />
     <None Remove="Resources\Logs\application_log.txt" />
+    <None Remove="Resources\Pictures\gamelauncher_background.jpg" />
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
@@ -132,6 +133,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Logs\application_log.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Pictures\gamelauncher_background.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Profiles_Template.xml">
