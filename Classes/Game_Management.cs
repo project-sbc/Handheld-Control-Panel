@@ -199,6 +199,7 @@ namespace Handheld_Control_Panel.Classes
             
             foreach (var launcher in gameLauncher.GetLaunchers())
             {
+               
                 switch(launcher.Name)
                 {
                     case "Steam":
@@ -319,6 +320,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
             //microsoft store apps below
+
             PackageManager packageManager = new PackageManager();
             IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
 
