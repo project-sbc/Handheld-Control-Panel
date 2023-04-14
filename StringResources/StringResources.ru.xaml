@@ -205,7 +205,7 @@
     <system:String x:Key="Filter_Method_Applications">Приложения</system:String>
     <!-- 14apr2023 -->
     <system:String x:Key="Filter_Method_MicrosoftStore">Microsoft Store</system:String>
-
+    <system:String x:Key="Usercontrol_MaxGPUCLK">Max GPU Clock</system:String>
 
 
 </ResourceDictionary>

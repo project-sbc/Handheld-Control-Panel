@@ -12,6 +12,7 @@ using LibreHardwareMonitor.Hardware;
 using System.Windows.Media.Animation;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
+using PidSharp;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -48,7 +49,7 @@ namespace Handheld_Control_Panel.Classes
 
         private static List<float> useCPU = new List<float>();
 
-        private static void mainAutoTDPLoop()
+        private static void mainAutoTDPLoopHyatice()
         {
             //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources
             computer.Open();
@@ -185,7 +186,91 @@ namespace Handheld_Control_Panel.Classes
             //close librehardware monitor instance
             computer.Close();
         }
+        private static void mainAutoTDPLoop()
+        {
+            //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources
+            computer.Open();
+            //Check to make sure main window is open. We dont want someone closing the program and this autotdp thread is preventing it from ending the overall process. Also make sure autoTDP is still enabled, as soon as someone says we dont want auto tdp anymore thatwill be the last cycle
 
+
+          
+
+            if (Global_Variables.Global_Variables.autoTDP)
+            {
+                //First time when autoTDP enabled only
+                //HYATICE - Define a CPU_Last Variable; can be temp to the AutoTDP thread as a whole but must survive between loops.
+                //set proposedCPU=CPU_Max - as defined by the user in the game/global profile; default to max CPU clock/9999?
+                proposedCPU = 9999;
+                //set proposedGPU=GPU_Min - as defined by the user in the game/global profile; default to 533mhz
+                proposedGPU = 533;
+                //ryzenadj.exe --max-performance - This will need to be re-ran if autoTDP is running and power is unplugged, or on wake from sleep.
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
+
+                //change power plan EPP to 0% - Be sure to save the original EPP to go back to after AutoTDP stops
+                originalEPP = Global_Variables.Global_Variables.EPP;
+
+                //  powercfg -setacvalueindex sub_processor perfepp 0
+                //  powercfg -setacvalueindex sub_processor perfepp1 0
+                //  powercfg -setdcvalueindex sub_processor perfepp 0
+                //  powercfg -setdcvalueindex sub_processor perfepp1 0
+                //  powercfg / s scheme_current
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(0));
+
+                // Will need to apply the same CPU/GPU clocks when exiting AutoTDP
+                // Will need to apply ryzenadj --power-saving when exiting AutoTDP if on battery
+                // Will need to restore EPP to what it was before AutoTDP ran/probably what's set in the game/global profile
+                // Possibly prompt to reset GPU clocks to defaults by restarting the GPU driver?
+            }
+
+
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            //HYATICEHYATICEHYATICEHYATICEHYATICEHYATICE
+            var cpuPID = new PidController(-1,-1,-1,4600,1100)
+            {
+                TargetValue = 90
+            };
+            var gpuPID = new PidController(-1, -1, -1, 2200, 400)
+            {
+                TargetValue = 90
+            };
+
+            while (Global_Variables.Global_Variables.autoTDP)
+            {
+                //HYATICE - If proposedCPU different than lastCPU Apply CPU changes and update lastCPU
+
+
+
+
+                //thread sleep just adds a pause (in ms)
+                Thread.Sleep(1000);
+
+
+                getInformationForAutoTDP();
+                Debug.WriteLine("procUtility: " + procUtility[procUtility.Count - 1].ToString());
+                Debug.WriteLine("gpuUsage: " + gpuUsage[gpuUsage.Count - 1].ToString());
+             
+
+                cpuPID.CurrentValue =procUtility[procUtility.Count - 1];
+                var value1 = cpuPID.ControlOutput;
+                gpuPID.CurrentValue = gpuUsage[gpuUsage.Count - 1];
+                var value2 = gpuPID.ControlOutput;
+                Debug.WriteLine("new max cpu: " + value1.ToString());
+                Debug.WriteLine("new gpu: " + value2.ToString());
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency((int)Math.Round(value1,0)));
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)Math.Round(value2,0)));
+
+
+             
+
+
+            }
+
+            //when autotdp is set to false the loop will end 
+
+            //close librehardware monitor instance
+            computer.Close();
+        }
         public static void endAutoTDP()
         {
             Global_Variables.Global_Variables.autoTDP = false;

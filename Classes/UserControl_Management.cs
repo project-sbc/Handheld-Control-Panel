@@ -27,6 +27,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                 switch (slider.Tag)
                 {
+                    
+                     case "Slider_MaxGPUCLK":
+                        slider.Minimum = 400;
+                        slider.Maximum = 2500;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        slider.Value = Properties.Settings.Default.maxGPUCLK;
+                        break;
                     case "Slider_MouseSensitivity":
                         slider.Minimum = 5;
                         slider.Maximum = 35;
@@ -168,14 +177,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         }
                         
                         break;
-                    case "Slider_MaxGPUCLK":
-                        slider.Minimum = 400;
-                        slider.Maximum = 2200;
-                        slider.TickFrequency = 50;
-                        slider.SmallChange = 50;
-                        slider.LargeChange = 100;
-                        slider.Value = Properties.Settings.Default.maxGPUCLK;
-                        break;
+                 
                     case "Slider_MinTDP":
                         slider.Minimum = 3;
                         slider.Maximum = 25;
@@ -507,7 +509,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 case "Slider_ProfileOfflineActiveCores":
                     Global_Variables.Global_Variables.profiles.editingProfile.Offline_ActiveCores = sliderValue.ToString();
                     break;
-
+ 
                 case "Slider_MaxGPUCLK":
                     Properties.Settings.Default.maxGPUCLK = (int)sliderValue;
                     Properties.Settings.Default.Save();

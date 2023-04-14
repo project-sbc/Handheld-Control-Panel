@@ -319,6 +319,9 @@ namespace Handheld_Control_Panel
                         }
 
                         break;
+                    case "L3":
+                        AutoTDP_Management.startAutoTDPThread();
+                        break;
                     default:
                         Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
                         break;

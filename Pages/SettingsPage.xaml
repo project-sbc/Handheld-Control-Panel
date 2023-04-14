@@ -29,8 +29,9 @@
             <uc:Divider/>
             <uc:Autostart_Toggle/>
             <uc:Autoupdate_Toggle/>
-    
-            <uc:Divider/>
+                <uc:Divider/>
+                <uc:MaxGPU_Slider/>
+                <uc:Divider/>
             <uc:IntelTDP_Dropdown/>
             <uc:MinTDP_Slider/>
             <uc:MaxTDP_Slider/>
