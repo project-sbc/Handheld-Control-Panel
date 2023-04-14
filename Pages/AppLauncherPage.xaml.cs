@@ -137,6 +137,11 @@ namespace Handheld_Control_Panel.Pages
             fm5.DisplayFilterMethod = Application.Current.Resources["Filter_Method_GOGGalaxy"].ToString();
             filterMethods.Add(fm5);
 
+            FilterMethods fm6 = new FilterMethods();
+            fm6.FilterMethod = "Filter_Method_MicrosoftStore";
+            fm6.DisplayFilterMethod = Application.Current.Resources["Filter_Method_MicrosoftStore"].ToString();
+            filterMethods.Add(fm6);
+                        
             controlListFilter.ItemsSource = filterMethods;
             controlListFilter.SelectedIndex = 0;
             controlListSort.ItemsSource = sortMethods;
