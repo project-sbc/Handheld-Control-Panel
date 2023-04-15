@@ -91,22 +91,20 @@ namespace Handheld_Control_Panel.Classes
         private static double originalEPP = Global_Variables.Global_Variables.EPP;
         public static void startAutoTDP()
         {
+            TDP_Management.TDP_Management.changeTDP(25, 25);
             Global_Variables.Global_Variables.autoTDP = true;
             autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
-            autoTDPThread.Start();
-        
       
 
             //set amd power slider
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
 
             //change power plan EPP to 0% - Be sure to save the original EPP to go back to after AutoTDP stops
-            originalEPP = Global_Variables.Global_Variables.EPP;
-                       
+            originalEPP = Global_Variables.Global_Variables.EPP; 
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(0));
 
-    
 
+            autoTDPThread.Start();
         }
         private static double minCPU = 1100;
         private static double maxCPU = 4700;
@@ -134,7 +132,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 RTSS.startRTSS();
             }
-            OSD osd = new OSD("autoTDP");
+            OSD osd =null;
 
             while (Global_Variables.Global_Variables.autoTDP)
             {
@@ -159,6 +157,10 @@ namespace Handheld_Control_Panel.Classes
                 Debug.WriteLine("FPS min :" + fps_Min.ToString());
                 if (RTSS.RTSSRunning())
                 {
+                    if (osd == null)
+                    {
+                        osd = new OSD("autoTDP");
+                    }
                     osd.Update("FPS: " + fps_Avg + " cpu usage avg: " + cpuUsage_Avg + " gpuUsage: " + gpuUsage_Avg + " new cpu value: " + value1.ToString() + " new gpu value: " + value2.ToString() + " package power: " + cpuPower);
                 }
 
@@ -176,8 +178,12 @@ namespace Handheld_Control_Panel.Classes
 
 
             }
-            osd.Update("");
-            osd.Dispose();
+            if (osd !=null)
+            {
+                osd.Update("");
+                osd.Dispose();
+            }
+
             //when autotdp is set to false the loop will end 
 
             //close librehardware monitor instance
