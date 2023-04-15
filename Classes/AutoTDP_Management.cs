@@ -85,14 +85,15 @@ namespace Handheld_Control_Panel.Classes
         public static void endAutoTDP()
         {
             Global_Variables.Global_Variables.autoTDP = false;
-        
+            Powercfg.setBalancedModePowercfg();
         }
 
         private static double originalEPP = Global_Variables.Global_Variables.EPP;
         public static void startAutoTDP()
         {
-            TDP_Management.TDP_Management.changeTDP(25, 25);
+            TDP_Management.TDP_Management.changeTDP(20, 20);
             Global_Variables.Global_Variables.autoTDP = true;
+            Powercfg.setBatterySaverModePowercfg();
             autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
       
 
@@ -106,7 +107,7 @@ namespace Handheld_Control_Panel.Classes
 
             autoTDPThread.Start();
         }
-        private static double minCPU = 1100;
+        private static double minCPU = 2100;
         private static double maxCPU = 4700;
         private static double minGPU = 500;
         private static double maxGPU = 2200;
@@ -115,7 +116,7 @@ namespace Handheld_Control_Panel.Classes
 
         private static PidController cpuPID = new PidController(-2, -1, 0, maxCPU, minCPU)
         {
-            TargetValue = 70
+            TargetValue = 50
         };
         private static PidController gpuPID = new PidController(-2, -1, 0, maxGPU, minGPU)
         {
@@ -146,7 +147,7 @@ namespace Handheld_Control_Panel.Classes
                 Debug.WriteLine("gpuUsage: " + gpuUsage[gpuUsage.Count - 1].ToString());
 
 
-                cpuPID.CurrentValue = cpuUsage_Avg;
+                cpuPID.CurrentValue = procUtility_Avg;
                 double value1 = Math.Min(Math.Ceiling(cpuPID.ControlOutput / 50.0) * 50.0, maxGPU);
                 gpuPID.CurrentValue = gpuUsage_Avg;
                 double value2 = Math.Min(Math.Ceiling(gpuPID.ControlOutput / 50.0) * 50.0, maxCPU);
@@ -287,8 +288,9 @@ namespace Handheld_Control_Panel.Classes
         private static PerformanceCounter theCPUCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total");
         private static void getProcUtility()
         {
-
-            procUtility.Add(theCPUCounter.NextValue());
+            var newcpuutil = theCPUCounter.NextValue();
+            Debug.WriteLine("new cpu util " + newcpuutil);
+            procUtility.Add(newcpuutil);
             if (procUtility.Count > 3)
             {
                 procUtility.RemoveAt(0);
