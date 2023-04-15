@@ -319,18 +319,7 @@ namespace Handheld_Control_Panel
                         }
 
                         break;
-                    case "L3":
-                        if (Global_Variables.autoTDP)
-                        {
-                            Global_Variables.autoTDP = false;
-                        }
-                        else
-                        {
-                            AutoTDP_Management.startAutoTDP();
-                            Notification_Management.ShowInWindow("Started auto TDP", NotificationType.Information);
-                        }
-                       
-                        break;
+                   
                     default:
                         Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
                         break;
