@@ -130,6 +130,10 @@ namespace Handheld_Control_Panel.Classes
         {
             //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources
             computer.Open();
+            if (!RTSS.RTSSRunning())
+            {
+                RTSS.startRTSS();
+            }
             OSD osd = new OSD("autoTDP");
 
             while (Global_Variables.Global_Variables.autoTDP)
