@@ -283,7 +283,7 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
-           
+
                     case "LT":
                         navigateListBox(true);
                         break;
@@ -315,12 +315,21 @@ namespace Handheld_Control_Panel
                                     toggleWindow();
                                     break;
                             }
-               
+
                         }
 
                         break;
                     case "L3":
-                        AutoTDP_Management.startAutoTDPThread();
+                        if (Global_Variables.autoTDP)
+                        {
+                            Global_Variables.autoTDP = false;
+                        }
+                        else
+                        {
+                            AutoTDP_Management.startAutoTDP();
+                            Notification_Management.ShowInWindow("Started auto TDP", NotificationType.Information);
+                        }
+                       
                         break;
                     default:
                         Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
