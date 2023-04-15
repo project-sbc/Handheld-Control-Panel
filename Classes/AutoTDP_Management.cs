@@ -82,7 +82,7 @@ namespace Handheld_Control_Panel.Classes
             IsBatteryEnabled = false,
             IsPsuEnabled = false
         };
-        public static void endAutoTDPTimer()
+        public static void endAutoTDP()
         {
             Global_Variables.Global_Variables.autoTDP = false;
         

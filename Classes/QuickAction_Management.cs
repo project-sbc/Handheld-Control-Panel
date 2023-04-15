@@ -29,7 +29,19 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.mainWindow.toggleOSK();
 
                     break;
-
+                case "Toggle_AutoTDP":
+                    if (Global_Variables.Global_Variables.autoTDP)
+                    {
+                        Notification_Management.Show("Stop AutoTDP");
+                        AutoTDP_Management.endAutoTDP();
+                    }
+                    else
+                    {
+                        Notification_Management.Show("Start AutoTDP");
+                        AutoTDP_Management.startAutoTDP();
+                    }
+                    break;
+                        
                 case "Toggle_Windows_OSK":
                     Process[] pname = Process.GetProcessesByName("tabtip");
                     OSKTablet oskt = new OSKTablet();

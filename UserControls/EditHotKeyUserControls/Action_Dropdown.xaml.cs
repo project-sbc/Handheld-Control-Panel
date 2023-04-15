@@ -104,6 +104,15 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(gotoDesktop);
 
+            if (Global_Variables.cpuType == "AMD")
+            {
+                HotKeyAction autoTDP = new HotKeyAction();
+                autoTDP.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_AutoTDP"].ToString();
+                autoTDP.HotkeyAction = "Toggle_AutoTDP";
+
+                hotkeyAction.Add(autoTDP);
+            }
+           
 
             HotKeyAction toggleWinOSK = new HotKeyAction();
             toggleWinOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_Windows_OSK"].ToString();
