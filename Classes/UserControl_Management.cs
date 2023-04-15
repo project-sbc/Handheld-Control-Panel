@@ -618,5 +618,56 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
         }
         #endregion
 
+        public static void getUserControlsOnPage(List<UserControl> userControls, StackPanel stackPanel)
+        {
+            foreach (object child in stackPanel.Children)
+            {
+                if (child is UserControl)
+                {
+                    UserControl uc = (UserControl)child;
+                    if (!child.ToString().Contains(".Divider") && uc.Visibility != Visibility.Collapsed)
+                    {
+                        userControls.Add((UserControl)child);
+                    }
+                }
+
+            }
+        }
+
+        public static void handleListBoxIndexChange(ListBox lb, int change)
+        {
+            int selectedIndex = lb.SelectedIndex;
+            int upperIndex = lb.Items.Count - 1;
+            if (change < 0)
+            {
+                if (selectedIndex >= -change)
+                {
+                    lb.SelectedIndex = selectedIndex + change;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+                else if (selectedIndex != 0)
+                {
+                    lb.SelectedIndex = 0;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+
+            }
+            if (change > 0)
+            {
+                if ((upperIndex - selectedIndex) >= change)
+                {
+                    lb.SelectedIndex = selectedIndex + change;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+                else if (selectedIndex != upperIndex)
+                {
+                    lb.SelectedIndex = upperIndex;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+
+
+            }
+
+        }
     }
 }

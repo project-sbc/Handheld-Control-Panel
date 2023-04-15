@@ -122,9 +122,12 @@ namespace Handheld_Control_Panel.Classes
         {
             TargetValue = 70
         };
+        private static PidController tdpPID = new PidController(-2, -1, -1, 25, 5)
+        {
+            TargetValue = 58,
+        };
 
-       
-     
+
         private static void mainAutoTDPLoop()
         {
             //computer.Open() starts a new Librehardware monitor instance so we can start getting data. We close it at the end when auto tdp is done to save resources
@@ -151,6 +154,12 @@ namespace Handheld_Control_Panel.Classes
                 double value1 = Math.Min(Math.Ceiling(cpuPID.ControlOutput / 50.0) * 50.0, maxGPU);
                 gpuPID.CurrentValue = gpuUsage_Avg;
                 double value2 = Math.Min(Math.Ceiling(gpuPID.ControlOutput / 50.0) * 50.0, maxCPU);
+                if (fps_Avg>1)
+                {
+                    tdpPID.CurrentValue = fps_Avg;
+                }
+               
+                double value3 = Math.Round(tdpPID.ControlOutput, 0);
                 Debug.WriteLine("new max cpu: " + value1.ToString());
                 Debug.WriteLine("new gpu: " + value2.ToString());
                 Debug.WriteLine("package power: " + cpuPower.ToString());
@@ -162,7 +171,7 @@ namespace Handheld_Control_Panel.Classes
                     {
                         osd = new OSD("autoTDP");
                     }
-                    osd.Update("FPS: " + fps_Avg + " cpu usage avg: " + cpuUsage_Avg + " gpuUsage: " + gpuUsage_Avg + " new cpu value: " + value1.ToString() + " new gpu value: " + value2.ToString() + " package power: " + cpuPower);
+                    osd.Update("FPS: " + fps_Avg + " cpu usage avg: " + cpuUsage_Avg + " gpuUsage: " + gpuUsage_Avg + " cpu value: " + value1.ToString() + " gpu value: " + value2.ToString() + " power: " + cpuPower + " tdp " + Global_Variables.Global_Variables.readPL1);
                 }
 
                 if (Global_Variables.Global_Variables.CPUMaxFrequency != value1)
@@ -175,7 +184,11 @@ namespace Handheld_Control_Panel.Classes
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)Math.Round(value2, 0)));
                     lastGPUValue = value2;
                 }
-               
+                if (Global_Variables.Global_Variables.readPL1 != value3 && fps_Avg >1)
+                {
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => TDP_Management.TDP_Management.changeTDP((int)value3,(int)value3));
+                    //lastTDPValue = value3;
+                }
 
 
             }

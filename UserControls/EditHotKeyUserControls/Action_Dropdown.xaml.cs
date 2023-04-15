@@ -104,7 +104,7 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(gotoDesktop);
 
-            if (Global_Variables.cpuType == "AMD")
+            if (Global_Variables.cpuType == "AMD" && Global_Variables.processorName.Contains("6800U"))
             {
                 HotKeyAction autoTDP = new HotKeyAction();
                 autoTDP.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_AutoTDP"].ToString();
