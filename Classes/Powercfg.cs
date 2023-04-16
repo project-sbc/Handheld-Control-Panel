@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Handheld_Control_Panel.Classes
         {
             if (input.Contains(":"))
             {
-                return input.Substring(input.IndexOf(":"),38).Trim();
+                return input.Substring(input.IndexOf(":")+1,38).Trim();
             }
             else { return ""; }
         }
@@ -43,11 +44,16 @@ namespace Handheld_Control_Panel.Classes
 
             foreach (string str in array)
             {
-                Debug.WriteLine(getGUID(str));
+                if (str.Contains("Optimized Power Saver"))
+                {
+                    
+                    Run_CLI.Run_CLI.RunCommand(" /s " + getGUID(str), false, "C:\\windows\\system32\\powercfg.exe", 1000);
+                }
+                
 
             }
 
-            Run_CLI.Run_CLI.RunCommand(" /s 381b4222-f694-41f0-9685-ff5bb260df2e", false, "C:\\windows\\system32\\powercfg.exe", 1000);
+            
         }
         public static bool HyaticePowerPlanInstalled()
         {
@@ -64,7 +70,9 @@ namespace Handheld_Control_Panel.Classes
         {
             if (!HyaticePowerPlanInstalled()) 
             {
-                Run_CLI.Run_CLI.RunCommand(" - import \"" + BaseDir + "\\Resources\\HyaticePowerPlan\\HyaticePowerPlan.pow\"", false, "C:\\windows\\system32\\powercfg.exe", 1000);
+                string directory = @Path.Combine(BaseDir + "Resources\\HyaticePowerPlan\\HyaticePowerPlan.pow");
+                                
+                Debug.WriteLine(Run_CLI.Run_CLI.RunCommand(" -import " + directory, true, "C:\\windows\\system32\\powercfg.exe", 2000,true));
             }
 
         }

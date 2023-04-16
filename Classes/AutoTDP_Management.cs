@@ -91,18 +91,23 @@ namespace Handheld_Control_Panel.Classes
         private static double originalEPP = Global_Variables.Global_Variables.EPP;
         public static void startAutoTDP()
         {
-            TDP_Management.TDP_Management.changeTDP(25, 25);
-            Global_Variables.Global_Variables.autoTDP = true;
-            Powercfg.setHyaticePowerPlanModePowercfg();
-            autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
-      
+            if (Global_Variables.Global_Variables.cpuType == "AMD" && Global_Variables.Global_Variables.processorName.Contains("6800U"))
+            {
+                TDP_Management.TDP_Management.changeTDP(25, 25);
+                Global_Variables.Global_Variables.autoTDP = true;
+                Powercfg.setHyaticePowerPlanModePowercfg();
+                autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
 
-            //set amd power slider
-            Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
-               
-            autoTDPThread.Start();
+
+                //set amd power slider
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
+
+                autoTDPThread.Start();
+            }
+
+         
         }
-        private static double minCPU = 2100;
+        private static double minCPU = 2000;
         private static double maxCPU = 4700;
         private static double minGPU = 500;
         private static double maxGPU = 2200;
