@@ -189,7 +189,7 @@ namespace Handheld_Control_Panel.Pages
                             {
                                 procs = Process.GetProcessById(processID);
 
-                                if (procs == FullScreen_Management.suspendedProcess)
+                                if (procs.Id == FullScreen_Management.suspendedProcess.Id)
                                 {
                                     FullScreen_Management.checkResumeProcess();
                                 }
