@@ -85,15 +85,15 @@ namespace Handheld_Control_Panel.Classes
         public static void endAutoTDP()
         {
             Global_Variables.Global_Variables.autoTDP = false;
-            Powercfg.setBalancedModePowercfg();
+            //Powercfg.setBatterySaverModePowercfg();
         }
 
         private static double originalEPP = Global_Variables.Global_Variables.EPP;
         public static void startAutoTDP()
         {
-            TDP_Management.TDP_Management.changeTDP(20, 20);
+            TDP_Management.TDP_Management.changeTDP(25, 25);
             Global_Variables.Global_Variables.autoTDP = true;
-            Powercfg.setBatterySaverModePowercfg();
+            //Powercfg.setBatterySaverModePowercfg();
             autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
       
 
@@ -114,11 +114,11 @@ namespace Handheld_Control_Panel.Classes
         private static double lastGPUValue = 500;
         private static double lastCPUValue = 2500;
 
-        private static PidController cpuPID = new PidController(-2, -1, 0, maxCPU, minCPU)
+        private static PidController cpuPID = new PidController(-4, -1, 0, maxCPU, minCPU)
         {
-            TargetValue = 50
+            TargetValue = 70
         };
-        private static PidController gpuPID = new PidController(-2, -1, 0, maxGPU, minGPU)
+        private static PidController gpuPID = new PidController(-4, -1, 0, maxGPU, minGPU)
         {
             TargetValue = 70
         };
@@ -151,9 +151,9 @@ namespace Handheld_Control_Panel.Classes
 
 
                 cpuPID.CurrentValue = procUtility_Avg;
-                double value1 = Math.Min(Math.Ceiling(cpuPID.ControlOutput / 50.0) * 50.0, maxGPU);
+                double value1 = Math.Min(Math.Ceiling(cpuPID.ControlOutput / 50.0) * 50.0, maxCPU);
                 gpuPID.CurrentValue = gpuUsage_Avg;
-                double value2 = Math.Min(Math.Ceiling(gpuPID.ControlOutput / 50.0) * 50.0, maxCPU);
+                double value2 = Math.Min(Math.Ceiling(gpuPID.ControlOutput / 50.0) * 50.0, maxGPU);
                 if (fps_Avg>1)
                 {
                     tdpPID.CurrentValue = fps_Avg;
@@ -171,7 +171,7 @@ namespace Handheld_Control_Panel.Classes
                     {
                         osd = new OSD("autoTDP");
                     }
-                    osd.Update("FPS: " + fps_Avg + " cpu usage avg: " + cpuUsage_Avg + " gpuUsage: " + gpuUsage_Avg + " cpu value: " + value1.ToString() + " gpu value: " + value2.ToString() + " power: " + cpuPower + " tdp " + Global_Variables.Global_Variables.readPL1);
+                    osd.Update("CPU clock " + cpuClock_Avg + "\n FPS: " + fps_Avg + "\n cpu usage avg: " + cpuUsage_Avg + "\n gpuUsage: " + gpuUsage_Avg + "\n cpu value: " + value1.ToString() + "\n gpu value: " + value2.ToString() + "\n power: " + cpuPower + "\n tdp " + Global_Variables.Global_Variables.readPL1);
                 }
 
                 if (Global_Variables.Global_Variables.CPUMaxFrequency != value1)
@@ -219,7 +219,7 @@ namespace Handheld_Control_Panel.Classes
             //get proc utility
             getProcUtility();
             //get cpu
-            getCPUClock();
+           
             getCPUUsage();
             getFPS();
 
@@ -244,6 +244,7 @@ namespace Handheld_Control_Panel.Classes
             computer.Accept(new UpdateVisitor());
             getLibre_packagepower();
             getLibre_GPUD3D();
+            libreGetCpuClock();
         }
         #region gpu D3D usage from libre hardware monitor
         private static List<int> gpuUsage = new List<int>();
@@ -322,19 +323,26 @@ namespace Handheld_Control_Panel.Classes
    
 
         private static PerformanceCounter theCPUClockCounter = new PerformanceCounter("Processor Information", "Processor Frequency", "_Total");
-        public static void getCPUClock()
+        public static void libreGetCpuClock()
         {
 
+            IHardware cpu = computer.Hardware.FirstOrDefault(c => c.Name.StartsWith("AMD Ryzen"));
 
-            cpuClock.Add(theCPUClockCounter.NextValue());
-    
-            if (cpuClock.Count > 3)
+            if (cpu != null)
             {
-                cpuClock.RemoveAt(0);
-                cpuClock_Avg = cpuClock.Average();
-                cpuClock_Min = cpuClock.Min();
-                cpuClock_Max = cpuClock.Max();
-             
+                ISensor clock = cpu.Sensors.FirstOrDefault(c => c.Name == "Core #1");
+                if (clock != null)
+                {
+                    cpuClock.Add((int)clock.Value);
+                    if (cpuClock.Count > 1)
+                    {
+                        if (cpuUsage.Count > 3) { cpuClock.RemoveAt(0); }
+                        cpuClock_Avg = Math.Round(cpuClock.Average(), 0);
+                        cpuClock_Min = cpuClock.Min();
+                        cpuClock_Max = cpuClock.Max();
+
+                    }
+                }
             }
         }
         #endregion

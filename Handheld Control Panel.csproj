@@ -31,6 +31,7 @@
     <None Remove="Resources\AMD\RyzenAdj\WinRing0x64.sys" />
     <None Remove="Resources\EC\EC.exe" />
     <None Remove="Resources\EC\WinRing0x64.sys" />
+    <None Remove="Resources\HyaticePowerPlan\HyaticePowerPlan.pow" />
     <None Remove="Resources\Intel\KX\KX.exe" />
     <None Remove="Resources\Intel\MSR\msr-cmd.exe" />
     <None Remove="Resources\Intel\MSR\winio-drv.exe" />
@@ -102,6 +103,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\HCP.ico" />
+    <Content Include="Resources\HyaticePowerPlan\HyaticePowerPlan.pow">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Intel\KX\KX.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
