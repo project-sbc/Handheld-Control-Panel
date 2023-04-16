@@ -58,7 +58,7 @@ namespace Handheld_Control_Panel.Pages
                 {
                    
                
-                    if (!listProcesses.Contains(p) && IsForegroundFullScreen(new HandleRef(null, p.MainWindowHandle), null) && !ExcludeFullScreeProcessList.Contains(p.ProcessName))
+                    if (!listProcesses.Contains(p) && FullScreen_Management.IsForegroundFullScreen(new HandleRef(null, p.MainWindowHandle), null) && !FullScreen_Management.ExcludeFullScreeProcessList.Contains(p.ProcessName))
                     {
                         listProcesses.Add(p);
                     }
@@ -110,73 +110,7 @@ namespace Handheld_Control_Panel.Pages
             controlList.ItemsSource = powerpageitems;
         }
 
-        private List<string> ExcludeFullScreeProcessList = new List<string>()
-        {
-           {"TextInputHost"},
-  
-         };
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct RECT
-        {
-            public int left;
-            public int top;
-            public int right;
-            public int bottom;
-        }
-
-        [DllImport("user32.dll")]
-        private static extern bool GetWindowRect(HandleRef hWnd, [In, Out] ref RECT rect);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
-
-     
-
-        public bool IsForegroundFullScreen(HandleRef hWnd, System.Windows.Forms.Screen screen)
-        {
-            if (screen == null)
-            {
-                screen = System.Windows.Forms.Screen.PrimaryScreen;
-            }
-            RECT rect = new RECT();
-            GetWindowRect(hWnd, ref rect);
-    
-
-            return new System.Drawing.Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top).Contains(screen.Bounds);
-        }
-        private static WINDOWPLACEMENT GetPlacement(IntPtr hwnd)
-        {
-            WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
-            placement.length = Marshal.SizeOf(placement);
-            GetWindowPlacement(hwnd, ref placement);
-            return placement;
-        }
-
-        [DllImport("user32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetWindowPlacement(
-            IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
-
-        [Serializable]
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct WINDOWPLACEMENT
-        {
-            public int length;
-            public int flags;
-            public ShowWindowCommands showCmd;
-            public System.Drawing.Point ptMinPosition;
-            public System.Drawing.Point ptMaxPosition;
-            public System.Drawing.Rectangle rcNormalPosition;
-        }
-
-        internal enum ShowWindowCommands : int
-        {
-            Hide = 0,
-            Normal = 1,
-            Minimized = 2,
-            Maximized = 3,
-        }
+        
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -184,9 +118,6 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-
-
-            
 
         }
 
@@ -258,7 +189,10 @@ namespace Handheld_Control_Panel.Pages
                             {
                                 procs = Process.GetProcessById(processID);
 
-
+                                if (procs == FullScreen_Management.suspendedProcess)
+                                {
+                                    FullScreen_Management.checkResumeProcess();
+                                }
 
                                 if (!procs.HasExited)
                                 {

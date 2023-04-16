@@ -329,13 +329,15 @@ namespace Handheld_Control_Panel
        
           
         }
-
+     
         public void toggleWindow()
         {
-
-
+           
             if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
             {
+                //call check for suspend process
+                FullScreen_Management.checkSuspendProcess();
+
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
                 {
@@ -352,7 +354,10 @@ namespace Handheld_Control_Panel
             }
             else
             {
-                
+                //check resume process
+                FullScreen_Management.checkResumeProcess();
+
+
                 this.Hide();
                 //this.WindowState = WindowState.Minimized;
                 m_notifyIcon.Visible = true;
