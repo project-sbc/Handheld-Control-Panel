@@ -93,18 +93,13 @@ namespace Handheld_Control_Panel.Classes
         {
             TDP_Management.TDP_Management.changeTDP(25, 25);
             Global_Variables.Global_Variables.autoTDP = true;
-            //Powercfg.setBatterySaverModePowercfg();
+            Powercfg.setHyaticePowerPlanModePowercfg();
             autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
       
 
             //set amd power slider
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
-
-            //change power plan EPP to 0% - Be sure to save the original EPP to go back to after AutoTDP stops
-            originalEPP = Global_Variables.Global_Variables.EPP; 
-            Classes.Task_Scheduler.Task_Scheduler.runTask(() => EPP_Management.EPP_Management.changeEPP(0));
-
-
+               
             autoTDPThread.Start();
         }
         private static double minCPU = 2100;
