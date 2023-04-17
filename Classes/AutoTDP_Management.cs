@@ -107,7 +107,7 @@ namespace Handheld_Control_Panel.Classes
 
          
         }
-        private static double minCPU = 2000;
+        private static double minCPU = 2200;
         private static double maxCPU = 4700;
         private static double minGPU = 500;
         private static double maxGPU = 2200;
@@ -116,11 +116,11 @@ namespace Handheld_Control_Panel.Classes
 
         private static PidController cpuPID = new PidController(-4, -1, 0, maxCPU, minCPU)
         {
-            TargetValue = 70
+            TargetValue = 50
         };
         private static PidController gpuPID = new PidController(-4, -1, 0, maxGPU, minGPU)
         {
-            TargetValue = 70
+            TargetValue = 60
         };
         private static PidController tdpPID = new PidController(-2, -1, -1, 25, 5)
         {
