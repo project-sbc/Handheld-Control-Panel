@@ -441,17 +441,17 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             switch (sliderTag)
             {
                 case "Slider_Fan-TickChange":
-                    if (Global_Variables.Global_Variables.fanControlDevice & Global_Variables.Global_Variables.fanControlEnable)
+                    if (Global_Variables.Global_Variables.Device.FanCapable & Global_Variables.Global_Variables.fanControlEnable)
                     {
-                        if (sliderValue == 29)
+                        if (sliderValue == 0)
                         {
                             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(0));
                         }
                         else
                         {
-                            if (sliderValue < 30)
+                            if (sliderValue <= Global_Variables.Global_Variables.Device.MinFanSpeedPercentage)
                             {
-                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(30));
+                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(Global_Variables.Global_Variables.Device.MinFanSpeedPercentage));
                             }
                             else
                             {

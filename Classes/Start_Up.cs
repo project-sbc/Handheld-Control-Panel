@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
             //librehardwaremonitor librehardwaremonitor = new librehardwaremonitor();
             //librehardwaremonitor.Monitor();
-
+            
             //test code here
            
             //test code
@@ -55,7 +55,7 @@ namespace Handheld_Control_Panel.Classes
 
 
             //check fan control device capability
-            Fan_Management.Fan_Management.determineFanDevice();
+            Global_Variables.Global_Variables.Device = Device_Management.GetCurrentDevice();
 
             Fan_Management.Fan_Management.readSoftwareFanControl();
             

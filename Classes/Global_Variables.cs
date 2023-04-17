@@ -292,8 +292,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int AMDPowerSlide;
 
         //fan controls
-        public static string fanDevice = "";
-        public static bool fanControlDevice = false;
+        public static HandheldDevice Device;
         public static bool fanControlEnable = false;
         public static string fanControlMode = "Hardware";
         public static double fanSpeed = 0;

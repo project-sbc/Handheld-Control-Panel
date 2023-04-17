@@ -37,7 +37,7 @@ namespace Handheld_Control_Panel.UserControls
         private DispatcherTimer changeValue = new DispatcherTimer();
         public Fan_Slider()
         {
-            if (Global_Variables.fanControlDevice)
+            if (Global_Variables.Device.FanCapable)
             {
                 InitializeComponent();
                 //setControlValue();

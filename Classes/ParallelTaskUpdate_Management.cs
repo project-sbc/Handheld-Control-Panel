@@ -20,7 +20,7 @@ namespace Handheld_Control_Panel.Classes
             updateTasks.Add(() => Classes.CoreParking_Management.CoreParking_Management.readActiveCores());
             updateTasks.Add(() => Classes.EPP_Management.EPP_Management.readEPP());
             updateTasks.Add(() => Classes.RTSS.getRTSSFPSLimit());
-            if (Global_Variables.Global_Variables.fanControlDevice && Global_Variables.Global_Variables.fanDevice != "WIN4_AMD")
+            if (Global_Variables.Global_Variables.Device.FanCapable && Global_Variables.Global_Variables.fanControlEnable)
             {
                 updateTasks.Add(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
             }
@@ -49,7 +49,7 @@ namespace Handheld_Control_Panel.Classes
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.CoreParking_Management.CoreParking_Management.readActiveCores());
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.EPP_Management.EPP_Management.readEPP());
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.getRTSSFPSLimit());
-            if (Global_Variables.Global_Variables.fanControlDevice)
+            if (Global_Variables.Global_Variables.Device.FanCapable && Global_Variables.Global_Variables.fanControlEnable)
             {
                 Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
             }
