@@ -31,7 +31,7 @@ namespace Handheld_Control_Panel.Classes
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
 
-      
+    
 
         public static bool IsForegroundFullScreen(HandleRef hWnd, System.Windows.Forms.Screen screen)
         {

@@ -73,7 +73,7 @@ namespace Handheld_Control_Panel.UserControls
                 }
                 controlToggle.IsOn = Global_Variables.fanControlEnable;
                 //set up timer
-                changeValue.Interval = new TimeSpan(0, 0, 2);
+                changeValue.Interval = new TimeSpan(0, 0, 1);
                 changeValue.Tick += ChangeValue_Tick;
             }
             else { this.Visibility = Visibility.Collapsed; }

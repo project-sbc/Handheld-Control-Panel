@@ -21,6 +21,7 @@ using Nefarius.Utilities.DeviceManagement.Extensions;
 using System.Timers;
 using System.Windows.Controls;
 using enabledevice;
+using Windows.Media.SpeechRecognition;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -203,7 +204,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             timerController.Start();
            
         }
-    
+        private static string continuousInputNew = "";
+        private static string continuousInputCurrent = "";
+        private static int continuousInputCounter = 0;
         private static void controller_Tick(object sender, EventArgs e)
         {
             //start timer to read and compare controller inputs
@@ -260,6 +263,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                             if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
                             {
 
+                                //reset continuousNew for every cycle
+                                continuousInputNew = "";
 
                                 if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
                                 {
@@ -289,22 +294,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                 {
                                     buttonEvents.raiseControllerInput("Y");
                                 }
-                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp))
-                                {
-                                    buttonEvents.raiseControllerInput("Up");
-                                }
-                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown))
-                                {
-                                    buttonEvents.raiseControllerInput("Down");
-                                }
-                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight))
-                                {
-                                    buttonEvents.raiseControllerInput("Right");
-                                }
-                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft))
-                                {
-                                    buttonEvents.raiseControllerInput("Left");
-                                }
+
                                 if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.B) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.B))
                                 {
                                     buttonEvents.raiseControllerInput("B");
@@ -318,24 +308,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                 {
                                     buttonEvents.raiseControllerInput("RB");
                                 }
-
-                                if (currentGamePad.LeftThumbX > 12000 && previousGamePad.LeftThumbX <= 12000)
-                                {
-                                    buttonEvents.raiseControllerInput("Right");
-                                }
-                                if (currentGamePad.LeftThumbX < -12000 && previousGamePad.LeftThumbX >= -12000)
-                                {
-                                    buttonEvents.raiseControllerInput("Left");
-                                }
-                                if (currentGamePad.LeftThumbY > 12000 && previousGamePad.LeftThumbY <= 12000)
-                                {
-                                    buttonEvents.raiseControllerInput("Up");
-                                }
-                                if (currentGamePad.LeftThumbY < -12000 && previousGamePad.LeftThumbY >= -12000)
-                                {
-                                    buttonEvents.raiseControllerInput("Down");
-                                }
-                                if (currentGamePad.LeftTrigger >200 && previousGamePad.LeftTrigger <= 200)
+                                if (currentGamePad.LeftTrigger > 200 && previousGamePad.LeftTrigger <= 200)
                                 {
                                     buttonEvents.raiseControllerInput("LT");
                                 }
@@ -343,7 +316,73 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                 {
                                     buttonEvents.raiseControllerInput("RT");
                                 }
+
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) || currentGamePad.LeftThumbY > 12000)
+                                {
+                                    if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && previousGamePad.LeftThumbY <= 12000)
+                                    {
+                                        buttonEvents.raiseControllerInput("Up");
+                                    }
+                                    else
+                                    {
+                                        continuousInputNew = "Up";
+                                    }
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) || currentGamePad.LeftThumbY < -12000)
+                                {
+                                    if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && previousGamePad.LeftThumbY >= -12000)
+                                    {
+                                        buttonEvents.raiseControllerInput("Down");
+                                    }
+                                    else
+                                    {
+                                        continuousInputNew = "Down";
+                                    }
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) || currentGamePad.LeftThumbX > 12000)
+                                {
+                                    if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && previousGamePad.LeftThumbX <= 12000)
+                                    {
+                                        buttonEvents.raiseControllerInput("Right");
+                                    }
+                                    else
+                                    {
+                                        continuousInputNew = "Right";
+                                    }
+                                }
+                                if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) || currentGamePad.LeftThumbX < -12000)
+                                {
+                                    if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && previousGamePad.LeftThumbX >= -12000)
+                                    {
+                                        buttonEvents.raiseControllerInput("Left");
+                                    }
+                                    else
+                                    {
+                                        continuousInputNew = "Left";
+                                    }
+                                }
+                                                          
+  
+                                if (continuousInputNew != continuousInputCurrent)
+                                {
+                                    continuousInputCurrent = continuousInputNew;
+                                    continuousInputCounter = 1;
+                                }
+                                else
+                                {
+                                    if (continuousInputCurrent != "")
+                                    {
+                                        continuousInputCounter++;
+                                        if (continuousInputCounter > 9)
+                                        {
+                                           
+                                            buttonEvents.raiseControllerInput(continuousInputCurrent);
+                                        }
+                                    }
+                                   
                             }
+
+                        }
 
 
 

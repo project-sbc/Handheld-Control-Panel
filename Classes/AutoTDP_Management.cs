@@ -41,25 +41,38 @@ namespace Handheld_Control_Panel.Classes
                 foreach (AppFlags af in appFlags)
                 {
                     appEntries = OSD.GetAppEntries(af);
-                    if (appEntries.Length > 0) { appFlag = af; break; }
-                }
-
-                foreach (var app in appEntries)
-                {
-                    int currFps = (int)app.InstantaneousFrames;
-                    fps.Add(currFps);
-                    if (fps.Count > 3)
+                    if (appEntries.Length > 0)
                     {
-                        fps.RemoveAt(0);
-                        fps_Avg = Math.Round(fps.Average(), 0);
-                        fps_Min = fps.Min();
-                        fps_Max = fps.Max();
+                        foreach (var app in appEntries)
+                        {
+                            Process p = Process.GetProcessById(app.ProcessId);
+                            if (p != null)
+                            {
+                                if (p.MainWindowHandle != IntPtr.Zero)
+                                {
+                                    int currFps = (int)app.InstantaneousFrames;
+                                    fps.Add(currFps);
+                                    if (fps.Count > 3)
+                                    {
+                                        fps.RemoveAt(0);
+                                        fps_Avg = Math.Round(fps.Average(), 0);
+                                        fps_Min = fps.Min();
+                                        fps_Max = fps.Max();
 
+                                    }
+                                }
+                            }
+                            
+
+                            return;
+
+                        }
                     }
-
-                    break;
-
+                        
+                   
                 }
+
+               
 
 
             }
@@ -88,10 +101,9 @@ namespace Handheld_Control_Panel.Classes
             //Powercfg.setBatterySaverModePowercfg();
         }
 
-        private static double originalEPP = Global_Variables.Global_Variables.EPP;
         public static void startAutoTDP()
         {
-            if (Global_Variables.Global_Variables.cpuType == "AMD" && Global_Variables.Global_Variables.processorName.Contains("6800U"))
+            if (Global_Variables.Global_Variables.cpuType == "AMD" && Global_Variables.Global_Variables.processorName.Contains("6800U") && Global_Variables.Global_Variables.Device.AutoTDP != "None")
             {
                 TDP_Management.TDP_Management.changeTDP(25, 25);
                 Global_Variables.Global_Variables.autoTDP = true;
@@ -107,12 +119,11 @@ namespace Handheld_Control_Panel.Classes
 
          
         }
-        private static double minCPU = 2200;
-        private static double maxCPU = 4700;
-        private static double minGPU = 500;
-        private static double maxGPU = 2200;
-        private static double lastGPUValue = 500;
-        private static double lastCPUValue = 2500;
+        private static double minCPU = Global_Variables.Global_Variables.Device.MinCPUClock;
+        private static double maxCPU = Global_Variables.Global_Variables.Device.MaxCPUClock;
+        private static double minGPU = Global_Variables.Global_Variables.Device.MinGPUClock;
+        private static double maxGPU = Global_Variables.Global_Variables.Device.MaxGPUClock;
+
 
         private static PidController cpuPID = new PidController(-4, -1, 0, maxCPU, minCPU)
         {
@@ -120,7 +131,7 @@ namespace Handheld_Control_Panel.Classes
         };
         private static PidController gpuPID = new PidController(-4, -1, 0, maxGPU, minGPU)
         {
-            TargetValue = 60
+            TargetValue = 68
         };
         private static PidController tdpPID = new PidController(-2, -1, -1, 25, 5)
         {
@@ -171,18 +182,19 @@ namespace Handheld_Control_Panel.Classes
                     {
                         osd = new OSD("autoTDP");
                     }
-                    osd.Update("CPU clock " + cpuClock_Avg + "\n FPS: " + fps_Avg + "\n cpu usage avg: " + cpuUsage_Avg + "\n gpuUsage: " + gpuUsage_Avg + "\n cpu value: " + value1.ToString() + "\n gpu value: " + value2.ToString() + "\n power: " + cpuPower + "\n tdp " + Global_Variables.Global_Variables.readPL1);
+                    
+                    osd.Update("CPU clock " + cpuClock_Avg + "\nFPS: " + fps_Avg + "\ncpu usage avg: " + cpuUsage_Avg + "\ngpuUsage: " + gpuUsage_Avg + "\ncpu value: " + value1.ToString() + "\ngpu value: " + value2.ToString() + "\npower: " + cpuPower + "\ntdp " + Global_Variables.Global_Variables.readPL1);
                 }
 
                 if (Global_Variables.Global_Variables.CPUMaxFrequency != value1)
                 {
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => MaxProcFreq_Management.MaxProcFreq_Management.changeCPUMaxFrequency((int)Math.Round(value1, 0)));
-                    lastCPUValue = value1;
+
                 }
                 if (Global_Variables.Global_Variables.GPUCLK != value2)
                 {
                     Classes.Task_Scheduler.Task_Scheduler.runTask(() => GPUCLK_Management.GPUCLK_Management.changeAMDGPUClock((int)Math.Round(value2, 0)));
-                    lastGPUValue = value2;
+ 
                 }
                 if (Global_Variables.Global_Variables.readPL1 != value3 && fps_Avg >1)
                 {

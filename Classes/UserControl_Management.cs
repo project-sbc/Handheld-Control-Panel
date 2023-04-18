@@ -339,12 +339,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                             double originalValue = slider.Value;
                             switch (action)
                             {
-                                case "Up":
-                                    slider.Value = slider.Value + slider.LargeChange;
-                                    break;
-                                case "Down":
-                                    slider.Value = slider.Value - slider.LargeChange;
-                                    break;
+
                                 case "Right":
                                     slider.Value = slider.Value + slider.SmallChange;
                                     break;
@@ -352,6 +347,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                                     slider.Value = slider.Value - slider.SmallChange;
                                     break;
 
+                                
                                 default: break;
                             }
                             if (originalValue != slider.Value && !slider.Tag.ToString().Contains("-TickChange"))

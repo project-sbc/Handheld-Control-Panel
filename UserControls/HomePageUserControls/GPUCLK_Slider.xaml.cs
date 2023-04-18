@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
          
 
             //set up timer
-            changeValue.Interval = new TimeSpan(0,0,2);
+            changeValue.Interval = new TimeSpan(0,0,1);
             changeValue.Tick += ChangeValue_Tick;
         }
 

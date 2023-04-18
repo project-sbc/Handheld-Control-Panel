@@ -26,7 +26,7 @@ namespace Handheld_Control_Panel.Classes
         public int MaxCPUClock;
         public int MinCPUClock;
 
-
+        public string AutoTDP;
     }
 
     public static class Device_Management
@@ -78,7 +78,7 @@ namespace Handheld_Control_Panel.Classes
         {
             this.Manufacturer = "GPD";
             this.Motherboard = "1619-04";
-
+            this.AutoTDP = "GPUClock";
             this.FanCapable = true;
             this.FanToggleAddress = 0x275;
             this.FanChangeAddress = 0x1809;
@@ -98,7 +98,7 @@ namespace Handheld_Control_Panel.Classes
         {
             this.Manufacturer = "GPD";
             this.Motherboard = "1618-04";
-
+            this.AutoTDP = "GPUClock";
             this.FanCapable = false;
             this.FanToggleAddress = 0;
             this.FanChangeAddress = 0;
@@ -116,9 +116,9 @@ namespace Handheld_Control_Panel.Classes
     {
         public GenericDevice()
         {
-            this.Manufacturer = "";
-            this.Motherboard = "";
-
+            this.Manufacturer = "Generic";
+            this.Motherboard = "Generic";
+            this.AutoTDP = "None";
             this.FanCapable = false;
           
         }
