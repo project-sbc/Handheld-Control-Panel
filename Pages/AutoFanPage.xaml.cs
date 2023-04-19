@@ -22,6 +22,7 @@ using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using YamlDotNet.Core.Tokens;
+using ScottPlot;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -31,8 +32,8 @@ namespace Handheld_Control_Panel.Pages
     public partial class AutoFanPage : Page
     {
         private string windowpage;
-        private double[] dataX = new double[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-        private double[] dataY = new double[] { 0, 0, 0, 0, 0, 0, 0, 30, 50, 70, 100 };
+        private double[] dataX = new double[] { 0, 5, 10, 15, 20, 25, 30, 35};
+        private double[] dataY = new double[] { 0, 0, 0, 30, 30, 40, 50, 70 };
         private int xIndex = 0;
 
 
@@ -51,8 +52,14 @@ namespace Handheld_Control_Panel.Pages
             setUpPlot();
             plotFanCurve();
             updateLabels();
-
-            
+            if (Properties.Settings.Default.SystemTheme == "Dark")
+            {
+                fanCurvePlot.plt.Style(ScottPlot.Style.Gray2);
+            }
+            else
+            {
+                fanCurvePlot.plt.Style(ScottPlot.Style.Light2);
+            }
         }
         private void handleInputs(string action)
         {
@@ -66,7 +73,7 @@ namespace Handheld_Control_Panel.Pages
                     }
                     break;
                 case "Right":
-                    if (xIndex < 10)
+                    if (xIndex < (dataX.Length-1))
                     {
                         xIndex = xIndex + 1;
                         updateLabels();
@@ -107,14 +114,14 @@ namespace Handheld_Control_Panel.Pages
 
         private void updateLabels()
         {
-            TemperatureLabel.Content = Application.Current.Resources["FanPage_Temperature"] + ": " + dataX[xIndex].ToString();
+            TemperatureLabel.Content = Application.Current.Resources["FanPage_CPUPower"] + ": " + dataX[xIndex].ToString();
             FanSpeedLabel.Content = Application.Current.Resources["FanPage_FanSpeed"] + ": " + dataY[xIndex].ToString();
         }
         private void setUpPlot()
         {
 
             fanCurvePlot.Plot.Title(Application.Current.Resources["FanPage_FanCurve"].ToString());
-            fanCurvePlot.Plot.XLabel(Application.Current.Resources["FanPage_Temperature"].ToString());
+            fanCurvePlot.Plot.XLabel(Application.Current.Resources["FanPage_CPUPower"].ToString());
             fanCurvePlot.Plot.YLabel(Application.Current.Resources["FanPage_FanSpeed"].ToString());
             fanCurvePlot.Plot.SetAxisLimits(-2, 102, -2, 102);
         }

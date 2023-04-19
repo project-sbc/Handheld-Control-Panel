@@ -211,6 +211,6 @@
     <!-- 18apr2023 -->
     <system:String x:Key="FanPage_FanCurve">Fan Curve</system:String>
     <system:String x:Key="FanPage_FanSpeed">Fan Speed (%)</system:String>
-    <system:String x:Key="FanPage_Temperature">Temperature (C)</system:String>
+    <system:String x:Key="FanPage_CPUPower">CPU Package Power (W)</system:String>
         
 </ResourceDictionary>

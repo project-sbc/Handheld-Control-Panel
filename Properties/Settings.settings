@@ -78,7 +78,7 @@
       <Value Profile="(Default)">1200</Value>
     </Setting>
     <Setting Name="fanCurve" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0, 0,0,30,30,30,50,70,100</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

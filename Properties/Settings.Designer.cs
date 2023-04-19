@@ -324,7 +324,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0, 0,0,30,30,30,50,70,100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string fanCurve {
             get {
                 return ((string)(this["fanCurve"]));
