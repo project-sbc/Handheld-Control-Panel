@@ -11,7 +11,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"    Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="Transparent" UseNoneWindowStyle="True" BorderThickness="0"
         Title="Handheld Control Panel" Height="750" Width="460"  Top="0" ResizeMode="NoResize"  Closing="MetroWindow_Closing" LocationChanged="MetroWindow_LocationChanged" StateChanged="MetroWindow_StateChanged" Loaded="MetroWindow_Loaded" IsVisibleChanged="MetroWindow_IsVisibleChanged" >
     <Border Background="{DynamicResource MahApps.Brushes.ThemeBackground}"   BorderThickness="0"  CornerRadius="11,0,0,11" x:Name="borderCorner1" >
-        <Border    BorderThickness="0"  CornerRadius="11,0,0,11" x:Name="borderCorner2" >
+        <Border    BorderThickness="0"     CornerRadius="11,0,0,11" x:Name="borderCorner2" >
             <Grid   >
 
                 <Grid.Resources>
@@ -82,7 +82,7 @@
                         <ListBoxItem Tag="AppLauncher" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
                         </ListBoxItem>
-                        <ListBoxItem Tag="Information" >
+                        <ListBoxItem Tag="AutoFan" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE946;" />
                         </ListBoxItem>
                         <ListBoxItem Tag="Settings" >

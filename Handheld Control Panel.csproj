@@ -182,6 +182,8 @@
     <PackageReference Include="PidSharp" Version="1.0.0.1" />
     <PackageReference Include="protobuf-net" Version="3.2.16" />
     <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
+    <PackageReference Include="ScottPlot" Version="4.1.63" />
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.63" />
     <PackageReference Include="SecretNest.SequentialScheduler" Version="1.1.0" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     <PackageReference Include="System.Management" Version="7.0.0" />
@@ -190,6 +192,9 @@
 
   <ItemGroup>
     <Compile Update="Pages\AppLauncherLargePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\AutoFanPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">

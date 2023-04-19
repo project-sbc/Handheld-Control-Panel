@@ -321,5 +321,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["joystickDeadzone"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0, 0,0,30,30,30,50,70,100")]
+        public string fanCurve {
+            get {
+                return ((string)(this["fanCurve"]));
+            }
+            set {
+                this["fanCurve"] = value;
+            }
+        }
     }
 }

@@ -17,7 +17,6 @@ using ControlzEx.Theming;
 using MahApps.Metro.Controls;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes;
-
 using System.Runtime.InteropServices;
 using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
@@ -342,14 +341,14 @@ namespace Handheld_Control_Panel
                 if (navigation.SelectedIndex != -1)
                 {
 
-                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                    //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                   // frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
 
 
                 }
        
                 this.Show();
-                //this.WindowState = WindowState.Normal;
+              
                 m_notifyIcon.Visible = false;
             }
             else
@@ -359,7 +358,7 @@ namespace Handheld_Control_Panel
 
 
                 this.Hide();
-                //this.WindowState = WindowState.Minimized;
+                
                 m_notifyIcon.Visible = true;
             }
 
@@ -625,8 +624,8 @@ namespace Handheld_Control_Panel
                 {
                     this.ShowInTaskbar = false;
 
-                    navigation.SelectedIndex = 0;
-                    frame.Source = null;
+                    //navigation.SelectedIndex = 0;
+                    //frame.Source = null;
                     //change interval to 15 seconds
                     updateTimer.Interval = new TimeSpan(0, 0, 15);
                     //change controller timer interval to 100 ms to hot key recognition when not open
@@ -643,8 +642,8 @@ namespace Handheld_Control_Panel
                     if (navigation.SelectedItem != null)
                     {
 
-                        ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                        frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                        //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                        //frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
 
 
                     }
@@ -680,8 +679,8 @@ namespace Handheld_Control_Panel
             {
                 this.ShowInTaskbar = false;
 
-                navigation.SelectedIndex = 0;
-                frame.Source = null;
+                //navigation.SelectedIndex = 0;
+                //frame.Source = null;
                 //change interval to 15 seconds
                 updateTimer.Interval = new TimeSpan(0, 0, 15);
                 //change controller timer interval to 100 ms to hot key recognition when not open
