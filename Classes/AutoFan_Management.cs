@@ -373,7 +373,7 @@ namespace Handheld_Control_Panel.Classes
                         if (dataString[i] != "")
                         {
                             Array.Resize(ref returnValues, i + 1);
-                            returnValues[i] = i*5 + 5;
+                            returnValues[i] = i*3 + 3;
                         }
                     }
                 }
@@ -389,7 +389,7 @@ namespace Handheld_Control_Panel.Classes
                         if (dataString[i] != "")
                         {
                             Array.Resize(ref returnValues, i + 1);
-                            returnValues[i] = i * 5 + 5;
+                            returnValues[i] = i * 3 + 3;
                         }
                     }
                 }

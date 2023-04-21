@@ -89,8 +89,8 @@ namespace Handheld_Control_Panel.Classes
             this.FanChangeAddress = 0x1809;
             this.MaxFanSpeed = 184;
             this.MinFanSpeedPercentage = 20;
-            this.fanCurveTemperature = "0, 0, 0, 0, 0, 30, 30, 40, 50, 70, 100,";
-            this.fanCurvePackagePower = "0,0,30,30,40,50,60,";
+            this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100,100";
+            this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
 
             this.MaxCPUClock = 4600;
             this.MinCPUClock = 1100;
@@ -146,8 +146,8 @@ namespace Handheld_Control_Panel.Classes
             this.FanChangeAddress = 0;
             this.MaxFanSpeed = 184;
             this.MinFanSpeedPercentage = 20;
-            this.fanCurveTemperature = "0, 0, 0, 0, 0, 30, 30, 40, 50, 70, 100,";
-            this.fanCurvePackagePower = "0,0,30,30,40,50,60,";
+            this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100,100";
+            this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
 
             this.MaxCPUClock = 4600;
             this.MinCPUClock = 1100;
