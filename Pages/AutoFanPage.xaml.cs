@@ -24,6 +24,8 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using YamlDotNet.Core.Tokens;
 using ScottPlot;
 using System.Reflection;
+using LibreHardwareMonitor.Hardware;
+using System.Windows.Threading;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -39,6 +41,7 @@ namespace Handheld_Control_Panel.Pages
         private double[] dataYpower = new double[] { };
         private int xIndex= 0;
 
+        private DispatcherTimer updateTempPower = new DispatcherTimer();
 
 
         public AutoFanPage()
@@ -75,9 +78,25 @@ namespace Handheld_Control_Panel.Pages
                 fanCurveTemperaturePlot.plt.Style(ScottPlot.Style.Light2);
             }
 
-          
-
+            computer.Open();
+            updateTempPower.Interval = new TimeSpan(0, 0, 1);
+            updateTempPower.Tick += UpdateTempPower_Tick;
+            updateTempPower.Start();
         }
+
+        private void UpdateTempPower_Tick(object? sender, EventArgs e)
+        {
+            computer.Accept(new UpdateVisitor());
+            if (Properties.Settings.Default.fanAutoModeTemp)
+            {
+                getLibre_cpuTemperature();
+            }
+            else
+            {
+                getLibre_packagepower();
+            }
+        }
+
         private void handleInputs(string action)
         {
            
@@ -300,7 +319,7 @@ namespace Handheld_Control_Panel.Pages
                     else{
                         saveSettingFanCurveTemperature();
                     }
-                  
+                    AutoFan_Management.loadXandYvalues();
                 }
                 if (args.Action == "X")
                 {
@@ -332,6 +351,73 @@ namespace Handheld_Control_Panel.Pages
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
+            updateTempPower.Stop();
+            updateTempPower.Tick -= UpdateTempPower_Tick;
+        }
+
+
+       
+
+        private static Computer computer = new Computer
+        {
+            IsCpuEnabled = true,
+            IsGpuEnabled = false,
+            IsMemoryEnabled = false,
+            IsMotherboardEnabled = false,
+            IsControllerEnabled = false,
+            IsNetworkEnabled = false,
+            IsStorageEnabled = false,
+            IsBatteryEnabled = false,
+            IsPsuEnabled = false
+        };
+        
+    
+        private void getLibre_packagepower()
+        {
+            foreach (Hardware hardware in computer.Hardware)
+            {
+                ISensor package = hardware.Sensors.FirstOrDefault(c => c.Name == "Package");
+                if (package != null)
+                {
+                    updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentPackagePower"] + " " + Math.Round((double)package.Value,1).ToString() + " W";
+
+                   
+                    break;
+                }
+            }
+
+        }
+
+
+        private void getLibre_cpuTemperature()
+        {
+
+            foreach (Hardware hardware in computer.Hardware)
+            {
+                ISensor temperature = hardware.Sensors.FirstOrDefault(c => c.Name == "Core (Tctl/Tdie)");
+                if (temperature != null)
+                {
+                    updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentTemperature"] + " " + Math.Round((double)temperature.Value, 1).ToString() + " C";
+
+                    break;
+                }
+                else
+                {
+                    foreach (IHardware subhardware in hardware.SubHardware)
+                    {
+                        Debug.WriteLine("\tSubhardware: {0}", subhardware.Name);
+
+                        ISensor temperature2 = subhardware.Sensors.FirstOrDefault(c => c.Name == "Core (Tctl/Tdie)");
+                        if (temperature2 != null)
+                        {
+                            updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentTemperature"] + " " + Math.Round((double)temperature.Value, 1).ToString() + " C";
+
+                            break;
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

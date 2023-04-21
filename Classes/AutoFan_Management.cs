@@ -20,6 +20,7 @@ namespace Handheld_Control_Panel.Classes
         private static int currentFanSpeedPercentage;
         private static int targetFanSpeedPercentage;
         private static int newFanSpeedPercentage;
+        private static object lockObj = new object();
         private static Computer computer = new Computer
         {
             IsCpuEnabled = true,
@@ -56,19 +57,23 @@ namespace Handheld_Control_Panel.Classes
 
 
         }
-        private static void loadXandYvalues()
+        public static void loadXandYvalues()
         {
-            string[] dataYstring;
-            if (tempControlled)
+            lock(lockObj)
             {
-                dataXvalues= new double[11] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-                dataYvalues = Fan_Functions.getTemperatureYValues();
+                string[] dataYstring;
+                if (tempControlled)
+                {
+                    dataXvalues = new double[21] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
+                    dataYvalues = Fan_Functions.getTemperatureYValues();
+                }
+                else
+                {
+                    dataXvalues = Fan_Functions.getPowerXValues();
+                    dataYvalues = Fan_Functions.getPowerYValues();
+                }
             }
-            else
-            {
-                dataXvalues = Fan_Functions.getPowerXValues();
-                dataYvalues = Fan_Functions.getPowerYValues();
-            }
+          
         }
         private static void mainAutoFanLoop_Temperature()
         {
@@ -130,6 +135,7 @@ namespace Handheld_Control_Panel.Classes
                         packagePower.RemoveAt(0);
                     }
                     avg_packagePower = packagePower.Average();
+                    Debug.WriteLine(avg_packagePower + " W");
                     break;
                 }
             }
@@ -154,6 +160,7 @@ namespace Handheld_Control_Panel.Classes
                         cpuTemperature.RemoveAt(0);
                     }
                     avg_cpuTemperature = cpuTemperature.Average();
+                    Debug.WriteLine(avg_cpuTemperature + " C");
                     break;
                 }
                 else
@@ -182,55 +189,59 @@ namespace Handheld_Control_Panel.Classes
         
         private static void getTargetFanSpeedPercentage()
         {
-            int index = 0;
-            if (tempControlled)
+            lock (lockObj)
             {
-                if (avg_cpuTemperature > dataXvalues[dataXvalues.Length - 1])
+                int index = 0;
+                if (tempControlled)
                 {
-                    targetFanSpeedPercentage = (int)Math.Round(dataYvalues[dataXvalues.Length - 1], 0);
+                    if (avg_cpuTemperature > dataXvalues[dataXvalues.Length - 1])
+                    {
+                        targetFanSpeedPercentage = (int)Math.Round(dataYvalues[dataXvalues.Length - 1], 0);
+
+                    }
+                    else
+                    {
+                        foreach (double d in dataXvalues)
+                        {
+                            if (avg_cpuTemperature <= d)
+                            {
+                                targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
+                                break;
+                            }
+
+                            index++;
+                        }
+                    }
+
 
                 }
                 else
                 {
-                    foreach (double d in dataXvalues)
+                    if (avg_packagePower > dataXvalues[dataXvalues.Length - 1])
                     {
-                        if (avg_cpuTemperature <= d)
+                        targetFanSpeedPercentage = (int)Math.Round(dataYvalues[dataXvalues.Length - 1], 0);
+
+                    }
+                    else
+                    {
+                        foreach (double d in dataXvalues)
                         {
-                            targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
-                            break;
+                            if (avg_packagePower <= d)
+                            {
+                                targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
+                                break;
+                            }
+
+                            index++;
                         }
-                    
-                        index++;
+                    }
+                    if (avg_cpuTemperature > 98)
+                    {
+                        targetFanSpeedPercentage = currentFanSpeedPercentage + 3;
                     }
                 }
-
-
             }
-            else
-            {
-                if (avg_packagePower > dataXvalues[dataXvalues.Length - 1])
-                {
-                    targetFanSpeedPercentage = (int)Math.Round(dataYvalues[dataXvalues.Length - 1], 0);
-
-                }
-                else
-                {
-                    foreach (double d in dataXvalues)
-                    {
-                        if (avg_packagePower <= d)
-                        {
-                            targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
-                            break;
-                        }
-                     
-                        index++;
-                    }
-                }
-                if (avg_cpuTemperature > 98)
-                {
-                    targetFanSpeedPercentage = currentFanSpeedPercentage + 3;
-                }
-            }
+         
 
         }
        
@@ -281,7 +292,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 dataString = Properties.Settings.Default.fanCurveTemperature.Split(',').ToArray();
 
-                if (dataString.Length == 11)
+                if (dataString.Length >0)
                 {
                     for (int i = 0; i < dataString.Length; i++)
                     {

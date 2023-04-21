@@ -150,7 +150,7 @@ namespace Handheld_Control_Panel.UserControls
             if (valueChangedEventArgs.Parameter == "FanSpeed" && !dragStarted)
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (control.IsLoaded && labelControl.Visibility == Visibility.Visible)
+                    if (control.IsLoaded && Global_Variables.softwareAutoFanControlEnabled)
                     {
 
                         if (Global_Variables.FanSpeed == 0)

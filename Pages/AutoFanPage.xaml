@@ -15,7 +15,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="62"/>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="300"/>
       
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
@@ -31,12 +32,13 @@
         </StackPanel>
         <StackPanel Grid.Row="1" x:Name="spTempPlot">
             <ScottPlot:WpfPlot x:Name="fanCurveTemperaturePlot"  Height="300" VerticalAlignment="Top" />
-            <DockPanel >
-                <Label x:Name="TemperatureLabel" DockPanel.Dock="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
-                <Label x:Name="FanSpeedLabel_Temperature" DockPanel.Dock="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
-            </DockPanel>
+           
         </StackPanel>
-
+        <StackPanel Grid.Row="2" Orientation="Vertical" >
+            <Label x:Name="TemperatureLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="FanSpeedLabel_Temperature" VerticalAlignment="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="updateLabel"  VerticalAlignment="Top" HorizontalAlignment="Left"    Style="{StaticResource userControlMainLabel}" />
+        </StackPanel>
     </Grid>
 
 </Page>
