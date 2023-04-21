@@ -219,26 +219,20 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Value = Global_Variables.Global_Variables.EPP;
                         break;
                     case "Slider_Fan-TickChange":
-                        slider.Minimum = 29;
+                        if (Global_Variables.Global_Variables.Device.MinFanSpeedPercentage != 0)
+                        {
+                            slider.Minimum = Global_Variables.Global_Variables.Device.MinFanSpeedPercentage-1;
+                        }
+                        else
+                        {
+                            slider.Minimum = 0;
+                        }
+                       
                         slider.Maximum = 100;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 5;
                         slider.LargeChange = 10;
-                        if (Global_Variables.Global_Variables.FanSpeed == 0)
-                        {
-                            slider.Value = 29;
-                        }
-                        else
-                        {
-                            if (Global_Variables.Global_Variables.FanSpeed <30)
-                            {
-                                slider.Value = 30;
-                            }
-                            else
-                            {
-                                slider.Value = Global_Variables.Global_Variables.FanSpeed;
-                            }
-                        }
+                        
                         
                         break;
                     case "Slider_CoreParking":
@@ -439,7 +433,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 case "Slider_Fan-TickChange":
                     if (Global_Variables.Global_Variables.Device.FanCapable & Global_Variables.Global_Variables.fanControlEnabled)
                     {
-                        if (sliderValue == 0)
+                        if (sliderValue == 0 || sliderValue == slider.Minimum)
                         {
                             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(0));
                         }

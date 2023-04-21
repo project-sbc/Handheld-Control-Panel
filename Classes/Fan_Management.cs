@@ -126,6 +126,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
 
                     default: break;
                 }
+                Global_Variables.Global_Variables.fanControlEnabled = true;
             }
             catch (Exception ex)
             {
@@ -149,6 +150,7 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
 
                     default: break;
                 }
+                Global_Variables.Global_Variables.fanControlEnabled = false;
             }
             catch (Exception ex)
             {

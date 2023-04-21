@@ -87,7 +87,7 @@ namespace Handheld_Control_Panel.Classes
                 Thread.Sleep(1000);
             }
 
-
+            Fan_Management.Fan_Management.setFanControlHardware();
 
         }
         private static void mainAutoFanLoop_PackagePower()
@@ -97,6 +97,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 computer.Accept(new UpdateVisitor());
                 getLibre_packagepower();
+                getLibre_cpuTemperature();
 
                 getTargetFanSpeedPercentage();
                 getNewTargetFanSpeedPercentage();
@@ -107,6 +108,7 @@ namespace Handheld_Control_Panel.Classes
                 Thread.Sleep(1000);
             }
 
+            Fan_Management.Fan_Management.setFanControlHardware();
 
 
         }
@@ -224,10 +226,14 @@ namespace Handheld_Control_Panel.Classes
                         index++;
                     }
                 }
+                if (avg_cpuTemperature > 98)
+                {
+                    targetFanSpeedPercentage = currentFanSpeedPercentage + 3;
+                }
             }
 
         }
-
+       
         private static void getNewTargetFanSpeedPercentage()
         {
             if (targetFanSpeedPercentage != 0)

@@ -12,11 +12,8 @@
             <DockPanel  DockPanel.Dock="Top">
                 <Label x:Name="label" Content="{DynamicResource UserControl_FanControl}"   Style="{StaticResource userControlMainLabel}" />
                 <Label  Name="labelControl"   Margin="0,0,0,0" ContentStringFormat="{}- {0} %"  Style="{StaticResource userControlMainLabel}" />
-                <mah:ToggleSwitch x:Name="controlToggle"   Style="{DynamicResource userControlToggle}"  Toggled="controlToggle_Toggled" >
-                    <mah:ToggleSwitch.LayoutTransform>
-                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                    </mah:ToggleSwitch.LayoutTransform>
-                </mah:ToggleSwitch>
+                <Button Name="controlButton" HorizontalAlignment="Right" Margin="0,0,8,0" Height="35" Click="controlButton_Click" />
+              
             </DockPanel>
     
             <Slider  x:Name="control" DockPanel.Dock="Bottom" Width="404" HorizontalAlignment="Center" Tag="Slider_Fan-TickChange"  Thumb.DragStarted="control_DragStarted" Thumb.DragCompleted="control_DragCompleted" ValueChanged="control_ValueChanged"  />

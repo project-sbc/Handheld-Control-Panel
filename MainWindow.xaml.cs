@@ -282,9 +282,7 @@ namespace Handheld_Control_Panel
             {
                 switch (args.Action)
                 {
-                    case "Start":
-                        AutoFan_Management.startAutoFan();
-                        break;
+                   
                     case "LT":
                         navigateListBox(true);
                         break;

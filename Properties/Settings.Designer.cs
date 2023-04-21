@@ -357,5 +357,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["fanAutoModeTemp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool startAutoFan {
+            get {
+                return ((bool)(this["startAutoFan"]));
+            }
+            set {
+                this["startAutoFan"] = value;
+            }
+        }
     }
 }
