@@ -16,17 +16,27 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="62"/>
             <RowDefinition Height="400"/>
-            <RowDefinition Height="82"/>
+      
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
             <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_HotKey}"/>
             <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_HotKey}"/>
         </DockPanel>
-        <ScottPlot:WpfPlot x:Name="fanCurvePlot" Grid.Row="1" Height="400" VerticalAlignment="Top" />
-        <DockPanel Grid.Row="2">
-            <Label x:Name="TemperatureLabel" DockPanel.Dock="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
-            <Label x:Name="FanSpeedLabel" DockPanel.Dock="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
-        </DockPanel>
+        <StackPanel Grid.Row="1" x:Name="spPackagePowerPlot">
+            <ScottPlot:WpfPlot x:Name="fanCurvePackagePowerPlot"  Height="300" VerticalAlignment="Top" />
+            <DockPanel >
+                <Label x:Name="PackagePowerLabel" DockPanel.Dock="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+                <Label x:Name="FanSpeedLabel_Power" DockPanel.Dock="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            </DockPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" x:Name="spTempPlot">
+            <ScottPlot:WpfPlot x:Name="fanCurveTemperaturePlot"  Height="300" VerticalAlignment="Top" />
+            <DockPanel >
+                <Label x:Name="TemperatureLabel" DockPanel.Dock="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+                <Label x:Name="FanSpeedLabel_Temperature" DockPanel.Dock="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            </DockPanel>
+        </StackPanel>
+
     </Grid>
 
 </Page>

@@ -91,6 +91,12 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(changeBrightness);
 
+            HotKeyAction changeVolume = new HotKeyAction();
+            changeVolume.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Volume"].ToString();
+            changeVolume.HotkeyAction = "Change_Volume";
+
+            hotkeyAction.Add(changeVolume);
+
             HotKeyAction toggleMouseMode = new HotKeyAction();
             toggleMouseMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_MouseMode"].ToString();
             toggleMouseMode.HotkeyAction = "Toggle_MouseMode";

@@ -29,7 +29,7 @@ namespace Handheld_Control_Panel.Classes
 
             //run all routines to get device ready
             //librehardwaremonitor librehardwaremonitor = new librehardwaremonitor();
-            //librehardwaremonitor.Monitor();
+        //    librehardwaremonitor.Monitor();
             
             //test code here
            

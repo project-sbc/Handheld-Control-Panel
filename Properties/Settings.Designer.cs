@@ -325,12 +325,36 @@ namespace Handheld_Control_Panel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string fanCurve {
+        public string fanCurveTemperature {
             get {
-                return ((string)(this["fanCurve"]));
+                return ((string)(this["fanCurveTemperature"]));
             }
             set {
-                this["fanCurve"] = value;
+                this["fanCurveTemperature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fanCurvePackagePower {
+            get {
+                return ((string)(this["fanCurvePackagePower"]));
+            }
+            set {
+                this["fanCurvePackagePower"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool fanAutoModeTemp {
+            get {
+                return ((bool)(this["fanAutoModeTemp"]));
+            }
+            set {
+                this["fanAutoModeTemp"] = value;
             }
         }
     }

@@ -66,12 +66,12 @@ namespace Handheld_Control_Panel.UserControls
               
           
 
-                if (!Global_Variables.fanControlEnable)
+                if (!Global_Variables.Device.FanCapable)
                 {
                     control.Visibility = Visibility.Collapsed;
                     
                 }
-                controlToggle.IsOn = Global_Variables.fanControlEnable;
+                controlToggle.IsOn = Global_Variables.fanControlEnabled;
                 //set up timer
                 changeValue.Interval = new TimeSpan(0, 0, 1);
                 changeValue.Tick += ChangeValue_Tick;
@@ -143,6 +143,10 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     controlToggle.IsOn = !controlToggle.IsOn;
                 }
+
+
+
+
                 else
                 {
                     Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
@@ -163,8 +167,7 @@ namespace Handheld_Control_Panel.UserControls
         }
         private void sliderValueChanged()
         {
-            if (Global_Variables.fanControlEnable)
-            {
+            if (Global_Variables.fanControlEnabled){
                 UserControl_Management.Slider_ValueChanged((Slider)control, null);
               
             }

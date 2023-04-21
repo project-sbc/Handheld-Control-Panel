@@ -40,26 +40,16 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             //error FM01
             try
             {
-                if (Global_Variables.Global_Variables.Device.FanCapable)
+                switch (Global_Variables.Global_Variables.Device.ClassType)
                 {
-                    byte returnvalue;
+                    case "GPDWinMax2_AMD":
+                        GPDWinMax2_AMD wm2amd = (GPDWinMax2_AMD)Global_Variables.Global_Variables.Device;
+                        Global_Variables.Global_Variables.fanControlEnabled = wm2amd.fanIsEnabled();
+                        wm2amd = null;
+                        break;
 
-                    ushort lookup = Global_Variables.Global_Variables.Device.FanToggleAddress;
-                    if (lookup > 0)
-                    {
-                        returnvalue = WinRingEC_Management.ECRamRead(lookup);
-                        if (returnvalue == 0)
-                        {
-                            Global_Variables.Global_Variables.fanControlEnable = false;
-                            Global_Variables.Global_Variables.fanControlMode = "Hardware";
-                        }
-                        else
-                        {
-                            Global_Variables.Global_Variables.fanControlEnable = true;
-                            Global_Variables.Global_Variables.fanControlMode = "Manual";
-                        }
+                    default: break;
 
-                    }
                 }
             }
             catch (Exception ex)
@@ -76,20 +66,16 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             //error FM02
             try
             {
-                if (Global_Variables.Global_Variables.Device.FanCapable)
+                switch (Global_Variables.Global_Variables.Device.ClassType)
                 {
-                    byte returnvalue;
+                    case "GPDWinMax2_AMD":
+                        GPDWinMax2_AMD wm2amd = (GPDWinMax2_AMD)Global_Variables.Global_Variables.Device;
+                        wm2amd.readFanSpeed();
+                        wm2amd = null;
+                        break;
 
-                    ushort lookup = Global_Variables.Global_Variables.Device.FanChangeAddress;
-                    if (lookup > 0)
-                    {
-                        returnvalue = WinRingEC_Management.ECRamRead(lookup);
+                    default:break;
 
-                        double dblValue = Convert.ToDouble(returnvalue);
-
-                        double fanPercentage = Math.Round(100 * (dblValue / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
-                        Global_Variables.Global_Variables.FanSpeed = fanPercentage;
-                    }
                 }
             }
             catch (Exception ex)
@@ -100,46 +86,26 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
 
         }
 
-        public static void setFanSpeed(double speedPercentage)
+        public static void setFanSpeed(int speedPercentage)
         {
-            //error FM03
+            //error FM05
             try
             {
-                if (Global_Variables.Global_Variables.Device.FanCapable && Global_Variables.Global_Variables.fanControlEnable)
+                switch(Global_Variables.Global_Variables.Device.ClassType)
                 {
-                    if (speedPercentage < 30 && speedPercentage > 0)
-                    {
-                        speedPercentage = 30;
-                    }
-                    byte setValue = 0;
-                    double fanRange = Global_Variables.Global_Variables.Device.MaxFanSpeed;
-                    if (fanRange > 0)
-                    {
-                        if (Global_Variables.Global_Variables.Device.MaxFanSpeed == 100)
-                        {
-                            setValue = (byte)speedPercentage;
-                        }
-                        else
-                        {
-                            double normalizedFanSpeed = Math.Round(((double)speedPercentage / 100) * fanRange, 0);
-                            setValue = (byte)normalizedFanSpeed;
-                        }
+                    case "GPDWinMax2_AMD":
+                        GPDWinMax2_AMD wm2amd = (GPDWinMax2_AMD)Global_Variables.Global_Variables.Device;
+                        wm2amd.setFanSpeed(speedPercentage);
+                        wm2amd = null;
+                        break;
 
-                        ushort lookup = Global_Variables.Global_Variables.Device.FanChangeAddress;
-                        if (lookup > 0)
-                        {
-                            WinRingEC_Management.ECRamWrite(lookup, setValue);
-
-                            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
-                        }
-                    }
-
-
+                    default: break;
                 }
+
             }
             catch (Exception ex)
             {
-                Log_Writer.writeLog(ex.Message, "FM03");
+                Log_Writer.writeLog(ex.Message, "FM05");
 
             }
 
@@ -150,18 +116,15 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             //error FM03
             try
             {
-                if (Global_Variables.Global_Variables.Device.FanCapable)
+                switch (Global_Variables.Global_Variables.Device.ClassType)
                 {
-                   
-                    ushort lookup = Global_Variables.Global_Variables.Device.FanToggleAddress;
-                    if (lookup > 0)
-                    {
-                        WinRingEC_Management.ECRamWrite(lookup, 0x01);
+                    case "GPDWinMax2_AMD":
+                        GPDWinMax2_AMD wm2amd = (GPDWinMax2_AMD)Global_Variables.Global_Variables.Device;
+                        wm2amd.enableFanControl();
+                        wm2amd = null;
+                        break;
 
-                        Global_Variables.Global_Variables.fanControlEnable = true;
-                        Global_Variables.Global_Variables.fanControlMode = "Manual";
-                    }
-
+                    default: break;
                 }
             }
             catch (Exception ex)
@@ -176,18 +139,15 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
             //error FM04
             try
             {
-                if (Global_Variables.Global_Variables.Device.FanCapable)
+                switch (Global_Variables.Global_Variables.Device.ClassType)
                 {
+                    case "GPDWinMax2_AMD":
+                        GPDWinMax2_AMD wm2amd = (GPDWinMax2_AMD)Global_Variables.Global_Variables.Device;
+                        wm2amd.disableFanControl();
+                        wm2amd = null;
+                        break;
 
-                    ushort lookup = Global_Variables.Global_Variables.Device.FanToggleAddress;
-                    if (lookup > 0)
-                    {
-                        WinRingEC_Management.ECRamWrite(lookup, 0x00);
-
-                        Global_Variables.Global_Variables.fanControlEnable = false;
-                        Global_Variables.Global_Variables.fanControlMode = "Hardware";
-                    }
-
+                    default: break;
                 }
             }
             catch (Exception ex)

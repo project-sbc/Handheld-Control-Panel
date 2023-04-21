@@ -9,6 +9,7 @@ namespace Handheld_Control_Panel.Classes
 {
     public abstract class HandheldDevice
     {
+        public string ClassType;
         public string Manufacturer;
         public string Motherboard;
 
@@ -18,8 +19,9 @@ namespace Handheld_Control_Panel.Classes
         public ushort FanToggleAddress;
         public ushort FanChangeAddress;
         public int MaxFanSpeed;
-        public int MinFanSpeed;
         public int MinFanSpeedPercentage;
+        public string fanCurveTemperature;
+        public string fanCurvePackagePower;
 
         public int MaxGPUClock;
         public int MinGPUClock;
@@ -27,6 +29,8 @@ namespace Handheld_Control_Panel.Classes
         public int MinCPUClock;
 
         public string AutoTDP;
+        
+
     }
 
     public static class Device_Management
@@ -76,6 +80,7 @@ namespace Handheld_Control_Panel.Classes
     {
         public GPDWinMax2_AMD()
         {
+            this.ClassType = "GPDWinMax2_AMD";
             this.Manufacturer = "GPD";
             this.Motherboard = "1619-04";
             this.AutoTDP = "GPUClock";
@@ -83,14 +88,51 @@ namespace Handheld_Control_Panel.Classes
             this.FanToggleAddress = 0x275;
             this.FanChangeAddress = 0x1809;
             this.MaxFanSpeed = 184;
-            this.MinFanSpeed = 20;
             this.MinFanSpeedPercentage = 20;
+            this.fanCurveTemperature = "0, 0, 0, 0, 0, 30, 30, 40, 50, 70, 100,";
+            this.fanCurvePackagePower = "0,0,30,30,40,50,60,";
 
             this.MaxCPUClock = 4600;
             this.MinCPUClock = 1100;
             this.MinGPUClock = 400;
             this.MaxGPUClock = 2200;
         }
+        public void enableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            Global_Variables.Global_Variables.fanControlEnabled = true;
+        }
+        public bool fanIsEnabled()
+        {
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+            if (returnvalue == 0) { return false; } else { return true; }
+        }
+        public void disableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress,0x00);
+        }
+        public void readFanSpeed()
+        {
+            int fanSpeed = 0;
+
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+
+            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+        }
+        public void setFanSpeed(int speedPercentage)
+        {
+            if (speedPercentage < MinFanSpeedPercentage && speedPercentage > 0)
+            {
+                speedPercentage = MinFanSpeedPercentage;
+            }
+
+            byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
+            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+
+            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
+        }
+
     }
     public class GPDWin4 : HandheldDevice
     {
@@ -103,8 +145,9 @@ namespace Handheld_Control_Panel.Classes
             this.FanToggleAddress = 0;
             this.FanChangeAddress = 0;
             this.MaxFanSpeed = 184;
-            this.MinFanSpeed = 20;
             this.MinFanSpeedPercentage = 20;
+            this.fanCurveTemperature = "0, 0, 0, 0, 0, 30, 30, 40, 50, 70, 100,";
+            this.fanCurvePackagePower = "0,0,30,30,40,50,60,";
 
             this.MaxCPUClock = 4600;
             this.MinCPUClock = 1100;

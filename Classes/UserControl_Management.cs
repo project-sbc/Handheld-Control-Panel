@@ -437,7 +437,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             switch (sliderTag)
             {
                 case "Slider_Fan-TickChange":
-                    if (Global_Variables.Global_Variables.Device.FanCapable & Global_Variables.Global_Variables.fanControlEnable)
+                    if (Global_Variables.Global_Variables.Device.FanCapable & Global_Variables.Global_Variables.fanControlEnabled)
                     {
                         if (sliderValue == 0)
                         {

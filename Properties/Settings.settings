@@ -77,8 +77,14 @@
     <Setting Name="joystickDeadzone" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1200</Value>
     </Setting>
-    <Setting Name="fanCurve" Type="System.String" Scope="User">
+    <Setting Name="fanCurveTemperature" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="fanCurvePackagePower" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="fanAutoModeTemp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
