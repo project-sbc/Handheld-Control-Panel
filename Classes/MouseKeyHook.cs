@@ -79,11 +79,15 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Unsubscribe()
         {
-            m_GlobalHook.KeyDown -= GlobalHook_KeyEvent;
-            m_GlobalHook.KeyUp -= GlobalHook_KeyEvent;
+            if (m_GlobalHook != null)
+            {
+                m_GlobalHook.KeyDown -= GlobalHook_KeyEvent;
+                m_GlobalHook.KeyUp -= GlobalHook_KeyEvent;
 
-            //It is recommened to dispose it
-            m_GlobalHook.Dispose();
+                //It is recommened to dispose it
+                m_GlobalHook.Dispose();
+            }
+          
         }
 
 

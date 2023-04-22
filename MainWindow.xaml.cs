@@ -56,9 +56,7 @@ namespace Handheld_Control_Panel
           
             InitializeComponent();
 
-           
-
-
+            
             Global_Variables.mainWindow = this;
                       
 
@@ -665,6 +663,10 @@ namespace Handheld_Control_Panel
            
             //added a DPI call to the setWindowSizePosition routine, set parameter to true to force run it
             setWindowSizePosition(true);
+
+            //check if multiple instances are running, if yes message and close the program to prevent errors from two instances running
+            if (Start_Up.checkMultipleProgramsRunning()) { System.Windows.MessageBox.Show("More than one instance of this program running. Closing this to prevent errors."); this.Close(); }
+
 
         }
         private void getDPIScaling()

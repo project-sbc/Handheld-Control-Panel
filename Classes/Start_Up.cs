@@ -138,6 +138,12 @@ namespace Handheld_Control_Panel.Classes
             
         }
 
+        public static bool checkMultipleProgramsRunning()
+        {
+            Process[] processes = Process.GetProcessesByName("Handheld Control Panel");
+            if (processes.Length > 1)
+            { return true; }  else { return false; }
+        }
         
     }
 }
