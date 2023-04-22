@@ -91,8 +91,15 @@ namespace Handheld_Control_Panel.Classes
 
                 Thread.Sleep(1000);
             }
-
-            Fan_Management.Fan_Management.setFanControlHardware();
+            if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
+            {
+                startAutoFan();
+            }
+            else
+            {
+                Fan_Management.Fan_Management.setFanControlHardware();
+            }
+          
 
         }
         private static void mainAutoFanLoop_PackagePower()
@@ -107,14 +114,19 @@ namespace Handheld_Control_Panel.Classes
                 getTargetFanSpeedPercentage();
                 getNewTargetFanSpeedPercentage();
 
-                
+                Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
                 currentFanSpeedPercentage = newFanSpeedPercentage;
 
                 Thread.Sleep(1000);
             }
-
-            Fan_Management.Fan_Management.setFanControlHardware();
-
+            if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
+            {
+                startAutoFan();
+            }
+            else
+            {
+                Fan_Management.Fan_Management.setFanControlHardware();
+            }
 
         }
 

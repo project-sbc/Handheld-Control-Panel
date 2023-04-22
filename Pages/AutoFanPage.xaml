@@ -16,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="62"/>
             <RowDefinition Height="300"/>
+     
             <RowDefinition Height="300"/>
       
         </Grid.RowDefinitions>
@@ -24,20 +25,22 @@
             <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_HotKey}"/>
         </DockPanel>
         <StackPanel Grid.Row="1" x:Name="spPackagePowerPlot">
-            <ScottPlot:WpfPlot x:Name="fanCurvePackagePowerPlot"  Height="300" VerticalAlignment="Top" />
-            <DockPanel >
-                <Label x:Name="PackagePowerLabel" DockPanel.Dock="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
-                <Label x:Name="FanSpeedLabel_Power" DockPanel.Dock="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
-            </DockPanel>
+            <ScottPlot:WpfPlot x:Name="fanCurvePackagePowerPlot"   Height="300" VerticalAlignment="Top" />
+          
         </StackPanel>
         <StackPanel Grid.Row="1" x:Name="spTempPlot">
-            <ScottPlot:WpfPlot x:Name="fanCurveTemperaturePlot"  Height="300" VerticalAlignment="Top" />
+            <ScottPlot:WpfPlot x:Name="fanCurveTemperaturePlot"   Height="300" VerticalAlignment="Top" />
            
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Vertical" >
+            <Label x:Name="PackagePowerLabel" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="FanSpeedLabel_Power" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
             <Label x:Name="TemperatureLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
             <Label x:Name="FanSpeedLabel_Temperature" VerticalAlignment="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+
+
             <Label x:Name="updateLabel"  VerticalAlignment="Top" HorizontalAlignment="Left"    Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="updateFanLabel"  VerticalAlignment="Top" HorizontalAlignment="Left"    Style="{StaticResource userControlMainLabel}" />
         </StackPanel>
     </Grid>
 

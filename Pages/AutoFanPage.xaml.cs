@@ -57,10 +57,14 @@ namespace Handheld_Control_Panel.Pages
             if (Properties.Settings.Default.fanAutoModeTemp)
             {
                 spPackagePowerPlot.Visibility = Visibility.Collapsed;
+                PackagePowerLabel.Visibility = Visibility.Collapsed;
+                FanSpeedLabel_Power.Visibility = Visibility.Collapsed;
             }
             else
             {
                 spTempPlot.Visibility = Visibility.Collapsed;
+                TemperatureLabel.Visibility = Visibility.Collapsed;
+                FanSpeedLabel_Temperature.Visibility = Visibility.Collapsed;
             }
 
             loadSettingFanCurve();
@@ -95,6 +99,7 @@ namespace Handheld_Control_Panel.Pages
             {
                 getLibre_packagepower();
             }
+            updateFanLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentFanSpeed"] + " " + Global_Variables.fanSpeed + " %";
         }
 
         private void handleInputs(string action)
@@ -207,12 +212,12 @@ namespace Handheld_Control_Panel.Pages
 
         private void updateLabels()
         {
-            if (spTempPlot.Visibility == Visibility.Visible)
+            if (Properties.Settings.Default.fanAutoModeTemp)
             {
                 TemperatureLabel.Content = Application.Current.Resources["FanPage_Temperature"] + ": " + dataXtemp[xIndex].ToString();
                 FanSpeedLabel_Temperature.Content = Application.Current.Resources["FanPage_FanSpeed"] + ": " + dataYtemp[xIndex].ToString();
             }
-            if (spPackagePowerPlot.Visibility == Visibility.Visible)
+            else
             {
                 PackagePowerLabel.Content = Application.Current.Resources["FanPage_CPUPower"] + ": " + dataXpower[xIndex].ToString();
                 FanSpeedLabel_Power.Content = Application.Current.Resources["FanPage_FanSpeed"] + ": " + dataYpower[xIndex].ToString();
@@ -327,6 +332,10 @@ namespace Handheld_Control_Panel.Pages
                     if (spPackagePowerPlot.Visibility == Visibility.Visible)
                     {
                         spPackagePowerPlot.Visibility = Visibility.Collapsed;
+                        PackagePowerLabel.Visibility = Visibility.Collapsed;
+                        FanSpeedLabel_Power.Visibility = Visibility.Collapsed;
+                        TemperatureLabel.Visibility = Visibility.Visible;
+                        FanSpeedLabel_Temperature.Visibility = Visibility.Visible;
                         spTempPlot.Visibility = Visibility.Visible;
                         Properties.Settings.Default.fanAutoModeTemp = true;
                     }
@@ -334,13 +343,26 @@ namespace Handheld_Control_Panel.Pages
                     {
                         spPackagePowerPlot.Visibility = Visibility.Visible;
                         spTempPlot.Visibility = Visibility.Collapsed;
+                        TemperatureLabel.Visibility = Visibility.Collapsed;
+                        FanSpeedLabel_Temperature.Visibility = Visibility.Collapsed;
+                        PackagePowerLabel.Visibility = Visibility.Visible;
+                        FanSpeedLabel_Power.Visibility = Visibility.Visible;
                         Properties.Settings.Default.fanAutoModeTemp = false;
                     }
                     Properties.Settings.Default.Save();
                     plotFanCurve();
                     updateLabels();
                 }
-
+                if (Properties.Settings.Default.fanAutoModeTemp)
+                {
+                    spPackagePowerPlot.Visibility = Visibility.Collapsed;
+                  
+                }
+                else
+                {
+                    spTempPlot.Visibility = Visibility.Collapsed;
+                  
+                }
 
             }
 

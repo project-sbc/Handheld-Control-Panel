@@ -222,5 +222,6 @@
 
     <system:String x:Key="Usercontrol_FanCurrentPackagePower">Current CPU Package Power:</system:String>
     <system:String x:Key="Usercontrol_FanCurrentTemperature">Current CPU Temperature:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">Current Fan Speed:</system:String>
 
 </ResourceDictionary>
