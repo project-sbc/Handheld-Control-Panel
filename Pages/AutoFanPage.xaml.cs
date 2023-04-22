@@ -39,6 +39,9 @@ namespace Handheld_Control_Panel.Pages
         private double[] dataXpower = new double[] { };
         private double[] dataYtemp = new double[] { };
         private double[] dataYpower = new double[] { };
+
+        private double[] currentX = new double[1] {0 };
+        private double[] currentY = new double[1] {0 };
         private int xIndex= 0;
 
         private DispatcherTimer updateTempPower = new DispatcherTimer();
@@ -117,6 +120,7 @@ namespace Handheld_Control_Panel.Pages
                                 xIndex = xIndex - 1;
                                 updateLabels();
                             }
+                            plotFanCurve();
                             break;
                         case "Right":
                             if (xIndex < (dataXpower.Length - 1))
@@ -124,7 +128,7 @@ namespace Handheld_Control_Panel.Pages
                                 xIndex = xIndex + 1;
                                 updateLabels();
                             }
-
+                            plotFanCurve();
                             break;
                         case "Up":
                             if (dataYpower[xIndex] < Global_Variables.Device.MinFanSpeedPercentage)
@@ -246,6 +250,9 @@ namespace Handheld_Control_Panel.Pages
             {
                 fanCurvePackagePowerPlot.Plot.Clear();
                 fanCurvePackagePowerPlot.Plot.AddScatter(dataXpower, dataYpower);
+                currentX[0] = dataXpower[xIndex];
+                currentY[0] = dataYpower[xIndex];
+                fanCurvePackagePowerPlot.Plot.AddScatter(currentX, currentY, System.Drawing.Color.Orange,1,10);
                 fanCurvePackagePowerPlot.Refresh();
                 fanCurvePackagePowerPlot.Render();
         
@@ -255,6 +262,9 @@ namespace Handheld_Control_Panel.Pages
             {
                 fanCurveTemperaturePlot.Plot.Clear();
                 fanCurveTemperaturePlot.Plot.AddScatter(dataXtemp, dataYtemp);
+                currentX[0] = dataXtemp[xIndex];
+                currentY[0] = dataYtemp[xIndex];
+                fanCurveTemperaturePlot.Plot.AddScatter(currentX, currentY, System.Drawing.Color.Orange, 1, 10);
                 fanCurveTemperaturePlot.Refresh();
                 fanCurveTemperaturePlot.Render();
               
