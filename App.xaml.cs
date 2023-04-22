@@ -33,10 +33,14 @@ namespace Handheld_Control_Panel
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            //set global error handler
-          
-         
+                        
+            //check to see if multiple instances of program are running
+            Process[] thisProgram = Process.GetProcessesByName("Handheld Control Panel");
+            if (thisProgram.Length > 1)
+            {
+                MessageBox.Show("This program is already running. Closing this instance");
+                Shutdown();
+            }
 
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start

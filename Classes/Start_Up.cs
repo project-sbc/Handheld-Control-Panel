@@ -21,19 +21,21 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class Start_Up
     {
-       
 
         public static void Start_Routine()
         {
 
 
             //run all routines to get device ready
-            //librehardwaremonitor librehardwaremonitor = new librehardwaremonitor();
-        //    librehardwaremonitor.Monitor();
-            
+
+            //    librehardwaremonitor.Monitor();
+
             //test code here
-           
+
             //test code
+
+
+            
 
             //check for updates first
             Update_Software.Update_Software.checkForUpdates(true);
@@ -85,9 +87,7 @@ namespace Handheld_Control_Panel.Classes
 
             //update values
             ParallelTaskUpdate_Management.UpdateTask();
-
-            //get motherboard info
-          //  Fan_Management.Fan_Management.determineFanDevice();
+                   
 
             //check if RTSS should be started at startup
             RTSS.checkAutoStartRTSS();
@@ -137,5 +137,7 @@ namespace Handheld_Control_Panel.Classes
             }
             
         }
+
+        
     }
 }
