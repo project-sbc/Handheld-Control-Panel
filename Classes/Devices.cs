@@ -171,26 +171,26 @@ namespace Handheld_Control_Panel.Classes
 
         public void enableFanControl()
         {
-            WinRingEC_Management.ECRamWriteWin4(FanToggleAddress, 0x01);
+           // WinRingEC_Management.ECRamWriteWin4(FanToggleAddress, 0x01);
             Global_Variables.Global_Variables.fanControlEnabled = true;
         }
         public bool fanIsEnabled()
         {
-            byte returnvalue = WinRingEC_Management.ECRamReadWin4(FanToggleAddress);
-            if (returnvalue == 0) { return false; } else { return true; }
+          //  byte returnvalue = WinRingEC_Management.ECRamReadWin4(FanToggleAddress);
+           // if (returnvalue == 0) { return false; } else { return true; }
         }
         public void disableFanControl()
         {
-            WinRingEC_Management.ECRamWriteWin4(FanToggleAddress, 0x00);
+           // WinRingEC_Management.ECRamWriteWin4(FanToggleAddress, 0x00);
         }
         public void readFanSpeed()
         {
             int fanSpeed = 0;
 
-            byte returnvalue = WinRingEC_Management.ECRamReadWin4(FanChangeAddress);
+           // byte returnvalue = WinRingEC_Management.ECRamReadWin4(FanChangeAddress);
 
-            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
-            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+          //  double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+          //  Global_Variables.Global_Variables.FanSpeed = fanPercentage;
         }
         public void setFanSpeed(int speedPercentage)
         {
@@ -200,7 +200,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
             byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
-            WinRingEC_Management.ECRamWriteWin4(FanChangeAddress, setValue);
+       //    WinRingEC_Management.ECRamWriteWin4(FanChangeAddress, setValue);
 
             Global_Variables.Global_Variables.FanSpeed = speedPercentage;
         }
