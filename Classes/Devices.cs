@@ -156,7 +156,7 @@ namespace Handheld_Control_Panel.Classes
             this.Manufacturer = "GPD";
             this.Motherboard = "1618-04";
             this.AutoTDP = "GPUClock";
-            this.FanCapable = false;
+            this.FanCapable = true;
             this.FanToggleAddress = 0xC311;
             this.FanChangeAddress = 0xC311;
             this.MaxFanSpeed = 127;
