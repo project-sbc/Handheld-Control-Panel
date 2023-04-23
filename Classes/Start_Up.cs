@@ -60,7 +60,7 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.Device = Device_Management.GetCurrentDevice();
 
             Fan_Management.Fan_Management.readSoftwareFanControl();
-            
+            Fan_Management.Fan_Management.readFanSpeed();
 
          
 

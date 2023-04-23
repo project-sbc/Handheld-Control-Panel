@@ -47,7 +47,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         Global_Variables.Global_Variables.fanControlEnabled = wm2amd.fanIsEnabled();
                         wm2amd = null;
                         break;
-
+                    case "OneXPlayer2":
+                        OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
+                        Global_Variables.Global_Variables.fanControlEnabled = oxp2.fanIsEnabled();
+                        oxp2 = null;
+                        break;
                     default: break;
 
                 }
@@ -73,7 +77,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         wm2amd.readFanSpeed();
                         wm2amd = null;
                         break;
-
+                    case "OneXPlayer2":
+                        OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
+                        oxp2.readFanSpeed();
+                        oxp2 = null;
+                        break;
                     default:break;
 
                 }
