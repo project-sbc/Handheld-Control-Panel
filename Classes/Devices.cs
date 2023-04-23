@@ -176,9 +176,9 @@ namespace Handheld_Control_Panel.Classes
             this.Manufacturer = "One-Netbook";
             this.Motherboard = "ONEXPLAYER 2 ARP23";
             this.AutoTDP = "GPUClock";
-            this.FanCapable = true;
+            this.FanCapable = false;
             this.FanToggleAddress = 0x4A;
-            this.FanChangeAddress = 0x44B;
+            this.FanChangeAddress = 0x76;
             this.MaxFanSpeed = 100;
             this.MinFanSpeedPercentage = 20;
             this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
@@ -191,23 +191,23 @@ namespace Handheld_Control_Panel.Classes
         }
         public void enableFanControl()
         {
-            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            //WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
             Global_Variables.Global_Variables.fanControlEnabled = true;
         }
         public bool fanIsEnabled()
         {
-            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+           // byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
             if (returnvalue == 0) { return false; } else { return true; }
         }
         public void disableFanControl()
         {
-            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+           // WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
         }
         public void readFanSpeed()
         {
             int fanSpeed = 0;
 
-            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+          //  byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
 
             double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
             Global_Variables.Global_Variables.FanSpeed = fanPercentage;
@@ -220,7 +220,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
             byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
-            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+           // WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
 
             Global_Variables.Global_Variables.FanSpeed = speedPercentage;
         }
