@@ -136,7 +136,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         wm2amd.enableFanControl();
                         wm2amd = null;
                         break;
-
+                    case "GPDWin4":
+                        GPDWin4 win4 = (GPDWin4)Global_Variables.Global_Variables.Device;
+                        win4.enableFanControl();
+                        win4 = null;
+                        break;
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = true;
@@ -160,7 +164,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         wm2amd.disableFanControl();
                         wm2amd = null;
                         break;
-
+                    case "GPDWin4":
+                        GPDWin4 win4 = (GPDWin4)Global_Variables.Global_Variables.Device;
+                        win4.disableFanControl();
+                        win4 = null;
+                        break;
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = false;
