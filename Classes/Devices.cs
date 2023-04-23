@@ -19,6 +19,7 @@ namespace Handheld_Control_Panel.Classes
         public ushort FanToggleAddress;
         public ushort FanChangeAddress;
         public int MaxFanSpeed;
+        public int MinFanSpeed;
         public int MinFanSpeedPercentage;
         public string fanCurveTemperature;
         public string fanCurvePackagePower;
@@ -99,6 +100,7 @@ namespace Handheld_Control_Panel.Classes
             this.FanToggleAddress = 0x275;
             this.FanChangeAddress = 0x1809;
             this.MaxFanSpeed = 184;
+            this.MinFanSpeed = 0;
             this.MinFanSpeedPercentage = 20;
             this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
             this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
@@ -121,6 +123,7 @@ namespace Handheld_Control_Panel.Classes
         public void disableFanControl()
         {
             WinRingEC_Management.ECRamWrite(FanToggleAddress,0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
         }
         public void readFanSpeed()
         {
@@ -154,9 +157,10 @@ namespace Handheld_Control_Panel.Classes
             this.Motherboard = "1618-04";
             this.AutoTDP = "GPUClock";
             this.FanCapable = false;
-            this.FanToggleAddress = 0x275;
-            this.FanChangeAddress = 0x1809;
-            this.MaxFanSpeed = 184;
+            this.FanToggleAddress = 0xC311;
+            this.FanChangeAddress = 0xC311;
+            this.MaxFanSpeed = 127;
+            this.MinFanSpeed = 1;
             this.MinFanSpeedPercentage = 20;
             this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
             this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
@@ -182,6 +186,7 @@ namespace Handheld_Control_Panel.Classes
         public void disableFanControl()
         {
             WinRingEC_Management.ECRamWriteWin4(FanToggleAddress, 0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
         }
         public void readFanSpeed()
         {
@@ -189,7 +194,7 @@ namespace Handheld_Control_Panel.Classes
 
             byte returnvalue = WinRingEC_Management.ECRamReadWin4(FanChangeAddress);
 
-            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            double fanPercentage = Math.Round(100 * ((Convert.ToDouble(returnvalue)-Convert.ToDouble(MinFanSpeed))  / (MaxFanSpeed - MinFanSpeed)), 0);
             Global_Variables.Global_Variables.FanSpeed = fanPercentage;
         }
         public void setFanSpeed(int speedPercentage)
@@ -199,7 +204,8 @@ namespace Handheld_Control_Panel.Classes
                 speedPercentage = MinFanSpeedPercentage;
             }
 
-            byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
+            byte setValue = (byte)(Math.Round(((double)speedPercentage / 100) * (MaxFanSpeed-MinFanSpeed), 0)+ MinFanSpeed);
+            
             WinRingEC_Management.ECRamWriteWin4(FanChangeAddress, setValue);
 
             Global_Variables.Global_Variables.FanSpeed = speedPercentage;
