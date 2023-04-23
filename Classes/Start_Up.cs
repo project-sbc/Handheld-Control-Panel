@@ -60,9 +60,7 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.Device = Device_Management.GetCurrentDevice();
 
             Fan_Management.Fan_Management.readSoftwareFanControl();
-            Fan_Management.Fan_Management.setFanSpeed(0);
-
-         
+                    
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
             //TDP_Management.TDP_Management.checkDriverBlockRegistry();
