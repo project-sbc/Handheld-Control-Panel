@@ -489,10 +489,18 @@ where childItem : DependencyObject
                     lb.SelectedIndex = selectedIndex + change;
                     lb.ScrollIntoView(lb.SelectedItem);
                 }
-                else if (selectedIndex != 0)
+                else
                 {
-                    lb.SelectedIndex = 0;
-                    lb.ScrollIntoView(lb.SelectedItem);
+                    if (selectedIndex != 0)
+                    {
+                        lb.SelectedIndex = 0;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
+                    else
+                    {
+                        lb.SelectedIndex = lb.Items.Count-1;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
                 }
 
             }
@@ -503,10 +511,18 @@ where childItem : DependencyObject
                     lb.SelectedIndex = selectedIndex + change;
                     lb.ScrollIntoView(lb.SelectedItem);
                 }
-                else if(selectedIndex != upperIndex)
+                else 
                 {
-                    lb.SelectedIndex = upperIndex;
-                    lb.ScrollIntoView(lb.SelectedItem);
+                    if (selectedIndex != upperIndex)
+                    {
+                        lb.SelectedIndex = upperIndex;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
+                    else
+                    {
+                        lb.SelectedIndex = 0;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
                 }
 
                

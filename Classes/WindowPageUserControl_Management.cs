@@ -107,15 +107,25 @@ namespace Handheld_Control_Panel.Classes
 
                             break;
                         case "Up":
-
-                            if (highlightedIndex > 0)
+                            if (highlightedIndex == 0)
                             {
-                                newIndexOffset = -1;
+                                newIndexOffset = userControls.Count;
+                            }
+
+                            newIndexOffset -= 1;
+                            while ((highlightedIndex + newIndexOffset) > 0 && userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Collapsed)
+                            {
+                                newIndexOffset--;
+                            }
+                            if (userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Visible)
+                            {
+                                
                                 Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                                 Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + newIndexOffset].ToString()));
                                 intReturn[0] = highlightedIndex + newIndexOffset;
                                 if (intReturn[0] == 0) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
                             }
+
                             userControls[intReturn[0]].BringIntoView();
 
                             break;
@@ -123,17 +133,28 @@ namespace Handheld_Control_Panel.Classes
                    
                          
                         case "Down":
-                           
-                            if (highlightedIndex < (userControls.Count-1))
+                            //if at the end of the list, set the offset to the number of items to bring you back to the top of the list and work down from there
+                            if (highlightedIndex == userControls.Count - 1)
                             {
-                                newIndexOffset = 1;
-                                Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
-                                Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + newIndexOffset].ToString()));
-                                intReturn[0] = highlightedIndex + newIndexOffset;
-                                if (intReturn[0] == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
-                                //((IScrollInfo)stackPanel).MouseWheelDown();
-                                
+                                newIndexOffset = -(userControls.Count);
                             }
+                            if (highlightedIndex <= (userControls.Count - 1))
+                            {
+                                newIndexOffset += 1;
+                                while ((highlightedIndex + newIndexOffset) < (userControls.Count - 1) && userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Collapsed)
+                                {
+                                    newIndexOffset++;
+                                }    
+                                if (userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Visible)
+                                {
+                                    Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
+                                    Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + newIndexOffset].ToString()));
+                                    intReturn[0] = highlightedIndex + newIndexOffset;
+                                    if (intReturn[0] == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+                                }
+
+                            }
+
                             userControls[intReturn[0]].BringIntoView();
                             break;
                         case "RB":
