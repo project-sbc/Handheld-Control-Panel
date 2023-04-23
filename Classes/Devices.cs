@@ -190,8 +190,6 @@ namespace Handheld_Control_Panel.Classes
         }
         public void readFanSpeed()
         {
-            int fanSpeed = 0;
-
             byte returnvalue = WinRingEC_Management.ECRamReadWin4(FanChangeAddress);
 
             double fanPercentage = Math.Round(100 * ((Convert.ToDouble(returnvalue)-Convert.ToDouble(MinFanSpeed))  / (MaxFanSpeed - MinFanSpeed)), 0);

@@ -78,6 +78,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         oxp2.readFanSpeed();
                         oxp2 = null;
                         break;
+                    case "GPDWin4":
+                        GPDWin4 win4 = (GPDWin4)Global_Variables.Global_Variables.Device;
+                        win4.readFanSpeed();
+                        win4 = null;
+                        break;
                     default:break;
 
                 }
@@ -102,7 +107,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         wm2amd.setFanSpeed(speedPercentage);
                         wm2amd = null;
                         break;
-
+                    case "GPDWin4":
+                        GPDWin4 win4 = (GPDWin4)Global_Variables.Global_Variables.Device;
+                        win4.setFanSpeed(speedPercentage);
+                        win4 = null;
+                        break;
                     default: break;
                 }
 
