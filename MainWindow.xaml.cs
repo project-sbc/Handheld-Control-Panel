@@ -296,6 +296,10 @@ namespace Handheld_Control_Panel
                         {
                             switch (page)
                             {
+                                case "CustomizeHomePage":
+                                    navigateFrame("HomePage");
+                                    break;
+
                                 case "HotKeyEditPage":
                                     Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
                                     navigateFrame("HotKeyPage");
@@ -332,8 +336,8 @@ namespace Handheld_Control_Panel
            
             if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
             {
-                //call check for suspend process
-                FullScreen_Management.checkSuspendProcess();
+                //call check for suspend process   stop this online games are ruined by this
+                //FullScreen_Management.checkSuspendProcess();
 
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
@@ -352,7 +356,7 @@ namespace Handheld_Control_Panel
             else
             {
                 //check resume process
-                FullScreen_Management.checkResumeProcess();
+                //FullScreen_Management.checkResumeProcess();
 
 
                 this.Hide();
@@ -574,11 +578,13 @@ namespace Handheld_Control_Panel
                 switch (newInstructionUserControl)
                 {
 
-
-                
+                    
+                    case "AutoFanPage_Instruction":
+                        instructionStackPanel.Children.Add(new AutoFanPage_Instruction());
+                        break;
                     case "AppLauncherPage_Instruction":
                         instructionStackPanel.Children.Add(new AppLauncherPage_Instruction());
-                    break;
+                        break;
                     case "HomePage_Instruction":
                         instructionStackPanel.Children.Add(new HomePage_Instruction());
                         break;

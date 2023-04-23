@@ -29,7 +29,7 @@ namespace Handheld_Control_Panel.Classes
             //run all routines to get device ready
 
             //    librehardwaremonitor.Monitor();
-
+           
             //test code here
 
             //test code
@@ -112,6 +112,11 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
             Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
 
+
+            if (Properties.Settings.Default.startAutoFan && Global_Variables.Global_Variables.Device.FanCapable)
+            {
+                AutoFan_Management.startAutoFan();
+            }
         }
       
         public static void loadLanguage()

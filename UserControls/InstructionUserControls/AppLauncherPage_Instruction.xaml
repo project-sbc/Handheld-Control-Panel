@@ -21,6 +21,7 @@
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_PageDown}" />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF10D;" />
             </StackPanel>
+
             <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Filter}"  />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEECA;"/>
@@ -30,7 +31,10 @@
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Sort}"  />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEDE3;" />
             </StackPanel>
-
+            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Edit}" />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF096;" />
+            </StackPanel>
             <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Favorite}" />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF095;" />

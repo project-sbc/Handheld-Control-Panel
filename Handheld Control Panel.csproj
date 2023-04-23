@@ -175,6 +175,7 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.SimpleIcons" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Unicons" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.1.2" />
     <PackageReference Include="MouseKeyHook" Version="5.6.0" />
     <PackageReference Include="Nefarius.Drivers.HidHide" Version="1.8.60" />
     <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.8.228" />
@@ -395,6 +396,9 @@
     <Compile Update="UserControls\InstructionUserControls\AppLauncherPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\AutoFanPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\PowerUserControls\CloseProgram_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -468,6 +472,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\PowerUserControls\CloseGame_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\AutostartFan_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">

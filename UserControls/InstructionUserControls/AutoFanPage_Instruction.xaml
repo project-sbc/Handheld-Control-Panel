@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.HomePage_Instruction"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.AutoFanPage_Instruction"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,14 +13,18 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Save}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEDE3;" />
+
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_ToggleMode}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF096;" />
+
+
             <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Close}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Arrange}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF095;" />
-
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Toggle}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Change}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF10E;" />
 
         </StackPanel>
      

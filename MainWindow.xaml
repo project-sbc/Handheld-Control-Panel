@@ -67,9 +67,7 @@
                         <ListBoxItem Tag="Home" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE80F;" />
                         </ListBoxItem>
-                        <ListBoxItem Tag="CustomizeHome" >
-                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE71D;" />
-                        </ListBoxItem>
+                      
                         <ListBoxItem Tag="Profiles" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
                         </ListBoxItem>

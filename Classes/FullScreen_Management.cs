@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Diagnostics.Tracing.Parsers;
+using Microsoft.Diagnostics.Tracing.Session;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,9 +12,10 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class FullScreen_Management
     {
-        public static List<string> ExcludeFullScreeProcessList = new List<string>()
+        public static List<string> ExcludeFullScreenProcessList = new List<string>()
         {
            {"TextInputHost"},
+           {"steamwebhelper"},
 
          };
 
@@ -143,10 +146,32 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (process.MainWindowHandle != IntPtr.Zero)
                 {
+                    if (process.ProcessName.Contains("steamwebhelper"))
+                    {//if catching steamwebhelper it means big picture mode is active, so we need to switch the process to main steam.exe to pause inputs on that
+                        Process[] steam = Process.GetProcessesByName("steam");
+                        if (steam.Length > 0)
+                        {
+                            suspendedProcess = steam.FirstOrDefault();
+                            foreach (ProcessThread pT in suspendedProcess.Threads)
+                            {
+                                IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
 
+                                if (pOpenThread == IntPtr.Zero)
+                                {
+                                    continue;
+                                }
 
-                    if (FullScreen_Management.IsForegroundFullScreen(new HandleRef(null, process.MainWindowHandle), null) && !FullScreen_Management.ExcludeFullScreeProcessList.Contains(process.ProcessName))
+                                SuspendThread(pOpenThread);
+
+                                CloseHandle(pOpenThread);
+                            }
+                            return;
+                        }
+                      
+                    }
+                    else if (FullScreen_Management.IsForegroundFullScreen(new HandleRef(null, process.MainWindowHandle), null) && !FullScreen_Management.ExcludeFullScreenProcessList.Contains(process.ProcessName))
                     {
+                        
                         suspendedProcess = process;
 
                         foreach (ProcessThread pT in process.Threads)
@@ -174,4 +199,5 @@ namespace Handheld_Control_Panel.Classes
 
       
     }
+   
 }

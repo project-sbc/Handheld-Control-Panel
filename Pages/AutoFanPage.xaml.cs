@@ -53,7 +53,7 @@ namespace Handheld_Control_Panel.Pages
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HotKeyPage_Instruction");
+            wnd.changeUserInstruction("AutoFanPage_Instruction");
             wnd = null;
 
 
@@ -171,15 +171,16 @@ namespace Handheld_Control_Panel.Pages
                                 xIndex = xIndex - 1;
                                 updateLabels();
                             }
-                            break;
+                        plotFanCurve();
+                        break;
                         case "Right":
                             if (xIndex < (dataXtemp.Length - 1))
                             {
                                 xIndex = xIndex + 1;
                                 updateLabels();
                             }
-
-                            break;
+                        plotFanCurve();
+                        break;
                         case "Up":
                             if (dataYtemp[xIndex] < Global_Variables.Device.MinFanSpeedPercentage)
                             {
