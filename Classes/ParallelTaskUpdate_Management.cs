@@ -22,7 +22,7 @@ namespace Handheld_Control_Panel.Classes
             updateTasks.Add(() => Classes.RTSS.getRTSSFPSLimit());
             if (Global_Variables.Global_Variables.Device.FanCapable && Global_Variables.Global_Variables.fanControlEnabled)
             {
-                updateTasks.Add(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
+                //updateTasks.Add(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
             }
             if (Global_Variables.Global_Variables.mainWindow == null)
             {
@@ -51,7 +51,7 @@ namespace Handheld_Control_Panel.Classes
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.getRTSSFPSLimit());
             if (Global_Variables.Global_Variables.Device.FanCapable && !Global_Variables.Global_Variables.softwareAutoFanControlEnabled)
             {
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
+                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
             }
        
 

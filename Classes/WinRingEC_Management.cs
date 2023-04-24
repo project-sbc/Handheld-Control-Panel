@@ -233,7 +233,6 @@ namespace Handheld_Control_Panel.Classes
             try
             {
                 lock (lockObject)
-
                 {
                     ols.WriteIoPortByte(reg_addr, 0x2E);
                     ols.WriteIoPortByte(reg_data, 0x11);
@@ -250,8 +249,7 @@ namespace Handheld_Control_Panel.Classes
                     ols.WriteIoPortByte(reg_addr, 0x2F);
                     ols.WriteIoPortByte(reg_data, data);
 
-                    if (ols != null)
-                        ols.DeinitializeOls();
+                    
                 }
             }
             catch
@@ -259,12 +257,13 @@ namespace Handheld_Control_Panel.Classes
                 ols = null;
                 return;
             }
-            ols = null;
+            
         }
 
         public static byte ECRamRead(ushort address)
         {
-            if (ols == null)
+
+                if (ols == null)
                 OlsInit();
             if (ols == null)
                 return 0;
@@ -274,7 +273,6 @@ namespace Handheld_Control_Panel.Classes
             try
             {
                 lock (lockObject)
-
                 {
                     ols.WriteIoPortByte(reg_addr, 0x2E);
                     ols.WriteIoPortByte(reg_data, 0x11);
@@ -290,16 +288,15 @@ namespace Handheld_Control_Panel.Classes
                     ols.WriteIoPortByte(reg_data, 0x12);
                     ols.WriteIoPortByte(reg_addr, 0x2F);
                     data = ols.ReadIoPortByte(reg_data);
-                    if (ols != null)
-                        ols.DeinitializeOls();
                 }
+              
             }
             catch
             {
                 ols = null;
                 return 0;
             }
-            ols = null;
+            
             return data;
         }
 

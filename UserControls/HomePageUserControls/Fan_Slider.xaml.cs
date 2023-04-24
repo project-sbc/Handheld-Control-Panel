@@ -90,6 +90,7 @@ namespace Handheld_Control_Panel.UserControls
                     Global_Variables.softwareAutoFanControlEnabled = false;
                     fanMode = "Manual";
                     Fan_Management.setFanControlManual();
+                    Fan_Management.readFanSpeed();
                 }
                 else
                 {
