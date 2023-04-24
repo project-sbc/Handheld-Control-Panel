@@ -61,16 +61,56 @@ namespace Handheld_Control_Panel.Classes
 
 
                     break;
+                case "ONE-NETBOOK TECHNOLOGY CO., LTD.":
                 case "ONE-NETBOOK":
                     switch (product)
                     {
                         case "ONEXPLAYER 2 ARP23":
                             handheldDevice = new OneXPlayer2();
                             break;
-                        
+                        case "V01":
+                            handheldDevice = new OneXPlayerMiniAMD();
+                            break;
+                        case "1002-C":
+                            handheldDevice = new OneXPlayerMiniIntel();
+                            break;
+                        case "V03":
+                            handheldDevice = new OneXPlayerMiniPro();
+                            break;
                     }
 
 
+                    break;
+                case "AYANEO":
+                    switch (product)
+                    {
+                        case "AIR":
+                            device = new AYANEOAIR();
+                            break;
+                        case "AIR Pro":
+                            device = new AYANEOAIRPro();
+                            break;
+                        case "AIR Lite":
+                            device = new AYANEOAIRLite();
+                            break;
+                        case "AYA NEO FOUNDER":
+                        case "AYANEO 2021":
+                            device = new AYANEO2021();
+                            break;
+                        case "AYANEO 2021 Pro":
+                        case "AYANEO 2021 Pro Retro Power":
+                            device = new AYANEO2021Pro();
+                            break;
+                        case "NEXT Pro":
+                        case "NEXT Advance":
+                        case "NEXT":
+                            device = new AYANEONEXT();
+                            break;
+                        case "AYANEO 2":
+                        case "GEEK":
+                            handheldDevice = new AYANEO2();
+                            break;
+                    }
                     break;
                 default:
 
@@ -209,7 +249,66 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.FanSpeed = speedPercentage;
         }
     }
+    public class AyaNeo2 : HandheldDevice
+    {
+        public AyaNeo2()
+        {
+            this.ClassType = "AyaNeo2";
+            this.Manufacturer = "Aya";
+            this.Motherboard = "AYANEO 2/GEEK";
+            this.AutoTDP = "GPUClock";
+            this.FanCapable = true;
+            this.FanToggleAddress = 0x44A;
+            this.FanChangeAddress = 0x44B;
+            this.MaxFanSpeed = 100;
+            this.MinFanSpeed = 0;
+            this.MinFanSpeedPercentage = 25;
+            this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
+            this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
 
+            this.MaxCPUClock = 4600;
+            this.MinCPUClock = 1100;
+            this.MinGPUClock = 400;
+            this.MaxGPUClock = 2200;
+        }
+        public void enableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            Global_Variables.Global_Variables.fanControlEnabled = true;
+        }
+        public bool fanIsEnabled()
+        {
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+            if (returnvalue == 0) { return false; } else { return true; }
+        }
+        public void disableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
+        }
+        public void readFanSpeed()
+        {
+            int fanSpeed = 0;
+
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+
+            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+        }
+        public void setFanSpeed(int speedPercentage)
+        {
+            if (speedPercentage < MinFanSpeedPercentage && speedPercentage > 0)
+            {
+                speedPercentage = MinFanSpeedPercentage;
+            }
+
+            byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
+            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+
+            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
+        }
+
+    }
     public class OneXPlayer2 : HandheldDevice
     {
         public OneXPlayer2()

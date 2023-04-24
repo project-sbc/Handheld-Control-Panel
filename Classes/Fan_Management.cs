@@ -48,6 +48,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         Global_Variables.Global_Variables.fanControlEnabled = w4.fanIsEnabled();
                         w4 = null;
                         break;
+                    case "AyaNeo2":
+                        AyaNeo2 an2 = (AyaNeo2)Global_Variables.Global_Variables.Device;
+                        Global_Variables.Global_Variables.fanControlEnabled = an2.fanIsEnabled();
+                        an2 = null;
+                        break;
                     default: break;
 
                 }
@@ -83,6 +88,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         win4.readFanSpeed();
                         win4 = null;
                         break;
+                    case "AyaNeo2":
+                        AyaNeo2 an2 = (AyaNeo2)Global_Variables.Global_Variables.Device;
+                        an2.readFanSpeed();
+                        an2 = null;
+                        break;
                     default:break;
 
                 }
@@ -111,6 +121,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         GPDWin4 win4 = (GPDWin4)Global_Variables.Global_Variables.Device;
                         win4.setFanSpeed(speedPercentage);
                         win4 = null;
+                        break;
+                    case "AyaNeo2":
+                        AyaNeo2 an2 = (AyaNeo2)Global_Variables.Global_Variables.Device;
+                        an2.setFanSpeed(speedPercentage);
+                        an2 = null;
                         break;
                     default: break;
                 }
@@ -141,6 +156,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         win4.enableFanControl();
                         win4 = null;
                         break;
+                    case "AyaNeo2":
+                        AyaNeo2 an2 = (AyaNeo2)Global_Variables.Global_Variables.Device;
+                        an2.enableFanControl();
+                        an2 = null;
+                        break;
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = true;
@@ -169,6 +189,12 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         win4.disableFanControl();
                         win4 = null;
                         break;
+                    case "AyaNeo2":
+                        AyaNeo2 an2 = (AyaNeo2)Global_Variables.Global_Variables.Device;
+                        an2.disableFanControl();
+                        an2 = null;
+                        break;
+                        
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = false;

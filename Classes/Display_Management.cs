@@ -1,6 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using DisplaySettings;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -127,6 +129,30 @@ namespace Handheld_Control_Panel.Classes.Display_Management
 
             return result;
 
+        }
+
+        public static void testGettingResolutionFromNewNugetPackage()
+        {
+            List<DisplaySettingsChanger.DisplayMode> listy = DisplaySettingsChanger.GetSupportedModes();
+            DisplaySettingsChanger.DisplayMode dmm = DisplaySettingsChanger.GetCurrentDisplayMode();
+            
+
+
+            Debug.WriteLine(dmm.dmPelsWidth);
+            Debug.WriteLine(dmm.dmPelsHeight);
+            Debug.WriteLine(dmm.dmSize);
+
+            foreach (DisplaySettingsChanger.DisplayMode displayMode in listy)
+            {
+                Debug.WriteLine(displayMode.dmPelsHeight);
+                Debug.WriteLine(displayMode.dmPelsWidth);
+      
+       
+
+                Debug.WriteLine(displayMode.dmDisplayFrequency);
+
+
+            }
         }
 
         public static void generateDisplayResolutionAndRateListOLD()
