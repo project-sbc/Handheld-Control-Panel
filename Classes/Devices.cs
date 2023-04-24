@@ -317,7 +317,7 @@ namespace Handheld_Control_Panel.Classes
             this.Manufacturer = "One-Netbook";
             this.Motherboard = "ONEXPLAYER 2 ARP23";
             this.AutoTDP = "GPUClock";
-            this.FanCapable = false;
+            this.FanCapable = true;
             this.FanToggleAddress = 0x44A;
             this.FanChangeAddress = 0x44B;
             this.MaxFanSpeed = 184;
@@ -338,7 +338,7 @@ namespace Handheld_Control_Panel.Classes
         }
         public bool fanIsEnabled()
         {
-            return false;
+       
             byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
             if (returnvalue == 0) { return false; } else { return true; }
         }

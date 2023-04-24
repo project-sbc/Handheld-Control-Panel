@@ -127,6 +127,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         an2.setFanSpeed(speedPercentage);
                         an2 = null;
                         break;
+                    case "OneXPlayer2":
+                        OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
+                        oxp2.setFanSpeed(speedPercentage);
+                        oxp2 = null;
+                        break;
                     default: break;
                 }
 
@@ -161,6 +166,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         an2.enableFanControl();
                         an2 = null;
                         break;
+                    case "OneXPlayer2":
+                        OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
+                        oxp2.enableFanControl();
+                        oxp2 = null;
+                        break;
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = true;
@@ -194,7 +204,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         an2.disableFanControl();
                         an2 = null;
                         break;
-                        
+                    case "OneXPlayer2":
+                        OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
+                        oxp2.disableFanControl();
+                        oxp2 = null;
+                        break;
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = false;
