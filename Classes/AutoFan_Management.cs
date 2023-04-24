@@ -18,8 +18,14 @@ namespace Handheld_Control_Panel.Classes
         private static double[] dataYvalues;
         private static bool tempControlled;
         private static int currentFanSpeedPercentage;
+
         private static int targetFanSpeedPercentage;
+        private static int oldTargetFanSpeedPercentage;
+        private static int tempBracket;
+        private static int oldTempBracket;
+
         private static int newFanSpeedPercentage;
+        private static DateTime continueFanOperationDateTime = null;
         private static object lockObj = new object();
         private static Computer computer = new Computer
         {
@@ -83,10 +89,23 @@ namespace Handheld_Control_Panel.Classes
                 getLibre_cpuTemperature();
 
                 getTargetFanSpeedPercentage();
-                getNewTargetFanSpeedPercentage();
 
-                Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
-                currentFanSpeedPercentage = newFanSpeedPercentage;
+                
+
+
+                if ( tempBracket < oldTempBracket )
+                {
+                    if (avg_cpuTemperature < (oldTempBracket - 2))
+                    {
+
+                        getNewTargetFanSpeedPercentage();
+
+                        Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
+                        currentFanSpeedPercentage = newFanSpeedPercentage;
+                    }
+                }
+
+
 
 
                 Thread.Sleep(1000);
@@ -95,10 +114,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 startAutoFan();
             }
-            else
-            {
-                Fan_Management.Fan_Management.setFanControlHardware();
-            }
+           
           
 
         }
@@ -112,6 +128,12 @@ namespace Handheld_Control_Panel.Classes
                 getLibre_cpuTemperature();
 
                 getTargetFanSpeedPercentage();
+
+                if (targetFanSpeedPercentage != oldTargetFanSpeedPercentage)
+                {
+                    Thread.Sleep(2000);
+                }
+                oldTargetFanSpeedPercentage = targetFanSpeedPercentage;
                 getNewTargetFanSpeedPercentage();
 
                 Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
@@ -123,10 +145,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 startAutoFan();
             }
-            else
-            {
-                Fan_Management.Fan_Management.setFanControlHardware();
-            }
+          
 
         }
 
@@ -217,6 +236,7 @@ namespace Handheld_Control_Panel.Classes
                         {
                             if (avg_cpuTemperature <= d)
                             {
+                                tempBracket = (int)Math.Round(d,0);
                                 targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
                                 break;
                             }
