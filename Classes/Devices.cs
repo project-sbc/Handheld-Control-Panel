@@ -69,13 +69,13 @@ namespace Handheld_Control_Panel.Classes
                             handheldDevice = new OneXPlayer2();
                             break;
                         case "V01":
-                            handheldDevice = new OneXPlayerMiniAMD();
+                            //handheldDevice = new OneXPlayerMiniAMD();
                             break;
                         case "1002-C":
-                            handheldDevice = new OneXPlayerMiniIntel();
+                            //handheldDevice = new OneXPlayerMiniIntel();
                             break;
                         case "V03":
-                            handheldDevice = new OneXPlayerMiniPro();
+                           //handheldDevice = new OneXPlayerMiniPro();
                             break;
                     }
 
@@ -85,30 +85,30 @@ namespace Handheld_Control_Panel.Classes
                     switch (product)
                     {
                         case "AIR":
-                            device = new AYANEOAIR();
+                          //  device = new AYANEOAIR();
                             break;
                         case "AIR Pro":
-                            device = new AYANEOAIRPro();
+                          // device = new AYANEOAIRPro();
                             break;
                         case "AIR Lite":
-                            device = new AYANEOAIRLite();
+                           // device = new AYANEOAIRLite();
                             break;
                         case "AYA NEO FOUNDER":
                         case "AYANEO 2021":
-                            device = new AYANEO2021();
+                            //device = new AYANEO2021();
                             break;
                         case "AYANEO 2021 Pro":
                         case "AYANEO 2021 Pro Retro Power":
-                            device = new AYANEO2021Pro();
+                            //device = new AYANEO2021Pro();
                             break;
                         case "NEXT Pro":
                         case "NEXT Advance":
                         case "NEXT":
-                            device = new AYANEONEXT();
+                            //device = new AYANEONEXT();
                             break;
                         case "AYANEO 2":
                         case "GEEK":
-                            handheldDevice = new AYANEO2();
+                            handheldDevice = new AyaNeo2();
                             break;
                     }
                     break;
@@ -318,10 +318,11 @@ namespace Handheld_Control_Panel.Classes
             this.Motherboard = "ONEXPLAYER 2 ARP23";
             this.AutoTDP = "GPUClock";
             this.FanCapable = false;
-            this.FanToggleAddress = 0x4A;
-            this.FanChangeAddress = 0x76;
-            this.MaxFanSpeed = 100;
-            this.MinFanSpeedPercentage = 20;
+            this.FanToggleAddress = 0x44A;
+            this.FanChangeAddress = 0x44B;
+            this.MaxFanSpeed = 184;
+            this.MinFanSpeed = 0;
+            this.MinFanSpeedPercentage = 25;
             this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
             this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
 
@@ -332,27 +333,28 @@ namespace Handheld_Control_Panel.Classes
         }
         public void enableFanControl()
         {
-            //WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
             Global_Variables.Global_Variables.fanControlEnabled = true;
         }
         public bool fanIsEnabled()
         {
             return false;
-           // byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
-            //if (returnvalue == 0) { return false; } else { return true; }
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+            if (returnvalue == 0) { return false; } else { return true; }
         }
         public void disableFanControl()
         {
-           // WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
         }
         public void readFanSpeed()
         {
             int fanSpeed = 0;
 
-          //  byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
 
-            //double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
-          //  Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
         }
         public void setFanSpeed(int speedPercentage)
         {
@@ -362,7 +364,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
             byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
-           // WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
 
             Global_Variables.Global_Variables.FanSpeed = speedPercentage;
         }
