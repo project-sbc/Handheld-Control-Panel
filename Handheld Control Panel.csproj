@@ -489,6 +489,9 @@
     <Compile Update="UserControls\SettingsUserControls\MaxGPU_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\SettingsUserControls\FanSettings_Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\SettingsUserControls\Update_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

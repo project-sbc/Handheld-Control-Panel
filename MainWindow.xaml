@@ -80,7 +80,7 @@
                         <ListBoxItem Tag="AppLauncher" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F9;" />
                         </ListBoxItem>
-                        <ListBoxItem Tag="AutoFan" >
+                        <ListBoxItem Tag="Information" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE946;" />
                         </ListBoxItem>
                         <ListBoxItem Tag="Settings" >

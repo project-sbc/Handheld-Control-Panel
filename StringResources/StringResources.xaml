@@ -224,6 +224,7 @@
     <system:String x:Key="Usercontrol_FanCurrentTemperature">Current CPU Temperature:</system:String>
     <system:String x:Key="Usercontrol_FanCurrentFanSpeed">Current Fan Speed:</system:String>
     <system:String x:Key="Usercontrol_AutostartFan">Autostart Fan Control</system:String>
+    <system:String x:Key="Usercontrol_FanSettings">Fan Settings</system:String>
     <system:String x:Key="Instruction_Change">CHANGE</system:String>
     <system:String x:Key="Instruction_ToggleMode">TOGGLE MODE</system:String>
 </ResourceDictionary>

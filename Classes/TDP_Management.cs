@@ -552,7 +552,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 {
                     string errorMsg = "Error: ChangeTDP.cs:  Run AMD TDP Read: " + ex.Message + ", processRyzenAdj is " + processRyzenAdj + ", result is " + result + ", commandargument is " + commandArguments;
                     Log_Writer.writeLog(errorMsg);
-                    MessageBox.Show(errorMsg);
+                    //MessageBox.Show(errorMsg);
 
                 }
             }

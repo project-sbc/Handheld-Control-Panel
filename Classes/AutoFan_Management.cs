@@ -25,7 +25,7 @@ namespace Handheld_Control_Panel.Classes
         private static int oldTempBracket;
 
         private static int newFanSpeedPercentage;
-        private static DateTime continueFanOperationDateTime = null;
+        private static DateTime continueFanOperationDateTime = DateTime.Now;
         private static object lockObj = new object();
         private static Computer computer = new Computer
         {
@@ -90,21 +90,12 @@ namespace Handheld_Control_Panel.Classes
 
                 getTargetFanSpeedPercentage();
 
-                
 
 
-                if ( tempBracket < oldTempBracket )
-                {
-                    if (avg_cpuTemperature < (oldTempBracket - 2))
-                    {
-
-                        getNewTargetFanSpeedPercentage();
-
-                        Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
-                        currentFanSpeedPercentage = newFanSpeedPercentage;
-                    }
-                }
-
+                getNewTargetFanSpeedPercentage();
+              
+                Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
+                currentFanSpeedPercentage = newFanSpeedPercentage;
 
 
 
@@ -129,11 +120,6 @@ namespace Handheld_Control_Panel.Classes
 
                 getTargetFanSpeedPercentage();
 
-                if (targetFanSpeedPercentage != oldTargetFanSpeedPercentage)
-                {
-                    Thread.Sleep(2000);
-                }
-                oldTargetFanSpeedPercentage = targetFanSpeedPercentage;
                 getNewTargetFanSpeedPercentage();
 
                 Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
@@ -228,7 +214,7 @@ namespace Handheld_Control_Panel.Classes
                     if (avg_cpuTemperature > dataXvalues[dataXvalues.Length - 1])
                     {
                         targetFanSpeedPercentage = (int)Math.Round(dataYvalues[dataXvalues.Length - 1], 0);
-
+                        tempBracket = (int)Math.Round(dataXvalues[dataXvalues.Length - 1],0);
                     }
                     else
                     {
@@ -236,8 +222,22 @@ namespace Handheld_Control_Panel.Classes
                         {
                             if (avg_cpuTemperature <= d)
                             {
-                                tempBracket = (int)Math.Round(d,0);
-                                targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
+                                if (index > 0)
+                                {
+                                    double slope = (dataYvalues[index] - dataYvalues[index - 1]) / (dataXvalues[index] - dataXvalues[index - 1]);
+                                    double constant = ((dataXvalues[index]* dataYvalues[index-1]) - (dataXvalues[index-1] * dataYvalues[index]))/ (dataXvalues[index] - dataXvalues[index - 1]);
+                                    double resultY = (double)(slope * avg_cpuTemperature + constant);
+                                    targetFanSpeedPercentage = (int)Math.Round(resultY, 0, MidpointRounding.ToEven);
+                                }
+                                else
+                                {
+                                    tempBracket = (int)Math.Round(d, 0);
+                                    targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
+                                }
+
+                               
+
+                               
                                 break;
                             }
 
@@ -260,6 +260,26 @@ namespace Handheld_Control_Panel.Classes
                         {
                             if (avg_packagePower <= d)
                             {
+                                if (index > 0)
+                                {
+                                    double slopePP = (dataYvalues[index] - dataYvalues[index - 1]) / (dataXvalues[index] - dataXvalues[index - 1]);
+                                    double constantPP = ((dataXvalues[index] * dataYvalues[index - 1]) - (dataXvalues[index - 1] * dataYvalues[index])) / (dataXvalues[index] - dataXvalues[index - 1]);
+                                    double resultYPP = (double)(slopePP * avg_cpuTemperature + constantPP);
+                                    targetFanSpeedPercentage = (int)Math.Round(resultYPP, 0, MidpointRounding.ToEven);
+                                }
+                                else
+                                {
+                                 
+                                    targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
+                                }
+
+
+                                double slope = (dataYvalues[index] - dataYvalues[index - 1]) / (dataXvalues[index] - dataXvalues[index - 1]);
+                                double constant = ((dataXvalues[index] * dataYvalues[index - 1]) - (dataXvalues[index - 1] * dataYvalues[index])) / (dataXvalues[index] - dataXvalues[index - 1]);
+                                double resultY = (double)(slope * avg_packagePower + constant);
+                                targetFanSpeedPercentage = (int)Math.Round(resultY, 0, MidpointRounding.ToEven);
+
+
                                 targetFanSpeedPercentage = (int)Math.Round(dataYvalues[index], 0);
                                 break;
                             }

@@ -300,6 +300,9 @@ namespace Handheld_Control_Panel
                                     navigateFrame("HomePage");
                                     break;
 
+                                case "AutoFanPage":
+                                    navigateFrame("SettingsPage");
+                                    break;
                                 case "HotKeyEditPage":
                                     Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
                                     navigateFrame("HotKeyPage");

@@ -44,6 +44,9 @@ namespace Handheld_Control_Panel.Pages
         private double[] currentY = new double[1] {0 };
         private int xIndex= 0;
 
+        private double cpuTemp = 0;
+        private double cpuPowerPackage = 0;
+
         private DispatcherTimer updateTempPower = new DispatcherTimer();
 
 
@@ -103,6 +106,7 @@ namespace Handheld_Control_Panel.Pages
                 getLibre_packagepower();
             }
             updateFanLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentFanSpeed"] + " " + Global_Variables.fanSpeed + " %";
+            plotFanCurve();
         }
 
         private void handleInputs(string action)
@@ -253,10 +257,18 @@ namespace Handheld_Control_Panel.Pages
                 fanCurvePackagePowerPlot.Plot.AddScatter(dataXpower, dataYpower);
                 currentX[0] = dataXpower[xIndex];
                 currentY[0] = dataYpower[xIndex];
-                fanCurvePackagePowerPlot.Plot.AddScatter(currentX, currentY, System.Drawing.Color.Orange,1,10);
+                fanCurvePackagePowerPlot.Plot.AddScatter(currentX, currentY, System.Drawing.Color.White,1,10);
+          
+        
+                if (cpuPowerPackage != 0)
+                {
+                    double[] currentPackagepower = new double[] { cpuPowerPackage };
+                    double[] currentFanCurve = new double[] { Global_Variables.fanSpeed };
+
+                    fanCurvePackagePowerPlot.Plot.AddScatter(currentPackagepower, currentFanCurve, System.Drawing.Color.Orange, 1, 10);
+                }
                 fanCurvePackagePowerPlot.Refresh();
                 fanCurvePackagePowerPlot.Render();
-        
 
             }
             else
@@ -265,7 +277,14 @@ namespace Handheld_Control_Panel.Pages
                 fanCurveTemperaturePlot.Plot.AddScatter(dataXtemp, dataYtemp);
                 currentX[0] = dataXtemp[xIndex];
                 currentY[0] = dataYtemp[xIndex];
-                fanCurveTemperaturePlot.Plot.AddScatter(currentX, currentY, System.Drawing.Color.Orange, 1, 10);
+                fanCurveTemperaturePlot.Plot.AddScatter(currentX, currentY, System.Drawing.Color.White, 1, 10);
+                if (cpuTemp != 0)
+                {
+                    double[] currentPackagepower = new double[] { cpuTemp };
+                    double[] currentFanCurve = new double[] { Global_Variables.fanSpeed };
+
+                    fanCurveTemperaturePlot.Plot.AddScatter(currentPackagepower, currentFanCurve, System.Drawing.Color.Orange, 1, 10);
+                }
                 fanCurveTemperaturePlot.Refresh();
                 fanCurveTemperaturePlot.Render();
               
@@ -310,8 +329,6 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-
-
 
         }
 
@@ -412,7 +429,9 @@ namespace Handheld_Control_Panel.Pages
                 ISensor package = hardware.Sensors.FirstOrDefault(c => c.Name == "Package");
                 if (package != null)
                 {
-                    updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentPackagePower"] + " " + Math.Round((double)package.Value,1).ToString() + " W";
+                    cpuPowerPackage = Math.Round((double)package.Value, 1);
+                    updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentPackagePower"] + " " + cpuPowerPackage.ToString() + " W";
+
 
                    
                     break;
@@ -420,7 +439,7 @@ namespace Handheld_Control_Panel.Pages
             }
 
         }
-
+        
 
         private void getLibre_cpuTemperature()
         {
@@ -430,7 +449,9 @@ namespace Handheld_Control_Panel.Pages
                 ISensor temperature = hardware.Sensors.FirstOrDefault(c => c.Name == "Core (Tctl/Tdie)");
                 if (temperature != null)
                 {
-                    updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentTemperature"] + " " + Math.Round((double)temperature.Value, 1).ToString() + " C";
+                    cpuTemp = Math.Round((double)temperature.Value, 1);
+
+                    updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentTemperature"] + " " + cpuTemp.ToString() + " C";
 
                     break;
                 }
@@ -443,8 +464,9 @@ namespace Handheld_Control_Panel.Pages
                         ISensor temperature2 = subhardware.Sensors.FirstOrDefault(c => c.Name == "Core (Tctl/Tdie)");
                         if (temperature2 != null)
                         {
-                            updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentTemperature"] + " " + Math.Round((double)temperature.Value, 1).ToString() + " C";
+                            cpuTemp = Math.Round((double)temperature.Value, 1);
 
+                            updateLabel.Content = Application.Current.Resources["Usercontrol_FanCurrentTemperature"] + " " + cpuTemp.ToString() + " C";
                             break;
                         }
                     }
