@@ -37,7 +37,11 @@ namespace Handheld_Control_Panel.UserControls
         private string usercontrol = "";
         public FanSettings_Button()
         {
-            InitializeComponent();
+            if (Global_Variables.Device.FanCapable == true)
+            {
+                InitializeComponent();
+            }
+            else { this.Visibility = Visibility.Collapsed; }
             
         }
 

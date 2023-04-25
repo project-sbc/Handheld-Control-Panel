@@ -562,6 +562,7 @@ namespace Handheld_Control_Panel
             {
                 Global_Variables.softwareAutoFanControlEnabled = false;
                 Fan_Management.setFanControlHardware();
+                WinRingEC_Management.OlsFree();
             }
         }
         

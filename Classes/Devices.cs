@@ -201,7 +201,7 @@ namespace Handheld_Control_Panel.Classes
             this.FanChangeAddress = 0xC311;
             this.MaxFanSpeed = 127;
             this.MinFanSpeed = 1;
-            this.MinFanSpeedPercentage = 20;
+            this.MinFanSpeedPercentage = 25;
             this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
             this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
 
