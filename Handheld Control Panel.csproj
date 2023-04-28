@@ -237,16 +237,16 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Parameter_Dropdown.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Parameter_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Hotkey_Button.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Hotkey_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Type_Dropdown.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Type_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Action_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditMouseModeUserControls\DefaultMM_Toggle.xaml.cs">
