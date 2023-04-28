@@ -235,7 +235,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static Action_Management hotKeys;
         public static CustomizeHome_Management homePageItems;
         //Power
-        public static string powerStatus = "";
+        public static string powerStatus = SystemParameters.PowerLineStatus.ToString();
         public static int batteryLevel = -1;
 
         //controller status
