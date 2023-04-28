@@ -158,7 +158,8 @@ namespace Handheld_Control_Panel.Classes.Display_Management
         public static void generateDisplayResolutionAndRateListOLD()
         {
             Global_Variables.Global_Variables.resolutions.Clear();
-            //Global_Variables.Global_Variables.refreshRates.Clear();
+    
+            Global_Variables.Global_Variables.resolution_refreshrates.Clear();
             string commandArguments = " /L";
             string result = QResCLIResult(commandArguments);
 

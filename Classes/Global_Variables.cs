@@ -258,6 +258,10 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
             set
             {
                 resolution= value;
+                if (!resolutions.Contains(value))
+                {
+                    Display_Management.Display_Management.generateDisplayResolutionAndRateList();
+                }
                 raiseValueChanged("Resolution");
             }
         }
