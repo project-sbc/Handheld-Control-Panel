@@ -27,17 +27,17 @@ namespace Handheld_Control_Panel.Pages
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HotKeyPage : Page
+    public partial class ActionPage : Page
     {
         private string windowpage;
 
-        public HotKeyPage()
+        public ActionPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HotKeyPage_Instruction");
+            wnd.changeUserInstruction("ActionPage_Instruction");
             wnd = null;
           
         }
@@ -85,20 +85,23 @@ namespace Handheld_Control_Panel.Pages
                         case "A":
                             Global_Variables.hotKeys.editingHotkey = (HotkeyItem)controlList.SelectedItem;
                             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.navigateFrame("HotKeyEditPage");
+                            wnd.navigateFrame("ActionEditPage");
                             break;
 
                         case "Start":
                             Global_Variables.hotKeys.addNewHotkey();
                             controlList.Items.Refresh();
                             break;
-                        case "X":
-   
+                        case "Delete_Action":
+
                             Global_Variables.hotKeys.deleteHotkey(hotkey);
                             controlList.Items.Refresh();
                             Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
                             Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
+                            break;
+                        case "X":
+                            Notification_Management.ShowYesNoPrompt("Delete current action?", Notification.Wpf.NotificationType.Warning, "Delete_Action");
                             break;
                         case "Up":
                             if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = controlList.Items.Count - 1; }

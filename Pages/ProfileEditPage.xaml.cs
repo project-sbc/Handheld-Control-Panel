@@ -130,7 +130,7 @@ namespace Handheld_Control_Panel.Pages
             {
                 if (Global_Variables.profiles.editingProfile == Global_Variables.profiles.activeProfile)
                 {
-                    Global_Variables.profiles.activeProfile.applyProfile();
+                    Global_Variables.profiles.activeProfile.applyProfile(false,false);
                 }
             }
         }

@@ -101,6 +101,7 @@ namespace Handheld_Control_Panel.Classes
 
                 Thread.Sleep(1000);
             }
+            WinRingEC_Management.OlsFree();
             if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
             {
                 startAutoFan();
@@ -127,6 +128,7 @@ namespace Handheld_Control_Panel.Classes
 
                 Thread.Sleep(1000);
             }
+            WinRingEC_Management.OlsFree();
             if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
             {
                 startAutoFan();

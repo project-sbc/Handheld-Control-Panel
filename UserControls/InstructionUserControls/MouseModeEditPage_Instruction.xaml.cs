@@ -36,6 +36,15 @@ namespace Handheld_Control_Panel.UserControls
             InitializeComponent();
         }
 
-      
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Tag != "")
+            {
+                Controller_Management.buttonEvents.raiseControllerInput(button.Tag.ToString());
+
+            }
+
+        }
     }
 }

@@ -28,16 +28,25 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class HotKeyPage_Instruction : UserControl
+    public partial class ActionEditPage_Instruction : UserControl
     {
  
-        public HotKeyPage_Instruction()
+        public ActionEditPage_Instruction()
         {
             InitializeComponent();
            
           
         }
 
-      
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Tag != "")
+            {
+                Controller_Management.buttonEvents.raiseControllerInput(button.Tag.ToString());
+
+            }
+
+        }
     }
 }

@@ -7,7 +7,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
-    <system:String x:Key="MainWindow_NavigationView_HotKey">Hotkeys</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">Action</system:String>
     <system:String x:Key="MainWindow_NavigationView_AppLauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
@@ -16,7 +16,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_HotKey">Hotkeys</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">Action</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
@@ -180,8 +180,8 @@
     <system:String x:Key="Instruction_Sort">SORT</system:String>
     <system:String x:Key="Instruction_Filter">FILTER</system:String>
     <system:String x:Key="Instruction_Favorite">FAVORITE</system:String>
-    <system:String x:Key="Instruction_PageDown">PAGE DOWN</system:String>
-    <system:String x:Key="Instruction_PageUp">PAGE UP</system:String>
+    <system:String x:Key="Instruction_PageDown">PG DOWN</system:String>
+    <system:String x:Key="Instruction_PageUp">PG UP</system:String>
 
         
         <!-- new strings 03apr2023-->

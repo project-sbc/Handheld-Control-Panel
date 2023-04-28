@@ -7,7 +7,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Home">主页</system:String>
     <system:String x:Key="MainWindow_NavigationView_Profiles">剖面</system:String>
-    <system:String x:Key="MainWindow_NavigationView_HotKey">热键</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">热键</system:String>
     <system:String x:Key="MainWindow_NavigationView_AppLauncher">软件启动器r</system:String>
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">自定义主页</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">设定</system:String>
@@ -16,7 +16,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">主页</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">剖面</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_HotKey">热键</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">热键</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">软件启动器</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">自定义主页</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">设定</system:String>

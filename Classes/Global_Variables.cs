@@ -232,7 +232,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
       
         public static Profiles_Management profiles;
         public static MouseMode_Management mousemodes;
-        public static HotKey_Management hotKeys;
+        public static Action_Management hotKeys;
         public static CustomizeHome_Management homePageItems;
         //Power
         public static string powerStatus = "";

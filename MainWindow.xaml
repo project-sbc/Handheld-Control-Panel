@@ -26,7 +26,7 @@
                
                     <RowDefinition  />
                
-                    <RowDefinition Height="50" />
+                    <RowDefinition Height="60" />
 
                 </Grid.RowDefinitions>
                
@@ -71,8 +71,8 @@
                         <ListBoxItem Tag="Profiles" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE8F1;" />
                         </ListBoxItem>
-                        <ListBoxItem Tag="HotKey" >
-                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE92E;" />
+                        <ListBoxItem Tag="Action" >
+                            <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xEDB5;" />
                         </ListBoxItem>
                         <ListBoxItem Tag="MouseMode" >
                             <TextBlock Style="{StaticResource controllerButtonTextblock}" Text="&#xE962;" />
@@ -94,7 +94,7 @@
                 </DockPanel>
                 <DockPanel Background="{DynamicResource MahApps.Brushes.Badged.Foreground}" Grid.Row="2"/>
 
-                <Border Grid.Row="3" Height="60" VerticalAlignment="Bottom" Panel.ZIndex="2" >
+                <Border Grid.Row="3" Height="120" VerticalAlignment="Bottom" Panel.ZIndex="2" >
                     <notifications:NotificationArea x:Name="WindowArea" Position="TopLeft" MaxItems="3"  />
                 </Border>
                 

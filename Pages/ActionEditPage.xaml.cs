@@ -30,21 +30,21 @@ namespace Handheld_Control_Panel.Pages
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HotKeyEditPage : Page
+    public partial class ActionEditPage : Page
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
 
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
-        public HotKeyEditPage()
+        public ActionEditPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
            
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HotKeyEditPage_Instruction");
+            wnd.changeUserInstruction("ActionEditPage_Instruction");
             wnd = null;
         }
        

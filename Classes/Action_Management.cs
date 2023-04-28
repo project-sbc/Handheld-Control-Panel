@@ -16,7 +16,7 @@ using MahApps.Metro.IconPacks;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public class HotKey_Management: List<HotkeyItem>
+    public class Action_Management: List<HotkeyItem>
     {
       
         public HotkeyItem editingHotkey = null;
@@ -155,7 +155,7 @@ namespace Handheld_Control_Panel.Classes
           
         }
 
-        public HotKey_Management()
+        public Action_Management()
         {
             //populates list
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();

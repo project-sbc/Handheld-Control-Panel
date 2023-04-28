@@ -97,12 +97,13 @@ namespace Handheld_Control_Panel.Classes
            
             Global_Variables.Global_Variables.profiles = new Profiles_Management();
 
+            AutoProfile_Management.checkAutoProfileApplicator_StartUp();
             if (Global_Variables.Global_Variables.profiles.activeProfile != null)
             {
-                Global_Variables.Global_Variables.profiles.activeProfile.applyProfile();
+                Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true, false);
             }
 
-            Global_Variables.Global_Variables.hotKeys = new HotKey_Management();
+            Global_Variables.Global_Variables.hotKeys = new Action_Management();
             Global_Variables.Global_Variables.homePageItems = new CustomizeHome_Management();
 
             Global_Variables.Global_Variables.hotKeys.generateGlobalControllerHotKeyList();

@@ -13,15 +13,31 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Save}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEDE3;" />
+            <Button Tag="Start" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Save}"  />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEDE3;" />
+                </StackPanel>
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_ToggleMode}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF096;" />
+            </Button>
+            <Button Tag="X" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_ToggleMode}"  />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF096;" />
+                </StackPanel>
+
+            </Button>
+            <Button Tag="B" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Close}"  />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF094;" />
+                </StackPanel>
+
+            </Button>
 
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Close}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
+           
+
 
             <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Change}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF10E;" />

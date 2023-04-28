@@ -7,7 +7,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Home">Начальный экран</system:String>
     <system:String x:Key="MainWindow_NavigationView_Profiles">Профили</system:String>
-    <system:String x:Key="MainWindow_NavigationView_HotKey">Горячие клавиши</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">Горячие клавиши</system:String>
     <system:String x:Key="MainWindow_NavigationView_AppLauncher">Запуск приложений</system:String>
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Настройка начального экрана</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Параметры</system:String>
@@ -16,7 +16,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Начальный экран</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Профили</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_HotKey">Горячие клавиши</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">Горячие клавиши</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">Запуск приложений</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Настройка элементов управления на начальном экране</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Параметры</system:String>

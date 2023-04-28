@@ -33,18 +33,35 @@ namespace Handheld_Control_Panel.Classes
                         //reapply profile is power status changed from charger to battery or vice versa. Global variables has the last power status, we will update that later in this routine
                         if (Global_Variables.Global_Variables.powerStatus != "" && Global_Variables.Global_Variables.powerStatus != Power)
                         {
-                            Global_Variables.Global_Variables.profiles.activeProfile.applyProfile();
+                     
+                            Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true,false);
                         }
                         //we exit this routine if a process is found, active profile with running exe has top priority
                         return;
+
+                    }
+                    else
+                    {
+                        //check if the profile currently applied is 
+                        if (Global_Variables.Global_Variables.profileAutoApplied == true)
+                        {
+                            
+                            if (Global_Variables.Global_Variables.profiles.defaultProfile != null)
+                            {
+                                Global_Variables.Global_Variables.profiles.defaultProfile.applyProfile(true,false);
+                                Global_Variables.Global_Variables.profileAutoApplied = true;
+                                return;
+                            }
+                         
+                        }
+                       
                     }
 
                 }
+              
             }
 
             //continue forward if active profile doesn't have running exe
-
-
             foreach (Profile profile in Global_Variables.Global_Variables.profiles)
             {
                 if (profile.Exe != "")
@@ -55,7 +72,7 @@ namespace Handheld_Control_Panel.Classes
                     //if pLlist is greater than 0 than process detected running
                     if (pList.Length > 0)
                     {
-                        profile.applyProfile();
+                        profile.applyProfile(true,false);
                         //we exit this routine if a process is found, this is the new active profile with running exe
                         return;
                     }
@@ -63,8 +80,43 @@ namespace Handheld_Control_Panel.Classes
                 }
             }
 
-            //lastly, we check if the active profile needs a 
+            //lastly, we check if the active profile needs a power change. we need to do this last because it has least precedent over the other changes  above
+            if (Global_Variables.Global_Variables.profiles.activeProfile != null)
+            {
+                //reapply profile is power status changed from charger to battery or vice versa. Global variables has the last power status, we will update that later in this routine
+                if (Global_Variables.Global_Variables.powerStatus != "" && Global_Variables.Global_Variables.powerStatus != Power)
+                {
+                    Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true, false);
+                    return;
+                }
+            }
 
+
+
+        }
+
+
+        public static void checkAutoProfileApplicator_StartUp()
+        {
+
+            //continue forward if active profile doesn't have running exe
+            foreach (Profile profile in Global_Variables.Global_Variables.profiles)
+            {
+                if (profile.Exe != "")
+                {
+                    //check if that exe is still running
+                    Process[] pList = Process.GetProcessesByName(profile.Exe);
+
+                    //if pLlist is greater than 0 than process detected running
+                    if (pList.Length > 0)
+                    {
+                        Global_Variables.Global_Variables.profiles.activeProfile = profile;
+                        //we exit this routine if a process is found, this is the new active profile with running exe
+                        return;
+                    }
+
+                }
+            }
 
 
         }

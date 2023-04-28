@@ -222,10 +222,10 @@
     <Compile Update="Pages\ProfileEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeyEditPage.xaml.cs">
+    <Compile Update="Pages\ActionEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeyPage.xaml.cs">
+    <Compile Update="Pages\ActionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ProfilesPage.xaml.cs">
@@ -531,10 +531,10 @@
     <Compile Update="UserControls\SettingsUserControls\MaxTDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InstructionUserControls\HotKeyEditPage_Instruction.xaml.cs">
+    <Compile Update="UserControls\InstructionUserControls\ActionEditPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InstructionUserControls\HotKeyPage_Instruction.xaml.cs">
+    <Compile Update="UserControls\InstructionUserControls\ActionPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\CustomizeHomePage_Instruction.xaml.cs">

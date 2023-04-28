@@ -24,7 +24,7 @@
         <ScrollViewer x:Name="pageScrollViewer" Style="{StaticResource pageScrollViewer}" DockPanel.Dock="Bottom">
             <StackPanel x:Name="stackPanel" >
                 <uc:Profile_Textbox/>
-                <uc:ProcessExe_Textbox/>
+             
                 <uc:Default_Toggle/>
                 <uc:Divider />
                 <uc:AppType_Textbox/>

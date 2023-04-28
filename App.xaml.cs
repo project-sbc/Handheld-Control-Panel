@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Fan_Management;
+using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using Linearstar.Windows.RawInput;
 using RTSSSharedMemoryNET;
@@ -93,6 +95,32 @@ namespace Handheld_Control_Panel
 
 
 
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            //close task scheduler
+            // Dispose of thread to allow program to close properly
+            Handheld_Control_Panel.Classes.Task_Scheduler.Task_Scheduler.closeScheduler();
+
+            //mouse keyboard input hook
+            MouseKeyHook.Unsubscribe();
+
+            //kill controller thread
+            Global_Variables.killControllerThread = true;
+
+           
+
+            //set auto tdp to false to make sure the autoTDP thread closes properly
+            Global_Variables.autoTDP = false;
+
+
+            if (Global_Variables.Device.FanCapable)
+            {
+                Global_Variables.softwareAutoFanControlEnabled = false;
+                Fan_Management.setFanControlHardware();
+                WinRingEC_Management.OlsFree();
+            }
         }
     }
 }

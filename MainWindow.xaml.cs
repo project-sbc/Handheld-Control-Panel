@@ -34,6 +34,8 @@ using Notification.Wpf.Classes;
 using System.Threading;
 using System.Printing;
 using System.Windows.Forms;
+using Notification.Wpf.Controls;
+using System.Collections.ObjectModel;
 
 namespace Handheld_Control_Panel
 {
@@ -168,12 +170,13 @@ namespace Handheld_Control_Panel
 
         private void UpdateTimer_Tick(object? sender, EventArgs e)
         {
-            if (this.Visibility != Visibility.Visible)
+            if (this.Visibility == Visibility.Visible)
             {
                 updateStatusBar();
                
             }
             ParallelTaskUpdate_Management.UpdateTaskAlternate();
+            AutoProfile_Management.checkAutoProfileApplicator();
         }
         #endregion
         #region update status bar
@@ -303,9 +306,9 @@ namespace Handheld_Control_Panel
                                 case "AutoFanPage":
                                     navigateFrame("SettingsPage");
                                     break;
-                                case "HotKeyEditPage":
+                                case "ActionEditPage":
                                     Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
-                                    navigateFrame("HotKeyPage");
+                                    navigateFrame("ActionPage");
                                     break;
                                 case "MouseModeEditPage":
                                     Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
@@ -425,9 +428,43 @@ namespace Handheld_Control_Panel
                 Global_Variables.profiles = new Profiles_Management();
             }));
         }
+        
+
+        public void ShowNotificationInWindowYESNO(string title, NotificationType notificationType, string action)
+        {
+
+            var notificationManager = new NotificationManager();
+
+            NotificationContent content = new NotificationContent
+            {
+                Title = title,
+
+                Type = notificationType,
+
+                TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
+                RowsCount = 3, //Will show 3 rows and trim after
+                LeftButtonAction = () => Controller_Management.buttonEvents.raiseControllerInput(action), //Action on left button click, button will not show if it null 
+                                                                                                    //RightButtonAction = () => , //Action on right button click,  button will not show if it null
+                LeftButtonContent = "YES", // Left button content (string or what u want
+                RightButtonContent = "NO", // Right button content (string or what u want
+                CloseOnClick = false, // Set true if u want close message when left mouse button click on message (base = true)
+
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Foreground = new SolidColorBrush(Colors.White)
+
+            };
+
+            notificationManager.Show(content,"WindowArea",TimeSpan.MaxValue);
+
+          
+        }
+
 
         public void ShowNotificationInWindow(string title, NotificationType notificationType)
         {
+
+
+
             this.BeginInvoke(new Action(() =>
             {
                 var notificationManager = new NotificationManager();
@@ -449,7 +486,7 @@ namespace Handheld_Control_Panel
                 };
 
 
-                notificationManager.Show(content, "WindowArea");
+                notificationManager.Show(content);
 
 
             }));
@@ -537,33 +574,9 @@ namespace Handheld_Control_Panel
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //close task scheduler
-            // Dispose of thread to allow program to close properly
-            Handheld_Control_Panel.Classes.Task_Scheduler.Task_Scheduler.closeScheduler();
-
-            //mouse keyboard input hook
-            MouseKeyHook.Unsubscribe();
-
-            //kill controller thread
-            Global_Variables.killControllerThread = true;
-
             //stop timers
-           
+
             updateTimer.Stop();
-
-            //disable software fan control if on an enabled device
-            Fan_Management.setFanControlHardware();
-
-            //set auto tdp to false to make sure the autoTDP thread closes properly
-            Global_Variables.autoTDP = false;
-
-           
-            if(Global_Variables.Device.FanCapable)
-            {
-                Global_Variables.softwareAutoFanControlEnabled = false;
-                Fan_Management.setFanControlHardware();
-                WinRingEC_Management.OlsFree();
-            }
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
@@ -595,8 +608,8 @@ namespace Handheld_Control_Panel
                     case "CustomizeHomePage_Instruction":
                         instructionStackPanel.Children.Add(new CustomizeHomePage_Instruction());
                         break;
-                    case "HotKeyPage_Instruction":
-                        instructionStackPanel.Children.Add(new HotKeyPage_Instruction());
+                    case "ActionPage_Instruction":
+                        instructionStackPanel.Children.Add(new ActionPage_Instruction());
                         break;
                     case "ProfilePage_Instruction":
                         instructionStackPanel.Children.Add(new ProfilePage_Instruction());
@@ -605,9 +618,9 @@ namespace Handheld_Control_Panel
           
                         instructionStackPanel.Children.Add(new ProfileEditPage_Instruction());
                         break; 
-                    case "HotKeyEditPage_Instruction":
+                    case "ActionEditPage_Instruction":
        
-                        instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());
+                        instructionStackPanel.Children.Add(new ActionEditPage_Instruction());
                         break;
                     case "SelectedListBox_Instruction":
                         disable_B_ToClose= true;
