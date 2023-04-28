@@ -17,7 +17,6 @@ using ControlzEx.Theming;
 using MahApps.Metro.Controls;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes;
-
 using System.Runtime.InteropServices;
 using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
@@ -35,6 +34,8 @@ using Notification.Wpf.Classes;
 using System.Threading;
 using System.Printing;
 using System.Windows.Forms;
+using Notification.Wpf.Controls;
+using System.Collections.ObjectModel;
 
 namespace Handheld_Control_Panel
 {
@@ -57,9 +58,7 @@ namespace Handheld_Control_Panel
           
             InitializeComponent();
 
-           
-
-
+            
             Global_Variables.mainWindow = this;
                       
 
@@ -171,12 +170,13 @@ namespace Handheld_Control_Panel
 
         private void UpdateTimer_Tick(object? sender, EventArgs e)
         {
-            if (this.Visibility != Visibility.Visible)
+            if (this.Visibility == Visibility.Visible)
             {
                 updateStatusBar();
                
             }
             ParallelTaskUpdate_Management.UpdateTaskAlternate();
+            AutoProfile_Management.checkAutoProfileApplicator();
         }
         #endregion
         #region update status bar
@@ -299,9 +299,16 @@ namespace Handheld_Control_Panel
                         {
                             switch (page)
                             {
-                                case "HotKeyEditPage":
+                                case "CustomizeHomePage":
+                                    navigateFrame("HomePage");
+                                    break;
+
+                                case "AutoFanPage":
+                                    navigateFrame("SettingsPage");
+                                    break;
+                                case "ActionEditPage":
                                     Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
-                                    navigateFrame("HotKeyPage");
+                                    navigateFrame("ActionPage");
                                     break;
                                 case "MouseModeEditPage":
                                     Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
@@ -315,10 +322,11 @@ namespace Handheld_Control_Panel
                                     toggleWindow();
                                     break;
                             }
-               
+
                         }
 
                         break;
+                   
                     default:
                         Controller_Window_Page_UserControl_Events.raisePageControllerInputEvent(args.Action, window + page);
                         break;
@@ -328,32 +336,37 @@ namespace Handheld_Control_Panel
        
           
         }
-
+     
         public void toggleWindow()
         {
-
-
+           
             if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
             {
+                //call check for suspend process   stop this online games are ruined by this
+                //FullScreen_Management.checkSuspendProcess();
+
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
                 {
 
-                    ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                    frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                    //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                   // frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
 
 
                 }
        
                 this.Show();
-                //this.WindowState = WindowState.Normal;
+              
                 m_notifyIcon.Visible = false;
             }
             else
             {
-                
+                //check resume process
+                //FullScreen_Management.checkResumeProcess();
+
+
                 this.Hide();
-                //this.WindowState = WindowState.Minimized;
+                
                 m_notifyIcon.Visible = true;
             }
 
@@ -415,9 +428,43 @@ namespace Handheld_Control_Panel
                 Global_Variables.profiles = new Profiles_Management();
             }));
         }
+        
+
+        public void ShowNotificationInWindowYESNO(string title, NotificationType notificationType, string action)
+        {
+
+            var notificationManager = new NotificationManager();
+
+            NotificationContent content = new NotificationContent
+            {
+                Title = title,
+
+                Type = notificationType,
+
+                TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
+                RowsCount = 3, //Will show 3 rows and trim after
+                LeftButtonAction = () => Controller_Management.buttonEvents.raiseControllerInput(action), //Action on left button click, button will not show if it null 
+                                                                                                    //RightButtonAction = () => , //Action on right button click,  button will not show if it null
+                LeftButtonContent = "YES", // Left button content (string or what u want
+                RightButtonContent = "NO", // Right button content (string or what u want
+                CloseOnClick = false, // Set true if u want close message when left mouse button click on message (base = true)
+
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Foreground = new SolidColorBrush(Colors.White)
+
+            };
+
+            notificationManager.Show(content,"WindowArea",TimeSpan.MaxValue);
+
+          
+        }
+
 
         public void ShowNotificationInWindow(string title, NotificationType notificationType)
         {
+
+
+
             this.BeginInvoke(new Action(() =>
             {
                 var notificationManager = new NotificationManager();
@@ -439,7 +486,7 @@ namespace Handheld_Control_Panel
                 };
 
 
-                notificationManager.Show(content, "WindowArea");
+                notificationManager.Show(content);
 
 
             }));
@@ -527,25 +574,9 @@ namespace Handheld_Control_Panel
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //close task scheduler
-            // Dispose of thread to allow program to close properly
-            Handheld_Control_Panel.Classes.Task_Scheduler.Task_Scheduler.closeScheduler();
-
-            //mouse keyboard input hook
-            MouseKeyHook.Unsubscribe();
-
-            //kill controller thread
-            Global_Variables.killControllerThread = true;
-
             //stop timers
-           
+
             updateTimer.Stop();
-
-            //disable software fan control if on an enabled device
-            Fan_Management.setFanControlHardware();
-
-            //set auto tdp to false to make sure the autoTDP thread closes properly
-            Global_Variables.autoTDP = false;
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
@@ -564,19 +595,21 @@ namespace Handheld_Control_Panel
                 switch (newInstructionUserControl)
                 {
 
-
-                
+                    
+                    case "AutoFanPage_Instruction":
+                        instructionStackPanel.Children.Add(new AutoFanPage_Instruction());
+                        break;
                     case "AppLauncherPage_Instruction":
                         instructionStackPanel.Children.Add(new AppLauncherPage_Instruction());
-                    break;
+                        break;
                     case "HomePage_Instruction":
                         instructionStackPanel.Children.Add(new HomePage_Instruction());
                         break;
                     case "CustomizeHomePage_Instruction":
                         instructionStackPanel.Children.Add(new CustomizeHomePage_Instruction());
                         break;
-                    case "HotKeyPage_Instruction":
-                        instructionStackPanel.Children.Add(new HotKeyPage_Instruction());
+                    case "ActionPage_Instruction":
+                        instructionStackPanel.Children.Add(new ActionPage_Instruction());
                         break;
                     case "ProfilePage_Instruction":
                         instructionStackPanel.Children.Add(new ProfilePage_Instruction());
@@ -585,9 +618,9 @@ namespace Handheld_Control_Panel
           
                         instructionStackPanel.Children.Add(new ProfileEditPage_Instruction());
                         break; 
-                    case "HotKeyEditPage_Instruction":
+                    case "ActionEditPage_Instruction":
        
-                        instructionStackPanel.Children.Add(new HotKeyEditPage_Instruction());
+                        instructionStackPanel.Children.Add(new ActionEditPage_Instruction());
                         break;
                     case "SelectedListBox_Instruction":
                         disable_B_ToClose= true;
@@ -619,8 +652,8 @@ namespace Handheld_Control_Panel
                 {
                     this.ShowInTaskbar = false;
 
-                    navigation.SelectedIndex = 0;
-                    frame.Source = null;
+                    //navigation.SelectedIndex = 0;
+                    //frame.Source = null;
                     //change interval to 15 seconds
                     updateTimer.Interval = new TimeSpan(0, 0, 15);
                     //change controller timer interval to 100 ms to hot key recognition when not open
@@ -637,8 +670,8 @@ namespace Handheld_Control_Panel
                     if (navigation.SelectedItem != null)
                     {
 
-                        ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                        frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
+                        //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
+                        //frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
 
 
                     }
@@ -653,6 +686,10 @@ namespace Handheld_Control_Panel
            
             //added a DPI call to the setWindowSizePosition routine, set parameter to true to force run it
             setWindowSizePosition(true);
+
+            //check if multiple instances are running, if yes message and close the program to prevent errors from two instances running
+            if (Start_Up.checkMultipleProgramsRunning()) { System.Windows.MessageBox.Show("More than one instance of this program running. Closing this to prevent errors."); this.Close(); }
+
 
         }
         private void getDPIScaling()
@@ -674,8 +711,8 @@ namespace Handheld_Control_Panel
             {
                 this.ShowInTaskbar = false;
 
-                navigation.SelectedIndex = 0;
-                frame.Source = null;
+                //navigation.SelectedIndex = 0;
+                //frame.Source = null;
                 //change interval to 15 seconds
                 updateTimer.Interval = new TimeSpan(0, 0, 15);
                 //change controller timer interval to 100 ms to hot key recognition when not open

@@ -7,7 +7,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
-    <system:String x:Key="MainWindow_NavigationView_HotKey">Hotkeys</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">Action</system:String>
     <system:String x:Key="MainWindow_NavigationView_AppLauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
@@ -16,7 +16,7 @@
 
     <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_HotKey">Hotkeys</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">Action</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">App Launcher</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
@@ -180,8 +180,8 @@
     <system:String x:Key="Instruction_Sort">SORT</system:String>
     <system:String x:Key="Instruction_Filter">FILTER</system:String>
     <system:String x:Key="Instruction_Favorite">FAVORITE</system:String>
-    <system:String x:Key="Instruction_PageDown">PAGE DOWN</system:String>
-    <system:String x:Key="Instruction_PageUp">PAGE UP</system:String>
+    <system:String x:Key="Instruction_PageDown">PG DOWN</system:String>
+    <system:String x:Key="Instruction_PageUp">PG UP</system:String>
 
         
         <!-- new strings 03apr2023-->
@@ -204,5 +204,27 @@
     <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
     <system:String x:Key="Filter_Method_Applications">Applications</system:String>
 
+    <!-- 14apr2023 -->
+    <system:String x:Key="Filter_Method_MicrosoftStore">Microsoft Store</system:String>
+    <system:String x:Key="Usercontrol_MaxGPUCLK">Max GPU Clock</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">AutoTDP</system:String>
+    <!-- 18apr2023 -->
+    <system:String x:Key="FanPage_FanCurve">Fan Curve</system:String>
+    <system:String x:Key="FanPage_FanSpeed">Fan Speed (%)</system:String>
+    <system:String x:Key="FanPage_CPUPower">CPU Package Power (W)</system:String>
+    <system:String x:Key="FanPage_Temperature">Temperature (C)</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume">Change Volume</system:String>
+        
+        
+    <system:String x:Key="FanMode_Hardware">Hardware Controlled</system:String>
+    <system:String x:Key="FanMode_Manual">Manual Control</system:String>
+    <system:String x:Key="FanMode_Software">Auto Fan Curve</system:String>
 
+    <system:String x:Key="Usercontrol_FanCurrentPackagePower">Current CPU Package Power:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentTemperature">Current CPU Temperature:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">Current Fan Speed:</system:String>
+    <system:String x:Key="Usercontrol_AutostartFan">Autostart Fan Control</system:String>
+    <system:String x:Key="Usercontrol_FanSettings">Fan Settings</system:String>
+    <system:String x:Key="Instruction_Change">CHANGE</system:String>
+    <system:String x:Key="Instruction_ToggleMode">TOGGLE MODE</system:String>
 </ResourceDictionary>

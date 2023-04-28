@@ -23,6 +23,7 @@ using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.UserControls;
 using System.Windows.Threading;
+using Handheld_Control_Panel.Classes.UserControl_Management;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -53,26 +54,12 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-            getUserControlsOnPage();
-         
+            UserControl_Management.getUserControlsOnPage(userControls, stackPanel);
+
 
         }
 
-        private void getUserControlsOnPage()
-        {
-            foreach (object child in stackPanel.Children)
-            {
-                if (child is UserControl)
-                {
-                    if (!child.ToString().Contains("Divider"))
-                    {
-                        userControls.Add((UserControl)child);
-                    }
-                  
-                }
-
-            }
-        }
+       
         //
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -143,7 +130,7 @@ namespace Handheld_Control_Panel.Pages
             {
                 if (Global_Variables.profiles.editingProfile == Global_Variables.profiles.activeProfile)
                 {
-                    Global_Variables.profiles.activeProfile.applyProfile();
+                    Global_Variables.profiles.activeProfile.applyProfile(false,false);
                 }
             }
         }

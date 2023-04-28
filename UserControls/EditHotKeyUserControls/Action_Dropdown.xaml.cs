@@ -91,6 +91,12 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(changeBrightness);
 
+            HotKeyAction changeVolume = new HotKeyAction();
+            changeVolume.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Volume"].ToString();
+            changeVolume.HotkeyAction = "Change_Volume";
+
+            hotkeyAction.Add(changeVolume);
+
             HotKeyAction toggleMouseMode = new HotKeyAction();
             toggleMouseMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_MouseMode"].ToString();
             toggleMouseMode.HotkeyAction = "Toggle_MouseMode";
@@ -104,6 +110,15 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(gotoDesktop);
 
+            if (Global_Variables.cpuType == "AMD" && Global_Variables.processorName.Contains("6800U"))
+            {
+                HotKeyAction autoTDP = new HotKeyAction();
+                autoTDP.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_AutoTDP"].ToString();
+                autoTDP.HotkeyAction = "Toggle_AutoTDP";
+
+                hotkeyAction.Add(autoTDP);
+            }
+           
 
             HotKeyAction toggleWinOSK = new HotKeyAction();
             toggleWinOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_Windows_OSK"].ToString();

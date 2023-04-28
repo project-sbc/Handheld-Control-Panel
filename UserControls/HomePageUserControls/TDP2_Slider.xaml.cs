@@ -21,7 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace Handheld_Control_Panel.UserControls
 {
@@ -33,15 +33,25 @@ namespace Handheld_Control_Panel.UserControls
         private string windowpage = "";
         private string usercontrol = "";
         private bool dragStarted= false;
+        private DispatcherTimer changeValue = new DispatcherTimer();
         public TDP2_Slider()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(control);
-         
+
+            //set up timer
+            changeValue.Interval = new TimeSpan(0, 0, 1);
+            changeValue.Tick += ChangeValue_Tick;
         }
 
-       
+        private void ChangeValue_Tick(object? sender, EventArgs e)
+        {
+            sliderValueChanged();
+            changeValue.Stop();
+        }
+
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
            //UserControl_Management.setThumbSize(control);
@@ -88,6 +98,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
             Global_Variables.valueChanged -= Global_Variables_valueChanged;
+            changeValue.Stop();
+            changeValue.Tick -= ChangeValue_Tick;
         }
         private void sliderValueChanged()
         {
@@ -110,7 +122,16 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (!dragStarted && control.IsLoaded)
             {
-                sliderValueChanged();
+                if (border.Tag == "")
+                {
+                    sliderValueChanged();
+                }
+                else
+                {
+                    changeValue.Stop();
+                    changeValue.Start();
+                }
+
             }
         }
     }

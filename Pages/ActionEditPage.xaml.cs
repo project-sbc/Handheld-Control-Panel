@@ -23,27 +23,28 @@ using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.UserControls;
 using System.Windows.Threading;
+using Handheld_Control_Panel.Classes.UserControl_Management;
 
 namespace Handheld_Control_Panel.Pages
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HotKeyEditPage : Page
+    public partial class ActionEditPage : Page
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
 
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
-        public HotKeyEditPage()
+        public ActionEditPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
            
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("HotKeyEditPage_Instruction");
+            wnd.changeUserInstruction("ActionEditPage_Instruction");
             wnd = null;
         }
        
@@ -53,22 +54,12 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-            getUserControlsOnPage();
-         
+            UserControl_Management.getUserControlsOnPage(userControls, stackPanel);
+
 
         }
 
-        private void getUserControlsOnPage()
-        {
-            foreach (object child in stackPanel.Children)
-            {
-                if (child is UserControl)
-                {
-                    userControls.Add((UserControl)child);
-                }
-
-            }
-        }
+      
         //
         private void handleControllerInputs(object sender, EventArgs e)
         {

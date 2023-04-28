@@ -151,30 +151,35 @@ namespace Handheld_Control_Panel.Classes
         {
             if (Properties.Settings.Default.directorySteam == "")
             {
-                //32 and 64 bit install locations in registry
-                string steam32 = "SOFTWARE\\VALVE\\STEAM";
-                string steam64 = "SOFTWARE\\Wow6432Node\\Valve\\STEAM";
-                string installPath = "";
-                RegistryKey keyReg = Registry.LocalMachine.OpenSubKey(steam64);
-                if (keyReg != null )
+                try
                 {
-                    if (keyReg.GetValue("InstallPath") != null)
+                    //32 and 64 bit install locations in registry
+                    string steam32 = "SOFTWARE\\VALVE\\STEAM";
+                    string steam64 = "SOFTWARE\\Wow6432Node\\Valve\\STEAM";
+                    string installPath = "";
+                    RegistryKey keyReg = Registry.LocalMachine.OpenSubKey(steam64);
+                    if (keyReg != null)
                     {
-                        Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
-                        Properties.Settings.Default.Save();
-                    }
-                    else
-                    {
-                        //if null might be 32 bit
-                        keyReg = Registry.LocalMachine.OpenSubKey(steam32);
                         if (keyReg.GetValue("InstallPath") != null)
                         {
                             Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
                             Properties.Settings.Default.Save();
                         }
+                        else
+                        {
+                            //if null might be 32 bit
+                            keyReg = Registry.LocalMachine.OpenSubKey(steam32);
+                            if (keyReg.GetValue("InstallPath") != null)
+                            {
+                                Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
+                                Properties.Settings.Default.Save();
+                            }
 
+                        }
                     }
                 }
+                catch { }
+               
 
                
                            

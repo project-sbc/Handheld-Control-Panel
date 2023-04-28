@@ -20,7 +20,8 @@
         </DockPanel>
          <ScrollViewer x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}" Grid.Row="1">
         <StackPanel x:Name="stackPanel" >
-            <uc:Update_Button/>
+                <uc:FanSettings_Button/>
+                <uc:Update_Button/>
             <uc:Theme_Toggle />
             <uc:AccentColor_Dropdown/>
             <uc:DockRight_Toggle/>
@@ -29,8 +30,10 @@
             <uc:Divider/>
             <uc:Autostart_Toggle/>
             <uc:Autoupdate_Toggle/>
-    
-            <uc:Divider/>
+                <uc:AutostartFan_Toggle/>
+                <uc:Divider/>
+                <uc:MaxGPU_Slider/>
+                <uc:Divider/>
             <uc:IntelTDP_Dropdown/>
             <uc:MinTDP_Slider/>
             <uc:MaxTDP_Slider/>

@@ -16,6 +16,9 @@
             <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Close}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
 
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Arrange}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF095;" />
+
             <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Toggle}" />
             <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
 

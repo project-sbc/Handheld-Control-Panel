@@ -13,12 +13,27 @@ using Notification.Wpf;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using WindowsInput;
 
 namespace Handheld_Control_Panel.Classes
 {
     public static class QuickAction_Management
     {
-            
+        [DllImport("user32.dll")]
+        public static extern bool IsIconic(IntPtr handle);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr FindWindow(string strClassName, string strWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+
+        public struct Rect
+        {
+            public int Left { get; set; }
+            public int Top { get; set; }
+            public int Right { get; set; }
+            public int Bottom { get; set; }
+        }
         public static void runHotKeyAction(ActionParameter actionParameter)
         {
             
@@ -29,7 +44,19 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.mainWindow.toggleOSK();
 
                     break;
-
+                case "Toggle_AutoTDP":
+                    if (Global_Variables.Global_Variables.autoTDP)
+                    {
+                        Notification_Management.Show("Stop AutoTDP");
+                        AutoTDP_Management.endAutoTDP();
+                    }
+                    else
+                    {
+                        Notification_Management.Show("Start AutoTDP");
+                        AutoTDP_Management.startAutoTDP();
+                    }
+                    break;
+                        
                 case "Toggle_Windows_OSK":
                     Process[] pname = Process.GetProcessesByName("tabtip");
                     OSKTablet oskt = new OSKTablet();
@@ -74,6 +101,9 @@ namespace Handheld_Control_Panel.Classes
                 case "Change_Brightness":
                     Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
                     break;
+                case "Change_Volume":
+                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
+                    break;
                 case "Change_GPUCLK":
                     int paramGPU;
                     Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " MHz");
@@ -95,10 +125,13 @@ namespace Handheld_Control_Panel.Classes
                     Controller_Management.Controller_Management.powerCycleController();
                     break;
                 case "Desktop":
-             
-                    Shell32.Shell shellObject = new Shell32.Shell();
-                    shellObject.ToggleDesktop();
-                    
+                    InputSimulator inputSimulator = new InputSimulator();
+                    inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LWIN);
+                    inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_D);
+                    inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_D);
+                    inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LWIN);
+                    inputSimulator = null;
+               
                     break;
                 default: break;
             }
@@ -108,6 +141,7 @@ namespace Handheld_Control_Panel.Classes
 
       
     }
+
     public class OSKTablet
     {
         public void Main()

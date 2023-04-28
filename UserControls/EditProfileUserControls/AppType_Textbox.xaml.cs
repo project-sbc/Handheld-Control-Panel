@@ -48,13 +48,13 @@ namespace Handheld_Control_Panel.UserControls
         {
             switch (Global_Variables.profiles.editingProfile.AppType)
             {
-                case "Steam":
+                case "eeeSteam":
                     control.Visibility = Visibility.Collapsed;
                     controlTextbox.Visibility = Visibility.Collapsed;
                     updateSteamImage();
                     
                     break;
-                case "EpicGames":
+                case "eeeEpicGames":
                     control.Visibility = Visibility.Collapsed;
                     controlTextbox.IsReadOnly = true;
                     controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;

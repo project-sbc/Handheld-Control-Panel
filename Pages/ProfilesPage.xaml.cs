@@ -104,14 +104,17 @@ namespace Handheld_Control_Panel.Pages
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
                         case "Y":
-                            profile.applyProfile();
+                            profile.applyProfile(false,true);
+                            Global_Variables.profileAutoApplied = false;
                             controlList.Items.Refresh();
                             break;
                         case "Up":
-                            if (index > 0) { controlList.SelectedIndex = index - 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            if (index > 0) { controlList.SelectedIndex = index - 1;  } else { controlList.SelectedIndex = controlList.Items.Count - 1; }
+                            controlList.ScrollIntoView(controlList.SelectedItem);
                             break;
                         case "Down":
-                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1; controlList.ScrollIntoView(controlList.SelectedItem); }
+                            if (index < controlList.Items.Count - 1) { controlList.SelectedIndex = index + 1;  } else { controlList.SelectedIndex = 0; }
+                            controlList.ScrollIntoView(controlList.SelectedItem);
                             break;
                         case "Start":
                             Global_Variables.profiles.addNewProfile(null);

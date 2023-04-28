@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Fan_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
 using Handheld_Control_Panel.Classes.UserControl_Management;
@@ -35,27 +36,30 @@ namespace Handheld_Control_Panel.UserControls
         private string usercontrol = "";
         private bool dragStarted= false;
         private DispatcherTimer changeValue = new DispatcherTimer();
+        private string fanMode;
         public Fan_Slider()
         {
-            if (Global_Variables.fanControlDevice)
+            if (Global_Variables.Device.FanCapable)
             {
                 InitializeComponent();
                 //setControlValue();
                 UserControl_Management.setupControl(control);
 
+                determineFanMode();
+
 
                 //set initial fanspeed value
                 if (Global_Variables.FanSpeed == 0)
                 {
-                    control.Value = 29;
+                    control.Value = control.Minimum;
                     labelControl.Content = "0";
                 }
                 else
                 {
-                    if (Global_Variables.FanSpeed < 30)
+                    if (Global_Variables.FanSpeed < Global_Variables.Device.MinFanSpeedPercentage)
                     {
-                        control.Value = 30;
-                        labelControl.Content = "30";
+                        control.Value = control.Minimum + 1;
+                        labelControl.Content = control.Minimum + 1;
                     }
                     else
                     {
@@ -63,22 +67,67 @@ namespace Handheld_Control_Panel.UserControls
                         labelControl.Content = Global_Variables.FanSpeed.ToString();
                     }
                 }
-              
-          
 
-                if (!Global_Variables.fanControlEnable)
-                {
-                    control.Visibility = Visibility.Collapsed;
-                    
-                }
-                controlToggle.IsOn = Global_Variables.fanControlEnable;
                 //set up timer
-                changeValue.Interval = new TimeSpan(0, 0, 2);
+                changeValue.Interval = new TimeSpan(0, 0, 1);
                 changeValue.Tick += ChangeValue_Tick;
             }
             else { this.Visibility = Visibility.Collapsed; }
-        }
 
+        }
+        private void handleChangingFanModes()
+        {
+            if (fanMode == "Software")
+            {
+                Global_Variables.softwareAutoFanControlEnabled = false;
+                fanMode = "Hardware";
+                Fan_Management.setFanControlHardware();
+            }
+            else
+            {
+                if (fanMode == "Hardware")
+                {
+                    Global_Variables.softwareAutoFanControlEnabled = false;
+                    fanMode = "Manual";
+                    Fan_Management.setFanControlManual();
+                    Fan_Management.readFanSpeed();
+                }
+                else
+                {
+                    fanMode = "Software";
+                    Fan_Management.setFanControlManual();
+                    AutoFan_Management.startAutoFan();
+                }
+            }
+            determineFanMode();
+        }
+        private void determineFanMode()
+        {
+            //check if manual control enabled
+            Fan_Management.readSoftwareFanControl();
+            if (Global_Variables.fanControlEnabled)
+            {
+                if (Global_Variables.softwareAutoFanControlEnabled)
+                {
+                    fanMode = "Software";
+                    control.Visibility = Visibility.Collapsed;
+                    labelControl.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    fanMode = "Manual";
+                    control.Visibility = Visibility.Visible;
+                    labelControl.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                fanMode = "Hardware";
+                control.Visibility = Visibility.Collapsed;
+                labelControl.Visibility = Visibility.Collapsed;
+            }
+            controlButton.Content = Application.Current.Resources["FanMode_" + fanMode];
+        }
         private void ChangeValue_Tick(object? sender, EventArgs e)
         {
             sliderValueChanged();
@@ -102,25 +151,46 @@ namespace Handheld_Control_Panel.UserControls
             if (valueChangedEventArgs.Parameter == "FanSpeed" && !dragStarted)
             {
                 this.Dispatcher.BeginInvoke(() => {
-                    if (border.Tag == "" && control.IsLoaded)
+                    if (control.IsLoaded && Global_Variables.softwareAutoFanControlEnabled)
                     {
-     
 
-
-                        if (Global_Variables.FanSpeed == 0 && control.Value != 29)
+                        if (Global_Variables.FanSpeed == 0)
                         {
-                            control.Value = 29;
                             labelControl.Content = "0";
                         }
-                        if (Global_Variables.FanSpeed < 30 && Global_Variables.FanSpeed>0 && control.Value != 30)
+                        else
                         {
-                            control.Value = 30;
-                            labelControl.Content = "30";
+                            if (Global_Variables.FanSpeed < Global_Variables.Device.MinFanSpeedPercentage)
+                            {
+                                labelControl.Content = control.Minimum + 1;
+                            }
+                            else
+                            {
+                                labelControl.Content = Global_Variables.FanSpeed.ToString();
+                            }
                         }
-                        if (Global_Variables.FanSpeed >= 30 && control.Value != Global_Variables.fanSpeed)
+                    }
+
+                    if (border.Tag == "" && control.IsLoaded && control.Visibility == Visibility.Visible)
+                    {
+                       
+                        if (Global_Variables.FanSpeed == 0)
                         {
-                            control.Value = Global_Variables.FanSpeed;
-                            labelControl.Content = Global_Variables.FanSpeed.ToString();
+                            control.Value = control.Minimum;
+                            labelControl.Content = "0";
+                        }
+                        else
+                        {
+                            if (Global_Variables.FanSpeed < Global_Variables.Device.MinFanSpeedPercentage)
+                            {
+                                control.Value = control.Minimum + 1;
+                                labelControl.Content = control.Minimum + 1;
+                            }
+                            else
+                            {
+                                control.Value = Global_Variables.FanSpeed;
+                                labelControl.Content = Global_Variables.FanSpeed.ToString();
+                            }
                         }
 
 
@@ -139,8 +209,15 @@ namespace Handheld_Control_Panel.UserControls
             controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
             if (args.WindowPage == windowpage && args.UserControl==usercontrol)
             {
-                Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                if (args.Action == "A" && this.Visibility == Visibility.Visible)
+                {
+                    handleChangingFanModes();
+                }
+                else
+                {
+                    Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
 
+                }
             }
         }
 
@@ -156,8 +233,7 @@ namespace Handheld_Control_Panel.UserControls
         }
         private void sliderValueChanged()
         {
-            if (Global_Variables.fanControlEnable)
-            {
+            if (Global_Variables.fanControlEnabled && !Global_Variables.softwareAutoFanControlEnabled){
                 UserControl_Management.Slider_ValueChanged((Slider)control, null);
               
             }
@@ -178,9 +254,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (control.IsLoaded)
+            if (control.IsLoaded && fanMode== "Manual")
             {
-                if (control.Value == 29)
+                if (control.Value < Global_Variables.Device.MinFanSpeedPercentage)
                 {
                     labelControl.Content = "0";
                 }
@@ -204,25 +280,11 @@ namespace Handheld_Control_Panel.UserControls
             }
         
         }
-        private void controlToggle_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (controlToggle.IsLoaded)
-            {
-                if (controlToggle.IsOn)
-                {
-                   
-                    control.Visibility = Visibility.Visible;
-                 
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlManual());
-                }
-                else
-                {
-                    control.Visibility = Visibility.Collapsed;
-                    
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlHardware());
-                }
-            }
-        }
+       
 
+        private void controlButton_Click(object sender, RoutedEventArgs e)
+        {
+            handleChangingFanModes();
+        }
     }
 }

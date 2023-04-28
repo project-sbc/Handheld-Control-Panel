@@ -88,6 +88,7 @@ namespace Handheld_Control_Panel.Classes
                 else
                 {
                     //define variable to use to loop over hidden usercontrols in up down scenario
+                    //this is now obsolete, 
                     int nextControl = 0;
                     int newIndexOffset = 0;
                     switch (action)
@@ -106,48 +107,89 @@ namespace Handheld_Control_Panel.Classes
 
                             break;
                         case "Up":
-                            while ((highlightedIndex - nextControl) >0)
+                            if (highlightedIndex == 0)
                             {
-                                if (userControls[highlightedIndex - nextControl - 1].Visibility != Visibility.Visible)
-                                {
-                                    nextControl--;
-                                }
-                                else
-                                {
-                                    newIndexOffset = nextControl - 1;
-                                    break;
-                                }
+                                newIndexOffset = userControls.Count;
                             }
-                            if (newIndexOffset != 0)
-                            {
 
+                            newIndexOffset -= 1;
+                            while ((highlightedIndex + newIndexOffset) > 0 && userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Collapsed)
+                            {
+                                newIndexOffset--;
+                            }
+                            if (userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Visible)
+                            {
+                                
                                 Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
                                 Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + newIndexOffset].ToString()));
                                 intReturn[0] = highlightedIndex + newIndexOffset;
                                 if (intReturn[0] == 0) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
-                                //((IScrollInfo)stackPanel).MouseWheelDown();
-                                
                             }
+
                             userControls[intReturn[0]].BringIntoView();
 
                             break;
 
-
+                   
                          
                         case "Down":
-                            while ((highlightedIndex + nextControl) < (userControls.Count - 1) )
+                            //if at the end of the list, set the offset to the number of items to bring you back to the top of the list and work down from there
+                            if (highlightedIndex == userControls.Count - 1)
                             {
-                                if (userControls[highlightedIndex + nextControl+1].Visibility != Visibility.Visible)
-                                {
-                                    nextControl++;
-                                }
-                                else
-                                {
-                                    newIndexOffset = nextControl + 1;
-                                    break;
-                                }
+                                newIndexOffset = -(userControls.Count);
                             }
+                            if (highlightedIndex <= (userControls.Count - 1))
+                            {
+                                newIndexOffset += 1;
+                                while ((highlightedIndex + newIndexOffset) < (userControls.Count - 1) && userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Collapsed)
+                                {
+                                    newIndexOffset++;
+                                }    
+                                if (userControls[highlightedIndex + newIndexOffset].Visibility == Visibility.Visible)
+                                {
+                                    Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
+                                    Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + newIndexOffset].ToString()));
+                                    intReturn[0] = highlightedIndex + newIndexOffset;
+                                    if (intReturn[0] == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+                                }
+
+                            }
+
+                            userControls[intReturn[0]].BringIntoView();
+                            break;
+                        case "RB":
+                            if ((highlightedIndex +5)  <= (userControls.Count - 1))
+                            {
+                                newIndexOffset = 5;
+                            }
+                            else
+                            {
+                                newIndexOffset = (userControls.Count - 1) - highlightedIndex;
+                            }
+
                             if (newIndexOffset !=0)
+                            {
+                                
+                                Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
+                                Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Highlight", windowpage, correctUserControl(userControls[highlightedIndex + newIndexOffset].ToString()));
+                                intReturn[0] = highlightedIndex + newIndexOffset;
+                                if (intReturn[0] == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
+                                //((IScrollInfo)stackPanel).MouseWheelDown();
+
+                            }
+                            userControls[intReturn[0]].BringIntoView();
+                            break;
+                        case "LB":
+                            if ((highlightedIndex - 5) >= 0)
+                            {
+                                newIndexOffset = -5;
+                            }
+                            else
+                            {
+                                newIndexOffset = -highlightedIndex;
+                            }
+
+                            if (newIndexOffset != 0)
                             {
 
                                 Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent("Unhighlight", windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
@@ -155,7 +197,7 @@ namespace Handheld_Control_Panel.Classes
                                 intReturn[0] = highlightedIndex + newIndexOffset;
                                 if (intReturn[0] == userControls.Count - 1) { ((IScrollInfo)stackPanel).MouseWheelUp(); }
                                 //((IScrollInfo)stackPanel).MouseWheelDown();
-                                
+
                             }
                             userControls[intReturn[0]].BringIntoView();
                             break;

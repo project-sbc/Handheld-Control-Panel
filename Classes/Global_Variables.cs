@@ -28,7 +28,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //TDP global
         #region TDP
 
-        public static bool autoTDP = true;
+        public static bool autoTDP = false;
         public static double ReadPL1
         {
             get
@@ -232,7 +232,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
       
         public static Profiles_Management profiles;
         public static MouseMode_Management mousemodes;
-        public static HotKey_Management hotKeys;
+        public static Action_Management hotKeys;
         public static CustomizeHome_Management homePageItems;
         //Power
         public static string powerStatus = "";
@@ -292,10 +292,9 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static int AMDPowerSlide;
 
         //fan controls
-        public static string fanDevice = "";
-        public static bool fanControlDevice = false;
-        public static bool fanControlEnable = false;
-        public static string fanControlMode = "Hardware";
+        public static HandheldDevice Device;
+        public static bool fanControlEnabled = false;
+        public static bool softwareAutoFanControlEnabled = false;
         public static double fanSpeed = 0;
 
         public static double FanSpeed

@@ -78,40 +78,45 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
             //Return Success as default value, otherwise alert calling routine to error
             try
             {
-                //check to make sure input TDP is not above maximum set and minimum 5
-                if (pl1TDP < Properties.Settings.Default.minTDP) { pl1TDP = Properties.Settings.Default.minTDP; }
-                if (pl2TDP < Properties.Settings.Default.minTDP) { pl2TDP = Properties.Settings.Default.minTDP; }
-                if (pl1TDP > Properties.Settings.Default.maxTDP) { pl1TDP = Properties.Settings.Default.maxTDP; }
-                if (pl2TDP > Properties.Settings.Default.maxTDP) { pl2TDP = Properties.Settings.Default.maxTDP; }
-
-
-                if (Global_Variables.Global_Variables.cpuType == "Intel")
+                //apply TDP if auto tdp is false (not on), otherwise dont touch tdp
+                if (!Global_Variables.Global_Variables.autoTDP)
                 {
-                    if (Properties.Settings.Default.IntelMMIOMSR.Contains("MMIO"))
-                    {
-                        //Log_Writer.writeLog("Start intel change TDP MMIO");
-                        runIntelTDPChangeMMIOKX(pl1TDP, pl2TDP);
-                    }
-                    if (Properties.Settings.Default.IntelMMIOMSR.Contains("MSR"))
-                    { //Log_Writer.writeLog("Start intel change TDP MSR");
-                        runIntelTDPChangeMSR(pl1TDP, pl2TDP);
-                    }
+                    //check to make sure input TDP is not above maximum set and minimum 5
+                    if (pl1TDP < Properties.Settings.Default.minTDP) { pl1TDP = Properties.Settings.Default.minTDP; }
+                    if (pl2TDP < Properties.Settings.Default.minTDP) { pl2TDP = Properties.Settings.Default.minTDP; }
+                    if (pl1TDP > Properties.Settings.Default.maxTDP) { pl1TDP = Properties.Settings.Default.maxTDP; }
+                    if (pl2TDP > Properties.Settings.Default.maxTDP) { pl2TDP = Properties.Settings.Default.maxTDP; }
 
-                }
-                else
-                {
-                    if (Global_Variables.Global_Variables.cpuType == "AMD")
-                    {
-                        //Log_Writer.writeLog("Start AMD change TDP");
-                        //6800U MessageBox.Show("change TDP to " + pl1TDP.ToString() + ", " + pl2TDP.ToString() + ", " + processorName);
-                        runAMDTDPChange(pl1TDP, pl2TDP);
-                    }
-                }
-                Global_Variables.Global_Variables.SetPL1 = pl1TDP;
-                Global_Variables.Global_Variables.SetPL2 = pl2TDP;
 
-                //read tdp after changing
-                readTDP();
+                    if (Global_Variables.Global_Variables.cpuType == "Intel")
+                    {
+                        if (Properties.Settings.Default.IntelMMIOMSR.Contains("MMIO"))
+                        {
+                            //Log_Writer.writeLog("Start intel change TDP MMIO");
+                            runIntelTDPChangeMMIOKX(pl1TDP, pl2TDP);
+                        }
+                        if (Properties.Settings.Default.IntelMMIOMSR.Contains("MSR"))
+                        { //Log_Writer.writeLog("Start intel change TDP MSR");
+                            runIntelTDPChangeMSR(pl1TDP, pl2TDP);
+                        }
+
+                    }
+                    else
+                    {
+                        if (Global_Variables.Global_Variables.cpuType == "AMD")
+                        {
+                            //Log_Writer.writeLog("Start AMD change TDP");
+                            //6800U MessageBox.Show("change TDP to " + pl1TDP.ToString() + ", " + pl2TDP.ToString() + ", " + processorName);
+                            runAMDTDPChange(pl1TDP, pl2TDP);
+                        }
+                    }
+                    Global_Variables.Global_Variables.SetPL1 = pl1TDP;
+                    Global_Variables.Global_Variables.SetPL2 = pl2TDP;
+
+                    //read tdp after changing
+                    readTDP();
+                }
+                
                 
             }
             catch (Exception ex)
@@ -547,7 +552,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 {
                     string errorMsg = "Error: ChangeTDP.cs:  Run AMD TDP Read: " + ex.Message + ", processRyzenAdj is " + processRyzenAdj + ", result is " + result + ", commandargument is " + commandArguments;
                     Log_Writer.writeLog(errorMsg);
-                    MessageBox.Show(errorMsg);
+                    //MessageBox.Show(errorMsg);
 
                 }
             }

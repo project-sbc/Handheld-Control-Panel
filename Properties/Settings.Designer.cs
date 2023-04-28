@@ -276,7 +276,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"Usercontrol_Bluetooth1;Usercontrol_Wifi1;Usercontrol_MouseMode1;Usercontrol_Controller1;Divider1;Usercontrol_Volume1;Usercontrol_VolumeMute1;Usercontrol_Brightness1;Divider1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_Scaling1;Usercontrol_FPSLimit1;Divider1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;Divider1;UserControl_FanControl1;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Usercontrol_Bluetooth1;Usercontrol_Wifi1;Usercontrol_MouseMode1;Usercontrol_Controller0;Divider1;Usercontrol_Volume1;Usercontrol_VolumeMute1;Usercontrol_Brightness1;Divider1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_Scaling1;Usercontrol_FPSLimit1;Divider1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;Divider1;UserControl_FanControl1;")]
         public string qamUserControls {
             get {
                 return ((string)(this["qamUserControls"]));
@@ -319,6 +319,54 @@ namespace Handheld_Control_Panel.Properties {
             }
             set {
                 this["joystickDeadzone"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fanCurveTemperature {
+            get {
+                return ((string)(this["fanCurveTemperature"]));
+            }
+            set {
+                this["fanCurveTemperature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fanCurvePackagePower {
+            get {
+                return ((string)(this["fanCurvePackagePower"]));
+            }
+            set {
+                this["fanCurvePackagePower"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool fanAutoModeTemp {
+            get {
+                return ((bool)(this["fanAutoModeTemp"]));
+            }
+            set {
+                this["fanAutoModeTemp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool startAutoFan {
+            get {
+                return ((bool)(this["startAutoFan"]));
+            }
+            set {
+                this["startAutoFan"] = value;
             }
         }
     }

@@ -22,6 +22,7 @@ using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.UserControls;
+using Handheld_Control_Panel.Classes.UserControl_Management;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -144,26 +145,11 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
-            getUserControlsOnPage();
+            UserControl_Management.getUserControlsOnPage(userControls, stackPanel);
 
         }
 
-        private void getUserControlsOnPage()
-        {
-            foreach (object child in stackPanel.Children)
-            {
-                if (child is UserControl)
-                {
-                    if (!child.ToString().Contains(".Divider"))
-                    {
-                        userControls.Add((UserControl)child);
-                    }
-                   
-                }
-
-            }
-        }
-        //
+      
         private void handleControllerInputs(object sender, EventArgs e)
         {
             //get action from custom event args for controller
@@ -172,11 +158,19 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
-                //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
-                int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+                if (args.Action == "Y")
+                {
+                    Global_Variables.mainWindow.navigateFrame("CustomizeHomePage");
+                }
+                else
+                {
+                    //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
+                    int[] intReturn = WindowPageUserControl_Management.globalHandlePageControllerInput(windowpage, action, userControls, highlightedUserControl, selectedUserControl, stackPanel);
+
+                    highlightedUserControl = intReturn[0];
+                    selectedUserControl = intReturn[1];
+                }
               
-                highlightedUserControl = intReturn[0];
-                selectedUserControl = intReturn[1];
    
             }
 

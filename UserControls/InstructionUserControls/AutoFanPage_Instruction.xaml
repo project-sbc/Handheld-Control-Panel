@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.AutoFanPage_Instruction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Handheld_Control_Panel.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="450" Height="50"  >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+   
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Tag="Start" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Save}"  />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEDE3;" />
+                </StackPanel>
+
+            </Button>
+            <Button Tag="X" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_ToggleMode}"  />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF096;" />
+                </StackPanel>
+
+            </Button>
+            <Button Tag="B" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Close}"  />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF094;" />
+                </StackPanel>
+
+            </Button>
+
+
+           
+
+
+            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Change}" />
+            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF10E;" />
+
+        </StackPanel>
+     
+
+    </Grid>
+</UserControl>

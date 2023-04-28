@@ -12,7 +12,216 @@ namespace Handheld_Control_Panel.Classes
         static ushort reg_addr = 0x4E;
         static ushort reg_data = 0x4F;
         static Ols ols = new Ols();
+        static Object lockObject = new object();
+        public static void InitECWin4()
 
+        {
+
+            if (ols == null)
+
+                OlsInit();
+
+            if (ols == null)
+
+                return;
+
+            try
+
+            {
+
+                byte EC_Chip_ID1 = ECRamReadWin4(0x2000);
+
+                if (EC_Chip_ID1 == 0x55)
+
+                {
+
+                    byte EC_Chip_Ver = ECRamReadWin4(0x1060);
+
+                    EC_Chip_Ver = (Byte)(EC_Chip_Ver | 0x80);
+
+                    ECRamWriteWin4(0x1060, EC_Chip_Ver);
+
+
+                }
+
+                //if (ols != null)
+
+                //    OlsFree();
+
+            }
+
+            catch
+
+            {
+
+                OlsFree();
+
+                return;
+
+            }
+
+        }
+
+
+
+        public static byte ECRamReadWin4(ushort address)
+
+        {
+
+            if (ols == null)
+
+                OlsInit();
+
+            if (ols == null)
+
+                return 0;
+
+            byte data = 0;
+
+            byte high_byte = (byte)((address >> 8) & 0xFF);
+
+            byte low_byte = (byte)(address & 0xFF);
+            try
+            {
+
+                lock (lockObject)
+
+                {
+
+                    reg_addr = 0x2E;
+
+                    reg_data = 0x2F;
+
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+
+                    ols.WriteIoPortByte(reg_data, 0x11);
+
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+
+                    ols.WriteIoPortByte(reg_data, high_byte);
+
+
+
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+
+                    ols.WriteIoPortByte(reg_data, 0x10);
+
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+
+                    ols.WriteIoPortByte(reg_data, low_byte);
+
+
+
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+
+                    ols.WriteIoPortByte(reg_data, 0x12);
+
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+
+                    data = ols.ReadIoPortByte(reg_data);
+
+                }
+
+                //if (ols != null)
+
+                //   OlsFree();
+
+            }
+
+            catch
+
+            {
+
+                OlsFree();
+
+                return 0;
+
+            }
+
+            return data;
+
+        }
+
+
+
+        public static void ECRamWriteWin4(ushort address, byte data)
+
+        {
+
+            if (ols == null)
+
+                OlsInit();
+
+            if (ols == null)
+
+                return;
+
+
+
+            byte high_byte = (byte)((address >> 8) & 0xFF);
+
+            byte low_byte = (byte)(address & 0xFF);
+
+            try
+            {
+
+                lock (lockObject)
+
+                {
+
+                    reg_addr = 0x2E;
+
+                    reg_data = 0x2F;
+
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+
+                    ols.WriteIoPortByte(reg_data, 0x11);
+
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+
+                    ols.WriteIoPortByte(reg_data, high_byte);
+
+
+
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+
+                    ols.WriteIoPortByte(reg_data, 0x10);
+
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+
+                    ols.WriteIoPortByte(reg_data, low_byte);
+
+
+
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+
+                    ols.WriteIoPortByte(reg_data, 0x12);
+
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+
+                    ols.WriteIoPortByte(reg_data, data);
+
+                }
+
+                //if (ols != null)
+
+                //    OlsFree();
+
+            }
+
+            catch
+
+            {
+
+                OlsFree();
+
+                return;
+
+            }
+
+
+
+        }
         public static void ECRamWrite(ushort address, byte data)
         {
             if (ols == null)
@@ -23,35 +232,38 @@ namespace Handheld_Control_Panel.Classes
             byte low_byte = (byte)(address & 0xFF);
             try
             {
-                ols.WriteIoPortByte(reg_addr, 0x2E);
-                ols.WriteIoPortByte(reg_data, 0x11);
-                ols.WriteIoPortByte(reg_addr, 0x2F);
-                ols.WriteIoPortByte(reg_data, high_byte);
+                lock (lockObject)
+                {
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+                    ols.WriteIoPortByte(reg_data, 0x11);
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+                    ols.WriteIoPortByte(reg_data, high_byte);
 
-                ols.WriteIoPortByte(reg_addr, 0x2E);
-                ols.WriteIoPortByte(reg_data, 0x10);
-                ols.WriteIoPortByte(reg_addr, 0x2F);
-                ols.WriteIoPortByte(reg_data, low_byte);
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+                    ols.WriteIoPortByte(reg_data, 0x10);
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+                    ols.WriteIoPortByte(reg_data, low_byte);
 
-                ols.WriteIoPortByte(reg_addr, 0x2E);
-                ols.WriteIoPortByte(reg_data, 0x12);
-                ols.WriteIoPortByte(reg_addr, 0x2F);
-                ols.WriteIoPortByte(reg_data, data);
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+                    ols.WriteIoPortByte(reg_data, 0x12);
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+                    ols.WriteIoPortByte(reg_data, data);
 
-                if (ols != null)
-                    ols.DeinitializeOls();
+                    
+                }
             }
             catch
             {
                 ols = null;
                 return;
             }
-            ols = null;
+            
         }
 
         public static byte ECRamRead(ushort address)
         {
-            if (ols == null)
+
+                if (ols == null)
                 OlsInit();
             if (ols == null)
                 return 0;
@@ -60,29 +272,31 @@ namespace Handheld_Control_Panel.Classes
             byte low_byte = (byte)(address & 0xFF);
             try
             {
-                ols.WriteIoPortByte(reg_addr, 0x2E);
-                ols.WriteIoPortByte(reg_data, 0x11);
-                ols.WriteIoPortByte(reg_addr, 0x2F);
-                ols.WriteIoPortByte(reg_data, high_byte);
+                lock (lockObject)
+                {
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+                    ols.WriteIoPortByte(reg_data, 0x11);
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+                    ols.WriteIoPortByte(reg_data, high_byte);
 
-                ols.WriteIoPortByte(reg_addr, 0x2E);
-                ols.WriteIoPortByte(reg_data, 0x10);
-                ols.WriteIoPortByte(reg_addr, 0x2F);
-                ols.WriteIoPortByte(reg_data, low_byte);
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+                    ols.WriteIoPortByte(reg_data, 0x10);
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+                    ols.WriteIoPortByte(reg_data, low_byte);
 
-                ols.WriteIoPortByte(reg_addr, 0x2E);
-                ols.WriteIoPortByte(reg_data, 0x12);
-                ols.WriteIoPortByte(reg_addr, 0x2F);
-                data = ols.ReadIoPortByte(reg_data);
-                if (ols != null)
-                    ols.DeinitializeOls();
+                    ols.WriteIoPortByte(reg_addr, 0x2E);
+                    ols.WriteIoPortByte(reg_data, 0x12);
+                    ols.WriteIoPortByte(reg_addr, 0x2F);
+                    data = ols.ReadIoPortByte(reg_data);
+                }
+              
             }
             catch
             {
                 ols = null;
                 return 0;
             }
-            ols = null;
+            
             return data;
         }
 

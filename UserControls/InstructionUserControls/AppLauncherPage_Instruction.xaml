@@ -13,38 +13,70 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+            <Button Tag="LB" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_PageUp}"  />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF10C;" />
             </StackPanel>
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
-                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_PageDown}" />
-                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF10D;" />
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+
+            </Button>
+
+            <Button Tag="RB" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_PageDown}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF10D;" />
+                </StackPanel>
+            </Button>
+
+            <Button Tag="Back" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+              
+<StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Filter}"  />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEECA;"/>
             </StackPanel>
-            
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+            </Button>
+
+
+            <Button Tag="Start" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+ <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Sort}"  />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xEDE3;" />
             </StackPanel>
 
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+            </Button>
+
+            <Button Tag="X" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+<StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Edit}" />
+                <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF096;" />
+            </StackPanel>
+
+            </Button>
+            <Button Tag="Y" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+<StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Favorite}" />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF095;" />
             </StackPanel>
 
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+            </Button>
+
+            <Button Tag="B" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+<StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Close}" />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" Text="&#xF094;" HorizontalAlignment="Center" />
             </StackPanel>
-            <StackPanel VerticalAlignment="Center" Margin="0,0,14,0">
+
+            </Button>
+            <Button Tag="A" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+
+ <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock Style="{StaticResource actionTextblock_InstructionsCondensed}" Text="{DynamicResource Instruction_Launch}" />
                 <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" HorizontalAlignment="Center" Text="&#xF093;" />
 
             </StackPanel>
+            </Button>
+            
+           
 
 
             

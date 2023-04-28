@@ -87,7 +87,20 @@ namespace Handheld_Control_Panel.UserControls
 
                     }
                     break;
+                case "Change_Volume":
+                    for (int i = -3; i < 4; i++)
+                    {
+                        if (i != 0)
+                        {
+                            Parameter parameter = new Parameter();
+                            int j = i * 5; //multiply by 5 to give a larger value without making the loop complicated
+                            if (i > 0) { parameter.DisplayParameter = "+" + j.ToString() + "%"; } else { parameter.DisplayParameter = j.ToString() + "%"; }
+                            parameter.ParameterValue = j.ToString();
+                            hotkeyParameter.Add(parameter);
+                        }
 
+                    }
+                    break;
                 default:
                     this.Visibility = Visibility.Collapsed;
                     break;

@@ -21,19 +21,19 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class Start_Up
     {
-       
 
         public static void Start_Routine()
         {
 
 
             //run all routines to get device ready
-            //librehardwaremonitor librehardwaremonitor = new librehardwaremonitor();
-            //librehardwaremonitor.Monitor();
 
+            //    librehardwaremonitor.Monitor();
+          
             //test code here
-           
+
             //test code
+
 
             //check for updates first
             Update_Software.Update_Software.checkForUpdates(true);
@@ -55,12 +55,10 @@ namespace Handheld_Control_Panel.Classes
 
 
             //check fan control device capability
-            Fan_Management.Fan_Management.determineFanDevice();
+            Global_Variables.Global_Variables.Device = Device_Management.GetCurrentDevice();
 
             Fan_Management.Fan_Management.readSoftwareFanControl();
-            
-
-         
+                    
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
             //TDP_Management.TDP_Management.checkDriverBlockRegistry();
@@ -85,9 +83,7 @@ namespace Handheld_Control_Panel.Classes
 
             //update values
             ParallelTaskUpdate_Management.UpdateTask();
-
-            //get motherboard info
-          //  Fan_Management.Fan_Management.determineFanDevice();
+                   
 
             //check if RTSS should be started at startup
             RTSS.checkAutoStartRTSS();
@@ -101,17 +97,23 @@ namespace Handheld_Control_Panel.Classes
            
             Global_Variables.Global_Variables.profiles = new Profiles_Management();
 
+            AutoProfile_Management.checkAutoProfileApplicator_StartUp();
             if (Global_Variables.Global_Variables.profiles.activeProfile != null)
             {
-                Global_Variables.Global_Variables.profiles.activeProfile.applyProfile();
+                Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true, false);
             }
 
-            Global_Variables.Global_Variables.hotKeys = new HotKey_Management();
+            Global_Variables.Global_Variables.hotKeys = new Action_Management();
             Global_Variables.Global_Variables.homePageItems = new CustomizeHome_Management();
 
             Global_Variables.Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
             Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
 
+
+            if (Properties.Settings.Default.startAutoFan && Global_Variables.Global_Variables.Device.FanCapable)
+            {
+                AutoFan_Management.startAutoFan();
+            }
         }
       
         public static void loadLanguage()
@@ -137,5 +139,13 @@ namespace Handheld_Control_Panel.Classes
             }
             
         }
+
+        public static bool checkMultipleProgramsRunning()
+        {
+            Process[] processes = Process.GetProcessesByName("Handheld Control Panel");
+            if (processes.Length > 1)
+            { return true; }  else { return false; }
+        }
+        
     }
 }

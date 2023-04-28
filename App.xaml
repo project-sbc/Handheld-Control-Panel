@@ -5,7 +5,7 @@
              xmlns:controls="using:Microsoft.UI.Xaml.Controls"
           
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
-            
+             Exit="Application_Exit"
              >
     <Application.Resources>
         

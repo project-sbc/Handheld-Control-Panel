@@ -188,7 +188,7 @@ namespace Handheld_Control_Panel.Classes
             if (profile != null)
             {
 
-                profile.applyProfile(true);
+                profile.applyProfile(true, true);
 
                 Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LaunchCommand, profile.Path));
 
@@ -377,7 +377,27 @@ namespace Handheld_Control_Panel.Classes
         public string Exe { get; set; } = "";
         public string Resolution { get; set; } = "";
         public string RefreshRate { get; set; } = "";
-        public string Path { get; set; } = "";
+        public string path { get; set; } = "";
+        public string Path 
+        {
+            get
+            {
+                return path;
+            }
+            set
+            {
+                if (value != "")
+                {
+                    if(File.Exists(value))
+                    {
+                        Exe = System.IO.Path.GetFileNameWithoutExtension(value);
+                    }
+
+                }
+
+                path = value;
+            }
+        }
 
         public string appType { get; set; } = "";
         public string LaunchCommand { get; set; } = "";
@@ -585,7 +605,7 @@ namespace Handheld_Control_Panel.Classes
 
 
                     parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
-                    parentNode.SelectSingleNode("Exe").InnerText = Exe;
+                    //parentNode.SelectSingleNode("Exe").InnerText = Exe;
 
                     //if ID isnt 0, which is the default profile, and its been saved to be the default profile, then make this ID 0 and change the other profile
                     if (DefaultProfile.ToString() != parentNode.SelectSingleNode("DefaultProfile").InnerText && DefaultProfile)
@@ -694,7 +714,7 @@ namespace Handheld_Control_Panel.Classes
                     
 
                     ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
-                    Exe = parentNode.SelectSingleNode("Exe").InnerText;
+                    //Exe = parentNode.SelectSingleNode("Exe").InnerText;
                     if (parentNode.SelectSingleNode("DefaultProfile").InnerText == "True") { DefaultProfile = true; } else { DefaultProfile = false; }
                     ID = loadID;
                     
@@ -708,8 +728,10 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-        public void applyProfile(bool changeDisplay=false)
+        public void applyProfile(bool autoApplied, bool changeDisplay)
         {
+            if (autoApplied) { Global_Variables.Global_Variables.profileAutoApplied = true; } else { Global_Variables.Global_Variables.profileAutoApplied = false; }
+
             //remove active profile flag for current
             if (Global_Variables.Global_Variables.profiles.activeProfile != null) 
             { 
@@ -732,6 +754,8 @@ namespace Handheld_Control_Panel.Classes
                     Display_Management.Display_Management.SetDisplayRefreshRate(RefreshRate);
                 }
             }
+           
+
 
             switch (powerStatus)
             {

@@ -1,0 +1,47 @@
+﻿<Page x:Class="Handheld_Control_Panel.Pages.AutoFanPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Handheld_Control_Panel.Pages"
+      xmlns:uc="clr-namespace:Handheld_Control_Panel.UserControls"
+            xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:ScottPlot="clr-namespace:ScottPlot;assembly=ScottPlot.WPF"
+      mc:Ignorable="d" 
+      d:DesignWidth="445" 
+      Title="HomePage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition Height="300"/>
+     
+            <RowDefinition Height="300"/>
+      
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_HotKey}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_HotKey}"/>
+        </DockPanel>
+        <StackPanel Grid.Row="1" x:Name="spPackagePowerPlot">
+            <ScottPlot:WpfPlot x:Name="fanCurvePackagePowerPlot"   Height="300" VerticalAlignment="Top" />
+          
+        </StackPanel>
+        <StackPanel Grid.Row="1" x:Name="spTempPlot">
+            <ScottPlot:WpfPlot x:Name="fanCurveTemperaturePlot"   Height="300" VerticalAlignment="Top" />
+           
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Vertical" >
+            <Label x:Name="PackagePowerLabel" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="FanSpeedLabel_Power" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="TemperatureLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="FanSpeedLabel_Temperature" VerticalAlignment="Top" HorizontalAlignment="Left" Content=""   Style="{StaticResource userControlMainLabel}" />
+
+
+            <Label x:Name="updateLabel"  VerticalAlignment="Top" HorizontalAlignment="Left"    Style="{StaticResource userControlMainLabel}" />
+            <Label x:Name="updateFanLabel"  VerticalAlignment="Top" HorizontalAlignment="Left"    Style="{StaticResource userControlMainLabel}" />
+        </StackPanel>
+    </Grid>
+
+</Page>

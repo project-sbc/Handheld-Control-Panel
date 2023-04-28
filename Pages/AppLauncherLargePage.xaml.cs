@@ -30,7 +30,7 @@ using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using ControlzEx.Standard;
-
+using Handheld_Control_Panel.Classes.UserControl_Management;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -405,17 +405,17 @@ where childItem : DependencyObject
                         case "Up":
                             if (dpSort.Visibility == Visibility.Visible)
                             {
-                                handleListBoxIndexChange(controlListSort, -1);
+                                UserControl_Management.handleListBoxIndexChange(controlListSort, -1);
                             }
                             else
                             {
                                 if (dpFilter.Visibility == Visibility.Visible)
                                 {
-                                    handleListBoxIndexChange(controlListFilter, -1);
+                                    UserControl_Management.handleListBoxIndexChange(controlListFilter, -1);
                                 }
                                 else
                                 {
-                                    handleListBoxIndexChange(controlList, -3);
+                                    UserControl_Management.handleListBoxIndexChange(controlList, -3);
                                 }
                             }
                             
@@ -423,31 +423,31 @@ where childItem : DependencyObject
                         case "Down":
                             if (dpSort.Visibility == Visibility.Visible)
                             {
-                                handleListBoxIndexChange(controlListSort, 1);
+                                UserControl_Management.handleListBoxIndexChange(controlListSort, 1);
                             }
                             else
                             {
                                 if (dpFilter.Visibility == Visibility.Visible)
                                 {
-                                    handleListBoxIndexChange(controlListFilter, 1);
+                                    UserControl_Management.handleListBoxIndexChange(controlListFilter, 1);
                                 }
                                 else
                                 {
-                                    handleListBoxIndexChange(controlList, 3);
+                                    UserControl_Management.handleListBoxIndexChange(controlList, 3);
                                 }
                             }
                             break;
                         case "Left":
-                            handleListBoxIndexChange(controlList, -1);
+                            UserControl_Management.handleListBoxIndexChange(controlList, -1);
                             break;
                         case "Right":
-                            handleListBoxIndexChange(controlList, 1);
+                            UserControl_Management.handleListBoxIndexChange(controlList, 1);
                             break;
                         case "LB":
-                            handleListBoxIndexChange(controlList, -15);
+                            UserControl_Management.handleListBoxIndexChange(controlList, -15);
                             break;
                         case "RB":
-                            handleListBoxIndexChange(controlList, 15);
+                            UserControl_Management.handleListBoxIndexChange(controlList, 15);
                             break;
                         default: break;
 
@@ -457,14 +457,7 @@ where childItem : DependencyObject
                 else
                 {
                     controlList.SelectedIndex = 0;
-                    if (args.Action == "X")
-                    {
-                            changeSortMethod();
-                    }
-                    if (args.Action == "RB")
-                    {
-                        changeFilterMethod();
-                    }
+                  
                 }
               
 
@@ -472,41 +465,7 @@ where childItem : DependencyObject
 
         }
 
-        private void handleListBoxIndexChange(ListBox lb, int change)
-        {
-            int selectedIndex = lb.SelectedIndex;
-            int upperIndex = lb.Items.Count-1;
-            if (change < 0 )
-            {
-                if (selectedIndex >= -change)
-                {
-                    lb.SelectedIndex = selectedIndex + change;
-                    lb.ScrollIntoView(lb.SelectedItem);
-                }
-                else if (selectedIndex != 0)
-                {
-                    lb.SelectedIndex = 0;
-                    lb.ScrollIntoView(lb.SelectedItem);
-                }
-
-            }
-            if (change > 0 )
-            {
-                if ((upperIndex - selectedIndex) >= change)
-                {
-                    lb.SelectedIndex = selectedIndex + change;
-                    lb.ScrollIntoView(lb.SelectedItem);
-                }
-                else if(selectedIndex != upperIndex)
-                {
-                    lb.SelectedIndex = upperIndex;
-                    lb.ScrollIntoView(lb.SelectedItem);
-                }
-
-               
-            }
-
-        }
+      
 
         private void changeSortMethod()
         {

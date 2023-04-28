@@ -137,6 +137,11 @@ namespace Handheld_Control_Panel.Pages
             fm5.DisplayFilterMethod = Application.Current.Resources["Filter_Method_GOGGalaxy"].ToString();
             filterMethods.Add(fm5);
 
+            FilterMethods fm6 = new FilterMethods();
+            fm6.FilterMethod = "Filter_Method_MicrosoftStore";
+            fm6.DisplayFilterMethod = Application.Current.Resources["Filter_Method_MicrosoftStore"].ToString();
+            filterMethods.Add(fm6);
+                        
             controlListFilter.ItemsSource = filterMethods;
             controlListFilter.SelectedIndex = 0;
             controlListSort.ItemsSource = sortMethods;
@@ -484,10 +489,18 @@ where childItem : DependencyObject
                     lb.SelectedIndex = selectedIndex + change;
                     lb.ScrollIntoView(lb.SelectedItem);
                 }
-                else if (selectedIndex != 0)
+                else
                 {
-                    lb.SelectedIndex = 0;
-                    lb.ScrollIntoView(lb.SelectedItem);
+                    if (selectedIndex != 0)
+                    {
+                        lb.SelectedIndex = 0;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
+                    else
+                    {
+                        lb.SelectedIndex = lb.Items.Count-1;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
                 }
 
             }
@@ -498,10 +511,18 @@ where childItem : DependencyObject
                     lb.SelectedIndex = selectedIndex + change;
                     lb.ScrollIntoView(lb.SelectedItem);
                 }
-                else if(selectedIndex != upperIndex)
+                else 
                 {
-                    lb.SelectedIndex = upperIndex;
-                    lb.ScrollIntoView(lb.SelectedItem);
+                    if (selectedIndex != upperIndex)
+                    {
+                        lb.SelectedIndex = upperIndex;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
+                    else
+                    {
+                        lb.SelectedIndex = 0;
+                        lb.ScrollIntoView(lb.SelectedItem);
+                    }
                 }
 
                

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Notification;
+using System.Windows.Media;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -27,6 +28,13 @@ namespace Handheld_Control_Panel.Classes
         public static void ShowInWindow(string title, NotificationType notificationType)
         {
             Global_Variables.Global_Variables.mainWindow.ShowNotificationInWindow(title,  notificationType);
+
+
+        }
+
+        public static void ShowYesNoPrompt(string title, NotificationType notificationType, string action)
+        {
+            Global_Variables.Global_Variables.mainWindow.ShowNotificationInWindowYESNO(title, notificationType,"Delete_Action");
 
 
         }

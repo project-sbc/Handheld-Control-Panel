@@ -31,6 +31,7 @@
     <None Remove="Resources\AMD\RyzenAdj\WinRing0x64.sys" />
     <None Remove="Resources\EC\EC.exe" />
     <None Remove="Resources\EC\WinRing0x64.sys" />
+    <None Remove="Resources\HyaticePowerPlan\HyaticePowerPlan.pow" />
     <None Remove="Resources\Intel\KX\KX.exe" />
     <None Remove="Resources\Intel\MSR\msr-cmd.exe" />
     <None Remove="Resources\Intel\MSR\winio-drv.exe" />
@@ -42,6 +43,7 @@
     <None Remove="Resources\Intel\MSR\WinRing0x64.sys" />
     <None Remove="Resources\Intel\RW\Rw.exe" />
     <None Remove="Resources\Logs\application_log.txt" />
+    <None Remove="Resources\Pictures\gamelauncher_background.jpg" />
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
@@ -101,6 +103,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\HCP.ico" />
+    <Content Include="Resources\HyaticePowerPlan\HyaticePowerPlan.pow">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Intel\KX\KX.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -134,6 +139,9 @@
     <Content Include="Resources\Logs\application_log.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Pictures\gamelauncher_background.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Profiles_Template.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -159,6 +167,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official" Version="1.7.7" />
+    <PackageReference Include="DisplaySettingsChanger" Version="1.0.1" />
     <PackageReference Include="GameLib.NET" Version="1.3.3" />
     <PackageReference Include="InputSimulatorCore" Version="1.0.5" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.2" />
@@ -171,8 +180,11 @@
     <PackageReference Include="Nefarius.Drivers.HidHide" Version="1.8.60" />
     <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.8.228" />
     <PackageReference Include="Notification.Wpf" Version="7.0.0" />
+    <PackageReference Include="PidSharp" Version="1.0.0.1" />
     <PackageReference Include="protobuf-net" Version="3.2.16" />
     <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
+    <PackageReference Include="ScottPlot" Version="4.1.63" />
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.63" />
     <PackageReference Include="SecretNest.SequentialScheduler" Version="1.1.0" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     <PackageReference Include="System.Management" Version="7.0.0" />
@@ -181,6 +193,9 @@
 
   <ItemGroup>
     <Compile Update="Pages\AppLauncherLargePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\AutoFanPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">
@@ -207,10 +222,10 @@
     <Compile Update="Pages\ProfileEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeyEditPage.xaml.cs">
+    <Compile Update="Pages\ActionEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HotKeyPage.xaml.cs">
+    <Compile Update="Pages\ActionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ProfilesPage.xaml.cs">
@@ -381,6 +396,9 @@
     <Compile Update="UserControls\InstructionUserControls\AppLauncherPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\AutoFanPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\PowerUserControls\CloseProgram_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -456,6 +474,9 @@
     <Compile Update="UserControls\PowerUserControls\CloseGame_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\SettingsUserControls\AutostartFan_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\SettingsUserControls\EnableNotifications_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -463,6 +484,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\Deadzone_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\MaxGPU_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SettingsUserControls\FanSettings_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\SettingsUserControls\Update_Button.xaml.cs">
@@ -504,10 +531,10 @@
     <Compile Update="UserControls\SettingsUserControls\MaxTDP_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InstructionUserControls\HotKeyEditPage_Instruction.xaml.cs">
+    <Compile Update="UserControls\InstructionUserControls\ActionEditPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InstructionUserControls\HotKeyPage_Instruction.xaml.cs">
+    <Compile Update="UserControls\InstructionUserControls\ActionPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\CustomizeHomePage_Instruction.xaml.cs">

@@ -5,154 +5,207 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="MainWindow_NavigationView_Home">Home</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Profiles">Profiles</system:String>
-    <system:String x:Key="MainWindow_NavigationView_HotKey">Hotkeys</system:String>
-    <system:String x:Key="MainWindow_NavigationView_AppLauncher">App Launcher</system:String>
-    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Customize Home</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Settings">Settings</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Information">Information</system:String>
-    <system:String x:Key="MainWindow_NavigationView_MouseMode">Mouse Mode</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Home">Начальный экран</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Profiles">Профили</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">Горячие клавиши</system:String>
+    <system:String x:Key="MainWindow_NavigationView_AppLauncher">Запуск приложений</system:String>
+    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Настройка начального экрана</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Settings">Параметры</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Information">Информация</system:String>
+    <system:String x:Key="MainWindow_NavigationView_MouseMode">Режим мыши</system:String>
 
-    <system:String x:Key="MainWindow_NavigationView_Sub_Home">Home</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Profiles</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_HotKey">Hotkeys</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">App Launcher</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Customize controls on your home page</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Settings</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Information">Information</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">Information</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Home">Начальный экран</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Профили</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">Горячие клавиши</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">Запуск приложений</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Настройка элементов управления на начальном экране</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Параметры</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Information">Информация</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">Информация</system:String>
 
 
-    <system:String x:Key="Usercontrol_Enable_OnContent">Enable</system:String>
-    <system:String x:Key="Usercontrol_Disable_OffContent">Disable</system:String>
+    <system:String x:Key="Usercontrol_Enable_OnContent">Включить</system:String>
+    <system:String x:Key="Usercontrol_Disable_OffContent">Выключить</system:String>
 
-    <system:String x:Key="Default_Profile">Default Profile</system:String>
-    <system:String x:Key="Active_Profile">Active Profile</system:String>
+    <system:String x:Key="Default_Profile">Профиль по умолчанию</system:String>
+    <system:String x:Key="Active_Profile">Активный профиль</system:String>
 
     <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
     <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
-    <system:String x:Key="Usercontrol_Brightness">Brightness</system:String>
-    <system:String x:Key="Usercontrol_Volume">Volume</system:String>
-    <system:String x:Key="Usercontrol_VolumeMute">Volume Mute</system:String>
-    <system:String x:Key="Usercontrol_Resolution">Resolution</system:String>
-    <system:String x:Key="Usercontrol_RefreshRate">Refresh Rate</system:String>
+    <system:String x:Key="Usercontrol_Brightness">Яркость</system:String>
+    <system:String x:Key="Usercontrol_Volume">Громкость</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute">Заглушить громкость</system:String>
+    <system:String x:Key="Usercontrol_Resolution">Разрешение</system:String>
+    <system:String x:Key="Usercontrol_RefreshRate">Частота обновления</system:String>
     <system:String x:Key="Usercontrol_TDP">TDP</system:String>
-    <system:String x:Key="Usercontrol_TDP2">Boost TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP2">Повышенный TDP</system:String>
     <system:String x:Key="Usercontrol_EPP">EPP</system:String>
-    <system:String x:Key="Usercontrol_FPSLimit">FPS Limit</system:String>
-    <system:String x:Key="Usercontrol_ActiveCores">Active CPU Cores</system:String>
-    <system:String x:Key="Usercontrol_MaxCPUFrequency">Max CPU</system:String>
-    <system:String x:Key="Usercontrol_GPUCLK">GPU Clock</system:String>
-    <system:String x:Key="Usercontrol_HotKeyAction">Action</system:String>
-    <system:String x:Key="Usercontrol_HotKeyType">Input Method</system:String>
-    <system:String x:Key="Usercontrol_HotKeyParameter">Parameter</system:String>
-    <system:String x:Key="Usercontrol_HotKey">Hot Key</system:String>
-    <system:String x:Key="Usercontrol_HotKeySaved">Hot Key Saved</system:String>
-    <system:String x:Key="Usercontrol_MouseModeSaved">Mouse Mode Saved</system:String>
-    <system:String x:Key="Usercontrol_ProfileSaved">Profile Saved</system:String>
-    <system:String x:Key="Usercontrol_ProfileName">Profile Name</system:String>
-    <system:String x:Key="Usercontrol_Exe">Process Exe</system:String>
-    <system:String x:Key="Usercontrol_DefaultProfile">Default Profile</system:String>
-    <system:String x:Key="Usercontrol_Autostart">Autostart</system:String>
-    <system:String x:Key="Usercontrol_StartRTSS">Autostart RTSS</system:String>
-    <system:String x:Key="Usercontrol_MaxTDP">Max TDP</system:String>
-    <system:String x:Key="Usercontrol_MinTDP">Min TDP</system:String>
-    <system:String x:Key="Usercontrol_MaxFPS">Max RTSS FPS</system:String>
-    <system:String x:Key="Usercontrol_Theme">Theme</system:String>
-    <system:String x:Key="Usercontrol_CombineTDP">Sync TDP Values</system:String>
-    <system:String x:Key="Usercontrol_EnableNotifications">Enable Notifications</system:String>
-    <system:String x:Key="Usercontrol_Scaling">Display Scaling</system:String>
-    <system:String x:Key="Usercontrol_Language">Language</system:String>
-    <system:String x:Key="Usercontrol_IntelTDP">Intel TDP Type</system:String>
-    <system:String x:Key="Usercontrol_MouseMode">Mouse Mode</system:String>
-    <system:String x:Key="Usercontrol_Controller">Controller Status</system:String>
-    <system:String x:Key="Usercontrol_Donate">Donate</system:String>
-    <system:String x:Key="Usercontrol_Update">Update</system:String>
-    <system:String x:Key="Usercontrol_CheckUpdate">Check For Updates</system:String>
-    <system:String x:Key="Usercontrol_Version">Version: </system:String>
-    <system:String x:Key="Usercontrol_DefaultMouseMode">Default Mode</system:String>
-    <system:String x:Key="Usercontrol_MouseSensitivity">Mouse Sensitivity</system:String>
-    <system:String x:Key="Usercontrol_ScrollSensitivity">Scroll Sensitivity</system:String>
-    <system:String x:Key="Usercontrol_AppType">Application Type</system:String>
-    <system:String x:Key="Usercontrol_SyncSteamGames">Sync Steam Games</system:String>
-    <system:String x:Key="Usercontrol_SyncEpicGames">Sync Epic Games</system:String>
-    <system:String x:Key="Usercontrol_Sync">Sync</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit">Ограничени FPS</system:String>
+    <system:String x:Key="Usercontrol_ActiveCores">Активные ядра CPU</system:String>
+    <system:String x:Key="Usercontrol_MaxCPUFrequency">Максимальная частота CPU</system:String>
+    <system:String x:Key="Usercontrol_GPUCLK">Тактовая частота GPU</system:String>
+    <system:String x:Key="Usercontrol_HotKeyAction">Действие</system:String>
+    <system:String x:Key="Usercontrol_HotKeyType">Метод ввода</system:String>
+    <system:String x:Key="Usercontrol_HotKeyParameter">Параметр</system:String>
+    <system:String x:Key="Usercontrol_HotKey">Горячая клавиша</system:String>
+    <system:String x:Key="Usercontrol_HotKeySaved">Горячая клавиша сохранена</system:String>
+    <system:String x:Key="Usercontrol_MouseModeSaved">Режим мыши сохранён</system:String>
+    <system:String x:Key="Usercontrol_ProfileSaved">Профиль сохранён</system:String>
+    <system:String x:Key="Usercontrol_ProfileName">Имя профиля</system:String>
+    <system:String x:Key="Usercontrol_Exe">Исполняемый файл процесса</system:String>
+    <system:String x:Key="Usercontrol_DefaultProfile">Профиль по умолчанию</system:String>
+    <system:String x:Key="Usercontrol_Autostart">Автозапуск</system:String>
+    <system:String x:Key="Usercontrol_StartRTSS">Автозапуск RTSS</system:String>
+    <system:String x:Key="Usercontrol_MaxTDP">Максимальный TDP</system:String>
+    <system:String x:Key="Usercontrol_MinTDP">Минимальный TDP</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS">Максимальный RTSS FPS</system:String>
+    <system:String x:Key="Usercontrol_Theme">Тема</system:String>
+    <system:String x:Key="Usercontrol_CombineTDP">Синхронизировать значения TDP</system:String>
+    <system:String x:Key="Usercontrol_EnableNotifications">Включить уведомления</system:String>
+    <system:String x:Key="Usercontrol_Scaling">Масштабирование дисплея</system:String>
+    <system:String x:Key="Usercontrol_Language">Язык</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP">Тип Intel TDP</system:String>
+    <system:String x:Key="Usercontrol_MouseMode">Режим мыши</system:String>
+    <system:String x:Key="Usercontrol_Controller">Отключить встроенный контроллер</system:String>
+    <system:String x:Key="Usercontrol_Donate">Пожертвовать</system:String>
+    <system:String x:Key="Usercontrol_Update">Обновить</system:String>
+    <system:String x:Key="Usercontrol_CheckUpdate">Проверить наличие обновлений</system:String>
+    <system:String x:Key="Usercontrol_Version">Версия: </system:String>
+    <system:String x:Key="Usercontrol_DefaultMouseMode">Режим по умолчанию</system:String>
+    <system:String x:Key="Usercontrol_MouseSensitivity">Чувствительность мыши</system:String>
+    <system:String x:Key="Usercontrol_ScrollSensitivity">Чувствительность прокрутки</system:String>
+    <system:String x:Key="Usercontrol_AppType">Тип приложения</system:String>
+    <system:String x:Key="Usercontrol_SyncGames">Синхронизировать игры</system:String>
+    <system:String x:Key="Usercontrol_SyncEpicGames">Синхронизировать Epic Games</system:String>
+    <system:String x:Key="Usercontrol_Sync">Синхронизировать</system:String>
     
-    <system:String x:Key="Usercontrol_LeftStick">Left Stick</system:String>
-    <system:String x:Key="Usercontrol_RightStick">Right Stick</system:String>
-    <system:String x:Key="Usercontrol_AButton">A Button</system:String>
-    <system:String x:Key="Usercontrol_XButton">X Button</system:String>
-    <system:String x:Key="Usercontrol_YButton">Y Button</system:String>
-    <system:String x:Key="Usercontrol_BButton">B Button</system:String>
-    <system:String x:Key="Usercontrol_StartButton">Start Button</system:String>
-    <system:String x:Key="Usercontrol_BackButton">Back Button</system:String>
-    <system:String x:Key="Usercontrol_DPadUp">DPad Up</system:String>
-    <system:String x:Key="Usercontrol_DPadDown">DPad Down</system:String>
-    <system:String x:Key="Usercontrol_DPadLeft">DPad Left</system:String>
-    <system:String x:Key="Usercontrol_DPadRight">DPad Right</system:String>
-    <system:String x:Key="Usercontrol_LB">Left Bumper</system:String>
-    <system:String x:Key="Usercontrol_RB">Right Bumper</system:String>
-    <system:String x:Key="Usercontrol_L3">Left Stick Button</system:String>
-    <system:String x:Key="Usercontrol_R3">Right Stick Button</system:String>
-    <system:String x:Key="Usercontrol_RT">Right Trigger</system:String>
-    <system:String x:Key="Usercontrol_LT">Left Trigger</system:String>
+    <system:String x:Key="Usercontrol_LeftStick">Левый стик</system:String>
+    <system:String x:Key="Usercontrol_RightStick">Правый стик</system:String>
+    <system:String x:Key="Usercontrol_AButton">Кнопка A</system:String>
+    <system:String x:Key="Usercontrol_XButton">Кнопка X</system:String>
+    <system:String x:Key="Usercontrol_YButton">Кнопка Y</system:String>
+    <system:String x:Key="Usercontrol_BButton">Кнопка B</system:String>
+    <system:String x:Key="Usercontrol_StartButton">Кнопка Start</system:String>
+    <system:String x:Key="Usercontrol_BackButton">Кнопка Back</system:String>
+    <system:String x:Key="Usercontrol_DPadUp">DPad Вверх</system:String>
+    <system:String x:Key="Usercontrol_DPadDown">DPad Вниз</system:String>
+    <system:String x:Key="Usercontrol_DPadLeft">DPad Влево</system:String>
+    <system:String x:Key="Usercontrol_DPadRight">DPad Вправо</system:String>
+    <system:String x:Key="Usercontrol_LB">Левый бампер</system:String>
+    <system:String x:Key="Usercontrol_RB">Правый бампер</system:String>
+    <system:String x:Key="Usercontrol_L3">Нажатие левого стика</system:String>
+    <system:String x:Key="Usercontrol_R3">Нажатие правого стика</system:String>
+    <system:String x:Key="Usercontrol_RT">Правый триггер</system:String>
+    <system:String x:Key="Usercontrol_LT">Левый триггер</system:String>
 
-    <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
-    <system:String x:Key="Usercontrol_AccentColor">Accent Color</system:String>
-    <system:String x:Key="Usercontrol_Autoupdate">Auto Check For Updates</system:String>
-    <system:String x:Key="Divider">Divider</system:String>
-    <system:String x:Key="Usercontrol_Right">Right</system:String>
-    <system:String x:Key="Usercontrol_Left">Left</system:String>
-    <system:String x:Key="Usercontrol_Dark">Dark</system:String>
-    <system:String x:Key="Usercontrol_Light">Light</system:String>
-
-
-    <system:String x:Key="Instruction_Toggle">TOGGLE</system:String>
-    <system:String x:Key="Instruction_Confirm">CONFIRM</system:String>
-    <system:String x:Key="Instruction_Close">CLOSE</system:String>
-    <system:String x:Key="Instruction_Arrange">ARRANGE</system:String>
-    <system:String x:Key="Instruction_Back">BACK</system:String>
-    <system:String x:Key="Instruction_Select">SELECT</system:String>
-    <system:String x:Key="Instruction_Edit">EDIT</system:String>
-    <system:String x:Key="Instruction_Delete">DELETE</system:String>
-    <system:String x:Key="Instruction_Add">NEW</system:String>
-    <system:String x:Key="Instruction_Save">SAVE</system:String>
-    <system:String x:Key="Instruction_Apply">APPLY</system:String>
-    <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
+    <system:String x:Key="Usercontrol_AppLocation">Расположение приложения</system:String>
+    <system:String x:Key="Usercontrol_AccentColor">Акцентный цвет</system:String>
+    <system:String x:Key="Usercontrol_Autoupdate">Автоматически проверять наличие обновлений</system:String>
+    <system:String x:Key="Divider">Разделитель</system:String>
+    <system:String x:Key="Usercontrol_Right">Справа</system:String>
+    <system:String x:Key="Usercontrol_Left">Слева</system:String>
+    <system:String x:Key="Usercontrol_Dark">Тёмный</system:String>
+    <system:String x:Key="Usercontrol_Light">Светлый</system:String>
 
 
+    <system:String x:Key="Instruction_Toggle">ПЕРЕКЛЮЧИТЬ</system:String>
+    <system:String x:Key="Instruction_Confirm">ПОДТВЕРДИТЬ</system:String>
+    <system:String x:Key="Instruction_Close">ЗАКРЫТЬ</system:String>
+    <system:String x:Key="Instruction_Arrange">СОРТИРОВАТЬ</system:String>
+    <system:String x:Key="Instruction_Back">НАЗАД</system:String>
+    <system:String x:Key="Instruction_Select">ВЫБРАТЬ</system:String>
+    <system:String x:Key="Instruction_Edit">РЕДАКТИРОВАТЬ</system:String>
+    <system:String x:Key="Instruction_Delete">УДАЛИТЬ</system:String>
+    <system:String x:Key="Instruction_Add">ДОБАВИТЬ</system:String>
+    <system:String x:Key="Instruction_Save">СОХРАНИТЬ</system:String>
+    <system:String x:Key="Instruction_Apply">ПРИМЕНИТЬ</system:String>
+    <system:String x:Key="Instruction_Duplicate">ДУБЛИРОВАТЬ</system:String>
+    <system:String x:Key="Instruction_Launch">ЗАПУСТИТЬ</system:String>
+  
+        
+  
 
-    <system:String x:Key="Hotkeys_Action_Open_Program">Open Program</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_TDP">Change TDP</system:String>
-    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Toggle Quick Access Menu</system:String>
-    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Open Steam Big Picture</system:String>
-    <system:String x:Key="Hotkeys_Action_Open_Playnite">Open Playnite</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Brightness">Change Brightness</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Change GPU Clock</system:String>
-    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Toggle Mouse Mode</system:String>
+
+
+    <system:String x:Key="Hotkeys_Action_Open_Program">Открыть программу</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">Изменить TDP</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Вкл\выкл меню быстрого доступа</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Открыть Steam Big Picture</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Playnite">Открыть Playnite</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">Изменить яркость</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Изменить тактовую частоту GPU</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Переключить режим мыши</system:String>
     
-    <system:String x:Key="Hotkeys_Type_Controller">Controller</system:String>
-    <system:String x:Key="Hotkeys_Type_Keyboard">Keyboard</system:String>
-    
-    
-    <system:String x:Key="Notification_ProfileApplied">Profile Applied</system:String>
-
-
-    <system:String x:Key="MouseMode_Action_MouseInput">Mouse Input</system:String>
-    <system:String x:Key="MouseMode_Action_Scroll">Scrolling</system:String>
-    <system:String x:Key="MouseMode_Action_ArrowKeys">Arrow Keys</system:String>
-
-
+    <system:String x:Key="Hotkeys_Type_Controller">Контроллер</system:String>
+    <system:String x:Key="Hotkeys_Type_Keyboard">Клавиатура</system:String>
     
     
-    <system:String x:Key="ContextMenu_Hide">Hide</system:String>
-    <system:String x:Key="ContextMenu_Close">Close</system:String>
-    <system:String x:Key="ContextMenu_ShutDownPC">Power Off</system:String>
+    <system:String x:Key="Notification_ProfileApplied">Профиль применён</system:String>
 
 
+    <system:String x:Key="MouseMode_Action_MouseInput">Ввод мышью</system:String>
+    <system:String x:Key="MouseMode_Action_Scroll">Прокрутка</system:String>
+    <system:String x:Key="MouseMode_Action_ArrowKeys">Кнопки стрелок</system:String>
 
 
+    
+    
+    <system:String x:Key="ContextMenu_Hide">Скрыть</system:String>
+    <system:String x:Key="ContextMenu_Close">Закрыть</system:String>
+    <system:String x:Key="ContextMenu_ShutDownPC">Выключить ПК</system:String>
 
-   
+
+<!-- new 27mar2023-->
+    <system:String x:Key="MainWindow_NavigationView_Power">Питание</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Power">Питание</system:String>
+    <system:String x:Key="UserControl_CloseGame">Закрыть </system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">Закрыть программу</system:String>
+    <system:String x:Key="UserControl_HideHCP">Скрыть HCP</system:String>
+    <system:String x:Key="UserControl_CloseHCP">Закрыть HCP</system:String>
+    <system:String x:Key="UserControl_RestartPC">Перезапустить ПК</system:String>
+    <system:String x:Key="UserControl_Restart">Перезапуск</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">Выключить ПК</system:String>
+    <system:String x:Key="UserControl_Shutdown">Выключение</system:String>
+    <system:String x:Key="UserControl_FanControl">Управление вентиляторами</system:String>
+
+        <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">На рабочий стол</system:String>
+    <system:String x:Key="Sort_Method_SortBy">Сортировать по</system:String>
+    <system:String x:Key="Sort_Method_AppType">Тип приложения</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">Частота запуска</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">Недавно запущено</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">Имя профиля</system:String>
+    <system:String x:Key="Sort_Method_Favorite">Избранное</system:String>
+        
+    <system:String x:Key="Instruction_Sort">СОРТИРОВКА</system:String>
+    <system:String x:Key="Instruction_Filter">ФИЛЬТР</system:String>
+    <system:String x:Key="Instruction_Favorite">ИЗБРАННОЕ</system:String>
+    <system:String x:Key="Instruction_PageDown">СЛЕД СТРАНИЦА</system:String>
+    <system:String x:Key="Instruction_PageUp">ПРЕД СТРАНИЦА</system:String>
+
+        
+        <!-- new strings 03apr2023-->
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">Включить экранную клавиатуру Windows</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">Включить экранную клавиатуру HCP</system:String>
+    <!-- 04apr2023 -->
+    <system:String x:Key="Usercontrol_Deadzone">Мертвая зона джойстика</system:String>
+        
+        <!-- 05apr2023 -->
+    <system:String x:Key="Notification_GameSyncDone">Синхронизация игровой библиотеки завершена</system:String>
+    <system:String x:Key="Notification_GameSyncing">Синхронизация игровой библиотеки</system:String>
+    
+        <!-- 06apr2023-->
+    <system:String x:Key="Filter_Method_Filter">Фильтр</system:String>
+    <system:String x:Key="Filter_Method_None">Нет</system:String>
+    <system:String x:Key="Filter_Method_Favorite">Избранное</system:String>
+    <system:String x:Key="Filter_Method_Steam">Steam</system:String>
+    <system:String x:Key="Filter_Method_EpicGames">Epic Games</system:String>
+    <system:String x:Key="Filter_Method_GOGGalaxy">GOG Galaxy</system:String>
+    <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
+    <system:String x:Key="Filter_Method_Applications">Приложения</system:String>
+    <!-- 14apr2023 -->
+    <system:String x:Key="Filter_Method_MicrosoftStore">Microsoft Store</system:String>
+    <system:String x:Key="Usercontrol_MaxGPUCLK">Max GPU Clock</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">AutoTDP</system:String>
+
 </ResourceDictionary>

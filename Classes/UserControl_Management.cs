@@ -27,6 +27,15 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                 switch (slider.Tag)
                 {
+                    
+                     case "Slider_MaxGPUCLK":
+                        slider.Minimum = 400;
+                        slider.Maximum = 2500;
+                        slider.TickFrequency = 50;
+                        slider.SmallChange = 50;
+                        slider.LargeChange = 100;
+                        slider.Value = Properties.Settings.Default.maxGPUCLK;
+                        break;
                     case "Slider_MouseSensitivity":
                         slider.Minimum = 5;
                         slider.Maximum = 35;
@@ -168,14 +177,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         }
                         
                         break;
-                    case "Slider_MaxGPUCLK":
-                        slider.Minimum = 400;
-                        slider.Maximum = 2200;
-                        slider.TickFrequency = 50;
-                        slider.SmallChange = 50;
-                        slider.LargeChange = 100;
-                        slider.Value = Properties.Settings.Default.maxGPUCLK;
-                        break;
+                 
                     case "Slider_MinTDP":
                         slider.Minimum = 3;
                         slider.Maximum = 25;
@@ -217,26 +219,20 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.Value = Global_Variables.Global_Variables.EPP;
                         break;
                     case "Slider_Fan-TickChange":
-                        slider.Minimum = 29;
+                        if (Global_Variables.Global_Variables.Device.MinFanSpeedPercentage != 0)
+                        {
+                            slider.Minimum = Global_Variables.Global_Variables.Device.MinFanSpeedPercentage-1;
+                        }
+                        else
+                        {
+                            slider.Minimum = 0;
+                        }
+                       
                         slider.Maximum = 100;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 5;
                         slider.LargeChange = 10;
-                        if (Global_Variables.Global_Variables.FanSpeed == 0)
-                        {
-                            slider.Value = 29;
-                        }
-                        else
-                        {
-                            if (Global_Variables.Global_Variables.FanSpeed <30)
-                            {
-                                slider.Value = 30;
-                            }
-                            else
-                            {
-                                slider.Value = Global_Variables.Global_Variables.FanSpeed;
-                            }
-                        }
+                        
                         
                         break;
                     case "Slider_CoreParking":
@@ -337,12 +333,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                             double originalValue = slider.Value;
                             switch (action)
                             {
-                                case "Up":
-                                    slider.Value = slider.Value + slider.LargeChange;
-                                    break;
-                                case "Down":
-                                    slider.Value = slider.Value - slider.LargeChange;
-                                    break;
+
                                 case "Right":
                                     slider.Value = slider.Value + slider.SmallChange;
                                     break;
@@ -350,6 +341,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                                     slider.Value = slider.Value - slider.SmallChange;
                                     break;
 
+                                
                                 default: break;
                             }
                             if (originalValue != slider.Value && !slider.Tag.ToString().Contains("-TickChange"))
@@ -439,17 +431,17 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
             switch (sliderTag)
             {
                 case "Slider_Fan-TickChange":
-                    if (Global_Variables.Global_Variables.fanControlDevice & Global_Variables.Global_Variables.fanControlEnable)
+                    if (Global_Variables.Global_Variables.Device.FanCapable & Global_Variables.Global_Variables.fanControlEnabled)
                     {
-                        if (sliderValue == 29)
+                        if (sliderValue == 0 || sliderValue == slider.Minimum)
                         {
                             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(0));
                         }
                         else
                         {
-                            if (sliderValue < 30)
+                            if (sliderValue <= Global_Variables.Global_Variables.Device.MinFanSpeedPercentage)
                             {
-                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(30));
+                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(Global_Variables.Global_Variables.Device.MinFanSpeedPercentage));
                             }
                             else
                             {
@@ -507,7 +499,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 case "Slider_ProfileOfflineActiveCores":
                     Global_Variables.Global_Variables.profiles.editingProfile.Offline_ActiveCores = sliderValue.ToString();
                     break;
-
+ 
                 case "Slider_MaxGPUCLK":
                     Properties.Settings.Default.maxGPUCLK = (int)sliderValue;
                     Properties.Settings.Default.Save();
@@ -616,5 +608,56 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
         }
         #endregion
 
+        public static void getUserControlsOnPage(List<UserControl> userControls, StackPanel stackPanel)
+        {
+            foreach (object child in stackPanel.Children)
+            {
+                if (child is UserControl)
+                {
+                    UserControl uc = (UserControl)child;
+                    if (!child.ToString().Contains(".Divider") && uc.Visibility != Visibility.Collapsed)
+                    {
+                        userControls.Add((UserControl)child);
+                    }
+                }
+
+            }
+        }
+
+        public static void handleListBoxIndexChange(ListBox lb, int change)
+        {
+            int selectedIndex = lb.SelectedIndex;
+            int upperIndex = lb.Items.Count - 1;
+            if (change < 0)
+            {
+                if (selectedIndex >= -change)
+                {
+                    lb.SelectedIndex = selectedIndex + change;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+                else if (selectedIndex != 0)
+                {
+                    lb.SelectedIndex = 0;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+
+            }
+            if (change > 0)
+            {
+                if ((upperIndex - selectedIndex) >= change)
+                {
+                    lb.SelectedIndex = selectedIndex + change;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+                else if (selectedIndex != upperIndex)
+                {
+                    lb.SelectedIndex = upperIndex;
+                    lb.ScrollIntoView(lb.SelectedItem);
+                }
+
+
+            }
+
+        }
     }
 }

@@ -109,6 +109,12 @@ namespace Handheld_Control_Panel.Pages
 
                                     controlList.ScrollIntoView(controlList.SelectedItem);
                                 }
+                                else
+                                {
+                                    //if at top of list, go to bottom
+                                    controlList.SelectedIndex = controlList.Items.Count -1;
+                                    controlList.ScrollIntoView(controlList.SelectedItem);
+                                }
                             }
                             break;
                         case "Down":
@@ -125,6 +131,13 @@ namespace Handheld_Control_Panel.Pages
 
                                     controlList.ScrollIntoView(controlList.SelectedItem);
 
+                                }
+                                else
+                                {
+                                    controlList.SelectedIndex =0;
+
+
+                                    controlList.ScrollIntoView(controlList.SelectedItem);
                                 }
                             }
                             break;
@@ -155,6 +168,12 @@ namespace Handheld_Control_Panel.Pages
                     Global_Variables.homePageItems.Insert(index - 1, hpi);
                     controlList.Items.Refresh();
                 }
+                else
+                {
+                    Global_Variables.homePageItems.Remove(hpi);
+                    Global_Variables.homePageItems.Insert(Global_Variables.homePageItems.Count, hpi);
+                    controlList.Items.Refresh();
+                }
             }
             else
             {
@@ -164,7 +183,14 @@ namespace Handheld_Control_Panel.Pages
                     Global_Variables.homePageItems.Insert(index+1, hpi);
                     controlList.Items.Refresh();
                 }
+                else
+                {
+                    Global_Variables.homePageItems.Remove(hpi);
+                    Global_Variables.homePageItems.Insert(0, hpi);
+                    controlList.Items.Refresh();
+                }
             }
+            controlList.ScrollIntoView(controlList.SelectedItem);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
