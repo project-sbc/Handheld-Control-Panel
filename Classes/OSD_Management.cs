@@ -19,6 +19,7 @@ namespace Handheld_Control_Panel.Classes
         {
             displayOSD = true;
             Thread osd = new Thread(() => { test(); });
+            osd.IsBackground = true;
             osd.Start();
         }
 
