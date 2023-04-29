@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using Windows.Graphics;
+using System.Windows.Controls.Primitives;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -113,7 +114,7 @@ namespace Handheld_Control_Panel.Classes
 
                 //set amd power slider
                 Classes.Task_Scheduler.Task_Scheduler.runTask(() => AMDPowerSlide_Management.AMDPowerSlide_Management.setAMDRyzenAdjPowerPerformance());
-
+                autoTDPThread.IsBackground = true;
                 autoTDPThread.Start();
             }
 

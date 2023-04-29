@@ -58,6 +58,7 @@ namespace Handheld_Control_Panel.Classes
                 
                 loadXandYvalues();
                 computer.Open();
+                autoFan.IsBackground = true;
                 autoFan.Start();
             }
 
