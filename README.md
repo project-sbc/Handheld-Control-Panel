@@ -97,6 +97,16 @@ Restart the computer
   <li>RTSS support - for changing FPS limits and displaying OSDs</li>
 </ul>
 
+# Special Thanks
+
+<ul>
+  <li>HMR - Handheld Master Race - for help with the user interface design and layout</li>
+  <li>Askarus (Discord)/Mystechry (Youtube) - for extensive help with testing early builds</li>
+  <li>Hyatice (Discord) - for help with AutoTDP and some testing</li>
+  <li>Frank (Motion Assistant Developer) - for help with fan controls</li>
+  <li>ETA Prime for the shoutout on Youtube</li>
+</ul>
+
 
 
 
