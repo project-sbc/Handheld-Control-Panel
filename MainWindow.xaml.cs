@@ -36,6 +36,7 @@ using System.Printing;
 using System.Windows.Forms;
 using Notification.Wpf.Controls;
 using System.Collections.ObjectModel;
+using Handheld_Control_Panel.Classes.Task_Scheduler;
 
 namespace Handheld_Control_Panel
 {
@@ -70,6 +71,9 @@ namespace Handheld_Control_Panel
 
             //check controller usb device info GUID instance ID
             Controller_Management.getDefaultControllerDeviceInformation();
+
+            //now check for hidhide configured
+            Controller_Management.HIDHideConfigured();
 
             MouseKeyHook.Subscribe();
 
@@ -345,6 +349,9 @@ namespace Handheld_Control_Panel
                 //call check for suspend process   stop this online games are ruined by this
                 //FullScreen_Management.checkSuspendProcess();
 
+
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
+                
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
                 {
@@ -358,12 +365,13 @@ namespace Handheld_Control_Panel
                 this.Show();
               
                 m_notifyIcon.Visible = false;
+                
             }
             else
             {
                 //check resume process
                 //FullScreen_Management.checkResumeProcess();
-
+                Controller_Management.unhideController();
 
                 this.Hide();
                 
