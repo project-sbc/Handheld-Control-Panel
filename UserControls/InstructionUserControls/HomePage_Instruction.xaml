@@ -13,14 +13,31 @@
    
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Close}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Arrange}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF095;" />
+            <Button Tag="Y" Margin="0,0,5,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Arrange}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF095;" />
+                </StackPanel>
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Toggle}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
+            </Button>
+            <Button Tag="B" Margin="0,0,5,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Close}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
+                </StackPanel>
+
+            </Button>
+            <Button Tag="A" Margin="0,0,5,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Toggle}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
+                </StackPanel>
+
+            </Button>
+         
+          
+           
 
         </StackPanel>
      

@@ -31,7 +31,7 @@ namespace Handheld_Control_Panel.Classes
             //    librehardwaremonitor.Monitor();
           
             //test code here
-
+            Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
             //test code
 
 

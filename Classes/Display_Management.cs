@@ -1,5 +1,6 @@
 ﻿using DisplaySettings;
 using Microsoft.Win32;
+using PInvoke;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -136,7 +137,7 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             List<DisplaySettingsChanger.DisplayMode> listy = DisplaySettingsChanger.GetSupportedModes();
             DisplaySettingsChanger.DisplayMode dmm = DisplaySettingsChanger.GetCurrentDisplayMode();
             
-
+            
 
             Debug.WriteLine(dmm.dmPelsWidth);
             Debug.WriteLine(dmm.dmPelsHeight);
@@ -144,13 +145,12 @@ namespace Handheld_Control_Panel.Classes.Display_Management
 
             foreach (DisplaySettingsChanger.DisplayMode displayMode in listy)
             {
-                Debug.WriteLine(displayMode.dmPelsHeight);
-                Debug.WriteLine(displayMode.dmPelsWidth);
+                string line = displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight + " " + displayMode.dmDisplayFrequency + " " + displayMode.dmBitsPerPel + " " + displayMode.dmDisplayOrientation;
+
+                Debug.WriteLine(line);
+
+
       
-       
-
-                Debug.WriteLine(displayMode.dmDisplayFrequency);
-
 
             }
         }
@@ -408,5 +408,11 @@ namespace Handheld_Control_Panel.Classes.Display_Management
 
 
         }
+
+
+        // new methods for resolution and refresh
+
     }
+
+   
 }
