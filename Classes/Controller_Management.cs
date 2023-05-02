@@ -80,7 +80,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
           
         }
 
-        public static void HIDHideConfigured()
+        public static async Task HIDHideConfiguredAsync()
         {
             //make sure its configured with HCP in it
             if (hideHidService.IsInstalled)
@@ -92,20 +92,25 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                 {
                     p.CloseMainWindow();
                 }
+                await Task.Delay(1000);
 
-
-                IReadOnlyList<string> appList = hideHidService.ApplicationPaths;
-                string appPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Handheld Control Panel.exe");
-                if (!appList.Contains(appPath))
+                hidHideClient = Process.GetProcessesByName("HidHideClient");
+                if (hidHideClient.Length == 0)
                 {
-                    hideHidService.AddApplicationPath(appPath);
-                }
+                    IReadOnlyList<string> appList = hideHidService.ApplicationPaths;
+                    string appPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Handheld Control Panel.exe");
+                    if (!appList.Contains(appPath))
+                    {
+                        hideHidService.AddApplicationPath(appPath);
+                    }
 
-                IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
-                if (!controllerList.Contains(Properties.Settings.Default.instanceID))
-                {
-                    hideHidService.AddBlockedInstanceId(Properties.Settings.Default.instanceID);
+                    IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
+                    if (!controllerList.Contains(Properties.Settings.Default.instanceID))
+                    {
+                        hideHidService.AddBlockedInstanceId(Properties.Settings.Default.instanceID);
+                    }
                 }
+              
             }
         }
 
@@ -113,6 +118,14 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
             if (hideHidService.IsInstalled && Properties.Settings.Default.instanceID != "")
             {
+                //check to make sure hidhide client isn't running or else an error will occur
+                Process[] hidHideClient = Process.GetProcessesByName("HidHideClient");
+
+                foreach (Process p in hidHideClient)
+                {
+                    p.CloseMainWindow();
+                }
+
                 IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
                 if (controllerList.Contains(Properties.Settings.Default.instanceID))
                 {

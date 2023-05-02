@@ -73,7 +73,7 @@ namespace Handheld_Control_Panel
             Controller_Management.getDefaultControllerDeviceInformation();
 
             //now check for hidhide configured
-            Controller_Management.HIDHideConfigured();
+            Controller_Management.HIDHideConfiguredAsync();
 
             MouseKeyHook.Subscribe();
 
@@ -98,7 +98,8 @@ namespace Handheld_Control_Panel
             //notifyicon stuff
             m_notifyIcon = new System.Windows.Forms.NotifyIcon();
             m_notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(AppDomain.CurrentDomain.BaseDirectory + "\\Handheld Control Panel.exe");
-            m_notifyIcon.Click += M_notifyIcon_Click;
+            m_notifyIcon.MouseClick += M_notifyIcon_Click;
+      
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
 
@@ -116,23 +117,35 @@ namespace Handheld_Control_Panel
         
         private void M_notifyIcon_Click(object? sender, EventArgs e)
         {
-            var contextMenu = new ContextMenu();
-            var menuItem = new MenuItem();
-            menuItem.Header = "Close";
-            var menuItemOpen = new MenuItem();
-            menuItemOpen.Header = "Open";
-            menuItem.Click += MenuItem_Click;
-            menuItemOpen.Click += MenuItemOpen_Click;
-            contextMenu.Items.Add(menuItemOpen);
-            contextMenu.Items.Add(menuItem);
-     
-            contextMenu.IsOpen = true;
+            System.Windows.Forms.MouseEventArgs mouseEventArgs = (System.Windows.Forms.MouseEventArgs)e;
 
-            // Get context menu handle and bring it to the foreground
-            if (PresentationSource.FromVisual(contextMenu) is HwndSource hwndSource)
+            if (mouseEventArgs.Button == MouseButtons.Left)
             {
-                _ = SetForegroundWindow(hwndSource.Handle);
+                toggleWindow();
+              
             }
+            if (mouseEventArgs.Button == MouseButtons.Right)
+            {
+                var contextMenu = new ContextMenu();
+                var menuItem = new MenuItem();
+                menuItem.Header = "Close";
+                var menuItemOpen = new MenuItem();
+                menuItemOpen.Header = "Open";
+                menuItem.Click += MenuItem_Click;
+                menuItemOpen.Click += MenuItemOpen_Click;
+                contextMenu.Items.Add(menuItemOpen);
+                contextMenu.Items.Add(menuItem);
+
+                contextMenu.IsOpen = true;
+
+                // Get context menu handle and bring it to the foreground
+                if (PresentationSource.FromVisual(contextMenu) is HwndSource hwndSource)
+                {
+                    _ = SetForegroundWindow(hwndSource.Handle);
+                }
+
+            }
+           
         }
         private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
         {
