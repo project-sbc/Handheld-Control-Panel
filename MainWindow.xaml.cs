@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using Notification.Wpf.Controls;
 using System.Collections.ObjectModel;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
+using System.Globalization;
 
 namespace Handheld_Control_Panel
 {
@@ -205,7 +206,10 @@ namespace Handheld_Control_Panel
                 checkPowerStatus();
        
             });
-            Time.Text = DateTime.Now.ToString("h:mm tt");
+
+
+            Time.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+        
         }
         private void checkNetworkInterface()
         {

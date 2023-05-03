@@ -134,25 +134,31 @@ namespace Handheld_Control_Panel.Classes.Display_Management
 
         public static void testGettingResolutionFromNewNugetPackage()
         {
-            List<DisplaySettingsChanger.DisplayMode> listy = DisplaySettingsChanger.GetSupportedModes();
+            
             DisplaySettingsChanger.DisplayMode dmm = DisplaySettingsChanger.GetCurrentDisplayMode();
-            
-            
 
-            Debug.WriteLine(dmm.dmPelsWidth);
-            Debug.WriteLine(dmm.dmPelsHeight);
-            Debug.WriteLine(dmm.dmSize);
+            short bits = dmm.dmBitsPerPel;
+            int ditherType = dmm.dmDitherType; //dither type is related to bitmap  conversion, just keep the kind of the current display mode
+            int displayOutput = dmm.dmDisplayFixedOutput;
 
-            foreach (DisplaySettingsChanger.DisplayMode displayMode in listy)
+            List<DisplaySettingsChanger.DisplayMode> initialList = DisplaySettingsChanger.GetSupportedModes().Where(o => o.dmBitsPerPel == bits).ToList();
+            List<DisplaySettingsChanger.DisplayMode> finalList = new List<DisplaySettingsChanger.DisplayMode>();
+           
+            
+            foreach (DisplaySettingsChanger.DisplayMode displayMode in initialList)
             {
-                string line = displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight + " " + displayMode.dmDisplayFrequency + " " + displayMode.dmBitsPerPel + " " + displayMode.dmDisplayOrientation;
-
-                Debug.WriteLine(line);
-
-
-      
+                if (displayMode.dmDitherType == ditherType && displayMode.dmBitsPerPel == bits && displayMode.dmDisplayFixedOutput == displayOutput)
+                {
+                    finalList.Add(displayMode);
+                }
 
             }
+            foreach (DisplaySettingsChanger.DisplayMode displayMode in finalList)
+            {
+                Debug.WriteLine(displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight + " " + displayMode.dmDisplayFrequency + " " + displayMode.dmBitsPerPel + " " + displayMode.dmCollate + " " + displayMode.dmColor + " " + displayMode.dmDeviceName + " " + displayMode.dmDisplayFixedOutput + " " + displayMode.dmDisplayFlags + " " + displayMode.dmDitherType + " " + displayMode.dmDuplex + " " + displayMode.dmFields + " " + displayMode.dmFormName + " " + displayMode.dmICMIntent + " " + displayMode.dmLogPixels + " " + displayMode.dmMediaType + " " + displayMode.dmTTOption);
+
+            }
+
         }
 
         public static void generateDisplayResolutionAndRateListOLD()
