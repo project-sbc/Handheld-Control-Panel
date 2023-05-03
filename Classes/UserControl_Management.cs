@@ -303,6 +303,37 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
         }
 
+        public static void handleHidingInstructionTextBlocksWithControllerIcons(StackPanel spMain)
+        {
+            foreach (DependencyObject child in spMain.Children)
+            {
+                if (child is Button)
+                {
+                    Button button = (Button)child;
+
+                    StackPanel sp = (StackPanel)button.Content;
+
+                    foreach (DependencyObject tb in sp.Children)
+                    {
+                        if (tb is TextBlock)
+                        {
+                            TextBlock textBlock = (TextBlock)tb;
+                            if (textBlock.FontFamily.ToString() == "Segoe MDL2 Assets")
+                            {
+                                if (!Controller_Management.Controller_Management.controller.IsConnected)
+                                {
+                                    textBlock.Visibility = Visibility.Collapsed;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+
         public static void handleUserControl(Border border, object control, string action)
         {
 

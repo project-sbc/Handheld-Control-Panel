@@ -363,7 +363,7 @@ namespace Handheld_Control_Panel
                 //FullScreen_Management.checkSuspendProcess();
 
 
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
+                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
                 
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
@@ -384,7 +384,7 @@ namespace Handheld_Control_Panel
             {
                 //check resume process
                 //FullScreen_Management.checkResumeProcess();
-                Controller_Management.unhideController();
+                //Controller_Management.unhideController();
 
                 this.Hide();
                 
@@ -616,7 +616,10 @@ namespace Handheld_Control_Panel
                 switch (newInstructionUserControl)
                 {
 
-                    
+                    case "SelectBack_Instruction":
+                        instructionStackPanel.Children.Add(new SelectBack_Instruction());
+                        break;
+
                     case "AutoFanPage_Instruction":
                         instructionStackPanel.Children.Add(new AutoFanPage_Instruction());
                         break;

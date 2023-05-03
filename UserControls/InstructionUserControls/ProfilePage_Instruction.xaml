@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
    
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Name="spMain">
 
             <Button Tag="Back" Margin="0,0,2,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
                 <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">

@@ -400,6 +400,9 @@
     <Compile Update="UserControls\InstructionUserControls\AutoFanPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InstructionUserControls\SelectBack_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\PowerUserControls\CloseProgram_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

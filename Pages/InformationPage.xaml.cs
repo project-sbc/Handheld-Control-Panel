@@ -44,7 +44,7 @@ namespace Handheld_Control_Panel.Pages
            
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("ProfileEditPage_Instruction");
+            wnd.changeUserInstruction("SelectBack_Instruction");
             wnd = null;
         }
        

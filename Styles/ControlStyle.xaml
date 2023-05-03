@@ -53,7 +53,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="DockPanel.Dock" Value="Right" />
         <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="Margin" Value="0,0,7,0" />
+        <Setter Property="Margin" Value="7,0,7,0" />
     </Style>
     <Style x:Key="actionTextblock_InstructionsCondensed" TargetType="TextBlock">
 
