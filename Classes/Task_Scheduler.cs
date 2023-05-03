@@ -22,6 +22,7 @@ namespace Handheld_Control_Panel.Classes.Task_Scheduler
             scheduler = new SecretNest.TaskSchedulers.SequentialScheduler(true);
 
             taskScheduler = new Thread(ThreadHandler);
+            taskScheduler.IsBackground = true;
             taskScheduler.Start();
         }
 

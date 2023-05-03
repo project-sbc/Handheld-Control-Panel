@@ -35,6 +35,7 @@ namespace Handheld_Control_Panel.Classes
                         {
                      
                             Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true,false);
+                            Global_Variables.Global_Variables.powerStatus = Power;
                         }
                         //we exit this routine if a process is found, active profile with running exe has top priority
                         return;
@@ -87,11 +88,16 @@ namespace Handheld_Control_Panel.Classes
                 if (Global_Variables.Global_Variables.powerStatus != "" && Global_Variables.Global_Variables.powerStatus != Power)
                 {
                     Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true, false);
+                    Global_Variables.Global_Variables.powerStatus = Power;
                     return;
                 }
             }
 
-
+            //if none of the above, we will just check to see if global powerstatus needs update and be done
+            if (Global_Variables.Global_Variables.powerStatus != Power)
+            {
+                Global_Variables.Global_Variables.powerStatus = Power;
+            }
 
         }
 

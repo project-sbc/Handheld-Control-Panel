@@ -220,7 +220,7 @@ namespace Handheld_Control_Panel.Classes
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(30);
+            timerController.Interval = TimeSpan.FromMilliseconds(8);
             timerController.Tick += controller_Tick;
             timerController.Start();
             Global_Variables.Global_Variables.MouseModeEnabled = true;

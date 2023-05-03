@@ -22,9 +22,9 @@
         <DockPanel Grid.Row="1">
             <ScrollViewer x:Name="pageScrollViewer" DockPanel.Dock="Bottom" Style="{StaticResource pageScrollViewer}">
                 <StackPanel x:Name="stackPanel" >
-                    <uc:Type_Dropdown />
                     <uc:Action_Dropdown />
                     <uc:Parameter_Dropdown/>
+                    <uc:Type_Dropdown />
                     <uc:Hotkey_Button />
                 </StackPanel>
             </ScrollViewer>

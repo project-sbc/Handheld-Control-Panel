@@ -49,16 +49,37 @@ namespace Handheld_Control_Panel.UserControls
         {
             List<HotKeyTypes> hotkeyTypes = new List<HotKeyTypes>();
 
+            HotKeyTypes none = new HotKeyTypes();
+            none.DisplayHotKeyType = Application.Current.Resources["Hotkeys_Type_None"].ToString();
+            none.HotKeyType = "None";
             HotKeyTypes controller = new HotKeyTypes();
             controller.DisplayHotKeyType = Application.Current.Resources["Hotkeys_Type_Controller"].ToString();
             controller.HotKeyType = "Controller";
             HotKeyTypes keyboard = new HotKeyTypes();
             keyboard.DisplayHotKeyType = Application.Current.Resources["Hotkeys_Type_Keyboard"].ToString();
             keyboard.HotKeyType = "Keyboard";
+            hotkeyTypes.Add(none);
             hotkeyTypes.Add(controller);
             hotkeyTypes.Add(keyboard);
             controlList.ItemsSource = hotkeyTypes;
-            if (Global_Variables.hotKeys.editingHotkey.Type == "Controller") { controlList.SelectedIndex = 0; actionLabel.Content = controller.DisplayHotKeyType; } else { controlList.SelectedIndex = 1; actionLabel.Content = keyboard.DisplayHotKeyType; }
+
+            switch(Global_Variables.hotKeys.editingHotkey.Type)
+            {
+                case "Controller":
+                    controlList.SelectedIndex = 1;
+                    actionLabel.Content = controller.DisplayHotKeyType;
+                    break;
+
+                case "None":
+                    controlList.SelectedIndex = 0;
+                    actionLabel.Content = none.DisplayHotKeyType;
+                    break;
+                case "Keyboard":
+                    controlList.SelectedIndex = 2;
+                    actionLabel.Content = keyboard.DisplayHotKeyType;
+                    break;
+            }
+            
            
 
         }

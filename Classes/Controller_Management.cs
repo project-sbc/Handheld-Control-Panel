@@ -22,6 +22,8 @@ using System.Timers;
 using System.Windows.Controls;
 using enabledevice;
 using Windows.Media.SpeechRecognition;
+using Nefarius.Drivers.HidHide;
+using System.IO;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -39,9 +41,12 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         public static int activeTimerTickInterval = 60;
         public static int passiveTimerTickInterval = 100;
 
+        public static HidHideControlService hideHidService = new HidHideControlService();
 
         public static void getDefaultControllerDeviceInformation()
         {
+
+            //this gets the properties of the first controller it detects (built in controller)
             if (Properties.Settings.Default.GUID == "" || Properties.Settings.Default.instanceID == "")
             {
                 var instance = 0;
@@ -75,17 +80,84 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
           
         }
 
-        public static void hideController()
+        public static async Task HIDHideConfiguredAsync()
         {
-            if (Global_Variables.Global_Variables.hidHide.IsInstalled)
+            //make sure its configured with HCP in it
+            if (hideHidService.IsInstalled)
             {
-                if (Global_Variables.Global_Variables.hidHide.IsInstalled)
-                {
+                //check to make sure hidhide client isn't running or else an error will occur
+                Process[] hidHideClient = Process.GetProcessesByName("HidHideClient");
 
+                foreach(Process p in hidHideClient)
+                {
+                    p.CloseMainWindow();
                 }
+                await Task.Delay(1000);
+
+                hidHideClient = Process.GetProcessesByName("HidHideClient");
+                if (hidHideClient.Length == 0)
+                {
+                    IReadOnlyList<string> appList = hideHidService.ApplicationPaths;
+                    string appPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Handheld Control Panel.exe");
+                    if (!appList.Contains(appPath))
+                    {
+                        hideHidService.AddApplicationPath(appPath);
+                    }
+
+                    IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
+                    if (!controllerList.Contains(Properties.Settings.Default.instanceID))
+                    {
+                        hideHidService.AddBlockedInstanceId(Properties.Settings.Default.instanceID);
+                    }
+                }
+              
             }
         }
 
+        public static void hideController()
+        {
+            if (hideHidService.IsInstalled && Properties.Settings.Default.instanceID != "")
+            {
+                //check to make sure hidhide client isn't running or else an error will occur
+                Process[] hidHideClient = Process.GetProcessesByName("HidHideClient");
+
+                foreach (Process p in hidHideClient)
+                {
+                    p.CloseMainWindow();
+                }
+
+                IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
+                if (controllerList.Contains(Properties.Settings.Default.instanceID))
+                {
+                    
+                    if (!hideHidService.IsActive)
+                    {
+                        hideHidService.IsActive = true;
+
+                    }
+                    powerCycleController();
+                }
+            }
+           
+        }
+        public static void unhideController()
+        {
+            if (hideHidService.IsInstalled && Properties.Settings.Default.instanceID != "")
+            {
+                IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
+                if (controllerList.Contains(Properties.Settings.Default.instanceID))
+                {
+
+                    if (hideHidService.IsActive)
+                    {
+                        hideHidService.IsActive = false;
+
+                    }
+                   
+                }
+            }
+
+        }
         public static bool checkBuiltInControllerStatus()
         {
 

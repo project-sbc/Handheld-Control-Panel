@@ -227,4 +227,5 @@
     <system:String x:Key="Usercontrol_FanSettings">Fan Settings</system:String>
     <system:String x:Key="Instruction_Change">CHANGE</system:String>
     <system:String x:Key="Instruction_ToggleMode">TOGGLE MODE</system:String>
+    <system:String x:Key="Hotkeys_Type_None">None</system:String>
 </ResourceDictionary>

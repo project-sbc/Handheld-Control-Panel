@@ -31,7 +31,7 @@ namespace Handheld_Control_Panel.Classes
             //    librehardwaremonitor.Monitor();
           
             //test code here
-
+            //Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
             //test code
 
 
@@ -136,6 +136,17 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.ru.xaml", UriKind.RelativeOrAbsolute);
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
                     break;
+                case "日本語":
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
+                    Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.jp.xaml", UriKind.RelativeOrAbsolute);
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
+                    break;
+                case "Português":
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
+                    Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.pt-br.xaml", UriKind.RelativeOrAbsolute);
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
+                    break;
+
             }
             
         }

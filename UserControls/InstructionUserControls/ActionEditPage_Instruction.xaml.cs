@@ -34,8 +34,9 @@ namespace Handheld_Control_Panel.UserControls
         public ActionEditPage_Instruction()
         {
             InitializeComponent();
-           
-          
+
+            UserControl_Management.handleHidingInstructionTextBlocksWithControllerIcons(spMain);
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -85,7 +85,7 @@ namespace Handheld_Control_Panel.Pages
                         {
                             
                             wnd = (MainWindow)Application.Current.MainWindow;
-                            wnd.navigateFrame("HotKeyPage");
+                            wnd.navigateFrame("ActionPage");
                             wnd = null;
                         }
     
@@ -103,7 +103,7 @@ namespace Handheld_Control_Panel.Pages
                         Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_HotKeySaved"].ToString(), Notification.Wpf.NotificationType.Success);
 
                         wnd = (MainWindow)Application.Current.MainWindow;
-                        wnd.navigateFrame("HotKeyPage");
+                        wnd.navigateFrame("ActionPage");
                         wnd = null;
 
                         //runSaveMessage();

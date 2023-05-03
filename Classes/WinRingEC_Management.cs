@@ -44,9 +44,12 @@ namespace Handheld_Control_Panel.Classes
 
                 }
 
-                //if (ols != null)
+                if (ols != null)
+                {
+                    OlsFree();
+                }
 
-                //    OlsFree();
+                   
 
             }
 
@@ -119,12 +122,13 @@ namespace Handheld_Control_Panel.Classes
                     ols.WriteIoPortByte(reg_addr, 0x2F);
 
                     data = ols.ReadIoPortByte(reg_data);
-
+                    if (ols != null)
+                    {
+                        OlsFree();
+                    }
                 }
 
-                //if (ols != null)
-
-                //   OlsFree();
+                
 
             }
 
@@ -201,11 +205,13 @@ namespace Handheld_Control_Panel.Classes
 
                     ols.WriteIoPortByte(reg_data, data);
 
+                    if (ols != null)
+                    {
+                        OlsFree();
+                    }
                 }
 
-                //if (ols != null)
-
-                //    OlsFree();
+               
 
             }
 
@@ -249,12 +255,18 @@ namespace Handheld_Control_Panel.Classes
                     ols.WriteIoPortByte(reg_addr, 0x2F);
                     ols.WriteIoPortByte(reg_data, data);
 
-                    
+                    if (ols != null)
+                    {
+                        OlsFree();
+                    }
                 }
             }
             catch
             {
-                ols = null;
+                if (ols != null)
+                {
+                    OlsFree();
+                }
                 return;
             }
             
@@ -288,12 +300,20 @@ namespace Handheld_Control_Panel.Classes
                     ols.WriteIoPortByte(reg_data, 0x12);
                     ols.WriteIoPortByte(reg_addr, 0x2F);
                     data = ols.ReadIoPortByte(reg_data);
+
+                    if (ols != null)
+                    {
+                        OlsFree();
+                    }
                 }
               
             }
             catch
             {
-                ols = null;
+                if (ols != null)
+                {
+                    OlsFree();
+                }
                 return 0;
             }
             
@@ -371,7 +391,11 @@ namespace Handheld_Control_Panel.Classes
         public static void OlsFree()
         {
             if (ols != null)
+            {
                 ols.DeinitializeOls();
+                ols = null;
+            }
+              
         }
 
     }

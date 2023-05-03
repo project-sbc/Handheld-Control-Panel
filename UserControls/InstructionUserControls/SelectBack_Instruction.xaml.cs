@@ -28,10 +28,10 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class MouseModePage_Instruction : UserControl
+    public partial class SelectBack_Instruction : UserControl
     {
  
-        public MouseModePage_Instruction()
+        public SelectBack_Instruction()
         {
             InitializeComponent();
             UserControl_Management.handleHidingInstructionTextBlocksWithControllerIcons(spMain);

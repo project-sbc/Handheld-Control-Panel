@@ -79,17 +79,24 @@ namespace Handheld_Control_Panel.UserControls
             //error number RRDD02
             try
             {
+
                 valueChangedEventArgs valueChangedEventArgs = e as valueChangedEventArgs;
                 if (valueChangedEventArgs.Parameter == "Resolution")
                 {
                     this.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
-                        if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
+                        if (Global_Variables.resolution_refreshrates.ContainsKey(Global_Variables.Resolution.Trim()))
                         {
-                            controlList.SelectedItem = Global_Variables.RefreshRate;
+                            controlList.ItemsSource = Global_Variables.resolution_refreshrates[Global_Variables.Resolution];
+                            if (controlList.Items.Contains(Global_Variables.RefreshRate) && controlList.SelectedItem != Global_Variables.RefreshRate && controlList.IsLoaded)
+                            {
+                                controlList.SelectedItem = Global_Variables.RefreshRate;
 
+                            }
                         }
+                       
+                       
+                       
 
 
                     }));

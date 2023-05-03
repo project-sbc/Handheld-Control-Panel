@@ -181,6 +181,7 @@
     <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.8.228" />
     <PackageReference Include="Notification.Wpf" Version="7.0.0" />
     <PackageReference Include="PidSharp" Version="1.0.0.1" />
+    <PackageReference Include="PInvoke.Windows.Core" Version="0.7.124" />
     <PackageReference Include="protobuf-net" Version="3.2.16" />
     <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
     <PackageReference Include="ScottPlot" Version="4.1.63" />
@@ -237,16 +238,16 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Parameter_Dropdown.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Parameter_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Hotkey_Button.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Hotkey_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Type_Dropdown.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Type_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditHotKeyUserControls\Action_Dropdown.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\Action_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditMouseModeUserControls\DefaultMM_Toggle.xaml.cs">
@@ -397,6 +398,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\AutoFanPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\SelectBack_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\PowerUserControls\CloseProgram_Dropdown.xaml.cs">

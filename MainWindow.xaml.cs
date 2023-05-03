@@ -36,6 +36,7 @@ using System.Printing;
 using System.Windows.Forms;
 using Notification.Wpf.Controls;
 using System.Collections.ObjectModel;
+using Handheld_Control_Panel.Classes.Task_Scheduler;
 
 namespace Handheld_Control_Panel
 {
@@ -71,6 +72,9 @@ namespace Handheld_Control_Panel
             //check controller usb device info GUID instance ID
             Controller_Management.getDefaultControllerDeviceInformation();
 
+            //now check for hidhide configured
+            Controller_Management.HIDHideConfiguredAsync();
+
             MouseKeyHook.Subscribe();
 
             //subscribe to controller events
@@ -94,7 +98,8 @@ namespace Handheld_Control_Panel
             //notifyicon stuff
             m_notifyIcon = new System.Windows.Forms.NotifyIcon();
             m_notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(AppDomain.CurrentDomain.BaseDirectory + "\\Handheld Control Panel.exe");
-            m_notifyIcon.Click += M_notifyIcon_Click;
+            m_notifyIcon.MouseClick += M_notifyIcon_Click;
+      
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
 
@@ -112,23 +117,35 @@ namespace Handheld_Control_Panel
         
         private void M_notifyIcon_Click(object? sender, EventArgs e)
         {
-            var contextMenu = new ContextMenu();
-            var menuItem = new MenuItem();
-            menuItem.Header = "Close";
-            var menuItemOpen = new MenuItem();
-            menuItemOpen.Header = "Open";
-            menuItem.Click += MenuItem_Click;
-            menuItemOpen.Click += MenuItemOpen_Click;
-            contextMenu.Items.Add(menuItemOpen);
-            contextMenu.Items.Add(menuItem);
-     
-            contextMenu.IsOpen = true;
+            System.Windows.Forms.MouseEventArgs mouseEventArgs = (System.Windows.Forms.MouseEventArgs)e;
 
-            // Get context menu handle and bring it to the foreground
-            if (PresentationSource.FromVisual(contextMenu) is HwndSource hwndSource)
+            if (mouseEventArgs.Button == MouseButtons.Left)
             {
-                _ = SetForegroundWindow(hwndSource.Handle);
+                toggleWindow();
+              
             }
+            if (mouseEventArgs.Button == MouseButtons.Right)
+            {
+                var contextMenu = new ContextMenu();
+                var menuItem = new MenuItem();
+                menuItem.Header = "Close";
+                var menuItemOpen = new MenuItem();
+                menuItemOpen.Header = "Open";
+                menuItem.Click += MenuItem_Click;
+                menuItemOpen.Click += MenuItemOpen_Click;
+                contextMenu.Items.Add(menuItemOpen);
+                contextMenu.Items.Add(menuItem);
+
+                contextMenu.IsOpen = true;
+
+                // Get context menu handle and bring it to the foreground
+                if (PresentationSource.FromVisual(contextMenu) is HwndSource hwndSource)
+                {
+                    _ = SetForegroundWindow(hwndSource.Handle);
+                }
+
+            }
+           
         }
         private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
         {
@@ -345,6 +362,9 @@ namespace Handheld_Control_Panel
                 //call check for suspend process   stop this online games are ruined by this
                 //FullScreen_Management.checkSuspendProcess();
 
+
+                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
+                
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
                 {
@@ -358,12 +378,13 @@ namespace Handheld_Control_Panel
                 this.Show();
               
                 m_notifyIcon.Visible = false;
+                
             }
             else
             {
                 //check resume process
                 //FullScreen_Management.checkResumeProcess();
-
+                //Controller_Management.unhideController();
 
                 this.Hide();
                 
@@ -595,7 +616,10 @@ namespace Handheld_Control_Panel
                 switch (newInstructionUserControl)
                 {
 
-                    
+                    case "SelectBack_Instruction":
+                        instructionStackPanel.Children.Add(new SelectBack_Instruction());
+                        break;
+
                     case "AutoFanPage_Instruction":
                         instructionStackPanel.Children.Add(new AutoFanPage_Instruction());
                         break;

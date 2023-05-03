@@ -1,0 +1,227 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="MainWindow_NavigationView_Home">ホーム</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Profiles">プロファイル</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">アクション</system:String>
+    <system:String x:Key="MainWindow_NavigationView_AppLauncher">アプリ ランチャー</system:String>
+    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">ホームをカスタマイズ</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Settings">設定</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Information">情報</system:String>
+    <system:String x:Key="MainWindow_NavigationView_MouseMode">マウスモード</system:String>
+
+    <system:String x:Key="MainWindow_NavigationView_Sub_Home">ホーム</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">プロファイル</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">アクション</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">アプリランチャー</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">ホームページのコントロールをカスタマイズする</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">設定</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Information">情報</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">マウスモード</system:String>
+
+
+    <system:String x:Key="Usercontrol_Enable_OnContent">有効にする</system:String>
+    <system:String x:Key="Usercontrol_Disable_OffContent">無効にする</system:String>
+
+    <system:String x:Key="Default_Profile">デフォルト プロファイル</system:String>
+    <system:String x:Key="Active_Profile">アクティブなプロファイル</system:String>
+
+    <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
+    <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
+    <system:String x:Key="Usercontrol_Brightness">明るさ</system:String>
+    <system:String x:Key="Usercontrol_Volume">音量</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute">ミュート</system:String>
+    <system:String x:Key="Usercontrol_Resolution">解像度</system:String>
+    <system:String x:Key="Usercontrol_RefreshRate">リフレッシュレート</system:String>
+    <system:String x:Key="Usercontrol_TDP">TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP2">TDP ブースト</system:String>
+    <system:String x:Key="Usercontrol_EPP">EPP</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit">FPS制限</system:String>
+    <system:String x:Key="Usercontrol_ActiveCores">CPU コア数</system:String>
+    <system:String x:Key="Usercontrol_MaxCPUFrequency">最大CPUクロック</system:String>
+    <system:String x:Key="Usercontrol_GPUCLK">GPUクロック</system:String>
+    <system:String x:Key="Usercontrol_HotKeyAction">アクション</system:String>
+    <system:String x:Key="Usercontrol_HotKeyType">入力方法</system:String>
+    <system:String x:Key="Usercontrol_HotKeyParameter">パラメータ</system:String>
+    <system:String x:Key="Usercontrol_HotKey">ホットキー</system:String>
+    <system:String x:Key="Usercontrol_HotKeySaved">ホットキーが保存されました</system:String>
+    <system:String x:Key="Usercontrol_MouseModeSaved">マウス モードが保存されました</system:String>
+    <system:String x:Key="Usercontrol_ProfileSaved">プロフィールを保存しました</system:String>
+    <system:String x:Key="Usercontrol_ProfileName">プロファイル名</system:String>
+    <system:String x:Key="Usercontrol_Exe">プロセス エグゼ</system:String>
+    <system:String x:Key="Usercontrol_DefaultProfile">デフォルト プロファイル</system:String>
+    <system:String x:Key="Usercontrol_Autostart">自動起動</system:String>
+    <system:String x:Key="Usercontrol_StartRTSS">RTSS の自動起動</system:String>
+    <system:String x:Key="Usercontrol_MaxTDP">最大 TDP</system:String>
+    <system:String x:Key="Usercontrol_MinTDP">最小 TDP</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS">最大FPS</system:String>
+    <system:String x:Key="Usercontrol_Theme">テーマ</system:String>
+    <system:String x:Key="Usercontrol_CombineTDP">同期 TDP 値</system:String>
+    <system:String x:Key="Usercontrol_EnableNotifications">通知を有効にする</system:String>
+    <system:String x:Key="Usercontrol_Scaling">ディスプレイのスケーリング</system:String>
+    <system:String x:Key="Usercontrol_Language">言語</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP">Intel TDP タイプ</system:String>
+    <system:String x:Key="Usercontrol_MouseMode">マウス モード</system:String>
+    <system:String x:Key="Usercontrol_Controller">組み込みコントローラーを無効にする</system:String>
+    <system:String x:Key="Usercontrol_Donate">寄付する</system:String>
+    <system:String x:Key="Usercontrol_Update">アップデート</system:String>
+    <system:String x:Key="Usercontrol_CheckUpdate">アップデートを確認</system:String>
+    <system:String x:Key="Usercontrol_Version">バージョン:</system:String>
+    <system:String x:Key="Usercontrol_DefaultMouseMode">マウスモードをデフォルトにする</system:String>
+    <system:String x:Key="Usercontrol_MouseSensitivity">マウス感度</system:String>
+    <system:String x:Key="Usercontrol_ScrollSensitivity">スクロール感度</system:String>
+    <system:String x:Key="Usercontrol_AppType">アプリケーションの種類</system:String>
+    <system:String x:Key="Usercontrol_SyncGames">ゲームを同期</system:String>
+    <system:String x:Key="Usercontrol_SyncEpicGames">エピック ゲームを同期</system:String>
+    <system:String x:Key="Usercontrol_Sync">同期</system:String>
+
+    <system:String x:Key="Usercontrol_LeftStick">左スティック</system:String>
+    <system:String x:Key="Usercontrol_RightStick">右スティック</system:String>
+    <system:String x:Key="Usercontrol_AButton">Aボタン</system:String>
+    <system:String x:Key="Usercontrol_XButton">Xボタン</system:String>
+    <system:String x:Key="Usercontrol_YButton">Yボタン</system:String>
+    <system:String x:Key="Usercontrol_BButton">Bボタン</system:String>
+    <system:String x:Key="Usercontrol_StartButton">スタートボタン</system:String>
+    <system:String x:Key="Usercontrol_BackButton">戻るボタン</system:String>
+    <system:String x:Key="Usercontrol_DPadUp">DPad 上</system:String>
+    <system:String x:Key="Usercontrol_DPadDown">DPad 下</system:String>
+    <system:String x:Key="Usercontrol_DPadLeft">DPad 左</system:String>
+    <system:String x:Key="Usercontrol_DPadRight">DPad 右</system:String>
+    <system:String x:Key="Usercontrol_LB">LB</system:String>
+    <system:String x:Key="Usercontrol_RB">RB</system:String>
+    <system:String x:Key="Usercontrol_L3">左スティック ボタン</system:String>
+    <system:String x:Key="Usercontrol_R3">右スティック ボタン</system:String>
+    <system:String x:Key="Usercontrol_RT">RT</system:String>
+    <system:String x:Key="Usercontrol_LT">LT</system:String>
+
+    <system:String x:Key="Usercontrol_AppLocation">アプリの場所</system:String>
+    <system:String x:Key="Usercontrol_AccentColor">アクセント カラー</system:String>
+    <system:String x:Key="Usercontrol_Autoupdate">アップデートの自動チェック</system:String>
+    <system:String x:Key="Divider">Divider</system:String>
+    <system:String x:Key="Usercontrol_Right">右</system:String>
+    <system:String x:Key="Usercontrol_Left">左</system:String>
+    <system:String x:Key="Usercontrol_Dark">暗い</system:String>
+    <system:String x:Key="Usercontrol_Light">ライト</system:String>
+
+
+    <system:String x:Key="Instruction_Toggle">トグル</system:String>
+    <system:String x:Key="Instruction_Confirm">決定</system:String>
+    <system:String x:Key="Instruction_Close">閉じる</system:String>
+    <system:String x:Key="Instruction_Arrange">アレンジ</system:String>
+    <system:String x:Key="Instruction_Back">戻る</system:String>
+    <system:String x:Key="Instruction_Select">セレクト</system:String>
+    <system:String x:Key="Instruction_Edit">エディット</system:String>
+    <system:String x:Key="Instruction_Delete">削除</system:String>
+    <system:String x:Key="Instruction_Add">NEW</system:String>
+    <system:String x:Key="Instruction_Save">保存</system:String>
+    <system:String x:Key="Instruction_Apply">適用</system:String>
+    <system:String x:Key="Instruction_Duplicate">DUPLICATE</system:String>
+    <system:String x:Key="Instruction_Launch">起動</system:String>
+
+
+
+
+
+
+    <system:String x:Key="Hotkeys_Action_Open_Program">プログラムを開く</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">TDPを変更</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">クイック アクセス メニューの切り替え</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Big pictureモードを開く</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Playnite">プレイナイトを開く</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">明るさを変更</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">GPU クロックを変更する</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">マウス モードの切り替え</system:String>
+
+    <system:String x:Key="Hotkeys_Type_Controller">コントローラー</system:String>
+    <system:String x:Key="Hotkeys_Type_Keyboard">キーボード</system:String>
+
+
+    <system:String x:Key="Notification_ProfileApplied">プロファイルが適用されました</system:String>
+
+
+    <system:String x:Key="MouseMode_Action_MouseInput">マウス入力</system:String>
+    <system:String x:Key="MouseMode_Action_Scroll">スクロール</system:String>
+    <system:String x:Key="MouseMode_Action_ArrowKeys">矢印キー</system:String>
+
+
+
+
+    <system:String x:Key="ContextMenu_Hide">隠す</system:String>
+    <system:String x:Key="ContextMenu_Close">閉じる</system:String>
+    <system:String x:Key="ContextMenu_ShutDownPC">PC をシャットダウン</system:String>
+
+
+    <!-- new 27mar2023-->
+    <system:String x:Key="MainWindow_NavigationView_Power">パワー</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Power">パワー</system:String>
+    <system:String x:Key="UserControl_CloseGame">閉じる</system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">プログラムを閉じる</system:String>
+    <system:String x:Key="UserControl_HideHCP">HCP を非表示</system:String>
+    <system:String x:Key="UserControl_CloseHCP">HCPを閉じる</system:String>
+    <system:String x:Key="UserControl_RestartPC">PCを再起動</system:String>
+    <system:String x:Key="UserControl_Restart">再起動</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">PC をシャットダウン</system:String>
+    <system:String x:Key="UserControl_Shutdown">シャットダウン</system:String>
+    <system:String x:Key="UserControl_FanControl">ファン制御</system:String>
+
+    <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">デスクトップに移動</system:String>
+    <system:String x:Key="Sort_Method_SortBy">並べ替え</system:String>
+    <system:String x:Key="Sort_Method_AppType">アプリの種類</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">よく起動する</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">最近起動した</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">プロファイル名</system:String>
+    <system:String x:Key="Sort_Method_Favorite">お気に入り</system:String>
+
+    <system:String x:Key="Instruction_Sort">ソート</system:String>
+    <system:String x:Key="Instruction_Filter">フィルタ</system:String>
+    <system:String x:Key="Instruction_Favorite">お気に入り</system:String>
+    <system:String x:Key="Instruction_PageDown">ページダウン</system:String>
+    <system:String x:Key="Instruction_PageUp">ページアップ</system:String>
+
+
+    <!-- 新しい文字列 2023 年 4 月 3 日 -->
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">Windows OSK の切り替え</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">HCP OSKの切り替え</system:String>
+    <!-- 2023 年 4 月 4 日 -->
+    <system:String x:Key="Usercontrol_Deadzone">ジョイスティック デッドゾーン</system:String>
+
+    <!-- 2023 年 4 月 5 日 -->
+    <system:String x:Key="Notification_GameSyncDone">ゲーム ライブラリの同期が完了しました</system:String>
+    <system:String x:Key="Notification_GameSyncing">ゲーム ライブラリの同期中</system:String>
+
+    <!-- 2023 年 4 月 6 日 -->
+    <system:String x:Key="Filter_Method_Filter">フィルタ</system:String>
+    <system:String x:Key="Filter_Method_None">なし</system:String>
+    <system:String x:Key="Filter_Method_Favorite">お気に入り</system:String>
+    <system:String x:Key="Filter_Method_Steam">Steam</system:String>
+    <system:String x:Key="Filter_Method_EpicGames">EpicGames</system:String>
+    <system:String x:Key="Filter_Method_GOGGalaxy">GOG Galaxy</system:String>
+    <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
+    <system:String x:Key="Filter_Method_Applications">アプリケーション</system:String>
+
+    <!-- 2023 年 4 月 14 日 -->
+    <system:String x:Key="Filter_Method_MicrosoftStore">MicrosoftStore</system:String>
+    <system:String x:Key="Usercontrol_MaxGPUCLK">最大 GPU クロック</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">AutoTDP</system:String>
+    <!-- 2023 年 4 月 18 日 -->
+    <system:String x:Key="FanPage_FanCurve">ファンカーブ</system:String>
+    <system:String x:Key="FanPage_FanSpeed">ファン速度 (%)</system:String>
+    <system:String x:Key="FanPage_CPUPower">CPU パッケージ電力 (W)</system:String>
+    <system:String x:Key="FanPage_Temperature">温度 (C)</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume">ボリュームを変更</system:String>
+
+
+    <system:String x:Key="FanMode_Hardware">ハードウェア制御</system:String>
+    <system:String x:Key="FanMode_Manual">手動制御</system:String>
+    <system:String x:Key="FanMode_Software">自動ファン モード</system:String>
+
+    <system:String x:Key="Usercontrol_FanCurrentPackagePower">現在の CPU パッケージの電力:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentTemperature">現在の CPU 温度:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">現在のファン速度:</system:String>
+    <system:String x:Key="Usercontrol_AutostartFan">ファン制御の自動開始</system:String>
+    <system:String x:Key="Usercontrol_FanSettings">ファン設定</system:String>
+    <system:String x:Key="Instruction_Change">CHANGE</system:String>
+    <system:String x:Key="Instruction_ToggleMode">トグル モード</system:String>
+</ResourceDictionary>

@@ -12,16 +12,32 @@
             <ColumnDefinition Width="*" />
    
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Save}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEDE3;" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Name="spMain">
 
+            <Button Tag="Start" Margin="0,0,5,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Save}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xEDE3;" />
+                </StackPanel>
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Back}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
+            </Button>
 
-            <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Toggle}" />
-            <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
+            <Button Tag="B" Margin="0,0,5,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Back}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF094;" />
+                </StackPanel>
+
+            </Button>
+
+            <Button Tag="A" Margin="0,0,5,0" Click="Button_Click" Background="Transparent" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource actionTextblock_Instructions}" Text="{DynamicResource Instruction_Toggle}" />
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_Instructions}" Text="&#xF093;" />
+                </StackPanel>
+
+            </Button>
+
 
         </StackPanel>
      

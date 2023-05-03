@@ -34,8 +34,8 @@ namespace Handheld_Control_Panel.UserControls
         public AutoFanPage_Instruction()
         {
             InitializeComponent();
-           
-          
+            UserControl_Management.handleHidingInstructionTextBlocksWithControllerIcons(spMain);
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
