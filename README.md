@@ -109,7 +109,8 @@ Restart the computer
   <li>ETA Prime for the shoutout on Youtube</li>
   <li>Russian translation by ion2903 (Discord)</li>
   <li>Chinese translation by ProjectSBC, Kiki (formerly One Netbook employee)</li>
-  
+  <li>Portugese translation by estefano.jol (Discord)</li>  
+  <li>Japanese translation by tomoniutaou33 (Discord)</li>
 </ul>
 
 
