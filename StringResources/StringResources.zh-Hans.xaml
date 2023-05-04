@@ -1,111 +1,108 @@
-﻿
-    
-    
-    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:String x:Key="MainWindow_NavigationView_Home">主页</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Profiles">剖面</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Profiles">软件独立设置</system:String>
     <system:String x:Key="MainWindow_NavigationView_Action">热键</system:String>
-    <system:String x:Key="MainWindow_NavigationView_AppLauncher">软件启动器r</system:String>
-    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">自定义主页</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Settings">设定</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Information">信息</system:String>
-    <system:String x:Key="MainWindow_NavigationView_MouseMode">鼠标模式</system:String>
+    <system:String x:Key="MainWindow_NavigationView_AppLauncher">软件启动器</system:String>
+    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">主页自定义</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Settings">设置</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Information">联系方式</system:String>
+    <system:String x:Key="MainWindow_NavigationView_MouseMode">模拟鼠标</system:String>
 
-    <system:String x:Key="MainWindow_NavigationView_Sub_Home">主页</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">剖面</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Action">热键</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Home">主页快捷设置</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">每个软件可独立设置运行参数</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">使用快捷键触发特定操作</system:String>
     <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">软件启动器</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">自定义主页</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">设定</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Information">信息</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">鼠标模式</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">自定义主页项目</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">HCP设置</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Information">下载方式和捐赠通道</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">模拟鼠标</system:String>
 
 
     <system:String x:Key="Usercontrol_Enable_OnContent">启用</system:String>
     <system:String x:Key="Usercontrol_Disable_OffContent">禁用</system:String>
 
-    <system:String x:Key="Default_Profile">缺省剖面</system:String>
-    <system:String x:Key="Active_Profile">现在剖面</system:String>
+    <system:String x:Key="Default_Profile">默认设置</system:String>
+    <system:String x:Key="Active_Profile">当前设置</system:String>
 
     <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
     <system:String x:Key="Usercontrol_Bluetooth">蓝牙</system:String>
     <system:String x:Key="Usercontrol_Brightness">亮度</system:String>
     <system:String x:Key="Usercontrol_Volume">音量</system:String>
     <system:String x:Key="Usercontrol_VolumeMute">静音</system:String>
-    <system:String x:Key="Usercontrol_Resolution">显示分辨率</system:String>
+    <system:String x:Key="Usercontrol_Resolution">屏幕分辨率</system:String>
     <system:String x:Key="Usercontrol_RefreshRate">屏幕刷新率</system:String>
-    <system:String x:Key="Usercontrol_TDP">TDP</system:String>
-    <system:String x:Key="Usercontrol_TDP2">Boost TDP</system:String>
-    <system:String x:Key="Usercontrol_EPP">EPP</system:String>
-    <system:String x:Key="Usercontrol_FPSLimit">FPS极限</system:String>
-    <system:String x:Key="Usercontrol_ActiveCores">现在CPU核</system:String>
-    <system:String x:Key="Usercontrol_MaxCPUFrequency">最大CPU频率</system:String>
-    <system:String x:Key="Usercontrol_GPUCLK">GPU Clock</system:String>
-    <system:String x:Key="Usercontrol_HotKeyAction">动作</system:String>
-    <system:String x:Key="Usercontrol_HotKeyType">输入法</system:String>
-    <system:String x:Key="Usercontrol_HotKeyParameter">实参</system:String>
-    <system:String x:Key="Usercontrol_HotKey">热键</system:String>
-    <system:String x:Key="Usercontrol_HotKeySaved">热键 Saved</system:String>
-    <system:String x:Key="Usercontrol_MouseModeSaved">Mouse Mode Saved</system:String>
-    <system:String x:Key="Usercontrol_ProfileSaved">剖面 Saved</system:String>
-    <system:String x:Key="Usercontrol_ProfileName">剖面 Name</system:String>
-    <system:String x:Key="Usercontrol_Exe">Process Exe</system:String>
-    <system:String x:Key="Usercontrol_DefaultProfile">缺省剖面</system:String>
-    <system:String x:Key="Usercontrol_Autostart">自动启动</system:String>
+    <system:String x:Key="Usercontrol_TDP">基础TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP2">最大TDP</system:String>
+    <system:String x:Key="Usercontrol_EPP">Energy Performance Preference (EPP)</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit">最大FPS限制</system:String>
+    <system:String x:Key="Usercontrol_ActiveCores">活动CPU核心数量</system:String>
+    <system:String x:Key="Usercontrol_MaxCPUFrequency">CPU最高频率</system:String>
+    <system:String x:Key="Usercontrol_GPUCLK">GPU频率</system:String>
+    <system:String x:Key="Usercontrol_HotKeyAction">触发操作</system:String>
+    <system:String x:Key="Usercontrol_HotKeyType">输入设备</system:String>
+    <system:String x:Key="Usercontrol_HotKeyParameter">数值设定</system:String>
+    <system:String x:Key="Usercontrol_HotKey">快捷键</system:String>
+    <system:String x:Key="Usercontrol_HotKeySaved">热键已保存</system:String>
+    <system:String x:Key="Usercontrol_MouseModeSaved">模拟鼠标设置已保存</system:String>
+    <system:String x:Key="Usercontrol_ProfileSaved">配置已保存</system:String>
+    <system:String x:Key="Usercontrol_ProfileName">配置名称</system:String>
+    <system:String x:Key="Usercontrol_Exe">可执行文件路径</system:String>
+    <system:String x:Key="Usercontrol_DefaultProfile">默认配置</system:String>
+    <system:String x:Key="Usercontrol_Autostart">启动时自动运行</system:String>
     <system:String x:Key="Usercontrol_StartRTSS">自动启动RTSS</system:String>
     <system:String x:Key="Usercontrol_MaxTDP">最大TDP</system:String>
-    <system:String x:Key="Usercontrol_MinTDP">最少TDP</system:String>
-    <system:String x:Key="Usercontrol_MaxFPS">最大RTSS FPS</system:String>
-    <system:String x:Key="Usercontrol_Theme">Theme</system:String>
-    <system:String x:Key="Usercontrol_CombineTDP">同步 TDP Values</system:String>
+    <system:String x:Key="Usercontrol_MinTDP">最小TDP</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS">最大FPS</system:String>
+    <system:String x:Key="Usercontrol_Theme">主题配色模式</system:String>
+    <system:String x:Key="Usercontrol_CombineTDP">合并TDP设置</system:String>
     <system:String x:Key="Usercontrol_EnableNotifications">启用通知</system:String>
-    <system:String x:Key="Usercontrol_Scaling">显示比例</system:String>
+    <system:String x:Key="Usercontrol_Scaling">屏幕显示比例</system:String>
     <system:String x:Key="Usercontrol_Language">语言</system:String>
-    <system:String x:Key="Usercontrol_IntelTDP">Intel TDP Type</system:String>
-    <system:String x:Key="Usercontrol_MouseMode">鼠标Mode</system:String>
-    <system:String x:Key="Usercontrol_Controller">手柄启用</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP">Intel TDP 类型</system:String>
+    <system:String x:Key="Usercontrol_MouseMode">模拟鼠标</system:String>
+    <system:String x:Key="Usercontrol_Controller">启用手柄</system:String>
     <system:String x:Key="Usercontrol_Donate">捐款</system:String>
     <system:String x:Key="Usercontrol_Update">更新版本</system:String>
     <system:String x:Key="Usercontrol_CheckUpdate">检查更新</system:String>
-    <system:String x:Key="Usercontrol_Version">版本: </system:String>
-    <system:String x:Key="Usercontrol_DefaultMouseMode">缺省</system:String>
+    <system:String x:Key="Usercontrol_Version">版本:</system:String>
+    <system:String x:Key="Usercontrol_DefaultMouseMode">默认配置</system:String>
     <system:String x:Key="Usercontrol_MouseSensitivity">鼠标灵敏度</system:String>
-    <system:String x:Key="Usercontrol_ScrollSensitivity">滚动灵敏度</system:String>
-    <system:String x:Key="Usercontrol_AppType">Application Type</system:String>
-    <system:String x:Key="Usercontrol_SyncSteamGames">同步Steam Games</system:String>
-    <system:String x:Key="Usercontrol_SyncEpicGames">同步Epic Games</system:String>
-    <system:String x:Key="Usercontrol_Sync">同步</system:String>
+    <system:String x:Key="Usercontrol_ScrollSensitivity">滚轮灵敏度</system:String>
+    <system:String x:Key="Usercontrol_AppType">可执行文件路径</system:String>
+    <system:String x:Key="Usercontrol_SyncSteamGames">同步Steam平台游戏库</system:String>
+    <system:String x:Key="Usercontrol_SyncEpicGames">同步Epic平台游戏库</system:String>
+    <system:String x:Key="Usercontrol_Sync">同步游戏库</system:String>
 
     <system:String x:Key="Usercontrol_LeftStick">左摇杆</system:String>
     <system:String x:Key="Usercontrol_RightStick">右摇杆</system:String>
-    <system:String x:Key="Usercontrol_AButton">A按键</system:String>
-    <system:String x:Key="Usercontrol_XButton">X按键</system:String>
-    <system:String x:Key="Usercontrol_YButton">Y按键</system:String>
-    <system:String x:Key="Usercontrol_BButton">B按键</system:String>
-    <system:String x:Key="Usercontrol_StartButton">Start按键</system:String>
-    <system:String x:Key="Usercontrol_BackButton">Back按键</system:String>
-    <system:String x:Key="Usercontrol_DPadUp">上按键</system:String>
-    <system:String x:Key="Usercontrol_DPadDown">下按键</system:String>
-    <system:String x:Key="Usercontrol_DPadLeft">左按键</system:String>
-    <system:String x:Key="Usercontrol_DPadRight">右按键</system:String>
-    <system:String x:Key="Usercontrol_LB">左肩膀按键</system:String>
-    <system:String x:Key="Usercontrol_RB">右肩膀按键</system:String>
+    <system:String x:Key="Usercontrol_AButton">A键</system:String>
+    <system:String x:Key="Usercontrol_XButton">X键</system:String>
+    <system:String x:Key="Usercontrol_YButton">Y键</system:String>
+    <system:String x:Key="Usercontrol_BButton">B键</system:String>
+    <system:String x:Key="Usercontrol_StartButton">Start键</system:String>
+    <system:String x:Key="Usercontrol_BackButton">Back键</system:String>
+    <system:String x:Key="Usercontrol_DPadUp">上键</system:String>
+    <system:String x:Key="Usercontrol_DPadDown">下键</system:String>
+    <system:String x:Key="Usercontrol_DPadLeft">左键</system:String>
+    <system:String x:Key="Usercontrol_DPadRight">右键</system:String>
+    <system:String x:Key="Usercontrol_LB">左肩键</system:String>
+    <system:String x:Key="Usercontrol_RB">右肩键</system:String>
     <system:String x:Key="Usercontrol_L3">左摇杆按键</system:String>
     <system:String x:Key="Usercontrol_R3">右摇杆按键</system:String>
     <system:String x:Key="Usercontrol_RT">右扳机</system:String>
     <system:String x:Key="Usercontrol_LT">左扳机</system:String>
 
-    <system:String x:Key="Usercontrol_AppLocation">App Location</system:String>
-    <system:String x:Key="Usercontrol_AccentColor">颜色</system:String>
+    <system:String x:Key="Usercontrol_AppLocation">窗口停靠位置</system:String>
+    <system:String x:Key="Usercontrol_AccentColor">主题颜色</system:String>
     <system:String x:Key="Usercontrol_Autoupdate">检查更新</system:String>
-    <system:String x:Key="Divider">隔板</system:String>
-    <system:String x:Key="Usercontrol_Right">右边</system:String>
-    <system:String x:Key="Usercontrol_Left">左边</system:String>
-    <system:String x:Key="Usercontrol_Dark">黑暗</system:String>
-    <system:String x:Key="Usercontrol_Light">光</system:String>
+    <system:String x:Key="Divider">分割线</system:String>
+    <system:String x:Key="Usercontrol_Right">屏幕右边</system:String>
+    <system:String x:Key="Usercontrol_Left">屏幕左边</system:String>
+    <system:String x:Key="Usercontrol_Dark">深色</system:String>
+    <system:String x:Key="Usercontrol_Light">浅色</system:String>
 
 
     <system:String x:Key="Instruction_Toggle">切换</system:String>
@@ -115,108 +112,108 @@
     <system:String x:Key="Instruction_Back">后退</system:String>
     <system:String x:Key="Instruction_Select">选择</system:String>
     <system:String x:Key="Instruction_Edit">编辑</system:String>
-    <system:String x:Key="Instruction_Delete">删</system:String>
-    <system:String x:Key="Instruction_Add">加</system:String>
-    <system:String x:Key="Instruction_Save">节省</system:String>
-    <system:String x:Key="Instruction_Apply">使用</system:String>
+    <system:String x:Key="Instruction_Delete">删除</system:String>
+    <system:String x:Key="Instruction_Add">新建</system:String>
+    <system:String x:Key="Instruction_Save">保存</system:String>
+    <system:String x:Key="Instruction_Apply">应用</system:String>
     <system:String x:Key="Instruction_Duplicate">复制</system:String>
 
 
 
-    <system:String x:Key="Hotkeys_Action_Open_Program">开启软件</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Program">运行软件</system:String>
     <system:String x:Key="Hotkeys_Action_Change_TDP">切换TDP</system:String>
-    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">切换Quick Access Menu</system:String>
-    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">开启Steam Big Picture</system:String>
-    <system:String x:Key="Hotkeys_Action_Open_Playnite">开启Playnite</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Brightness">切换亮度</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">切换GPU Clock</system:String>
-    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">切换Mouse Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">弹出/隐藏HCP窗口</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">打开Steam大屏幕模式</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Playnite">打开Playnite</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">调整亮度</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">切换GPU频率</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">切换模拟鼠标功能</system:String>
 
     <system:String x:Key="Hotkeys_Type_Controller">手柄</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">键盘</system:String>
 
 
-    <system:String x:Key="Notification_ProfileApplied">剖面Applied</system:String>
+    <system:String x:Key="Notification_ProfileApplied">配置已生效</system:String>
 
 
     <system:String x:Key="MouseMode_Action_MouseInput">鼠标</system:String>
     <system:String x:Key="MouseMode_Action_Scroll">滚轮</system:String>
-    <system:String x:Key="MouseMode_Action_ArrowKeys">箭头键</system:String>
+    <system:String x:Key="MouseMode_Action_ArrowKeys">方向键</system:String>
 
 
 
 
-    <system:String x:Key="ContextMenu_Hide">隐蔽</system:String>
+    <system:String x:Key="ContextMenu_Hide">隐藏</system:String>
     <system:String x:Key="ContextMenu_Close">关闭</system:String>
     <system:String x:Key="ContextMenu_ShutDownPC">关机</system:String>
 
 
     <!-- new 27mar2023-->
-    <system:String x:Key="MainWindow_NavigationView_Power">Power</system:String>
-    <system:String x:Key="MainWindow_NavigationView_Sub_Power">Power</system:String>
-    <system:String x:Key="UserControl_CloseGame">关</system:String>
-    <system:String x:Key="UserControl_CloseActiveProgram">关 Program</system:String>
-    <system:String x:Key="UserControl_HideHCP">隐蔽HCP</system:String>
-    <system:String x:Key="UserControl_CloseHCP">关闭HCP</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Power">电源</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Power">电源选项</system:String>
+    <system:String x:Key="UserControl_CloseGame">关闭游戏</system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">关闭活动程序</system:String>
+    <system:String x:Key="UserControl_HideHCP">隐藏HCP窗口</system:String>
+    <system:String x:Key="UserControl_CloseHCP">退出HCP</system:String>
     <system:String x:Key="UserControl_RestartPC">重启PC</system:String>
     <system:String x:Key="UserControl_Restart">重启</system:String>
-    <system:String x:Key="UserControl_ShutdownPC">停机PC</system:String>
-    <system:String x:Key="UserControl_Shutdown">停机</system:String>
-    <system:String x:Key="UserControl_FanControl">Fan Control</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">关闭PC</system:String>
+    <system:String x:Key="UserControl_Shutdown">关机</system:String>
+    <system:String x:Key="UserControl_FanControl">风扇控制</system:String>
 
     <!--new 01Apr2023-->
-    <system:String x:Key="Hotkeys_Action_Desktop">Go To Desktop</system:String>
-    <system:String x:Key="Sort_Method_SortBy">排序-</system:String>
-    <system:String x:Key="Sort_Method_AppType">软件种</system:String>
-    <system:String x:Key="Sort_Method_FrequentlyLaunched">经常开启</system:String>
-    <system:String x:Key="Sort_Method_RecentlyLaunched">最近开启</system:String>
-    <system:String x:Key="Sort_Method_ProfileName">名字</system:String>
+    <system:String x:Key="Hotkeys_Action_Desktop">返回桌面</system:String>
+    <system:String x:Key="Sort_Method_SortBy">排序</system:String>
+    <system:String x:Key="Sort_Method_AppType">软件类型</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">经常使用</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">最近使用</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">配置名称</system:String>
 
     <system:String x:Key="Instruction_Sort">排序</system:String>
 
 
     <!-- new strings 03apr2023-->
-    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">切换Windows OSK</system:String>
-    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">切换HCP OSK</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">打开Windows屏幕键盘</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">打开HCP屏幕键盘</system:String>
     <!-- 04apr2023 -->
-    <system:String x:Key="Usercontrol_Deadzone">Joystick Deadzone</system:String>
+    <system:String x:Key="Usercontrol_Deadzone">摇杆死区设置</system:String>
 
     <!-- 05apr2023 -->
-    <system:String x:Key="Notification_GameSyncDone">Game Library Sync Complete</system:String>
-    <system:String x:Key="Notification_GameSyncing">Game Library Syncing</system:String>
+    <system:String x:Key="Notification_GameSyncDone">游戏库同步完毕</system:String>
+    <system:String x:Key="Notification_GameSyncing">正在同步游戏库</system:String>
 
     <!-- 06apr2023-->
-    <system:String x:Key="Filter_Method_Filter">Filter</system:String>
-    <system:String x:Key="Filter_Method_None">None</system:String>
-    <system:String x:Key="Filter_Method_Favorite">Favorite</system:String>
+    <system:String x:Key="Filter_Method_Filter">筛选</system:String>
+    <system:String x:Key="Filter_Method_None">无</system:String>
+    <system:String x:Key="Filter_Method_Favorite">最喜欢</system:String>
     <system:String x:Key="Filter_Method_Steam">Steam</system:String>
     <system:String x:Key="Filter_Method_EpicGames">Epic Games</system:String>
     <system:String x:Key="Filter_Method_GOGGalaxy">GOG Galaxy</system:String>
     <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
-    <system:String x:Key="Filter_Method_Applications">Applications</system:String>
+    <system:String x:Key="Filter_Method_Applications">其它应用软件</system:String>
 
     <!-- 14apr2023 -->
     <system:String x:Key="Filter_Method_MicrosoftStore">Microsoft Store</system:String>
-    <system:String x:Key="Usercontrol_MaxGPUCLK">Max GPU Clock</system:String>
-    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">AutoTDP</system:String>
+    <system:String x:Key="Usercontrol_MaxGPUCLK">最大GPU频率</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">切换AutoTDP自动调整功耗</system:String>
     <!-- 18apr2023 -->
-    <system:String x:Key="FanPage_FanCurve">Fan Curve</system:String>
-    <system:String x:Key="FanPage_FanSpeed">Fan Speed (%)</system:String>
-    <system:String x:Key="FanPage_CPUPower">CPU Package Power (W)</system:String>
-    <system:String x:Key="FanPage_Temperature">Temperature (C)</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Volume">Change Volume</system:String>
+    <system:String x:Key="FanPage_FanCurve">风扇控制曲线</system:String>
+    <system:String x:Key="FanPage_FanSpeed">风扇转速 (%)</system:String>
+    <system:String x:Key="FanPage_CPUPower">CPU总功率 (W)</system:String>
+    <system:String x:Key="FanPage_Temperature">CPU温度 (℃)</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume">改变音量</system:String>
 
 
-    <system:String x:Key="FanMode_Hardware">Hardware Controlled</system:String>
-    <system:String x:Key="FanMode_Manual">Manual Control</system:String>
-    <system:String x:Key="FanMode_Software">Auto Fan Curve</system:String>
+    <system:String x:Key="FanMode_Hardware">硬件自动控制</system:String>
+    <system:String x:Key="FanMode_Manual">手动控制</system:String>
+    <system:String x:Key="FanMode_Software">使用风扇曲线自动控制</system:String>
 
-    <system:String x:Key="Usercontrol_FanCurrentPackagePower">Current CPU Package Power:</system:String>
-    <system:String x:Key="Usercontrol_FanCurrentTemperature">Current CPU Temperature:</system:String>
-    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">Current Fan Speed:</system:String>
-    <system:String x:Key="Usercontrol_AutostartFan">Autostart Fan Control</system:String>
-    <system:String x:Key="Usercontrol_FanSettings">Fan Settings</system:String>
-    <system:String x:Key="Instruction_Change">CHANGE</system:String>
-    <system:String x:Key="Instruction_ToggleMode">TOGGLE MODE</system:String>
-    <system:String x:Key="Hotkeys_Type_None">None</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentPackagePower">当前CPU总功率:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentTemperature">当前CPU温度:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">当前风扇转速:</system:String>
+    <system:String x:Key="Usercontrol_AutostartFan">自动启用风扇控制</system:String>
+    <system:String x:Key="Usercontrol_FanSettings">风扇设置</system:String>
+    <system:String x:Key="Instruction_Change">修改</system:String>
+    <system:String x:Key="Instruction_ToggleMode">切换控制模式</system:String>
+    <system:String x:Key="Hotkeys_Type_None">无</system:String>
 </ResourceDictionary>
