@@ -115,6 +115,10 @@ Restart the computer
 </ul>
 
 
+# Contact
+
+You can email me about device support or other suggestions at project.sbc@outlook.com
+
 
 
 
