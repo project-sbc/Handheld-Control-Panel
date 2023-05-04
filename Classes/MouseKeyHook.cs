@@ -39,13 +39,13 @@ namespace Handheld_Control_Panel.Classes
             { 
                 if (runningKeyStroke == "") 
                 { 
-                    runningKeyStroke = e.KeyCode.ToString(); 
+                    runningKeyStroke = e.KeyData.ToString(); 
                 } 
                 else 
                 {
-                    if (runningKeyStroke != e.KeyCode.ToString() && !runningKeyStroke.Contains("+" + e.KeyCode.ToString()))
+                    if (runningKeyStroke != e.KeyData.ToString() && !runningKeyStroke.Contains("+" + e.KeyData.ToString()))
                     {
-                        runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
+                        runningKeyStroke = runningKeyStroke + "+" + e.KeyData.ToString();
                       
                     }
          

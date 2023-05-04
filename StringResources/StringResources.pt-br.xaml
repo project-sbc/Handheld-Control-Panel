@@ -63,7 +63,7 @@
     <system:String x:Key="Usercontrol_Language">Idioma</system:String>
     <system:String x:Key="Usercontrol_IntelTDP">Tipo de TDP Intel</system:String>
     <system:String x:Key="Usercontrol_MouseMode">Modo Mouse</system:String>
-    <system:String x:Key="Usercontrol_Controller">Desabilitar Controle Interno</system:String>
+    <system:String x:Key="Usercontrol_Controller">Desligar Controle Interno</system:String>
     <system:String x:Key="Usercontrol_Donate">Doar</system:String>
     <system:String x:Key="Usercontrol_Update">Atualizar</system:String>
     <system:String x:Key="Usercontrol_CheckUpdate">Verificar Atualizações</system:String>
@@ -97,7 +97,7 @@
 
     <system:String x:Key="Usercontrol_AppLocation">Local da Aplicação</system:String>
     <system:String x:Key="Usercontrol_AccentColor">Cor</system:String>
-    <system:String x:Key="Usercontrol_Autoupdate">Verif. Atualizações Automaticamente</system:String>
+    <system:String x:Key="Usercontrol_Autoupdate">Atualizações Automaticas</system:String>
     <system:String x:Key="Divider">Divisor</system:String>
     <system:String x:Key="Usercontrol_Right">Direita</system:String>
     <system:String x:Key="Usercontrol_Left">Esquerda</system:String>
@@ -176,7 +176,7 @@
 
     <system:String x:Key="Instruction_Sort">ORDENAR</system:String>
     <system:String x:Key="Instruction_Filter">FILTRAR</system:String>
-    <system:String x:Key="Instruction_Favorite">FAVORITO</system:String>
+    <system:String x:Key="Instruction_Favorite">FAV.</system:String>
     <system:String x:Key="Instruction_PageDown">PG ABAIXO</system:String>
     <system:String x:Key="Instruction_PageUp">PG ACIMA</system:String>
 
@@ -188,7 +188,7 @@
     <system:String x:Key="Usercontrol_Deadzone">Deadzone Analógicos</system:String>
 
     <!-- 05apr2023 -->
-    <system:String x:Key="Notification_GameSyncDone">Sincronizar Biblioteca de Jogos Completa</system:String>
+    <system:String x:Key="Notification_GameSyncDone">Sincronização da Biblioteca Completa</system:String>
     <system:String x:Key="Notification_GameSyncing">Sincronizando Biblioteca de Jogos</system:String>
 
     <!-- 06apr2023-->
@@ -220,7 +220,7 @@
     <system:String x:Key="Usercontrol_FanCurrentPackagePower">Pacote de Energia da CPU Atual:</system:String>
     <system:String x:Key="Usercontrol_FanCurrentTemperature">Temperatura Atual da CPU:</system:String>
     <system:String x:Key="Usercontrol_FanCurrentFanSpeed">Velocidade Atual da Ventoinha:</system:String>
-    <system:String x:Key="Usercontrol_AutostartFan">Inicio Automático do Controle da Ventoinha</system:String>
+    <system:String x:Key="Usercontrol_AutostartFan">Controle Autom. da Ventoinha</system:String>
     <system:String x:Key="Usercontrol_FanSettings">Configuração da Ventoinha</system:String>
     <system:String x:Key="Instruction_Change">ALTERAR</system:String>
     <system:String x:Key="Instruction_ToggleMode">ALTERNAR MODO</system:String>

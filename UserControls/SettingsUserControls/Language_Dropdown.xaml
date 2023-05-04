@@ -12,7 +12,7 @@
             <DockPanel DockPanel.Dock="Top" Height="50" VerticalAlignment="Center" >
 
                 <Label x:Name="label" Content="{DynamicResource Usercontrol_Language}"   Style="{StaticResource userControlMainLabel}" />
-                <Label  Content="{Binding ElementName=controlList, Path=SelectedItem}" ContentStringFormat="{}- {0}" HorizontalAlignment="Right" Width="150"   Margin="0,0,0,0"   Style="{StaticResource userControlMainLabel}" />
+                <Label  Content="{Binding ElementName=controlList, Path=SelectedItem}" ContentStringFormat="{}- {0}" HorizontalAlignment="Right" Width="240"   Margin="0,0,0,0"   Style="{StaticResource userControlMainLabel}" />
                 <Button x:Name="button" Background="Transparent" Click="button_Click" BorderThickness="0" BorderBrush="Transparent" Height="40" Width="40" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <iconPacks:PackIconUnicons x:Name="icon" Kind="AngleRight" Height="26" Width="26"  />
                 </Button>

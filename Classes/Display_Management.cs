@@ -40,14 +40,14 @@ namespace Handheld_Control_Panel.Classes.Display_Management
         {
             resolutionProfileChangedEvent?.Invoke(null, EventArgs.Empty);
         }
-        public static void getCurrentDisplaySettings()
+        public static void getCurrentDisplaySettingsOLD()
         {
-            
+
             string commandArguments = " /S";
             string result = QResCLIResult(commandArguments);
             try
             {
-                               
+
                 if (result != null)
                 {
                     //get actual resolution by dividing scaled width/height with scaling factor
@@ -66,14 +66,71 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                     string displayRate = result.Substring(findStartStringRate, 1 + findEndStringRate - findStartStringRate).Trim();
                     if (Global_Variables.Global_Variables.RefreshRate != displayRate)
                     {
-                       Global_Variables.Global_Variables.RefreshRate = displayRate;
+                        Global_Variables.Global_Variables.RefreshRate = displayRate;
                     }
-        
+
                 }
             }
             catch (Exception ex)
             {
                 string errorMsg = "Error: ChangeDisplaySettings.cs:  Get current display settings: " + ex.Message + " Result: " + result;
+                Log_Writer.writeLog(errorMsg);
+                System.Windows.MessageBox.Show(errorMsg);
+
+            }
+
+
+
+
+
+        }
+        public static void getCurrentDisplaySettings()
+        {
+            
+           
+            try
+            {
+                               
+                DisplaySettingsChanger.DisplayMode displayMode = DisplaySettingsChanger.GetCurrentDisplayMode();
+                string resolution = displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight;
+                //display refresh rate
+                string displayRate = displayMode.dmDisplayFrequency.ToString();
+
+                if (!Global_Variables.Global_Variables.resolutions.Contains(resolution) || !Global_Variables.Global_Variables.resolution_refreshrates.ContainsKey(resolution))
+                {
+                    //dont forget generate list routine also sets current display thats why we can return
+                    generateDisplayResolutionAndRateList();
+                    Global_Variables.Global_Variables.raiseValueChanged("resolution_refreshrates");
+                    return;
+                }
+                else
+                {
+                    if (!Global_Variables.Global_Variables.resolution_refreshrates[resolution].Contains(displayRate))
+                    {
+                        //dont forget generate list routine also sets current display tahts why we can return
+                        generateDisplayResolutionAndRateList();
+                        Global_Variables.Global_Variables.raiseValueChanged("resolution_refreshrates");
+                        return;
+                    }
+
+                }
+                if (Global_Variables.Global_Variables.Resolution != resolution)
+                {
+                    Global_Variables.Global_Variables.Resolution = resolution;
+                }
+
+            
+
+                
+                if (Global_Variables.Global_Variables.RefreshRate != displayRate)
+                {
+                    Global_Variables.Global_Variables.RefreshRate = displayRate;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = "Error: ChangeDisplaySettings.cs:  Get current display settings: " + ex.Message ;
                 Log_Writer.writeLog(errorMsg);
                 System.Windows.MessageBox.Show(errorMsg);
 
@@ -169,6 +226,18 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             short bits = dmm.dmBitsPerPel;
             int ditherType = dmm.dmDitherType; //dither type is related to bitmap  conversion, just keep the kind of the current display mode
             int displayOutput = dmm.dmDisplayFixedOutput;
+            //set resolution
+            if (Global_Variables.Global_Variables.Resolution != dmm.dmPelsWidth + "x" + dmm.dmPelsHeight)
+            {
+                Global_Variables.Global_Variables.Resolution = dmm.dmPelsWidth + "x" + dmm.dmPelsHeight;
+            }
+            //set refresh rate
+
+            if (Global_Variables.Global_Variables.RefreshRate != dmm.dmDisplayFrequency.ToString())
+            {
+                Global_Variables.Global_Variables.RefreshRate = dmm.dmDisplayFrequency.ToString();
+            }
+
 
             List<DisplaySettingsChanger.DisplayMode> initialList = DisplaySettingsChanger.GetSupportedModes().Where(o => o.dmBitsPerPel == bits).ToList();
   
