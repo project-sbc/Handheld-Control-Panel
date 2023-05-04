@@ -9,9 +9,11 @@
              d:DesignWidth="450" Height="50" Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel VerticalAlignment="Center" >
-
-            <Label Content="{DynamicResource Usercontrol_Theme}"  Style="{StaticResource userControlMainLabel}"/>
-            <mah:ToggleSwitch x:Name="control" Style="{DynamicResource userControlToggle}" Margin="0,0,-80,0" OnContent="{DynamicResource Usercontrol_Dark}" OffContent="{DynamicResource Usercontrol_Light}"  Toggled="toggleSwitch_Toggled" >
+            <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                <TextBlock Text="{DynamicResource Usercontrol_Theme}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+            </Viewbox>
+          
+            <mah:ToggleSwitch x:Name="control" Style="{DynamicResource userControlToggle}" Margin="0,0,-60,0" OnContent="{DynamicResource Usercontrol_Dark}" OffContent="{DynamicResource Usercontrol_Light}"  Toggled="toggleSwitch_Toggled" >
                 <mah:ToggleSwitch.LayoutTransform>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                 </mah:ToggleSwitch.LayoutTransform>

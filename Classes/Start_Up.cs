@@ -146,7 +146,11 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.pt-br.xaml", UriKind.RelativeOrAbsolute);
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
                     break;
-
+                case "한국어":
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
+                    Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.kr.xaml", UriKind.RelativeOrAbsolute);
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
+                    break;
             }
             
         }

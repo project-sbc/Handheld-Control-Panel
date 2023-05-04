@@ -10,8 +10,10 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Height="50" VerticalAlignment="Center" >
-
-                <Label x:Name="label" Content="{DynamicResource Usercontrol_AccentColor}"   Style="{StaticResource userControlMainLabel}" />
+                <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                    <TextBlock Text="{DynamicResource Usercontrol_AccentColor}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+                </Viewbox>
+               
                 <Border x:Name="colorBorder" CornerRadius="3" HorizontalAlignment="Right" Height="30" Width="120" Margin="80,0,0,0"/>
                 <Button x:Name="button" Background="Transparent" Click="button_Click" BorderThickness="0" BorderBrush="Transparent" Height="40" Width="40" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <iconPacks:PackIconUnicons x:Name="icon" Kind="AngleRight" Height="26" Width="26"  />

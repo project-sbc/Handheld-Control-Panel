@@ -53,6 +53,7 @@ namespace Handheld_Control_Panel.UserControls
             controlList.Items.Add("Pусский");
             controlList.Items.Add("日本語");
             controlList.Items.Add("Português (Brasil)");
+            controlList.Items.Add("한국어");
             controlList.SelectedItem = Properties.Settings.Default.language;
 
 
@@ -147,6 +148,9 @@ namespace Handheld_Control_Panel.UserControls
                             break;
                         case "Português (Brasil)":
                             Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.pt-br.xaml", UriKind.RelativeOrAbsolute);
+                            break;
+                        case "한국어":
+                            Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.kr.xaml", UriKind.RelativeOrAbsolute);
                             break;
                     }
                    
