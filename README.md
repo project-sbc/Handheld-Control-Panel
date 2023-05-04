@@ -108,9 +108,10 @@ Restart the computer
   <li>JamesCJ (RyzenAdj Developer, UXTU Developer) - for Aya Neo 2 testing/general contributions. Check out his other projects here https://github.com/JamesCJ60/Playmate-Game-Launcher   https://github.com/JamesCJ60/Universal-x86-Tuning-Utility </li>
   <li>ETA Prime for the shoutout on Youtube</li>
   <li>Russian translation by ion2903 (Discord)</li>
-  <li>Chinese translation by ProjectSBC, Kiki (formerly One Netbook employee)</li>
+  <li>Chinese translation by ProjectSBC, Kiki (formerly One Netbook employee), handtalker (Discord)</li>
   <li>Portugese translation by estefano.jol (Discord)</li>  
   <li>Japanese translation by tomoniutaou33 (Discord)</li>
+  <li>Korean translation by motsa (Discord)</li>
 </ul>
 
 
