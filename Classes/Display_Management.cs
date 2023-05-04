@@ -131,10 +131,8 @@ namespace Handheld_Control_Panel.Classes.Display_Management
             return result;
 
         }
-
-        public static void testGettingResolutionFromNewNugetPackage()
+        public static void testNewResRoutine()
         {
-            
             DisplaySettingsChanger.DisplayMode dmm = DisplaySettingsChanger.GetCurrentDisplayMode();
 
             short bits = dmm.dmBitsPerPel;
@@ -143,8 +141,8 @@ namespace Handheld_Control_Panel.Classes.Display_Management
 
             List<DisplaySettingsChanger.DisplayMode> initialList = DisplaySettingsChanger.GetSupportedModes().Where(o => o.dmBitsPerPel == bits).ToList();
             List<DisplaySettingsChanger.DisplayMode> finalList = new List<DisplaySettingsChanger.DisplayMode>();
-           
-            
+
+
             foreach (DisplaySettingsChanger.DisplayMode displayMode in initialList)
             {
                 if (displayMode.dmDitherType == ditherType && displayMode.dmBitsPerPel == bits && displayMode.dmDisplayFixedOutput == displayOutput)
@@ -158,106 +156,78 @@ namespace Handheld_Control_Panel.Classes.Display_Management
                 Debug.WriteLine(displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight + " " + displayMode.dmDisplayFrequency + " " + displayMode.dmBitsPerPel + " " + displayMode.dmCollate + " " + displayMode.dmColor + " " + displayMode.dmDeviceName + " " + displayMode.dmDisplayFixedOutput + " " + displayMode.dmDisplayFlags + " " + displayMode.dmDitherType + " " + displayMode.dmDuplex + " " + displayMode.dmFields + " " + displayMode.dmFormName + " " + displayMode.dmICMIntent + " " + displayMode.dmLogPixels + " " + displayMode.dmMediaType + " " + displayMode.dmTTOption);
 
             }
+            Global_Variables.Global_Variables.resolution_refreshrates.Clear();
+        }
+        public static void generateDisplayResolutionAndRateList()
+        {
+            Global_Variables.Global_Variables.resolution_refreshrates.Clear();
+            Global_Variables.Global_Variables.resolutions.Clear();
+
+
+            DisplaySettingsChanger.DisplayMode dmm = DisplaySettingsChanger.GetCurrentDisplayMode();
+
+            short bits = dmm.dmBitsPerPel;
+            int ditherType = dmm.dmDitherType; //dither type is related to bitmap  conversion, just keep the kind of the current display mode
+            int displayOutput = dmm.dmDisplayFixedOutput;
+
+            List<DisplaySettingsChanger.DisplayMode> initialList = DisplaySettingsChanger.GetSupportedModes().Where(o => o.dmBitsPerPel == bits).ToList();
+  
+           
+            //once for resolutions
+            foreach (DisplaySettingsChanger.DisplayMode displayMode in initialList)
+            {
+                if (displayMode.dmDitherType == ditherType && displayMode.dmBitsPerPel == bits && displayMode.dmDisplayFixedOutput == displayOutput)
+                {
+                    string resolution = displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight;
+                    string refresh = displayMode.dmDisplayFrequency.ToString();
+                    if (!Global_Variables.Global_Variables.resolution_refreshrates.ContainsKey(resolution))
+                    {
+                        Global_Variables.Global_Variables.resolution_refreshrates.Add(resolution, new List<string>());
+                        Debug.WriteLine(resolution);
+                    }
+                    if (!Global_Variables.Global_Variables.resolutions.Contains(resolution)) { Global_Variables.Global_Variables.resolutions.Insert(0, resolution); }
+
+                }
+
+            }
+            //second for refresh rates
+            foreach (DisplaySettingsChanger.DisplayMode displayMode in initialList)
+            {
+                if (displayMode.dmDitherType == ditherType && displayMode.dmBitsPerPel == bits && displayMode.dmDisplayFixedOutput == displayOutput)
+                {
+                    string resolution = displayMode.dmPelsWidth + "x" + displayMode.dmPelsHeight;
+                    string refresh = displayMode.dmDisplayFrequency.ToString();
+                    if (Global_Variables.Global_Variables.resolution_refreshrates.ContainsKey(resolution))
+                    {
+                        List<string> refreshRates = Global_Variables.Global_Variables.resolution_refreshrates[resolution];
+                        if (!refreshRates.Contains(refresh))
+                        {
+                            Debug.WriteLine(resolution + " " + refresh);
+                            refreshRates.Add(refresh);
+                            Global_Variables.Global_Variables.resolution_refreshrates[resolution] = refreshRates;
+                        }
+                       
+                        
+                    }
+
+                    
+                }
+
+            }
+
+            Global_Variables.Global_Variables.scalings.Clear();
+            Global_Variables.Global_Variables.scalings.Add("100");
+            Global_Variables.Global_Variables.scalings.Add("125");
+            Global_Variables.Global_Variables.scalings.Add("150");
+            Global_Variables.Global_Variables.scalings.Add("175");
+            Global_Variables.Global_Variables.scalings.Add("200");
+            Global_Variables.Global_Variables.scalings.Add("225");
+
+
 
         }
 
         public static void generateDisplayResolutionAndRateListOLD()
-        {
-            Global_Variables.Global_Variables.resolutions.Clear();
-    
-            Global_Variables.Global_Variables.resolution_refreshrates.Clear();
-            string commandArguments = " /L";
-            string result = QResCLIResult(commandArguments);
-
-            string resolution;
-            string refreshrate;
-
-            using (StringReader reader = new StringReader(result))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (line.IndexOf("@") > 0)
-                    {
-                        resolution = line.Substring(0, line.IndexOf(",")).Trim();
-                        refreshrate = line.Substring(line.IndexOf("@") + 1, 4).Trim();
-                        if (!Global_Variables.Global_Variables.resolutions.Contains(resolution)) { Global_Variables.Global_Variables.resolutions.Insert(0,resolution); }
-                       // if (!Global_Variables.Global_Variables.refreshRates.Contains(refreshrate)) { Global_Variables.Global_Variables.refreshRates.Add(refreshrate); }
-                    }
-                }
-            }
-
-            Global_Variables.Global_Variables.scalings.Clear();
-            Global_Variables.Global_Variables.scalings.Add("100");
-            Global_Variables.Global_Variables.scalings.Add("125");
-            Global_Variables.Global_Variables.scalings.Add("150");
-            Global_Variables.Global_Variables.scalings.Add("175");
-            Global_Variables.Global_Variables.scalings.Add("200");
-            Global_Variables.Global_Variables.scalings.Add("225");
-        }
-        public static void generateDisplayResolutionAndRateListOLD2()
-        {
-            Global_Variables.Global_Variables.resolution_refreshrates.Clear();
-            string commandArguments = " /L";
-            string result = QResCLIResult(commandArguments);
-
-            string resolution;
-            string currResolution="";
-            string refreshrate;
-
-
-            List<string> resultList = result.Split(Environment.NewLine).ToList();
-
-            List<string> refreshrates = new List<string>();
-
-            foreach (string line in resultList)
-            {
-                if (line.IndexOf("@") > 0)
-                {
-                
-                    resolution = line.Substring(0, line.IndexOf(",")).Trim();
-
-                    if (currResolution != resolution)
-                    {
-                        if (currResolution != "")
-                        {
-                            Global_Variables.Global_Variables.resolution_refreshrates.Add(currResolution, refreshrates);
-                            refreshrates = new List<string>();
-                            Global_Variables.Global_Variables.resolutions.Insert(0, currResolution);
-                            currResolution = resolution;
-                          
-                        }
-                        else
-                        {
-                            currResolution = resolution;
-                        }
-
-                    }
-
-                    refreshrate = line.Substring(line.IndexOf("@") + 1, 4).Trim();
-                    if (!refreshrates.Contains(refreshrate)) { refreshrates.Add(refreshrate); }
-                    if (resultList.IndexOf(line) == resultList.Count - 2)
-                    {
-                        Global_Variables.Global_Variables.resolution_refreshrates.Add(resolution, refreshrates);
-                        if (!Global_Variables.Global_Variables.resolutions.Contains(resolution)) { Global_Variables.Global_Variables.resolutions.Insert(0, resolution); }
-                       
-
-                    }
-                }
-
-            }
-
-           
-
-            Global_Variables.Global_Variables.scalings.Clear();
-            Global_Variables.Global_Variables.scalings.Add("100");
-            Global_Variables.Global_Variables.scalings.Add("125");
-            Global_Variables.Global_Variables.scalings.Add("150");
-            Global_Variables.Global_Variables.scalings.Add("175");
-            Global_Variables.Global_Variables.scalings.Add("200");
-            Global_Variables.Global_Variables.scalings.Add("225");
-        }
-        public static void generateDisplayResolutionAndRateList()
         {
             Global_Variables.Global_Variables.resolution_refreshrates.Clear();
             string commandArguments = " /L";
