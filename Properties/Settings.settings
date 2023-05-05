@@ -9,7 +9,7 @@
       <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="IntelMMIOMSR" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MMIO</Value>
+      <Value Profile="(Default)">MMIO+MSR</Value>
     </Setting>
     <Setting Name="minTDP" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>

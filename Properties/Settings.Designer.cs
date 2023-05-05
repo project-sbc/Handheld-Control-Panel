@@ -49,7 +49,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MMIO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MMIO+MSR")]
         public string IntelMMIOMSR {
             get {
                 return ((string)(this["IntelMMIOMSR"]));

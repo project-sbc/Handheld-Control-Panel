@@ -124,10 +124,16 @@ namespace Handheld_Control_Panel.UserControls
                 if (controlList.SelectedItem != null)
                 {
                     string selectedItem = controlList.SelectedValue.ToString();
-
                     Properties.Settings.Default.IntelMMIOMSR = selectedItem;
                     Properties.Settings.Default.Save();
-                    selectedObject = selectedItem;
+                  
+                    if (controlList.Visibility == Visibility.Visible)
+                    {
+                        selectedObject = selectedItem;
+                    }
+                    
+
+                   
                    
                 }
 
@@ -152,6 +158,11 @@ namespace Handheld_Control_Panel.UserControls
             }
             else
             {
+                if (controlList.SelectedItem != null)
+                {
+                    selectedObject = controlList.SelectedItem;
+                }
+              
                 controlList.Visibility = Visibility.Visible;
                 PackIconUnicons icon = (PackIconUnicons)button.Content;
                 icon.RotationAngle = 90;
