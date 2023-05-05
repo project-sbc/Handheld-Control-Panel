@@ -32,6 +32,8 @@ namespace Handheld_Control_Panel.Classes.Update_Software
             if (args.Error == null)
             {
                 Properties.Settings.Default.lastCheckUpdate = DateTime.Now;
+
+                Properties.Settings.Default.Save();
                 if (args.IsUpdateAvailable)
                 {
                     DialogResult dialogResult;
@@ -62,6 +64,9 @@ namespace Handheld_Control_Panel.Classes.Update_Software
                             //Throw event to close main window
                             if (AutoUpdater.DownloadUpdate(args))
                             {
+                                Properties.Settings.Default.upgradeSettingsRequired = true;
+                                Properties.Settings.Default.Save();
+
                                 closeWindowEvent.raiseCloseWindowForUpdateEvent();
                             }
                         }

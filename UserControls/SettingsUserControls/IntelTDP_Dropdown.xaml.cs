@@ -121,7 +121,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (controlList.IsLoaded)
             {
-                if (controlList.SelectedItem != null & controlList.Visibility == Visibility.Visible)
+                if (controlList.SelectedItem != null)
                 {
                     string selectedItem = controlList.SelectedValue.ToString();
 

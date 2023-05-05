@@ -31,7 +31,7 @@
                 <uc:ProfilesResolution_Dropdown/>
                 <uc:ProfileRefreshRate_Dropdown />
                 <uc:Divider />
-                    <Label Style="{StaticResource userControlMainLabel}" Content="On Charger" />
+                    <Label Style="{StaticResource userControlMainLabel}" Content="{DynamicResource Usercontrol_OnCharger}" />
                     <uc:OnlineTDP_Slider />
                 <uc:OnlineTDP2_Slider />
                 <uc:OnlineFPS_Slider/>
@@ -40,7 +40,7 @@
                 <uc:OnlineGPUCLK_Slider/>
                 <uc:OnlineActiveCore_Slider/>
                 <uc:Divider/>
-                    <Label Style="{StaticResource userControlMainLabel}" Content="On Battery" />
+                    <Label Style="{StaticResource userControlMainLabel}" Content="{DynamicResource Usercontrol_OnBattery}" />
                     <uc:OfflineTDP_Slider />
                 <uc:OfflineTDP2_Slider />
                 <uc:OfflineFPS_Slider/>

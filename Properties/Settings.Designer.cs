@@ -369,5 +369,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["startAutoFan"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool upgradeSettingsRequired {
+            get {
+                return ((bool)(this["upgradeSettingsRequired"]));
+            }
+            set {
+                this["upgradeSettingsRequired"] = value;
+            }
+        }
     }
 }

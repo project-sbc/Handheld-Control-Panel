@@ -224,4 +224,10 @@
     <system:String x:Key="Usercontrol_FanSettings">Configuração da Ventoinha</system:String>
     <system:String x:Key="Instruction_Change">ALTERAR</system:String>
     <system:String x:Key="Instruction_ToggleMode">ALTERNAR MODO</system:String>
+
+
+    <!-- 04may2023-->
+    <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
+    <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
+    <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
 </ResourceDictionary>

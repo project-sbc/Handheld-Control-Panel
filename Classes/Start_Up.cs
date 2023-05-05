@@ -16,6 +16,7 @@ using System.Windows.Threading;
 
 using MessageBox = System.Windows.MessageBox;
 using System.Windows.Media.Animation;
+using Handheld_Control_Panel.Classes.Task_Scheduler;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -24,12 +25,24 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Start_Routine()
         {
+            //run setting upgrade if needed
+            if (Properties.Settings.Default.upgradeSettingsRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.upgradeSettingsRequired = false;
+                Properties.Settings.Default.Save();
+
+                if (TaskSchedulerWin32.TaskSchedulerWin32.checkAutoStart())
+                {
+                    TaskSchedulerWin32.TaskSchedulerWin32.changeTaskService(true);
+                }
+            }
 
 
             //run all routines to get device ready
 
             //    librehardwaremonitor.Monitor();
-          
+
             //test code here
             //Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
             //test code

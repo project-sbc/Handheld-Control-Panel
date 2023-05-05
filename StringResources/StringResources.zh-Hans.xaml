@@ -216,4 +216,10 @@
     <system:String x:Key="Instruction_Change">修改</system:String>
     <system:String x:Key="Instruction_ToggleMode">切换控制模式</system:String>
     <system:String x:Key="Hotkeys_Type_None">无</system:String>
+
+
+    <!-- 04may2023-->
+    <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
+    <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
+    <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
 </ResourceDictionary>

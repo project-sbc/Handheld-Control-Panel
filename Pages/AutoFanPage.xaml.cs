@@ -353,6 +353,9 @@ namespace Handheld_Control_Panel.Pages
                         saveSettingFanCurveTemperature();
                     }
                     AutoFan_Management.loadXandYvalues();
+
+                    Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_FanCurveSaved"].ToString(), Notification.Wpf.NotificationType.Success);
+
                 }
                 if (args.Action == "X")
                 {

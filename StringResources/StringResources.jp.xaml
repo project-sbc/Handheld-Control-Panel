@@ -224,4 +224,10 @@
     <system:String x:Key="Usercontrol_FanSettings">ファン設定</system:String>
     <system:String x:Key="Instruction_Change">CHANGE</system:String>
     <system:String x:Key="Instruction_ToggleMode">トグル モード</system:String>
+
+
+    <!-- 04may2023-->
+    <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
+    <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
+    <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
 </ResourceDictionary>
