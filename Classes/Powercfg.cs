@@ -11,7 +11,7 @@ namespace Handheld_Control_Panel.Classes
     public static class Powercfg
     {
         public static string BaseDir = AppDomain.CurrentDomain.BaseDirectory;
-
+        public static string initialPowerScheme;
         public static void setPerformanceModePowercfg()
         {
             Run_CLI.Run_CLI.RunCommand(" /s scheme_min", false, "C:\\windows\\system32\\powercfg.exe", 1000);
@@ -23,6 +23,24 @@ namespace Handheld_Control_Panel.Classes
         public static void setBalancedModePowercfg()
         {
             Run_CLI.Run_CLI.RunCommand(" /s 381b4222-f694-41f0-9685-ff5bb260df2e", false, "C:\\windows\\system32\\powercfg.exe", 1000);
+        }
+
+        public static void setupPowerPlan()
+        {
+            //get plan before app started
+            string result = Run_CLI.Run_CLI.RunCommand(" /getactivescheme", true, "C:\\windows\\system32\\powercfg.exe", 1000);
+            initialPowerScheme=  getGUID(result);
+
+            setHyaticePowerPlanModePowercfg();
+        }
+
+        public static void closingAppPowerPlanRestore()
+        {
+            if (initialPowerScheme != null)
+            {
+                Run_CLI.Run_CLI.RunCommand(" /s " + initialPowerScheme,  false, "C:\\windows\\system32\\powercfg.exe", 1000);
+            }
+
         }
 
         private static string getGUID(string input)
@@ -72,7 +90,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 string directory = @Path.Combine(BaseDir + "Resources\\HyaticePowerPlan\\HyaticePowerPlan.pow");
                                 
-                Debug.WriteLine(Run_CLI.Run_CLI.RunCommand(" -import " + directory, true, "C:\\windows\\system32\\powercfg.exe", 2000,true));
+                Run_CLI.Run_CLI.RunCommand(" -import " + directory, false, "C:\\windows\\system32\\powercfg.exe", 2000,true);
             }
 
         }

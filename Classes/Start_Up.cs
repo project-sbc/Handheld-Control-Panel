@@ -25,7 +25,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Start_Routine()
         {
-            //run setting upgrade if needed
+            //run setting upgrade if needed when version is updated
             if (Properties.Settings.Default.upgradeSettingsRequired)
             {
                 Properties.Settings.Default.Upgrade();
@@ -38,6 +38,9 @@ namespace Handheld_Control_Panel.Classes
                 }
             }
 
+
+            //run hyatice powerplan
+            Powercfg.setupPowerPlan();
 
             //run all routines to get device ready
 
@@ -162,6 +165,11 @@ namespace Handheld_Control_Panel.Classes
                 case "한국어":
                     System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
                     Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.kr.xaml", UriKind.RelativeOrAbsolute);
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
+                    break;
+                case "Español":
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
+                    Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.es-ES.xaml", UriKind.RelativeOrAbsolute);
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
                     break;
             }

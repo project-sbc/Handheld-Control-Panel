@@ -10,7 +10,10 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel >
             <DockPanel  DockPanel.Dock="Top">
-                <Label x:Name="label" Content="{DynamicResource UserControl_FanControl}"   Style="{StaticResource userControlMainLabel}" />
+                <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                    <TextBlock Text="{DynamicResource UserControl_FanControl}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+                </Viewbox>
+            
                 <Label  Name="labelControl"   Margin="0,0,0,0" ContentStringFormat="{}- {0} %"  Style="{StaticResource userControlMainLabel}" />
                 <Button Name="controlButton" HorizontalAlignment="Right" Margin="0,0,8,0" Height="35" Click="controlButton_Click" />
               

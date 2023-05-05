@@ -9,7 +9,7 @@
              d:DesignWidth="450" Height="50" Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel VerticalAlignment="Center" >
-            <Viewbox Style="{StaticResource userControlMainLabelViewBox}" >
+            <Viewbox Style="{StaticResource userControlMainLabelViewBox}" MaxWidth="320" >
                 <TextBlock Text="{DynamicResource Usercontrol_AutostartFan}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
             </Viewbox>
            

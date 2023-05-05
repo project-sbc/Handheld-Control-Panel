@@ -10,7 +10,7 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel >
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                <Viewbox MaxWidth="320" Style="{StaticResource userControlMainLabelViewBox}">
                     <TextBlock Text="{DynamicResource Usercontrol_Deadzone}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
                 </Viewbox>
 

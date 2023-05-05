@@ -104,7 +104,8 @@ namespace Handheld_Control_Panel
             //kill controller thread
             Global_Variables.killControllerThread = true;
 
-           
+            //restore original power plan applied before launching the app
+            Powercfg.closingAppPowerPlanRestore();
 
             //set auto tdp to false to make sure the autoTDP thread closes properly
             Global_Variables.autoTDP = false;

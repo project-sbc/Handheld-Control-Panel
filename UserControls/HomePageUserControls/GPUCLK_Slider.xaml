@@ -10,8 +10,11 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel >
             <DockPanel Height="50"  DockPanel.Dock="Top">
-                <Label x:Name="label" Content="{DynamicResource Usercontrol_GPUCLK}"   Style="{StaticResource userControlMainLabel}" />
-                <Label Name="secondLabel" Content="{Binding ElementName=control, Path=Value}" Margin="0,0,0,0" ContentStringFormat="{}- {0} MHz"  Style="{StaticResource userControlMainLabel}" />
+                <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                    <TextBlock Text="{DynamicResource Usercontrol_GPUCLK}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+                </Viewbox>
+               
+                <Label Name="secondLabel" Content="{Binding ElementName=control, Path=Value}" VerticalContentAlignment="Center" Margin="0,0,0,0" ContentStringFormat="{}- {0} MHz"  Style="{StaticResource userControlMainLabel}" />
                 <mah:ToggleSwitch x:Name="controlToggle"   Style="{DynamicResource userControlToggle}"  Toggled="controlToggle_Toggled" >
                     <mah:ToggleSwitch.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
