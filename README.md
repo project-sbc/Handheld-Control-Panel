@@ -112,6 +112,7 @@ Restart the computer
   <li>Portugese translation by estefano.jol (Discord)</li>  
   <li>Japanese translation by tomoniutaou33 (Discord)</li>
   <li>Korean translation by motsa (Discord)</li>
+  <li>Spanish translation by kikeminchas (Discord)</li>
 </ul>
 
 
