@@ -315,7 +315,13 @@
     <Compile Update="UserControls\EditMouseModeUserControls\LeftStick_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\Image_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditProfileUserControls\AppType_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EditProfileUserControls\SeparateChargerBattery_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditProfileUserControls\OfflineEPP_Slider.xaml.cs">

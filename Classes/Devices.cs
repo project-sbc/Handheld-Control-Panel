@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -43,6 +44,7 @@ namespace Handheld_Control_Panel.Classes
 
             HandheldDevice handheldDevice = new GenericDevice();
 
+            MessageBox.Show("Send this to ProjectSBC---" + manufacturer + "----" + product);
             switch(manufacturer)
             {
                 case "GPD":
@@ -339,6 +341,127 @@ namespace Handheld_Control_Panel.Classes
         public bool fanIsEnabled()
         {
        
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+            if (returnvalue == 0) { return false; } else { return true; }
+        }
+        public void disableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
+        }
+        public void readFanSpeed()
+        {
+            int fanSpeed = 0;
+
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+
+            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+        }
+        public void setFanSpeed(int speedPercentage)
+        {
+            if (speedPercentage < MinFanSpeedPercentage && speedPercentage > 0)
+            {
+                speedPercentage = MinFanSpeedPercentage;
+            }
+
+            byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
+            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+
+            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
+        }
+    }
+
+    public class AOKZOEA1 : HandheldDevice
+    {
+        public AOKZOEA1()
+        {
+            this.ClassType = "";
+            this.Manufacturer = "";
+            this.Motherboard = "";
+            this.AutoTDP = "GPUClock";
+            this.FanCapable = true;
+            this.FanToggleAddress = 0x44A;
+            this.FanChangeAddress = 0x44B;
+            this.MaxFanSpeed = 255;
+            this.MinFanSpeed = 0;
+            this.MinFanSpeedPercentage = 25;
+            this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
+            this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
+
+            this.MaxCPUClock = 4600;
+            this.MinCPUClock = 1100;
+            this.MinGPUClock = 400;
+            this.MaxGPUClock = 2200;
+        }
+        public void enableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            Global_Variables.Global_Variables.fanControlEnabled = true;
+        }
+        public bool fanIsEnabled()
+        {
+
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+            if (returnvalue == 0) { return false; } else { return true; }
+        }
+        public void disableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
+        }
+        public void readFanSpeed()
+        {
+            int fanSpeed = 0;
+
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+
+            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+        }
+        public void setFanSpeed(int speedPercentage)
+        {
+            if (speedPercentage < MinFanSpeedPercentage && speedPercentage > 0)
+            {
+                speedPercentage = MinFanSpeedPercentage;
+            }
+
+            byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
+            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+
+            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
+        }
+    }
+    public class OneXPlayerMiniPro : HandheldDevice
+    {
+        public OneXPlayerMiniPro()
+        {
+            this.ClassType = "OneXPlayerMiniPro";
+            this.Manufacturer = "One-Netbook";
+            this.Motherboard = "";
+            this.AutoTDP = "GPUClock";
+            this.FanCapable = true;
+            this.FanToggleAddress = 0x44A;
+            this.FanChangeAddress = 0x44B;
+            this.MaxFanSpeed = 255;
+            this.MinFanSpeed = 0;
+            this.MinFanSpeedPercentage = 25;
+            this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
+            this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
+
+            this.MaxCPUClock = 4600;
+            this.MinCPUClock = 1100;
+            this.MinGPUClock = 400;
+            this.MaxGPUClock = 2200;
+        }
+        public void enableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            Global_Variables.Global_Variables.fanControlEnabled = true;
+        }
+        public bool fanIsEnabled()
+        {
+
             byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
             if (returnvalue == 0) { return false; } else { return true; }
         }

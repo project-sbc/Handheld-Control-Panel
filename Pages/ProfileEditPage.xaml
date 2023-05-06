@@ -31,24 +31,26 @@
                 <uc:ProfilesResolution_Dropdown/>
                 <uc:ProfileRefreshRate_Dropdown />
                 <uc:Divider />
-                    <Label Style="{StaticResource userControlMainLabel}" Content="{DynamicResource Usercontrol_OnCharger}" />
-                    <uc:OnlineTDP_Slider />
-                <uc:OnlineTDP2_Slider />
-                <uc:OnlineFPS_Slider/>
-                <uc:OnlineEPP_Slider/>
-                <uc:OnlineMaxCPU_Slider/>
-                <uc:OnlineGPUCLK_Slider/>
-                <uc:OnlineActiveCore_Slider/>
-                <uc:Divider/>
-                    <Label Style="{StaticResource userControlMainLabel}" Content="{DynamicResource Usercontrol_OnBattery}" />
+                    <uc:SeparateChargerBattery_Toggle/>
+                    <Label Name="batteryLabel" Style="{StaticResource userControlMainLabel}" Content="{DynamicResource Usercontrol_OnBattery}" />
                     <uc:OfflineTDP_Slider />
-                <uc:OfflineTDP2_Slider />
-                <uc:OfflineFPS_Slider/>
-                <uc:OfflineEPP_Slider/>
-                <uc:OfflineMaxCPU_Slider/>
-                <uc:OfflineGPUCLK_Slider/>
-                <uc:OfflineActiveCore_Slider/>
-            </StackPanel>
+                    <uc:OfflineTDP2_Slider />
+                    <uc:OfflineFPS_Slider/>
+                    <uc:OfflineEPP_Slider/>
+                    <uc:OfflineMaxCPU_Slider/>
+                    <uc:OfflineGPUCLK_Slider/>
+                    <uc:OfflineActiveCore_Slider/>
+                    <uc:Divider/>
+
+                    <Label Name="chargerLabel" Style="{StaticResource userControlMainLabel}" Content="{DynamicResource Usercontrol_OnCharger}" />
+                    <uc:OnlineTDP_Slider />
+                    <uc:OnlineTDP2_Slider />
+                    <uc:OnlineFPS_Slider/>
+                    <uc:OnlineEPP_Slider/>
+                    <uc:OnlineMaxCPU_Slider/>
+                    <uc:OnlineGPUCLK_Slider/>
+                    <uc:OnlineActiveCore_Slider/>
+                </StackPanel>
         </ScrollViewer>
     </DockPanel>
     </Grid>

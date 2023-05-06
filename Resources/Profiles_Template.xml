@@ -18,6 +18,7 @@
 				<NumberLaunches>0</NumberLaunches>
 				<Favorite>False</Favorite>
 			</LaunchOptions>
+			<SeparateChargerBattery>False</SeparateChargerBattery>
 			<Offline>
 				<TDP1>9</TDP1>
 				<TDP2>12</TDP2>
@@ -28,8 +29,8 @@
 				<GPUCLK></GPUCLK>
 			</Offline>
 			<Online>
-				<TDP1>10</TDP1>
-				<TDP2>11</TDP2>
+				<TDP1></TDP1>
+				<TDP2></TDP2>
 				<ActiveCores></ActiveCores>
 				<MAXCPU></MAXCPU>
 				<FPSLimit></FPSLimit>
@@ -129,6 +130,7 @@
 				<NumberLaunches>0</NumberLaunches>
 				<Favorite>False</Favorite>
 			</LaunchOptions>
+			<SeparateChargerBattery>False</SeparateChargerBattery>
 			<Offline>
 				<TDP1></TDP1>
 				<TDP2></TDP2>
