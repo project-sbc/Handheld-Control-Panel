@@ -44,7 +44,7 @@ namespace Handheld_Control_Panel.Classes
 
             HandheldDevice handheldDevice = new GenericDevice();
 
-            MessageBox.Show("Send this to ProjectSBC---" + manufacturer + "----" + product);
+            
             switch(manufacturer)
             {
                 case "GPD":

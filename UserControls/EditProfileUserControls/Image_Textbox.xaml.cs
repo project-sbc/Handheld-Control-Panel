@@ -118,7 +118,7 @@ namespace Handheld_Control_Panel.UserControls
                     controlTextbox.Visibility = Visibility.Visible;
                     controlButton.Visibility = Visibility.Visible;
                     controlImage.Visibility = Visibility.Visible;
-                    updateIconImage();
+                   
 
 
                 }

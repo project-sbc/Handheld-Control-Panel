@@ -374,7 +374,7 @@ where childItem : DependencyObject
 
                                         }
 
-
+                                        Global_Variables.mainWindow.toggleWindow();
 
                                     }
                                 }

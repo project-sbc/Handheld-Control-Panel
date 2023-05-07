@@ -367,7 +367,7 @@ namespace Handheld_Control_Panel
                 //FullScreen_Management.checkSuspendProcess();
 
 
-                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
+                //dont use this yet!! Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
                 
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
@@ -386,9 +386,11 @@ namespace Handheld_Control_Panel
             }
             else
             {
-                //check resume process
-                //FullScreen_Management.checkResumeProcess();
-                //Controller_Management.unhideController();
+                //check resume process, do this always in case they ran the toggle window with suspend process mode
+                FullScreen_Management.checkResumeProcess();
+               
+                
+                // dont use this yet Controller_Management.unhideController();
 
                 this.Hide();
                 
@@ -674,6 +676,7 @@ namespace Handheld_Control_Panel
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
+            //currently not using this to see if i can get away from capturing state change events
             if (false)
             {
                 if (this.WindowState == WindowState.Minimized)
@@ -683,7 +686,7 @@ namespace Handheld_Control_Panel
                     //navigation.SelectedIndex = 0;
                     //frame.Source = null;
                     //change interval to 15 seconds
-                    updateTimer.Interval = new TimeSpan(0, 0, 15);
+                    updateTimer.Interval = new TimeSpan(0, 0, 6);
                     //change controller timer interval to 100 ms to hot key recognition when not open
                     Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
                 }
@@ -742,7 +745,7 @@ namespace Handheld_Control_Panel
                 //navigation.SelectedIndex = 0;
                 //frame.Source = null;
                 //change interval to 15 seconds
-                updateTimer.Interval = new TimeSpan(0, 0, 15);
+                updateTimer.Interval = new TimeSpan(0, 0, 6);
                 //change controller timer interval to 100 ms to hot key recognition when not open
                 Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
             }

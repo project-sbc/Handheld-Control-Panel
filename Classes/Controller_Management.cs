@@ -273,6 +273,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             getController();
             timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
             timerController.Tick += controller_Tick;
+           
             timerController.Start();
            
         }
@@ -328,6 +329,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                     {
                                         ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
                                         QuickAction_Management.runHotKeyAction(action);
+                                        return;
                                     }
                                 }
                             }

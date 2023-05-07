@@ -55,6 +55,12 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(showhideHCP);
 
+            HotKeyAction showhideHCPGS = new HotKeyAction();
+            showhideHCPGS.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Show_Hide_HCP_ProcessSuspend"].ToString();
+            showhideHCPGS.HotkeyAction = "Show_Hide_HCP_ProcessSuspend";
+
+            hotkeyAction.Add(showhideHCPGS);
+
             HotKeyAction openProgram = new HotKeyAction();
             openProgram.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Open_Program"].ToString();
             openProgram.HotkeyAction = "Open_Program";

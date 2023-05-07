@@ -184,7 +184,6 @@
     <PackageReference Include="Notification.Wpf" Version="7.0.0" />
     <PackageReference Include="PidSharp" Version="1.0.0.1" />
     <PackageReference Include="PInvoke.Windows.Core" Version="0.7.124" />
-    <PackageReference Include="protobuf-net" Version="3.2.16" />
     <PackageReference Include="RawInput.Sharp" Version="0.0.4" />
     <PackageReference Include="ScottPlot" Version="4.1.63" />
     <PackageReference Include="ScottPlot.WPF" Version="4.1.63" />

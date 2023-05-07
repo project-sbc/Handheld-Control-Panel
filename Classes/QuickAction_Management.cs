@@ -79,6 +79,16 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.mainWindow.toggleWindow();
                    
                     break;
+
+                case "Show_Hide_HCP_ProcessSuspend":
+                    if (Global_Variables.Global_Variables.mainWindow.Visibility != Visibility.Visible)
+                    {
+                        FullScreen_Management.checkSuspendProcess();
+                    }
+                  
+                    Global_Variables.Global_Variables.mainWindow.toggleWindow();
+
+                    break;
                 case "Change_TDP":
                    
                     int param;
