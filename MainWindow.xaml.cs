@@ -368,7 +368,8 @@ namespace Handheld_Control_Panel
 
 
                 //dont use this yet!! Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
-                
+                updateStatusBar();
+
                 this.WindowState = WindowState.Normal;
                 if (navigation.SelectedIndex != -1)
                 {
