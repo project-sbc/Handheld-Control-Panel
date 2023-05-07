@@ -376,10 +376,10 @@ namespace Handheld_Control_Panel
                     //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
                    // frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
 
-
+                    
                 }
-       
-                this.Show();
+
+                this.Visibility = Visibility.Visible;
               
                 m_notifyIcon.Visible = false;
                 
@@ -392,7 +392,7 @@ namespace Handheld_Control_Panel
                 
                 // dont use this yet Controller_Management.unhideController();
 
-                this.Hide();
+                this.Visibility= Visibility.Hidden;
                 
                 m_notifyIcon.Visible = true;
             }

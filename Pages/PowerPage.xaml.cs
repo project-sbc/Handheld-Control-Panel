@@ -190,11 +190,14 @@ namespace Handheld_Control_Panel.Pages
                             try
                             {
                                 procs = Process.GetProcessById(processID);
-
-                                if (procs.Id == FullScreen_Management.suspendedProcess.Id)
+                                if (FullScreen_Management.suspendedProcess != null)
                                 {
-                                    FullScreen_Management.checkResumeProcess();
+                                    if (procs.Id == FullScreen_Management.suspendedProcess.Id)
+                                    {
+                                        FullScreen_Management.checkResumeProcess();
+                                    }
                                 }
+                                
 
                                 if (!procs.HasExited)
                                 {
@@ -222,22 +225,18 @@ namespace Handheld_Control_Panel.Pages
                         wnd = null;
                         break;
                     case "RestartPC":
-                        if (CheckForegroundWindowQAM.IsActive(mainWindowHandle))
-                        {
-                            var psi = new ProcessStartInfo("shutdown", "/r /t 0");
-                            psi.CreateNoWindow = true;
-                            psi.UseShellExecute = false;
-                            Process.Start(psi);
-                        }
+
+                        var psi = new ProcessStartInfo("shutdown", "/r /t 0");
+                        psi.CreateNoWindow = true;
+                        psi.UseShellExecute = false;
+                        Process.Start(psi);
+
                         break;
                     case "ShutdownPC":
-                        if (CheckForegroundWindowQAM.IsActive(mainWindowHandle))
-                        {
-                            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
-                            psi.CreateNoWindow = true;
-                            psi.UseShellExecute = false;
-                            Process.Start(psi);
-                        }
+                        var psisd = new ProcessStartInfo("shutdown", "/s /t 0");
+                        psisd.CreateNoWindow = true;
+                        psisd.UseShellExecute = false;
+                        Process.Start(psisd);
                         break;
                     default: break;
 
