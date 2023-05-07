@@ -87,31 +87,41 @@ namespace Handheld_Control_Panel.Classes
                     switch (product)
                     {
                         case "AIR":
-                          //  device = new AYANEOAIR();
+                          
                             break;
                         case "AIR Pro":
-                          // device = new AYANEOAIRPro();
+                          
                             break;
                         case "AIR Lite":
-                           // device = new AYANEOAIRLite();
+                           
                             break;
                         case "AYA NEO FOUNDER":
                         case "AYANEO 2021":
-                            //device = new AYANEO2021();
+                            
                             break;
                         case "AYANEO 2021 Pro":
                         case "AYANEO 2021 Pro Retro Power":
-                            //device = new AYANEO2021Pro();
+                            
                             break;
                         case "NEXT Pro":
                         case "NEXT Advance":
                         case "NEXT":
-                            //device = new AYANEONEXT();
+                            
                             break;
                         case "AYANEO 2":
                         case "GEEK":
                             handheldDevice = new AyaNeo2();
                             break;
+                    }
+                    break;
+                case "AOKZOE":
+                    switch (product)
+                    {
+                        case "AOKZOE A1 AR07":
+                            handheldDevice = new AOKZOEA1();
+                            break;
+                        default: break;
+
                     }
                     break;
                 default:
