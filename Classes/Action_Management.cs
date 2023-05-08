@@ -129,9 +129,9 @@ namespace Handheld_Control_Panel.Classes
 
         public void generateGlobalKeyboardHotKeyList()
         {
-            Dictionary<string, ActionParameter> returnDictionary = Global_Variables.Global_Variables.KBHotKeyDictionary;
-
-            returnDictionary.Clear();
+            Global_Variables.Global_Variables.KBHotKeyDictionary.Clear();
+                     
+            
 
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
@@ -145,11 +145,12 @@ namespace Handheld_Control_Panel.Classes
                     string hotkey = node.SelectSingleNode("Hotkey").InnerText;
                     ap.Action = node.SelectSingleNode("Action").InnerText;
                     ap.Parameter = node.SelectSingleNode("Parameter").InnerText;
-                    returnDictionary.Add(hotkey, ap);
+                    Global_Variables.Global_Variables.KBHotKeyDictionary.Add(hotkey, ap);
 
                 }
 
             }
+
 
             xmlDocument = null;
           
