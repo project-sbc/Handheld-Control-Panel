@@ -38,6 +38,7 @@ using Notification.Wpf.Controls;
 using System.Collections.ObjectModel;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using System.Globalization;
+using Handheld_Control_Panel.Classes.Update_Software;
 
 namespace Handheld_Control_Panel
 {
@@ -722,6 +723,9 @@ namespace Handheld_Control_Panel
             //check if multiple instances are running, if yes message and close the program to prevent errors from two instances running
             if (Start_Up.checkMultipleProgramsRunning()) { System.Windows.MessageBox.Show("More than one instance of this program running. Closing this to prevent errors."); this.Close(); }
 
+
+            //check for updates first
+            Update_Software.checkForUpdates(true);
 
         }
         private void getDPIScaling()

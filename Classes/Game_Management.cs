@@ -31,7 +31,7 @@ namespace Handheld_Control_Panel.Classes
  
         public static void LaunchApp(string gameID, string appType, string launchcommand, string appLocation)
         {
-            if (appType =="App")
+            if (appType =="Exe")
             {
                 if (File.Exists(appLocation))
                 {

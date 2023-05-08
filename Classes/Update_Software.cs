@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows;
 using AutoUpdaterDotNET;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace Handheld_Control_Panel.Classes.Update_Software
 {
@@ -22,7 +23,8 @@ namespace Handheld_Control_Panel.Classes.Update_Software
             if ((startUp && Properties.Settings.Default.checkUpdatesAtStartUp) || !startUp)
             {
                 AutoUpdater.CheckForUpdateEvent += (args) => AutoUpdaterOnCheckForUpdateEvent(startUp, args);
-                AutoUpdater.Start("https://raw.githubusercontent.com/project-sbc/Handheld-Control-Panel/master/Update.xml?token=GHSAT0AAAAAAB3XF4JRMYS75Q25SUNH62M2Y5RRTWA");
+                AutoUpdater.Start("https://raw.githubusercontent.com/project-sbc/Handheld-Control-Panel/master/Update.xml");
+                
             }
 
 
@@ -62,12 +64,14 @@ namespace Handheld_Control_Panel.Classes.Update_Software
                         try
                         {
                             //Throw event to close main window
+                          
                             if (AutoUpdater.DownloadUpdate(args))
                             {
                                 Properties.Settings.Default.upgradeSettingsRequired = true;
                                 Properties.Settings.Default.Save();
-
-                                closeWindowEvent.raiseCloseWindowForUpdateEvent();
+                                Thread.Sleep(200);
+                                Global_Variables.Global_Variables.mainWindow.Close();
+                   
                             }
                         }
                         catch (Exception exception)

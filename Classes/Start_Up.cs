@@ -49,10 +49,7 @@ namespace Handheld_Control_Panel.Classes
             //test code here
             //Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
             //test code
-
-
-            //check for updates first
-            Update_Software.Update_Software.checkForUpdates(true);
+                       
 
             //Load XML profile file
             XML_Management.Load_XML_File.load_XML_File();
