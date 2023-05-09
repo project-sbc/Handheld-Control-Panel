@@ -130,8 +130,9 @@ namespace Handheld_Control_Panel.Classes
         public void generateGlobalKeyboardHotKeyList()
         {
             Global_Variables.Global_Variables.KBHotKeyDictionary.Clear();
-                     
             
+
+
 
             System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);

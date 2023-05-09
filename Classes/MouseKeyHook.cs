@@ -16,6 +16,7 @@ namespace Handheld_Control_Panel.Classes
     {
         public static IKeyboardMouseEvents m_GlobalHook;
         public static string runningKeyStroke = "";
+    
         public static bool programmingKeystroke = false;
         public static keyboardEvents keyboardEvents = new keyboardEvents();
         public static void Subscribe()
@@ -36,43 +37,41 @@ namespace Handheld_Control_Panel.Classes
             KeyEventArgsExt args = (KeyEventArgsExt)e;
 
             if (args.IsKeyDown) 
-            { 
-                if (runningKeyStroke == "") 
-                { 
-                    runningKeyStroke = e.KeyData.ToString(); 
-                } 
-                else 
-                {
-                    if (runningKeyStroke != e.KeyData.ToString() && !runningKeyStroke.Contains("+" + e.KeyData.ToString()))
-                    {
-                        runningKeyStroke = runningKeyStroke + "+" + e.KeyData.ToString();
-                      
-                    }
-         
-                }
+            {
+                runningKeyStroke = e.KeyData.ToString();
                
+
                 if (Global_Variables.Global_Variables.KBHotKeyDictionary.Count != null)
                 {
+                    
                     if (Global_Variables.Global_Variables.KBHotKeyDictionary.ContainsKey(runningKeyStroke) && !programmingKeystroke)
                     {
-                       
+
                         args.SuppressKeyPress = true;
                         ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
                         QuickAction_Management.runHotKeyAction(action);
                         runningKeyStroke = "";
+                      
+                    }
+                    else
+                    {
 
+                        Debug.WriteLine(Global_Variables.Global_Variables.KBHotKeyDictionary.First().Value);
                     }
                 }
-              
             }
             if (args.IsKeyUp)
             {
                 keyboardEvents.raiseKeyboardStringPress(runningKeyStroke);
-    
+
                 runningKeyStroke = "";
+               
             }
 
-            //args.SuppressKeyPress = true;
+
+      
+            
+
         }
 
 
