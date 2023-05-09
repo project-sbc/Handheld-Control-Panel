@@ -105,10 +105,10 @@ namespace Handheld_Control_Panel
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
 
-            //hide if autostart
+            //show notify icon if auto start
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-               // this.Hide();
+                m_notifyIcon.Visible = true;
             }
            
         }
@@ -368,10 +368,14 @@ namespace Handheld_Control_Panel
                 //FullScreen_Management.checkSuspendProcess();
 
 
-                //dont use this yet!! Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
+                //update status bar because time takes forever to load
                 updateStatusBar();
 
                 this.WindowState = WindowState.Normal;
+
+                //run position check to make sure its located correctly, fixes issue where app moves all over
+                setWindowSizePosition();
+
                 if (navigation.SelectedIndex != -1)
                 {
 
