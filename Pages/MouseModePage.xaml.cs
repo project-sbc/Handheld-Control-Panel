@@ -108,7 +108,7 @@ namespace Handheld_Control_Panel.Pages
 
                             break;
                         case "X":
-                            Notification_Management.ShowYesNoPrompt("Delete current mouse mode?", Notification.Wpf.NotificationType.Warning, "Delete_Mousemode");
+                            Notification_Management.ShowYesNoPrompt(Application.Current.Resources["Prompt_DeleteSelectedMousemode"].ToString(), Notification.Wpf.NotificationType.Warning, "Delete_Mousemode");
                             break;
 
                         case "Up":

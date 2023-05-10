@@ -105,7 +105,7 @@ namespace Handheld_Control_Panel.Pages
 
                             break;
                         case "X":
-                            Notification_Management.ShowYesNoPrompt("Delete current profile?", Notification.Wpf.NotificationType.Warning, "Delete_Profile");
+                            Notification_Management.ShowYesNoPrompt(Application.Current.Resources["Prompt_DeleteSelectedProfile"].ToString(), Notification.Wpf.NotificationType.Warning, "Delete_Profile");
                             break;
                                                   
                         case "Y":

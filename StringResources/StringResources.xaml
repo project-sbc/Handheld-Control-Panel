@@ -238,4 +238,9 @@
         <!-- 05may2023-->
     <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
     <system:String x:Key="Hotkeys_Action_Show_Hide_HCP_ProcessSuspend">Toggle Quick Access Menu (Game Process Suspend)</system:String>
+        
+        <!-- 10may2023-->
+    <system:String x:Key="Prompt_DeleteSelectedAction">Delete selected action?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedProfile">Delete selected profile?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedMousemode">Delete selected mouse mode?</system:String>
 </ResourceDictionary>
