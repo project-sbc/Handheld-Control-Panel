@@ -20,8 +20,8 @@
 			</LaunchOptions>
 			<SeparateChargerBattery>False</SeparateChargerBattery>
 			<Offline>
-				<TDP1>9</TDP1>
-				<TDP2>12</TDP2>
+				<TDP1></TDP1>
+				<TDP2></TDP2>
 				<ActiveCores></ActiveCores>
 				<MAXCPU></MAXCPU>
 				<FPSLimit></FPSLimit>

@@ -474,17 +474,18 @@ namespace Handheld_Control_Panel
                 TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
                 RowsCount = 3, //Will show 3 rows and trim after
                 LeftButtonAction = () => Controller_Management.buttonEvents.raiseControllerInput(action), //Action on left button click, button will not show if it null 
+                RightButtonAction = () => Controller_Management.buttonEvents.raiseControllerInput(""), //Action on left button click, button will not show if it null 
                                                                                                     //RightButtonAction = () => , //Action on right button click,  button will not show if it null
                 LeftButtonContent = "YES", // Left button content (string or what u want
                 RightButtonContent = "NO", // Right button content (string or what u want
-                CloseOnClick = false, // Set true if u want close message when left mouse button click on message (base = true)
+                CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
 
                 Background = new SolidColorBrush(Colors.DarkGray),
                 Foreground = new SolidColorBrush(Colors.White)
 
             };
 
-            notificationManager.Show(content,"WindowArea",TimeSpan.MaxValue);
+            notificationManager.Show(content,"WindowArea",new TimeSpan(0,0,15));
 
           
         }
@@ -608,7 +609,7 @@ namespace Handheld_Control_Panel
 
             updateTimer.Stop();
 
-            //set the variable startSafeMode to false. This indicates the application shut down properly
+            //set the variable startSafeMode to false. This indicates the application shut down properly. 
             Properties.Settings.Default.startSafeMode = false;
             Properties.Settings.Default.Save();
         }

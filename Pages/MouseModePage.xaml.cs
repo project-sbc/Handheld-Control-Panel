@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -100,12 +101,16 @@ namespace Handheld_Control_Panel.Pages
                             mousemode.applyProfile();
                             controlList.Items.Refresh();
                             break;
-                        case "X":
-   
+                        case "Delete_Mousemode":
                             Global_Variables.mousemodes.deleteProfile(mousemode);
                             controlList.Items.Refresh();
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
+
                             break;
+                        case "X":
+                            Notification_Management.ShowYesNoPrompt("Delete current mouse mode?", Notification.Wpf.NotificationType.Warning, "Delete_Mousemode");
+                            break;
+
                         case "Up":
                             if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = controlList.Items.Count - 1; }
                             controlList.ScrollIntoView(controlList.SelectedItem);

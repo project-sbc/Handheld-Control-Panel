@@ -98,11 +98,16 @@ namespace Handheld_Control_Panel.Pages
                             wnd.navigateFrame("ProfileEditPage");
                             break;
 
-                        case "X":
+                        case "Delete_Profile":
                             Global_Variables.profiles.deleteProfile(profile);
                             controlList.Items.Refresh();
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
+
                             break;
+                        case "X":
+                            Notification_Management.ShowYesNoPrompt("Delete current profile?", Notification.Wpf.NotificationType.Warning, "Delete_Profile");
+                            break;
+                                                  
                         case "Y":
                             profile.applyProfile(false,true);
                             Global_Variables.profileAutoApplied = false;
