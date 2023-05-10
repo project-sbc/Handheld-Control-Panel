@@ -233,4 +233,8 @@
     <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
     <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
     <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
+
+    <!-- 05may2023-->
+    <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP_ProcessSuspend">Toggle Quick Access Menu (Game Process Suspend)</system:String>
 </ResourceDictionary>

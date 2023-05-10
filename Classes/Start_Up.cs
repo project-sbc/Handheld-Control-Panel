@@ -123,10 +123,29 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
 
 
-            if (Properties.Settings.Default.startAutoFan && Global_Variables.Global_Variables.Device.FanCapable)
+            //variable startSafeMode is a way to make the fan go back to hardware control operation in the case the app crashes and doesn't properly put the fan back into hardware control.
+            //It works by turning false if the app closes properly. It will normally be true so if something does happen then it won't properly close and turn it false.
+
+            if (Global_Variables.Global_Variables.Device.FanCapable)
             {
-                AutoFan_Management.startAutoFan();
+                if (!Properties.Settings.Default.startSafeMode)
+                {
+                    if (Properties.Settings.Default.startAutoFan)
+                    {
+                        AutoFan_Management.startAutoFan();
+                    }
+                }
+                else
+                {
+                    Fan_Management.Fan_Management.setFanControlHardware();
+                  
+                }
             }
+            Properties.Settings.Default.startSafeMode = true;
+            Properties.Settings.Default.Save();
+
+
+
         }
       
         public static void loadLanguage()

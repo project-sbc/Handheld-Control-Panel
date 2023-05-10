@@ -381,5 +381,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["upgradeSettingsRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool startSafeMode {
+            get {
+                return ((bool)(this["startSafeMode"]));
+            }
+            set {
+                this["startSafeMode"] = value;
+            }
+        }
     }
 }

@@ -117,6 +117,8 @@ namespace Handheld_Control_Panel
                 Fan_Management.setFanControlHardware();
                 WinRingEC_Management.OlsFree();
             }
+
+            
         }
     }
 }

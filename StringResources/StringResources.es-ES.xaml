@@ -123,13 +123,13 @@
 
 
     <system:String x:Key="Hotkeys_Action_Open_Program">Abrir el Programa</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_TDP">Cambiar TDP</system:String>
-    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Alternar Menú de Acceso Rápido</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">Ajustar TDP</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Abrir/Cerrar Menú de Acceso Rápido</system:String>
     <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Abrir Modo Big Picture de Steam</system:String>
     <system:String x:Key="Hotkeys_Action_Open_Playnite">Abrir Playnite</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_Brightness">Cambiar Brillo</system:String>
-    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Cambiar la Frecuencia de la GPU</system:String>
-    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Alternar Modo Ratón</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">Ajustar Brillo</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Ajustar la Frecuencia de la GPU</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Activar/Desactivar Modo Ratón</system:String>
 
     <system:String x:Key="Hotkeys_Type_Controller">Controlador</system:String>
     <system:String x:Key="Hotkeys_Type_Keyboard">Teclado</system:String>
@@ -167,7 +167,7 @@
     <system:String x:Key="Hotkeys_Action_Desktop">Ir a Escritorio</system:String>
     <system:String x:Key="Sort_Method_SortBy">Ordenar por</system:String>
     <system:String x:Key="Sort_Method_AppType">Tipo de Aplicación</system:String>
-    <system:String x:Key="Sort_Method_FrequentlyLaunched">Usado con Frecuencia</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">Usado Frequentemente</system:String>
     <system:String x:Key="Sort_Method_RecentlyLaunched">Usado Recientemente</system:String>
     <system:String x:Key="Sort_Method_ProfileName">Nombre del Perfil</system:String>
     <system:String x:Key="Sort_Method_Favorite">Favorito</system:String>
@@ -228,4 +228,8 @@
     <system:String x:Key="Usercontrol_OnCharger">En Cargador</system:String>
     <system:String x:Key="Usercontrol_OnBattery">En Batería</system:String>
     <system:String x:Key="Usercontrol_FanCurveSaved">Ajustes del Ventilador Guardados</system:String>
+
+    <!-- 05may2023-->
+    <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP_ProcessSuspend">Toggle Quick Access Menu (Game Process Suspend)</system:String>
 </ResourceDictionary>

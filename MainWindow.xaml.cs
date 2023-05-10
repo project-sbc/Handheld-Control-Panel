@@ -364,9 +364,6 @@ namespace Handheld_Control_Panel
            
             if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
             {
-                //call check for suspend process   stop this online games are ruined by this
-                //FullScreen_Management.checkSuspendProcess();
-
 
                 //update status bar because time takes forever to load
                 updateStatusBar();
@@ -610,12 +607,16 @@ namespace Handheld_Control_Panel
             //stop timers
 
             updateTimer.Stop();
+
+            //set the variable startSafeMode to false. This indicates the application shut down properly
+            Properties.Settings.Default.startSafeMode = false;
+            Properties.Settings.Default.Save();
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
         {
             
-            setWindowSizePosition();
+            //setWindowSizePosition();
         }
         #endregion
 
@@ -683,37 +684,7 @@ namespace Handheld_Control_Panel
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
             //currently not using this to see if i can get away from capturing state change events
-            if (false)
-            {
-                if (this.WindowState == WindowState.Minimized)
-                {
-                    this.ShowInTaskbar = false;
-
-                    //navigation.SelectedIndex = 0;
-                    //frame.Source = null;
-                    //change interval to 15 seconds
-                    updateTimer.Interval = new TimeSpan(0, 0, 6);
-                    //change controller timer interval to 100 ms to hot key recognition when not open
-                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
-                }
-                if (this.WindowState == WindowState.Normal)
-                {
-                    this.ShowInTaskbar = true;
-                    //navigation.SelectedIndex = 0;
-                    updateTimer.Interval = new TimeSpan(0, 0, 3);
-                    //change controller timer interval to 20 ms for active use
-                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
-                    setWindowSizePosition();
-                    if (navigation.SelectedItem != null)
-                    {
-
-                        //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                        //frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
-
-
-                    }
-                }
-            }
+            
           
         }
 
