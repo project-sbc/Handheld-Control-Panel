@@ -37,12 +37,11 @@ namespace Handheld_Control_Panel.UserControls
         private DispatcherTimer changeValue = new DispatcherTimer();
         public GPUCLK_Slider()
         {
-            if (Global_Variables.Device.MaxGPUClock != null)
+            if (Global_Variables.cpuType == "AMD")
             {
                 InitializeComponent();
                 //setControlValue();
                 UserControl_Management.setupControl(control);
-
 
                 //set up timer
                 changeValue.Interval = new TimeSpan(0, 0, 1);

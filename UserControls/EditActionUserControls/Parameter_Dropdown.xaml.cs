@@ -222,7 +222,7 @@ namespace Handheld_Control_Panel.UserControls
                         }
                         else
                         {
-                            if (parameterArray.Contains(param.ParameterValue))
+                            if (parameterArray.Contains(param.DisplayParameter))
                             {
                                 controlList.SelectedItems.Add(param);
                             }

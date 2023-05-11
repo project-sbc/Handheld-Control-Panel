@@ -75,6 +75,8 @@ namespace Handheld_Control_Panel.Classes
 
 
                     break;
+
+
                 case "Show_Hide_HCP":
                     Global_Variables.Global_Variables.mainWindow.toggleWindow();
                    
@@ -146,10 +148,65 @@ namespace Handheld_Control_Panel.Classes
                     Playnite_Management.playniteToggle();
                     break;
                 case "Change_Brightness":
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
+
+                    
+                    int paramBrightness;
+
+                    if (Int32.TryParse(actionParameter.Parameter, out paramBrightness))
+                    {
+                        param = (int)(paramBrightness + Global_Variables.Global_Variables.Brightness);
+                        if (param > 100) { param = 100; }
+                        if (param < 0) { param = 0; }
+                        Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Brightness_Management.WindowsSettingsBrightnessController.setBrightness(param));
+                    }
+                    break;
+                case "Change_Brightness_Mode":
+
+                    if (actionParameter.Parameter != null)
+                    {
+                        int Parameter;
+                        string[] Values = actionParameter.Parameter.Split(";");
+                        bool applyNextValue = false;
+                        foreach (string Value in Values)
+                        {
+                            if (Value != "")
+                            {
+                                if (Int32.TryParse(Value, out Parameter))
+                                {
+                                    if (applyNextValue)
+                                    {
+                                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(Parameter, Parameter));
+                                        return;
+                                    }
+                                    if (Value == Global_Variables.Global_Variables.ReadPL1.ToString())
+                                    {
+                                        applyNextValue = true;
+                                    }
+                                }
+
+                            }
+                        }
+                        if (Int32.TryParse(Values[0], out Parameter))
+                        {
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(Parameter, Parameter));
+                            return;
+                        }
+                    }
+
+
                     break;
                 case "Change_Volume":
-                    Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
+                    int paramVol;
+                    if (Int32.TryParse(actionParameter.Parameter, out paramVol))
+                    {
+                        param = (int)(paramVol + Global_Variables.Global_Variables.Brightness);
+                        if (param > 100) { param = 100; }
+                        if (param < 0) { param = 0; }
+                        Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume(param));
+                    }
+                 
                     break;
                 case "Change_GPUCLK":
                     int paramGPU;

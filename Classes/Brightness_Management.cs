@@ -49,6 +49,8 @@ namespace Handheld_Control_Panel.Classes.Brightness_Management
 
             try
             {
+                
+
                 ManagementClass mclass = new ManagementClass("WmiMonitorBrightnessMethods");
                 mclass.Scope = new ManagementScope("\\\\.\\root\\wmi");
 
