@@ -176,10 +176,11 @@ namespace Handheld_Control_Panel.Classes
                                 {
                                     if (applyNextValue)
                                     {
-                                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(Parameter, Parameter));
+                                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Brightness_Management.WindowsSettingsBrightnessController.setBrightness(Parameter));
+                                      
                                         return;
                                     }
-                                    if (Value == Global_Variables.Global_Variables.ReadPL1.ToString())
+                                    if (Value == Global_Variables.Global_Variables.Brightness.ToString())
                                     {
                                         applyNextValue = true;
                                     }
@@ -189,7 +190,43 @@ namespace Handheld_Control_Panel.Classes
                         }
                         if (Int32.TryParse(Values[0], out Parameter))
                         {
-                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(Parameter, Parameter));
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Brightness_Management.WindowsSettingsBrightnessController.setBrightness(Parameter));
+                            return;
+                        }
+                    }
+
+
+                    break;
+                case "Change_Volume_Mode":
+
+                    if (actionParameter.Parameter != null)
+                    {
+                        int Parameter;
+                        string[] Values = actionParameter.Parameter.Split(";");
+                        bool applyNextValue = false;
+                        foreach (string Value in Values)
+                        {
+                            if (Value != "")
+                            {
+                                if (Int32.TryParse(Value, out Parameter))
+                                {
+                                    if (applyNextValue)
+                                    {
+                                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume(Parameter));
+
+                                        return;
+                                    }
+                                    if (Value == Global_Variables.Global_Variables.Volume.ToString())
+                                    {
+                                        applyNextValue = true;
+                                    }
+                                }
+
+                            }
+                        }
+                        if (Int32.TryParse(Values[0], out Parameter))
+                        {
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume(Parameter));
                             return;
                         }
                     }

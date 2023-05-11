@@ -65,7 +65,7 @@ namespace Handheld_Control_Panel.Classes.Brightness_Management
 
                     instance.InvokeMethod("WmiSetBrightness", args);
                 }
-               
+                Global_Variables.Global_Variables.Brightness = intBrightness;
             }
             catch 
             { 

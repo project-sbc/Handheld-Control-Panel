@@ -336,15 +336,19 @@ namespace Handheld_Control_Panel.UserControls
 
                         System.Collections.IList selectedItems = controlList.SelectedItems;
                         string totalString="";
+                        string totalDisplayString="";
                         foreach (Parameter parameter in selectedItems)
                         {
-                            if (totalString == "") { totalString = parameter.DisplayParameter; }
-                            else { totalString = totalString + ";" + parameter.DisplayParameter; }
+                            if (totalString == "") { totalString = parameter.ParameterValue; }
+                            else { totalString = totalString + ";" + parameter.ParameterValue; }
+
+                            if (totalDisplayString == "") { totalDisplayString = parameter.DisplayParameter; }
+                            else { totalDisplayString = totalDisplayString + ";" + parameter.DisplayParameter; }
                         }
                         if (Global_Variables.hotKeys.editingHotkey.Parameter != totalString)
                         {
                             Global_Variables.hotKeys.editingHotkey.Parameter = totalString;
-                            actionLabel.Content = totalString;
+                            actionLabel.Content = totalDisplayString;
                           
                         }
                     }
