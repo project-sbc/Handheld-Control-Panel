@@ -100,6 +100,43 @@ namespace Handheld_Control_Panel.Classes
                         Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(param, param));
                     }
                     break;
+
+                case "Change_TDP_Mode":
+
+                    if (actionParameter.Parameter != null)
+                    {
+                        int tdpParameter;
+                        string[] tdpValues = actionParameter.Parameter.Split(";");
+                        bool applyNextValue = false;
+                        foreach(string tdpValue in tdpValues)
+                        {
+                            if (tdpValue != "") 
+                            {
+                                if (Int32.TryParse(tdpValue, out tdpParameter))
+                                {
+                                    if (applyNextValue)
+                                    {
+                                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(tdpParameter, tdpParameter));
+                                        return;
+                                    }
+                                    if (tdpValue == Global_Variables.Global_Variables.ReadPL1.ToString())
+                                    {
+                                        applyNextValue = true;
+                                    }
+                                }
+                                
+                            }
+                        }
+                        if (Int32.TryParse(tdpValues[0], out tdpParameter))
+                        {
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP(tdpParameter, tdpParameter));
+                            return;
+                        }
+
+                    }
+
+                 
+                    break;
                 case "Open_Steam_BigPicture":
                     Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString());
                     Steam_Management.openSteamBigPicture();

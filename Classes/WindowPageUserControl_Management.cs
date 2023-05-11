@@ -1,7 +1,9 @@
 ﻿using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.UserControls;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -74,7 +76,21 @@ namespace Handheld_Control_Panel.Classes
 
                             break;
                         case "A":
-                            intReturn[1] = -1;
+
+                            //put if statement for actions where there is a multi-select condition and idont want the indexed selected object to goback to default value of -1, so we can continue to navigate the page
+                       
+                            if (userControls[highlightedIndex].ToString().Contains("Parameter_Dropdown"))
+                            {
+                                Parameter_Dropdown pd = userControls[highlightedIndex] as Parameter_Dropdown;
+                                if (pd.controlList.SelectionMode == SelectionMode.Single)
+                                {
+                                    intReturn[1] = -1;
+                                }
+                            }
+                            else
+                            {
+                                intReturn[1] = -1;
+                            }
                             Controller_Window_Page_UserControl_Events.raiseUserControlControllerInputEvent(action, windowpage, correctUserControl(userControls[highlightedIndex].ToString()));
 
                             break;

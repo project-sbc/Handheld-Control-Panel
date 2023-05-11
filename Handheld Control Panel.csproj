@@ -239,6 +239,9 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditActionUserControls\AddHomePage_Toggle.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditActionUserControls\Parameter_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -378,6 +381,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditProfileUserControls\ProfilesResolution_Dropdown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\HomePageUserControls\Action_Panel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\Controller_Toggle.xaml.cs">

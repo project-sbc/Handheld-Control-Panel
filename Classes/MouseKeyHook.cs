@@ -53,11 +53,7 @@ namespace Handheld_Control_Panel.Classes
                         runningKeyStroke = "";
                       
                     }
-                    else
-                    {
-
-                        Debug.WriteLine(Global_Variables.Global_Variables.KBHotKeyDictionary.First().Value);
-                    }
+     
                 }
             }
             if (args.IsKeyUp)

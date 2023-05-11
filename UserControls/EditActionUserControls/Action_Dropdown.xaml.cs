@@ -73,6 +73,13 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(changeTDP);
 
+            HotKeyAction changeTDPMode = new HotKeyAction();
+            changeTDPMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_TDP_Mode"].ToString();
+            changeTDPMode.HotkeyAction = "Change_TDP_Mode";
+
+            hotkeyAction.Add(changeTDPMode);
+
+
             HotKeyAction openSteamBigPicture = new HotKeyAction();
             openSteamBigPicture.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Open_Steam_BigPicture"].ToString();
             openSteamBigPicture.HotkeyAction = "Open_Steam_BigPicture";
@@ -97,11 +104,23 @@ namespace Handheld_Control_Panel.UserControls
 
             hotkeyAction.Add(changeBrightness);
 
+            HotKeyAction changeBrightnessMode = new HotKeyAction();
+            changeBrightnessMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Brightness_Mode"].ToString();
+            changeBrightnessMode.HotkeyAction = "Change_Brightness_Mode";
+
+            hotkeyAction.Add(changeBrightnessMode);
+
             HotKeyAction changeVolume = new HotKeyAction();
             changeVolume.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Volume"].ToString();
             changeVolume.HotkeyAction = "Change_Volume";
 
             hotkeyAction.Add(changeVolume);
+
+            HotKeyAction changeVolumeMode = new HotKeyAction();
+            changeVolumeMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Volume_Mode"].ToString();
+            changeVolumeMode.HotkeyAction = "Change_Volume_Mode";
+
+            hotkeyAction.Add(changeVolumeMode);
 
             HotKeyAction toggleMouseMode = new HotKeyAction();
             toggleMouseMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_MouseMode"].ToString();
@@ -124,7 +143,35 @@ namespace Handheld_Control_Panel.UserControls
 
                 hotkeyAction.Add(autoTDP);
             }
-           
+
+            HotKeyAction resolutionMode = new HotKeyAction();
+            resolutionMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Resolution_Mode"].ToString();
+            resolutionMode.HotkeyAction = "Resolution_Mode";
+
+            hotkeyAction.Add(resolutionMode);
+
+            HotKeyAction refreshMode = new HotKeyAction();
+            refreshMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Refresh_Mode"].ToString();
+            refreshMode.HotkeyAction = "Refresh_Mode";
+
+            hotkeyAction.Add(refreshMode);
+
+            if (Global_Variables.Device.FanCapable)
+            {
+                HotKeyAction changeFanSpeed = new HotKeyAction();
+                changeFanSpeed.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_FanSpeed"].ToString();
+                changeFanSpeed.HotkeyAction = "Change_FanSpeed";
+
+                hotkeyAction.Add(changeFanSpeed);
+
+                HotKeyAction changeFanSpeedMode = new HotKeyAction();
+                changeFanSpeedMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_FanSpeed_Mode"].ToString();
+                changeFanSpeedMode.HotkeyAction = "Change_FanSpeed_Mode";
+
+                hotkeyAction.Add(changeFanSpeedMode);
+
+
+            }
 
             HotKeyAction toggleWinOSK = new HotKeyAction();
             toggleWinOSK.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_Windows_OSK"].ToString();

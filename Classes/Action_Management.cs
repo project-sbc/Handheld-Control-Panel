@@ -252,7 +252,7 @@ namespace Handheld_Control_Panel.Classes
         public string DisplayType { get; set; } = "";
 
         public PackIconMaterialKind Kind { get; set; }
-
+        public bool AddHomePage { get; set; }
         private string action { get; set; } = "";
         public string Action
         {
@@ -411,6 +411,7 @@ namespace Handheld_Control_Panel.Classes
                     parentNode.SelectSingleNode("Action").InnerText = Action;
                     parentNode.SelectSingleNode("Parameter").InnerText = Parameter;
                     parentNode.SelectSingleNode("Hotkey").InnerText = Hotkey;
+                    parentNode.SelectSingleNode("AddHomePage").InnerText = AddHomePage.ToString();
 
                 }
 
@@ -445,6 +446,14 @@ namespace Handheld_Control_Panel.Classes
                     Parameter = parentNode.SelectSingleNode("Parameter").InnerText;
                     Hotkey = parentNode.SelectSingleNode("Hotkey").InnerText;
                     ID = loadID;
+                    if (parentNode.SelectSingleNode("AddHomePage").InnerText == "True")
+                    {
+                        AddHomePage = true;
+                    }
+                    else
+                    {
+                        AddHomePage = false;
+                    }
                 }
             }            
             xmlDocument = null;
