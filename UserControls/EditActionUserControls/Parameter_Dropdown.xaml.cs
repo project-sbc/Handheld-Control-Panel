@@ -160,7 +160,7 @@ namespace Handheld_Control_Panel.UserControls
                         parameter0.DisplayParameter = "0%";
                         parameter0.ParameterValue = "0";
                         hotkeyParameter.Add(parameter0);
-                        for (int i = Global_Variables.Device.MinFanSpeed; i < 100; i=i+5)
+                        for (int i = Global_Variables.Device.MinFanSpeedPercentage; i < 100; i=i+5)
                         {
                             Parameter parameter = new Parameter();
                            

@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using WindowsInput;
+using System.Data.Common;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -40,6 +41,9 @@ namespace Handheld_Control_Panel.Classes
 
             switch (actionParameter.Action)
             {
+                
+
+
                 case "Toggle_HCP_OSK":
                     Global_Variables.Global_Variables.mainWindow.toggleOSK();
 
@@ -91,6 +95,92 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.mainWindow.toggleWindow();
 
                     break;
+                case "Change_FanSpeed":
+                    if (Global_Variables.Global_Variables.Device.FanCapable)
+                    {
+                        int paramFS;
+
+                        if (Int32.TryParse(actionParameter.Parameter, out paramFS))
+                        {
+                            paramFS = (int)(paramFS + Global_Variables.Global_Variables.fanSpeed);
+                            //error trap fan speed, if speed is down and less than min go to 0. if speed is less than min and going up go to min speed. if > 100 go to 100
+                            if (paramFS < Global_Variables.Global_Variables.Device.MinFanSpeedPercentage && actionParameter.Parameter.Contains("-")) { paramFS = 0; }
+                            if (paramFS < Global_Variables.Global_Variables.Device.MinFanSpeedPercentage && !actionParameter.Parameter.Contains("-")) { paramFS = Global_Variables.Global_Variables.Device.MinFanSpeedPercentage; }
+                            if (paramFS >100 ) { paramFS = 100; }
+
+
+                            Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %, TDP: " + paramFS.ToString() + " %");
+                            if (!Global_Variables.Global_Variables.fanControlEnabled) { Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlManual()); }
+                            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(paramFS));
+                      
+                        }
+
+                    }
+                    
+                    break;
+                case "Change_FanSpeed_Mode":
+
+                    if (actionParameter.Parameter != null )
+                    {
+                        if (!Global_Variables.Global_Variables.softwareAutoFanControlEnabled)
+                        {
+                            int fsParameter;
+                            string[] fsValues = actionParameter.Parameter.Split(";");
+                            bool applyNextValue = false;
+                           
+                            if (!Global_Variables.Global_Variables.fanControlEnabled)
+                            {
+                                
+                                if (Int32.TryParse(fsValues[0], out fsParameter))
+                                {
+                                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlManual());
+                                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(fsParameter));
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                foreach (string fsValue in fsValues)
+                                {
+                                    if (fsValue != "")
+                                    {
+                                        if (Int32.TryParse(fsValue, out fsParameter))
+                                        {
+                                            if (applyNextValue)
+                                            {
+                                                if (!Global_Variables.Global_Variables.fanControlEnabled) {  }
+                                                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(fsParameter));
+
+                                                return;
+                                            }
+                                            if (fsValue == Global_Variables.Global_Variables.FanSpeed.ToString())
+                                            {
+                                                applyNextValue = true;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if (Int32.TryParse(fsValues[0], out fsParameter))
+                                {
+                                   
+                                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(fsParameter));
+                                    return;
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+                            //display message about auto fan enabled, disable it first
+                        }
+
+                    }
+
+
+                    break;
+
+
                 case "Change_TDP":
                    
                     int param;
