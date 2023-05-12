@@ -15,6 +15,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using WindowsInput;
 using System.Data.Common;
+using YamlDotNet.Core.Tokens;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -319,6 +320,64 @@ namespace Handheld_Control_Panel.Classes
                             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Volume_Management.AudioManager.SetMasterVolume(Parameter));
                             return;
                         }
+                    }
+
+
+                    break;
+                case "Change_Refresh_Mode":
+                    if (actionParameter.Parameter != null)
+                    {
+
+                        string[] Values = actionParameter.Parameter.Split(";");
+                        bool applyNextValue = false;
+                        foreach (string Value in Values)
+                        {
+                            if (Value != "")
+                            {
+                                if (applyNextValue)
+                                {
+                                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Display_Management.Display_Management.SetDisplayRefreshRate(Value));
+
+                                    return;
+                                }
+                                if (Value == Global_Variables.Global_Variables.RefreshRate)
+                                {
+                                    applyNextValue = true;
+                                }
+
+                            }
+                        }
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Display_Management.Display_Management.SetDisplayRefreshRate(Values[0]));
+                        return;
+                    }
+
+
+                    break;
+                case "Change_Resolution_Mode":
+                    if (actionParameter.Parameter != null)
+                    {
+                       
+                        string[] Values = actionParameter.Parameter.Split(";");
+                        bool applyNextValue = false;
+                        foreach (string Value in Values)
+                        {
+                            if (Value != "")
+                            {
+                                if (applyNextValue)
+                                {
+                                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Display_Management.Display_Management.SetDisplayResolution(Value));
+
+                                    return;
+                                }
+                                if (Value == Global_Variables.Global_Variables.Resolution)
+                                {
+                                    applyNextValue = true;
+                                }
+
+                            }
+                        }
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Display_Management.Display_Management.SetDisplayResolution(Values[0]));
+                        return;
                     }
 
 

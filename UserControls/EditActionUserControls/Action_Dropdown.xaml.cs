@@ -146,13 +146,13 @@ namespace Handheld_Control_Panel.UserControls
 
             HotKeyAction resolutionMode = new HotKeyAction();
             resolutionMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Resolution_Mode"].ToString();
-            resolutionMode.HotkeyAction = "Resolution_Mode";
+            resolutionMode.HotkeyAction = "Change_Resolution_Mode";
 
             hotkeyAction.Add(resolutionMode);
 
             HotKeyAction refreshMode = new HotKeyAction();
             refreshMode.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Change_Refresh_Mode"].ToString();
-            refreshMode.HotkeyAction = "Refresh_Mode";
+            refreshMode.HotkeyAction = "Change_Refresh_Mode";
 
             hotkeyAction.Add(refreshMode);
 
