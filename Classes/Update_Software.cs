@@ -17,19 +17,26 @@ namespace Handheld_Control_Panel.Classes.Update_Software
     {
 
         public static closeWindowForUpdate closeWindowEvent = new closeWindowForUpdate();
-        public static void checkForUpdates(bool startUp = false)
+        public static bool startUp = false;
+        public static void bindUpdateEvent()
+        {
+            AutoUpdater.CheckForUpdateEvent += (args) => AutoUpdaterOnCheckForUpdateEvent(args);
+        }
+
+        public static void checkForUpdates(bool startUpRoutine = false)
         {
             //check for updates if this is called at startup and the setting for allow check at startup is on OR if this is not at startup and called from settings
+            startUp = startUpRoutine;
             if ((startUp && Properties.Settings.Default.checkUpdatesAtStartUp) || !startUp)
             {
-                AutoUpdater.CheckForUpdateEvent += (args) => AutoUpdaterOnCheckForUpdateEvent(startUp, args);
+                
                 AutoUpdater.Start("https://raw.githubusercontent.com/project-sbc/Handheld-Control-Panel/master/Update.xml");
                 
             }
 
 
         }
-        private static void AutoUpdaterOnCheckForUpdateEvent(bool startUp, UpdateInfoEventArgs args)
+        private static void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
             if (args.Error == null)
             {

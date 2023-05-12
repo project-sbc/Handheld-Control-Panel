@@ -110,7 +110,10 @@ namespace Handheld_Control_Panel
             {
                 m_notifyIcon.Visible = true;
             }
-           
+
+            //check for updates first
+            Update_Software.checkForUpdates(true);
+
         }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
@@ -700,8 +703,7 @@ namespace Handheld_Control_Panel
             if (Start_Up.checkMultipleProgramsRunning()) { System.Windows.MessageBox.Show("More than one instance of this program running. Closing this to prevent errors."); this.Close(); }
 
 
-            //check for updates first
-            Update_Software.checkForUpdates(true);
+           
 
         }
         private void getDPIScaling()

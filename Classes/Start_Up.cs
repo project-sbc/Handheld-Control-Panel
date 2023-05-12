@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using MessageBox = System.Windows.MessageBox;
 using System.Windows.Media.Animation;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
+using AutoUpdaterDotNET;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -144,10 +145,16 @@ namespace Handheld_Control_Panel.Classes
             Properties.Settings.Default.startSafeMode = true;
             Properties.Settings.Default.Save();
 
-
+            //bind autostart event but DONT start it yet
+            Update_Software.Update_Software.bindUpdateEvent();
 
         }
-      
+
+        private static void AutoUpdaterOnCheckForUpdateEvent(object startUp, UpdateInfoEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void loadLanguage()
         {
             Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
