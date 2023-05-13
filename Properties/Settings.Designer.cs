@@ -405,5 +405,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["hideSplashScreen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\RivaTuner Statistics Server")]
+        public string directoryRTSS {
+            get {
+                return ((string)(this["directoryRTSS"]));
+            }
+            set {
+                this["directoryRTSS"] = value;
+            }
+        }
     }
 }

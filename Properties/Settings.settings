@@ -98,5 +98,8 @@
     <Setting Name="hideSplashScreen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="directoryRTSS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\RivaTuner Statistics Server</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
