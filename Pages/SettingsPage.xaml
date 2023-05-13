@@ -30,6 +30,7 @@
             <uc:Divider/>
             <uc:Autostart_Toggle/>
             <uc:Autoupdate_Toggle/>
+                <uc:HideSplashScreen_Toggle/>
                 <uc:AutostartFan_Toggle/>
                 <uc:Divider/>
                 <uc:MaxGPU_Slider/>

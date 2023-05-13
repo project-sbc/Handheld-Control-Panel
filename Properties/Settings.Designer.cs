@@ -393,5 +393,17 @@ namespace Handheld_Control_Panel.Properties {
                 this["startSafeMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hideSplashScreen {
+            get {
+                return ((bool)(this["hideSplashScreen"]));
+            }
+            set {
+                this["hideSplashScreen"] = value;
+            }
+        }
     }
 }

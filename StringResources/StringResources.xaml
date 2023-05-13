@@ -234,6 +234,7 @@
     <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
     <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
     <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
+
         
         <!-- 05may2023-->
     <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
@@ -252,5 +253,5 @@
     <system:String x:Key="Hotkeys_Action_Change_Refresh_Mode">Change Display Refresh Mode</system:String>
     <system:String x:Key="Hotkeys_Action_Change_Resolution_Mode">Change Display Resolution Mode</system:String>
     <system:String x:Key="Hotkeys_Action_Change_FanSpeed">Change Fan Speed</system:String>
-        
+    <system:String x:Key="Usercontrol_HideSplashScreen">Hide Splash Screen At Start</system:String>
 </ResourceDictionary>
