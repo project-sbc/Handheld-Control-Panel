@@ -34,7 +34,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void ShowYesNoPrompt(string title, NotificationType notificationType, string action)
         {
-            Global_Variables.Global_Variables.mainWindow.ShowNotificationInWindowYESNO(title, notificationType,"Delete_Action");
+            Global_Variables.Global_Variables.mainWindow.ShowNotificationInWindowYESNO(title, notificationType, action);
 
 
         }

@@ -45,9 +45,10 @@ namespace Handheld_Control_Panel
             {
                 quietStart = true;
             }
+
             var splashScreen = new SplashScreenStartUp();
 
-            if (!quietStart)
+            if (!quietStart || Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen)
             {
                 //if not quiet start then show splashscreen
                 this.MainWindow = splashScreen;
