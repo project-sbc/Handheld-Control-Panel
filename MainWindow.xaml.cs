@@ -172,6 +172,9 @@ namespace Handheld_Control_Panel
             {
                 osk.Close();
                 osk = null;
+                System.Windows.Threading.Dispatcher
+             .CurrentDispatcher
+             .InvokeShutdown();
             }
 
         }

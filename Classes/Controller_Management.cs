@@ -531,11 +531,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                         if (((ushort)previousGamePad.Buttons) != btnShort)
                                         {
                                             ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
-                                            Global_Variables.Global_Variables.mainWindow.Dispatcher.Invoke(() =>
-                                            {
-                                                QuickAction_Management.runHotKeyAction(action);
+                                            QuickAction_Management.runHotKeyAction(action);
 
-                                            });
+                                            
                                             Thread.Sleep(200);
                                             goto Controller;
                                         }
@@ -819,7 +817,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         
         public void raiseControllerInput(string action)
         {
-            Global_Variables.Global_Variables.mainWindow.Dispatcher.Invoke(() =>
+
+            System.Windows.Application.Current.Dispatcher.BeginInvoke(() =>
             {
                 controllerInput?.Invoke(this, new controllerInputEventArgs(action));
             });

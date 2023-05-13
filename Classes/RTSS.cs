@@ -11,11 +11,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Windows.Security.EnterpriseData;
 
 namespace Handheld_Control_Panel.Classes
 {
     public static class RTSS
     {
+        public static  string rtssDirectory = Properties.Settings.Default.directoryRTSS;
         public static void getRTSSFPSLimit()
         {
             
@@ -42,7 +44,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static bool directoryRTSSExists()
         {
-            if (File.Exists(@"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe"))
+            if (File.Exists(rtssDirectory + @"\RTSS.exe"))
             {
                 return true;
             }
@@ -53,10 +55,10 @@ namespace Handheld_Control_Panel.Classes
         }
         public static void startRTSS()
         {
-            if (File.Exists(@"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe"))
+            if (File.Exists(rtssDirectory + @"\RTSS.exe"))
             {
                 Process process = new Process();
-                process.StartInfo.FileName = @"C:\Program Files (x86)\RivaTuner Statistics Server\RTSS.exe";
+                process.StartInfo.FileName = rtssDirectory + @"\RTSS.exe";
                 process.Start();
 
                 process.Dispose();
@@ -144,28 +146,28 @@ namespace Handheld_Control_Panel.Classes
         [DllImport("user32.dll", SetLastError = true)]
         static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll")]
+        [DllImport("RTSSHooks64.dll")]
         public static extern uint SetFlags(uint dwAND, uint dwXOR);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern void LoadProfile(string profile = GLOBAL_PROFILE);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern void SaveProfile(string profile = GLOBAL_PROFILE);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern void DeleteProfile(string profile = GLOBAL_PROFILE);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern bool GetProfileProperty(string propertyName, IntPtr value, uint size);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern bool SetProfileProperty(string propertyName, IntPtr value, uint size);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern void ResetProfile(string profile = GLOBAL_PROFILE);
 
-        [DllImport("C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll", CharSet = CharSet.Ansi)]
+        [DllImport("RTSSHooks64.dll", CharSet = CharSet.Ansi)]
         public static extern void UpdateProfiles();
 
         private static void PostMessage(uint Msg, IntPtr wParam, IntPtr lParam)

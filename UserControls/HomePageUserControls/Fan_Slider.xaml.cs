@@ -150,7 +150,7 @@ namespace Handheld_Control_Panel.UserControls
             valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
             if (valueChangedEventArgs.Parameter == "FanSpeed" && !dragStarted)
             {
-                this.Dispatcher.BeginInvoke(() => {
+                this.BeginInvoke(() => {
                     if (control.IsLoaded && Global_Variables.softwareAutoFanControlEnabled)
                     {
 

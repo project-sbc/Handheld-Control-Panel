@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using WindowsInput;
 using System.Data.Common;
 using YamlDotNet.Core.Tokens;
+using System.Windows.Threading;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -38,7 +39,7 @@ namespace Handheld_Control_Panel.Classes
         }
         public static void runHotKeyAction(ActionParameter actionParameter)
         {
-            
+            Log_Writer.writeLog("Starting quick action " + actionParameter.Action);
 
             switch (actionParameter.Action)
             {
@@ -46,7 +47,8 @@ namespace Handheld_Control_Panel.Classes
 
 
                 case "Toggle_HCP_OSK":
-                    Global_Variables.Global_Variables.mainWindow.toggleOSK();
+                    System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => Global_Variables.Global_Variables.mainWindow.toggleOSK()));
+                                       
 
                     break;
                 case "Toggle_AutoTDP":
@@ -83,7 +85,10 @@ namespace Handheld_Control_Panel.Classes
 
 
                 case "Show_Hide_HCP":
-                    Global_Variables.Global_Variables.mainWindow.toggleWindow();
+                    System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => Global_Variables.Global_Variables.mainWindow.toggleWindow()));
+
+
+                    
                    
                     break;
 
@@ -92,8 +97,8 @@ namespace Handheld_Control_Panel.Classes
                     {
                         FullScreen_Management.checkSuspendProcess();
                     }
-                  
-                    Global_Variables.Global_Variables.mainWindow.toggleWindow();
+
+                    System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => Global_Variables.Global_Variables.mainWindow.toggleWindow()));
 
                     break;
                 case "Change_FanSpeed":
@@ -421,7 +426,7 @@ namespace Handheld_Control_Panel.Classes
                     inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_D);
                     inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LWIN);
                     inputSimulator = null;
-               
+              
                     break;
                 default: break;
             }
