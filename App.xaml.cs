@@ -56,11 +56,8 @@ namespace Handheld_Control_Panel
             }
 
             //you can do additional work here, call start routine
-            await Task.Run(() =>
-            {
-                Classes.Start_Up.Start_Routine();
-            });
-            
+            await Task.Run(() => Start_Up.Start_Routine());
+
 
 
             MainWindow mainWindow = new MainWindow();
