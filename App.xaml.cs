@@ -1,26 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Handheld_Control_Panel.Classes;
-using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.Classes.Fan_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
-using Handheld_Control_Panel.Classes.Task_Scheduler;
-using Linearstar.Windows.RawInput;
-using RTSSSharedMemoryNET;
 
 namespace Handheld_Control_Panel
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    
+
     public partial class App : Application
     {
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -60,41 +51,23 @@ namespace Handheld_Control_Panel
             }
 
             //you can do additional work here, call start routine
+            await Task.Run(() => Start_Up.Start_Routine());
 
-            Classes.Start_Up.Start_Routine();
+            //initialize the main window, set it as the application main window
+            //and close the splash screen
 
+            this.MainWindow = new MainWindow();
 
-            MainWindow mainWindow = new MainWindow();
-            Task.Factory.StartNew(() =>
+            if (!quietStart)
             {
-                
-                //since we're not on the UI thread
-                //once we're done we need to use the Dispatcher
-                //to create and show the main window
-                this.Dispatcher.Invoke(() =>
-                {
-                    //initialize the main window, set it as the application main window
-                    //and close the splash screen
-
-                    this.MainWindow = mainWindow;
-                    
-                    if (!quietStart)
-                    {
-                        //close splashscreen if open
-                        splashScreen.Close();
-                        mainWindow.Show();
-                    }
-                    else
-                    {
-                        mainWindow.Hide();
-                    }
-
-                });
-            });
-
-
-
-
+                //close splashscreen if open
+                splashScreen.Close();
+                MainWindow.Show();
+            }
+            else
+            {
+                MainWindow.Hide();
+            }
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
