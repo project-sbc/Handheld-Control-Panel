@@ -27,7 +27,7 @@ namespace Handheld_Control_Panel
         {
             base.OnStartup(e);
 
-           
+            AutoTDP_Management.SetRSR(false);
 
 
             bool quietStart = false;

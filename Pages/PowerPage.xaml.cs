@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.Pages
             {
                 if (p.MainWindowHandle != IntPtr.Zero)
                 {
-                   
+                    Debug.WriteLine(p.ProcessName);
                
                     if (!listProcesses.Contains(p) && FullScreen_Management.IsForegroundFullScreen(new HandleRef(null, p.MainWindowHandle), null) && !FullScreen_Management.ExcludeFullScreenProcessList.Contains(p.ProcessName))
                     {
