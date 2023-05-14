@@ -13,14 +13,16 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class Notification_Management
     {
-        private static readonly NotificationManager __NotificationManager = new();
+       
 
 
         public static void Show(string message, bool forceEnable=false)
         {
             if (Properties.Settings.Default.enableNotifications || forceEnable)
             {
+                NotificationManager __NotificationManager = new();
                 __NotificationManager.Show("Handheld Control Panel", message);
+                __NotificationManager = null;
             }
       
         }
