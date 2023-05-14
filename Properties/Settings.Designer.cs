@@ -49,7 +49,7 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MMIO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MMIO+MSR")]
         public string IntelMMIOMSR {
             get {
                 return ((string)(this["IntelMMIOMSR"]));
@@ -367,6 +367,54 @@ namespace Handheld_Control_Panel.Properties {
             }
             set {
                 this["startAutoFan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool upgradeSettingsRequired {
+            get {
+                return ((bool)(this["upgradeSettingsRequired"]));
+            }
+            set {
+                this["upgradeSettingsRequired"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool startSafeMode {
+            get {
+                return ((bool)(this["startSafeMode"]));
+            }
+            set {
+                this["startSafeMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hideSplashScreen {
+            get {
+                return ((bool)(this["hideSplashScreen"]));
+            }
+            set {
+                this["hideSplashScreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\RivaTuner Statistics Server")]
+        public string directoryRTSS {
+            get {
+                return ((string)(this["directoryRTSS"]));
+            }
+            set {
+                this["directoryRTSS"] = value;
             }
         }
     }

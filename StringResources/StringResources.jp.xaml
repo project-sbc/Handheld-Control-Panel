@@ -224,4 +224,28 @@
     <system:String x:Key="Usercontrol_FanSettings">ファン設定</system:String>
     <system:String x:Key="Instruction_Change">CHANGE</system:String>
     <system:String x:Key="Instruction_ToggleMode">トグル モード</system:String>
+
+
+    <!-- 04may2023-->
+    <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
+    <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
+    <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
+
+    <!-- 05may2023-->
+    <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP_ProcessSuspend">Toggle Quick Access Menu (Game Process Suspend)</system:String>
+
+    <!-- 10may2023-->
+    <system:String x:Key="Prompt_DeleteSelectedAction">Delete selected action?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedProfile">Delete selected profile?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedMousemode">Delete selected mouse mode?</system:String>
+
+    <system:String x:Key="Hotkeys_Action_Change_TDP_Mode">Change TDP Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness_Mode">Change Brightness Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume_Mode">Change Volume Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_FanSpeed_Mode">Change Fan Speed Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Refresh_Mode">Change Display Refresh Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Resolution_Mode">Change Display Resolution Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_FanSpeed">Change Fan Speed</system:String>
+    <system:String x:Key="Usercontrol_HideSplashScreen">Hide Splash Screen At Start</system:String>
 </ResourceDictionary>

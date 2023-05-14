@@ -49,6 +49,8 @@ namespace Handheld_Control_Panel.Classes.Brightness_Management
 
             try
             {
+                
+
                 ManagementClass mclass = new ManagementClass("WmiMonitorBrightnessMethods");
                 mclass.Scope = new ManagementScope("\\\\.\\root\\wmi");
 
@@ -63,7 +65,7 @@ namespace Handheld_Control_Panel.Classes.Brightness_Management
 
                     instance.InvokeMethod("WmiSetBrightness", args);
                 }
-               
+                Global_Variables.Global_Variables.Brightness = intBrightness;
             }
             catch 
             { 

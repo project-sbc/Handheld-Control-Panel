@@ -16,6 +16,7 @@ namespace Handheld_Control_Panel.Classes
     {
         public static IKeyboardMouseEvents m_GlobalHook;
         public static string runningKeyStroke = "";
+    
         public static bool programmingKeystroke = false;
         public static keyboardEvents keyboardEvents = new keyboardEvents();
         public static void Subscribe()
@@ -36,43 +37,37 @@ namespace Handheld_Control_Panel.Classes
             KeyEventArgsExt args = (KeyEventArgsExt)e;
 
             if (args.IsKeyDown) 
-            { 
-                if (runningKeyStroke == "") 
-                { 
-                    runningKeyStroke = e.KeyCode.ToString(); 
-                } 
-                else 
-                {
-                    if (runningKeyStroke != e.KeyCode.ToString() && !runningKeyStroke.Contains("+" + e.KeyCode.ToString()))
-                    {
-                        runningKeyStroke = runningKeyStroke + "+" + e.KeyCode.ToString();
-                      
-                    }
-         
-                }
+            {
+                runningKeyStroke = e.KeyData.ToString();
                
+
                 if (Global_Variables.Global_Variables.KBHotKeyDictionary.Count != null)
                 {
+                    
                     if (Global_Variables.Global_Variables.KBHotKeyDictionary.ContainsKey(runningKeyStroke) && !programmingKeystroke)
                     {
-                       
+
                         args.SuppressKeyPress = true;
                         ActionParameter action = Global_Variables.Global_Variables.KBHotKeyDictionary[runningKeyStroke];
                         QuickAction_Management.runHotKeyAction(action);
                         runningKeyStroke = "";
-
+                      
                     }
+     
                 }
-              
             }
             if (args.IsKeyUp)
             {
                 keyboardEvents.raiseKeyboardStringPress(runningKeyStroke);
-    
+
                 runningKeyStroke = "";
+               
             }
 
-            //args.SuppressKeyPress = true;
+
+      
+            
+
         }
 
 

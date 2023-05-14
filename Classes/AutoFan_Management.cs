@@ -84,28 +84,35 @@ namespace Handheld_Control_Panel.Classes
         }
         private static void mainAutoFanLoop_Temperature()
         {
-            while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
+            try
             {
-                computer.Accept(new UpdateVisitor());
-                getLibre_cpuTemperature();
+                while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
+                {
+                    computer.Accept(new UpdateVisitor());
+                    getLibre_cpuTemperature();
 
-                getTargetFanSpeedPercentage();
-
-
-
-                getNewTargetFanSpeedPercentage();
-              
-                Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
-                currentFanSpeedPercentage = newFanSpeedPercentage;
+                    getTargetFanSpeedPercentage();
 
 
 
-                Thread.Sleep(1000);
+                    getNewTargetFanSpeedPercentage();
+
+                    Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
+                    currentFanSpeedPercentage = newFanSpeedPercentage;
+
+
+
+                    Thread.Sleep(1000);
+                }
+                WinRingEC_Management.OlsFree();
+                if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
+                {
+                    startAutoFan();
+                }
             }
-            WinRingEC_Management.OlsFree();
-            if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
+           catch
             {
-                startAutoFan();
+                Fan_Management.Fan_Management.setFanControlHardware();
             }
            
           
@@ -113,27 +120,34 @@ namespace Handheld_Control_Panel.Classes
         }
         private static void mainAutoFanLoop_PackagePower()
         {
+            try
+            {
+                while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
+                {
+                    computer.Accept(new UpdateVisitor());
+                    getLibre_packagepower();
+                    getLibre_cpuTemperature();
+
+                    getTargetFanSpeedPercentage();
+
+                    getNewTargetFanSpeedPercentage();
+
+                    Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
+                    currentFanSpeedPercentage = newFanSpeedPercentage;
+
+                    Thread.Sleep(1000);
+                }
+                WinRingEC_Management.OlsFree();
+                if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
+                {
+                    startAutoFan();
+                }
+            }
+            catch
+            {
+                Fan_Management.Fan_Management.setFanControlHardware();
+            }
             
-            while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
-            {
-                computer.Accept(new UpdateVisitor());
-                getLibre_packagepower();
-                getLibre_cpuTemperature();
-
-                getTargetFanSpeedPercentage();
-
-                getNewTargetFanSpeedPercentage();
-
-                Fan_Management.Fan_Management.setFanSpeed(newFanSpeedPercentage);
-                currentFanSpeedPercentage = newFanSpeedPercentage;
-
-                Thread.Sleep(1000);
-            }
-            WinRingEC_Management.OlsFree();
-            if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
-            {
-                startAutoFan();
-            }
           
 
         }

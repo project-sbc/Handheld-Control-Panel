@@ -37,6 +37,8 @@ using System.Windows.Forms;
 using Notification.Wpf.Controls;
 using System.Collections.ObjectModel;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
+using System.Globalization;
+using Handheld_Control_Panel.Classes.Update_Software;
 
 namespace Handheld_Control_Panel
 {
@@ -103,12 +105,15 @@ namespace Handheld_Control_Panel
             m_notifyIcon.MouseDoubleClick += M_notifyIcon_DoubleClick;
 
 
-            //hide if autostart
+            //show notify icon if auto start
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
             {
-               // this.Hide();
+                m_notifyIcon.Visible = true;
             }
-           
+
+            //check for updates first
+            Update_Software.checkForUpdates(true);
+
         }
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
@@ -167,6 +172,9 @@ namespace Handheld_Control_Panel
             {
                 osk.Close();
                 osk = null;
+                System.Windows.Threading.Dispatcher
+             .CurrentDispatcher
+             .InvokeShutdown();
             }
 
         }
@@ -205,7 +213,10 @@ namespace Handheld_Control_Panel
                 checkPowerStatus();
        
             });
-            Time.Text = DateTime.Now.ToString("h:mm tt");
+
+
+            Time.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+        
         }
         private void checkNetworkInterface()
         {
@@ -359,34 +370,38 @@ namespace Handheld_Control_Panel
            
             if (this.Visibility == Visibility.Hidden || this.WindowState == WindowState.Minimized) 
             {
-                //call check for suspend process   stop this online games are ruined by this
-                //FullScreen_Management.checkSuspendProcess();
 
+                //update status bar because time takes forever to load
+                updateStatusBar();
 
-                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Controller_Management.hideController());
-                
                 this.WindowState = WindowState.Normal;
+
+                //run position check to make sure its located correctly, fixes issue where app moves all over
+                setWindowSizePosition();
+
                 if (navigation.SelectedIndex != -1)
                 {
 
                     //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
                    // frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
 
-
+                    
                 }
-       
-                this.Show();
+
+                this.Visibility = Visibility.Visible;
               
                 m_notifyIcon.Visible = false;
                 
             }
             else
             {
-                //check resume process
-                //FullScreen_Management.checkResumeProcess();
-                //Controller_Management.unhideController();
+                //check resume process, do this always in case they ran the toggle window with suspend process mode
+                FullScreen_Management.checkResumeProcess();
+               
+                
+                // dont use this yet Controller_Management.unhideController();
 
-                this.Hide();
+                this.Visibility= Visibility.Hidden;
                 
                 m_notifyIcon.Visible = true;
             }
@@ -465,17 +480,18 @@ namespace Handheld_Control_Panel
                 TrimType = NotificationTextTrimType.NoTrim, // will show attach button on message
                 RowsCount = 3, //Will show 3 rows and trim after
                 LeftButtonAction = () => Controller_Management.buttonEvents.raiseControllerInput(action), //Action on left button click, button will not show if it null 
+                RightButtonAction = () => Controller_Management.buttonEvents.raiseControllerInput(""), //Action on left button click, button will not show if it null 
                                                                                                     //RightButtonAction = () => , //Action on right button click,  button will not show if it null
                 LeftButtonContent = "YES", // Left button content (string or what u want
                 RightButtonContent = "NO", // Right button content (string or what u want
-                CloseOnClick = false, // Set true if u want close message when left mouse button click on message (base = true)
+                CloseOnClick = true, // Set true if u want close message when left mouse button click on message (base = true)
 
                 Background = new SolidColorBrush(Colors.DarkGray),
                 Foreground = new SolidColorBrush(Colors.White)
 
             };
 
-            notificationManager.Show(content,"WindowArea",TimeSpan.MaxValue);
+            notificationManager.Show(content,"WindowArea",new TimeSpan(0,0,15));
 
           
         }
@@ -598,12 +614,16 @@ namespace Handheld_Control_Panel
             //stop timers
 
             updateTimer.Stop();
+
+            //set the variable startSafeMode to false. This indicates the application shut down properly. 
+            Properties.Settings.Default.startSafeMode = false;
+            Properties.Settings.Default.Save();
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)
         {
             
-            setWindowSizePosition();
+            //setWindowSizePosition();
         }
         #endregion
 
@@ -670,37 +690,8 @@ namespace Handheld_Control_Panel
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
-            if (false)
-            {
-                if (this.WindowState == WindowState.Minimized)
-                {
-                    this.ShowInTaskbar = false;
-
-                    //navigation.SelectedIndex = 0;
-                    //frame.Source = null;
-                    //change interval to 15 seconds
-                    updateTimer.Interval = new TimeSpan(0, 0, 15);
-                    //change controller timer interval to 100 ms to hot key recognition when not open
-                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
-                }
-                if (this.WindowState == WindowState.Normal)
-                {
-                    this.ShowInTaskbar = true;
-                    //navigation.SelectedIndex = 0;
-                    updateTimer.Interval = new TimeSpan(0, 0, 3);
-                    //change controller timer interval to 20 ms for active use
-                    Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.activeTimerTickInterval);
-                    setWindowSizePosition();
-                    if (navigation.SelectedItem != null)
-                    {
-
-                        //ListBoxItem lbi = navigation.SelectedItem as ListBoxItem;
-                        //frame.Navigate(new Uri("Pages\\" + lbi.Tag.ToString() + "Page.xaml", UriKind.RelativeOrAbsolute));
-
-
-                    }
-                }
-            }
+            //currently not using this to see if i can get away from capturing state change events
+            
           
         }
 
@@ -714,6 +705,8 @@ namespace Handheld_Control_Panel
             //check if multiple instances are running, if yes message and close the program to prevent errors from two instances running
             if (Start_Up.checkMultipleProgramsRunning()) { System.Windows.MessageBox.Show("More than one instance of this program running. Closing this to prevent errors."); this.Close(); }
 
+
+           
 
         }
         private void getDPIScaling()
@@ -738,7 +731,7 @@ namespace Handheld_Control_Panel
                 //navigation.SelectedIndex = 0;
                 //frame.Source = null;
                 //change interval to 15 seconds
-                updateTimer.Interval = new TimeSpan(0, 0, 15);
+                updateTimer.Interval = new TimeSpan(0, 0, 6);
                 //change controller timer interval to 100 ms to hot key recognition when not open
                 Controller_Management.timerController.Interval = TimeSpan.FromMilliseconds(Controller_Management.passiveTimerTickInterval);
             }

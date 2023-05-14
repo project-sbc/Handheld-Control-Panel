@@ -378,6 +378,7 @@ namespace Handheld_Control_Panel.Classes
         public string Resolution { get; set; } = "";
         public string RefreshRate { get; set; } = "";
         public string path { get; set; } = "";
+        public bool SeparateChargerBattery { get; set; }
         public string Path 
         {
             get
@@ -603,6 +604,8 @@ namespace Handheld_Control_Panel.Classes
                     LaunchOptions.SelectSingleNode("ImageLocation").InnerText = ImageLocation.ToString();
                     LaunchOptions.SelectSingleNode("Favorite").InnerText = Favorite.ToString();
 
+                    parentNode.SelectSingleNode("SeparateChargerBattery").InnerText = SeparateChargerBattery.ToString();
+
 
                     parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
                     //parentNode.SelectSingleNode("Exe").InnerText = Exe;
@@ -691,6 +694,15 @@ namespace Handheld_Control_Panel.Classes
                         Favorite = false;
                     }
 
+                    if (parentNode.SelectSingleNode("SeparateChargerBattery").InnerText == "True")
+                    {
+                        SeparateChargerBattery = true;
+                    }
+                    else
+                    {
+                        SeparateChargerBattery = false;
+                    }
+
                     LaunchCommand = LaunchOptions.SelectSingleNode("LaunchCommand").InnerText;
                     
 
@@ -754,8 +766,13 @@ namespace Handheld_Control_Panel.Classes
                     Display_Management.Display_Management.SetDisplayRefreshRate(RefreshRate);
                 }
             }
-           
 
+
+           //if setting is false for separating charger and battery, then it defaults to offline values 
+            if (!SeparateChargerBattery)
+            {
+                powerStatus = "Offline";
+            }
 
             switch (powerStatus)
             {
@@ -789,5 +806,13 @@ namespace Handheld_Control_Panel.Classes
         }
     }
 
-  
+    public static class Profile_Events
+    {
+        public static event EventHandler separateChargerBatteryEvent;
+        public static void raiseSeparateChargerBatteryEvent()
+        {
+            separateChargerBatteryEvent?.Invoke(null, EventArgs.Empty);
+        }
+    }
+
 }

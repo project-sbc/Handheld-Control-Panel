@@ -87,6 +87,7 @@ namespace Handheld_Control_Panel.Classes.Volume_Management
                     return;
 
                 masterVol.SetMasterVolumeLevelScalar(newLevel / 100, Guid.Empty);
+                Global_Variables.Global_Variables.Volume = (int)newLevel;
             }
             finally
             {

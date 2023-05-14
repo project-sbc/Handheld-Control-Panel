@@ -1,0 +1,252 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="MainWindow_NavigationView_Home">홈</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Profiles">프로필</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">액션</system:String>
+    <system:String x:Key="MainWindow_NavigationView_AppLauncher">앱 런처</system:String>
+    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">홈 개인 설정</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Settings">설정</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Information">정보</system:String>
+    <system:String x:Key="MainWindow_NavigationView_MouseMode">마우스 모드</system:String>
+
+    <system:String x:Key="MainWindow_NavigationView_Sub_Home">홈</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">프로필</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">액션</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">앱 런처</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">홈 페이지의 컨트롤 개인 설정</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">설정</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Information">정보</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">마우스 모드</system:String>
+
+
+    <system:String x:Key="Usercontrol_Enable_OnContent">활성화</system:String>
+    <system:String x:Key="Usercontrol_Disable_OffContent">비활성화</system:String>
+
+    <system:String x:Key="Default_Profile">기본 프로필</system:String>
+    <system:String x:Key="Active_Profile">활성화된 프로필</system:String>
+
+    <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
+    <system:String x:Key="Usercontrol_Bluetooth">블루투스</system:String>
+    <system:String x:Key="Usercontrol_Brightness">화면 밝기</system:String>
+    <system:String x:Key="Usercontrol_Volume">볼륨</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute">음소거</system:String>
+    <system:String x:Key="Usercontrol_Resolution">해상도</system:String>
+    <system:String x:Key="Usercontrol_RefreshRate">주사율</system:String>
+    <system:String x:Key="Usercontrol_TDP">TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP2">부스트 TDP</system:String>
+    <system:String x:Key="Usercontrol_EPP">EPP</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit">FPS 제한</system:String>
+    <system:String x:Key="Usercontrol_ActiveCores">활성화 CPU 코어 수</system:String>
+    <system:String x:Key="Usercontrol_MaxCPUFrequency">최대 CPU 클럭</system:String>
+    <system:String x:Key="Usercontrol_GPUCLK">GPU 클럭</system:String>
+    <system:String x:Key="Usercontrol_HotKeyAction">액션</system:String>
+    <system:String x:Key="Usercontrol_HotKeyType">입력 방법</system:String>
+    <system:String x:Key="Usercontrol_HotKeyParameter">파라미터</system:String>
+    <system:String x:Key="Usercontrol_HotKey">단축키</system:String>
+    <system:String x:Key="Usercontrol_HotKeySaved">단축키 저장 완료</system:String>
+    <system:String x:Key="Usercontrol_MouseModeSaved">마우스 모드 저장 완료</system:String>
+    <system:String x:Key="Usercontrol_ProfileSaved">프로필 저장 완료</system:String>
+    <system:String x:Key="Usercontrol_ProfileName">프로필 이름</system:String>
+    <system:String x:Key="Usercontrol_Exe">프로세스 Exe</system:String>
+    <system:String x:Key="Usercontrol_DefaultProfile">기본 프로필</system:String>
+    <system:String x:Key="Usercontrol_Autostart">자동 실행</system:String>
+    <system:String x:Key="Usercontrol_StartRTSS">RTSS 자동 실행</system:String>
+    <system:String x:Key="Usercontrol_MaxTDP">최대 TDP</system:String>
+    <system:String x:Key="Usercontrol_MinTDP">최소 TDP</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS">최대 RTSS FPS</system:String>
+    <system:String x:Key="Usercontrol_Theme">테마</system:String>
+    <system:String x:Key="Usercontrol_CombineTDP">TDP 값 동기화</system:String>
+    <system:String x:Key="Usercontrol_EnableNotifications">알림 활성화</system:String>
+    <system:String x:Key="Usercontrol_Scaling">디스플레이 스케일링</system:String>
+    <system:String x:Key="Usercontrol_Language">언어</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP">인텔 TDP 타입</system:String>
+    <system:String x:Key="Usercontrol_MouseMode">마우스 모드</system:String>
+    <system:String x:Key="Usercontrol_Controller">내장 컨트롤러 비활성화</system:String>
+    <system:String x:Key="Usercontrol_Donate">도네이션</system:String>
+    <system:String x:Key="Usercontrol_Update">업데이트</system:String>
+    <system:String x:Key="Usercontrol_CheckUpdate">업데이트 확인</system:String>
+    <system:String x:Key="Usercontrol_Version">버전:</system:String>
+    <system:String x:Key="Usercontrol_DefaultMouseMode">기본 모드</system:String>
+    <system:String x:Key="Usercontrol_MouseSensitivity">마우스 감도</system:String>
+    <system:String x:Key="Usercontrol_ScrollSensitivity">스크롤 감도</system:String>
+    <system:String x:Key="Usercontrol_AppType">응용 프로그램 타입</system:String>
+    <system:String x:Key="Usercontrol_SyncGames">게임 동기화</system:String>
+    <system:String x:Key="Usercontrol_SyncEpicGames">에픽 게임즈 동기화</system:String>
+    <system:String x:Key="Usercontrol_Sync">동기화</system:String>
+
+    <system:String x:Key="Usercontrol_LeftStick">왼쪽 스틱</system:String>
+    <system:String x:Key="Usercontrol_RightStick">오른쪽 스틱</system:String>
+    <system:String x:Key="Usercontrol_AButton">A 버튼</system:String>
+    <system:String x:Key="Usercontrol_XButton">X 버튼</system:String>
+    <system:String x:Key="Usercontrol_YButton">Y 버튼</system:String>
+    <system:String x:Key="Usercontrol_BButton">B 버튼</system:String>
+    <system:String x:Key="Usercontrol_StartButton">시작 버튼</system:String>
+    <system:String x:Key="Usercontrol_BackButton">뒤로가기 버튼</system:String>
+    <system:String x:Key="Usercontrol_DPadUp">DPad 위</system:String>
+    <system:String x:Key="Usercontrol_DPadDown">DPad 아래</system:String>
+    <system:String x:Key="Usercontrol_DPadLeft">DPad 왼쪽</system:String>
+    <system:String x:Key="Usercontrol_DPadRight">DPad 오른쪽</system:String>
+    <system:String x:Key="Usercontrol_LB">왼쪽 범퍼</system:String>
+    <system:String x:Key="Usercontrol_RB">오른쪽 범퍼</system:String>
+    <system:String x:Key="Usercontrol_L3">왼쪽 스틱 버튼</system:String>
+    <system:String x:Key="Usercontrol_R3">오른쪽 스틱 버튼</system:String>
+    <system:String x:Key="Usercontrol_RT">오른쪽 트리거</system:String>
+    <system:String x:Key="Usercontrol_LT">왼쪽 트리거</system:String>
+
+    <system:String x:Key="Usercontrol_AppLocation">응용 프로그램 위치</system:String>
+    <system:String x:Key="Usercontrol_AccentColor">강조 색상</system:String>
+    <system:String x:Key="Usercontrol_Autoupdate">업데이트 자동 확인</system:String>
+    <system:String x:Key="Divider">경계선</system:String>
+    <system:String x:Key="Usercontrol_Right">오른쪽</system:String>
+    <system:String x:Key="Usercontrol_Left">왼쪽</system:String>
+    <system:String x:Key="Usercontrol_Dark">다크 모드</system:String>
+    <system:String x:Key="Usercontrol_Light">라이트 모드</system:String>
+
+
+    <system:String x:Key="Instruction_Toggle">토글</system:String>
+    <system:String x:Key="Instruction_Confirm">확인</system:String>
+    <system:String x:Key="Instruction_Close">닫기</system:String>
+    <system:String x:Key="Instruction_Arrange">정렬</system:String>
+    <system:String x:Key="Instruction_Back">뒤로가기</system:String>
+    <system:String x:Key="Instruction_Select">선택</system:String>
+    <system:String x:Key="Instruction_Edit">편집</system:String>
+    <system:String x:Key="Instruction_Delete">삭제</system:String>
+    <system:String x:Key="Instruction_Add">새 항목 추가</system:String>
+    <system:String x:Key="Instruction_Save">저장</system:String>
+    <system:String x:Key="Instruction_Apply">적용</system:String>
+    <system:String x:Key="Instruction_Duplicate">복제</system:String>
+    <system:String x:Key="Instruction_Launch">실행</system:String>
+
+
+
+
+
+
+    <system:String x:Key="Hotkeys_Action_Open_Program">프로그램 실행</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">TDP 변경</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">빠른 실행 메뉴 전환</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">스팀 빅 픽처 모드 실행</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Playnite">플레이나이트 실행</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">화면 밝기 변경</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">GPU 클럭 변경</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">마우스 모드 전환</system:String>
+
+    <system:String x:Key="Hotkeys_Type_Controller">컨트롤러</system:String>
+    <system:String x:Key="Hotkeys_Type_Keyboard">키보드</system:String>
+
+
+    <system:String x:Key="Notification_ProfileApplied">프로필 적용 완료</system:String>
+
+
+    <system:String x:Key="MouseMode_Action_MouseInput">마우스 입력</system:String>
+    <system:String x:Key="MouseMode_Action_Scroll">마우스 스크롤</system:String>
+    <system:String x:Key="MouseMode_Action_ArrowKeys">방향키</system:String>
+
+
+
+
+    <system:String x:Key="ContextMenu_Hide">숨김</system:String>
+    <system:String x:Key="ContextMenu_Close">닫기</system:String>
+    <system:String x:Key="ContextMenu_ShutDownPC">PC 종료</system:String>
+
+
+    <!-- new 27mar2023-->
+    <system:String x:Key="MainWindow_NavigationView_Power">전원</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Power">전원</system:String>
+    <system:String x:Key="UserControl_CloseGame">게임 종료</system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">프로그램 종료</system:String>
+    <system:String x:Key="UserControl_HideHCP">HCP 숨김</system:String>
+    <system:String x:Key="UserControl_CloseHCP">HCP 닫기</system:String>
+    <system:String x:Key="UserControl_RestartPC">PC 재시작</system:String>
+    <system:String x:Key="UserControl_Restart">재시작</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">PC 종료</system:String>
+    <system:String x:Key="UserControl_Shutdown">종료</system:String>
+    <system:String x:Key="UserControl_FanControl">팬 속도 제어</system:String>
+
+    <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">바탕화면 보기</system:String>
+    <system:String x:Key="Sort_Method_SortBy">정렬 기준</system:String>
+    <system:String x:Key="Sort_Method_AppType">응용 프로그램 타입</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">자주 실행된 항목</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">최근 실행된 항목</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">프로필 이름</system:String>
+    <system:String x:Key="Sort_Method_Favorite">즐겨찾기</system:String>
+
+    <system:String x:Key="Instruction_Sort">정렬</system:String>
+    <system:String x:Key="Instruction_Filter">필터</system:String>
+    <system:String x:Key="Instruction_Favorite">즐겨찾기</system:String>
+    <system:String x:Key="Instruction_PageDown">페이지 다운</system:String>
+    <system:String x:Key="Instruction_PageUp">페이지 업</system:String>
+
+
+    <!-- new strings 03apr2023-->
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">윈도우 화상 키보드 전환</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">HCP 화상 키보드 전환</system:String>
+    <!-- 04apr2023 -->
+    <system:String x:Key="Usercontrol_Deadzone">조이스틱 데드존</system:String>
+
+    <!-- 05apr2023 -->
+    <system:String x:Key="Notification_GameSyncDone">게임 라이브러리 동기화 완료</system:String>
+    <system:String x:Key="Notification_GameSyncing">게임 라이브러리 동기화 중</system:String>
+
+    <!-- 06apr2023-->
+    <system:String x:Key="Filter_Method_Filter">필터</system:String>
+    <system:String x:Key="Filter_Method_None">없음</system:String>
+    <system:String x:Key="Filter_Method_Favorite">즐겨찾기</system:String>
+    <system:String x:Key="Filter_Method_Steam">스팀</system:String>
+    <system:String x:Key="Filter_Method_EpicGames">에픽 게임즈</system:String>
+    <system:String x:Key="Filter_Method_GOGGalaxy">GOG 갤럭시</system:String>
+    <system:String x:Key="Filter_Method_Battlenet">배틀넷</system:String>
+    <system:String x:Key="Filter_Method_Applications">응용 프로그램</system:String>
+
+    <!-- 14apr2023 -->
+    <system:String x:Key="Filter_Method_MicrosoftStore">마이크로소프트 스토어</system:String>
+    <system:String x:Key="Usercontrol_MaxGPUCLK">최대 GPU 클럭</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">AutoTDP</system:String>
+    <!-- 18apr2023 -->
+    <system:String x:Key="FanPage_FanCurve">팬 커브 제어</system:String>
+    <system:String x:Key="FanPage_FanSpeed">팬 속도 (%)</system:String>
+    <system:String x:Key="FanPage_CPUPower">CPU 소모 전력 (W)</system:String>
+    <system:String x:Key="FanPage_Temperature">온도 (C)</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume">볼륨 변경</system:String>
+
+
+    <system:String x:Key="FanMode_Hardware">하드웨어 제어</system:String>
+    <system:String x:Key="FanMode_Manual">수동 제어</system:String>
+    <system:String x:Key="FanMode_Software">자동 팬 커브</system:String>
+
+    <system:String x:Key="Usercontrol_FanCurrentPackagePower">현재 CPU 소비 전력:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentTemperature">현재 CPU 온도:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">현재 팬 속도:</system:String>
+    <system:String x:Key="Usercontrol_AutostartFan">팬 컨트롤 자동 실행</system:String>
+    <system:String x:Key="Usercontrol_FanSettings">팬 설정</system:String>
+    <system:String x:Key="Instruction_Change">변경</system:String>
+    <system:String x:Key="Instruction_ToggleMode">토글 모드</system:String>
+    <system:String x:Key="Hotkeys_Type_None">없음</system:String>
+
+
+    <!-- 04may2023-->
+    <system:String x:Key="Usercontrol_OnCharger">On Charger</system:String>
+    <system:String x:Key="Usercontrol_OnBattery">On Battery</system:String>
+    <system:String x:Key="Usercontrol_FanCurveSaved">Fan Setting Saved</system:String>
+
+    <!-- 05may2023-->
+    <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP_ProcessSuspend">Toggle Quick Access Menu (Game Process Suspend)</system:String>
+
+    <!-- 10may2023-->
+    <system:String x:Key="Prompt_DeleteSelectedAction">Delete selected action?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedProfile">Delete selected profile?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedMousemode">Delete selected mouse mode?</system:String>
+
+    <system:String x:Key="Hotkeys_Action_Change_TDP_Mode">Change TDP Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness_Mode">Change Brightness Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume_Mode">Change Volume Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_FanSpeed_Mode">Change Fan Speed Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Refresh_Mode">Change Display Refresh Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Resolution_Mode">Change Display Resolution Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_FanSpeed">Change Fan Speed</system:String>
+    <system:String x:Key="Usercontrol_HideSplashScreen">Hide Splash Screen At Start</system:String>
+</ResourceDictionary>

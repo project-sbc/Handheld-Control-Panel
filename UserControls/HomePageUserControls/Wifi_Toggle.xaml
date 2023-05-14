@@ -9,8 +9,10 @@
              d:DesignWidth="450"  Height="50" Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel VerticalAlignment="Center" >
-
-            <Label Content="{DynamicResource Usercontrol_Wifi}"  Style="{StaticResource userControlMainLabel}"/>
+            <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                <TextBlock Text="{DynamicResource Usercontrol_Wifi}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+            </Viewbox>
+    
             <mah:ToggleSwitch x:Name="control" Style="{DynamicResource userControlToggle}"  Toggled="toggleSwitch_Toggled" >
                 <mah:ToggleSwitch.LayoutTransform>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>

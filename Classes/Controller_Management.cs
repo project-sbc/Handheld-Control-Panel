@@ -271,10 +271,13 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
             //create background thread to handle controller input
             getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
-            timerController.Tick += controller_Tick;
-            timerController.Start();
-           
+            //timerController.Interval = TimeSpan.FromMilliseconds(activeTimerTickInterval);
+            //timerController.Tick += controller_Tick;
+
+            //timerController.Start();
+            Thread controllerThread = new Thread(controller_Tickthread);
+            controllerThread.IsBackground = true;
+            controllerThread.Start();
         }
         private static string continuousInputNew = "";
         private static string continuousInputCurrent = "";
@@ -328,6 +331,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                     {
                                         ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
                                         QuickAction_Management.runHotKeyAction(action);
+                                        return;
                                     }
                                 }
                             }
@@ -477,6 +481,213 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
            
 
         }
+        private static void controller_Tickthread()
+        {
+            //start timer to read and compare controller inputs
+            //Controller input handler
+            //error number CM05
+            while(true)
+            {
+                try
+                {
+                    if (controller == null)
+
+
+                    {
+                        getController();
+                        if (controller.IsConnected == false)
+                        {
+                            getController();
+                        }
+                    }
+                    else if (!controller.IsConnected)
+                    {
+                        getController();
+                    }
+
+
+                    if (controller != null)
+                    {
+                        if (controller.IsConnected)
+                        {
+                            //a quick routine to check other controllers for the swap controller command
+                            checkSwapController();
+
+                            //var watch = System.Diagnostics.Stopwatch.StartNew();
+                            currentGamePad = controller.GetState().Gamepad;
+
+                            ushort btnShort = ((ushort)currentGamePad.Buttons);
+
+
+                            if (!suspendEventsForGamepadHotKeyProgramming)
+                            {
+                                //check if controller combo is in controller hot key dictionary
+
+                                if (Global_Variables.Global_Variables.controllerHotKeyDictionary != null)
+                                {
+                                    if (Global_Variables.Global_Variables.controllerHotKeyDictionary.ContainsKey(btnShort))
+                                    {
+
+                                        if (((ushort)previousGamePad.Buttons) != btnShort)
+                                        {
+                                            ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
+                                            QuickAction_Management.runHotKeyAction(action);
+
+                                            
+                                            Thread.Sleep(200);
+                                            goto Controller;
+                                        }
+                                    }
+                                }
+
+                                if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
+                                {
+
+                                    //reset continuousNew for every cycle
+                                    continuousInputNew = "";
+
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Back) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                                    {
+                                        buttonEvents.raiseControllerInput("Back");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Start) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Start))
+                                    {
+                                        buttonEvents.raiseControllerInput("Start");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb))
+                                    {
+                                        buttonEvents.raiseControllerInput("L3");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightThumb))
+                                    {
+                                        buttonEvents.raiseControllerInput("R3");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.A) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.A))
+                                    {
+                                        buttonEvents.raiseControllerInput("A");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.X) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.X))
+                                    {
+                                        buttonEvents.raiseControllerInput("X");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.Y) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.Y))
+                                    {
+                                        buttonEvents.raiseControllerInput("Y");
+                                    }
+
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.B) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.B))
+                                    {
+                                        buttonEvents.raiseControllerInput("B");
+                                    }
+
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
+                                    {
+                                        buttonEvents.raiseControllerInput("LB");
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !previousGamePad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder))
+                                    {
+                                        buttonEvents.raiseControllerInput("RB");
+                                    }
+                                    if (currentGamePad.LeftTrigger > 200 && previousGamePad.LeftTrigger <= 200)
+                                    {
+                                        buttonEvents.raiseControllerInput("LT");
+                                    }
+                                    if (currentGamePad.RightTrigger > 200 && previousGamePad.RightTrigger <= 200)
+                                    {
+                                        buttonEvents.raiseControllerInput("RT");
+                                    }
+
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) || currentGamePad.LeftThumbY > 12000)
+                                    {
+                                        if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) && previousGamePad.LeftThumbY <= 12000)
+                                        {
+                                            buttonEvents.raiseControllerInput("Up");
+                                        }
+                                        else
+                                        {
+                                            continuousInputNew = "Up";
+                                        }
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) || currentGamePad.LeftThumbY < -12000)
+                                    {
+                                        if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadDown) && previousGamePad.LeftThumbY >= -12000)
+                                        {
+                                            buttonEvents.raiseControllerInput("Down");
+                                        }
+                                        else
+                                        {
+                                            continuousInputNew = "Down";
+                                        }
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) || currentGamePad.LeftThumbX > 12000)
+                                    {
+                                        if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadRight) && previousGamePad.LeftThumbX <= 12000)
+                                        {
+                                            buttonEvents.raiseControllerInput("Right");
+                                        }
+                                        else
+                                        {
+                                            continuousInputNew = "Right";
+                                        }
+                                    }
+                                    if (currentGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) || currentGamePad.LeftThumbX < -12000)
+                                    {
+                                        if (!previousGamePad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft) && previousGamePad.LeftThumbX >= -12000)
+                                        {
+                                            buttonEvents.raiseControllerInput("Left");
+                                        }
+                                        else
+                                        {
+                                            continuousInputNew = "Left";
+                                        }
+                                    }
+
+
+                                    if (continuousInputNew != continuousInputCurrent)
+                                    {
+                                        continuousInputCurrent = continuousInputNew;
+                                        continuousInputCounter = 1;
+                                    }
+                                    else
+                                    {
+                                        if (continuousInputCurrent != "")
+                                        {
+                                            continuousInputCounter++;
+                                            if (continuousInputCounter > 9)
+                                            {
+
+                                                buttonEvents.raiseControllerInput(continuousInputCurrent);
+                                            }
+                                        }
+
+                                    }
+
+                                }
+
+
+
+                            }
+                            //watch.Stop();
+                            //Debug.WriteLine($"Total Execution Time: {watch.ElapsedMilliseconds} ms");
+                            //doSomeWork();
+  Controller:
+                            previousGamePad = currentGamePad;
+                            Thread.Sleep(activeTimerTickInterval);
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log_Writer.writeLog("Controller Management; " + ex.Message, "CM05");
+
+                }
+            }
+            
+
+
+
+        }
 
         private static void checkSwapController()
         {
@@ -606,8 +817,12 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         
         public void raiseControllerInput(string action)
         {
-           
-            controllerInput?.Invoke(this, new controllerInputEventArgs(action));
+
+            System.Windows.Application.Current.Dispatcher.BeginInvoke(() =>
+            {
+                controllerInput?.Invoke(this, new controllerInputEventArgs(action));
+            });
+            
         }
       
 

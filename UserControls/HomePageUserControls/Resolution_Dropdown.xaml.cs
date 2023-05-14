@@ -87,8 +87,22 @@ namespace Handheld_Control_Panel.UserControls
 
                     }));
                 }
+                if (valueChangedEventArgs.Parameter == "resolution_refreshrates")
+                {
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (controlList.Items.Contains(Global_Variables.Resolution) && controlList.SelectedItem != Global_Variables.Resolution && controlList.IsLoaded)
+                        {
+                            controlList.ItemsSource = Global_Variables.resolutions;
+                            controlList.SelectedItem = Global_Variables.Resolution;
+                            selectedObject = Global_Variables.Resolution;
+                        }
 
+
+                    }));
                 }
+
+            }
             catch (Exception ex)
             {
                 Log_Writer.writeLog(usercontrol + "; " + ex.Message, "RDD02");

@@ -10,7 +10,10 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel >
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <Label x:Name="label" Content="{DynamicResource Usercontrol_MaxTDP}"   Style="{StaticResource userControlMainLabel}" />
+                <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
+                    <TextBlock Text="{DynamicResource Usercontrol_MaxTDP}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+                </Viewbox>
+              
                 <Label   DockPanel.Dock="Top" Content="{Binding ElementName=control, Path=Value}" Margin="0,0,0,0" ContentStringFormat="{}- {0} W"  Style="{StaticResource userControlMainLabel}" />
             </StackPanel>
 

@@ -26,14 +26,9 @@ namespace Handheld_Control_Panel
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
            
-            //check to see if multiple instances of program are running
-            //Process[] thisProgram = Process.GetProcessesByName("Handheld Control Panel");
-            //if (thisProgram.Length > 1)
-            //{
-               // MessageBox.Show("This program is already running. Closing this instance");
-              //  Shutdown();
-           // }
+
 
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start
@@ -41,9 +36,10 @@ namespace Handheld_Control_Panel
             {
                 quietStart = true;
             }
+
             var splashScreen = new SplashScreenStartUp();
 
-            if (!quietStart)
+            if (!quietStart || Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen)
             {
                 //if not quiet start then show splashscreen
                 this.MainWindow = splashScreen;
@@ -53,8 +49,7 @@ namespace Handheld_Control_Panel
             //you can do additional work here, call start routine
             await Task.Run(() => Start_Up.Start_Routine());
 
-            //initialize the main window, set it as the application main window
-            //and close the splash screen
+
 
             this.MainWindow = new MainWindow();
 
@@ -82,7 +77,8 @@ namespace Handheld_Control_Panel
             //kill controller thread
             Global_Variables.killControllerThread = true;
 
-           
+            //restore original power plan applied before launching the app
+            Powercfg.closingAppPowerPlanRestore();
 
             //set auto tdp to false to make sure the autoTDP thread closes properly
             Global_Variables.autoTDP = false;
@@ -94,6 +90,8 @@ namespace Handheld_Control_Panel
                 Fan_Management.setFanControlHardware();
                 WinRingEC_Management.OlsFree();
             }
+
+            
         }
     }
 }

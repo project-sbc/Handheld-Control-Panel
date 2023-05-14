@@ -24,7 +24,7 @@
     </Style>
     <Style x:Key="controllerButtonTextblock_Instructions" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
-        <Setter Property="FontSize" Value="27" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="DockPanel.Dock" Value="Right" />
         <Setter Property="HorizontalAlignment" Value="Right" />
@@ -72,9 +72,20 @@
     </Style>
 
     <!--labels-->
+    <Style x:Key="userControlMainLabelViewBox_Textblock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+    </Style>
+    <Style x:Key="userControlMainLabelViewBox" TargetType="Viewbox">
+   
+
+        <Setter Property="DockPanel.Dock" Value="Left" />
+        <Setter Property="Margin" Value="8,0,0,0" />
+        <Setter Property="MaxHeight" Value="30" />
+    </Style>
+
     <Style x:Key="userControlMainLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="25" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="DockPanel.Dock" Value="Left" />
         <Setter Property="Margin" Value="8,0,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
@@ -100,7 +111,7 @@
 
     <Style x:Key="HeaderLabel" TargetType="Label">
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="27" />
+        <Setter Property="FontSize" Value="25" />
         <Setter Property="Height" Value="48" />
         <Setter Property="Margin" Value="8,-7,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />

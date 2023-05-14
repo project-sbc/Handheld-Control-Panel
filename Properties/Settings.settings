@@ -9,7 +9,7 @@
       <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="IntelMMIOMSR" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MMIO</Value>
+      <Value Profile="(Default)">MMIO+MSR</Value>
     </Setting>
     <Setting Name="minTDP" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
@@ -88,6 +88,18 @@
     </Setting>
     <Setting Name="startAutoFan" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="upgradeSettingsRequired" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="startSafeMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="hideSplashScreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="directoryRTSS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\RivaTuner Statistics Server</Value>
     </Setting>
   </Settings>
 </SettingsFile>

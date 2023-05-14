@@ -79,7 +79,7 @@ namespace Handheld_Control_Panel.UserControls
                     actionLabel.Content = keyboard.DisplayHotKeyType;
                     break;
             }
-            
+            controlList.ScrollIntoView(controlList.SelectedItem);
            
 
         }

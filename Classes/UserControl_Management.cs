@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     
                      case "Slider_MaxGPUCLK":
                         slider.Minimum = 400;
-                        slider.Maximum = 2500;
+                        slider.Maximum = 3200;
                         slider.TickFrequency = 50;
                         slider.SmallChange = 50;
                         slider.LargeChange = 100;
@@ -188,7 +188,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
                     case "Slider_MaxTDP":
                         slider.Minimum = 5;
-                        slider.Maximum = 65;
+                        slider.Maximum = 85;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;

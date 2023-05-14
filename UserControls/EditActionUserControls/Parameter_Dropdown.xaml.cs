@@ -4,6 +4,7 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -40,16 +41,29 @@ namespace Handheld_Control_Panel.UserControls
             if (controlList.ItemsSource != null) { controlList.ItemsSource = null; }
             //set as default visible and switch to collapsed in switch statement if its not a parameter type of action (like opening closing hcp)
 
+
+            //set controllist default mode to single select, not multi, will adjust below if it needs to be multi
+            controlList.SelectionMode = SelectionMode.Single;
             switch (Global_Variables.hotKeys.editingHotkey.Action)
             {
-
+                case "Change_TDP_Mode":
+                    controlList.SelectionMode = SelectionMode.Multiple;
+                    for (int i = 5; i < Properties.Settings.Default.maxTDP; i=i+5)
+                    {
+                        Parameter parameter = new Parameter();
+                        parameter.DisplayParameter = i.ToString() + " W"; 
+                        parameter.ParameterValue = i.ToString();
+                        hotkeyParameter.Add(parameter);
+                    }
+                    break;
                 case "Change_TDP":
+                    
                     for (int i = -5; i < 6; i++)
                     {
                         if (i != 0)
                         {
                             Parameter parameter = new Parameter();
-                            if (i > 0) { parameter.DisplayParameter = "+" + i.ToString(); } else { parameter.DisplayParameter = i.ToString(); }
+                            if (i > 0) { parameter.DisplayParameter = "+" + i.ToString() + " W"; } else { parameter.DisplayParameter = i.ToString() + " W"; }
                             parameter.ParameterValue = i.ToString();
                             hotkeyParameter.Add(parameter);
                         }
@@ -58,6 +72,7 @@ namespace Handheld_Control_Panel.UserControls
                     }
 
                     break;
+                
                 case "Change_GPUCLK":
                     for (int i = -5; i < 6; i++)
                     {
@@ -69,8 +84,6 @@ namespace Handheld_Control_Panel.UserControls
                             parameter.ParameterValue = j.ToString();
                             hotkeyParameter.Add(parameter);
                         }
-
-
                     }
                     break;
                 case "Change_Brightness":
@@ -84,6 +97,18 @@ namespace Handheld_Control_Panel.UserControls
                             parameter.ParameterValue = j.ToString();
                             hotkeyParameter.Add(parameter);
                         }
+
+                    }
+                    break;
+                case "Change_Brightness_Mode":
+                    controlList.SelectionMode = SelectionMode.Multiple;
+                    for (int i = 0; i < 21; i++)
+                    {
+                        Parameter parameter = new Parameter();
+                        int j = i * 5; //multiply by 5 to give a larger value without making the loop complicated
+                        parameter.DisplayParameter = j.ToString() + "%";
+                        parameter.ParameterValue = j.ToString();
+                        hotkeyParameter.Add(parameter);
 
                     }
                     break;
@@ -101,6 +126,78 @@ namespace Handheld_Control_Panel.UserControls
 
                     }
                     break;
+                case "Change_FanSpeed":
+                    for (int i = -3; i < 4; i++)
+                    {
+                        if (i != 0)
+                        {
+                            Parameter parameter = new Parameter();
+                            int j = i * 5; //multiply by 5 to give a larger value without making the loop complicated
+                            if (i > 0) { parameter.DisplayParameter = "+" + j.ToString() + "%"; } else { parameter.DisplayParameter = j.ToString() + "%"; }
+                            parameter.ParameterValue = j.ToString();
+                            hotkeyParameter.Add(parameter);
+                        }
+
+                    }
+                    break;
+                case "Change_Volume_Mode":
+                    controlList.SelectionMode = SelectionMode.Multiple;
+                    for (int i = 0; i < 21; i++)
+                    {
+                        Parameter parameter = new Parameter();
+                        int j = i * 5; //multiply by 5 to give a larger value without making the loop complicated
+                        parameter.DisplayParameter = j.ToString() + "%";
+                        parameter.ParameterValue = j.ToString();
+                        hotkeyParameter.Add(parameter);
+
+                    }
+                    break;
+                case "Change_FanSpeed_Mode":
+                    if (Global_Variables.Device.FanCapable)
+                    {
+                        controlList.SelectionMode = SelectionMode.Multiple;
+                        Parameter parameter0 = new Parameter();
+                        parameter0.DisplayParameter = "0%";
+                        parameter0.ParameterValue = "0";
+                        hotkeyParameter.Add(parameter0);
+                        for (int i = Global_Variables.Device.MinFanSpeedPercentage; i < 100; i=i+5)
+                        {
+                            Parameter parameter = new Parameter();
+                           
+                            parameter.DisplayParameter = i.ToString() + "%";
+                            parameter.ParameterValue = i.ToString();
+                            hotkeyParameter.Add(parameter);
+
+                        }
+                        Parameter parameter100 = new Parameter();
+                        parameter100.DisplayParameter = "100%";
+                        parameter100.ParameterValue = "100";
+                        hotkeyParameter.Add(parameter100);
+                    }
+                   
+                    break;
+                case "Change_Resolution_Mode":
+                    controlList.SelectionMode = SelectionMode.Multiple;
+                    foreach (string resolution in Global_Variables.resolutions)
+                    {
+                        Parameter parameter = new Parameter();
+                        parameter.DisplayParameter = resolution;
+                        parameter.ParameterValue = resolution;
+                        hotkeyParameter.Add(parameter);
+                    }
+
+                    break;
+                case "Change_Refresh_Mode":
+                    controlList.SelectionMode = SelectionMode.Multiple;
+                    foreach (string refresh in Global_Variables.resolution_refreshrates[Global_Variables.resolution])
+                    {
+                        Parameter parameter = new Parameter();
+                        parameter.DisplayParameter = refresh + " Hz";
+                        parameter.ParameterValue = refresh;
+                        hotkeyParameter.Add(parameter);
+                    }
+
+                    break;
                 default:
                     this.Visibility = Visibility.Collapsed;
                     break;
@@ -111,14 +208,28 @@ namespace Handheld_Control_Panel.UserControls
                 {
 
                     controlList.ItemsSource = hotkeyParameter;
+                    List<string> parameterArray = Global_Variables.hotKeys.editingHotkey.Parameter.Split(";").ToList<string>();
                     foreach (Parameter param in hotkeyParameter)
                     {
-                        if (Global_Variables.hotKeys.editingHotkey.Parameter == param.ParameterValue)
+                        if (controlList.SelectionMode == SelectionMode.Single)
                         {
-                            controlList.SelectedItem = param;
-                            actionLabel.Content = param.DisplayParameter;
+                            if (Global_Variables.hotKeys.editingHotkey.Parameter == param.ParameterValue)
+                            {
+                                controlList.SelectedItem = param;
+                                actionLabel.Content = param.DisplayParameter;
+                                break;
+                            }
                         }
+                        else
+                        {
+                            if (parameterArray.Contains(param.DisplayParameter))
+                            {
+                                controlList.SelectedItems.Add(param);
+                            }
+                        }
+                      
                     }
+                    actionLabel.Content = Global_Variables.hotKeys.editingHotkey.Parameter;
                 }
 
             }
@@ -148,7 +259,12 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             handleListboxChange();
-                            Global_Variables.mainWindow.changeUserInstruction("HotKeyEditPage_Instruction");
+                            if (controlList.SelectionMode == SelectionMode.Single)
+                            {
+                                
+                                Global_Variables.mainWindow.changeUserInstruction("HotKeyEditPage_Instruction");
+                            }
+
                         }
                         else
                         {
@@ -167,12 +283,18 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.Visibility == Visibility.Visible)
                         {
                             
-
-                            if (selectedObject != null)
+                            if (controlList.SelectionMode == SelectionMode.Single)
                             {
-                                
-                                controlList.SelectedItem = selectedObject;
-                                actionLabel.Content = selectedObject.DisplayHotkeyAction;
+                                if (selectedObject != null)
+                                {
+
+                                    controlList.SelectedItem = selectedObject;
+                                    actionLabel.Content = selectedObject.DisplayHotkeyAction;
+                                }
+                            }
+                            else
+                            {
+                                handleListboxChange();
                             }
                             button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
@@ -195,16 +317,43 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (controlList.SelectedItem != null)
                 {
-                    Parameter selected = (Parameter)controlList.SelectedItem;
-                    if (Global_Variables.hotKeys.editingHotkey.Parameter != selected.ParameterValue)
+                    if (controlList.SelectionMode == SelectionMode.Single)
                     {
-                        Global_Variables.hotKeys.editingHotkey.Parameter = selected.ParameterValue;
-                        actionLabel.Content = selected.DisplayParameter;
-                        if (controlList.Visibility == Visibility.Visible)
+                        Parameter selectedItem = (Parameter)controlList.SelectedItem;
+                        if (Global_Variables.hotKeys.editingHotkey.Parameter != selectedItem.ParameterValue)
                         {
-                            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                            Global_Variables.hotKeys.editingHotkey.Parameter = selectedItem.ParameterValue;
+                            actionLabel.Content = selectedItem.DisplayParameter;
+                            if (controlList.Visibility == Visibility.Visible && controlList.SelectionMode == SelectionMode.Single)
+                            {
+                                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                            }
                         }
                     }
+                    else
+                    {
+                        
+
+                        System.Collections.IList selectedItems = controlList.SelectedItems;
+                        string totalString="";
+                        string totalDisplayString="";
+                        foreach (Parameter parameter in selectedItems)
+                        {
+                            if (totalString == "") { totalString = parameter.ParameterValue; }
+                            else { totalString = totalString + ";" + parameter.ParameterValue; }
+
+                            if (totalDisplayString == "") { totalDisplayString = parameter.DisplayParameter; }
+                            else { totalDisplayString = totalDisplayString + ";" + parameter.DisplayParameter; }
+                        }
+                        if (Global_Variables.hotKeys.editingHotkey.Parameter != totalString)
+                        {
+                            Global_Variables.hotKeys.editingHotkey.Parameter = totalString;
+                            actionLabel.Content = totalDisplayString;
+                          
+                        }
+                    }
+
+                  
 
                 }
 

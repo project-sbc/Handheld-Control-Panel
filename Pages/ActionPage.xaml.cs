@@ -101,7 +101,7 @@ namespace Handheld_Control_Panel.Pages
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
                             break;
                         case "X":
-                            Notification_Management.ShowYesNoPrompt("Delete current action?", Notification.Wpf.NotificationType.Warning, "Delete_Action");
+                            Notification_Management.ShowYesNoPrompt(Application.Current.Resources["Prompt_DeleteSelectedAction"].ToString(), Notification.Wpf.NotificationType.Warning, "Delete_Action");
                             break;
                         case "Up":
                             if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = controlList.Items.Count - 1; }

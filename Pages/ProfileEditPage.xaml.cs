@@ -54,12 +54,70 @@ namespace Handheld_Control_Panel.Pages
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             //subscribe to controller input events
             Controller_Window_Page_UserControl_Events.pageControllerInput += handleControllerInputs;
+            Profile_Events.separateChargerBatteryEvent += Profile_Events_separateChargerBatteryEvent;
+
+            //do this to account for the separate profile for charger/battery
+            collapseUncollapseOnlineValues(Global_Variables.profiles.editingProfile.SeparateChargerBattery);
+            if (Global_Variables.profiles.editingProfile.SeparateChargerBattery)
+            {
+                batteryLabel.Visibility = Visibility.Visible;
+                chargerLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                chargerLabel.Visibility = Visibility.Collapsed;
+                batteryLabel.Visibility = Visibility.Collapsed;
+            }
             UserControl_Management.getUserControlsOnPage(userControls, stackPanel);
 
 
         }
 
-       
+        private void Profile_Events_separateChargerBatteryEvent(object? sender, EventArgs e)
+        {
+            userControls.Clear();
+            collapseUncollapseOnlineValues(Global_Variables.profiles.editingProfile.SeparateChargerBattery);
+            if (Global_Variables.profiles.editingProfile.SeparateChargerBattery)
+            {
+                batteryLabel.Visibility = Visibility.Visible;
+                chargerLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                chargerLabel.Visibility = Visibility.Collapsed;
+                batteryLabel.Visibility = Visibility.Collapsed;
+            }
+            UserControl_Management.getUserControlsOnPage(userControls, stackPanel);
+            if (userControls.Count < highlightedUserControl || userControls.Count < selectedUserControl)
+            {
+                highlightedUserControl = 0;
+                selectedUserControl = -1;
+            }
+        }
+
+        private void collapseUncollapseOnlineValues(bool SeparateChargerBattery)
+        {
+            foreach (object child in stackPanel.Children)
+            {
+                if (child is UserControl)
+                {
+                    UserControl uc = (UserControl)child;
+                    if (child.ToString().Contains(".Online"))
+                    {
+                        if (SeparateChargerBattery)
+                        {
+                            uc.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            uc.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+
+            }
+        }
+
         //
         private void handleControllerInputs(object sender, EventArgs e)
         {

@@ -1,0 +1,249 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="MainWindow_NavigationView_Home">Inicio</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Profiles">Perfiles</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Action">Acción</system:String>
+    <system:String x:Key="MainWindow_NavigationView_AppLauncher">Lanzador de Aplicaciones</system:String>
+    <system:String x:Key="MainWindow_NavigationView_CustomizeHome">Personalizar Inicio</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Settings">Ajustes</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Information">Información</system:String>
+    <system:String x:Key="MainWindow_NavigationView_MouseMode">Modo Ratón</system:String>
+
+    <system:String x:Key="MainWindow_NavigationView_Sub_Home">Inicio</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Profiles">Perfiles</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Action">Acción</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_AppLauncher">Lanzador de Aplicaciones</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_CustomizeHome">Personalizar controles en página de Inicio</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Settings">Ajustes</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Information">Información</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_MouseMode">Información</system:String>
+
+
+    <system:String x:Key="Usercontrol_Enable_OnContent">Activar</system:String>
+    <system:String x:Key="Usercontrol_Disable_OffContent">Desactivar</system:String>
+
+    <system:String x:Key="Default_Profile">Perfil Predeterminado</system:String>
+    <system:String x:Key="Active_Profile">Perfil Activo</system:String>
+
+    <system:String x:Key="Usercontrol_Wifi">Wi-Fi</system:String>
+    <system:String x:Key="Usercontrol_Bluetooth">Bluetooth</system:String>
+    <system:String x:Key="Usercontrol_Brightness">Brillo</system:String>
+    <system:String x:Key="Usercontrol_Volume">Volumen</system:String>
+    <system:String x:Key="Usercontrol_VolumeMute">Silenciar Volumen</system:String>
+    <system:String x:Key="Usercontrol_Resolution">Resolución</system:String>
+    <system:String x:Key="Usercontrol_RefreshRate">Frecuencia de Actualización</system:String>
+    <system:String x:Key="Usercontrol_TDP">TDP</system:String>
+    <system:String x:Key="Usercontrol_TDP2">Aumentar (Boost) TDP</system:String>
+    <system:String x:Key="Usercontrol_EPP">EPP</system:String>
+    <system:String x:Key="Usercontrol_FPSLimit">Límite de FPS</system:String>
+    <system:String x:Key="Usercontrol_ActiveCores">Núcleos de CPU Activos</system:String>
+    <system:String x:Key="Usercontrol_MaxCPUFrequency">CPU Máx</system:String>
+    <system:String x:Key="Usercontrol_GPUCLK">Frecuencia GPU</system:String>
+    <system:String x:Key="Usercontrol_HotKeyAction">Acción</system:String>
+    <system:String x:Key="Usercontrol_HotKeyType">Método de Entrada</system:String>
+    <system:String x:Key="Usercontrol_HotKeyParameter">Parámetro</system:String>
+    <system:String x:Key="Usercontrol_HotKey">Tecla de Acceso Rápido</system:String>
+    <system:String x:Key="Usercontrol_HotKeySaved">Tecla de Acceso Rápido Guardada</system:String>
+    <system:String x:Key="Usercontrol_MouseModeSaved">Modo Ratón Guardado</system:String>
+    <system:String x:Key="Usercontrol_ProfileSaved">Perfil Guardado</system:String>
+    <system:String x:Key="Usercontrol_ProfileName">Nombre del Perfil</system:String>
+    <system:String x:Key="Usercontrol_Exe">Fichero Ejecutable</system:String>
+    <system:String x:Key="Usercontrol_DefaultProfile">Perfil Predeterminado</system:String>
+    <system:String x:Key="Usercontrol_Autostart">Iniciar Automáticamente</system:String>
+    <system:String x:Key="Usercontrol_StartRTSS">Iniciar RTSS Automáticamente</system:String>
+    <system:String x:Key="Usercontrol_MaxTDP">TDP Máx.</system:String>
+    <system:String x:Key="Usercontrol_MinTDP">TDP Mín.</system:String>
+    <system:String x:Key="Usercontrol_MaxFPS">FPS RTSS Máx.</system:String>
+    <system:String x:Key="Usercontrol_Theme">Tema</system:String>
+    <system:String x:Key="Usercontrol_CombineTDP">Sincronizar Valores de TDP</system:String>
+    <system:String x:Key="Usercontrol_EnableNotifications">Activar Notificaciones</system:String>
+    <system:String x:Key="Usercontrol_Scaling">Escalado de Pantalla</system:String>
+    <system:String x:Key="Usercontrol_Language">Idioma</system:String>
+    <system:String x:Key="Usercontrol_IntelTDP">Tipo de TDP Intel</system:String>
+    <system:String x:Key="Usercontrol_MouseMode">Modo Ratón</system:String>
+    <system:String x:Key="Usercontrol_Controller">Desactivar Controlador Interno</system:String>
+    <system:String x:Key="Usercontrol_Donate">Donar</system:String>
+    <system:String x:Key="Usercontrol_Update">Actualizar</system:String>
+    <system:String x:Key="Usercontrol_CheckUpdate">Buscar Actualizaciones</system:String>
+    <system:String x:Key="Usercontrol_Version">Versión:</system:String>
+    <system:String x:Key="Usercontrol_DefaultMouseMode">Modo Predeterminado</system:String>
+    <system:String x:Key="Usercontrol_MouseSensitivity">Sensibilidad del Ratón</system:String>
+    <system:String x:Key="Usercontrol_ScrollSensitivity">Sensibilidad Velocidad de Desplazamiento</system:String>
+    <system:String x:Key="Usercontrol_AppType">Tipo de Aplicación</system:String>
+    <system:String x:Key="Usercontrol_SyncGames">Sincronizar Juegos</system:String>
+    <system:String x:Key="Usercontrol_SyncEpicGames">Sincronizar Juegos de Epic</system:String>
+    <system:String x:Key="Usercontrol_Sync">Sincronizar</system:String>
+
+    <system:String x:Key="Usercontrol_LeftStick">Analógico Izquierdo</system:String>
+    <system:String x:Key="Usercontrol_RightStick">Analógico Derecho</system:String>
+    <system:String x:Key="Usercontrol_AButton">Botón A</system:String>
+    <system:String x:Key="Usercontrol_XButton">Botón X</system:String>
+    <system:String x:Key="Usercontrol_YButton">Botón Y</system:String>
+    <system:String x:Key="Usercontrol_BButton">Botón B</system:String>
+    <system:String x:Key="Usercontrol_StartButton">Botón Start (Inicio)</system:String>
+    <system:String x:Key="Usercontrol_BackButton">Botón de Retroceso</system:String>
+    <system:String x:Key="Usercontrol_DPadUp">Cruceta Arriba</system:String>
+    <system:String x:Key="Usercontrol_DPadDown">Cruceta Abajo</system:String>
+    <system:String x:Key="Usercontrol_DPadLeft">Cruceta Izquierda</system:String>
+    <system:String x:Key="Usercontrol_DPadRight">Cruceta Derecha</system:String>
+    <system:String x:Key="Usercontrol_LB">Botón Izquierdo (LB)</system:String>
+    <system:String x:Key="Usercontrol_RB">Botón Derecho (RB)</system:String>
+    <system:String x:Key="Usercontrol_L3">Botón del Analógico Izquierdo (L3)</system:String>
+    <system:String x:Key="Usercontrol_R3">Botón del Analógico Derecho (R3)</system:String>
+    <system:String x:Key="Usercontrol_RT">Gatillo Derecho</system:String>
+    <system:String x:Key="Usercontrol_LT">Gatillo Izquierdo</system:String>
+
+    <system:String x:Key="Usercontrol_AppLocation">Ubicación de la Aplicación</system:String>
+    <system:String x:Key="Usercontrol_AccentColor">Color de Acento</system:String>
+    <system:String x:Key="Usercontrol_Autoupdate">Búsqueda Automática de Actualizaciones</system:String>
+    <system:String x:Key="Divider">Divisor</system:String>
+    <system:String x:Key="Usercontrol_Right">Derecha</system:String>
+    <system:String x:Key="Usercontrol_Left">Izquierda</system:String>
+    <system:String x:Key="Usercontrol_Dark">Oscuro</system:String>
+    <system:String x:Key="Usercontrol_Light">Claro</system:String>
+
+
+    <system:String x:Key="Instruction_Toggle">ALTERNAR</system:String>
+    <system:String x:Key="Instruction_Confirm">CONFIRMAR</system:String>
+    <system:String x:Key="Instruction_Close">CERRAR</system:String>
+    <system:String x:Key="Instruction_Arrange">ORGANIZAR</system:String>
+    <system:String x:Key="Instruction_Back">ATRÁS</system:String>
+    <system:String x:Key="Instruction_Select">SELECCIONAR</system:String>
+    <system:String x:Key="Instruction_Edit">EDITAR</system:String>
+    <system:String x:Key="Instruction_Delete">ELIMINAR</system:String>
+    <system:String x:Key="Instruction_Add">NUEVO</system:String>
+    <system:String x:Key="Instruction_Save">GUARDAR</system:String>
+    <system:String x:Key="Instruction_Apply">APLICAR</system:String>
+    <system:String x:Key="Instruction_Duplicate">DUPLICAR</system:String>
+    <system:String x:Key="Instruction_Launch">INICIAR</system:String>
+
+
+
+
+
+
+    <system:String x:Key="Hotkeys_Action_Open_Program">Abrir el Programa</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_TDP">Ajustar TDP</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP">Abrir/Cerrar Menú de Acceso Rápido</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Steam_BigPicture">Abrir Modo Big Picture de Steam</system:String>
+    <system:String x:Key="Hotkeys_Action_Open_Playnite">Abrir Playnite</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness">Ajustar Brillo</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_GPUCLK">Ajustar la Frecuencia de la GPU</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_MouseMode">Activar/Desactivar Modo Ratón</system:String>
+
+    <system:String x:Key="Hotkeys_Type_Controller">Controlador</system:String>
+    <system:String x:Key="Hotkeys_Type_Keyboard">Teclado</system:String>
+
+
+    <system:String x:Key="Notification_ProfileApplied">Perfil Aplicado</system:String>
+
+
+    <system:String x:Key="MouseMode_Action_MouseInput">Entrada del Ratón</system:String>
+    <system:String x:Key="MouseMode_Action_Scroll">Desplazamiento</system:String>
+    <system:String x:Key="MouseMode_Action_ArrowKeys">Teclas de Flecha</system:String>
+
+
+
+
+    <system:String x:Key="ContextMenu_Hide">Ocultar</system:String>
+    <system:String x:Key="ContextMenu_Close">Cerrar</system:String>
+    <system:String x:Key="ContextMenu_ShutDownPC">Apagar PC</system:String>
+
+
+    <!-- new 27mar2023-->
+    <system:String x:Key="MainWindow_NavigationView_Power">Energía</system:String>
+    <system:String x:Key="MainWindow_NavigationView_Sub_Power">Energía</system:String>
+    <system:String x:Key="UserControl_CloseGame">Cerrar</system:String>
+    <system:String x:Key="UserControl_CloseActiveProgram">Cerrar Programa</system:String>
+    <system:String x:Key="UserControl_HideHCP">Ocultar HCP</system:String>
+    <system:String x:Key="UserControl_CloseHCP">Cerrar HCP</system:String>
+    <system:String x:Key="UserControl_RestartPC">Reiniciar PC</system:String>
+    <system:String x:Key="UserControl_Restart">Reiniciar</system:String>
+    <system:String x:Key="UserControl_ShutdownPC">Apagar PC</system:String>
+    <system:String x:Key="UserControl_Shutdown">Apagar</system:String>
+    <system:String x:Key="UserControl_FanControl">Control del Ventilador</system:String>
+
+    <!--new 01Apr2023-->
+    <system:String x:Key="Hotkeys_Action_Desktop">Ir a Escritorio</system:String>
+    <system:String x:Key="Sort_Method_SortBy">Ordenar por</system:String>
+    <system:String x:Key="Sort_Method_AppType">Tipo de Aplicación</system:String>
+    <system:String x:Key="Sort_Method_FrequentlyLaunched">Usado Frequentemente</system:String>
+    <system:String x:Key="Sort_Method_RecentlyLaunched">Usado Recientemente</system:String>
+    <system:String x:Key="Sort_Method_ProfileName">Nombre del Perfil</system:String>
+    <system:String x:Key="Sort_Method_Favorite">Favorito</system:String>
+
+    <system:String x:Key="Instruction_Sort">ORDENAR</system:String>
+    <system:String x:Key="Instruction_Filter">FILTRO</system:String>
+    <system:String x:Key="Instruction_Favorite">FAVORITO</system:String>
+    <system:String x:Key="Instruction_PageDown">AV PAG (PG DOWN)</system:String>
+    <system:String x:Key="Instruction_PageUp">RE PAG (PG UP)</system:String>
+
+    <!-- new strings 03apr2023-->
+    <system:String x:Key="Hotkeys_Action_Toggle_Windows_OSK">Alternar Teclado en Pantalla de Windows</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_HCP_OSK">Alternar Teclado en Pantalla de HCP</system:String>
+    <!-- 04apr2023 -->
+    <system:String x:Key="Usercontrol_Deadzone">Zona Inactiva (Deadzone) del Analógico</system:String>
+
+    <!-- 05apr2023 -->
+    <system:String x:Key="Notification_GameSyncDone">Sincronización de Biblioteca de Juegos Completada</system:String>
+    <system:String x:Key="Notification_GameSyncing">Biblioteca de Juegos Sincronizando</system:String>
+
+    <!-- 06apr2023-->
+    <system:String x:Key="Filter_Method_Filter">Filtrar</system:String>
+    <system:String x:Key="Filter_Method_None">Ninguno</system:String>
+    <system:String x:Key="Filter_Method_Favorite">Favorito</system:String>
+    <system:String x:Key="Filter_Method_Steam">Steam</system:String>
+    <system:String x:Key="Filter_Method_EpicGames">Epic Games</system:String>
+    <system:String x:Key="Filter_Method_GOGGalaxy">GOG Galaxy</system:String>
+    <system:String x:Key="Filter_Method_Battlenet">Battle.net</system:String>
+    <system:String x:Key="Filter_Method_Applications">Aplicaciones</system:String>
+
+    <!-- 14apr2023 -->
+    <system:String x:Key="Filter_Method_MicrosoftStore">Microsoft Store</system:String>
+    <system:String x:Key="Usercontrol_MaxGPUCLK">Frecuencia Máxima de GPU</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AutoTDP">TDP Automático (AutoTDP)</system:String>
+
+    <!-- 18apr2023 -->
+    <system:String x:Key="FanPage_FanCurve">Curva del Ventilador</system:String>
+    <system:String x:Key="FanPage_FanSpeed">Velocidad del Ventilador (%)</system:String>
+    <system:String x:Key="FanPage_CPUPower">Consumo de Energía de la CPU (W)</system:String>
+    <system:String x:Key="FanPage_Temperature">Temperatura (C)</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume">Cambiar Volumen</system:String>
+
+
+    <system:String x:Key="FanMode_Hardware">Controlado por Hardware</system:String>
+    <system:String x:Key="FanMode_Manual">Control Manual</system:String>
+    <system:String x:Key="FanMode_Software">Curva Automática del Ventilador</system:String>
+
+    <system:String x:Key="Usercontrol_FanCurrentPackagePower">Consumo Actual de Energía de la CPU:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentTemperature">Temperatura Actual de la CPU:</system:String>
+    <system:String x:Key="Usercontrol_FanCurrentFanSpeed">Velocidad Actual del Ventilador:</system:String>
+    <system:String x:Key="Usercontrol_AutostartFan">Inicio Automático del Control del Ventilador</system:String>
+    <system:String x:Key="Usercontrol_FanSettings">Ajustes del Ventilador</system:String>
+    <system:String x:Key="Instruction_Change">CAMBIAR</system:String>
+    <system:String x:Key="Instruction_ToggleMode">ALTERNAR MODO</system:String>
+    <system:String x:Key="Hotkeys_Type_None">Ninguno</system:String>
+
+    <!-- 04may2023-->
+    <system:String x:Key="Usercontrol_OnCharger">En Cargador</system:String>
+    <system:String x:Key="Usercontrol_OnBattery">En Batería</system:String>
+    <system:String x:Key="Usercontrol_FanCurveSaved">Ajustes del Ventilador Guardados</system:String>
+
+    <!-- 05may2023-->
+    <system:String x:Key="Usercontrol_SeparateChargerBattery">Separate Profile For On Charger/Battery</system:String>
+    <system:String x:Key="Hotkeys_Action_Show_Hide_HCP_ProcessSuspend">Toggle Quick Access Menu (Game Process Suspend)</system:String>
+
+    <!-- 10may2023-->
+    <system:String x:Key="Prompt_DeleteSelectedAction">Delete selected action?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedProfile">Delete selected profile?</system:String>
+    <system:String x:Key="Prompt_DeleteSelectedMousemode">Delete selected mouse mode?</system:String>
+
+    <system:String x:Key="Hotkeys_Action_Change_TDP_Mode">Change TDP Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Brightness_Mode">Change Brightness Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Volume_Mode">Change Volume Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_FanSpeed_Mode">Change Fan Speed Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Refresh_Mode">Change Display Refresh Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_Resolution_Mode">Change Display Resolution Mode</system:String>
+    <system:String x:Key="Hotkeys_Action_Change_FanSpeed">Change Fan Speed</system:String>
+    <system:String x:Key="Usercontrol_HideSplashScreen">Hide Splash Screen At Start</system:String>
+</ResourceDictionary>

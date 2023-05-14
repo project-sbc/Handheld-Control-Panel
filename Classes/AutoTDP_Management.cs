@@ -128,11 +128,11 @@ namespace Handheld_Control_Panel.Classes
 
         private static PidController cpuPID = new PidController(-4, -1, 0, maxCPU, minCPU)
         {
-            TargetValue = 50
+            TargetValue = 70
         };
         private static PidController gpuPID = new PidController(-4, -1, 0, maxGPU, minGPU)
         {
-            TargetValue = 68
+            TargetValue = 78
         };
         private static PidController tdpPID = new PidController(-2, -1, -1, 25, 5)
         {

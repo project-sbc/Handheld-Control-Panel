@@ -18,9 +18,10 @@
 				<NumberLaunches>0</NumberLaunches>
 				<Favorite>False</Favorite>
 			</LaunchOptions>
+			<SeparateChargerBattery>False</SeparateChargerBattery>
 			<Offline>
-				<TDP1>9</TDP1>
-				<TDP2>12</TDP2>
+				<TDP1></TDP1>
+				<TDP2></TDP2>
 				<ActiveCores></ActiveCores>
 				<MAXCPU></MAXCPU>
 				<FPSLimit></FPSLimit>
@@ -28,8 +29,8 @@
 				<GPUCLK></GPUCLK>
 			</Offline>
 			<Online>
-				<TDP1>10</TDP1>
-				<TDP2>11</TDP2>
+				<TDP1></TDP1>
+				<TDP2></TDP2>
 				<ActiveCores></ActiveCores>
 				<MAXCPU></MAXCPU>
 				<FPSLimit></FPSLimit>
@@ -48,6 +49,7 @@
 			<Parameter>
 			</Parameter>
 			<Hotkey>776</Hotkey>
+			<AddHomePage>False</AddHomePage>
 		</ControllerHotKey>
 		<ControllerHotKey>
 			<ID>0</ID>
@@ -56,6 +58,7 @@
 			<Parameter>
 			</Parameter>
 			<Hotkey>769</Hotkey>
+			<AddHomePage>False</AddHomePage>
 		</ControllerHotKey>
 		<ControllerHotKey>
 			<ID>2</ID>
@@ -64,6 +67,7 @@
 			<Parameter>
 			</Parameter>
 			<Hotkey>772</Hotkey>
+			<AddHomePage>False</AddHomePage>
 		</ControllerHotKey>
 		<ControllerHotKey>
 			<ID>3</ID>
@@ -71,6 +75,7 @@
 			<Action>Change_TDP</Action>
 			<Parameter>2</Parameter>
 			<Hotkey>17</Hotkey>
+			<AddHomePage>False</AddHomePage>
 		</ControllerHotKey>
 		<ControllerHotKey>
 			<ID>4</ID>
@@ -78,6 +83,7 @@
 			<Action>Change_TDP</Action>
 			<Parameter>-2</Parameter>
 			<Hotkey>18</Hotkey>
+			<AddHomePage>False</AddHomePage>
 		</ControllerHotKey>
 	</ControllerHotKeys>
 
@@ -129,6 +135,7 @@
 				<NumberLaunches>0</NumberLaunches>
 				<Favorite>False</Favorite>
 			</LaunchOptions>
+			<SeparateChargerBattery>False</SeparateChargerBattery>
 			<Offline>
 				<TDP1></TDP1>
 				<TDP2></TDP2>
@@ -157,6 +164,7 @@
 			<Action>Show_Hide_HCP</Action>
 			<Parameter></Parameter>
 			<Hotkey></Hotkey>
+			<AddHomePage>False</AddHomePage>
 		</ControllerHotKey>
 	</ControllerHotKeyTemplate>
 	<MouseModeTemplate>

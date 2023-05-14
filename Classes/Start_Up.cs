@@ -16,6 +16,8 @@ using System.Windows.Threading;
 
 using MessageBox = System.Windows.MessageBox;
 using System.Windows.Media.Animation;
+using Handheld_Control_Panel.Classes.Task_Scheduler;
+using AutoUpdaterDotNET;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -24,19 +26,31 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Start_Routine()
         {
+            //run setting upgrade if needed when version is updated
+            if (Properties.Settings.Default.upgradeSettingsRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.upgradeSettingsRequired = false;
+                Properties.Settings.Default.Save();
 
+                if (TaskSchedulerWin32.TaskSchedulerWin32.checkAutoStart())
+                {
+                    TaskSchedulerWin32.TaskSchedulerWin32.changeTaskService(true);
+                }
+            }
+
+
+            //run hyatice powerplan
+            Powercfg.setupPowerPlan();
 
             //run all routines to get device ready
 
             //    librehardwaremonitor.Monitor();
-          
+
             //test code here
             //Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
             //test code
-
-
-            //check for updates first
-            Update_Software.Update_Software.checkForUpdates(true);
+                       
 
             //Load XML profile file
             XML_Management.Load_XML_File.load_XML_File();
@@ -110,12 +124,37 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.hotKeys.generateGlobalKeyboardHotKeyList();
 
 
-            if (Properties.Settings.Default.startAutoFan && Global_Variables.Global_Variables.Device.FanCapable)
+            //variable startSafeMode is a way to make the fan go back to hardware control operation in the case the app crashes and doesn't properly put the fan back into hardware control.
+            //It works by turning false if the app closes properly. It will normally be true so if something does happen then it won't properly close and turn it false.
+
+            if (Global_Variables.Global_Variables.Device.FanCapable)
             {
-                AutoFan_Management.startAutoFan();
+                if (!Properties.Settings.Default.startSafeMode)
+                {
+                    if (Properties.Settings.Default.startAutoFan)
+                    {
+                        AutoFan_Management.startAutoFan();
+                    }
+                }
+                else
+                {
+                    Fan_Management.Fan_Management.setFanControlHardware();
+                  
+                }
             }
+            Properties.Settings.Default.startSafeMode = true;
+            Properties.Settings.Default.Save();
+
+            //bind autostart event but DONT start it yet
+            Update_Software.Update_Software.bindUpdateEvent();
+
         }
-      
+
+        private static void AutoUpdaterOnCheckForUpdateEvent(object startUp, UpdateInfoEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void loadLanguage()
         {
             Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
@@ -141,12 +180,21 @@ namespace Handheld_Control_Panel.Classes
                     Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.jp.xaml", UriKind.RelativeOrAbsolute);
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
                     break;
-                case "Português":
+                case "Português (Brasil)":
                     System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
                     Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.pt-br.xaml", UriKind.RelativeOrAbsolute);
                     System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
                     break;
-
+                case "한국어":
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
+                    Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.kr.xaml", UriKind.RelativeOrAbsolute);
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
+                    break;
+                case "Español":
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.Global_Variables.languageDict);
+                    Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.es-ES.xaml", UriKind.RelativeOrAbsolute);
+                    System.Windows.Application.Current.Resources.MergedDictionaries.Add(Global_Variables.Global_Variables.languageDict);
+                    break;
             }
             
         }

@@ -112,7 +112,7 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     startGamepadTimer();
                 }
-                else
+                if (Global_Variables.hotKeys.editingHotkey.Type == "Keyboard")
                 {
                     startKBTimer();
                 }
@@ -237,6 +237,7 @@ namespace Handheld_Control_Panel.UserControls
             Global_Variables.hotKeys.editingHotkey.Hotkey = (string)sender;
             MouseKeyHook.keyboardEvents.keyboardStringPress -= handleKeyboardStringPress;
             keyboardTimer.Stop();
+            MouseKeyHook.programmingKeystroke = false;
         }
         private void startKBTimer()
         {
