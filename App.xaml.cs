@@ -27,9 +27,7 @@ namespace Handheld_Control_Panel
         {
             base.OnStartup(e);
 
-            AutoTDP_Management.SetRSR(false);
-
-
+           
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
