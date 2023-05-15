@@ -8,6 +8,8 @@
 		-Fixed bug where RTSS hooks dll was being taken from RTSS program files. For non C drive installations this causes error. Uses local dll.
 		-Fixed splashscreen spinner not spinning at startup (Thanks to Pakuyasa!)
 		-Fixed error where mouse/profile delete prompts don't delete the object.
+		-Fixed error where it kept reapplying profile for default profile that has an exe attached to it.
+		-Fixed error where default profile and a launched game profile would cycle before starting a game.
 
 	Features:
 

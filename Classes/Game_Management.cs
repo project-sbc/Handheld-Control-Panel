@@ -82,6 +82,9 @@ namespace Handheld_Control_Panel.Classes
             
             }
           
+            Global_Variables.Global_Variables.mainWindow.updateTimer.Stop();
+            Global_Variables.Global_Variables.mainWindow.updateTimer.Interval = new TimeSpan(0, 0, 15);
+            Global_Variables.Global_Variables.mainWindow.updateTimer.Start();
 
         }
 

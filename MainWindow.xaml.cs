@@ -51,7 +51,7 @@ namespace Handheld_Control_Panel
     {
         private string window = "MainWindow";
         private string page = "";
-        private DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
+        public DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Background);
         public bool disable_B_ToClose = false;
         public OSK osk;
 
@@ -195,6 +195,14 @@ namespace Handheld_Control_Panel
 
         private void UpdateTimer_Tick(object? sender, EventArgs e)
         {
+
+            //timespan changes when a game launches to prevent the auto profile applicator from cycling between default and launched game profile, gives it time to launch
+            //this just resets it back to 3 seconds after given time to launch
+            if (updateTimer.Interval.TotalSeconds > 3)
+            {
+                updateTimer.Interval = new TimeSpan(0, 0, 3);
+            }
+
             if (this.Visibility == Visibility.Visible)
             {
                 updateStatusBar();

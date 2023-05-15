@@ -391,7 +391,7 @@ namespace Handheld_Control_Panel.Classes
                     int paramVol;
                     if (Int32.TryParse(actionParameter.Parameter, out paramVol))
                     {
-                        param = (int)(paramVol + Global_Variables.Global_Variables.Brightness);
+                        param = (int)(paramVol + Global_Variables.Global_Variables.Volume);
                         if (param > 100) { param = 100; }
                         if (param < 0) { param = 0; }
                         Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %");

@@ -9,7 +9,70 @@
              d:DesignWidth="450" Height="85" Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel >
-            
+            <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450"   >
+                <ListBox.Resources>
+
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="0"/>
+
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <WrapPanel IsItemsHost="True" />
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="BorderThickness" Value="2" />
+                                    <Setter Property="CornerRadius" Value="3" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                 Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource MahApps.Brushes.ThemeBackground}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid HorizontalAlignment="Center" >
+                                <Grid.ColumnDefinitions>
+                                  
+                                    <ColumnDefinition Width="135" SharedSizeGroup="Column1"/>
+
+
+                                </Grid.ColumnDefinitions>
+                                <!-- Assumes MVVM and you wish to bind to properties and commands -->
+
+                                <Grid HorizontalAlignment="Center"  VerticalAlignment="Top" Height="65" Width="123"  Grid.Column="0">
+
+                                    <iconPacks:PackIconFontAwesome  Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="fontAwesomeIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <iconPacks:PackIconFontAwesome Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="materialIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <iconPacks:PackIconFontAwesome Kind="SpinnerSolid" Height="30" Width="30" Spin="False" Panel.ZIndex="3" Visibility="Hidden" Name="ionIcon" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding ProfileName}"/>
+                                    <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding ProfileName}"/>
+
+                                </Grid>
+
+
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+
+
+            </ListBox>
         </DockPanel>
 
     </Border>

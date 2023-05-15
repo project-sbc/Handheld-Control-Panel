@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using MahApps.Metro.IconPacks;
+using System.Windows.Threading;
+using WindowsInput;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -223,6 +225,13 @@ namespace Handheld_Control_Panel.Classes
     public class HotkeyItem
     {
         public string ID { get; set; }
+
+        public Visibility materialIconVisibility { get; set; }
+        public Visibility fontAwesomeIconVisibility { get; set; }
+        public Visibility simpleIconVisibility { get; set; }
+        public PackIconMaterial materialIcon { get; set; }
+        public PackIconFontAwesome fontAwesomeIcon { get; set; }
+        public PackIconSimpleIcons simpleIcon { get; set; }
         private string type { get; set; } = "";
         public string Type
         {
@@ -269,6 +278,76 @@ namespace Handheld_Control_Panel.Classes
                 }
                
                 action = value;
+
+                switch (action)
+                {
+
+                    case "Toggle_HCP_OSK":
+                       
+                        break;
+                    case "Toggle_AutoTDP":
+                        
+                        break;
+                    case "Toggle_Windows_OSK":
+                       
+                        break;
+                    case "Show_Hide_HCP":
+                      
+                        break;
+                    case "Show_Hide_HCP_ProcessSuspend":
+                       
+                        break;
+                    case "Change_FanSpeed":
+                        
+                        break;
+                    case "Change_FanSpeed_Mode":
+
+                        break;
+                    case "Change_TDP":
+
+                        break;
+                    case "Change_TDP_Mode":
+
+                        break;
+                    case "Open_Steam_BigPicture":
+                      
+                        break;
+                    case "Open_Playnite":
+                     
+                        break;
+                    case "Change_Brightness":
+
+                        break;
+                    case "Change_Brightness_Mode":
+
+                        break;
+                    case "Change_Volume_Mode":
+
+                        break;
+                    case "Change_Refresh_Mode":
+                       
+                        break;
+                    case "Change_Resolution_Mode":
+                      
+                        break;
+                    case "Change_Volume":
+                    
+                        break;
+                    case "Change_GPUCLK":
+                  
+                        break;
+                    case "Toggle_MouseMode":
+                     
+                        break;
+                    case "Toggle_Controller":
+                     
+                        break;
+                    case "Desktop":
+                       
+                        break;
+                    default: break;
+                }
+
             }
 
         }
@@ -346,6 +425,7 @@ namespace Handheld_Control_Panel.Classes
 
         }
      
+
 
 
         public string convertControllerUshortToString(string hotkey)

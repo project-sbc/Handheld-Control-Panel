@@ -43,14 +43,16 @@ namespace Handheld_Control_Panel.Classes
                     }
                     else
                     {
+                       
+
                         //check if the profile currently applied is 
                         if (Global_Variables.Global_Variables.profileAutoApplied == true)
                         {
                             
                             if (Global_Variables.Global_Variables.profiles.defaultProfile != null)
                             {
-                                Global_Variables.Global_Variables.profiles.defaultProfile.applyProfile(true,false);
-                                Global_Variables.Global_Variables.profileAutoApplied = true;
+                                Global_Variables.Global_Variables.profiles.defaultProfile.applyProfile(false,false);
+                    
                                 return;
                             }
                          
