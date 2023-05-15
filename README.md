@@ -102,6 +102,7 @@ Restart the computer
 <ul>
   <li>HMR / Handheld Master Race (Youtube - https://www.youtube.com/@hmr0/featured) - for help with the user interface design and layout</li>
   <li>Askarus (Discord)/Mystechry (Youtube - https://www.youtube.com/@mystechry) - for extensive help with testing early builds, suggesting several features seen in the current build</li>
+  <li>Akaraah-3D (Discord) - for extensive testing and discovery of many bugs</li>
   <li>Hyatice (Discord) - for help with AutoTDP, amazing power saving profile, and some testing</li>
   <li>Frank (Motion Assistant Developer) - for help with fan controls</li>
   <li>Ben/CasperH (Handheld Companion Developers) - for feedback/general contributions. Check out Handheld Companion here for gyro support on windows handhelds https://github.com/Valkirie/HandheldCompanion</li>
