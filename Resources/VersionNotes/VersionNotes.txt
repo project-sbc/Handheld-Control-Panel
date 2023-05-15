@@ -10,6 +10,7 @@
 		-Fixed error where mouse/profile delete prompts don't delete the object.
 		-Fixed error where it kept reapplying profile for default profile that has an exe attached to it.
 		-Fixed error where default profile and a launched game profile would cycle before starting a game.
+		-Fixed error where volume hot keys were not adjusting correctly.
 
 	Features:
 
