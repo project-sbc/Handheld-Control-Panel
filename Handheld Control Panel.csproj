@@ -49,6 +49,7 @@
     <None Remove="Resources\Profiles_Template.xml" />
     <None Remove="Resources\QRes\QRes.exe" />
     <None Remove="Resources\SetDPI\SetDpi.exe" />
+    <None Remove="Resources\VersionNotes\VersionNotes.txt" />
     <None Remove="WinRing0x64.sys" />
   </ItemGroup>
 
@@ -157,6 +158,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\SetDPI\SetDpi.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\VersionNotes\VersionNotes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WinRing0x64.dll">

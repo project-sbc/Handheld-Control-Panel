@@ -1,6 +1,8 @@
 ﻿using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
+using Handheld_Control_Panel.Classes.Global_Variables;
 using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,24 +20,27 @@ namespace Handheld_Control_Panel.UserControls
         private string usercontrol = "";
         public RSR_Toggle()
         {
-            int RSRResult = ADLX_Managmenet.GetRSR();
-            if (RSRResult > -1)
+            if (Global_Variables.cpuType == "AMD")
             {
-                
-                InitializeComponent();
-                
-                if (RSRResult == 0) { control.IsOn = false; } else { control.IsOn = true; }
+                int RSRResult = ADLX_Managmenet.GetRSRState();
+                if (RSRResult > -1)
+                {
 
+                    InitializeComponent();
+
+                    if (RSRResult == 0) { control.IsOn = false; } else { control.IsOn = true; }
+
+                }
+                else
+                {
+                    this.Visibility = Visibility.Collapsed;
+                }
             }
             else
             {
                 this.Visibility = Visibility.Collapsed;
             }
-
-           
-          
         }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;

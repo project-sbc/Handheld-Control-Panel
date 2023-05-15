@@ -58,14 +58,14 @@ namespace Handheld_Control_Panel.Pages
                     {
                         if (item.Enabled)
                         {
-                            Debug.WriteLine(item.UserControl);
+                        
                             switch (item.UserControl)
                             {
                                 
                                 case "UserControl_FanControl":
                                     stackPanel.Children.Add(new Fan_Slider());
                                     break;
-                                case "UserControl_RSR":
+                                case "Usercontrol_RSR":
                                     stackPanel.Children.Add(new RSR_Toggle());
                                     break;
                                 case "Usercontrol_Wifi":

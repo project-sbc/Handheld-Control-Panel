@@ -17,7 +17,7 @@ namespace Handheld_Control_Panel.Classes
     {
         
         public HomePageItem editingItem = null;
-
+        private string homePagNewVersion = "Usercontrol_Bluetooth;Usercontrol_Wifi;Usercontrol_MouseMode;Usercontrol_Controller;Divider;Usercontrol_Volume;Usercontrol_VolumeMute;Usercontrol_Brightness;Divider;Usercontrol_Resolution;Usercontrol_RefreshRate;Usercontrol_Scaling;Usercontrol_FPSLimit;Divider;Usercontrol_TDP;Usercontrol_TDP2;Usercontrol_EPP;Usercontrol_ActiveCores;Usercontrol_MaxCPUFrequency;Usercontrol_GPUCLK;Divider;UserControl_FanControl;Usercontrol_RSR";
         public CustomizeHome_Management()
         {
             //populates list
@@ -29,6 +29,19 @@ namespace Handheld_Control_Panel.Classes
 
             //populates list
             List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
+            List<string> listNewVersion = homePagNewVersion.Split(';').ToList();
+
+            foreach(string item in listNewVersion)
+            {
+                if (item != "")
+                {
+                    if (!Properties.Settings.Default.qamUserControls.Contains(item))
+                    {
+                        list.Add(item + "0");
+                    }
+                }
+            }
+
             foreach (string item in list)
             {
 
@@ -45,6 +58,9 @@ namespace Handheld_Control_Panel.Classes
                     this.Add(hpi);
                 }
             }
+
+
+
 
         }
         public void saveList()

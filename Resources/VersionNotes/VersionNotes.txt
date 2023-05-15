@@ -1,0 +1,34 @@
+﻿Version Notes Handheld Control Panel
+
+0.1.0.2 - Released TBD
+	
+	Fixes:
+		
+		-Potentially fixed bug where dispatchers were created in non UI classes that were not being disposed of, causing the app to crash.
+		-Fixed bug where RTSS hooks dll was being taken from RTSS program files. For non C drive installations this causes error. Uses local dll.
+		-Fixed splashscreen spinner not spinning at startup (Thanks to Pakuyasa!)
+
+	Features:
+
+		-Added RSR support from AMD driver to home page. Existing users need to add it on the customize home page.
+		-Added RTSS directory to app settings
+		-Added optional hide splashscreen at normal startup in settings
+
+
+0.1.0.1 - Released 12-May-2023 on discord
+	
+	Fixes:
+		
+		-Fixed bug where keyboard hot keys required restart to take effect.
+		-Fixed bug where keyboard hot keys were not recognized if the keypresses were not in the same order.
+		-Fixed bug where auto updater would not properly download from github
+
+	Features:
+
+		-Added new action modes where volume, brightness, TDP, gpu clock, resolution, and refresh rate can be cycled through a defined list
+
+
+
+0.1.0.0 - Released 07-May-2023
+
+	Baseline released for discord users
