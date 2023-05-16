@@ -207,6 +207,9 @@
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\AboutPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\PowerPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
