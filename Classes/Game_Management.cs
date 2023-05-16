@@ -178,6 +178,7 @@ namespace Handheld_Control_Panel.Classes
 
                 }
             }
+            
         }
 
         public static bool BattleNetRunning()
@@ -327,58 +328,58 @@ namespace Handheld_Control_Panel.Classes
             PackageManager packageManager = new PackageManager();
             IEnumerable<Windows.ApplicationModel.Package> packages = packageManager.FindPackages();
 
-            string[] filesInDirectory;
-            string xboxGameDirectory = "C:\\XboxGames";
-            if (Directory.Exists(xboxGameDirectory))
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
             {
-                filesInDirectory = Directory.GetDirectories(xboxGameDirectory);
-
-                if (filesInDirectory.Length > 0)
+                string xboxGameDirectory = Path.Combine(d.Name, "XboxGames");
+                string[] filesInDirectory;
+                if (Directory.Exists(xboxGameDirectory))
                 {
-                    string[] strings = filesInDirectory.Select(x => Path.GetFileName(x)).ToArray();
+                    filesInDirectory = Directory.GetDirectories(xboxGameDirectory);
 
-                    if (strings.Length > 0)
+                    if (filesInDirectory.Length > 0)
                     {
-                        foreach (Package package in packages)
+                        string[] strings = filesInDirectory.Select(x => Path.GetFileName(x)).ToArray();
+
+                        if (strings.Length > 0)
                         {
-                            string install = package.InstalledLocation.Path;
-                            string sig = package.SignatureKind.ToString();
-
-                            if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
+                            foreach (Package package in packages)
                             {
-                                if (strings.Contains(package.DisplayName))
+                                string install = package.InstalledLocation.Path;
+                                string sig = package.SignatureKind.ToString();
+
+                                if (install.Contains("WindowsApps") && sig == "Store" && package.IsFramework == false)
                                 {
-                                    GameLauncherItem launcherItem = new GameLauncherItem();
-                                    launcherItem.gameName = package.DisplayName;
-                                    launcherItem.gameID = package.Id.FullName;
-                                    launcherItem.launchCommand = package.Id.FullName;
+                                    if (strings.Contains(package.DisplayName))
+                                    {
+                                        GameLauncherItem launcherItem = new GameLauncherItem();
+                                        launcherItem.gameName = package.DisplayName;
+                                        launcherItem.gameID = package.Id.FullName;
+                                        launcherItem.launchCommand = package.Id.FullName;
 
 
-                                    //launcherItem.path = game.Executable;
-                                    //launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
-                                    launcherItem.appType = "Microsoft Store";
-                                    launcherItem.imageLocation = package.Logo.AbsolutePath;
-                                    list.Add(launcherItem);
+                                        //launcherItem.path = game.Executable;
+                                        //launcherItem.exe = Path.GetFileNameWithoutExtension(launcherItem.path);
+                                        launcherItem.appType = "Microsoft Store";
+                                        launcherItem.imageLocation = package.Logo.AbsolutePath;
+                                        list.Add(launcherItem);
+
+                                    }
 
                                 }
 
-
-
                             }
-
 
                         }
 
-
                     }
 
-
-
                 }
-
             }
 
-
+            
+           
 
 
             return list;

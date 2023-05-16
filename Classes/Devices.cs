@@ -112,6 +112,9 @@ namespace Handheld_Control_Panel.Classes
                         case "GEEK":
                             handheldDevice = new AyaNeo2();
                             break;
+                        case "AYANEOAir":
+
+                            break;
                     }
                     break;
                 case "AOKZOE":
