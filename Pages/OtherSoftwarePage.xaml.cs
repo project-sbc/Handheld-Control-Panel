@@ -34,11 +34,11 @@ namespace Handheld_Control_Panel.Pages
     /// 
 
 
-    public partial class AboutPage : Page
+    public partial class OtherSoftwarePage : Page
     {
         private string windowpage;
         private List<infopageitem> infopageitems = new List<infopageitem>();
-        public AboutPage()
+        public OtherSoftwarePage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -48,13 +48,13 @@ namespace Handheld_Control_Panel.Pages
             wnd = null;
 
             infopageitem GitHub = new infopageitem();
-            GitHub.displayitem = Application.Current.Resources["UserControl_GitHubLink"].ToString();
+            GitHub.displayitem = Application.Current.Resources["Usercontrol_HCPGithub"].ToString();
             GitHub.item = "Handheld Control Panel GitHub Link";
             GitHub.Kind = PackIconMaterialKind.DockRight;
             infopageitems.Add(GitHub);
 
             infopageitem Tutorials = new infopageitem();
-            Tutorials.displayitem = Application.Current.Resources["UserControl_Tutorials"].ToString();
+            Tutorials.displayitem = Application.Current.Resources["Usercontrol_UserGuide"].ToString();
             Tutorials.item = "Tutorials";
             Tutorials.Kind = PackIconMaterialKind.DockRight;
             infopageitems.Add(Tutorials);
@@ -75,8 +75,27 @@ namespace Handheld_Control_Panel.Pages
 
             controlList.ItemsSource = infopageitems;
         }
+        //Github Page - link to page
 
-        
+
+
+        //Tutorials
+
+
+        //Donate
+        //Kofi
+        //Paypal
+        //Patreon
+
+        //Other Software
+        //Handheld Companion
+        //Motion Assistant
+        //Playnite
+        //Playmate
+        //RTSS
+        //HID Hide
+        //SDI Lite
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -174,12 +193,5 @@ namespace Handheld_Control_Panel.Pages
             handleListChange();
         }
     }
-    public class infopageitem
-    {
-        public string displayitem { get; set; }
-        public string displayitemdescription { get; set; }
-        public string item { get; set; }
-        public PackIconMaterialKind Kind { get; set; }
-      
-    }
+   
 }

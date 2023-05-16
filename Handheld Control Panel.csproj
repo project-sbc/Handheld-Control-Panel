@@ -198,6 +198,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\OtherSoftwarePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\AppLauncherLargePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -412,6 +415,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\HomePageUserControls\FPS_Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\HandheldCompanion_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InformationUserControls\GitHub_Link.xaml.cs">
