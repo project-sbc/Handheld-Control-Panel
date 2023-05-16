@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,19 +11,25 @@ namespace Handheld_Control_Panel.Classes
     public static class Gyroscope_Management
     {
         private static double number = 0;
-        private static void ReadingChanged(object sender, EventArgs e)
+
+        public static void startReading()
         {
 
-            //Accelerometer acc = Accelerometer.GetDefault();
-            //Accelerometer gyro = Accelerometer.GetDefault();
-
-            //gyro.ReadingChanged += ReadingChanged;
-            //AccelerometerReading reading = e.Reading;
-            //Debug.WriteLine( reading.AccelerationZ);
-            //Debug.WriteLine(reading.AccelerationY);
-            //number =number  +reading.AccelerationX;
-            //Debug.WriteLine(number.ToString());
-            //Debug.WriteLine(reading.AccelerationX);
+           
+            Accelerometer gyro = Accelerometer.GetDefault();
+            AccelerometerReading gyroread= gyro.GetCurrentReading();
+           
         }
+
+        private static void Gyro_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
+        {
+            AccelerometerReading reading = args.Reading;
+            Debug.WriteLine(reading.AccelerationZ);
+            Debug.WriteLine(reading.AccelerationY);
+            Debug.WriteLine(number.ToString());
+            Debug.WriteLine(reading.AccelerationX);
+        }
+
+      
     }
 }
