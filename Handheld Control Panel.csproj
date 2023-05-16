@@ -417,6 +417,24 @@
     <Compile Update="UserControls\HomePageUserControls\FPS_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InformationUserControls\HIDHide_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\SDILite_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\UXTU_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\Playmate_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\Playnite_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\RTSS_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InformationUserControls\HandheldCompanion_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
