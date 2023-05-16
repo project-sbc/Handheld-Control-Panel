@@ -11,14 +11,14 @@
 		-Fixed error where it kept reapplying profile for default profile that has an exe attached to it.
 		-Fixed error where default profile and a launched game profile would cycle before starting a game.
 		-Fixed error where volume hot keys were not adjusting correctly.
-		-Fixed error where xbox games not scanned from D drive.
 
 	Features:
 
 		-Added RSR support from AMD driver to home page. Existing users need to add it on the customize home page.
 		-Added RTSS directory to app settings
 		-Added optional hide splashscreen at normal startup in settings
-
+		-Expanded xbox game scan to all drives, not just C.
+		-Added air neo air plus 6800U support.
 
 0.1.0.1 - Released 12-May-2023 on discord
 	
@@ -31,8 +31,7 @@
 
 	Features:
 
-		-Added new action modes where volume, brightness, TDP, gpu clock, resolution, and refresh rate can be cycled through a defined list
-		-Added
+		-Added new action modes where volume, brightness, TDP, gpu clock, resolution, and refresh rate can be cycled through a defined list.
 
 
 0.1.0.0 - Released 07-May-2023

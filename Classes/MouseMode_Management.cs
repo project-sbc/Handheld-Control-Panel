@@ -219,11 +219,15 @@ namespace Handheld_Control_Panel.Classes
         public void start_MouseMode()
         {
             //create background thread to handle controller input
-            getController();
-            timerController.Interval = TimeSpan.FromMilliseconds(8);
-            timerController.Tick += controller_Tick;
-            timerController.Start();
-            Global_Variables.Global_Variables.MouseModeEnabled = true;
+            if (activeMouseMode != null)
+            {
+                getController();
+                timerController.Interval = TimeSpan.FromMilliseconds(8);
+                timerController.Tick += controller_Tick;
+                timerController.Start();
+                Global_Variables.Global_Variables.MouseModeEnabled = true;
+            }
+           
         }
         public bool status_MouseMode()
         {
@@ -276,7 +280,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (Global_Variables.Global_Variables.mousemodes.activeMouseMode != null)
                 {
-                    if (controller.IsConnected)
+                    if (controller.IsConnected && activeMouseMode != null)
                     {
                         currentGamePad = controller.GetState().Gamepad;
 
