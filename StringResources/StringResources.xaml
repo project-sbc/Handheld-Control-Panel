@@ -258,6 +258,10 @@
         
     <system:String x:Key="Usercontrol_RSR">AMD RSR</system:String>
         
+      <!-- new 16May2023 !-->
         
-        
+    <system:String x:Key="Usercontrol_HCPGithub">Handheld Control Panel Github</system:String>
+    <system:String x:Key="Usercontrol_UserGuide">User Guide Videos</system:String>
+    <system:String x:Key="UserControl_OtherSoftware">Useful Software</system:String>
+
 </ResourceDictionary>
