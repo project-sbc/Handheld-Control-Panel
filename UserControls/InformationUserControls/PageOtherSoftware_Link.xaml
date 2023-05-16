@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.Playnite_Link"
+﻿<UserControl x:Class="Handheld_Control_Panel.UserControls.PageOtherSoftware_Link"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,14 +10,14 @@
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel VerticalAlignment="Center" >
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="{DynamicResource UserControl_OtherSoftware_Playnite}" DockPanel.Dock="Left"  Style="{StaticResource userControlMainLabel}"/>
+                <Label Content="{DynamicResource UserControl_OtherSoftware_RTSS}" DockPanel.Dock="Left"  Style="{StaticResource userControlMainLabel}"/>
                 <TextBlock FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Top" Margin="0,0,22,0" >
-                <Hyperlink NavigateUri="https://playnite.link" RequestNavigate="Hyperlink_RequestNavigate" x:Name="control">
+                <Hyperlink NavigateUri="https://www.guru3d.com/files-details/rtss-rivatuner-statistics-server-download.html" RequestNavigate="Hyperlink_RequestNavigate" x:Name="control" >
                     Link
                 </Hyperlink>
                 </TextBlock>
             </DockPanel>
-            <TextBlock Text="{DynamicResource UserControl_OtherSoftware_Playnite_Subtext}" Style="{StaticResource userControlSubtextAboutPagesViewBox_Textblock}" TextWrapping="Wrap" />
+            <TextBlock Text="{DynamicResource UserControl_OtherSoftware_RTSS_Subtext}" Style="{StaticResource userControlSubtextAboutPagesViewBox_Textblock}" TextWrapping="Wrap" />
         </DockPanel>
 
     </Border>

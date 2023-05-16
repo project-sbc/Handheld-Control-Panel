@@ -13,7 +13,7 @@
                 <Label Content="{DynamicResource UserControl_OtherSoftware_Playmate}" DockPanel.Dock="Left"  Style="{StaticResource userControlMainLabel}"/>
                 <TextBlock FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Top" Margin="0,0,22,0" >
                 <Hyperlink NavigateUri="https://github.com/JmaesCJ60/Playmate-Game-Launcher" RequestNavigate="Hyperlink_RequestNavigate" x:Name="control">
-                    Playmate Link
+                    Link
                 </Hyperlink>
                 </TextBlock>
             </DockPanel>

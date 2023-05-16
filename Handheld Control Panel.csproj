@@ -420,6 +420,9 @@
     <Compile Update="UserControls\InformationUserControls\HIDHide_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InformationUserControls\PageOtherSoftware_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InformationUserControls\SDILite_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

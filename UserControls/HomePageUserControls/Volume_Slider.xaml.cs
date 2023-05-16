@@ -35,9 +35,16 @@ namespace Handheld_Control_Panel.UserControls
         private bool dragStarted= false;
         public Volume_Slider()
         {
-            InitializeComponent();
-            //setControlValue();
-            UserControl_Management.setupControl(control);
+            if (Global_Variables.Volume > -1)
+            {
+                InitializeComponent();
+                //setControlValue();
+                UserControl_Management.setupControl(control);
+            }
+            else
+            {
+                this.Visibility = Visibility.Collapsed;
+            }
          
         }
 

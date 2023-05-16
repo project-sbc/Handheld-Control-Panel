@@ -29,28 +29,21 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class VolumeMute_Toggle : UserControl
+    public partial class PageOtherSoftware_Link : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public VolumeMute_Toggle()
+        public PageOtherSoftware_Link()
         {
-            if (Global_Variables.Volume > -1)
-            {
-                InitializeComponent();
-                //setControlValue();
-                UserControl_Management.setupControl(control);
-            }
-            else
-            {
-                this.Visibility = Visibility.Collapsed;
-            }
+            InitializeComponent();
+            setControlValue();
+          
         }
 
         private void setControlValue()
         {
             
-            control.IsOn = Global_Variables.Mute;
+            
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -58,24 +51,9 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
-            Global_Variables.valueChanged += Global_Variables_volumeMuteChanged;
+          
         }
-
-        private void Global_Variables_volumeMuteChanged(object? sender, EventArgs e)
-        {
-            valueChangedEventArgs valueChangedEventArgs = (valueChangedEventArgs)e;
-            if (valueChangedEventArgs.Parameter == "VolumeMute")
-            {
-                this.Dispatcher.BeginInvoke(() => {
-                    if (Global_Variables.Mute != control.IsOn)
-                    {
-                        control.IsOn = Global_Variables.Mute;
-                    }
-
-                });
-            }
-           
-        }
+              
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
@@ -88,20 +66,18 @@ namespace Handheld_Control_Panel.UserControls
         }
 
 
-        private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (control.IsLoaded)
-            {
-                AudioManager.SetMasterVolumeMute(control.IsOn);
-               
-            }
-          
-        }
+       
       
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-            Global_Variables.valueChanged -= Global_Variables_volumeMuteChanged;
+          
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+            e.Handled = true;
         }
     }
 }

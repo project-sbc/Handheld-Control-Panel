@@ -1,5 +1,6 @@
 ﻿using Handheld_Control_Panel.Classes.Global_Variables;
 using System;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 // ReSharper disable SuspiciousTypeConversion.Global
 // ReSharper disable InconsistentNaming
@@ -38,11 +39,16 @@ namespace Handheld_Control_Panel.Classes.Volume_Management
 
 
             }
+            catch
+            {
+                Global_Variables.Global_Variables.Volume = -1;
+            }
             finally
             {
                 if (masterVol != null)
                     Marshal.ReleaseComObject(masterVol);
             }
+            
         }
 
         /// <summary>
@@ -65,6 +71,10 @@ namespace Handheld_Control_Panel.Classes.Volume_Management
                 bool isMuted;
                 masterVol.GetMute(out isMuted);
                 if (Global_Variables.Global_Variables.Mute != isMuted) { Global_Variables.Global_Variables.Mute = isMuted; }
+            }
+            catch
+            {
+                Global_Variables.Global_Variables.Volume = -1;
             }
             finally
             {

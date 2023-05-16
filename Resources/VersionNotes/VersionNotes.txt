@@ -12,6 +12,7 @@
 		-Fixed error where default profile and a launched game profile would cycle before starting a game.
 		-Fixed error where volume hot keys were not adjusting correctly.
 		-Fixed error where mouse mode was allowed to start without an active mouse mode profile.
+		-Fixed error when no audio driver is installed, get volume returns an error. Now error traps and hides the volume controls on the home page.
 
 	Features:
 
@@ -20,6 +21,7 @@
 		-Added optional hide splashscreen at normal startup in settings
 		-Expanded xbox game scan to all drives, not just C.
 		-Added air neo air plus 6800U support.
+		-Removed the hotkey type option, type is automatically detected based on keyboard or controller input.
 
 0.1.0.1 - Released 12-May-2023 on discord
 	
