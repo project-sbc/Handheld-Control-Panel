@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
 
         //var for hotkey input
         private DispatcherTimer gamepadTimer = new DispatcherTimer(DispatcherPriority.Render);
-        private DispatcherTimer keyboardTimer = new DispatcherTimer();
+        private DispatcherTimer fiveSecondTimeOutTimer = new DispatcherTimer();
         private ushort controllerButtons = 0;
         private DateTime gamepadTimerTickCounter;
         private ushort currentGamepad = 0;
@@ -108,14 +108,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                if (Global_Variables.hotKeys.editingHotkey.Type == "Controller")
-                {
-                    startGamepadTimer();
-                }
-                if (Global_Variables.hotKeys.editingHotkey.Type == "Keyboard")
-                {
-                    startKBTimer();
-                }
+                startKB_Controller_Timer();
             }
 
         }
@@ -126,12 +119,7 @@ namespace Handheld_Control_Panel.UserControls
             currentGamepad = ((ushort)Controller_Management.currentGamePad.Buttons);
 
 
-            //timeout after 100 ticks or just over 5 seconds
-            if (DateTime.Now > gamepadTimerTickCounter)
-            {
-                stopGamepadTimer(true);
-                controllerButtons = 0;
-            }
+           
             //start timer to read controller for inputs
             if (currentGamepad >= previousGamepad)
             {
@@ -146,12 +134,11 @@ namespace Handheld_Control_Panel.UserControls
                 if (currentGamepad < previousGamepad && previousGamepad != 4096)
                 {
                     //as soon as the button combo is LESS than the previous gamepad button AND isn't the A button (value of 4096) we know they have finished pressing all the buttons and we can now figure out what the combo is
-                    stopGamepadTimer(false);
-                    //string gamepadCombo = convertControllerUshortToString(controllerButtons.ToString());
-
-
+                    Global_Variables.hotKeys.editingHotkey.Type = "Controller";
                     Global_Variables.hotKeys.editingHotkey.Hotkey = controllerButtons.ToString();
                     control.Content = Global_Variables.hotKeys.editingHotkey.DisplayHotkey;
+                    stopKB_Controller_Timer(false);
+                    return;
                 }
 
             }
@@ -210,60 +197,65 @@ namespace Handheld_Control_Panel.UserControls
 
         }
 
-
-        private void startGamepadTimer()
+        private void startKB_Controller_Timer()
         {
+            //set variables to stop controller / kb input from being registered
             Controller_Management.suspendEventsForGamepadHotKeyProgramming = true;
+            MouseKeyHook.programmingKeystroke = true;
+
+            //set up separate timer to get controller input
             gamepadTimer.Tick += gamepad_Tick;
             gamepadTimer.Interval = TimeSpan.FromMilliseconds(70);
-            gamepadTimerTickCounter = DateTime.Now.AddSeconds(5);
-            System.Threading.Tasks.Task.Delay(70);
             gamepadTimer.Start();
+
+            // setup 5 second timeout timer
+            fiveSecondTimeOutTimer.Tick += fiveSecondTimeOutTimer_Tick;
+            fiveSecondTimeOutTimer.Interval = new TimeSpan(0, 0, 5);
+
+            //subscribe to event that tracks keyboard presses for a completed hotkey
+            MouseKeyHook.keyboardEvents.keyboardStringPress += handleKeyboardStringPress;
+
+            //set the control to the ... signifying its listening
             control.Content = "...";
+
+            //start the 5 second timeout timer (after 5 seconds it stops and reverts the value back if no controller/kb input detected)
+            fiveSecondTimeOutTimer.Start();
+
         }
-        private void stopGamepadTimer(bool timedOut)
+        private void stopKB_Controller_Timer(bool timedOut)
         {
-            gamepadTimer.Stop();
+            //set variables to allow the normal function of keyboard/controller input
             Controller_Management.suspendEventsForGamepadHotKeyProgramming = false;
+            MouseKeyHook.programmingKeystroke = false;
+
+            //stop the specific timer for tracking controller hotkey inputs AND unsubscribe to prevent threads from staying open after closure
+            gamepadTimer.Stop();
+            gamepadTimer.Tick -= gamepad_Tick;
+            MouseKeyHook.keyboardEvents.keyboardStringPress -= handleKeyboardStringPress;
             if (timedOut)
             {
                 control.Content = Global_Variables.hotKeys.editingHotkey.DisplayHotkey;
             }
         }
+      
+      
 
         private void handleKeyboardStringPress(object sender, EventArgs args)
         {
             control.Content = (string)sender;
             Global_Variables.hotKeys.editingHotkey.Hotkey = (string)sender;
-            MouseKeyHook.keyboardEvents.keyboardStringPress -= handleKeyboardStringPress;
-            keyboardTimer.Stop();
-            MouseKeyHook.programmingKeystroke = false;
+            Global_Variables.hotKeys.editingHotkey.Type = "Keyboard";
+            stopKB_Controller_Timer(false);
         }
-        private void startKBTimer()
-        {
-
-            MouseKeyHook.programmingKeystroke = true;
-            keyboardTimer.Tick += keyboard_Tick;
-            keyboardTimer.Interval = new TimeSpan(0, 0, 5);
-
-            MouseKeyHook.keyboardEvents.keyboardStringPress += handleKeyboardStringPress;
-
-            control.Content = "...";
-            keyboardTimer.Start();
-        }
-        private void stopKBTimer()
-        {
-            keyboardTimer.Stop();
-            MouseKeyHook.programmingKeystroke = false;
-
-        }
+        
+      
 
         #endregion
         #region keyboard timer
-        private void keyboard_Tick(object sender, EventArgs e)
+        private void fiveSecondTimeOutTimer_Tick(object sender, EventArgs e)
         {
             control.Content = Global_Variables.hotKeys.editingHotkey.DisplayHotkey;
-            stopKBTimer();
+            stopKB_Controller_Timer(true);
         }
 
 

@@ -24,7 +24,7 @@
                 <StackPanel x:Name="stackPanel" >
                     <uc:Action_Dropdown />
                     <uc:Parameter_Dropdown/>
-                    <uc:Type_Dropdown />
+                   
                     <uc:Hotkey_Button />
                 </StackPanel>
             </ScrollViewer>

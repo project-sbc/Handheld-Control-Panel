@@ -30,6 +30,10 @@ using static Vanara.Interop.KnownShellItemPropertyKeys;
 
 namespace Handheld_Control_Panel.UserControls
 {
+
+
+    //////////////////////////////////////////////////////////////////PLEASE READ  I GOT RID OF THIS BECAUSE PEOPLE KEPT GETTING CONFUSED HOW TO PROGRAM HOTKEYS, KEEPING THIS FOR THE TIME BEING AND THEN DELETE AFTER JUNE 2023///////////////////////////////////////////////////
+
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
