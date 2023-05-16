@@ -34,11 +34,11 @@ namespace Handheld_Control_Panel.Pages
     /// 
 
 
-    public partial class PowerPage : Page
+    public partial class AboutPage : Page
     {
         private string windowpage;
-        private List<powerpageitem> powerpageitems = new List<powerpageitem>();
-        public PowerPage()
+        private List<infopageitem> infopageitems = new List<infopageitem>();
+        public AboutPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
@@ -47,67 +47,27 @@ namespace Handheld_Control_Panel.Pages
             wnd.changeUserInstruction("SelectBack_Instruction");
             wnd = null;
 
+            infopageitem Tutorials = new infopageitem();
+            Tutorials.displayitem = Application.Current.Resources["UserControl_Tutorials"].ToString();
+            Tutorials.item = "Tutorials";
+            Tutorials.Kind = PackIconMaterialKind.DockRight;
+            infopageitems.Add(Tutorials);
 
 
-            List<Process> listProcesses = new List<Process>();
+            infopageitem Donate = new infopageitem();
+            Donate.displayitem = Application.Current.Resources["UserControl_Donate"].ToString();
+            Donate.item = "Donate";
+            Donate.Kind = PackIconMaterialKind.DockRight;
+            infopageitems.Add(Donate);
 
-            Process[] pList = Process.GetProcesses();
-            foreach (Process p in pList)
-            {
-                if (p.MainWindowHandle != IntPtr.Zero)
-                {
-                    Debug.WriteLine(p.ProcessName);
-               
-                    if (!listProcesses.Contains(p) && FullScreen_Management.IsForegroundFullScreen(new HandleRef(null, p.MainWindowHandle), null) && !FullScreen_Management.ExcludeFullScreenProcessList.Contains(p.ProcessName))
-                    {
-                        listProcesses.Add(p);
-                    }
-                }
-            }
-
-           
-
-            if (listProcesses.Count >0)
-            {
-                foreach (Process p in listProcesses)
-                {
-                    powerpageitem gameppi = new powerpageitem();
-                    gameppi.displayitem = Application.Current.Resources["UserControl_CloseGame"].ToString() + " " + p.ProcessName;
-                    gameppi.item = "CloseGame";
-                    gameppi.processID = p.Id;
-                    gameppi.Kind = PackIconMaterialKind.MicrosoftXboxController;
-                    powerpageitems.Add(gameppi);
-                }
-
-              
-            }
-
-            powerpageitem hideppi = new powerpageitem();
-            hideppi.displayitem = Application.Current.Resources["UserControl_HideHCP"].ToString();
-            hideppi.item = "HideHCP";
-            hideppi.Kind = PackIconMaterialKind.DockRight;
-            powerpageitems.Add(hideppi);
-
-            powerpageitem closeppi = new powerpageitem();
-            closeppi.displayitem = Application.Current.Resources["UserControl_CloseHCP"].ToString();
-            closeppi.item = "CloseHCP";
-            closeppi.Kind = PackIconMaterialKind.WindowClose;
-            powerpageitems.Add(closeppi);
-
-            powerpageitem restartppi = new powerpageitem();
-            restartppi.displayitem = Application.Current.Resources["UserControl_RestartPC"].ToString();
-            restartppi.item = "RestartPC";
-            restartppi.Kind = PackIconMaterialKind.Restart;
-            powerpageitems.Add(restartppi);
-
-            powerpageitem shutdownppi = new powerpageitem();
-            shutdownppi.displayitem = Application.Current.Resources["UserControl_ShutdownPC"].ToString();
-            shutdownppi.item = "ShutdownPC";
-            shutdownppi.Kind = PackIconMaterialKind.Power;
-            powerpageitems.Add(shutdownppi);
+            infopageitem OtherSoftware = new infopageitem();
+            OtherSoftware.displayitem = Application.Current.Resources["UserControl_OtherSoftware"].ToString();
+            OtherSoftware.item = "OtherSoftware";
+            OtherSoftware.Kind = PackIconMaterialKind.DockRight;
+            infopageitems.Add(OtherSoftware);
 
 
-            controlList.ItemsSource = powerpageitems;
+            controlList.ItemsSource = infopageitems;
         }
 
         
@@ -132,7 +92,7 @@ namespace Handheld_Control_Panel.Pages
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 if (controlList.SelectedItem != null)
                 {
-                    powerpageitem ppi = controlList.SelectedItem as powerpageitem;
+                    infopageitem ipi = controlList.SelectedItem as infopageitem;
                     int index = controlList.SelectedIndex;
                     switch (action)
                     {
@@ -174,70 +134,19 @@ namespace Handheld_Control_Panel.Pages
         {
             if (controlList.SelectedItem != null)
             {
-                powerpageitem ppi = controlList.SelectedItem as powerpageitem;
+                infopageitem ipi = controlList.SelectedItem as infopageitem;
                 int index = controlList.SelectedIndex;
 
                 MainWindow wnd = (MainWindow)Application.Current.MainWindow;
                 var mainWindowHandle = new WindowInteropHelper(wnd).Handle;
-                switch (ppi.item)
+                switch (ipi.item)
                 {
-                    case "CloseGame":
-                        int processID = ppi.processID;
-                        if (processID != 0)
-                        {
-                            System.Diagnostics.Process procs = null;
-
-                            try
-                            {
-                                procs = Process.GetProcessById(processID);
-                                if (FullScreen_Management.suspendedProcess != null)
-                                {
-                                    if (procs.Id == FullScreen_Management.suspendedProcess.Id)
-                                    {
-                                        FullScreen_Management.checkResumeProcess();
-                                    }
-                                }
-                                
-
-                                if (!procs.HasExited)
-                                {
-                                    procs.CloseMainWindow();
-                                }
-                            }
-                            finally
-                            {
-                                if (procs != null)
-                                {
-                                    procs.Dispose();
-                                }
-                                powerpageitems.Remove(ppi);
-                                controlList.Items.Refresh();
-                            }
-                        }
+                    case "Tutorials":
+                       
                         break;
 
 
-                    case "HideHCP":
-                        wnd.toggleWindow();
-                        break;
-                    case "CloseHCP":
-                        wnd.Close();
-                        wnd = null;
-                        break;
-                    case "RestartPC":
-
-                        var psi = new ProcessStartInfo("shutdown", "/r /t 0");
-                        psi.CreateNoWindow = true;
-                        psi.UseShellExecute = false;
-                        Process.Start(psi);
-
-                        break;
-                    case "ShutdownPC":
-                        var psisd = new ProcessStartInfo("shutdown", "/s /t 0");
-                        psisd.CreateNoWindow = true;
-                        psisd.UseShellExecute = false;
-                        Process.Start(psisd);
-                        break;
+                  
                     default: break;
 
                 }
@@ -259,11 +168,11 @@ namespace Handheld_Control_Panel.Pages
             handleListChange();
         }
     }
-    public class powerpageitem
+    public class infopageitem
     {
         public string displayitem { get; set; }
         public string item { get; set; }
         public PackIconMaterialKind Kind { get; set; }
-        public int processID { get; set; } = 0;
+      
     }
 }
