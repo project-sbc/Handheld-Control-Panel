@@ -85,6 +85,7 @@ namespace Handheld_Control_Panel
             if (Global_Variables.Device.FanCapable)
             {
                 Global_Variables.softwareAutoFanControlEnabled = false;
+                Global_Variables.fanControlEnabled = false;
                 Fan_Management.setFanControlHardware();
                 WinRingEC_Management.OlsFree();
             }

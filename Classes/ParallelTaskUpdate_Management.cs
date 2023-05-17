@@ -49,9 +49,11 @@ namespace Handheld_Control_Panel.Classes
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.CoreParking_Management.CoreParking_Management.readActiveCores());
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.EPP_Management.EPP_Management.readEPP());
             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.RTSS.getRTSSFPSLimit());
-            if (Global_Variables.Global_Variables.Device.FanCapable && !Global_Variables.Global_Variables.softwareAutoFanControlEnabled)
+            if (Global_Variables.Global_Variables.Device.FanCapable && Global_Variables.Global_Variables.softwareAutoFanControlEnabled)
             {
-                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.readFanSpeed());
+                //checks if thread is alive, if not starts it
+                AutoFan_Management.checkFanThreadRunning();
+               
             }
        
 

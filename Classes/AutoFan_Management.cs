@@ -44,6 +44,7 @@ namespace Handheld_Control_Panel.Classes
             if (Global_Variables.Global_Variables.Device.FanCapable)
             {
                 Global_Variables.Global_Variables.softwareAutoFanControlEnabled = true;
+                Global_Variables.Global_Variables.fanControlEnabled = true;
                 Fan_Management.Fan_Management.setFanControlManual();
                 //get the property variable whether you want it temperature or package power controlled, true means temp, false means package power
                 tempControlled = Properties.Settings.Default.fanAutoModeTemp;
@@ -64,6 +65,24 @@ namespace Handheld_Control_Panel.Classes
 
 
         }
+
+        public static void checkFanThreadRunning()
+        {
+            //this checks to see if the auto fan is running when it should be. The routine that calls this checks if device is fan capable and auto fan is running
+            if (autoFan == null)
+            {
+                startAutoFan();
+            }
+            else
+            {
+                if (!autoFan.IsAlive)
+                {
+                    startAutoFan();
+                }
+            }
+           
+        }
+
         public static void loadXandYvalues()
         {
             lock(lockObj)

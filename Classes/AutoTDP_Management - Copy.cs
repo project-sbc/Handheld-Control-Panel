@@ -24,7 +24,8 @@ namespace Handheld_Control_Panel.Classes
         public static void startAutoTDPThread()
         {
             Global_Variables.Global_Variables.autoTDP = true;
-            autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });
+            autoTDPThread = new Thread(() => { mainAutoTDPLoopHyatice(); });
+            autoTDPThread.IsBackground = true;
             autoTDPThread.Start();
         }
 
@@ -154,23 +155,24 @@ namespace Handheld_Control_Panel.Classes
                     tarCPU = (int)Math.Round(Math.Min(96, useCPU.Average() + .5), 0);
                     proposedCPU = (int)Math.Round(Math.Min(Math.Max(minCPU, cpuClock[cpuClock.Count-1] * useCPU[useCPU.Count-1] / tarCPU + offSetCPU), maxCPU),0);
                 }
-        //      useCPU = Math.Max(1, utilCPU * baseCPU)/actCPU)
-        //      useCPU should be measured as a float with at least 1 point of decimal precision
-        //      Need average of useCPU over previous 2 cycles + current cycle
-        //
-        //      tarCPU = Math.Min(96, average(useCPU)+.5)
-        //          The .5 (as a percent) is small enough that it almost never causes FPS dips during actual gameplay, but prevents runaway.
-        //
-        //      The min(96, x) makes it so that the max tarCPU value is 96%. This means that an average of 99% will still have some headroom to push clocks higher when necessary.
-        //
-        //      proposedCPU = Math.Min(Math.Max(minCPU, actCPU*useCPU/tarCPU+offsetCPU), maxCPU)
-        //
-        //      Ensure that measured GPU Usage is at least 1%
-        //      useGPU should be measured as a float with at least 1 point of decimal precision
-        //      Need average of useGPU over previous 2 cycles + current cycle
-        //      
-        //      tarGPU = Math.Min(96, average(useGPU)+.5) - See above re: CPU
-        //      proposedGPU = Math.Min(Math.Max(minGPU, actGPU*useGPU/tarGPU+offsetGPU), autoMaxGPU)
+                //      useCPU = Math.Max(1, utilCPU * baseCPU)/actCPU)
+                //      useCPU should be measured as a float with at least 1 point of decimal precision
+                //      Need average of useCPU over previous 2 cycles + current cycle
+                //
+                //      tarCPU = Math.Min(96, average(useCPU)+.5)
+                //          The .5 (as a percent) is small enough that it almost never causes FPS dips during actual gameplay, but prevents runaway.
+                //
+                //      The min(96, x) makes it so that the max tarCPU value is 96%. This means that an average of 99% will still have some headroom to push clocks higher when necessary.
+                //
+                //      proposedCPU = Math.Min(Math.Max(minCPU, actCPU*useCPU/tarCPU+offsetCPU), maxCPU)
+                //
+                //      Ensure that measured GPU Usage is at least 1%
+                //      useGPU should be measured as a float with at least 1 point of decimal precision
+                //      Need average of useGPU over previous 2 cycles + current cycle
+                //      
+                //      tarGPU = Math.Min(96, average(useGPU)+.5) - See above re: CPU
+                //      proposedGPU = Math.Min(Math.Max(minGPU, actGPU*useGPU/tarGPU+offsetGPU), autoMaxGPU)
+                Debug.WriteLine(gpuUsage[gpuUsage.Count - 1]);
                 if (gpuUsage[gpuUsage.Count-1] > 1)
                 {
                     tarGPU = (int)Math.Round(Math.Min(96, gpuUsage_Avg + .5));
