@@ -46,8 +46,10 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            
-            Resolutions = Global_Variables.resolutions;
+            foreach(string resolution in Global_Variables.resolutions)
+            {
+                Resolutions.Add(resolution);
+            }
             Resolutions.Insert(0, "");
 
             controlList.ItemsSource = Resolutions;

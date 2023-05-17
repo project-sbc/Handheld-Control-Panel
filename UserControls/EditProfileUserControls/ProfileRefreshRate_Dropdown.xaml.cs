@@ -49,10 +49,12 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (Global_Variables.profiles.editingProfile.Resolution != "")
             {
-               
-                RefreshRates = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution];
+                foreach (string refresh in Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution])
+                {
+                    RefreshRates.Add(refresh);
+                }
                 RefreshRates.Insert(0, "");
-
+              
                 controlList.ItemsSource = RefreshRates;
 
                 controlList.SelectedItem = Global_Variables.profiles.editingProfile.Resolution;
