@@ -204,13 +204,13 @@
     <Compile Update="Pages\AutoFanPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\DonatePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\OtherSoftwarePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\AboutPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\PowerPage.xaml.cs">
@@ -420,7 +420,16 @@
     <Compile Update="UserControls\InformationUserControls\HIDHide_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InformationUserControls\Donate_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\TutorialVideos_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InformationUserControls\OtherSoftware_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InformationUserControls\HCPGithub_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InformationUserControls\SDILite_Link.xaml.cs">
@@ -441,13 +450,13 @@
     <Compile Update="UserControls\InformationUserControls\HandheldCompanion_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InformationUserControls\GitHub_Link.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UserControls\InstructionUserControls\AppLauncherPage_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\AutoFanPage_Instruction.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\InstructionUserControls\SelectClose_Instruction.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InstructionUserControls\SelectBack_Instruction.xaml.cs">

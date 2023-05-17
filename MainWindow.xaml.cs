@@ -335,10 +335,18 @@ namespace Handheld_Control_Panel
                         {
                             switch (page)
                             {
+                                case "OtherSoftwarePage":
+                                    navigateFrame("InformationPage");
+                                    break;
+                                case "DonatePage":
+                                    navigateFrame("InformationPage");
+                                    break;
+                                case "TutorialVideosPage":
+                                    navigateFrame("InformationPage");
+                                    break;
                                 case "CustomizeHomePage":
                                     navigateFrame("HomePage");
                                     break;
-
                                 case "AutoFanPage":
                                     navigateFrame("SettingsPage");
                                     break;
@@ -645,9 +653,13 @@ namespace Handheld_Control_Panel
                 {
 
                     case "SelectBack_Instruction":
+                    
                         instructionStackPanel.Children.Add(new SelectBack_Instruction());
                         break;
-
+                    case "SelectClose_Instruction":
+                      
+                        instructionStackPanel.Children.Add(new SelectClose_Instruction());
+                        break;
                     case "AutoFanPage_Instruction":
                         instructionStackPanel.Children.Add(new AutoFanPage_Instruction());
                         break;

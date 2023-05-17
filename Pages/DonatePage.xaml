@@ -1,4 +1,4 @@
-﻿<Page x:Class="Handheld_Control_Panel.Pages.InformationPage"
+﻿<Page x:Class="Handheld_Control_Panel.Pages.DonatePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,15 +15,14 @@
 
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0"  Background="{DynamicResource MahApps.Brushes.Accent3}">
-            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Information}"/>
-            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource MainWindow_NavigationView_Sub_Information}"/>
+            <Label  Name="HeaderLabel" Style="{DynamicResource HeaderLabel}" Content="{DynamicResource UserControl_Donate}"/>
+            <Label Name="SubheaderLabel" Style="{DynamicResource SubheaderLabel}" Content="{DynamicResource UserControl_Donate_Subtext}"/>
         </DockPanel>
          <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
-                <uc:HCPGithub_Link/>
-                <uc:TutorialVideos_Link/>
-                <uc:Donate_Link />
-                <uc:OtherSoftware_Link />
+                <uc:DonateKofi_Link/>
+                <uc:DonatePaypal_Link/>
+
             </StackPanel>
     </ScrollViewer>
     </Grid>

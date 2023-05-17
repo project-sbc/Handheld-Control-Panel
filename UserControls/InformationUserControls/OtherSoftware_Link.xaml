@@ -13,7 +13,7 @@
                 <Label Content="{DynamicResource UserControl_OtherSoftware}" DockPanel.Dock="Left"  Style="{StaticResource userControlMainLabel}"/>
                 <TextBlock FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Top" Margin="0,0,22,0" >
                 <Hyperlink NavigateUri="OtherSoftwarePage" RequestNavigate="Hyperlink_RequestNavigate" x:Name="control" Tag="Page" >
-                    Link
+                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" Text="&#xE7C3;" />
                 </Hyperlink>
                 </TextBlock>
             </DockPanel>

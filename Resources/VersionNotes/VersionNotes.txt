@@ -13,6 +13,7 @@
 		-Fixed error where volume hot keys were not adjusting correctly.
 		-Fixed error where mouse mode was allowed to start without an active mouse mode profile.
 		-Fixed error when no audio driver is installed, get volume returns an error. Now error traps and hides the volume controls on the home page.
+		-Fixed issue where blank records were inserted into resolution/refresh rate lists when editing a profile.
 
 	Features:
 

@@ -30,21 +30,21 @@ namespace Handheld_Control_Panel.Pages
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class InformationPage : Page
+    public partial class DonatePage : Page
     {
         private string windowpage;
         private List<UserControl> userControls = new List<UserControl>();
 
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
-        public InformationPage()
+        public DonatePage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
            
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
-            wnd.changeUserInstruction("SelectClose_Instruction");
+            wnd.changeUserInstruction("SelectBack_Instruction");
             wnd = null;
         }
        

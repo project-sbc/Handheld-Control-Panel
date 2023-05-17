@@ -259,11 +259,7 @@
     <system:String x:Key="Usercontrol_RSR">AMD RSR</system:String>
         
       <!-- new 16May2023 !-->
-        
-    <system:String x:Key="Usercontrol_HCPGithub">Handheld Control Panel Github</system:String>
-    <system:String x:Key="Usercontrol_UserGuide">User Guide Videos</system:String>
-
-
+          
     <system:String x:Key="UserControl_OtherSoftware_HandheldCompanion">Handheld Companion</system:String>
     <system:String x:Key="UserControl_OtherSoftware_HandheldCompanion_Subtext">Handheld Companion is a gyro controller application that offers other 
     features such as TDP and fan control.
@@ -292,5 +288,17 @@
     </system:String>
     <system:String x:Key="UserControl_Donate">Donate</system:String>
     <system:String x:Key="UserControl_Donate_Subtext">Show your support to the developer by donating.
+    </system:String>
+    <system:String x:Key="UserControl_HCPGithub">HCP GitHub</system:String>
+    <system:String x:Key="UserControl_HCPGithub_Subtext">Go to the GitHub page to see the latest information, contribute to the project, or submit a problem report.
+    </system:String>
+    <system:String x:Key="UserControl_DonateKofi">Donate On Ko-fi</system:String>
+    <system:String x:Key="UserControl_DonateKofi_Subtext">Support the developer on Ko-fi.
+    </system:String>
+    <system:String x:Key="UserControl_DonatePaypal">Donate On PayPal</system:String>
+    <system:String x:Key="UserControl_DonatePaypal_Subtext">Support the developer on PayPal.
+    </system:String>
+    <system:String x:Key="UserControl_TutorialVideos">Tutorial Videos</system:String>
+    <system:String x:Key="UserControl_TutorialVideos_Subtext">See a list of tutorial videos on how to use HCP.
     </system:String>
 </ResourceDictionary>
