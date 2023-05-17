@@ -78,7 +78,7 @@ namespace Handheld_Control_Panel.UserControls
             if (hyperlink.Tag.ToString() == "Page")
             {
         
-                Global_Variables.mainWindow.navigateFrame(hyperlink.Tag.ToString());
+                Global_Variables.mainWindow.navigateFrame(hyperlink.NavigateUri.ToString());
                 e.Handled = true;
             }
             else
