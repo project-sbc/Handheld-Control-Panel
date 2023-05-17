@@ -393,7 +393,14 @@ namespace Handheld_Control_Panel.Classes
                     {
                         Exe = System.IO.Path.GetFileNameWithoutExtension(value);
                     }
-
+                    else
+                    {
+                        Exe = "";
+                    }
+                }
+                else
+                {
+                    Exe = "";
                 }
 
                 path = value;

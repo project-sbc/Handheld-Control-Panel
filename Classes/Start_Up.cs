@@ -108,8 +108,13 @@ namespace Handheld_Control_Panel.Classes
             //apply default profile, 0 is default profile ID and will only apply if 0 exists
             //XML_Management.Manage_XML_Profiles.applyProfile("0", false);
 
+
+            //wrap in dispatcher because calling profiles from UI thread later will give an error. REMINDER: this is running on separate thread for spinner
+            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => Global_Variables.Global_Variables.profiles = new Profiles_Management()));
+
+
            
-            Global_Variables.Global_Variables.profiles = new Profiles_Management();
+            
 
             AutoProfile_Management.checkAutoProfileApplicator_StartUp();
             if (Global_Variables.Global_Variables.profiles.activeProfile != null)

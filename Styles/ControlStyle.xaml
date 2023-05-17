@@ -75,10 +75,11 @@
     <Style x:Key="userControlMainLabelViewBox_Textblock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
+    
     <Style x:Key="userControlSubtextAboutPagesViewBox_Textblock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="Margin" Value="8,0,5,0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="12,0,8,7" />
     </Style>
     <Style x:Key="userControlMainLabelViewBox" TargetType="Viewbox">
    

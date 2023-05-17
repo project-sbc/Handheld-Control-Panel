@@ -23,7 +23,8 @@
                 <uc:GitHub_Link/>
                 <uc:DonatePaypal_Link />
             <uc:DonateKofi_Link/>
-        </StackPanel>
+                <uc:OtherSoftware_Link />
+            </StackPanel>
     </ScrollViewer>
     </Grid>
    

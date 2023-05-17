@@ -29,11 +29,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class PageOtherSoftware_Link : UserControl
+    public partial class OtherSoftware_Link : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public PageOtherSoftware_Link()
+        public OtherSoftware_Link()
         {
             InitializeComponent();
             setControlValue();
@@ -65,8 +65,6 @@ namespace Handheld_Control_Panel.UserControls
             }
         }
 
-
-       
       
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -76,8 +74,19 @@ namespace Handheld_Control_Panel.UserControls
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-            e.Handled = true;
+            Hyperlink hyperlink = (Hyperlink)sender;
+            if (hyperlink.Tag.ToString() == "Page")
+            {
+        
+                Global_Variables.mainWindow.navigateFrame(hyperlink.Tag.ToString());
+                e.Handled = true;
+            }
+            else
+            {
+                Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+                e.Handled = true;
+            }
+            
         }
     }
 }

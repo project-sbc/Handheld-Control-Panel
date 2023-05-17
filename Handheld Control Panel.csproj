@@ -198,13 +198,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\OtherSoftwarePage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Pages\AppLauncherLargePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AutoFanPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\OtherSoftwarePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MouseModeEditPage.xaml.cs">
@@ -420,7 +420,7 @@
     <Compile Update="UserControls\InformationUserControls\HIDHide_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\InformationUserControls\PageOtherSoftware_Link.xaml.cs">
+    <Compile Update="UserControls\InformationUserControls\OtherSoftware_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\InformationUserControls\SDILite_Link.xaml.cs">

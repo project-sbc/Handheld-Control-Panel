@@ -446,7 +446,18 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         Hyperlink hyperlink = (Hyperlink)control;
                         if (action == "A")
                         {
-                            System.Diagnostics.Process.Start(new ProcessStartInfo(hyperlink.NavigateUri.AbsoluteUri) { UseShellExecute = true });
+                            if (hyperlink.Tag == null)
+                            {
+                                System.Diagnostics.Process.Start(new ProcessStartInfo(hyperlink.NavigateUri.AbsoluteUri) { UseShellExecute = true });
+                                
+                            }
+                            else if (hyperlink.Tag.ToString() == "Page")
+                            {
+                                Global_Variables.Global_Variables.mainWindow.navigateFrame(hyperlink.NavigateUri.ToString());
+                            }
+                           
+
+                            
 
                         }
                     }
