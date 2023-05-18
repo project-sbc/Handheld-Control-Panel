@@ -102,8 +102,6 @@ namespace Handheld_Control_Panel.Classes
                         WorkingDirectory = Path.GetDirectoryName(command)
                     });
                 }
-
-              
             }
             catch { /* ignore */ }
         }

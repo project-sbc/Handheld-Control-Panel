@@ -18,6 +18,7 @@
    
 
                 <ResourceDictionary Source="/Styles/ControlStyle.xaml" />
+                <ResourceDictionary Source="/Styles/ControlStyleIcons.xaml" />
                 <ResourceDictionary Source="/StringResources/StringResources.xaml" />
 
             </ResourceDictionary.MergedDictionaries>

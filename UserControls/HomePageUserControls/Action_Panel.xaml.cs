@@ -32,33 +32,33 @@ namespace Handheld_Control_Panel.UserControls
     {
         private string windowpage = "";
         private string usercontrol = "";
-        private bool dragStarted= false;
+        private bool dragStarted = false;
         public Action_Panel()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(null);
-         
+
         }
 
-       
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-           //UserControl_Management.setThumbSize(control);
+            //UserControl_Management.setThumbSize(control);
 
             Controller_Window_Page_UserControl_Events.userControlControllerInput += handleControllerInputs;
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
-            usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
+            usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.", "");
 
         }
 
-      
-      
+
+
 
         private void handleControllerInputs(object sender, EventArgs e)
         {
-            controllerUserControlInputEventArgs args= (controllerUserControlInputEventArgs)e;
-            if (args.WindowPage == windowpage && args.UserControl==usercontrol)
+            controllerUserControlInputEventArgs args = (controllerUserControlInputEventArgs)e;
+            if (args.WindowPage == windowpage && args.UserControl == usercontrol)
             {
                 Classes.UserControl_Management.UserControl_Management.handleUserControl(border, null, args.Action);
 
@@ -66,16 +66,20 @@ namespace Handheld_Control_Panel.UserControls
         }
 
 
-     
-      
+
+
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
-        
-        }
-      
-       
 
-      
+        }
+
+
+
+
+    }
+    public class Action_Panel_Items
+    {
+
     }
 }
