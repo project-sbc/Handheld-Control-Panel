@@ -22,6 +22,7 @@
         <StackPanel x:Name="stackPanel" >
                 <uc:DonateKofi_Link/>
                 <uc:DonatePaypal_Link/>
+                <uc:DonatePatreon_Link/>
 
             </StackPanel>
     </ScrollViewer>

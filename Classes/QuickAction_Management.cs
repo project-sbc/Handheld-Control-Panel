@@ -43,7 +43,11 @@ namespace Handheld_Control_Panel.Classes
 
             switch (actionParameter.Action)
             {
-                
+                case "Open_Program":
+                    Global_Variables.Global_Variables.profiles.openProgram(actionParameter.Parameter);
+
+
+                    break;
 
 
                 case "Toggle_HCP_OSK":

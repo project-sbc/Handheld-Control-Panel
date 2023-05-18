@@ -19,10 +19,9 @@
 	Features:
 
 		-Added RSR support from AMD driver to home page. Existing users need to add it on the customize home page.
-		-Added RTSS directory to app settings
-		-Added optional hide splashscreen at normal startup in settings
+		-Added RTSS directory to app settings.
+		-Added optional hide splashscreen at normal startup in settings.
 		-Expanded xbox game scan to all drives, not just C.
-		-Added air neo air plus 6800U support.
 		-Removed the hotkey type option, type is automatically detected based on keyboard or controller input.
 
 0.1.0.1 - Released 12-May-2023 on discord

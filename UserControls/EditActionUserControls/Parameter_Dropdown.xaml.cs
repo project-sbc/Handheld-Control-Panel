@@ -4,6 +4,7 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -198,6 +199,19 @@ namespace Handheld_Control_Panel.UserControls
                     }
 
                     break;
+                case "Open_Program":
+
+                    foreach (Profile profile in Global_Variables.profiles.Where(o => o.AppType != "").ToList<Profile>())
+                    {
+                        Parameter parameter = new Parameter();
+                        Debug.WriteLine(profile.appType);
+                        parameter.DisplayParameter = profile.ProfileName;
+                        parameter.ParameterValue = profile.ID;
+                        hotkeyParameter.Add(parameter);
+                    }
+
+                    break;
+                    
                 default:
                     this.Visibility = Visibility.Collapsed;
                     break;

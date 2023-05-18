@@ -417,6 +417,9 @@
     <Compile Update="UserControls\HomePageUserControls\FPS_Slider.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InformationUserControls\DonatePatreon_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InformationUserControls\HIDHide_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -255,7 +255,65 @@ namespace Handheld_Control_Panel.Classes
             inputSimulator = null;
             Global_Variables.Global_Variables.MouseModeEnabled = false;
         }
-      
+
+        public void checkResumePauseMouseMode(bool toggleOpen)
+        {
+            //this routine will toggle the mouse mode automatically when HCP is open to allow controller use on the panel
+            if (Global_Variables.Global_Variables.MouseModeEnabled)
+            {
+                if (toggleOpen)
+                {
+                    timerController.Stop();
+                }
+                else
+                {
+                    timerController.Start();
+                }
+            }
+        }
+
+        private void checkSwapController()
+        {
+
+            //error number MMM03
+            try
+            {
+                List<Controller> controllerList = new List<Controller>();
+
+                controllerList.Add(new Controller(UserIndex.One));
+                controllerList.Add(new Controller(UserIndex.Two));
+                controllerList.Add(new Controller(UserIndex.Three));
+                controllerList.Add(new Controller(UserIndex.Four));
+
+                foreach (Controller swapController in controllerList)
+                {
+
+                    if (swapController != null)
+                    {
+                        if (swapController.IsConnected)
+                        {
+                            Gamepad swapGamepad = swapController.GetState().Gamepad;
+                            if (swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Start) && swapGamepad.Buttons.HasFlag(GamepadButtonFlags.Back))
+                            {
+
+                                controller = swapController;
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log_Writer.writeLog("Controller Management; " + ex.Message, "MMM03");
+
+            }
+
+
+
+
+
+        }
         private void controller_Tick(object sender, EventArgs e)
         {
             //start timer to read and compare controller inputs
@@ -282,6 +340,8 @@ namespace Handheld_Control_Panel.Classes
                 {
                     if (controller.IsConnected && activeMouseMode != null)
                     {
+
+
                         currentGamePad = controller.GetState().Gamepad;
 
                         double mouseX = 0;

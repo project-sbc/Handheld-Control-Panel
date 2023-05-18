@@ -298,6 +298,9 @@
     <system:String x:Key="UserControl_DonatePaypal">Donate On PayPal</system:String>
     <system:String x:Key="UserControl_DonatePaypal_Subtext">Support the developer on PayPal.
     </system:String>
+    <system:String x:Key="UserControl_DonatePatreon">Donate On Patreon</system:String>
+    <system:String x:Key="UserControl_DonatePatreon_Subtext">Support the developer on Patreon.
+    </system:String>
     <system:String x:Key="UserControl_TutorialVideos">Tutorial Videos</system:String>
     <system:String x:Key="UserControl_TutorialVideos_Subtext">See a list of tutorial videos on how to use HCP.
     </system:String>
