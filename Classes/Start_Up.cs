@@ -38,7 +38,7 @@ namespace Handheld_Control_Panel.Classes
                     TaskSchedulerWin32.TaskSchedulerWin32.changeTaskService(true);
                 }
             }
-
+                        
 
             //run hyatice powerplan
             Powercfg.setupPowerPlan();
