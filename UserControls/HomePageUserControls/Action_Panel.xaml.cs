@@ -47,6 +47,7 @@ namespace Handheld_Control_Panel.UserControls
 
         }
 
+
         private void loadActionPanelList()
         {
             foreach (HotkeyItem hki in Global_Variables.hotKeys)
@@ -55,15 +56,16 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     Action_Panel_Items api = new Action_Panel_Items();
                     api.hki = hki;
-                    switch(hki.Action)
+         
+
+                    switch (hki.Action)
                     {
                         case "Open_Program":
                             
                             break;
                         default:
                             api.data = Application.Current.Resources["Path_Data_" + hki.Action].ToString();
-                            api.imageVisibility = Visibility.Collapsed;
-                            api.canvasVisibility = Visibility.Visible;
+
                             break;
                     }
                     if (hki.Action != "")
@@ -119,8 +121,10 @@ namespace Handheld_Control_Panel.UserControls
     {
         public HotkeyItem hki { get; set; }
         public string data { get; set; }
-        public Visibility canvasVisibility { get; set; }
-        public Visibility imageVisibility { get; set; }
+        public string text { get; set; }
+        public Visibility canvasVisibility { get; set; } = Visibility.Visible;
+        public Visibility imageVisibility { get; set; } = Visibility.Collapsed;
+        public Visibility visibilitySlash { get; set; } = Visibility.Collapsed;
         public Image image { get; set; }
 
     }
