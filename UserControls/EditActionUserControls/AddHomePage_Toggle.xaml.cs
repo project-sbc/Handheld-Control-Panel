@@ -70,7 +70,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Global_Variables.profiles.editingProfile.DefaultProfile = control.IsOn;
+                Global_Variables.hotKeys.editingHotkey.AddHomePage = control.IsOn;
 
             }
           

@@ -57,10 +57,13 @@ namespace Handheld_Control_Panel.UserControls
                     api.hki = hki;
                     switch(hki.Action)
                     {
-                        case "Open_Steam_BigPicture":
+                        case "Open_Program":
                             
                             break;
                         default:
+                            api.data = Application.Current.Resources["Path_Data_" + hki.Action].ToString();
+                            api.imageVisibility = Visibility.Collapsed;
+                            api.canvasVisibility = Visibility.Visible;
                             break;
                     }
                     if (hki.Action != "")
@@ -115,7 +118,10 @@ namespace Handheld_Control_Panel.UserControls
     public class Action_Panel_Items
     {
         public HotkeyItem hki { get; set; }
-        public Canvas canvas { get; set; }
+        public string data { get; set; }
+        public Visibility canvasVisibility { get; set; }
+        public Visibility imageVisibility { get; set; }
+        public Image image { get; set; }
 
     }
 }
