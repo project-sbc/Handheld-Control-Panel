@@ -33,14 +33,48 @@ namespace Handheld_Control_Panel.UserControls
         private string windowpage = "";
         private string usercontrol = "";
         private bool dragStarted = false;
+        private List<Action_Panel_Items> apiList = new List<Action_Panel_Items>();
+
         public Action_Panel()
         {
             InitializeComponent();
             //setControlValue();
             UserControl_Management.setupControl(null);
 
+
+            loadActionPanelList();
+
+
         }
 
+        private void loadActionPanelList()
+        {
+            foreach (HotkeyItem hki in Global_Variables.hotKeys)
+            {
+                if (hki.AddHomePage)
+                {
+                    Action_Panel_Items api = new Action_Panel_Items();
+                    api.hki = hki;
+                    switch(hki.Action)
+                    {
+                        case "Open_Steam_BigPicture":
+                            
+                            break;
+                        default:
+                            break;
+                    }
+                    if (hki.Action != "")
+                    {
+                        apiList.Add(api);
+                    }
+                }
+
+            }
+
+            controlList.ItemsSource = apiList;
+
+
+        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -80,6 +114,8 @@ namespace Handheld_Control_Panel.UserControls
     }
     public class Action_Panel_Items
     {
+        public HotkeyItem hki { get; set; }
+        public Canvas canvas { get; set; }
 
     }
 }

@@ -37,6 +37,7 @@ namespace Handheld_Control_Panel.Pages
         private HomePageItem selectedItem;
 
         
+
         public CustomizeHomePage()
         {
             InitializeComponent();

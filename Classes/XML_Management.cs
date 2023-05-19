@@ -1228,5 +1228,32 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
         }
         
+
+        public static class Manage_XML_App_Updates
+        {
+            public static void upgrade_To_0_1_0_2()
+            {
+                //upgrades from 0.1.0.1 to 0.1.0.2 for XML file scopes
+                //NO CHANGES, this is an example routine DONT USE. I thought I didnt add the AddHomePage to action_management but i did, so i dont need this
+
+                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
+                XmlNode xmlNodeHotkeys = xmlDocument.SelectSingleNode("//Configuration/HotKeys");
+
+                foreach (XmlNode node in xmlNodeHotkeys.ChildNodes)
+                {
+                    if (node.SelectSingleNode("AddHomePage") == null)
+                    {
+                      
+                  
+                    }
+
+                }
+
+                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
+                xmlDocument = null;
+            }
+
+        }
     }
 

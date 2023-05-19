@@ -226,12 +226,7 @@ namespace Handheld_Control_Panel.Classes
     {
         public string ID { get; set; }
 
-        public Visibility materialIconVisibility { get; set; }
-        public Visibility fontAwesomeIconVisibility { get; set; }
-        public Visibility simpleIconVisibility { get; set; }
-        public PackIconMaterial materialIcon { get; set; }
-        public PackIconFontAwesome fontAwesomeIcon { get; set; }
-        public PackIconSimpleIcons simpleIcon { get; set; }
+   
         private string type { get; set; } = "";
         public string Type
         {
@@ -424,8 +419,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-     
-
+      
 
 
         public string convertControllerUshortToString(string hotkey)

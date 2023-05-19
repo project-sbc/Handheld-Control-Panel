@@ -61,7 +61,9 @@ namespace Handheld_Control_Panel.Pages
                         
                             switch (item.UserControl)
                             {
-                                
+                                case "Usercontrol_ActionPanel":
+                                    stackPanel.Children.Add(new Action_Panel());
+                                    break;
                                 case "UserControl_FanControl":
                                     stackPanel.Children.Add(new Fan_Slider());
                                     break;
