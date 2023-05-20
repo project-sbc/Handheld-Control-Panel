@@ -60,6 +60,10 @@ namespace Handheld_Control_Panel.UserControls
 
                     switch (hki.Action)
                     {
+                        case "Change_TDP":
+                            api.data = Application.Current.Resources["Path_Data_" + hki.Action].ToString();
+                            api.text = hki.DisplayParameter + " W";
+                            break;
                         case "Open_Program":
                             
                             break;
