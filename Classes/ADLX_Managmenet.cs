@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public static class ADLX_Managmenet
+    public static class ADLX_Management
     {
 
         #region constants and dll references

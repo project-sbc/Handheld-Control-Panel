@@ -24,6 +24,7 @@
                 <uc:TutorialVideos_Link/>
                 <uc:Donate_Link />
                 <uc:OtherSoftware_Link />
+                <uc:Discord_Link/>
             </StackPanel>
     </ScrollViewer>
     </Grid>

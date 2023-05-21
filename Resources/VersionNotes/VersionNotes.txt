@@ -15,6 +15,7 @@
 		-Fixed error when no audio driver is installed, get volume returns an error. Now error traps and hides the volume controls on the home page.
 		-Fixed issue where blank records were inserted into resolution/refresh rate lists when editing a profile.
 		-Fixed issue where auto fan on startup was reporting as hardware control on the fan control on the home page.
+		-Fixed error where windows OSK was crashing HCP when trying to bring up on the screen.
 
 	Features:
 

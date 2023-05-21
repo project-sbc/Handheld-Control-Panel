@@ -308,4 +308,10 @@
     <system:String x:Key="UserControl_TutorialVideos">Tutorial Videos</system:String>
     <system:String x:Key="UserControl_TutorialVideos_Subtext">See a list of tutorial videos on how to use HCP.
     </system:String>
+
+    <system:String x:Key="UserControl_DiscordLink">Discord Link</system:String>
+    <system:String x:Key="UserControl_DiscordLink_Subtext">Come chat with me and other people about handhelds, SBCs, or HCP.
+    </system:String>
+
+    <system:String x:Key="Hotkeys_Action_Toggle_AMD_RSR">Toggle AMD RSR</system:String>
 </ResourceDictionary>

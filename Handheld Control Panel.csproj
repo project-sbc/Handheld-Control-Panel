@@ -420,6 +420,9 @@
     <Compile Update="UserControls\InformationUserControls\DonatePatreon_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InformationUserControls\Discord_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InformationUserControls\HIDHide_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -645,6 +648,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="UserControls\InformationUserControls\Discord_Link.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\SettingsUserControls\Update_Button.xaml">
       <SubType>Designer</SubType>
     </Page>

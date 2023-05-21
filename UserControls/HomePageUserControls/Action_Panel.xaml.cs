@@ -102,6 +102,17 @@ namespace Handheld_Control_Panel.UserControls
 
                     switch (hki.Action)
                     {
+                        case "Toggle_AMD_RSR":
+                            api.text = "    RSR";
+                            if (ADLX_Management.GetRSRState() == 1)
+                            {
+                                api.visibilitySlash = Visibility.Visible;
+                            }
+                            else
+                            {
+                                api.visibilitySlash = Visibility.Hidden;
+                            }
+                            break;
                         case "Toggle_MouseMode":
                             if (!Global_Variables.MouseModeEnabled)
                             {
@@ -192,24 +203,7 @@ namespace Handheld_Control_Panel.UserControls
                     switch (args.Action)
                     {
                         case "A":
-                            if (controlList.SelectedItem != null)
-                            {
-                                Action_Panel_Items api = controlList.SelectedItem as Action_Panel_Items;
-
-                                if (api != null)
-                                {
-                                    if (api.hki != null)
-                                    {
-                                        ActionParameter ap = new ActionParameter();
-                                        ap.Action = api.hki.Action;
-                                        ap.Parameter = api.hki.Parameter;
-
-                                        QuickAction_Management.runHotKeyAction(ap);
-                                    }
-
-                                }
-
-                            }
+                            handleActionButtonPressed();
 
                             break;
 
@@ -243,7 +237,43 @@ namespace Handheld_Control_Panel.UserControls
             }
         }
 
+        private void handleActionButtonPressed()
+        {
+            if (controlList.SelectedItem != null)
+            {
+                Action_Panel_Items api = controlList.SelectedItem as Action_Panel_Items;
 
+                if (api != null)
+                {
+                    if (api.hki != null)
+                    {
+                        ActionParameter ap = new ActionParameter();
+                        ap.Action = api.hki.Action;
+                        ap.Parameter = api.hki.Parameter;
+
+                        QuickAction_Management.runHotKeyAction(ap);
+
+                        switch (ap.Action)
+                        {
+                            case "Toggle_AMD_RSR":
+                                if (api.visibilitySlash == Visibility.Visible)
+                                {
+                                    api.visibilitySlash = Visibility.Hidden;
+                                }
+                                else
+                                {
+                                    api.visibilitySlash = Visibility.Visible;
+                                }
+                                break;
+
+                        }
+                        controlList.Items.Refresh();
+                    }
+
+                }
+
+            }
+        }
 
       
 

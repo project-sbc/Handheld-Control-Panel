@@ -17,6 +17,7 @@ using WindowsInput;
 using System.Data.Common;
 using YamlDotNet.Core.Tokens;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -67,10 +68,26 @@ namespace Handheld_Control_Panel.Classes
                         AutoTDP_Management_OLD.startAutoTDPThread();
                     }
                     break;
-                        
+
+                case "Toggle_AMD_RSR":
+                    if (Global_Variables.Global_Variables.cpuType == "AMD")
+                    {
+                        int rsrState = ADLX_Management.GetRSRState();
+                        if (rsrState == 1)
+                        {
+                            ADLX_Management.SetRSR(false);
+                        }
+                        else
+                        {
+                            ADLX_Management.SetRSR(true);
+                        }
+                    }
+
+                    break;
+
                 case "Toggle_Windows_OSK":
                     Process[] pname = Process.GetProcessesByName("tabtip");
-                    OSKTablet oskt = new OSKTablet();
+    
                     if (pname.Length == 0)
                     {
                         ProcessStartInfo psi = new ProcessStartInfo()
@@ -81,7 +98,15 @@ namespace Handheld_Control_Panel.Classes
                         System.Diagnostics.Process.Start(psi);
                      
                     }
-                    oskt.Main();
+                    Thread.Sleep(300);
+
+                    pname = Process.GetProcessesByName("tabtip");
+                    if (pname.Length != 0)
+                    {
+                        OSKTablet oskt = new OSKTablet();
+                        oskt.Main();
+                    }
+                    
 
 
 

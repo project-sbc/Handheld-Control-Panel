@@ -140,8 +140,17 @@ namespace Handheld_Control_Panel.UserControls
                 HotKeyAction autoTDP = new HotKeyAction();
                 autoTDP.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_AutoTDP"].ToString();
                 autoTDP.HotkeyAction = "Toggle_AutoTDP";
-
+                
                 hotkeyAction.Add(autoTDP);
+            }
+
+            if (Global_Variables.cpuType == "AMD")
+            {
+                HotKeyAction rsr = new HotKeyAction();
+                rsr.DisplayHotkeyAction = Application.Current.Resources["Hotkeys_Action_Toggle_AMD_RSR"].ToString();
+                rsr.HotkeyAction = "Toggle_AMD_RSR";
+
+                hotkeyAction.Add(rsr);
             }
 
             HotKeyAction resolutionMode = new HotKeyAction();
