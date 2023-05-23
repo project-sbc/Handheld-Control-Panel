@@ -69,7 +69,7 @@
                                     </Canvas>
 
                                     <Viewbox VerticalAlignment="Bottom" Height="27">
-                                        <local:OutlinedTextBlock Text="{Binding text}" TextWrapping="Wrap" StrokeThickness="1" Stroke="{DynamicResource MahApps.Brushes.ThemeForeground}" FontWeight="Bold" Fill="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                                        <local:OutlinedTextBlock Text="{Binding text}" TextWrapping="Wrap" StrokeThickness="3" Stroke="{DynamicResource MahApps.Brushes.ThemeBackground}"  Fill="{DynamicResource MahApps.Brushes.ThemeForeground}">
                                     
                                         </local:OutlinedTextBlock>
                                         
