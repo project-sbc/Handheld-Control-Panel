@@ -29,11 +29,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class AddHomePage_Toggle : UserControl
+    public partial class AddQuickActionPanel : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public AddHomePage_Toggle()
+        public AddQuickActionPanel()
         {
             InitializeComponent();
             setControlValue();

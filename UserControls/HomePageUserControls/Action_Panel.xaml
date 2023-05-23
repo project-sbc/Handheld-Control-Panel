@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Handheld_Control_Panel.UserControls" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+     
               xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignWidth="450"  Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
@@ -14,8 +15,8 @@
                     <TextBlock Text="{DynamicResource Usercontrol_ActionPanel}" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
                 </Viewbox>
 
-                <Viewbox Style="{StaticResource userControlMainLabelViewBox}">
-                    <TextBlock Name="actionName" Style="{StaticResource userControlMainLabelViewBox_Textblock}" />
+                <Viewbox Style="{StaticResource userControlMainLabelViewBox}" >
+                    <TextBlock Name="actionName" Style="{StaticResource userControlMainLabelViewBox_Textblock}"  />
                 </Viewbox>
             </StackPanel>
             <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450" SelectedValue="{Binding hki}" 
@@ -67,8 +68,11 @@
                                             StrokeStartLineCap="flat"  StrokeEndLineCap="flat"  StrokeLineJoin="miter"/>
                                     </Canvas>
 
-                                    <Viewbox VerticalAlignment="Bottom">
-                                        <TextBlock Text="{Binding text}" Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" FontWeight="Bold" />
+                                    <Viewbox VerticalAlignment="Bottom" Height="27">
+                                        <local:OutlinedTextBlock Text="{Binding text}" TextWrapping="Wrap" StrokeThickness="1" Stroke="{DynamicResource MahApps.Brushes.ThemeForeground}" FontWeight="Bold" Fill="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                                    
+                                        </local:OutlinedTextBlock>
+                                        
                                     </Viewbox>
 
                                     <Label Content="{}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right"  Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" VerticalAlignment="Bottom" Margin="0,0,-5,-5"/>

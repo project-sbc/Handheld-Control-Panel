@@ -86,7 +86,7 @@ namespace Handheld_Control_Panel.Classes
                     break;
 
                 case "Toggle_Windows_OSK":
-                    Process[] pname = Process.GetProcessesByName("tabtip");
+                    Process[] pname = Process.GetProcessesByName("TabTip");
     
                     if (pname.Length == 0)
                     {
@@ -100,7 +100,7 @@ namespace Handheld_Control_Panel.Classes
                     }
                     Thread.Sleep(300);
 
-                    pname = Process.GetProcessesByName("tabtip");
+                    pname = Process.GetProcessesByName("TabTip");
                     if (pname.Length != 0)
                     {
                         OSKTablet oskt = new OSKTablet();

@@ -249,7 +249,7 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditActionUserControls\AddHomePage_Toggle.xaml.cs">
+    <Compile Update="UserControls\EditActionUserControls\AddQuickActionPanel_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditActionUserControls\Parameter_Dropdown.xaml.cs">

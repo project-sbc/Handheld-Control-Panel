@@ -20,6 +20,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -72,7 +73,7 @@ namespace Handheld_Control_Panel.UserControls
                                 api.text = Global_Variables.Brightness.ToString() + " %";
                                 break;
                             case "Volume":
-                                api.text = Global_Variables.Volume.ToString() + " %";
+                                api.text = "  " + Global_Variables.Volume.ToString() + " %";
                                 break;
                             case "FanSpeed":
                                 api.text = Global_Variables.FanSpeed.ToString() + " %";
@@ -146,7 +147,7 @@ namespace Handheld_Control_Panel.UserControls
                             api.text = hki.DisplayParameter + " %";
                             break;
                         case "Change_Volume_Mode":
-                            api.text = Global_Variables.Volume + " %";
+                            api.text ="  " + Global_Variables.Volume + " %";
                             valueChangedParameters.Add("Volume", api);
                             break;
                         case "Change_Volume":
@@ -352,4 +353,5 @@ namespace Handheld_Control_Panel.UserControls
         public Image image { get; set; }
 
     }
+    
 }
