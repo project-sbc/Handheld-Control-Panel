@@ -33,6 +33,7 @@
                 <uc:HideSplashScreen_Toggle/>
                 <uc:AutostartFan_Toggle/>
                 <uc:Divider/>
+                <uc:RSRSharpness_Slider/>
                 <uc:MaxGPU_Slider/>
                 <uc:Divider/>
             <uc:IntelTDP_Dropdown/>

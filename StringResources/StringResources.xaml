@@ -262,8 +262,11 @@
       <!-- new 16May2023 !-->
     <system:String x:Key="Usercontrol_ActionPanel">Quick Action Panel</system:String>
     <system:String x:Key="Usercontrol_AddHomePage">Add To Home Page</system:String>
-    
+    <system:String x:Key="Usercontrol_AMD_RSR_Sharpness">Set AMD RSR Sharpness</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AMD_RSR">Toggle AMD RSR</system:String>
 
+        
+        
     <system:String x:Key="UserControl_OtherSoftware_HandheldCompanion">Handheld Companion</system:String>
     <system:String x:Key="UserControl_OtherSoftware_HandheldCompanion_Subtext">Handheld Companion is a gyro controller application that offers other 
     features such as TDP and fan control.
@@ -313,5 +316,5 @@
     <system:String x:Key="UserControl_DiscordLink_Subtext">Come chat with me and other people about handhelds, SBCs, or HCP.
     </system:String>
 
-    <system:String x:Key="Hotkeys_Action_Toggle_AMD_RSR">Toggle AMD RSR</system:String>
+
 </ResourceDictionary>

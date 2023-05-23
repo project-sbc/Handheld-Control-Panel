@@ -20,7 +20,7 @@
                 </Viewbox>
             </StackPanel>
             <ListBox x:Name="controlList" VerticalAlignment="Top" FontSize="16" Background="Transparent" Width="450" SelectedValue="{Binding hki}" 
-             SelectedValuePath="DisplayAction"   >
+             SelectedValuePath="DisplayAction" SelectionChanged="controlList_SelectionChanged"   >
                 <ListBox.Resources>
 
                     <Style TargetType="ListBoxItem">
@@ -64,7 +64,7 @@
                                         <Canvas.LayoutTransform>
                                             <MatrixTransform Matrix="Identity" />
                                         </Canvas.LayoutTransform>
-                                        <Path Data="M212.8875 212.8875A9.375 9.375 0 0 0 212.8875 199.6125L100.3875 87.1125A9.375 9.375 0 0 0 87.1125 100.3875L199.6125 212.8875A9.375 9.375 0 0 0 212.8875 212.8875z"  Stroke="{x:Null}"   Fill="Gray"  Stretch="Uniform"  Width="60" Height="65" SnapsToDevicePixels="False" UseLayoutRounding="False" StrokeThickness="0"
+                                        <Path Data="M212.8875 212.8875A9.375 9.375 0 0 0 212.8875 199.6125L100.3875 87.1125A9.375 9.375 0 0 0 87.1125 100.3875L199.6125 212.8875A9.375 9.375 0 0 0 212.8875 212.8875z"  Stroke="{x:Null}"   Fill="{DynamicResource MahApps.Brushes.ThemeForeground}"  Stretch="Uniform"  Width="60" Height="65" SnapsToDevicePixels="False" UseLayoutRounding="False" StrokeThickness="0"
                                             StrokeStartLineCap="flat"  StrokeEndLineCap="flat"  StrokeLineJoin="miter"/>
                                     </Canvas>
 

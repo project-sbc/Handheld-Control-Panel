@@ -28,6 +28,16 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                 switch (slider.Tag)
                 {
                     
+                    case "Slider_AMDRSRSharpness-TickChange":
+                        slider.Minimum = 0;
+                        slider.Maximum = 100;
+                        slider.TickFrequency = 1;
+                        slider.SmallChange = 1;
+                        slider.LargeChange = 10;
+                        slider.Value = ADLX_Management.GetRSRSharpness();
+                        Debug.WriteLine(ADLX_Management.GetRSRSharpness());
+                        break;
+
                      case "Slider_MaxGPUCLK":
                         slider.Minimum = 400;
                         slider.Maximum = 3200;
@@ -494,6 +504,9 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                         
                     }
+                    break;
+                case "Slider_AMDRSRSharpness-TickChange":
+                    ADLX_Management.SetRSRSharpness((int)sliderValue);
                     break;
                 case "Slider_MouseSensitivity":
                     Global_Variables.Global_Variables.mousemodes.editingMouseMode.MouseSensitivity = sliderValue;

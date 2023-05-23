@@ -338,9 +338,27 @@ namespace Handheld_Control_Panel.UserControls
 
         }
 
+        private void controlList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //update text to show what the action is
+            if (this.IsLoaded)
+            {
+                if (controlList.SelectedItem != null)
+                {
+                    Action_Panel_Items api = controlList.SelectedItem as Action_Panel_Items;
+                    if (api != null)
+                    {
+                        if (api.hki != null)
+                        {
+                            actionName.Text = api.hki.DisplayAction;
+                        }
+                        
+                    }
+                    
+                }
 
-
-
+            }
+        }
     }
     public class Action_Panel_Items
     {

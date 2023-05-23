@@ -253,4 +253,61 @@
     <system:String x:Key="Usercontrol_HideSplashScreen">Hide Splash Screen At Start</system:String>
 
     <system:String x:Key="Usercontrol_RSR">AMD RSR</system:String>
+
+    <!-- new 16May2023 !-->
+    <system:String x:Key="Usercontrol_ActionPanel">Quick Action Panel</system:String>
+    <system:String x:Key="Usercontrol_AddHomePage">Add To Home Page</system:String>
+    <system:String x:Key="Usercontrol_AMD_RSR_Sharpness">Set AMD RSR Sharpness</system:String>
+    <system:String x:Key="Hotkeys_Action_Toggle_AMD_RSR">Toggle AMD RSR</system:String>
+
+
+
+    <system:String x:Key="UserControl_OtherSoftware_HandheldCompanion">Handheld Companion</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_HandheldCompanion_Subtext">Handheld Companion is a gyro controller application that offers other 
+    features such as TDP and fan control.
+    </system:String>
+    <system:String x:Key="UserControl_OtherSoftware_RTSS">Rivatuner Statistics Server (RTSS)</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_RTSS_Subtext">RTSS is fps limiting and on screen display software. It allows the display of cpu metrics on screen during gaming.
+    </system:String>
+    <system:String x:Key="UserControl_OtherSoftware_Playnite">Playnite Game Launcher</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_Playnite_Subtext">Playnite is an open source all in one game launcher that is free! Has a big screen mode that is controller compatible. You can open playnite big screen with a hot key using HCP! Works with almost all game platforms (Steam, Epic, Microsoft Store, GOG, etc.).
+    </system:String>
+    <system:String x:Key="UserControl_OtherSoftware_HIDHide">HID Hide</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_HIDHide_Subtext">HID Hide is a kernel mode filter driver that allows HID devices (like game controllers) to be hidden from specific applications on the OS. This software is espeically useful for gyro applications.
+    </system:String>
+    <system:String x:Key="UserControl_OtherSoftware_Playmate">Playmate</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_Playmate_Subtext">Playmate is an upcoming game launcher by JamesCJ, the developer of UXTU. It offers full screen controller support with interactive video backgrounds.
+    </system:String>
+    <system:String x:Key="UserControl_OtherSoftware_UXTU">UXTU</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_UXTU_Subtext">UXTU, or Universal x86 Tuning Utility, is computer tuninig utility that allows CPU and GPU parameters to be fine tuned such as TDP. Offers in-depth customizations for your CPU. Made by the developer JamesCJ, who also supports RyzenAdj.
+    </system:String>
+    <system:String x:Key="UserControl_OtherSoftware_SDILite">SDI Lite</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_SDILite_Subtext">SDI Lite, or Snappy Driver Installer Lite, is a lightweight tool that scans your system for hardware and recommends the best driver for that hardware and allows you to download the drivers.
+    </system:String>
+
+    <system:String x:Key="UserControl_OtherSoftware">Other Useful Software</system:String>
+    <system:String x:Key="UserControl_OtherSoftware_Subtext">List of other software that is useful for handheld gaming.
+    </system:String>
+    <system:String x:Key="UserControl_Donate">Donate</system:String>
+    <system:String x:Key="UserControl_Donate_Subtext">Show your support to the developer by donating.
+    </system:String>
+    <system:String x:Key="UserControl_HCPGithub">HCP GitHub</system:String>
+    <system:String x:Key="UserControl_HCPGithub_Subtext">Go to the GitHub page to see the latest information, contribute to the project, or submit a problem report.
+    </system:String>
+    <system:String x:Key="UserControl_DonateKofi">Donate On Ko-fi</system:String>
+    <system:String x:Key="UserControl_DonateKofi_Subtext">Support the developer on Ko-fi.
+    </system:String>
+    <system:String x:Key="UserControl_DonatePaypal">Donate On PayPal</system:String>
+    <system:String x:Key="UserControl_DonatePaypal_Subtext">Support the developer on PayPal.
+    </system:String>
+    <system:String x:Key="UserControl_DonatePatreon">Donate On Patreon</system:String>
+    <system:String x:Key="UserControl_DonatePatreon_Subtext">Support the developer on Patreon.
+    </system:String>
+    <system:String x:Key="UserControl_TutorialVideos">Tutorial Videos</system:String>
+    <system:String x:Key="UserControl_TutorialVideos_Subtext">See a list of tutorial videos on how to use HCP.
+    </system:String>
+
+    <system:String x:Key="UserControl_DiscordLink">Discord Link</system:String>
+    <system:String x:Key="UserControl_DiscordLink_Subtext">Come chat with me and other people about handhelds, SBCs, or HCP.
+    </system:String>
 </ResourceDictionary>
