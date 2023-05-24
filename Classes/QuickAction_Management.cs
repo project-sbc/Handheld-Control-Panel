@@ -60,12 +60,12 @@ namespace Handheld_Control_Panel.Classes
                     if (Global_Variables.Global_Variables.autoTDP)
                     {
                         Notification_Management.Show("Stop AutoTDP");
-                        AutoTDP_Management_OLD.endAutoTDP();
+                        AutoTDP_Management.endAutoTDP();
                     }
                     else
                     {
                         Notification_Management.Show("Start AutoTDP");
-                        AutoTDP_Management_OLD.startAutoTDPThread();
+                        AutoTDP_Management.startAutoTDPThread();
                     }
                     break;
 
