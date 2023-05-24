@@ -65,7 +65,7 @@ namespace Handheld_Control_Panel.Classes
                     else
                     {
                         Notification_Management.Show("Start AutoTDP");
-                        AutoTDP_Management.startAutoTDPThread();
+                        AutoTDP_Management.startAutoTDP();
                     }
                     break;
 

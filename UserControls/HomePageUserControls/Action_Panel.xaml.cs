@@ -228,6 +228,10 @@ namespace Handheld_Control_Panel.UserControls
                             handleListBoxIndexChange(controlList, 15);
                             break;
                         default:
+                            if (args.Action == "Highlight")
+                            {
+                                changeActionNameText();
+                            }
                             Classes.UserControl_Management.UserControl_Management.handleUserControl(border, null, args.Action);
                             break;
 
@@ -337,25 +341,28 @@ namespace Handheld_Control_Panel.UserControls
             Controller_Window_Page_UserControl_Events.userControlControllerInput -= handleControllerInputs;
 
         }
+        private void changeActionNameText()
+        {
+            if (controlList.SelectedItem != null)
+            {
+                Action_Panel_Items api = controlList.SelectedItem as Action_Panel_Items;
+                if (api != null)
+                {
+                    if (api.hki != null)
+                    {
+                        actionName.Text = " -  " + api.hki.DisplayAction;
+                    }
 
+                }
+
+            }
+        }
         private void controlList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //update text to show what the action is
             if (this.IsLoaded)
             {
-                if (controlList.SelectedItem != null)
-                {
-                    Action_Panel_Items api = controlList.SelectedItem as Action_Panel_Items;
-                    if (api != null)
-                    {
-                        if (api.hki != null)
-                        {
-                            actionName.Text = api.hki.DisplayAction;
-                        }
-                        
-                    }
-                    
-                }
+                changeActionNameText();
 
             }
         }
