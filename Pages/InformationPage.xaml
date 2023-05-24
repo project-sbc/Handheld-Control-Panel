@@ -21,7 +21,7 @@
          <ScrollViewer Grid.Row="1" x:Name="pageScrollViewer"  Style="{StaticResource pageScrollViewer}">
         <StackPanel x:Name="stackPanel" >
                 <uc:HCPGithub_Link/>
-                <uc:TutorialVideos_Link/>
+                <uc:Youtube_Link/>
                 <uc:Donate_Link />
                 <uc:OtherSoftware_Link />
                 <uc:Discord_Link/>

@@ -9,11 +9,13 @@
              d:DesignWidth="450"  Style="{DynamicResource userControls}" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Border Style="{StaticResource userControlBorder}"   x:Name="border" >
         <DockPanel VerticalAlignment="Center" >
+            <iconPacks:PackIconFontAwesome Kind="YoutubeBrands" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" Margin="6,0,0,0" Height="32" Width="32" DockPanel.Dock="Left" VerticalAlignment="Center"/>
             <DockPanel DockPanel.Dock="Top">
                 <Label Content="{DynamicResource UserControl_TutorialVideos}" DockPanel.Dock="Left"  Style="{StaticResource userControlMainLabel}"/>
                 <TextBlock FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Top" Margin="0,0,22,0" >
-                <Hyperlink NavigateUri="OtherSoftwarePage" RequestNavigate="Hyperlink_RequestNavigate" x:Name="control" Tag="Page" >
-                    <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" Text="&#xE7C3;" />
+                <Hyperlink NavigateUri="OtherSoftwarePage" RequestNavigate="Hyperlink_RequestNavigate" x:Name="control" Tag="Page"  >
+                 
+                      <TextBlock  Style="{StaticResource controllerButtonTextblock_InstructionsCondensed}" Text="&#xE71B;" />
                 </Hyperlink>
                 </TextBlock>
             </DockPanel>

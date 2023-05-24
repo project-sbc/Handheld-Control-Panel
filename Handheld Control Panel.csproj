@@ -429,6 +429,9 @@
     <Compile Update="UserControls\InformationUserControls\Donate_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\InformationUserControls\Youtube_Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\InformationUserControls\TutorialVideos_Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
