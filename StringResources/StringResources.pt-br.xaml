@@ -307,4 +307,7 @@
     <system:String x:Key="UserControl_DiscordLink">Discord Link</system:String>
     <system:String x:Key="UserControl_DiscordLink_Subtext">Come chat with me and other people about handhelds, SBCs, or HCP.
     </system:String>
+    <system:String x:Key="UserControl_YoutubeLink">ProjectSBC Channel</system:String>
+    <system:String x:Key="UserControl_YoutubeLink_Subtext">Check out my Youtube channel for videos on handhelds and HCP.
+    </system:String>
 </ResourceDictionary>
