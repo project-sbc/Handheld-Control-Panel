@@ -53,20 +53,23 @@
                                 <!-- Assumes MVVM and you wish to bind to properties and commands -->
 
                                 <Grid HorizontalAlignment="Center"  VerticalAlignment="Center" Height="65" Width="60"  Grid.Column="0" >
-                                    <Canvas  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  >
-                                        <Canvas.LayoutTransform>
-                                            <MatrixTransform Matrix="Identity" />
-                                        </Canvas.LayoutTransform>
-                                        <Path Data="{Binding data}"  Stroke="{x:Null}"   Fill="{DynamicResource MahApps.Brushes.ThemeForeground}"   Stretch="Uniform"  Width="60" Height="65" SnapsToDevicePixels="False" UseLayoutRounding="False" StrokeThickness="0"
+                                    <DockPanel >
+                                        <Canvas Margin="5,5,0,0"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  >
+                                            <Canvas.LayoutTransform>
+                                                <MatrixTransform Matrix="Identity" />
+                                            </Canvas.LayoutTransform>
+                                            <Path  Data="{Binding data}"  Stroke="{x:Null}"   Fill="{DynamicResource MahApps.Brushes.ThemeForeground}"   Stretch="Uniform"  Width="50" Height="55" SnapsToDevicePixels="False" UseLayoutRounding="False" StrokeThickness="0"
                                             StrokeStartLineCap="flat"  StrokeEndLineCap="flat"  StrokeLineJoin="miter"/>
-                                    </Canvas>
-                                    <Canvas  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Panel.ZIndex="3" Visibility="{Binding visibilitySlash}"   >
-                                        <Canvas.LayoutTransform>
-                                            <MatrixTransform Matrix="Identity" />
-                                        </Canvas.LayoutTransform>
-                                        <Path Data="M212.8875 212.8875A9.375 9.375 0 0 0 212.8875 199.6125L100.3875 87.1125A9.375 9.375 0 0 0 87.1125 100.3875L199.6125 212.8875A9.375 9.375 0 0 0 212.8875 212.8875z"  Stroke="{x:Null}"   Fill="{DynamicResource MahApps.Brushes.ThemeForeground}"  Stretch="Uniform"  Width="60" Height="65" SnapsToDevicePixels="False" UseLayoutRounding="False" StrokeThickness="0"
+                                        </Canvas>
+                                        <Canvas Margin="5,5,0,0"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Panel.ZIndex="3" Visibility="{Binding visibilitySlash}"   >
+                                            <Canvas.LayoutTransform>
+                                                <MatrixTransform Matrix="Identity" />
+                                            </Canvas.LayoutTransform>
+                                            <Path Data="M212.8875 212.8875A9.375 9.375 0 0 0 212.8875 199.6125L100.3875 87.1125A9.375 9.375 0 0 0 87.1125 100.3875L199.6125 212.8875A9.375 9.375 0 0 0 212.8875 212.8875z"  Stroke="{x:Null}"   Fill="{DynamicResource MahApps.Brushes.ThemeForeground}"  Stretch="Uniform"  Width="50" Height="55" SnapsToDevicePixels="False" UseLayoutRounding="False" StrokeThickness="0"
                                             StrokeStartLineCap="flat"  StrokeEndLineCap="flat"  StrokeLineJoin="miter"/>
-                                    </Canvas>
+                                        </Canvas>
+                                    </DockPanel>
+
 
                                     <Viewbox VerticalAlignment="Bottom" Height="27">
                                         <local:OutlinedTextBlock Text="{Binding text}" TextWrapping="Wrap" StrokeThickness="3" Stroke="{DynamicResource MahApps.Brushes.ThemeBackground}"  Fill="{DynamicResource MahApps.Brushes.ThemeForeground}">
