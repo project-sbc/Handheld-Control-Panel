@@ -129,6 +129,10 @@ namespace Handheld_Control_Panel.UserControls
                             api.text = Global_Variables.Resolution;
                             valueChangedParameters.Add("Resolution", api);
                             break;
+                        case "Toggle_HCP_OSK":
+                            api.text = "HCP";
+                          
+                            break;
                         case "Change_Brightness_Mode":
                             api.text = Global_Variables.Brightness + " %";
                             valueChangedParameters.Add("Brightness", api);

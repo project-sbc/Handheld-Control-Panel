@@ -22,7 +22,21 @@ namespace Handheld_Control_Panel.Classes.Update_Software
         {
             AutoUpdater.CheckForUpdateEvent += (args) => AutoUpdaterOnCheckForUpdateEvent(args);
         }
+        public static void checkUpdateSettings()
+        {
+            //run setting upgrade if needed when version is updated
+            if (Properties.Settings.Default.upgradeSettingsRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.upgradeSettingsRequired = false;
+                Properties.Settings.Default.Save();
 
+                if (TaskSchedulerWin32.TaskSchedulerWin32.checkAutoStart())
+                {
+                    TaskSchedulerWin32.TaskSchedulerWin32.changeTaskService(true);
+                }
+            }
+        }
         public static void checkForUpdates(bool startUpRoutine = false)
         {
             //check for updates if this is called at startup and the setting for allow check at startup is on OR if this is not at startup and called from settings

@@ -16,6 +16,8 @@
 		-Fixed issue where blank records were inserted into resolution/refresh rate lists when editing a profile.
 		-Fixed issue where auto fan on startup was reporting as hardware control on the fan control on the home page.
 		-Fixed error where windows OSK was crashing HCP when trying to bring up on the screen.
+		-Fixed issue where profiles didn't reapply after sleep.
+		-Fixed playnite running as admin.
 
 	Features:
 
@@ -24,6 +26,7 @@
 		-Added optional hide splashscreen at normal startup in settings.
 		-Expanded xbox game scan to all drives, not just C.
 		-Removed the hotkey type option, type is automatically detected based on keyboard or controller input.
+		-Added quick action panel to home page and added setting to enable on home screen.
 
 0.1.0.1 - Released 12-May-2023 on discord
 	

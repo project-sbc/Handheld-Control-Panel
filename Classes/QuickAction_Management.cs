@@ -144,7 +144,7 @@ namespace Handheld_Control_Panel.Classes
                             if (paramFS >100 ) { paramFS = 100; }
 
 
-                            Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %, TDP: " + paramFS.ToString() + " %");
+                            Notification_Management.Show(Application.Current.Resources["Hotkeys_Action_" + actionParameter.Action].ToString() + " " + actionParameter.Parameter + " %, Fan: " + paramFS.ToString() + " %");
                             if (!Global_Variables.Global_Variables.fanControlEnabled) { Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanControlManual()); }
                             Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.Fan_Management.Fan_Management.setFanSpeed(paramFS));
                       

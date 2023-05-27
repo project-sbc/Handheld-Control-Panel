@@ -74,8 +74,8 @@ namespace Handheld_Control_Panel
             //check controller usb device info GUID instance ID
             Controller_Management.getDefaultControllerDeviceInformation();
 
-            //now check for hidhide configured
-            Controller_Management.HIDHideConfiguredAsync();
+            //now check for hidhide configured  DONT RUN THIS YET WAIT FOR GYOR AND VIGEM INSTALL
+            //Controller_Management.HIDHideConfiguredAsync();
 
             MouseKeyHook.Subscribe();
 

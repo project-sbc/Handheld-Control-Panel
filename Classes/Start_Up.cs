@@ -26,19 +26,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Start_Routine()
         {
-            //run setting upgrade if needed when version is updated
-            if (Properties.Settings.Default.upgradeSettingsRequired)
-            {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.upgradeSettingsRequired = false;
-                Properties.Settings.Default.Save();
-
-                if (TaskSchedulerWin32.TaskSchedulerWin32.checkAutoStart())
-                {
-                    TaskSchedulerWin32.TaskSchedulerWin32.changeTaskService(true);
-                }
-            }
-                        
+                                  
 
             //run hyatice powerplan
             Powercfg.setupPowerPlan();

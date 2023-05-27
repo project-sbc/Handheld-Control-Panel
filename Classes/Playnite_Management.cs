@@ -1,4 +1,5 @@
 ﻿using Handheld_Control_Panel.Classes.Run_CLI;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,16 +14,27 @@ namespace Handheld_Control_Panel.Classes
     {
         public static void playniteToggle()
         {
+            string command;
             if (Properties.Settings.Default.directoryPlaynite != "")
             {
                 if (playniteRunning())
                 {
-                    Run_CLI.Run_CLI.RunCommand(" --shutdown", false, Properties.Settings.Default.directoryPlaynite + "\\Playnite.FullscreenApp.exe", 6000, false);
+                    command = Properties.Settings.Default.directoryPlaynite + "\\Playnite.FullscreenApp.exe --shutdown";
+                   
                 }
                 else
                 {
-                    Run_CLI.Run_CLI.RunCommand(" --startfullscreen", false, Properties.Settings.Default.directoryPlaynite + "\\Playnite.FullscreenApp.exe", 6000, false);
+                    //run game management one because why not
+                    command = Properties.Settings.Default.directoryPlaynite + "\\Playnite.FullscreenApp.exe";
                 }
+                try
+                {
+                                       
+                    RunNotAsAdmin_Shell.SystemUtility.ExecuteProcessUnElevated(command,"");
+
+                }
+                catch { /* ignore */ }
+
             }
 
 

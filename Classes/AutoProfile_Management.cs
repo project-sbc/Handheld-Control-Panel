@@ -6,14 +6,29 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Windows.Storage;
 
 namespace Handheld_Control_Panel.Classes
 {
     public static class AutoProfile_Management
     {
-
+        private static DateTime lastProfileCheck = DateTime.Now;
         public static void checkAutoProfileApplicator()
         {
+            
+
+            //this is last profile checker to see if device went to sleep, if the datetime since last checked is more than a minute the device probably went to sleep so reapply
+           
+            if (DateTime.Now.Subtract(lastProfileCheck).Seconds > 40) 
+            {
+                if (Global_Variables.Global_Variables.profiles.activeProfile != null)
+                {
+                    lastProfileCheck = DateTime.Now;
+                    Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true, false);
+                    return;
+                }
+            }
+            lastProfileCheck = DateTime.Now;
             //this has the workflow for auto applying profiles when power status changes OR an exe is detected running with a profile
             string Power = SystemParameters.PowerLineStatus.ToString();
             //first thing... we check if there is an active profile and if its tied to an exe
@@ -37,6 +52,7 @@ namespace Handheld_Control_Panel.Classes
                             Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true,false);
                             Global_Variables.Global_Variables.powerStatus = Power;
                         }
+                       
                         //we exit this routine if a process is found, active profile with running exe has top priority
                         return;
 
@@ -45,7 +61,7 @@ namespace Handheld_Control_Panel.Classes
                     {
                        
 
-                        //check if the profile currently applied is 
+                        //check if the profile currently applied is auto applied
                         if (Global_Variables.Global_Variables.profileAutoApplied == true)
                         {
                             

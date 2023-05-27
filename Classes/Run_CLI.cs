@@ -29,7 +29,7 @@ namespace Handheld_Control_Panel.Classes.Run_CLI
                 //startInfo.Arguments = "/c " + arguments;
                 startInfo.Arguments = arguments;
                 startInfo.CreateNoWindow = true;
-                if (runasadmin) { startInfo.Verb = "runas"; }
+                if (runasadmin) { startInfo.Verb = "runas"; } else { startInfo.Verb = ""; }
                 startInfo.RedirectStandardError = readOutput;
                 startInfo.RedirectStandardOutput = readOutput;
                 

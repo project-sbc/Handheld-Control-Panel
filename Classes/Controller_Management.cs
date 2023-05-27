@@ -41,7 +41,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         public static int activeTimerTickInterval = 60;
         public static int passiveTimerTickInterval = 100;
 
-        public static HidHideControlService hideHidService = new HidHideControlService();
+        public static HidHideControlService hideHidService = null;
 
         public static void getDefaultControllerDeviceInformation()
         {
@@ -233,6 +233,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
       
 
         }
+
 
         public static void powerCycleController()
         {
