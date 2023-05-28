@@ -546,6 +546,9 @@
     <Compile Update="UserControls\PowerUserControls\CloseGame_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\SettingsUserControls\RTSSDirectory_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\SettingsUserControls\AutostartFan_Toggle.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

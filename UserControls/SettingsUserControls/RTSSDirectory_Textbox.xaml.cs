@@ -33,11 +33,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class AppType_Textbox : UserControl
+    public partial class RTSSDirectory_Textbox : UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public AppType_Textbox()
+        public RTSSDirectory_Textbox()
         {
             InitializeComponent();
             setControlValue();
@@ -46,54 +46,13 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-            switch (Global_Variables.profiles.editingProfile.AppType)
-            {
-                case "Steam":
-                    control.Visibility = Visibility.Collapsed;
-                    controlTextbox.Visibility = Visibility.Collapsed;
-                    updateSteamImage();
-                    
-                    break;
-                case "EpicGames":
-                    control.Visibility = Visibility.Collapsed;
-                    controlTextbox.IsReadOnly = true;
-                    controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;
-                    updateIconImage();
-                    break;
-
-                default:
-                    if (Global_Variables.profiles.editingProfile.Path != "")
-                    {
-                        updateIconImage();
-                        controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;
-                        control.IsOn = true;
-
-                    }
-                    else
-                    {
-                        control.IsOn = false;
-                        controlTextbox.Visibility = Visibility.Collapsed;
-                        controlButton.Visibility = Visibility.Collapsed;
-                    }
-
-                    break;
-            }
-
+           
            
 
         }
         private void updateIconImage()
         {
-            controlImage.Width = 34;
-            controlImage.Height = 34;
-            string file = Global_Variables.profiles.editingProfile.Path;
-            if (File.Exists(file))
-            {
-                using (Icon ico = Icon.ExtractAssociatedIcon(file))
-                {
-                    controlImage.Source = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                }
-            }
+           
 
         }
 
@@ -132,43 +91,16 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (control.Visibility == Visibility.Visible)
-                        {
-                            control.IsOn = !control.IsOn;
-                        }
+              
                         break;
                     default:
-                        Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
+                        //Classes.UserControl_Management.UserControl_Management.handleUserControl(border, control, args.Action);
                         break;
                 }
             }
         }
 
-        private void toggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (control.IsLoaded)
-            {
-                if (control.IsOn)
-                {
-                    controlTextbox.Visibility = Visibility.Visible;
-                    controlButton.Visibility = Visibility.Visible;
-                    controlImage.Visibility = Visibility.Visible;
-                    updateIconImage();
-
-
-                }
-                else
-                {
-                    controlTextbox.Text = "";
-                    controlTextbox.Visibility = Visibility.Collapsed;
-                    controlButton.Visibility = Visibility.Collapsed;
-                    controlImage.Visibility = Visibility.Collapsed;
-
-               
-                }
-            }
-
-        }
+      
 
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

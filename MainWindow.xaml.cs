@@ -389,8 +389,11 @@ namespace Handheld_Control_Panel
 
                 //update status bar because time takes forever to load
                 updateStatusBar();
-
-                this.WindowState = WindowState.Normal;
+                if (this.WindowState != WindowState.Normal)
+                {
+                    this.WindowState = WindowState.Normal;
+                }
+               
 
                 //run position check to make sure its located correctly, fixes issue where app moves all over
                 setWindowSizePosition();

@@ -1,7 +1,11 @@
 ﻿Version Notes Handheld Control Panel
 
-0.1.0.2 - Released TBD
+1.0.0.0 - Released TBD
 	
+	Comments:
+
+		Version put at 1.0.0.0 to accomodate the AutoNetUpdater function.
+
 	Fixes:
 		
 		-Potentially fixed bug where dispatchers were created in non UI classes that were not being disposed of, causing the app to crash.
