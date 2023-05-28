@@ -630,6 +630,14 @@ namespace Handheld_Control_Panel
         }
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //dispose of notify icon so it doesn't linger in task tray
+            if (m_notifyIcon != null)
+            {
+                m_notifyIcon.Dispose();
+            }
+            
+
+
             //stop timers
 
             updateTimer.Stop();
