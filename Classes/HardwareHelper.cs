@@ -345,10 +345,12 @@ ref PropertyChangeParameters classInstallParams, int classInstallParamsSize);
                 }
                 if (result == false)
                     throw new Win32Exception();
-                if (instanceId.Equals(sb.ToString()))
+
+                if (string.Equals(instanceId, sb.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return index;
                 }
+               
             }
             // not found
             return -1;
