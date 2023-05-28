@@ -10,6 +10,7 @@ using System.Windows;
 using AutoUpdaterDotNET;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.IO;
 
 namespace Handheld_Control_Panel.Classes.Update_Software
 {
@@ -20,6 +21,7 @@ namespace Handheld_Control_Panel.Classes.Update_Software
         public static bool startUp = false;
         public static void bindUpdateEvent()
         {
+            AutoUpdater.InstallationPath = AppDomain.CurrentDomain.BaseDirectory; ;
             AutoUpdater.CheckForUpdateEvent += (args) => AutoUpdaterOnCheckForUpdateEvent(args);
         }
         public static void checkUpdateSettings()
@@ -43,7 +45,7 @@ namespace Handheld_Control_Panel.Classes.Update_Software
             startUp = startUpRoutine;
             if ((startUp && Properties.Settings.Default.checkUpdatesAtStartUp) || !startUp)
             {
-                
+                AutoUpdater.InstallationPath = AppDomain.CurrentDomain.BaseDirectory; ;
                 AutoUpdater.Start("https://raw.githubusercontent.com/project-sbc/Handheld-Control-Panel/master/Update.xml");
                 
             }
