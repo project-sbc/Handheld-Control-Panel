@@ -34,11 +34,11 @@ namespace Handheld_Control_Panel.UserControls
     /// <summary>
     /// Interaction logic for TDP_Slider.xaml
     /// </summary>
-    public partial class RTSSDirectory_Textbox : System.Windows.Controls.UserControl
+    public partial class Playnite_Textbox : System.Windows.Controls.UserControl
     {
         private string windowpage = "";
         private string usercontrol = "";
-        public RTSSDirectory_Textbox()
+        public Playnite_Textbox()
         {
             InitializeComponent();
             setControlValue();
@@ -47,7 +47,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-           controlTextbox.Text = Properties.Settings.Default.directoryRTSS;
+           controlTextbox.Text = Properties.Settings.Default.directoryPlaynite;
            
 
         }
@@ -101,7 +101,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                    
-                    Properties.Settings.Default.directoryRTSS = fbd.SelectedPath;
+                    Properties.Settings.Default.directoryPlaynite = fbd.SelectedPath;
                     Properties.Settings.Default.Save();
                   
                 }
@@ -114,7 +114,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (this.IsLoaded)
             {
-                Properties.Settings.Default.directoryRTSS = controlTextbox.Text;
+                Properties.Settings.Default.directoryPlaynite = controlTextbox.Text;
                 Properties.Settings.Default.Save();
             }
 

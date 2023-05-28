@@ -1,6 +1,6 @@
 ﻿Version Notes Handheld Control Panel
 
-1.0.0.0 - Released TBD
+1.0.0.0 - Released 28-May-2023 on github
 	
 	Comments:
 
@@ -22,11 +22,13 @@
 		-Fixed error where windows OSK was crashing HCP when trying to bring up on the screen.
 		-Fixed issue where profiles didn't reapply after sleep.
 		-Fixed playnite running as admin.
+		-Fixed issue notify icon is in task tray after closing. This can cause a "unable to show window error" when clicking the notify icon.
 
 	Features:
 
 		-Added RSR support from AMD driver to home page. Existing users need to add it on the customize home page.
 		-Added RTSS directory to app settings.
+		-Added Playnite directory to app settings.
 		-Added optional hide splashscreen at normal startup in settings.
 		-Expanded xbox game scan to all drives, not just C.
 		-Removed the hotkey type option, type is automatically detected based on keyboard or controller input.

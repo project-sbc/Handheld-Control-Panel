@@ -311,4 +311,9 @@
     <system:String x:Key="UserControl_YoutubeLink">ProjectSBC Channel</system:String>
     <system:String x:Key="UserControl_YoutubeLink_Subtext">Check out my Youtube channel for videos on handhelds and HCP.
     </system:String>
+
+    <!-- 28May2023 !-->
+
+    <system:String x:Key="UserControl_RTSSDirectory">RTSS Directory</system:String>
+    <system:String x:Key="UserControl_PlayniteDirectory">Playnite Directory</system:String>
 </ResourceDictionary>
