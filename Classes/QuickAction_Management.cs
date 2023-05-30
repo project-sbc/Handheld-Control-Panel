@@ -103,8 +103,11 @@ namespace Handheld_Control_Panel.Classes
                     pname = Process.GetProcessesByName("TabTip");
                     if (pname.Length != 0)
                     {
-                        OSKTablet oskt = new OSKTablet();
-                        oskt.Main();
+                        //Thread tempThread = new Thread(OSKTablet.startOSK);
+                        //tempThread.SetApartmentState(ApartmentState.STA);
+
+                        //tempThread.Start();
+                        Classes.Task_Scheduler.Task_Scheduler.runTask(() => OSKTablet.ToggleOSK()) ;
                     }
                     
 
@@ -466,14 +469,17 @@ namespace Handheld_Control_Panel.Classes
       
     }
 
-    public class OSKTablet
+    public static class OSKTablet
     {
-        public void Main()
+  
+        static ITipInvocation iti = (ITipInvocation)new UIHostNoLaunch();
+       
+        public static void ToggleOSK()
         {
-            var uiHostNoLaunch = new UIHostNoLaunch();
-            var tipInvocation = (ITipInvocation)uiHostNoLaunch;
-            tipInvocation.Toggle(GetDesktopWindow());
-            Marshal.ReleaseComObject(uiHostNoLaunch);
+            
+            iti.Toggle(GetDesktopWindow());
+           
+          
         }
 
         [ComImport, Guid("4ce576fa-83dc-4F88-951c-9d0782b4e376")]

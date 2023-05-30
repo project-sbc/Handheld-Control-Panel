@@ -169,11 +169,15 @@ namespace Handheld_Control_Panel.Classes
                         {
                             //if null might be 32 bit
                             keyReg = Registry.LocalMachine.OpenSubKey(steam32);
-                            if (keyReg.GetValue("InstallPath") != null)
+                            if (keyReg != null)
                             {
-                                Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
-                                Properties.Settings.Default.Save();
+                                if (keyReg.GetValue("InstallPath") != null)
+                                {
+                                    Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
+                                    Properties.Settings.Default.Save();
+                                }
                             }
+                           
 
                         }
                     }
