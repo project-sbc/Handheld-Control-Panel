@@ -63,7 +63,9 @@ namespace Handheld_Control_Panel
 
             
             Global_Variables.mainWindow = this;
-                      
+
+            //check if RTSS should be started at startup
+            RTSS.checkAutoStartRTSS();
 
             //start mouse mode, required because controller management makes call to mousemode
             Global_Variables.mousemodes = new MouseMode_Management();

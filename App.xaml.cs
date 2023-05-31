@@ -21,7 +21,7 @@ namespace Handheld_Control_Panel
             string message = "An unhandled exception just occurred: " + e.Exception.Message + ". Stack Trace: " + e.Exception.StackTrace + ". Source: " + e.Exception.Source + ". Inner Exception: " + e.Exception.InnerException;
             MessageBox.Show(message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Error);
             Log_Writer.writeLog(message);
-            e.Handled = true;
+            Environment.Exit(0);
            
         }
   
