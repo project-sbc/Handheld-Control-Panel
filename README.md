@@ -11,7 +11,7 @@ See ETA Prime's video on this
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. MISUSE OF THIS SOFTWARE COULD CAUSE SYSTEM INSTABILITY OR MALFUNCTION.
 
 ## Download
-NOT OFFICIALLY RELEASED YET. Join my discord to find out about beta testing.  https://discord.gg/zEnCgEqgTd
+[Download](https://github.com/project-sbc/Handheld-Control-Panel/releases)
 
 ## Current Features.
 ### Power Controls
