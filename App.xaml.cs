@@ -24,12 +24,12 @@ namespace Handheld_Control_Panel
             Environment.Exit(0);
            
         }
-  
+
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-           
+
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))
@@ -39,12 +39,14 @@ namespace Handheld_Control_Panel
 
             var splashScreen = new SplashScreenStartUp();
 
-            if (!quietStart || !Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen)
+            if (!Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen && !quietStart)
             {
                 //if not quiet start then show splashscreen
                 this.MainWindow = splashScreen;
                 splashScreen.Show();
             }
+
+
 
             //you can do additional work here, call start routine
             //do the update settings check first
@@ -56,16 +58,20 @@ namespace Handheld_Control_Panel
 
             this.MainWindow = new MainWindow();
 
-            if (!quietStart || !Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen)
+            if (quietStart)
             {
-                //close splashscreen if open
-                splashScreen.Close();
-                MainWindow.Show();
+                MainWindow.Visibility = Visibility.Hidden;
             }
             else
             {
-                MainWindow.Hide();
+                if (!Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen)
+                {
+                    splashScreen.Close();
+                }
+                MainWindow.Show();
             }
+
+           
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

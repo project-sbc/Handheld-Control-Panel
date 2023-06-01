@@ -487,7 +487,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             //start timer to read and compare controller inputs
             //Controller input handler
             //error number CM05
-            while(true)
+            while(Global_Variables.Global_Variables.mainWindow != null)
             {
                 try
                 {

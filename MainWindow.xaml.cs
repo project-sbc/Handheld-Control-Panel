@@ -64,7 +64,7 @@ namespace Handheld_Control_Panel
             
             Global_Variables.mainWindow = this;
 
-            //check if RTSS should be started at startup
+            //check if RTSS should be started at startup, place here to put on main thread so that there isn't an issue calling rtsshooks64.dll
             RTSS.checkAutoStartRTSS();
 
             //start mouse mode, required because controller management makes call to mousemode

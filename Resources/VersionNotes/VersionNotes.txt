@@ -1,5 +1,20 @@
 ﻿Version Notes Handheld Control Panel
 
+1.0.0.1 - Released TBD on github
+	
+	Comments:
+
+		Version put at 1.0.0.1 to accomodate the AutoNetUpdater function.
+
+	Fixes:
+		
+		-Fixed error on aya neo air plus where windows OSK quick action was posting a synchronous error when pressing the hot key using LC RC.
+		-Fixed error where splashscreen stays on screen after starting.
+		-Fixed error where RTSSHooks64.dll was not loading if RTSS was set to autostart with HCP.
+		-Fixed error where controller thread was remaining active after the application is shut down.
+
+	
+
 1.0.0.0 - Released 28-May-2023 on github
 	
 	Comments:
