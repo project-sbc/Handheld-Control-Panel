@@ -23,7 +23,8 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         public static string MCHBAR = "";
         public static string processorName = "";
 
-       
+        //SETTINGS
+        public static Settings settings;
 
         //TDP global
         #region TDP

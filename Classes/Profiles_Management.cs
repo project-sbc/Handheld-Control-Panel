@@ -27,7 +27,7 @@ namespace Handheld_Control_Panel.Classes
 {
     public class Profiles_Management: List<Profile>
     {
-        
+         
         public Profile activeProfile=null;
         public Profile editingProfile = null;
         public Profile defaultProfile = null;

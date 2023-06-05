@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using Handheld_Control_Panel.Classes;
@@ -29,6 +31,18 @@ namespace Handheld_Control_Panel
         {
             base.OnStartup(e);
 
+            //LOAD SETTINGS FIRST!!!!
+            Global_Variables.settings = Load_Settings.loadSettings(AppDomain.CurrentDomain.BaseDirectory + "Settings.xml");
+            
+
+            TestXMLSaving testXMLSaving1 = new TestXMLSaving();
+            Global_Variables.settings.testXMLSavings.Add(testXMLSaving1);
+        
+
+            Global_Variables.settings.Save(AppDomain.CurrentDomain.BaseDirectory + "Settings.xml");
+
+
+            
 
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start

@@ -38,9 +38,6 @@
     <Setting Name="dockWindowRight" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="cpuEfficiencyMode" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="lastCheckUpdate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

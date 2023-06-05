@@ -169,18 +169,6 @@ namespace Handheld_Control_Panel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool cpuEfficiencyMode {
-            get {
-                return ((bool)(this["cpuEfficiencyMode"]));
-            }
-            set {
-                this["cpuEfficiencyMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.DateTime lastCheckUpdate {
             get {
                 return ((global::System.DateTime)(this["lastCheckUpdate"]));
