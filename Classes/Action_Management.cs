@@ -15,12 +15,14 @@ using System.Xml;
 using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
 using WindowsInput;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Handheld_Control_Panel.Classes
 {
     public class Action_Management: List<HotkeyItem>
     {
-      
+        public string actionDirectory = AppDomain.CurrentDomain.BaseDirectory + "Actions";
         public HotkeyItem editingHotkey = null;
 
         public event EventHandler hotkeyClearedEvent;
@@ -162,64 +164,74 @@ namespace Handheld_Control_Panel.Classes
         public Action_Management()
         {
             //populates list
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
+            if (!Directory.Exists(actionDirectory))
             {
-                HotkeyItem hotkey = new HotkeyItem();
-
-                hotkey.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-         
-                this.Add(hotkey);
+                Directory.CreateDirectory(actionDirectory);
             }
-            
-            xmlDocument = null;          
-        }
 
+            string[] files = Directory.GetFiles(actionDirectory, "*.xml", SearchOption.TopDirectoryOnly);
+
+            foreach (string file in files)
+            {
+                StreamReader sr = new StreamReader(file);
+                XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                this.Add((HotkeyItem)xmls.Deserialize(sr));
+                sr.Dispose();
+                xmls = null;
+
+            }
+                
+        }
+        public void SaveToXML(HotkeyItem hki)
+        {
+            //Profile profile = this.Find(o => o.ProfileName == profileName);
+            if (hki != null)
+            {
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Actions\\" + hki.ID + ".xml");
+                    XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                    xmls.Serialize(sw, hki);
+                    sw.Dispose();
+                    xmls = null;
+                }
+
+
+                    );
+
+            }
+
+
+
+        }
+     
 
 
         public void addNewHotkey()
         {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeyTemplate/ControllerHotKey");
-            XmlNode xmlNodeHotKeys = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-               
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "ControllerHotKey", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
+            HotkeyItem hki = new HotkeyItem();
+
+            string newProfileName = "New Action";
             
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForHotkey(xmlDocument);
-            xmlNodeHotKeys.AppendChild(newNode);
-
-            HotkeyItem hotkey = new HotkeyItem();
-            this.Add(hotkey);
-            hotkey.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-
-        public string getNewIDNumberForHotkey(XmlDocument xmlDocument)
-        {
-            //gets ID for new profiles
-            int ID = 0;
-
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
-
-            while (xmlSelectedNode != null)
+            int x = 1;
+            if (File.Exists(actionDirectory + newProfileName + ".xml"))
             {
-                ID = ID + 1;
-                xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID.ToString() + "']");
+                while (File.Exists(actionDirectory + newProfileName + x.ToString() + ".xml"))
+                {
+                    x++;
+                }
+                newProfileName = newProfileName + x.ToString();
             }
-            //ID++;
-            return ID.ToString();
+
+            hki.ID = newProfileName;
+
+            this.Add(hki);
+            Global_Variables.Global_Variables.hotKeys.SaveToXML(hki);
+
+
 
         }
+               
     }
 
     public class HotkeyItem
