@@ -361,7 +361,8 @@ namespace Handheld_Control_Panel
                                     navigateFrame("MouseModePage");
                                     break;
                                 case "ProfileEditPage":
-                                    Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+
+                                    Global_Variables.profiles.loadProfile(Global_Variables.profiles.editingProfile.ProfileName);
                                     navigateFrame("ProfilesPage");
                                     break;
                                 default:

@@ -35,15 +35,6 @@ namespace Handheld_Control_Panel
             Global_Variables.settings = Load_Settings.loadSettings(AppDomain.CurrentDomain.BaseDirectory + "Settings.xml");
             
 
-            TestXMLSaving testXMLSaving1 = new TestXMLSaving();
-            Global_Variables.settings.testXMLSavings.Add(testXMLSaving1);
-        
-
-            Global_Variables.settings.Save(AppDomain.CurrentDomain.BaseDirectory + "Settings.xml");
-
-
-            
-
             bool quietStart = false;
             //if start is from system32 (task scheduled start) then set quietStart to true, means auto start
             if (String.Equals("C:\\Windows\\System32", Directory.GetCurrentDirectory(), StringComparison.OrdinalIgnoreCase))

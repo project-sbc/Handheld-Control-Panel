@@ -19,10 +19,6 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
     public static class Fan_Management
     {
       
-
-       
-
-
         public static string processEC = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\EC\\EC.exe";
 
       
@@ -52,6 +48,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         AyaNeo2 an2 = (AyaNeo2)Global_Variables.Global_Variables.Device;
                         Global_Variables.Global_Variables.fanControlEnabled = an2.fanIsEnabled();
                         an2 = null;
+                        break;
+                    case "AynLokiMax":
+                        AynLokiMax aynLokiMax = (AynLokiMax)Global_Variables.Global_Variables.Device;
+                        Global_Variables.Global_Variables.fanControlEnabled = aynLokiMax.fanIsEnabled();
+                        aynLokiMax = null;
                         break;
                     default: break;
 
@@ -93,6 +94,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         an2.readFanSpeed();
                         an2 = null;
                         break;
+                    case "AynLokiMax":
+                        AynLokiMax aynLokiMax = (AynLokiMax)Global_Variables.Global_Variables.Device;
+                        aynLokiMax.readFanSpeed();
+                        aynLokiMax = null;
+                        break;
                     default:break;
 
                 }
@@ -131,6 +137,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
                         oxp2.setFanSpeed(speedPercentage);
                         oxp2 = null;
+                        break;
+                    case "AynLokiMax":
+                        AynLokiMax aynLokiMax = (AynLokiMax)Global_Variables.Global_Variables.Device;
+                        aynLokiMax.setFanSpeed(speedPercentage);
+                        aynLokiMax = null;
                         break;
                     default: break;
                 }
@@ -171,6 +182,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         oxp2.enableFanControl();
                         oxp2 = null;
                         break;
+                    case "AynLokiMax":
+                        AynLokiMax aynLokiMax = (AynLokiMax)Global_Variables.Global_Variables.Device;
+                        aynLokiMax.enableFanControl();
+                        aynLokiMax = null;
+                        break;
                     default: break;
                 }
                 Global_Variables.Global_Variables.fanControlEnabled = true;
@@ -208,6 +224,11 @@ namespace Handheld_Control_Panel.Classes.Fan_Management
                         OneXPlayer2 oxp2 = (OneXPlayer2)Global_Variables.Global_Variables.Device;
                         oxp2.disableFanControl();
                         oxp2 = null;
+                        break;
+                    case "AynLokiMax":
+                        AynLokiMax aynLokiMax = (AynLokiMax)Global_Variables.Global_Variables.Device;
+                        aynLokiMax.disableFanControl();
+                        aynLokiMax = null;
                         break;
                     default: break;
                 }

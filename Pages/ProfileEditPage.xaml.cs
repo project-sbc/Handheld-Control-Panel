@@ -135,7 +135,7 @@ namespace Handheld_Control_Panel.Pages
                     case "B":
                         if (selectedUserControl < 0)
                         {
-                            Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+                            Global_Variables.profiles.loadProfile(Global_Variables.profiles.editingProfile.ProfileName);
                             wnd = (MainWindow)Application.Current.MainWindow;
                             wnd.navigateFrame("ProfilesPage");
                             wnd = null;
@@ -150,9 +150,9 @@ namespace Handheld_Control_Panel.Pages
                         break;
                     case "Start":
                         Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), Notification.Wpf.NotificationType.Success);
-                        Global_Variables.profiles.editingProfile.SaveToXML();
+                        Global_Variables.profiles.SaveToXML(Global_Variables.profiles.editingProfile);
 
-                        Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+                        Global_Variables.profiles.loadProfile(Global_Variables.profiles.editingProfile.ProfileName);
                         wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("ProfilesPage");
                         wnd = null;
@@ -183,7 +183,7 @@ namespace Handheld_Control_Panel.Pages
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
             //make sure to load profile to clear any unsaved changes to the profile
-            Global_Variables.profiles.editingProfile.LoadProfile(Global_Variables.profiles.editingProfile.ID);
+            Global_Variables.profiles.loadProfile(Global_Variables.profiles.editingProfile.ProfileName);
             if (Global_Variables.profiles.activeProfile != null)
             {
                 if (Global_Variables.profiles.editingProfile == Global_Variables.profiles.activeProfile)

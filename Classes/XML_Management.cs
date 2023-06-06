@@ -425,61 +425,9 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
         }
 
-        public static void createProfileForSteamGame(string profileName, string gameID)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
-            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "Steam";
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-        public static void createProfileForEpicGame(string profileName, string path, string gameID)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile();
-            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
-            newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "EpicGames";
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
         public static void syncSteamGameToProfile()
         {
+            //NOT IN USE CURRENTLY
             //gets list of steam games from library.vdf file, then makes profiles for those without one
 
             Dictionary<string, string> result = Steam_Management.syncSteam_Library();
@@ -495,7 +443,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + pair.Key + "']");
                     if (xmlSelectedNode == null)
                     {
-                        createProfileForSteamGame(pair.Value, pair.Key);
+                        //createProfileForSteamGame(pair.Value, pair.Key);
                     }
                 }
 
@@ -509,6 +457,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
         }
         public static void syncEpicGameToProfile()
         {
+            //NOT IN USE CURRENTLY
             //gets list of steam games from library.vdf file, then makes profiles for those without one
 
             List<EpicGamesLauncherItem> result = EpicGames_Management.syncEpic_Library();
@@ -524,7 +473,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
                     XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
                     if (xmlSelectedNode == null)
                     {
-                        createProfileForEpicGame(item.gameName, item.installPath, item.gameID);
+                        //createProfileForEpicGame(item.gameName, item.installPath, item.gameID);
                     }
                 }
 
@@ -536,27 +485,7 @@ namespace Handheld_Control_Panel.Classes.XML_Management
 
 
         }
-        public static string getProfileNameByID(string ID)
-        {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
-            string returnstring = "";
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                    returnstring = parentNode.SelectSingleNode("ProfileName").InnerText;
-
-                }
-            }
-            xmlDocument = null;
-            return returnstring;
-        }
+      
 
         public static void applyProfile(string ID, bool profileAutoApplied)
         {

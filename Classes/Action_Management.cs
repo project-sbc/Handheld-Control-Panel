@@ -394,7 +394,7 @@ namespace Handheld_Control_Panel.Classes
                 {
                     if (Action == "Open_Program")
                     {
-                        DisplayParameter = Global_Variables.Global_Variables.profiles.getProfileNameById(value);
+                        DisplayParameter = value;
                     }
                     else
                     {

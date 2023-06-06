@@ -39,11 +39,6 @@ namespace Handheld_Control_Panel.Classes
         public int maxGPUCLK { get; set; } = 1500;
 
 
-        public List<TestXMLSaving> testXMLSavings = new List<TestXMLSaving>();
-
-
-
-
         public void Save(string filename)
         {
             using (StreamWriter sw = new StreamWriter(filename))
@@ -56,12 +51,5 @@ namespace Handheld_Control_Panel.Classes
        
     }
 
-    public class TestXMLSaving
-    {
-        public string profilename { get; set; }
-        public string test1 { get; set; } = "test1";
-        public string test2 { get; set; } = "test2";
-        public string test3 { get; set; } = "test3";
-
-    }
+   
 }

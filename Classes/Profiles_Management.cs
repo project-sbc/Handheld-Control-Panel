@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using ControlzEx.Standard;
+using MahApps.Metro.Controls;
 using MahApps.Metro.IconPacks;
 using SharpDX;
 using SharpDX.XInput;
@@ -20,6 +21,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
+using System.Xml.Serialization;
+using Windows.Networking.NetworkOperators;
 using YamlDotNet.Core.Tokens;
 using Path = System.IO.Path;
 
@@ -27,73 +30,81 @@ namespace Handheld_Control_Panel.Classes
 {
     public class Profiles_Management: List<Profile>
     {
-         
+        private string profileDirectory = AppDomain.CurrentDomain.BaseDirectory + "Profiles";
         public Profile activeProfile=null;
         public Profile editingProfile = null;
         public Profile defaultProfile = null;
         public Profiles_Management()
         {
             //populates list
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-           
-            foreach (XmlNode node in xmlNode.ChildNodes)
+            if (!Directory.Exists(profileDirectory))
             {
-                Profile profile = new Profile();
-
-                profile.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-                if (node.SelectSingleNode("DefaultProfile").InnerText == "True") { defaultProfile = profile; activeProfile = profile; activeProfile.ActiveProfile = true;  }
-                this.Add(profile);
+                Directory.CreateDirectory(profileDirectory);
             }
-           // this.OrderBy(o => o.ProfileName);
-            xmlDocument = null;          
-        }
 
-        public void createProfileForSteamGame(string profileName, string gameID)
-        {
+            string[] files = Directory.GetFiles(profileDirectory, "*.xml", SearchOption.TopDirectoryOnly);
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
-            newNode.SelectSingleNode("ID").InnerText = Global_Variables.Global_Variables.profiles.getNewIDNumberForProfile(xmlDocument);
-            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = "Steam";
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
+            foreach (string file in files)
+            {
+                StreamReader sr = new StreamReader(file);
+                XmlSerializer xmls = new XmlSerializer(typeof(Profile));
+                this.Add((Profile)xmls.Deserialize(sr));
+                sr.Dispose();
+                xmls = null;
+    
+            }
 
         }
-        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, XmlDocument xmlDocument, string exe, string imageLocation)
+        private string RemoveSpecialCharacters(string str)
         {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == ' ')
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
 
-         
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+        public void loadProfile(string profilename)
+        {
+            Profile loadingProfile = this.Find(o => o.ProfileName == profilename);
+            if (loadingProfile != null)
+            {
+                if (File.Exists(profileDirectory + "\\" + profilename + ".xml"))
+                {
+                    using (StreamReader sw = new StreamReader(profileDirectory + "\\" + profilename + ".xml"))
+                    {
+                        XmlSerializer xmls = new XmlSerializer(typeof(Profile));
+                        loadingProfile = (Profile)xmls.Deserialize(sw);
+                    }
+                }
+              
 
+            }
+        }
+       
+        public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, string exe, string imageLocation)
+        {
+            Profile newProfile = new Profile();
+            profileName = RemoveSpecialCharacters(profileName);
+            int x = 1;
+            if (File.Exists(profileDirectory + profileName + ".xml"))
+            {
+                //END THE ROUTINE IF THE GAME ALREADY HAS A PROFILE
+                newProfile = null;
+                return;
+            }
+    
+            newProfile.ProfileName = profileName;
+            newProfile.GameID = gameID;
+            newProfile.Path = path;
+            newProfile.LaunchCommand = launchcommand;
+            newProfile.AppType = apptype;
 
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = profileName;
-            newNode.SelectSingleNode("ID").InnerText = Global_Variables.Global_Variables.profiles.getNewIDNumberForProfile(xmlDocument);
-            newNode.SelectSingleNode("LaunchOptions/GameID").InnerText = gameID;
-            newNode.SelectSingleNode("LaunchOptions/Path").InnerText = path;
-            newNode.SelectSingleNode("LaunchOptions/LaunchCommand").InnerText = launchcommand;
-            newNode.SelectSingleNode("LaunchOptions/AppType").InnerText = apptype;
+            
             if (exe != null)
             {
                 if (File.Exists(exe))
@@ -108,20 +119,20 @@ namespace Handheld_Control_Panel.Classes
                     }
                 }
 
-                newNode.SelectSingleNode("Exe").InnerText = exe;
+                newProfile.Exe = exe;
             }
             if (imageLocation != null)
             {
-                newNode.SelectSingleNode("LaunchOptions/ImageLocation").InnerText = imageLocation;
+                newProfile.ImageLocation = imageLocation;
             }
 
-            xmlNodeProfiles.AppendChild(newNode);
+           
+
+            this.Add(newProfile);
+            Global_Variables.Global_Variables.profiles.SaveToXML(newProfile);
 
 
 
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-       
 
         }
                 
@@ -136,28 +147,19 @@ namespace Handheld_Control_Panel.Classes
 
             if (result.Count > 0)
             {
-                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-                XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
+      
                 foreach (GameLauncherItem item in result)
                 {
-                    XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/LaunchOptions/GameID[text()='" + item.gameID + "']");
-                    if (xmlSelectedNode == null)
+                    Profile gameIDProfile = this.Find(o => o.GameID == item.gameID);
+                    if (gameIDProfile == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, xmlDocument, item.exe, item.imageLocation);
+                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, item.exe, item.imageLocation);
                     }
                 }
-                
-                
-                xmlDocument = null;
-
+               
             }
 
-            Global_Variables.Global_Variables.mainWindow.reinitializeProfiles();
-
             Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
-
 
         }
 
@@ -174,8 +176,8 @@ namespace Handheld_Control_Panel.Classes
             if (profile != null)
             {
                 profile.Favorite = !profile.Favorite;
-                profile.SaveToXML();
-
+          
+                Global_Variables.Global_Variables.profiles.SaveToXML(profile);
             }
 
 
@@ -197,7 +199,7 @@ namespace Handheld_Control_Panel.Classes
 
                 profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
                                    System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
-                profile.SaveToXML();
+                Global_Variables.Global_Variables.profiles.SaveToXML(profile);
         
             }
 
@@ -215,23 +217,12 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
-        public string getProfileNameById(string ID)
-        {
-            string name = "";
-            foreach (Profile profile in this)
-            {
-                if (profile.ID == ID)
-                {
-                    name = profile.ProfileName;
-                }
-            }
-            return name;
-        }
+      
         public void deleteProfile(Profile profile)
         {
             if (profile != null)
             {
-                string ID = profile.ID;
+                string profileName = profile.ProfileName;
 
                 if (Global_Variables.Global_Variables.profiles.activeProfile != null)
                 {
@@ -247,105 +238,72 @@ namespace Handheld_Control_Panel.Classes
                         Global_Variables.Global_Variables.profiles.defaultProfile = null;
                     }
                 }
-                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-
-                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+                
+                if (File.Exists(profileDirectory + profileName + ".xml"))
                 {
-                    if (node.SelectSingleNode("ID").InnerText == ID)
-                    {
-                        xmlNodeProfiles.RemoveChild(node);
-                        break;
-                    }
-
+                    File.Delete(profileDirectory + profileName + ".xml");
                 }
-
-                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-                xmlDocument = null;
 
                 this.Remove(profile);
             }
           
 
         }
+        public void SaveToXML(Profile profile)
+        {
+            //Profile profile = this.Find(o => o.ProfileName == profileName);
+            if (profile != null)
+            {
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profile.ProfileName + ".xml");
+                    XmlSerializer xmls = new XmlSerializer(typeof(Profile));
+                    xmls.Serialize(sw, profile);
+                    sw.Dispose();
+                    xmls = null;
+                }
 
+
+                    );
+                
+            }
+
+          
+
+        }
         public void addNewProfile(Profile copyProfile)
         {
-         
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/ProfileTemplate/Profile");
+            
+          
+            string newProfileName = "NewProfile";
+            
 
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/Profiles");
+
+            Profile profile = new Profile();
 
             if (copyProfile != null)
             {
-
-                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
-                {
-                    if (node.SelectSingleNode("ID").InnerText == copyProfile.ID)
-                    {
-                        xmlNodeTemplate = node;
-                        break;
-                    }
-
-                }
+                profile = copyProfile;
             }
 
-            string newProfileName = "NewProfile";
-            if (copyProfile != null) { newProfileName = copyProfile.ProfileName; }
-            int countProfile = 0;
-            XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + "']");
-
-            if (xmlNodesByName.Count > 0)
+            int x = 1;
+            if (File.Exists(profileDirectory + newProfileName + ".xml"))
             {
-                while (xmlNodesByName.Count > 0)
+                while (File.Exists(profileDirectory + newProfileName + x.ToString() + ".xml"))
                 {
-                    countProfile++;
-                    xmlNodesByName = xmlNodeProfiles.SelectNodes("Profile/ProfileName[text()='" + newProfileName + countProfile.ToString() + "']");
-
+                    x++;
                 }
-                newProfileName = newProfileName + countProfile.ToString();
+                newProfileName = newProfileName + x.ToString();
             }
 
+            profile.ProfileName = newProfileName;
 
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "Profile", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("ProfileName").InnerText = newProfileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile(xmlDocument);
-            newNode.SelectSingleNode("DefaultProfile").InnerText = "False";
-
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-            Profile profile = new Profile();
             this.Add(profile);
-            profile.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
+            Global_Variables.Global_Variables.profiles.SaveToXML(profile);
 
         }
 
-        public string getNewIDNumberForProfile(XmlDocument xmlDocument)
-        {
-            //gets ID for new profiles
-            int ID = 0;
-
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID.ToString() + "']");
-
-            while (xmlSelectedNode != null)
-            {
-                ID = ID + 1;
-                xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID.ToString() + "']");
-            }
-            //ID++;
-            return ID.ToString();
-
-        }
+      
     }
 
     public class Profile
@@ -425,11 +383,11 @@ namespace Handheld_Control_Panel.Classes
                     {
                         if (appType == "Microsoft Store")
                         {
-                            imageIcon = new BitmapImage(new Uri(value.Replace("%20", " ")));
+                            //imageIcon = new BitmapImage(new Uri(value.Replace("%20", " ")));
                         }
                         else
                         {
-                            imageApp = new BitmapImage(new Uri(value.Replace("%20", " ")));
+                            //imageApp = new BitmapImage(new Uri(value.Replace("%20", " ")));
                         }
                         
                     }
@@ -447,7 +405,7 @@ namespace Handheld_Control_Panel.Classes
 
                             using (Icon ico = Icon.ExtractAssociatedIcon(Path))
                             {
-                                imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                                //imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                             }
 
                         }
@@ -472,8 +430,8 @@ namespace Handheld_Control_Panel.Classes
             }
         }
         public Visibility favoriteIconVisibility { get; set; } = Visibility.Collapsed;
-        public ImageSource imageIcon { get; set; } = null;
-        public ImageSource imageApp { get; set; } = null;
+        //public ImageSource imageIcon { get; set; } = null;
+        //public ImageSource imageApp { get; set; } = null;
         public int LastLaunched { get; set; } = 0;
         public int NumberLaunches { get; set; } = 0;
         public string AppType
@@ -493,13 +451,13 @@ namespace Handheld_Control_Panel.Classes
                             string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + GameID + "_header";
                             if (File.Exists(imageDirectory + ".jpg"))
                             {
-                                imageApp = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
+                                //imageApp = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
                             }
                             else
                             {
                                 if (File.Exists(imageDirectory + ".png"))
                                 {
-                                    imageApp = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                                    //imageApp = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
                                 }
 
                             }
@@ -568,184 +526,9 @@ namespace Handheld_Control_Panel.Classes
 
 
 
-        public void SaveToXML()
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + ID + "']");
+        
 
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                    XmlNode onlineNode = parentNode.SelectSingleNode("Online");
-                    onlineNode.SelectSingleNode("TDP1").InnerText = Online_TDP1;
-                    onlineNode.SelectSingleNode("TDP2").InnerText = Online_TDP2;
-                    onlineNode.SelectSingleNode("ActiveCores").InnerText = Online_ActiveCores;
-                    onlineNode.SelectSingleNode("MAXCPU").InnerText = Online_MAXCPU;
-                    onlineNode.SelectSingleNode("FPSLimit").InnerText = Online_FPSLimit;
-                    onlineNode.SelectSingleNode("EPP").InnerText = Online_EPP;
-                    onlineNode.SelectSingleNode("GPUCLK").InnerText = Online_GPUCLK;
-
-                    XmlNode offlineNode = parentNode.SelectSingleNode("Offline");
-                    offlineNode.SelectSingleNode("TDP1").InnerText = Offline_TDP1;
-                    offlineNode.SelectSingleNode("TDP2").InnerText = Offline_TDP2;
-                    offlineNode.SelectSingleNode("ActiveCores").InnerText = Offline_ActiveCores;
-                    offlineNode.SelectSingleNode("MAXCPU").InnerText = Offline_MAXCPU;
-                    offlineNode.SelectSingleNode("FPSLimit").InnerText = Offline_FPSLimit;
-                    offlineNode.SelectSingleNode("EPP").InnerText = Offline_EPP;
-                    offlineNode.SelectSingleNode("GPUCLK").InnerText = Offline_GPUCLK;
-
-                    XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
-                    LaunchOptions.SelectSingleNode("Resolution").InnerText = Resolution;
-                    LaunchOptions.SelectSingleNode("RefreshRate").InnerText = RefreshRate;
-                    LaunchOptions.SelectSingleNode("Path").InnerText = Path;
-                    LaunchOptions.SelectSingleNode("AppType").InnerText = AppType;
-                    LaunchOptions.SelectSingleNode("GameID").InnerText = GameID;
-                    LaunchOptions.SelectSingleNode("LastLaunched").InnerText = LastLaunched.ToString();
-                    LaunchOptions.SelectSingleNode("NumberLaunches").InnerText = NumberLaunches.ToString();
-                    LaunchOptions.SelectSingleNode("LaunchCommand").InnerText = LaunchCommand.ToString();
-                    LaunchOptions.SelectSingleNode("ImageLocation").InnerText = ImageLocation.ToString();
-                    LaunchOptions.SelectSingleNode("Favorite").InnerText = Favorite.ToString();
-
-                    parentNode.SelectSingleNode("SeparateChargerBattery").InnerText = SeparateChargerBattery.ToString();
-
-
-                    parentNode.SelectSingleNode("ProfileName").InnerText = ProfileName;
-                    //parentNode.SelectSingleNode("Exe").InnerText = Exe;
-
-                    //if ID isnt 0, which is the default profile, and its been saved to be the default profile, then make this ID 0 and change the other profile
-                    if (DefaultProfile.ToString() != parentNode.SelectSingleNode("DefaultProfile").InnerText && DefaultProfile)
-                    {
-                        //check to see if a default profile exists
-                        XmlNode xmlCurrentDefault = xmlNode.SelectSingleNode("Profile/DefaultProfile[text()='True']");
-                        if (xmlCurrentDefault != null)
-                        {
-                            //if not null set to false
-                            xmlCurrentDefault.InnerText = "False";
-                            //get the ID and change status in profiles list
-                            string curDefID = xmlCurrentDefault.ParentNode.SelectSingleNode("ID").InnerText;
-                            Global_Variables.Global_Variables.profiles.setCurrentDefaultProfileToFalse(curDefID);
-                        }
-                        
-                    }
-                    parentNode.SelectSingleNode("DefaultProfile").InnerText = DefaultProfile.ToString();
-
-                }
-
-
-            }
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-
-        }
-
-        public void LoadProfile(string loadID, XmlDocument xmlDocument=null)
-        {
-            if (xmlDocument == null)
-            {
-                xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            }
-
-
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/Profiles");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("Profile/ID[text()='" + loadID + "']");
-
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                    XmlNode onlineNode = parentNode.SelectSingleNode("Online");
-                    Online_TDP1 = onlineNode.SelectSingleNode("TDP1").InnerText;
-                    Online_TDP2 = onlineNode.SelectSingleNode("TDP2").InnerText;
-                    Online_ActiveCores = onlineNode.SelectSingleNode("ActiveCores").InnerText;
-                    Online_MAXCPU = onlineNode.SelectSingleNode("MAXCPU").InnerText;
-                    Online_FPSLimit = onlineNode.SelectSingleNode("FPSLimit").InnerText;
-                    Online_EPP = onlineNode.SelectSingleNode("EPP").InnerText;
-                    Online_GPUCLK = onlineNode.SelectSingleNode("GPUCLK").InnerText;
-
-                    XmlNode offlineNode = parentNode.SelectSingleNode("Offline");
-                    Offline_TDP1 = offlineNode.SelectSingleNode("TDP1").InnerText;
-                    Offline_TDP2 = offlineNode.SelectSingleNode("TDP2").InnerText;
-                    Offline_ActiveCores = offlineNode.SelectSingleNode("ActiveCores").InnerText;
-                    Offline_MAXCPU = offlineNode.SelectSingleNode("MAXCPU").InnerText;
-                    Offline_FPSLimit = offlineNode.SelectSingleNode("FPSLimit").InnerText;
-                    Offline_EPP = offlineNode.SelectSingleNode("EPP").InnerText;
-                    Offline_GPUCLK = offlineNode.SelectSingleNode("GPUCLK").InnerText;
-
-                    XmlNode LaunchOptions = parentNode.SelectSingleNode("LaunchOptions");
-                    GameID = LaunchOptions.SelectSingleNode("GameID").InnerText;
-                    AppType = LaunchOptions.SelectSingleNode("AppType").InnerText;
-                    Resolution = LaunchOptions.SelectSingleNode("Resolution").InnerText;
-                    RefreshRate = LaunchOptions.SelectSingleNode("RefreshRate").InnerText;
-                    Path = LaunchOptions.SelectSingleNode("Path").InnerText;
-                   
-                    ImageLocation = LaunchOptions.SelectSingleNode("ImageLocation").InnerText;
-               
-                   
-                   
-                    if (LaunchOptions.SelectSingleNode("Favorite").InnerText == "True")
-                    {
-                        Favorite = true;
-                    }
-                    else
-                    {
-                        Favorite = false;
-                    }
-
-                    if (parentNode.SelectSingleNode("SeparateChargerBattery").InnerText == "True")
-                    {
-                        SeparateChargerBattery = true;
-                    }
-                    else
-                    {
-                        SeparateChargerBattery = false;
-                    }
-
-                    LaunchCommand = LaunchOptions.SelectSingleNode("LaunchCommand").InnerText;
-                    
-
-
-                    if (LaunchOptions.SelectSingleNode("NumberLaunches").InnerText != "")
-                    {
-                        NumberLaunches = Int32.Parse(LaunchOptions.SelectSingleNode("NumberLaunches").InnerText);
-                    }
-                    else
-                    {
-                        NumberLaunches = 0;
-                    }
-                    if (LaunchOptions.SelectSingleNode("LastLaunched").InnerText != "")
-                    {
-                        LastLaunched = Int32.Parse(LaunchOptions.SelectSingleNode("LastLaunched").InnerText);
-                    }
-                    else
-                    {
-                        LastLaunched = 0;
-                    }
-                    
-
-                    ProfileName = parentNode.SelectSingleNode("ProfileName").InnerText;
-                    //Exe = parentNode.SelectSingleNode("Exe").InnerText;
-                    if (parentNode.SelectSingleNode("DefaultProfile").InnerText == "True") { DefaultProfile = true; } else { DefaultProfile = false; }
-                    ID = loadID;
-                    
-
-                }
-
-
-            }
-            
-            xmlDocument = null;
-
-        }
+       
 
         public void applyProfile(bool autoApplied, bool changeDisplay)
         {
