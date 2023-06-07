@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setControlValue()
         {
             
-            control.IsOn = Properties.Settings.Default.enableNotifications;
+            control.IsOn = Global_Variables.settings.enableNotifications;
            
 
         }
@@ -71,8 +71,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Properties.Settings.Default.enableNotifications=control.IsOn;
-                Properties.Settings.Default.Save();
+                Global_Variables.settings.enableNotifications=control.IsOn;
+                Global_Variables.settings.Save();
 
             }
 

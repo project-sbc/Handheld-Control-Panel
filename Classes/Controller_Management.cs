@@ -47,7 +47,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         {
 
             //this gets the properties of the first controller it detects (built in controller)
-            if (Properties.Settings.Default.GUID == "" || Properties.Settings.Default.instanceID == "")
+            if (Global_Variables.Global_Variables.settings.GUID == "" || Global_Variables.Global_Variables.settings.instanceID == "")
             {
                 var instance = 0;
                 //Get the VID and PID from instance path, should look like this VID_045E&PID_028E, we need this to search in the Devcon interface GUID
@@ -70,9 +70,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     {
                         
                         Guid guid = usbDevice.GetProperty<Guid>(DevicePropertyKey.Device_ClassGuid);
-                        Properties.Settings.Default.GUID = guid.ToString();
-                        Properties.Settings.Default.instanceID = usbDevice.InstanceId;
-                        Properties.Settings.Default.Save();
+                        Global_Variables.Global_Variables.settings.GUID = guid.ToString();
+                        Global_Variables.Global_Variables.settings.instanceID = usbDevice.InstanceId;
+                        Global_Variables.Global_Variables.settings.Save();
                         break;
                     }
                 }
@@ -105,9 +105,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     }
 
                     IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
-                    if (!controllerList.Contains(Properties.Settings.Default.instanceID))
+                    if (!controllerList.Contains(Global_Variables.Global_Variables.settings.instanceID))
                     {
-                        hideHidService.AddBlockedInstanceId(Properties.Settings.Default.instanceID);
+                        hideHidService.AddBlockedInstanceId(Global_Variables.Global_Variables.settings.instanceID);
                     }
                 }
               
@@ -116,7 +116,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
 
         public static void hideController()
         {
-            if (hideHidService.IsInstalled && Properties.Settings.Default.instanceID != "")
+            if (hideHidService.IsInstalled && Global_Variables.Global_Variables.settings.instanceID != "")
             {
                 //check to make sure hidhide client isn't running or else an error will occur
                 Process[] hidHideClient = Process.GetProcessesByName("HidHideClient");
@@ -127,7 +127,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                 }
 
                 IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
-                if (controllerList.Contains(Properties.Settings.Default.instanceID))
+                if (controllerList.Contains(Global_Variables.Global_Variables.settings.instanceID))
                 {
                     
                     if (!hideHidService.IsActive)
@@ -142,10 +142,10 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         }
         public static void unhideController()
         {
-            if (hideHidService.IsInstalled && Properties.Settings.Default.instanceID != "")
+            if (hideHidService.IsInstalled && Global_Variables.Global_Variables.settings.instanceID != "")
             {
                 IReadOnlyList<string> controllerList = hideHidService.BlockedInstanceIds;
-                if (controllerList.Contains(Properties.Settings.Default.instanceID))
+                if (controllerList.Contains(Global_Variables.Global_Variables.settings.instanceID))
                 {
 
                     if (hideHidService.IsActive)
@@ -175,7 +175,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                         .ToUsbPnPDevice();
 
                     //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
-                    if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
+                    if (usbDevice.InstanceId == Global_Variables.Global_Variables.settings.instanceID)
                     {
 
                         controllerEnabled = true;
@@ -197,14 +197,14 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             {
                 //make this negative because we want to do the opposite of its current state (so if enabled lets disable)
                 bool deviceEnable = !checkBuiltInControllerStatus();
-                if (Properties.Settings.Default.GUID != "" && Properties.Settings.Default.instanceID != "")
+                if (Global_Variables.Global_Variables.settings.GUID != "" && Global_Variables.Global_Variables.settings.instanceID != "")
                 {
                     var instance = 0;
 
 
 
-                    Guid guid = new Guid(Properties.Settings.Default.GUID);
-                    string instanceID = Properties.Settings.Default.instanceID;
+                    Guid guid = new Guid(Global_Variables.Global_Variables.settings.GUID);
+                    string instanceID = Global_Variables.Global_Variables.settings.instanceID;
 
                     enabledevice.DeviceHelper.SetDeviceEnabled(guid, instanceID, deviceEnable);
 
@@ -252,7 +252,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                         .ToUsbPnPDevice();
 
                     //We want the device that has our VID and PID value, the variable strDevInstPth that should look like this  VID_045E&PID_028E
-                    if (usbDevice.InstanceId == Properties.Settings.Default.instanceID)
+                    if (usbDevice.InstanceId == Global_Variables.Global_Variables.settings.instanceID)
                     {
                         
                         //Apply power port cycle to finish disable

@@ -26,12 +26,12 @@ namespace Handheld_Control_Panel.Classes
             //steam stuff copy is below
 
             List<EpicGamesLauncherItem> result = new List<EpicGamesLauncherItem>();
-            if (Properties.Settings.Default.directoryEpicGames != "")
+            if (Global_Variables.Global_Variables.settings.directoryEpicGames != "")
             {
-                if (File.Exists(Properties.Settings.Default.directoryEpicGames + "\\LauncherInstalled.dat"))
+                if (File.Exists(Global_Variables.Global_Variables.settings.directoryEpicGames + "\\LauncherInstalled.dat"))
                 {
 
-                    string[] lines = System.IO.File.ReadAllLines(Properties.Settings.Default.directoryEpicGames + "\\LauncherInstalled.dat");
+                    string[] lines = System.IO.File.ReadAllLines(Global_Variables.Global_Variables.settings.directoryEpicGames + "\\LauncherInstalled.dat");
 
                     bool startNewApp = false;
                     string installLocation = "";
@@ -173,11 +173,11 @@ namespace Handheld_Control_Panel.Classes
 
         public static void openEpicGame(string gameID)
         {
-            if (Properties.Settings.Default.directorySteam != "")
+            if (Global_Variables.Global_Variables.settings.directorySteam != "")
             {
                 //string steamLaunch = "steam://rungameid/" + gameID;
                 //System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Steam\steam.exe", steamLaunch);
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://rungameid/" + gameID, false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false));
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://rungameid/" + gameID, false, Global_Variables.Global_Variables.settings.directorySteam + "\\Steam.exe", 6000, false));
             }
 
 
@@ -187,7 +187,7 @@ namespace Handheld_Control_Panel.Classes
       
         public static void setEpicGamesDirectory()
         {
-            if (Properties.Settings.Default.directoryEpicGames == "")
+            if (Global_Variables.Global_Variables.settings.directoryEpicGames == "")
             {
             
                 string epicGamesReg = "SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher";
@@ -204,10 +204,10 @@ namespace Handheld_Control_Panel.Classes
                         installPath = Directory.GetParent(@installPath).ToString();
                         installPath = Directory.GetParent(@installPath).ToString();
                         installPath = Directory.GetParent(@installPath).ToString();
-                        Properties.Settings.Default.directoryEpicGames = installPath + "\\UnrealEngineLauncher";
+                        Global_Variables.Global_Variables.settings.directoryEpicGames = installPath + "\\UnrealEngineLauncher";
 
                         //\UnrealEngineLauncher\\LauncherInstalled.dat
-                        Properties.Settings.Default.Save();
+                        Global_Variables.Global_Variables.settings.Save();
                     }
                 }
                 

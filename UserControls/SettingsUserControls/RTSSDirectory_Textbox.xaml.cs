@@ -47,7 +47,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-           controlTextbox.Text = Properties.Settings.Default.directoryRTSS;
+           controlTextbox.Text = Global_Variables.settings.directoryRTSS;
            
 
         }
@@ -101,8 +101,8 @@ namespace Handheld_Control_Panel.UserControls
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                    
-                    Properties.Settings.Default.directoryRTSS = fbd.SelectedPath;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.settings.directoryRTSS = fbd.SelectedPath;
+                    Global_Variables.settings.Save();
                   
                 }
             }
@@ -114,8 +114,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (this.IsLoaded)
             {
-                Properties.Settings.Default.directoryRTSS = controlTextbox.Text;
-                Properties.Settings.Default.Save();
+                Global_Variables.settings.directoryRTSS = controlTextbox.Text;
+                Global_Variables.settings.Save();
             }
 
         }

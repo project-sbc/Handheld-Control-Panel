@@ -63,7 +63,7 @@ namespace Handheld_Control_Panel
         private bool keyWin = false;
 
         private double sensitivity = 16;
-        private double deadzone = Properties.Settings.Default.joystickDeadzone;
+        private double deadzone = Global_Variables.settings.joystickDeadzone;
         buttonEvents events = new buttonEvents();
 
         Dictionary<string, VirtualKeyCode> keyLookUp =

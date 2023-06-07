@@ -44,7 +44,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 50;
                         slider.SmallChange = 50;
                         slider.LargeChange = 100;
-                        slider.Value = Properties.Settings.Default.maxGPUCLK;
+                        slider.Value = Global_Variables.Global_Variables.settings.maxGPUCLK;
                         break;
                     case "Slider_MouseSensitivity":
                         slider.Minimum = 5;
@@ -60,34 +60,34 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
-                        slider.Value = Math.Round(Properties.Settings.Default.joystickDeadzone*100 / 32768, 0);
+                        slider.Value = Math.Round(Global_Variables.Global_Variables.settings.joystickDeadzone*100 / 32768, 0);
                         break;
 
                     case "Slider_ProfileOnlineTDP":
-                        slider.Minimum = Properties.Settings.Default.minTDP;
-                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.Minimum = Global_Variables.Global_Variables.settings.minTDP;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxTDP;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
                         
                         break;
                     case "Slider_ProfileOfflineTDP":
-                        slider.Minimum = Properties.Settings.Default.minTDP;
-                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.Minimum = Global_Variables.Global_Variables.settings.minTDP;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxTDP;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
                         break;
                     case "Slider_ProfileOnlineTDP2":
-                        slider.Minimum = Properties.Settings.Default.minTDP;
-                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.Minimum = Global_Variables.Global_Variables.settings.minTDP;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxTDP;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
                         break;
                     case "Slider_ProfileOfflineTDP2":
-                        slider.Minimum = Properties.Settings.Default.minTDP;
-                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.Minimum = Global_Variables.Global_Variables.settings.minTDP;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxTDP;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
@@ -108,7 +108,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
                     case "Slider_ProfileOnlineGPUCLK":
                         slider.Minimum = 400;
-                        slider.Maximum = Properties.Settings.Default.maxGPUCLK;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxGPUCLK;
                         slider.TickFrequency = 50;
                         slider.SmallChange = 50;
                         slider.LargeChange = 100;
@@ -116,7 +116,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
                     case "Slider_ProfileOfflineGPUCLK":
                         slider.Minimum = 400;
-                        slider.Maximum = Properties.Settings.Default.maxGPUCLK;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxGPUCLK;
                         slider.TickFrequency = 50;
                         slider.SmallChange = 50;
                         slider.LargeChange = 100;
@@ -152,14 +152,14 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
                     case "Slider_ProfileOfflineFPS":
                         slider.Minimum = 0;
-                        slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxRTSSFPSLimit;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
                         break;
                     case "Slider_ProfileOnlineFPS":
                         slider.Minimum = 0;
-                        slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxRTSSFPSLimit;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
@@ -167,8 +167,8 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
 
                     case "Slider_TDP-TickChange":
-                        slider.Minimum = Properties.Settings.Default.minTDP;
-                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.Minimum = Global_Variables.Global_Variables.settings.minTDP;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxTDP;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
@@ -176,7 +176,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
                     case "Slider_GPUCLK-TickChange":
                         slider.Minimum = 400;
-                        slider.Maximum = Properties.Settings.Default.maxGPUCLK;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxGPUCLK;
                         slider.TickFrequency = 50;
                         slider.SmallChange = 50;
                         slider.LargeChange = 100;
@@ -194,7 +194,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
-                        slider.Value = Properties.Settings.Default.minTDP;
+                        slider.Value = Global_Variables.Global_Variables.settings.minTDP;
                         break;
                     case "Slider_MaxTDP":
                         slider.Minimum = 5;
@@ -202,11 +202,11 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
-                        slider.Value = Properties.Settings.Default.maxTDP;
+                        slider.Value = Global_Variables.Global_Variables.settings.maxTDP;
                         break;
                     case "Slider_TDP2-TickChange":
-                        slider.Minimum = Properties.Settings.Default.minTDP;
-                        slider.Maximum = Properties.Settings.Default.maxTDP;
+                        slider.Minimum = Global_Variables.Global_Variables.settings.minTDP;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxTDP;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
@@ -263,7 +263,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         break;
                     case "Slider_FPSLimit":
                         slider.Minimum = 0;
-                        slider.Maximum = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.Maximum = Global_Variables.Global_Variables.settings.maxRTSSFPSLimit;
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 5;
@@ -275,7 +275,7 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                         slider.TickFrequency = 1;
                         slider.SmallChange = 1;
                         slider.LargeChange = 10;
-                        slider.Value = Properties.Settings.Default.maxRTSSFPSLimit;
+                        slider.Value = Global_Variables.Global_Variables.settings.maxRTSSFPSLimit;
                         break;
 
                     case "Slider_MaxCPU":
@@ -556,27 +556,27 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
                     break;
  
                 case "Slider_MaxGPUCLK":
-                    Properties.Settings.Default.maxGPUCLK = (int)sliderValue;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.Global_Variables.settings.maxGPUCLK = (int)sliderValue;
+                    Global_Variables.Global_Variables.settings.Save();
                     break;
                 case "Slider_MinTDP":
-                    Properties.Settings.Default.minTDP = (int)sliderValue;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.Global_Variables.settings.minTDP = (int)sliderValue;
+                    Global_Variables.Global_Variables.settings.Save();
                     break;
                 case "Slider_Deadzone":
-                    Properties.Settings.Default.joystickDeadzone = Math.Round((sliderValue/100)*32768,0);
-                    Properties.Settings.Default.Save();
+                    Global_Variables.Global_Variables.settings.joystickDeadzone = Math.Round((sliderValue/100)*32768,0);
+                    Global_Variables.Global_Variables.settings.Save();
                     break;
                 case "Slider_MaxTDP":
-                    Properties.Settings.Default.maxTDP = (int)sliderValue;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.Global_Variables.settings.maxTDP = (int)sliderValue;
+                    Global_Variables.Global_Variables.settings.Save();
                     break;
                 case "Slider_MaxFPS":
-                    Properties.Settings.Default.maxRTSSFPSLimit = (int)sliderValue;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.Global_Variables.settings.maxRTSSFPSLimit = (int)sliderValue;
+                    Global_Variables.Global_Variables.settings.Save();
                     break;
                 case "Slider_TDP-TickChange":
-                    if (Properties.Settings.Default.combineTDP)
+                    if (Global_Variables.Global_Variables.settings.combineTDP)
                     {
                         Classes.Task_Scheduler.Task_Scheduler.runTask(() => Classes.TDP_Management.TDP_Management.changeTDP((int)sliderValue, (int)sliderValue));
 

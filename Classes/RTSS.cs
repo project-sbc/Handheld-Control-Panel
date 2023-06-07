@@ -17,7 +17,7 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class RTSS
     {
-        public static  string rtssDirectory = Properties.Settings.Default.directoryRTSS;
+        public static  string rtssDirectory = Global_Variables.Global_Variables.settings.directoryRTSS;
         public static void getRTSSFPSLimit()
         {
             
@@ -36,7 +36,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void checkAutoStartRTSS()
         {
-            if (!RTSSRunning() && Properties.Settings.Default.autoStartRTSS)
+            if (!RTSSRunning() && Global_Variables.Global_Variables.settings.autoStartRTSS)
             {
                 startRTSS();
             }

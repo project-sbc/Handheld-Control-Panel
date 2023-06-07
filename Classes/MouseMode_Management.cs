@@ -108,7 +108,7 @@ namespace Handheld_Control_Panel.Classes
 
         public double sensitivityScroll = 1;
         private int joystickButtonPressSensivitiy = 6000;
-        private double deadzone = Properties.Settings.Default.joystickDeadzone;
+        private double deadzone = Global_Variables.Global_Variables.settings.joystickDeadzone;
         public MouseMode activeMouseMode = new MouseMode();
   
         public MouseMode editingMouseMode = new MouseMode();

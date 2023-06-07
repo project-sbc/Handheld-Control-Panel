@@ -18,7 +18,7 @@ namespace Handheld_Control_Panel.Classes
 
         public static void Show(string message, bool forceEnable=false)
         {
-            if (Properties.Settings.Default.enableNotifications || forceEnable)
+            if (Global_Variables.Global_Variables.settings.enableNotifications || forceEnable)
             {
                 NotificationManager __NotificationManager = new();
                 __NotificationManager.Show("Handheld Control Panel", message);

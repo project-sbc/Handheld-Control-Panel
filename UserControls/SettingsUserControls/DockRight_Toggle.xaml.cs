@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setControlValue()
         {
             
-            control.IsOn = Properties.Settings.Default.dockWindowRight;
+            control.IsOn = Global_Variables.settings.dockWindowRight;
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -70,8 +70,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Properties.Settings.Default.dockWindowRight = control.IsOn;
-                Properties.Settings.Default.Save();
+                Global_Variables.settings.dockWindowRight = control.IsOn;
+                Global_Variables.settings.Save();
 
                 MainWindow wnd = (MainWindow)Application.Current.MainWindow;
                 wnd.setWindowSizePosition();

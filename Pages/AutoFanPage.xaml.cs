@@ -53,14 +53,14 @@ namespace Handheld_Control_Panel.Pages
         public AutoFanPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            ThemeManager.Current.ChangeTheme(this, Global_Variables.settings.SystemTheme + "." + Global_Variables.settings.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
             wnd.changeUserInstruction("AutoFanPage_Instruction");
             wnd = null;
 
 
-            if (Properties.Settings.Default.fanAutoModeTemp)
+            if (Global_Variables.settings.fanAutoModeTemp)
             {
                 spPackagePowerPlot.Visibility = Visibility.Collapsed;
                 PackagePowerLabel.Visibility = Visibility.Collapsed;
@@ -77,7 +77,7 @@ namespace Handheld_Control_Panel.Pages
             setUpPlot();
             plotFanCurve();
             updateLabels();
-            if (Properties.Settings.Default.SystemTheme == "Dark")
+            if (Global_Variables.settings.SystemTheme == "Dark")
             {
                 fanCurvePackagePowerPlot.plt.Style(ScottPlot.Style.Gray2);
                 fanCurveTemperaturePlot.plt.Style(ScottPlot.Style.Gray2);
@@ -97,7 +97,7 @@ namespace Handheld_Control_Panel.Pages
         private void UpdateTempPower_Tick(object? sender, EventArgs e)
         {
             computer.Accept(new UpdateVisitor());
-            if (Properties.Settings.Default.fanAutoModeTemp)
+            if (Global_Variables.settings.fanAutoModeTemp)
             {
                 getLibre_cpuTemperature();
             }
@@ -221,7 +221,7 @@ namespace Handheld_Control_Panel.Pages
 
         private void updateLabels()
         {
-            if (Properties.Settings.Default.fanAutoModeTemp)
+            if (Global_Variables.settings.fanAutoModeTemp)
             {
                 TemperatureLabel.Content = Application.Current.Resources["FanPage_Temperature"] + ": " + dataXtemp[xIndex].ToString();
                 FanSpeedLabel_Temperature.Content = Application.Current.Resources["FanPage_FanSpeed"] + ": " + dataYtemp[xIndex].ToString();
@@ -298,8 +298,8 @@ namespace Handheld_Control_Panel.Pages
                 saveDataY = saveDataY + d.ToString() + ",";
 
             }
-            Properties.Settings.Default.fanCurveTemperature = saveDataY;
-            Properties.Settings.Default.Save();
+            Global_Variables.settings.fanCurveTemperature = saveDataY;
+            Global_Variables.settings.Save();
 
         }
 
@@ -311,8 +311,8 @@ namespace Handheld_Control_Panel.Pages
                 saveDataY = saveDataY + d.ToString() + ",";
 
             }
-            Properties.Settings.Default.fanCurvePackagePower = saveDataY;
-            Properties.Settings.Default.Save();
+            Global_Variables.settings.fanCurvePackagePower = saveDataY;
+            Global_Variables.settings.Save();
 
         }
         private void loadSettingFanCurve()
@@ -368,7 +368,7 @@ namespace Handheld_Control_Panel.Pages
                         TemperatureLabel.Visibility = Visibility.Visible;
                         FanSpeedLabel_Temperature.Visibility = Visibility.Visible;
                         spTempPlot.Visibility = Visibility.Visible;
-                        Properties.Settings.Default.fanAutoModeTemp = true;
+                        Global_Variables.settings.fanAutoModeTemp = true;
                     }
                     else
                     {
@@ -378,13 +378,13 @@ namespace Handheld_Control_Panel.Pages
                         FanSpeedLabel_Temperature.Visibility = Visibility.Collapsed;
                         PackagePowerLabel.Visibility = Visibility.Visible;
                         FanSpeedLabel_Power.Visibility = Visibility.Visible;
-                        Properties.Settings.Default.fanAutoModeTemp = false;
+                        Global_Variables.settings.fanAutoModeTemp = false;
                     }
-                    Properties.Settings.Default.Save();
+                    Global_Variables.settings.Save();
                     plotFanCurve();
                     updateLabels();
                 }
-                if (Properties.Settings.Default.fanAutoModeTemp)
+                if (Global_Variables.settings.fanAutoModeTemp)
                 {
                     spPackagePowerPlot.Visibility = Visibility.Collapsed;
                   

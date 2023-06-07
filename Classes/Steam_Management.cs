@@ -20,9 +20,9 @@ namespace Handheld_Control_Panel.Classes
         {
             Dictionary<string, string> result = new Dictionary<string,  string>();
 
-            if (Directory.Exists(Properties.Settings.Default.directorySteam))
+            if (Directory.Exists(Global_Variables.Global_Variables.settings.directorySteam))
             {
-                string[] lines = System.IO.File.ReadAllLines(Properties.Settings.Default.directorySteam + "\\steamapps\\libraryfolders.vdf");
+                string[] lines = System.IO.File.ReadAllLines(Global_Variables.Global_Variables.settings.directorySteam + "\\steamapps\\libraryfolders.vdf");
                 List<string> paths = new List<string>();
                 bool foundApps = false;
 
@@ -118,11 +118,11 @@ namespace Handheld_Control_Panel.Classes
 
         public static void openSteamGame(string gameID)
         {
-            if (Properties.Settings.Default.directorySteam != "")
+            if (Global_Variables.Global_Variables.settings.directorySteam != "")
             {
                 //string steamLaunch = "steam://rungameid/" + gameID;
                 //System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Steam\steam.exe", steamLaunch);
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://rungameid/" + gameID,false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, true));
+                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://rungameid/" + gameID,false, Global_Variables.Global_Variables.settings.directorySteam + "\\Steam.exe", 6000, true));
             }
 
 
@@ -131,16 +131,16 @@ namespace Handheld_Control_Panel.Classes
 
         public static void openSteamBigPicture()
         {
-            if (Properties.Settings.Default.directorySteam != "")
+            if (Global_Variables.Global_Variables.settings.directorySteam != "")
             {
                 if (steamRunning())
                 {
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://open/bigpicture\"", false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false));
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" \"steam://open/bigpicture\"", false, Global_Variables.Global_Variables.settings.directorySteam + "\\Steam.exe", 6000, false));
 
                 }
                 else
                 {
-                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" -bigpicture", false, Properties.Settings.Default.directorySteam + "\\Steam.exe", 6000, false));
+                    Classes.Task_Scheduler.Task_Scheduler.runTask(() => Run_CLI.Run_CLI.RunCommand(" -bigpicture", false, Global_Variables.Global_Variables.settings.directorySteam + "\\Steam.exe", 6000, false));
                 }
             }
 
@@ -149,7 +149,7 @@ namespace Handheld_Control_Panel.Classes
         }
         public static void setSteamDirectory()
         {
-            if (Properties.Settings.Default.directorySteam == "")
+            if (Global_Variables.Global_Variables.settings.directorySteam == "")
             {
                 try
                 {
@@ -162,8 +162,8 @@ namespace Handheld_Control_Panel.Classes
                     {
                         if (keyReg.GetValue("InstallPath") != null)
                         {
-                            Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
-                            Properties.Settings.Default.Save();
+                            Global_Variables.Global_Variables.settings.directorySteam = keyReg.GetValue("InstallPath").ToString();
+                            Global_Variables.Global_Variables.settings.Save();
                         }
                         else
                         {
@@ -173,8 +173,8 @@ namespace Handheld_Control_Panel.Classes
                             {
                                 if (keyReg.GetValue("InstallPath") != null)
                                 {
-                                    Properties.Settings.Default.directorySteam = keyReg.GetValue("InstallPath").ToString();
-                                    Properties.Settings.Default.Save();
+                                    Global_Variables.Global_Variables.settings.directorySteam = keyReg.GetValue("InstallPath").ToString();
+                                    Global_Variables.Global_Variables.settings.Save();
                                 }
                             }
                            

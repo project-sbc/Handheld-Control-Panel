@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Fan_Management;
 using Handheld_Control_Panel.Classes.Global_Variables;
-using Handheld_Control_Panel.Classes.TaskSchedulerWin32;
-using Handheld_Control_Panel.Classes.Update_Software;
+
 
 namespace Handheld_Control_Panel
 {
@@ -44,7 +41,7 @@ namespace Handheld_Control_Panel
 
             var splashScreen = new SplashScreenStartUp();
 
-            if (!Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen && !quietStart)
+            if (!Global_Variables.settings.hideSplashScreen && !quietStart)
             {
                 //if not quiet start then show splashscreen
                 this.MainWindow = splashScreen;
@@ -54,8 +51,7 @@ namespace Handheld_Control_Panel
 
 
             //you can do additional work here, call start routine
-            //do the update settings check first
-            Update_Software.checkUpdateSettings();
+           
 
             await Task.Run(() => Start_Up.Start_Routine());
 
@@ -69,7 +65,7 @@ namespace Handheld_Control_Panel
             }
             else
             {
-                if (!Handheld_Control_Panel.Properties.Settings.Default.hideSplashScreen)
+                if (!Global_Variables.settings.hideSplashScreen)
                 {
                     splashScreen.Close();
                 }

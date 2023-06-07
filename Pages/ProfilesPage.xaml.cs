@@ -35,7 +35,7 @@ namespace Handheld_Control_Panel.Pages
         public ProfilesPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            ThemeManager.Current.ChangeTheme(this, Global_Variables.settings.SystemTheme + "." + Global_Variables.settings.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
             wnd.changeUserInstruction("ProfilePage_Instruction");

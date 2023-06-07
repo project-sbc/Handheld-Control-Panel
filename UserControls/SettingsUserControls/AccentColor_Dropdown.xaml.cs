@@ -57,7 +57,7 @@ namespace Handheld_Control_Panel.UserControls
                     color.theme = theme.DisplayName;
                     color.brush = theme.ShowcaseBrush;
                     controlList.Items.Add(color);
-                    if (color.theme.Contains(Properties.Settings.Default.systemAccent))
+                    if (color.theme.Contains(Global_Variables.settings.systemAccent))
                     {
                         controlList.SelectedIndex = controlList.Items.Count - 1;
                         colorBorder.Background = color.brush;
@@ -70,7 +70,7 @@ namespace Handheld_Control_Panel.UserControls
 
             //foreach (colorRectangle lbi in controlList.Items)
             //{
-                //if (lbi.theme.Contains(Properties.Settings.Default.systemAccent))
+                //if (lbi.theme.Contains(Global_Variables.Global_Variables.settings.systemAccent))
                 //{
                    // controlList.SelectedItem = lbi;
                    //selectedObject = lbi;
@@ -117,7 +117,7 @@ namespace Handheld_Control_Panel.UserControls
                         if (controlList.SelectedItem !=null)
                         {
                             colorRectangle lbi = controlList.SelectedItem as colorRectangle;
-                            if (!lbi.theme.ToString().Contains(Properties.Settings.Default.systemAccent))
+                            if (!lbi.theme.ToString().Contains(Global_Variables.settings.systemAccent))
                             {
                                 handleListboxChange();
                             }
@@ -170,9 +170,9 @@ namespace Handheld_Control_Panel.UserControls
                     colorRectangle themeShape = (colorRectangle)controlList.SelectedItem;
                     string theme = themeShape.theme;
                     theme = theme.Substring(0, theme.IndexOf("(")).Trim();
-                    ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + theme);
-                    Properties.Settings.Default.systemAccent = theme;
-                    Properties.Settings.Default.Save();
+                    ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Global_Variables.settings.SystemTheme + "." + theme);
+                    Global_Variables.settings.systemAccent = theme;
+                    Global_Variables.settings.Save();
                     selectedObject = controlList.SelectedItem;
                     colorBorder.Background = themeShape.brush;              
                     if (controlList.Visibility == Visibility.Visible)

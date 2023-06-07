@@ -31,7 +31,7 @@ namespace Handheld_Control_Panel.Classes.GPUCLK_Management
 
                         lock (objLock)
                         {
-                            if (gpuclk > Properties.Settings.Default.maxGPUCLK) { gpuclk = Properties.Settings.Default.maxGPUCLK; }
+                            if (gpuclk > Global_Variables.Global_Variables.settings.maxGPUCLK) { gpuclk = Global_Variables.Global_Variables.settings.maxGPUCLK; }
                             commandArguments = " --gfx-clk=" + gpuclk.ToString();
                             //Log_Writer.writeLog("Read TDP AMD processRyzenAj=" + processRyzenAdj + "; commandarugment=" + commandArguments);
 

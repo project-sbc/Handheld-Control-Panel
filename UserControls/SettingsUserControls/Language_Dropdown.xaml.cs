@@ -55,7 +55,7 @@ namespace Handheld_Control_Panel.UserControls
             controlList.Items.Add("Português (Brasil)");
             controlList.Items.Add("한국어");
             controlList.Items.Add("Español");
-            controlList.SelectedItem = Properties.Settings.Default.language;
+            controlList.SelectedItem = Global_Variables.settings.language;
 
 
             controlList.Visibility = Visibility.Collapsed;
@@ -79,7 +79,7 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.SelectedItem.ToString() != Properties.Settings.Default.language)
+                        if (controlList.SelectedItem.ToString() != Global_Variables.settings.language)
                         {
                             handleListboxChange();
                         }
@@ -128,8 +128,8 @@ namespace Handheld_Control_Panel.UserControls
                 {
                     string selectedItem = controlList.SelectedValue.ToString();
 
-                    Properties.Settings.Default.language = selectedItem;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.settings.language = selectedItem;
+                    Global_Variables.settings.Save();
                     selectedObject = selectedItem;
                     System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Global_Variables.languageDict);
                     switch (selectedItem)

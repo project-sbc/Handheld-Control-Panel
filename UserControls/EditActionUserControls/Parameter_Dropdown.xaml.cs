@@ -49,7 +49,7 @@ namespace Handheld_Control_Panel.UserControls
             {
                 case "Change_TDP_Mode":
                     controlList.SelectionMode = SelectionMode.Multiple;
-                    for (int i = 5; i < Properties.Settings.Default.maxTDP; i=i+5)
+                    for (int i = 5; i < Global_Variables.settings.maxTDP; i=i+5)
                     {
                         Parameter parameter = new Parameter();
                         parameter.DisplayParameter = i.ToString() + " W"; 

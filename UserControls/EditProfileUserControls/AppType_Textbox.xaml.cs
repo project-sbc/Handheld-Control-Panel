@@ -99,7 +99,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void updateSteamImage()
         {
-            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + Global_Variables.profiles.editingProfile.GameID + "_header";
+            string imageDirectory = Global_Variables.settings.directorySteam + "\\appcache\\librarycache\\" + Global_Variables.profiles.editingProfile.GameID + "_header";
             if (File.Exists(imageDirectory + ".jpg"))
             {
                 controlImage.Source = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));

@@ -33,15 +33,15 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 //Log_Writer.writeLog("CPU type is " + cpuType);
                 if (Global_Variables.Global_Variables.cpuType == "Intel")
                 {
-                    if (Properties.Settings.Default.IntelMMIOMSR.Contains("MMIO"))
+                    if (Global_Variables.Global_Variables.settings.IntelMMIOMSR.Contains("MMIO"))
                     { //Log_Writer.writeLog("Read TDP MMIO: read MMIO intel");
                         runIntelReadTDPMMIOKX();
                     }
-                    if (Properties.Settings.Default.IntelMMIOMSR == "MSR")
+                    if (Global_Variables.Global_Variables.settings.IntelMMIOMSR == "MSR")
                     { //Log_Writer.writeLog("Read TDP start: read MSR intel");
                         runIntelReadTDPMSR();
                     }
-                    //if (Properties.Settings.Default.IntelMMIOMSR == "MSRCMD") { runIntelReadTDPMSRCMD(); }
+                    //if (Global_Variables.Global_Variables.settings.IntelMMIOMSR == "MSRCMD") { runIntelReadTDPMSRCMD(); }
                 }
                 else
                 {
@@ -52,13 +52,6 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 }
                 Task.Delay(200);
                 
-
-
-                if (Properties.Settings.Default.autoApplySetTDP)
-                {
-                    Task_Scheduler.Task_Scheduler.runTask(() => TDP_Management.changeTDP((int)Global_Variables.Global_Variables.SetPL1, (int)Global_Variables.Global_Variables.SetPL2));
-                }
-
 
             }
             catch (Exception ex)
@@ -82,20 +75,20 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 if (!Global_Variables.Global_Variables.autoTDP)
                 {
                     //check to make sure input TDP is not above maximum set and minimum 5
-                    if (pl1TDP < Properties.Settings.Default.minTDP) { pl1TDP = Properties.Settings.Default.minTDP; }
-                    if (pl2TDP < Properties.Settings.Default.minTDP) { pl2TDP = Properties.Settings.Default.minTDP; }
-                    if (pl1TDP > Properties.Settings.Default.maxTDP) { pl1TDP = Properties.Settings.Default.maxTDP; }
-                    if (pl2TDP > Properties.Settings.Default.maxTDP) { pl2TDP = Properties.Settings.Default.maxTDP; }
+                    if (pl1TDP < Global_Variables.Global_Variables.settings.minTDP) { pl1TDP = Global_Variables.Global_Variables.settings.minTDP; }
+                    if (pl2TDP < Global_Variables.Global_Variables.settings.minTDP) { pl2TDP = Global_Variables.Global_Variables.settings.minTDP; }
+                    if (pl1TDP > Global_Variables.Global_Variables.settings.maxTDP) { pl1TDP = Global_Variables.Global_Variables.settings.maxTDP; }
+                    if (pl2TDP > Global_Variables.Global_Variables.settings.maxTDP) { pl2TDP = Global_Variables.Global_Variables.settings.maxTDP; }
 
 
                     if (Global_Variables.Global_Variables.cpuType == "Intel")
                     {
-                        if (Properties.Settings.Default.IntelMMIOMSR.Contains("MMIO"))
+                        if (Global_Variables.Global_Variables.settings.IntelMMIOMSR.Contains("MMIO"))
                         {
                             //Log_Writer.writeLog("Start intel change TDP MMIO");
                             runIntelTDPChangeMMIOKX(pl1TDP, pl2TDP);
                         }
-                        if (Properties.Settings.Default.IntelMMIOMSR.Contains("MSR"))
+                        if (Global_Variables.Global_Variables.settings.IntelMMIOMSR.Contains("MSR"))
                         { //Log_Writer.writeLog("Start intel change TDP MSR");
                             runIntelTDPChangeMSR(pl1TDP, pl2TDP);
                         }
@@ -256,7 +249,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 if (processorName.IndexOf("AMD") >= 0) { Global_Variables.Global_Variables.cpuType = "AMD"; }
                 Global_Variables.Global_Variables.processorName = processorName;
 
-                if (Global_Variables.Global_Variables.cpuType == "Intel" && Properties.Settings.Default.IntelMMIOMSR.Contains("MMIO"))
+                if (Global_Variables.Global_Variables.cpuType == "Intel" && Global_Variables.Global_Variables.settings.IntelMMIOMSR.Contains("MMIO"))
                 {
                     determineIntelMCHBAR();
                 }

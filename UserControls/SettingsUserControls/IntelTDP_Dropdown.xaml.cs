@@ -52,7 +52,7 @@ namespace Handheld_Control_Panel.UserControls
             controlList.Items.Add("MMIO");
             controlList.Items.Add("MSR");
             controlList.Items.Add("MMIO+MSR");
-            controlList.SelectedItem = Properties.Settings.Default.IntelMMIOMSR;
+            controlList.SelectedItem = Global_Variables.settings.IntelMMIOMSR;
 
 
             controlList.Visibility = Visibility.Collapsed;
@@ -76,7 +76,7 @@ namespace Handheld_Control_Panel.UserControls
                 switch(args.Action)
                 {
                     case "A":
-                        if (controlList.SelectedItem.ToString() != Properties.Settings.Default.IntelMMIOMSR)
+                        if (controlList.SelectedItem.ToString() != Global_Variables.settings.IntelMMIOMSR)
                         {
                             handleListboxChange();
                         }
@@ -124,8 +124,8 @@ namespace Handheld_Control_Panel.UserControls
                 if (controlList.SelectedItem != null)
                 {
                     string selectedItem = controlList.SelectedValue.ToString();
-                    Properties.Settings.Default.IntelMMIOMSR = selectedItem;
-                    Properties.Settings.Default.Save();
+                    Global_Variables.settings.IntelMMIOMSR = selectedItem;
+                    Global_Variables.settings.Save();
                   
                     if (controlList.Visibility == Visibility.Visible)
                     {

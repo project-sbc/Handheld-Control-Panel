@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setControlValue()
         {
             
-            control.IsOn = Properties.Settings.Default.startAutoFan;
+            control.IsOn = Global_Variables.settings.startAutoFan;
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -70,8 +70,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Properties.Settings.Default.startAutoFan = control.IsOn;
-                Properties.Settings.Default.Save();
+                Global_Variables.settings.startAutoFan = control.IsOn;
+                Global_Variables.settings.Save();
             }
           
         }

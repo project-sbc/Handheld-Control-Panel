@@ -42,7 +42,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-            if (Properties.Settings.Default.SystemTheme == "Dark")
+            if (Global_Variables.settings.SystemTheme == "Dark")
             {
                 control.IsOn = true;
             }
@@ -79,15 +79,15 @@ namespace Handheld_Control_Panel.UserControls
             {
                 if (control.IsOn)
                 {
-                    Properties.Settings.Default.SystemTheme = "Dark";
+                    Global_Variables.settings.SystemTheme = "Dark";
                     
                 }
                 else
                 {
-                    Properties.Settings.Default.SystemTheme = "Light" ;
+                    Global_Variables.settings.SystemTheme = "Light" ;
                 }
-                Properties.Settings.Default.Save();
-                ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+                Global_Variables.settings.Save();
+                ThemeManager.Current.ChangeTheme(Window.GetWindow(this), Global_Variables.settings.SystemTheme + "." + Global_Variables.settings.systemAccent);
                
 
             }

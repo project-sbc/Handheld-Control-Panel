@@ -15,17 +15,17 @@ namespace Handheld_Control_Panel.Classes
         public static void playniteToggle()
         {
             string command;
-            if (Properties.Settings.Default.directoryPlaynite != "")
+            if (Global_Variables.Global_Variables.settings.directoryPlaynite != "")
             {
                 if (playniteRunning())
                 {
-                    command = Properties.Settings.Default.directoryPlaynite + "\\Playnite.FullscreenApp.exe --shutdown";
+                    command = Global_Variables.Global_Variables.settings.directoryPlaynite + "\\Playnite.FullscreenApp.exe --shutdown";
                    
                 }
                 else
                 {
                     //run game management one because why not
-                    command = Properties.Settings.Default.directoryPlaynite + "\\Playnite.FullscreenApp.exe";
+                    command = Global_Variables.Global_Variables.settings.directoryPlaynite + "\\Playnite.FullscreenApp.exe";
                 }
                 try
                 {
@@ -41,11 +41,11 @@ namespace Handheld_Control_Panel.Classes
         }
         public static void setPlayniteDirectory()
         {
-            if (Properties.Settings.Default.directoryPlaynite == "")
+            if (Global_Variables.Global_Variables.settings.directoryPlaynite == "")
             {
                 if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Playnite") + "\\Playnite.FullscreenApp.exe"))
                 {
-                    Properties.Settings.Default.directoryPlaynite = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Playnite");
+                    Global_Variables.Global_Variables.settings.directoryPlaynite = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Playnite");
                 }
             }
 

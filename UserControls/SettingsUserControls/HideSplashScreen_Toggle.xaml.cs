@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setControlValue()
         {
             
-            control.IsOn = Properties.Settings.Default.hideSplashScreen;
+            control.IsOn = Global_Variables.settings.hideSplashScreen;
            
 
         }
@@ -71,8 +71,8 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Properties.Settings.Default.hideSplashScreen=control.IsOn;
-                Properties.Settings.Default.Save();
+                Global_Variables.settings.hideSplashScreen=control.IsOn;
+                Global_Variables.settings.Save();
 
             }
 

@@ -39,7 +39,7 @@ namespace Handheld_Control_Panel.Pages
         public HomePage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            ThemeManager.Current.ChangeTheme(this, Global_Variables.settings.SystemTheme + "." + Global_Variables.settings.systemAccent);
             addUserControlsToPage();
 
             Global_Variables.mainWindow.changeUserInstruction("HomePage_Instruction");
@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.Pages
 
             try
             {
-                List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
+                List<string> list = Global_Variables.settings.qamUserControls.Split(';').ToList();
                 foreach (HomePageItem item in Global_Variables.homePageItems)
                 {
 
@@ -95,7 +95,7 @@ namespace Handheld_Control_Panel.Pages
                                     stackPanel.Children.Add(new TDP_Slider());
                                     break;
                                 case "Usercontrol_TDP2":
-                                    if (!Properties.Settings.Default.combineTDP)
+                                    if (!Global_Variables.settings.combineTDP)
                                     {
                                         stackPanel.Children.Add(new TDP2_Slider());
                                     }

@@ -1,23 +1,10 @@
-﻿using Handheld_Control_Panel.Classes.Global_Variables;
-using RTSSSharedMemoryNET;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Diagnostics;
 using System.Windows.Threading;
 
-using MessageBox = System.Windows.MessageBox;
-using System.Windows.Media.Animation;
-using Handheld_Control_Panel.Classes.Task_Scheduler;
-using AutoUpdaterDotNET;
+
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -118,9 +105,9 @@ namespace Handheld_Control_Panel.Classes
 
             if (Global_Variables.Global_Variables.Device.FanCapable)
             {
-                if (!Properties.Settings.Default.startSafeMode)
+                if (!Global_Variables.Global_Variables.settings.startSafeMode)
                 {
-                    if (Properties.Settings.Default.startAutoFan)
+                    if (Global_Variables.Global_Variables.settings.startAutoFan)
                     {
                         AutoFan_Management.startAutoFan();
                     }
@@ -131,23 +118,18 @@ namespace Handheld_Control_Panel.Classes
                   
                 }
             }
-            Properties.Settings.Default.startSafeMode = true;
-            Properties.Settings.Default.Save();
+            Global_Variables.Global_Variables.settings.startSafeMode = true;
+            Global_Variables.Global_Variables.settings.Save();
 
-            //bind autostart event but DONT start it yet
-            Update_Software.Update_Software.bindUpdateEvent();
+            
 
         }
-
-        private static void AutoUpdaterOnCheckForUpdateEvent(object startUp, UpdateInfoEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
+              
 
         public static void loadLanguage()
         {
             Global_Variables.Global_Variables.languageDict.Source = new Uri("StringResources/StringResources.xaml", UriKind.RelativeOrAbsolute);
-            switch (Properties.Settings.Default.language)
+            switch (Global_Variables.Global_Variables.settings.language)
             {
                 default: break;
                 case "English":

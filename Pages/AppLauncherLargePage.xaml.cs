@@ -48,7 +48,7 @@ namespace Handheld_Control_Panel.Pages
         private string windowpage;
         private List<Profile> items = new List<Profile>();
         private List<Profile> tempList = new List<Profile>();
-        private string currentSortMethod = Properties.Settings.Default.appSortMethod;
+        private string currentSortMethod = Global_Variables.settings.appSortMethod;
         private string currentFilterMethod = "Filter_Method_None";
 
         private List<SortMethods> sortMethods = new List<SortMethods>();
@@ -57,7 +57,7 @@ namespace Handheld_Control_Panel.Pages
         public AppLauncherLargePage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            ThemeManager.Current.ChangeTheme(this, Global_Variables.settings.SystemTheme + "." + Global_Variables.settings.systemAccent);
 
             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
             wnd.changeUserInstruction("AppLauncherPage_Instruction");
@@ -475,8 +475,8 @@ where childItem : DependencyObject
                 currentSortMethod = sm.SortMethod;
                 applySortAndFilter();
                 updateSortFilterLabel();
-                Properties.Settings.Default.appSortMethod = currentSortMethod;
-                Properties.Settings.Default.Save();
+                Global_Variables.settings.appSortMethod = currentSortMethod;
+                Global_Variables.settings.Save();
 
             }
 

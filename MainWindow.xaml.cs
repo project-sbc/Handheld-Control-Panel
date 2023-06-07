@@ -38,7 +38,7 @@ using Notification.Wpf.Controls;
 using System.Collections.ObjectModel;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using System.Globalization;
-using Handheld_Control_Panel.Classes.Update_Software;
+
 
 namespace Handheld_Control_Panel
 {
@@ -89,7 +89,7 @@ namespace Handheld_Control_Panel
           
 
             //set theme
-            ThemeManager.Current.ChangeTheme(this, Properties.Settings.Default.SystemTheme + "." + Properties.Settings.Default.systemAccent);
+            ThemeManager.Current.ChangeTheme(this, Global_Variables.settings.SystemTheme + "." + Global_Variables.settings.systemAccent);
 
           
 
@@ -113,8 +113,7 @@ namespace Handheld_Control_Panel
                 m_notifyIcon.Visible = true;
             }
 
-            //check for updates first
-            Update_Software.checkForUpdates(true);
+            
 
         }
 
@@ -585,7 +584,7 @@ namespace Handheld_Control_Panel
                     this.Top = Math.Round(screen.Bounds.Height / scaling * 0.03, 0);
 
                     this.Height = Math.Round(screen.Bounds.Height / scaling * 0.91, 0);
-                    if (Properties.Settings.Default.dockWindowRight)
+                    if (Global_Variables.settings.dockWindowRight)
                     {
                         //if dockWindowRight is true, move to right side of screen
                         this.Left = Math.Round((screen.Bounds.Width / scaling) - this.Width, 0);
@@ -594,7 +593,7 @@ namespace Handheld_Control_Panel
                         borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
                         borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
                     }
-                    if (!Properties.Settings.Default.dockWindowRight)
+                    if (!Global_Variables.settings.dockWindowRight)
                     {
                         borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
                         borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
@@ -608,7 +607,7 @@ namespace Handheld_Control_Panel
                     this.Top = Math.Round(screen.Bounds.Height * 0.03, 0);
 
                     this.Height = Math.Round(screen.Bounds.Height * 0.91, 0);
-                    if (Properties.Settings.Default.dockWindowRight)
+                    if (Global_Variables.settings.dockWindowRight)
                     {
                         //if dockWindowRight is true, move to right side of screen
                         this.Left = screen.Bounds.Width - this.Width;
@@ -617,7 +616,7 @@ namespace Handheld_Control_Panel
                         borderCorner2.CornerRadius = new System.Windows.CornerRadius(11, 0, 0, 11);
                         borderCorner3.CornerRadius = new System.Windows.CornerRadius(0, 0, 0, 11);
                     }
-                    if (!Properties.Settings.Default.dockWindowRight)
+                    if (!Global_Variables.settings.dockWindowRight)
                     {
                         borderCorner1.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
                         borderCorner2.CornerRadius = new System.Windows.CornerRadius(0, 11, 11, 0);
@@ -646,8 +645,8 @@ namespace Handheld_Control_Panel
             updateTimer.Stop();
 
             //set the variable startSafeMode to false. This indicates the application shut down properly. 
-            Properties.Settings.Default.startSafeMode = false;
-            Properties.Settings.Default.Save();
+            Global_Variables.settings.startSafeMode = false;
+            Global_Variables.settings.Save();
         }
         
         private void MetroWindow_LocationChanged(object sender, EventArgs e)

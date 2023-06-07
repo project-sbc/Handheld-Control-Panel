@@ -28,14 +28,14 @@ namespace Handheld_Control_Panel.Classes
             if (this.Count > 0) { this.Clear(); }
 
             //populates list
-            List<string> list = Properties.Settings.Default.qamUserControls.Split(';').ToList();
+            List<string> list = Global_Variables.Global_Variables.settings.qamUserControls.Split(';').ToList();
             List<string> listNewVersion = homePageNewVersion.Split(';').ToList();
 
             foreach(string item in listNewVersion)
             {
                 if (item != "")
                 {
-                    if (!Properties.Settings.Default.qamUserControls.Contains(item))
+                    if (!Global_Variables.Global_Variables.settings.qamUserControls.Contains(item))
                     {
                         list.Add(item + "0");
                     }
@@ -72,8 +72,8 @@ namespace Handheld_Control_Panel.Classes
                 if (hpi.Enabled) { newList = newList + "1;"; } else { newList = newList + "0;"; }
 
             }
-            Properties.Settings.Default.qamUserControls= newList;
-            Properties.Settings.Default.Save();
+            Global_Variables.Global_Variables.settings.qamUserControls= newList;
+            Global_Variables.Global_Variables.settings.Save();
 
         }
 

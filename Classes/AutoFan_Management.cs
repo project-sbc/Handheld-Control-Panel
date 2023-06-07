@@ -47,7 +47,7 @@ namespace Handheld_Control_Panel.Classes
                 Global_Variables.Global_Variables.fanControlEnabled = true;
                 Fan_Management.Fan_Management.setFanControlManual();
                 //get the property variable whether you want it temperature or package power controlled, true means temp, false means package power
-                tempControlled = Properties.Settings.Default.fanAutoModeTemp;
+                tempControlled = Global_Variables.Global_Variables.settings.fanAutoModeTemp;
                 if (tempControlled )
                 {
                     autoFan = new Thread(() => { mainAutoFanLoop_Temperature(); });
@@ -105,7 +105,7 @@ namespace Handheld_Control_Panel.Classes
         {
             try
             {
-                while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
+                while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Global_Variables.Global_Variables.settings.fanAutoModeTemp == true)
                 {
                     computer.Accept(new UpdateVisitor());
                     getLibre_cpuTemperature();
@@ -124,7 +124,7 @@ namespace Handheld_Control_Panel.Classes
                     Thread.Sleep(1000);
                 }
                 WinRingEC_Management.OlsFree();
-                if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
+                if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Global_Variables.Global_Variables.settings.fanAutoModeTemp == false)
                 {
                     startAutoFan();
                 }
@@ -141,7 +141,7 @@ namespace Handheld_Control_Panel.Classes
         {
             try
             {
-                while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == false)
+                while (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Global_Variables.Global_Variables.settings.fanAutoModeTemp == false)
                 {
                     computer.Accept(new UpdateVisitor());
                     getLibre_packagepower();
@@ -157,7 +157,7 @@ namespace Handheld_Control_Panel.Classes
                     Thread.Sleep(1000);
                 }
                 WinRingEC_Management.OlsFree();
-                if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Properties.Settings.Default.fanAutoModeTemp == true)
+                if (Global_Variables.Global_Variables.softwareAutoFanControlEnabled && Global_Variables.Global_Variables.settings.fanAutoModeTemp == true)
                 {
                     startAutoFan();
                 }
@@ -376,9 +376,9 @@ namespace Handheld_Control_Panel.Classes
             string[] dataString; 
 
 
-            if (Properties.Settings.Default.fanCurveTemperature != "")
+            if (Global_Variables.Global_Variables.settings.fanCurveTemperature != "")
             {
-                dataString = Properties.Settings.Default.fanCurveTemperature.Split(',').ToArray();
+                dataString = Global_Variables.Global_Variables.settings.fanCurveTemperature.Split(',').ToArray();
 
                 if (dataString.Length >0)
                 {
@@ -419,9 +419,9 @@ namespace Handheld_Control_Panel.Classes
             string[] dataString;
 
 
-            if (Properties.Settings.Default.fanCurvePackagePower != "")
+            if (Global_Variables.Global_Variables.settings.fanCurvePackagePower != "")
             {
-                dataString = Properties.Settings.Default.fanCurvePackagePower.Split(',').ToArray();
+                dataString = Global_Variables.Global_Variables.settings.fanCurvePackagePower.Split(',').ToArray();
 
                 if (dataString.Length > 0)
                 {
@@ -461,9 +461,9 @@ namespace Handheld_Control_Panel.Classes
             string[] dataString;
 
 
-            if (Properties.Settings.Default.fanCurvePackagePower != "")
+            if (Global_Variables.Global_Variables.settings.fanCurvePackagePower != "")
             {
-                dataString = Properties.Settings.Default.fanCurvePackagePower.Split(',').ToArray();
+                dataString = Global_Variables.Global_Variables.settings.fanCurvePackagePower.Split(',').ToArray();
 
                 if (dataString.Length > 0)
                 {

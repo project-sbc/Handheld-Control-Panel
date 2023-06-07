@@ -34,9 +34,11 @@ namespace Handheld_Control_Panel.Classes
         public Profile activeProfile=null;
         public Profile editingProfile = null;
         public Profile defaultProfile = null;
+        public object lockObjectProfiles = new object();
         public Profiles_Management()
         {
             //populates list
+
             if (!Directory.Exists(profileDirectory))
             {
                 Directory.CreateDirectory(profileDirectory);
@@ -46,11 +48,15 @@ namespace Handheld_Control_Panel.Classes
 
             foreach (string file in files)
             {
-                StreamReader sr = new StreamReader(file);
-                XmlSerializer xmls = new XmlSerializer(typeof(Profile));
-                this.Add((Profile)xmls.Deserialize(sr));
-                sr.Dispose();
-                xmls = null;
+                lock(lockObjectProfiles)
+                {
+                    StreamReader sr = new StreamReader(file);
+                    XmlSerializer xmls = new XmlSerializer(typeof(Profile));
+                    this.Add((Profile)xmls.Deserialize(sr));
+                    sr.Dispose();
+                    xmls = null;
+                }
+     
     
             }
 
@@ -75,11 +81,16 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (File.Exists(profileDirectory + "\\" + profilename + ".xml"))
                 {
-                    using (StreamReader sw = new StreamReader(profileDirectory + "\\" + profilename + ".xml"))
+                    lock(lockObjectProfiles)
                     {
-                        XmlSerializer xmls = new XmlSerializer(typeof(Profile));
-                        loadingProfile = (Profile)xmls.Deserialize(sw);
+                        using (StreamReader sw = new StreamReader(profileDirectory + "\\" + profilename + ".xml"))
+                        {
+                            XmlSerializer xmls = new XmlSerializer(typeof(Profile));
+                            loadingProfile = (Profile)xmls.Deserialize(sw);
+                        }
                     }
+
+                   
                 }
               
 
@@ -256,11 +267,15 @@ namespace Handheld_Control_Panel.Classes
             {
                 Application.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profile.ProfileName + ".xml");
-                    XmlSerializer xmls = new XmlSerializer(typeof(Profile));
-                    xmls.Serialize(sw, profile);
-                    sw.Dispose();
-                    xmls = null;
+                    lock(lockObjectProfiles)
+                    {
+                        StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profile.ProfileName + ".xml");
+                        XmlSerializer xmls = new XmlSerializer(typeof(Profile));
+                        xmls.Serialize(sw, profile);
+                        sw.Dispose();
+                        xmls = null;
+                    }
+
                 }
 
 
@@ -448,7 +463,7 @@ namespace Handheld_Control_Panel.Classes
                         iconVisibility = Visibility.Visible;
                         if (ImageLocation == "")
                         {
-                            string imageDirectory = Properties.Settings.Default.directorySteam + "\\appcache\\librarycache\\" + GameID + "_header";
+                            string imageDirectory = Global_Variables.Global_Variables.settings.directorySteam + "\\appcache\\librarycache\\" + GameID + "_header";
                             if (File.Exists(imageDirectory + ".jpg"))
                             {
                                 //imageApp = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
