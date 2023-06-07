@@ -83,7 +83,7 @@ namespace Handheld_Control_Panel.Pages
                         }
                         else
                         {
-                            Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
+                            Global_Variables.hotKeys.loadHotKey(Global_Variables.hotKeys.editingHotkey.ID);
                             wnd = (MainWindow)Application.Current.MainWindow;
                             wnd.navigateFrame("ActionPage");
                             wnd = null;
@@ -91,7 +91,7 @@ namespace Handheld_Control_Panel.Pages
     
                         break;
                     case "Start":
-                        Global_Variables.hotKeys.editingHotkey.SaveToXML();
+                        Global_Variables.hotKeys.SaveToXML(Global_Variables.hotKeys.editingHotkey);
                         if (Global_Variables.hotKeys.editingHotkey.Type == "Controller")
                         {
                             Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
@@ -132,12 +132,10 @@ namespace Handheld_Control_Panel.Pages
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            //always load profile from xml in case changes made werent saved so it can reflect what was last save
-            Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
-
+            
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
             //make sure to load profile to clear any unsaved changes to the profile
-            Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
+            Global_Variables.hotKeys.loadHotKey(Global_Variables.hotKeys.editingHotkey.ID);
         }
     }
 }

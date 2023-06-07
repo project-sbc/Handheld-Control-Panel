@@ -352,7 +352,7 @@ namespace Handheld_Control_Panel
                                     navigateFrame("SettingsPage");
                                     break;
                                 case "ActionEditPage":
-                                    Global_Variables.hotKeys.editingHotkey.LoadProfile(Global_Variables.hotKeys.editingHotkey.ID);
+                                    Global_Variables.hotKeys.loadHotKey(Global_Variables.hotKeys.editingHotkey.ID);
                                     navigateFrame("ActionPage");
                                     break;
                                 case "MouseModeEditPage":

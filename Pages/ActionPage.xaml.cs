@@ -118,7 +118,7 @@ namespace Handheld_Control_Panel.Pages
                 }
                 else
                 {
-                    if (action == "Y")
+                    if (action == "Start")
                     {
                         Global_Variables.hotKeys.addNewHotkey();
                         controlList.Items.Refresh();

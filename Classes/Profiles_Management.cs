@@ -30,7 +30,7 @@ namespace Handheld_Control_Panel.Classes
 {
     public class Profiles_Management: List<Profile>
     {
-        private string profileDirectory = AppDomain.CurrentDomain.BaseDirectory + "Profiles";
+        private string profileDirectory = AppDomain.CurrentDomain.BaseDirectory + "Profiles\\";
         public Profile activeProfile=null;
         public Profile editingProfile = null;
         public Profile defaultProfile = null;
@@ -257,6 +257,7 @@ namespace Handheld_Control_Panel.Classes
 
                 this.Remove(profile);
             }
+
           
 
         }
@@ -289,11 +290,8 @@ namespace Handheld_Control_Panel.Classes
         public void addNewProfile(Profile copyProfile)
         {
             
-          
             string newProfileName = "NewProfile";
             
-
-
             Profile profile = new Profile();
 
             if (copyProfile != null)
@@ -513,7 +511,6 @@ namespace Handheld_Control_Panel.Classes
 
             }
         }
-
         public string GameID { get; set; } = "";
         public string Offline_TDP1 { get; set; } = "";
         public string Offline_TDP2 { get; set; } = "";

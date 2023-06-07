@@ -40,12 +40,30 @@
                     <Grid  Height="53">
 
                         <DockPanel >
-                            <iconPacks:PackIconMaterial Kind="{Binding Kind}" Height="20" Width="20" Margin="12,0,11,0" VerticalAlignment="Center" />
-                            <StackPanel>
-                                <Label Content="{Binding DisplayAction}"  FontSize="22" Margin="0,-7,0,0" />
-                                <Label Content="{Binding DisplayHotkey}" FontSize="14" Margin="0,-7,0,0" />
+                            <StackPanel DockPanel.Dock="Left">
+                                <Viewbox Height="29" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding ID}" />
+                                </Viewbox>
+                                <Viewbox Height="20" HorizontalAlignment="Left">
+                                    <TextBlock >
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="DisplayAction" />
+                                                <Binding Path="DisplayParameter" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Viewbox>
                             </StackPanel>
-                            <Label Content="{Binding DisplayParameter}" FontSize="22" Margin="6,0,10,0" HorizontalAlignment="Right" />
+                            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Width="80">
+                                <iconPacks:PackIconMaterial Kind="{Binding Kind}" Height="30" Width="25"  HorizontalAlignment="Center" />
+                                <Viewbox Height="20"  Width="80" HorizontalAlignment="Center" >
+                                    <TextBlock Text="{Binding DisplayHotkey}"  />
+                                </Viewbox>
+                            </StackPanel>
+                           
+                           
+                           
                         </DockPanel>
                         
                                

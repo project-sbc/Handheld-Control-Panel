@@ -17,12 +17,14 @@ using System.Windows.Threading;
 using WindowsInput;
 using System.IO;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace Handheld_Control_Panel.Classes
 {
     public class Action_Management: List<HotkeyItem>
     {
-        public string actionDirectory = AppDomain.CurrentDomain.BaseDirectory + "Actions";
+        public object lockObjectActions = new object();
+        public string actionDirectory = AppDomain.CurrentDomain.BaseDirectory + "Actions\\";
         public HotkeyItem editingHotkey = null;
 
         public event EventHandler hotkeyClearedEvent;
@@ -45,38 +47,55 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
+        public void loadHotKey(string ID)
+        {
+            HotkeyItem loadingHKI = this.Find(o => o.ID == ID);
+            if (loadingHKI != null)
+            {
+                if (File.Exists(actionDirectory + "\\" + ID + ".xml"))
+                {
+                    lock (lockObjectActions)
+                    {
+                        using (StreamReader sw = new StreamReader(actionDirectory + "\\" + ID + ".xml"))
+                        {
+                            XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                            loadingHKI = (HotkeyItem)xmls.Deserialize(sw);
+                        }
+                    }
+
+
+                }
+
+
+            }
+        }
+
         public void generateGlobalControllerHotKeyList()
         {
             Global_Variables.Global_Variables.controllerHotKeyDictionary.Clear();
 
             Dictionary<ushort, ActionParameter> returnDictionary = new Dictionary<ushort, ActionParameter>();
 
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
+            foreach(HotkeyItem hki in this)
             {
-                if (node.SelectSingleNode("Type").InnerText == "Controller")
+                if (hki.Type == "Controller")
                 {
                     ushort hotkey;
-                    
-                    if (ushort.TryParse(node.SelectSingleNode("Hotkey").InnerText, out hotkey))
+                    if (ushort.TryParse(hki.Hotkey, out hotkey))
                     {
                         ActionParameter ap = new ActionParameter();
-                        ap.Action = node.SelectSingleNode("Action").InnerText;
-                        ap.Parameter = node.SelectSingleNode("Parameter").InnerText;
+                        ap.Action = hki.Action;
+                        ap.Parameter = hki.Parameter;
                         if (!returnDictionary.ContainsKey(hotkey))
                         {
                             returnDictionary.Add(hotkey, ap);
                         }
-                     
+
                     }
-
                 }
-
+              
             }
-            xmlDocument = null;
+
             Global_Variables.Global_Variables.controllerHotKeyDictionary = returnDictionary;
         }
 
@@ -105,60 +124,45 @@ namespace Handheld_Control_Panel.Classes
         {
             if (hotKey != null)
             {
-                string ID = hotKey.ID;
-
-                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+                string hotkeyID = hotKey.ID;
+                               
+                if (File.Exists(actionDirectory + hotkeyID + ".xml"))
                 {
-                    if (node.SelectSingleNode("ID").InnerText == ID)
-                    {
-                        xmlNodeProfiles.RemoveChild(node);
-                        break;
-                    }
-
+                    File.Delete(actionDirectory + hotkeyID + ".xml");
                 }
-
-                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-                xmlDocument = null;
 
                 this.Remove(hotKey);
             }
-
 
         }
 
 
         public void generateGlobalKeyboardHotKeyList()
         {
+
             Global_Variables.Global_Variables.KBHotKeyDictionary.Clear();
-            
+       
 
+            Dictionary<string, ActionParameter> returnDictionary = new Dictionary<string, ActionParameter>();
 
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
+            foreach (HotkeyItem hki in this)
             {
-                if (node.SelectSingleNode("Type").InnerText == "Keyboard")
+                if (hki.Type == "Keyboard")
                 {
                     ActionParameter ap = new ActionParameter();
-                    string hotkey = node.SelectSingleNode("Hotkey").InnerText;
-                    ap.Action = node.SelectSingleNode("Action").InnerText;
-                    ap.Parameter = node.SelectSingleNode("Parameter").InnerText;
-                    Global_Variables.Global_Variables.KBHotKeyDictionary.Add(hotkey, ap);
-
+                    ap.Action = hki.Action;
+                    ap.Parameter = hki.Parameter;
+                    if (!returnDictionary.ContainsKey(hki.Hotkey))
+                    {
+                        returnDictionary.Add(hki.Hotkey, ap);
+                    }
                 }
-
+              
             }
 
+            Global_Variables.Global_Variables.KBHotKeyDictionary = returnDictionary;
 
-            xmlDocument = null;
-          
+
         }
 
         public Action_Management()
@@ -170,16 +174,19 @@ namespace Handheld_Control_Panel.Classes
             }
 
             string[] files = Directory.GetFiles(actionDirectory, "*.xml", SearchOption.TopDirectoryOnly);
-
-            foreach (string file in files)
+            lock (lockObjectActions)
             {
-                StreamReader sr = new StreamReader(file);
-                XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
-                this.Add((HotkeyItem)xmls.Deserialize(sr));
-                sr.Dispose();
-                xmls = null;
+                foreach (string file in files)
+                {
+                    StreamReader sr = new StreamReader(file);
+                    XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                    this.Add((HotkeyItem)xmls.Deserialize(sr));
+                    sr.Dispose();
+                    xmls = null;
 
+                }
             }
+           
                 
         }
         public void SaveToXML(HotkeyItem hki)
@@ -189,11 +196,15 @@ namespace Handheld_Control_Panel.Classes
             {
                 Application.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Actions\\" + hki.ID + ".xml");
-                    XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
-                    xmls.Serialize(sw, hki);
-                    sw.Dispose();
-                    xmls = null;
+                    lock (lockObjectActions)
+                    {
+                        StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Actions\\" + hki.ID + ".xml");
+                        XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                        xmls.Serialize(sw, hki);
+                        sw.Dispose();
+                        xmls = null;
+                    }
+           
                 }
 
 
@@ -479,72 +490,9 @@ namespace Handheld_Control_Panel.Classes
             }
 
         }
+                
 
-        public void SaveToXML()
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + ID + "']");
-
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                    parentNode.SelectSingleNode("Type").InnerText = Type;
-                    parentNode.SelectSingleNode("Action").InnerText = Action;
-                    parentNode.SelectSingleNode("Parameter").InnerText = Parameter;
-                    parentNode.SelectSingleNode("Hotkey").InnerText = Hotkey;
-                    parentNode.SelectSingleNode("AddHomePage").InnerText = AddHomePage.ToString();
-
-                }
-
-            }
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-        }
-
-        public void LoadProfile(string loadID, XmlDocument xmlDocument=null)
-        {
-            if (xmlDocument == null)
-            {
-                xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            }
-
-
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/ControllerHotKeys");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("ControllerHotKey/ID[text()='" + loadID + "']");
-
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                  
-                    Type = parentNode.SelectSingleNode("Type").InnerText;
-                    Action = parentNode.SelectSingleNode("Action").InnerText;
-                    Parameter = parentNode.SelectSingleNode("Parameter").InnerText;
-                    Hotkey = parentNode.SelectSingleNode("Hotkey").InnerText;
-                    ID = loadID;
-                    if (parentNode.SelectSingleNode("AddHomePage").InnerText == "True")
-                    {
-                        AddHomePage = true;
-                    }
-                    else
-                    {
-                        AddHomePage = false;
-                    }
-                }
-            }            
-            xmlDocument = null;
-
-        }
+      
     }
    
 }
