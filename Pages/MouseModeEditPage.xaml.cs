@@ -69,6 +69,7 @@ namespace Handheld_Control_Panel.Pages
 
             if (args.WindowPage == windowpage)
             {
+
                 int[] intReturn;
                 MainWindow wnd;
                 switch (args.Action)
@@ -83,7 +84,7 @@ namespace Handheld_Control_Panel.Pages
                         }
                         else
                         {
-                            Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
+                            Global_Variables.mousemodes.loadMouseMode(Global_Variables.mousemodes.editingMouseMode.MouseModeName);
                             wnd = (MainWindow)Application.Current.MainWindow;
                             wnd.navigateFrame("MouseModePage");
                             wnd = null;
@@ -93,7 +94,7 @@ namespace Handheld_Control_Panel.Pages
                      
                         break;
                     case "Start":
-                        Global_Variables.mousemodes.editingMouseMode.SaveToXML();
+                        Global_Variables.mousemodes.SaveToXML(Global_Variables.mousemodes.editingMouseMode);
                         Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_MouseModeSaved"].ToString(), Notification.Wpf.NotificationType.Success);
                       
                         wnd = (MainWindow)Application.Current.MainWindow;
@@ -124,7 +125,7 @@ namespace Handheld_Control_Panel.Pages
         {
             Controller_Window_Page_UserControl_Events.pageControllerInput -= handleControllerInputs;
             //make sure to load profile to clear any unsaved changes to the profile
-            Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
+            Global_Variables.mousemodes.loadMouseMode(Global_Variables.mousemodes.editingMouseMode.MouseModeName);
         }
     }
 }

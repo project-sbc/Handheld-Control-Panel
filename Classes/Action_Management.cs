@@ -390,6 +390,7 @@ namespace Handheld_Control_Panel.Classes
                     }
                     else
                     {
+
                         DisplayHotkey = value;
                     }
                 }
@@ -415,6 +416,7 @@ namespace Handheld_Control_Panel.Classes
             {
                 if (value != "")
                 {
+
                     if (Action == "Open_Program")
                     {
                         DisplayParameter = value;
@@ -423,11 +425,19 @@ namespace Handheld_Control_Panel.Classes
                     {
                         if (Action.Contains("Change"))
                         {
-                            int number;
-                            if (Int32.TryParse(value, out number))
+                            if (Action.Contains("_Mode"))
                             {
-                                if (number > 0) { DisplayParameter = "+" + value; } else { DisplayParameter = value; }
+                                DisplayParameter = value;
                             }
+                            else
+                            {
+                                int number;
+                                if (Int32.TryParse(value, out number))
+                                {
+                                    if (number > 0) { DisplayParameter = "+" + value; } else { DisplayParameter = value; }
+                                }
+                            }
+                          
                         }
                         else
                         {

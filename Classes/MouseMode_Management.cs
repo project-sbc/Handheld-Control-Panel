@@ -1,26 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Handheld_Control_Panel.Classes.Global_Variables;
-using SharpDX;
 using SharpDX.XInput;
-using Linearstar.Windows.RawInput;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using WindowsInput;
 using System.Xml;
-using System.Drawing;
-using System.Collections;
 using WindowsInput.Native;
-using System.Windows.Media.Media3D;
-
+using System.IO;
+using System.Xml.Serialization;
+using MahApps.Metro.Controls;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -105,7 +94,6 @@ namespace Handheld_Control_Panel.Classes
         public DispatcherTimer timerController = new DispatcherTimer(DispatcherPriority.Render);
         public Gamepad currentGamePad;
         public Gamepad previousGamePad;
-
         public double sensitivityScroll = 1;
         private int joystickButtonPressSensivitiy = 6000;
         private double deadzone = Global_Variables.Global_Variables.settings.joystickDeadzone;
@@ -199,24 +187,88 @@ namespace Handheld_Control_Panel.Classes
 
         };
 
+
+        public object lockObjectMouseMode = new object();
+        public string mouseModeDirectory = AppDomain.CurrentDomain.BaseDirectory + "MouseModes\\";
+
         public MouseMode_Management()
         {
-            
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations");
-
-            foreach (XmlNode node in xmlNode.ChildNodes)
+            //populates list
+            if (!Directory.Exists(mouseModeDirectory))
             {
-                MouseMode mouseMode = new MouseMode();
-                mouseMode.LoadProfile(node.SelectSingleNode("ID").InnerText, xmlDocument);
-                if (mouseMode.DefaultMode) { activeMouseMode = mouseMode; ; activeMouseMode.ActiveProfile = true; }
-                this.Add(mouseMode);
+                Directory.CreateDirectory(mouseModeDirectory);
             }
-            xmlDocument = null;
+
+            string[] files = Directory.GetFiles(mouseModeDirectory, "*.xml", SearchOption.TopDirectoryOnly);
+            lock (lockObjectMouseMode)
+            {
+                foreach (string file in files)
+                {
+                    StreamReader sr = new StreamReader(file);
+                    XmlSerializer xmls = new XmlSerializer(typeof(MouseMode));
+                    this.Add((MouseMode)xmls.Deserialize(sr));
+                    sr.Dispose();
+                    xmls = null;
+
+                }
+            }
+
         }
 
-        public void start_MouseMode()
+        public void SaveToXML(MouseMode mouseMode)
+        {
+            //Profile profile = this.Find(o => o.ProfileName == profileName);
+            if (mouseMode != null)
+            {
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    lock (lockObjectMouseMode)
+                    {
+                        StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "MouseModes\\" + mouseMode.MouseModeName + ".xml");
+                        XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                        xmls.Serialize(sw, mouseMode);
+                        sw.Dispose();
+                        xmls = null;
+                    }
+
+                }
+                );
+
+            }
+
+
+
+        }
+
+        public void addNewMouseMode(MouseMode copyMM =null)
+        {
+            MouseMode mm = new MouseMode();
+
+            if (copyMM != null) { mm= copyMM; }
+            string newProfileName = "New Mouse Mode";
+
+            int x = 1;
+            if (File.Exists(mouseModeDirectory + newProfileName + ".xml"))
+            {
+                while (File.Exists(mouseModeDirectory + newProfileName + x.ToString() + ".xml"))
+                {
+                    x++;
+                }
+                newProfileName = newProfileName + x.ToString();
+            }
+
+            mm.MouseModeName = newProfileName;
+
+            this.Add(mm);
+            Global_Variables.Global_Variables.mousemodes.SaveToXML(mm);
+
+
+
+        }
+
+    
+
+    public void start_MouseMode()
         {
             //create background thread to handle controller input
             if (activeMouseMode != null)
@@ -810,146 +862,59 @@ namespace Handheld_Control_Panel.Classes
             }
         }
 
-        public void setCurrentDefaultProfileToFalse(string ID)
+        public void setCurrentDefaultProfileToFalse(string name)
         {
             //changes 
             foreach (MouseMode profile in this)
             {
-                if (profile.ID == ID)
+                if (profile.MouseModeName == name)
                 {
                     profile.DefaultMode = false;
                 }
             }
 
         }
-        public string getProfileNameById(string ID)
-        {
-            string name = "";
-            foreach (MouseMode profile in this)
-            {
-                if (profile.ID == ID)
-                {
-                    name = profile.MouseModeName;
-                }
-            }
-            return name;
-        }
+       
         public void deleteProfile(MouseMode profile)
         {
             if (profile != null)
             {
-                string ID = profile.ID;
+                string name = profile.MouseModeName;
 
-                if (Global_Variables.Global_Variables.mousemodes.activeMouseMode != null)
+                if (File.Exists(mouseModeDirectory + name + ".xml"))
                 {
-                    if (Global_Variables.Global_Variables.mousemodes.activeMouseMode == profile)
-                    {
-                        Global_Variables.Global_Variables.mousemodes.activeMouseMode = null;
-                    }
+                    File.Delete(mouseModeDirectory + name + ".xml");
                 }
-             
-
-
-                System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-                XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations");
-
-                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
-                {
-                    if (node.SelectSingleNode("ID").InnerText == ID)
-                    {
-                        xmlNodeProfiles.RemoveChild(node);
-                        break;
-                    }
-
-                }
-
-                xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-                xmlDocument = null;
 
                 this.Remove(profile);
             }
 
 
         }
-
-        public void addNewProfile(MouseMode copyProfile)
+              
+        public void loadMouseMode(string MouseModeName)
         {
-
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNodeTemplate = xmlDocument.SelectSingleNode("//Configuration/MouseModeTemplate/MouseModeConfiguration");
-
-            XmlNode xmlNodeProfiles = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations");
-
-            if (copyProfile != null)
+            MouseMode loadingMM = this.Find(o => o.MouseModeName == MouseModeName);
+            if (loadingMM != null)
             {
-
-                foreach (XmlNode node in xmlNodeProfiles.ChildNodes)
+                if (File.Exists(mouseModeDirectory + "\\" + MouseModeName + ".xml"))
                 {
-                    if (node.SelectSingleNode("ID").InnerText == copyProfile.ID)
+                    lock (lockObjectMouseMode)
                     {
-                        xmlNodeTemplate = node;
-                        break;
+                        using (StreamReader sw = new StreamReader(mouseModeDirectory + "\\" + MouseModeName + ".xml"))
+                        {
+                            XmlSerializer xmls = new XmlSerializer(typeof(MouseMode));
+                            loadingMM = (MouseMode)xmls.Deserialize(sw);
+                        }
                     }
 
-                }
-            }
-
-            string newProfileName = "NewProfile";
-            if (copyProfile != null) { newProfileName = copyProfile.MouseModeName; }
-            int countProfile = 0;
-            XmlNodeList xmlNodesByName = xmlNodeProfiles.SelectNodes("MouseModeConfiguration/MouseModeName[text()='" + newProfileName + "']");
-
-            if (xmlNodesByName.Count > 0)
-            {
-                while (xmlNodesByName.Count > 0)
-                {
-                    countProfile++;
-                    xmlNodesByName = xmlNodeProfiles.SelectNodes("MouseModeConfiguration/MouseModeName[text()='" + newProfileName + countProfile.ToString() + "']");
 
                 }
-                newProfileName = newProfileName + countProfile.ToString();
+
+
             }
-
-
-            XmlNode newNode = xmlDocument.CreateNode(XmlNodeType.Element, "MouseModeConfiguration", "");
-            newNode.InnerXml = xmlNodeTemplate.InnerXml;
-            newNode.SelectSingleNode("MouseModeName").InnerText = newProfileName;
-            newNode.SelectSingleNode("ID").InnerText = getNewIDNumberForProfile(xmlDocument);
-            newNode.SelectSingleNode("DefaultMode").InnerText = "False";
-
-
-            xmlNodeProfiles.AppendChild(newNode);
-
-            MouseMode profile = new MouseMode();
-            this.Add(profile);
-            profile.LoadProfile(newNode.SelectSingleNode("ID").InnerText, xmlDocument);
-
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
         }
-
-        public string getNewIDNumberForProfile(XmlDocument xmlDocument)
-        {
-            //gets ID for new profiles
-            int ID = 0;
-
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("MouseModeConfiguration/ID[text()='" + ID.ToString() + "']");
-
-            while (xmlSelectedNode != null)
-            {
-                ID = ID + 1;
-                xmlSelectedNode = xmlNode.SelectSingleNode("MouseModeConfiguration/ID[text()='" + ID.ToString() + "']");
-            }
-            //ID++;
-            return ID.ToString();
-
-        }
-
+    
     }
 
     public class MouseMode
@@ -958,8 +923,7 @@ namespace Handheld_Control_Panel.Classes
 
         public bool HIDHideEnabled { get; set; }
         public bool PowerCycleWithHIDHide { get; set; }
-        public string ID { get; set; } = "";
-
+     
         public double MouseSensitivity { get; set; }
         public double ScrollSensitivity { get; set; }
 
@@ -1001,140 +965,7 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.mousemodes.activeMouseMode = this;
             ActiveProfile = true;
         }
-        public void SaveToXML()
-        {
-            System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
-            xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("MouseModeConfiguration/ID[text()='" + ID + "']");
-
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                    foreach(XmlNode childNode in parentNode.ChildNodes)
-                    {
-                        switch(childNode.Name)
-                        {
-                            case "MouseModeName":
-                                childNode.InnerText = MouseModeName;
-                                break;
-                            case "DefaultMode":
-                                //do nothing, will handle below
-                                break;
-                            case "ID"://donothing
-                                      break;
-                            case "HIDHideEnabled":
-                                childNode.InnerText = HIDHideEnabled.ToString();
-                                break;
-                            case "PowerCycleWithHIDHide":
-                                childNode.InnerText = PowerCycleWithHIDHide.ToString();
-                                break;
-                            case "MouseSensitivity":
-                                childNode.InnerText = MouseSensitivity.ToString();
-                               
-                                break;
-                            case "ScrollSensitivity":
-                                childNode.InnerText = ScrollSensitivity.ToString();
-                                break;
-                            default:
-                                childNode.InnerText = mouseMode[childNode.Name];
-
-                                break;
-                        }
-                    }
-                    
-
-                    //if ID isnt 0, which is the default profile, and its been saved to be the default profile, then make this ID 0 and change the other profile
-                    if (DefaultMode.ToString() != parentNode.SelectSingleNode("DefaultMode").InnerText && DefaultMode)
-                    {
-                        //check to see if a default profile exists
-                        XmlNode xmlCurrentDefault = xmlNode.SelectSingleNode("MouseModeConfiguration/DefaultMode[text()='True']");
-                        if (xmlCurrentDefault != null)
-                        {
-                            //if not null set to false
-                            xmlCurrentDefault.InnerText = "False";
-                            //get the ID and change status in profiles list
-                            string curDefID = xmlCurrentDefault.ParentNode.SelectSingleNode("ID").InnerText;
-                            Global_Variables.Global_Variables.mousemodes.setCurrentDefaultProfileToFalse(curDefID);
-                        }
-
-                    }
-                    parentNode.SelectSingleNode("DefaultMode").InnerText = DefaultMode.ToString();
-
-                }
-
-
-            }
-            xmlDocument.Save(Global_Variables.Global_Variables.xmlFile);
-
-            xmlDocument = null;
-
-
-        }
-
-        public void LoadProfile(string loadID, XmlDocument xmlDocument = null)
-        {
-            if (xmlDocument == null)
-            {
-                xmlDocument = new System.Xml.XmlDocument();
-                xmlDocument.Load(Global_Variables.Global_Variables.xmlFile);
-            }
-
-
-            XmlNode xmlNode = xmlDocument.SelectSingleNode("//Configuration/MouseModeConfigurations");
-            XmlNode xmlSelectedNode = xmlNode.SelectSingleNode("MouseModeConfiguration/ID[text()='" + loadID + "']");
-
-            if (xmlSelectedNode != null)
-            {
-                XmlNode parentNode = xmlSelectedNode.ParentNode;
-
-                if (parentNode != null)
-                {
-                    MouseModeName = parentNode.SelectSingleNode("MouseModeName").InnerText;
-                    ID = loadID;
-                    if (parentNode.SelectSingleNode("DefaultMode").InnerText == "True") { DefaultMode = true; } else { DefaultMode = false; }
-                    if (parentNode.SelectSingleNode("HIDHideEnabled").InnerText == "True") { HIDHideEnabled = true; } else { HIDHideEnabled = false; }
-                    if (parentNode.SelectSingleNode("PowerCycleWithHIDHide").InnerText == "True") { PowerCycleWithHIDHide = true; } else { PowerCycleWithHIDHide = false; }
-
-             
-                    double dblSen;
-                    if (double.TryParse(parentNode.SelectSingleNode("MouseSensitivity").InnerText, out dblSen))
-                    {
-                        MouseSensitivity = dblSen;
-                    }
-                    else { MouseSensitivity = 20; }
-
-                    double dblSSen;
-                    if (double.TryParse(parentNode.SelectSingleNode("MouseSensitivity").InnerText, out dblSSen))
-                    {
-                        ScrollSensitivity = dblSSen;
-                    }
-                    else { ScrollSensitivity = 1; }
-
-                    mouseMode.Clear();
-                    foreach (XmlNode node in parentNode.ChildNodes)
-                    {
-
-                        if (node.Name != "MouseSensitivity" && node.Name != "ScrollSensitivity" && node.Name != "MouseModeName" && node.Name != "ID" && node.Name != "DefaultMode" && node.Name != "HIDHideEnabled" && node.Name != "PowerCycleWithHIDHide")
-                        {
-                            mouseMode.Add(node.Name, node.InnerText);
-                        }
-
-                    }
-
-
-
-                }
-
-
-            }
-
-            xmlDocument = null;
-
-        }
+       
 
     }
 

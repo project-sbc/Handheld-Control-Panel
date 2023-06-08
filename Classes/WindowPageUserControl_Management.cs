@@ -144,6 +144,11 @@ namespace Handheld_Control_Panel.Classes
 
                             userControls[intReturn[0]].BringIntoView();
 
+                            if (intReturn[0] == userControls.Count - 1)
+                            {
+                                ((IScrollInfo)stackPanel).PageDown();
+                            }
+
                             break;
 
                    

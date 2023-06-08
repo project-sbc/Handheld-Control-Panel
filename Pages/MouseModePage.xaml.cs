@@ -90,11 +90,11 @@ namespace Handheld_Control_Panel.Pages
                             break;
 
                         case "Start":
-                            Global_Variables.mousemodes.addNewProfile(null);
+                            Global_Variables.mousemodes.addNewMouseMode();
                             controlList.Items.Refresh();
                             break;
                         case "Back":
-                            Global_Variables.mousemodes.addNewProfile(mousemode);
+                            Global_Variables.mousemodes.addNewMouseMode(mousemode);
                             controlList.Items.Refresh();
                             break;
                         case "Y":
@@ -126,9 +126,9 @@ namespace Handheld_Control_Panel.Pages
                 }
                 else
                 {
-                    if (action == "Y")
+                    if (action == "Start")
                     {
-                        Global_Variables.mousemodes.addNewProfile(null);
+                        Global_Variables.mousemodes.addNewMouseMode();
                         controlList.Items.Refresh();
                     }
                     if (action == "Up" || action == "Down")

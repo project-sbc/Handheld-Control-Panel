@@ -356,7 +356,7 @@ namespace Handheld_Control_Panel
                                     navigateFrame("ActionPage");
                                     break;
                                 case "MouseModeEditPage":
-                                    Global_Variables.mousemodes.editingMouseMode.LoadProfile(Global_Variables.mousemodes.editingMouseMode.ID);
+                                    Global_Variables.mousemodes.loadMouseMode(Global_Variables.mousemodes.editingMouseMode.MouseModeName);
                                     navigateFrame("MouseModePage");
                                     break;
                                 case "ProfileEditPage":
