@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -41,12 +42,28 @@ namespace Handheld_Control_Panel.Classes
         {
             string manufacturer = Motherboard_Info.Motherboard_Info.Manufacturer.ToUpper();
             string product = Motherboard_Info.Motherboard_Info.Product.ToUpper();
-
+            string cpu = Registry.GetValue("HKEY_LOCAL_MACHINE\\hardware\\description\\system\\centralprocessor\\0", "ProcessorNameString", null).ToString();
             HandheldDevice handheldDevice = new GenericDevice();
 
             
             switch(manufacturer)
             {
+                case "ayn":
+                    switch(product)
+                    {
+                        case "Loki Max":
+                            if (cpu.Contains("6800U"))
+                            {
+                                handheldDevice = new AynLokiMax();
+                            }
+                            if (cpu.Contains("6600U"))
+                            {
+                                handheldDevice = new AynLoki();
+                            }
+                            break;
+
+                    }
+                    break;
                 case "GPD":
                     switch (product)
                     {
@@ -203,7 +220,66 @@ namespace Handheld_Control_Panel.Classes
         }
 
     }
+    public class AynLoki : HandheldDevice
+    {
+        public AynLoki()
+        {
+            this.ClassType = "AynLoki";
+            this.Manufacturer = "Ayn";
+            this.Motherboard = "Loki";
+            this.AutoTDP = "GPUClock";
+            this.FanCapable = true;
+            this.FanToggleAddress = 0x10;
+            this.FanChangeAddress = 0x11;
+            this.MaxFanSpeed = 128;
+            this.MinFanSpeed = 0;
+            this.MinFanSpeedPercentage = 20;
+            this.fanCurveTemperature = "0,0,0,0,0,0,0,0,0,0,30,30,30,30,40,40,50,50,70,70,100";
+            this.fanCurvePackagePower = "0,0,0,30,30,40,40,50,60,60,80,90";
 
+            this.MaxCPUClock = 4600;
+            this.MinCPUClock = 1100;
+            this.MinGPUClock = 400;
+            this.MaxGPUClock = 1900;
+        }
+        public void enableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x00);
+            Global_Variables.Global_Variables.fanControlEnabled = true;
+        }
+        public bool fanIsEnabled()
+        {
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanToggleAddress);
+            if (returnvalue == 1) { return false; } else { return true; }
+        }
+        public void disableFanControl()
+        {
+            WinRingEC_Management.ECRamWrite(FanToggleAddress, 0x01);
+            Global_Variables.Global_Variables.fanControlEnabled = false;
+        }
+        public void readFanSpeed()
+        {
+            int fanSpeed = 0;
+
+            byte returnvalue = WinRingEC_Management.ECRamRead(FanChangeAddress);
+
+            double fanPercentage = Math.Round(100 * (Convert.ToDouble(returnvalue) / Global_Variables.Global_Variables.Device.MaxFanSpeed), 0);
+            Global_Variables.Global_Variables.FanSpeed = fanPercentage;
+        }
+        public void setFanSpeed(int speedPercentage)
+        {
+            if (speedPercentage < MinFanSpeedPercentage && speedPercentage > 0)
+            {
+                speedPercentage = MinFanSpeedPercentage;
+            }
+
+            byte setValue = (byte)Math.Round(((double)speedPercentage / 100) * MaxFanSpeed, 0);
+            WinRingEC_Management.ECRamWrite(FanChangeAddress, setValue);
+
+            Global_Variables.Global_Variables.FanSpeed = speedPercentage;
+        }
+
+    }
     public class AynLokiMax : HandheldDevice
     {
         public AynLokiMax()
