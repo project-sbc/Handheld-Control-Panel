@@ -206,7 +206,7 @@ namespace Handheld_Control_Panel.UserControls
                         Parameter parameter = new Parameter();
                         Debug.WriteLine(profile.appType);
                         parameter.DisplayParameter = profile.ProfileName;
-                        parameter.ParameterValue = profile.ID;
+                        parameter.ParameterValue = profile.ProfileName;
                         hotkeyParameter.Add(parameter);
                     }
 

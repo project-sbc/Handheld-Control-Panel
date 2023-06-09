@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using Windows.Networking.NetworkOperators;
 using YamlDotNet.Core.Tokens;
@@ -34,7 +35,6 @@ namespace Handheld_Control_Panel.Classes
         public Profile activeProfile=null;
         public Profile editingProfile = null;
         public Profile defaultProfile = null;
-        public object lockObjectProfiles = new object();
         public Profiles_Management()
         {
             //populates list
@@ -48,18 +48,9 @@ namespace Handheld_Control_Panel.Classes
 
             foreach (string file in files)
             {
-                lock(lockObjectProfiles)
-                {
-                    StreamReader sr = new StreamReader(file);
-                    XmlSerializer xmls = new XmlSerializer(typeof(Profile));
-                    this.Add((Profile)xmls.Deserialize(sr));
-                    sr.Dispose();
-                    xmls = null;
-                }
-     
-    
+                Profile profile = XML_Management.Load_Profile(Path.GetFileNameWithoutExtension(file));
+                if (profile != null) { this.Add(profile); }
             }
-
         }
         private string RemoveSpecialCharacters(string str)
         {
@@ -73,30 +64,6 @@ namespace Handheld_Control_Panel.Classes
             }
             return sb.ToString();
         }
-
-        public void loadProfile(string profilename)
-        {
-            Profile loadingProfile = this.Find(o => o.ProfileName == profilename);
-            if (loadingProfile != null)
-            {
-                if (File.Exists(profileDirectory + "\\" + profilename + ".xml"))
-                {
-                    lock(lockObjectProfiles)
-                    {
-                        using (StreamReader sw = new StreamReader(profileDirectory + "\\" + profilename + ".xml"))
-                        {
-                            XmlSerializer xmls = new XmlSerializer(typeof(Profile));
-                            loadingProfile = (Profile)xmls.Deserialize(sw);
-                        }
-                    }
-
-                   
-                }
-              
-
-            }
-        }
-       
         public void createProfileForGame(string profileName, string path, string gameID, string launchcommand, string apptype, string exe, string imageLocation)
         {
             Profile newProfile = new Profile();
@@ -136,18 +103,10 @@ namespace Handheld_Control_Panel.Classes
             {
                 newProfile.ImageLocation = imageLocation;
             }
-
-           
-
             this.Add(newProfile);
-            Global_Variables.Global_Variables.profiles.SaveToXML(newProfile);
-
-
-
+            XML_Management.Save_Profile(newProfile);
 
         }
-                
-
         public async Task syncGamesToProfile()
         {
             //gets list of steam games from library.vdf file, then makes profiles for those without one
@@ -174,33 +133,31 @@ namespace Handheld_Control_Panel.Classes
 
         }
 
-
         private int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
             return (int)span.TotalDays;
         }
-        public void changeProfileFavorite(string ID)
+        public void changeProfileFavorite(string name)
         {
-            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID == ID);
+            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName == name);
 
             if (profile != null)
             {
                 profile.Favorite = !profile.Favorite;
           
-                Global_Variables.Global_Variables.profiles.SaveToXML(profile);
+                XML_Management.Save_Profile(profile);
             }
 
 
         }
 
-        public void openProgram(string ID)
+        public void openProgram(string name)
         {
-            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ID== ID);
+            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName== name);
 
             if (profile != null)
             {
-
                 profile.applyProfile(true, true);
 
                 Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LaunchCommand, profile.Path));
@@ -210,25 +167,13 @@ namespace Handheld_Control_Panel.Classes
 
                 profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
                                    System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
-                Global_Variables.Global_Variables.profiles.SaveToXML(profile);
+                XML_Management.Save_Profile(profile);
         
             }
 
 
         }
-        public void setCurrentDefaultProfileToFalse(string ID)
-        {
-            //changes 
-            foreach (Profile profile in this)
-            {
-                if (profile.ID == ID)
-                {
-                    profile.DefaultProfile = false;
-                }
-            }
-
-        }
-      
+             
         public void deleteProfile(Profile profile)
         {
             if (profile != null)
@@ -261,32 +206,7 @@ namespace Handheld_Control_Panel.Classes
           
 
         }
-        public void SaveToXML(Profile profile)
-        {
-            //Profile profile = this.Find(o => o.ProfileName == profileName);
-            if (profile != null)
-            {
-                Application.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    lock(lockObjectProfiles)
-                    {
-                        StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profile.ProfileName + ".xml");
-                        XmlSerializer xmls = new XmlSerializer(typeof(Profile));
-                        xmls.Serialize(sw, profile);
-                        sw.Dispose();
-                        xmls = null;
-                    }
-
-                }
-
-
-                    );
-                
-            }
-
-          
-
-        }
+       
         public void addNewProfile(Profile copyProfile)
         {
             
@@ -312,7 +232,7 @@ namespace Handheld_Control_Panel.Classes
             profile.ProfileName = newProfileName;
 
             this.Add(profile);
-            Global_Variables.Global_Variables.profiles.SaveToXML(profile);
+            XML_Management.Save_Profile(profile);
 
         }
 
@@ -321,7 +241,6 @@ namespace Handheld_Control_Panel.Classes
 
     public class Profile
     {
-        public string ID { get; set; }
         public bool DefaultProfile
         {
             get { return defaultProfile; }
@@ -532,16 +451,6 @@ namespace Handheld_Control_Panel.Classes
 
         public Visibility iconVisibility { get; set; } = Visibility.Collapsed;
         public Visibility iconMaterialVisibility { get; set; } = Visibility.Collapsed;
-       
-
-
-
-
-
-        
-
-       
-
         public void applyProfile(bool autoApplied, bool changeDisplay)
         {
             if (autoApplied) { Global_Variables.Global_Variables.profileAutoApplied = true; } else { Global_Variables.Global_Variables.profileAutoApplied = false; }

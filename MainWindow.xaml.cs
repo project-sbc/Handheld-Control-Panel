@@ -352,7 +352,7 @@ namespace Handheld_Control_Panel
                                     navigateFrame("SettingsPage");
                                     break;
                                 case "ActionEditPage":
-                                    Global_Variables.hotKeys.loadHotKey(Global_Variables.hotKeys.editingHotkey.ID);
+                                    XML_Management.Load_Action(Global_Variables.hotKeys.editingHotkey.ID);
                                     navigateFrame("ActionPage");
                                     break;
                                 case "MouseModeEditPage":
@@ -361,7 +361,7 @@ namespace Handheld_Control_Panel
                                     break;
                                 case "ProfileEditPage":
 
-                                    Global_Variables.profiles.loadProfile(Global_Variables.profiles.editingProfile.ProfileName);
+                                    XML_Management.Load_Profile(Global_Variables.profiles.editingProfile.ProfileName);
                                     navigateFrame("ProfilesPage");
                                     break;
                                 default:

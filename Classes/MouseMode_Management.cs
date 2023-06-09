@@ -225,7 +225,7 @@ namespace Handheld_Control_Panel.Classes
                     lock (lockObjectMouseMode)
                     {
                         StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "MouseModes\\" + mouseMode.MouseModeName + ".xml");
-                        XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
+                        XmlSerializer xmls = new XmlSerializer(typeof(QuickAction));
                         xmls.Serialize(sw, mouseMode);
                         sw.Dispose();
                         xmls = null;

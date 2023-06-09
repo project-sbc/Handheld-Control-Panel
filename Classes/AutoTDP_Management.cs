@@ -106,7 +106,7 @@ namespace Handheld_Control_Panel.Classes
         {
             if (Global_Variables.Global_Variables.cpuType == "AMD" && Global_Variables.Global_Variables.processorName.Contains("6800U") && Global_Variables.Global_Variables.Device.AutoTDP != "None")
             {
-                TDP_Management.TDP_Management.changeTDP(25, 25);
+                //TDP_Management.TDP_Management.changeTDP(25, 25);
                 Global_Variables.Global_Variables.autoTDP = true;
                 Powercfg.setHyaticePowerPlanModePowercfg();
                 autoTDPThread = new Thread(() => { mainAutoTDPLoop(); });

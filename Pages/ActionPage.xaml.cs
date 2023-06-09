@@ -78,12 +78,12 @@ namespace Handheld_Control_Panel.Pages
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 if (controlList.SelectedItem != null)
                 {
-                    HotkeyItem hotkey = controlList.SelectedItem as HotkeyItem;
+                    QuickAction hotkey = controlList.SelectedItem as QuickAction;
                     int index = controlList.SelectedIndex;
                     switch (action)
                     {
                         case "A":
-                            Global_Variables.hotKeys.editingHotkey = (HotkeyItem)controlList.SelectedItem;
+                            Global_Variables.hotKeys.editingHotkey = (QuickAction)controlList.SelectedItem;
                             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
                             wnd.navigateFrame("ActionEditPage");
                             break;

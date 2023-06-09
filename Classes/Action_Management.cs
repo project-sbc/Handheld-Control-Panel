@@ -21,11 +21,10 @@ using System.Globalization;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public class Action_Management: List<HotkeyItem>
+    public class Action_Management: List<QuickAction>
     {
-        public object lockObjectActions = new object();
         public string actionDirectory = AppDomain.CurrentDomain.BaseDirectory + "Actions\\";
-        public HotkeyItem editingHotkey = null;
+        public QuickAction editingHotkey = null;
 
         public event EventHandler hotkeyClearedEvent;
         public void raiseHotkeyClearedEvent()
@@ -40,43 +39,20 @@ namespace Handheld_Control_Panel.Classes
 
         public void updateLanguage()
         {
-            foreach (HotkeyItem hki in Global_Variables.Global_Variables.hotKeys)
+            foreach (QuickAction hki in Global_Variables.Global_Variables.hotKeys)
             {
                 hki.Action = hki.Action;
             }
 
         }
-
-        public void loadHotKey(string ID)
-        {
-            HotkeyItem loadingHKI = this.Find(o => o.ID == ID);
-            if (loadingHKI != null)
-            {
-                if (File.Exists(actionDirectory + "\\" + ID + ".xml"))
-                {
-                    lock (lockObjectActions)
-                    {
-                        using (StreamReader sw = new StreamReader(actionDirectory + "\\" + ID + ".xml"))
-                        {
-                            XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
-                            loadingHKI = (HotkeyItem)xmls.Deserialize(sw);
-                        }
-                    }
-
-
-                }
-
-
-            }
-        }
-
+        
         public void generateGlobalControllerHotKeyList()
         {
             Global_Variables.Global_Variables.controllerHotKeyDictionary.Clear();
 
             Dictionary<ushort, ActionParameter> returnDictionary = new Dictionary<ushort, ActionParameter>();
 
-            foreach(HotkeyItem hki in this)
+            foreach(QuickAction hki in this)
             {
                 if (hki.Type == "Controller")
                 {
@@ -120,7 +96,7 @@ namespace Handheld_Control_Panel.Classes
 
    };
 
-        public void deleteHotkey(HotkeyItem hotKey)
+        public void deleteHotkey(QuickAction hotKey)
         {
             if (hotKey != null)
             {
@@ -145,7 +121,7 @@ namespace Handheld_Control_Panel.Classes
 
             Dictionary<string, ActionParameter> returnDictionary = new Dictionary<string, ActionParameter>();
 
-            foreach (HotkeyItem hki in this)
+            foreach (QuickAction hki in this)
             {
                 if (hki.Type == "Keyboard")
                 {
@@ -174,53 +150,18 @@ namespace Handheld_Control_Panel.Classes
             }
 
             string[] files = Directory.GetFiles(actionDirectory, "*.xml", SearchOption.TopDirectoryOnly);
-            lock (lockObjectActions)
+
+            foreach (string file in files)
             {
-                foreach (string file in files)
-                {
-                    StreamReader sr = new StreamReader(file);
-                    XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
-                    this.Add((HotkeyItem)xmls.Deserialize(sr));
-                    sr.Dispose();
-                    xmls = null;
-
-                }
-            }
-           
-                
-        }
-        public void SaveToXML(HotkeyItem hki)
-        {
-            //Profile profile = this.Find(o => o.ProfileName == profileName);
-            if (hki != null)
-            {
-                Application.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    lock (lockObjectActions)
-                    {
-                        StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Actions\\" + hki.ID + ".xml");
-                        XmlSerializer xmls = new XmlSerializer(typeof(HotkeyItem));
-                        xmls.Serialize(sw, hki);
-                        sw.Dispose();
-                        xmls = null;
-                    }
-           
-                }
-
-
-                    );
-
+                QuickAction hki = XML_Management.Load_Action(Path.GetFileNameWithoutExtension(file));
+                if (hki != null) { this.Add(hki); }
             }
 
-
-
         }
-     
-
-
+       
         public void addNewHotkey()
         {
-            HotkeyItem hki = new HotkeyItem();
+            QuickAction hki = new QuickAction();
 
             string newProfileName = "New Action";
             
@@ -237,7 +178,7 @@ namespace Handheld_Control_Panel.Classes
             hki.ID = newProfileName;
 
             this.Add(hki);
-            Global_Variables.Global_Variables.hotKeys.SaveToXML(hki);
+            XML_Management.Save_Action(hki);
 
 
 
@@ -245,7 +186,7 @@ namespace Handheld_Control_Panel.Classes
                
     }
 
-    public class HotkeyItem
+    public class QuickAction
     {
         public string ID { get; set; }
 

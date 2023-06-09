@@ -93,7 +93,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void loadActionPanelList()
         {
-            foreach (HotkeyItem hki in Global_Variables.hotKeys)
+            foreach (QuickAction hki in Global_Variables.hotKeys)
             {
                 if (hki.AddHomePage)
                 {
@@ -373,7 +373,7 @@ namespace Handheld_Control_Panel.UserControls
     }
     public class Action_Panel_Items
     {
-        public HotkeyItem hki { get; set; }
+        public QuickAction hki { get; set; }
         public string data { get; set; }
         public string text { get; set; }
         public Visibility canvasVisibility { get; set; } = Visibility.Visible;

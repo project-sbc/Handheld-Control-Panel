@@ -26,10 +26,7 @@ namespace Handheld_Control_Panel.Classes
             //Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
             //test code
                        
-
-            //Load XML profile file
-            XML_Management.Load_XML_File.load_XML_File();
-
+                      
 
             //check steam/playnite installed for added features
             Steam_Management.setSteamDirectory();

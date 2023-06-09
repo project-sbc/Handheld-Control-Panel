@@ -22,7 +22,6 @@ using ControlzEx.Theming;
 using System.Windows.Controls.Primitives;
 using Handheld_Control_Panel.Classes.Global_Variables;
 using MahApps.Metro.Controls;
-using Handheld_Control_Panel.Classes.XML_Management;
 using System.Drawing;
 using System.Windows.Interop;
 using System.IO;
@@ -340,7 +339,7 @@ where childItem : DependencyObject
                                         // Finding textBlock from the DataTemplate that is set on that ContentPresenter
                                         DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
 
-                                        Global_Variables.profiles.openProgram(lbai.ID);
+                                        Global_Variables.profiles.openProgram(lbai.ProfileName);
 
                                         packIconFontAwesome = (PackIconFontAwesome)myDataTemplate.FindName("fontAwesomeIcon", myContentPresenter);
                                         if (packIconFontAwesome != null)
@@ -391,7 +390,7 @@ where childItem : DependencyObject
                             }
                             break;
                         case "Y":
-                            Global_Variables.profiles.changeProfileFavorite(lbai.ID);
+                            Global_Variables.profiles.changeProfileFavorite(lbai.ProfileName);
                             if (currentFilterMethod.Contains("Favorite") || currentSortMethod.Contains("Favorite"))
                             {
                                 applySortAndFilter();

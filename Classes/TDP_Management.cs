@@ -50,7 +50,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                         runAMDReadTDP();
                     }
                 }
-                Task.Delay(200);
+                Thread.Sleep(50);
                 
 
             }
@@ -106,8 +106,11 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                     Global_Variables.Global_Variables.SetPL1 = pl1TDP;
                     Global_Variables.Global_Variables.SetPL2 = pl2TDP;
 
+
+                    Thread.Sleep(50);
                     //read tdp after changing
                     readTDP();
+                    Thread.Sleep(50);
                 }
                 
                 
@@ -539,7 +542,8 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
 
                         }
                     }
-
+                    //add thread sleep to prevent SMU errors due to mulitple commands back to back
+                    Thread.Sleep(30);
                 }
                 catch (Exception ex)
                 {
@@ -564,16 +568,20 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
                 //6800U MessageBox.Show("going to change TDP");
                 lock (objLock)
                 {
-                    commandArguments = " --stapm-limit=" + (pl1TDP * 1000).ToString() + " --slow-limit=" + (pl2TDP * 1000).ToString() + " --fast-limit=" + (pl2TDP * 1000).ToString();
-         
+                    //set the limits one at a time to prevent crash or glitches, put 30 ms delay to prevent errors
+                    commandArguments = " --stapm-limit=" + (pl1TDP * 1000).ToString();
                     result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
-                    Task.Delay(100);
+                    Thread.Sleep(30);
+                    commandArguments = " --slow-limit=" + (pl2TDP * 1000).ToString();
+                    result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
+                    Thread.Sleep(30);
+                    commandArguments = " --fast-limit=" + (pl2TDP * 1000).ToString();
+                    result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
+                    Thread.Sleep(30);
                     commandArguments = " --apu-slow-limit=" + (pl1TDP * 1000).ToString();
-
                     result = Run_CLI.Run_CLI.RunCommand(commandArguments, true, processRyzenAdj);
-                    Task.Delay(100);
-                    //6800U MessageBox.Show(result);
-                    //Log_Writer.writeLog("Read TDP AMD complete");
+                    Thread.Sleep(30);
+                  
                 }
 
 
