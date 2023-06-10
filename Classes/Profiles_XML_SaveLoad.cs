@@ -14,14 +14,19 @@ namespace Handheld_Control_Panel.Classes
 {
     public static class Profiles_XML_SaveLoad
     {
-        private static string hcpDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        private static string hcpDirectory = AppDomain.CurrentDomain.BaseDirectory + "Profiles\\";
         private static object lockObject = new object();
 
         public static void Save_XML(string folderName, string objType, object objClass)
         {
+            if (!Directory.Exists(hcpDirectory + folderName))
+            {
+                Directory.CreateDirectory(hcpDirectory + folderName);
+            }
+
             lock (lockObject)
             {
-                StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + folderName + "\\" + objType  +".xml");
+                StreamWriter sw = new StreamWriter(hcpDirectory + folderName + "\\" + objType  +".xml");
                 XmlSerializer xmls = null;
                 switch(objType)
                 {
@@ -57,7 +62,7 @@ namespace Handheld_Control_Panel.Classes
         }
         public static object Load_XML(string folderPath, string objType)
         {
-            string filePath = hcpDirectory + "Profiles\\" + folderPath + ".xml";
+            string filePath = hcpDirectory + folderPath + "\\" + objType + ".xml";
             object objObject = null;
             if (File.Exists(filePath))
             {

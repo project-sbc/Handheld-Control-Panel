@@ -20,10 +20,12 @@ namespace Handheld_Control_Panel.Classes
 
             //run all routines to get device ready
 
-            //    librehardwaremonitor.Monitor();
+          
 
             //test code here
-            //Display_Management.Display_Management.testGettingResolutionFromNewNugetPackage();
+     
+
+
             //test code
                        
                       
@@ -44,7 +46,7 @@ namespace Handheld_Control_Panel.Classes
             Global_Variables.Global_Variables.Device = Device_Management.GetCurrentDevice();
 
             Fan_Management.Fan_Management.readSoftwareFanControl();
-                    
+                   
 
             //check to make sure driver isn't blocked for intel (checks for intel in routine)
             //TDP_Management.TDP_Management.checkDriverBlockRegistry();
@@ -54,17 +56,16 @@ namespace Handheld_Control_Panel.Classes
             CoreParking_Management.CoreParking_Management.unhidePowercfgCoreParking();
             EPP_Management.EPP_Management.unhidePowercfgEPP();
 
-            //get max core count
+            //get max core count for core parking function
             Global_Variables.Global_Variables.maxCpuCores = new ManagementObjectSearcher("Select * from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["NumberOfCores"].ToString()));
 
             //load lists (resolutions, refresh rates, scalings)
             Display_Management.Display_Management.generateDisplayResolutionAndRateList();
           
-            
             //load language resource
             loadLanguage();
 
-            //start task scheduler
+            //start task scheduler, the dedicated task queue
             Task_Scheduler.Task_Scheduler.startScheduler();
 
             //update values
@@ -80,9 +81,6 @@ namespace Handheld_Control_Panel.Classes
             //wrap in dispatcher because calling profiles from UI thread later will give an error. REMINDER: this is running on separate thread for spinner
             System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => Global_Variables.Global_Variables.profiles = new Profiles_Management()));
 
-
-           
-            
 
             AutoProfile_Management.checkAutoProfileApplicator_StartUp();
             if (Global_Variables.Global_Variables.profiles.activeProfile != null)
