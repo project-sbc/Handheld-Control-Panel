@@ -57,8 +57,8 @@ namespace Handheld_Control_Panel.Pages
             Profile_Events.separateChargerBatteryEvent += Profile_Events_separateChargerBatteryEvent;
 
             //do this to account for the separate profile for charger/battery
-            collapseUncollapseOnlineValues(Global_Variables.profiles.editingProfile.SeparateChargerBattery);
-            if (Global_Variables.profiles.editingProfile.SeparateChargerBattery)
+            collapseUncollapseOnlineValues(Global_Variables.profiles.editingProfile.profile_Parameters.SeparateChargerBattery);
+            if (Global_Variables.profiles.editingProfile.profile_Parameters.SeparateChargerBattery)
             {
                 batteryLabel.Visibility = Visibility.Visible;
                 chargerLabel.Visibility = Visibility.Visible;
@@ -76,8 +76,8 @@ namespace Handheld_Control_Panel.Pages
         private void Profile_Events_separateChargerBatteryEvent(object? sender, EventArgs e)
         {
             userControls.Clear();
-            collapseUncollapseOnlineValues(Global_Variables.profiles.editingProfile.SeparateChargerBattery);
-            if (Global_Variables.profiles.editingProfile.SeparateChargerBattery)
+            collapseUncollapseOnlineValues(Global_Variables.profiles.editingProfile.profile_Parameters.SeparateChargerBattery);
+            if (Global_Variables.profiles.editingProfile.profile_Parameters.SeparateChargerBattery)
             {
                 batteryLabel.Visibility = Visibility.Visible;
                 chargerLabel.Visibility = Visibility.Visible;
@@ -150,7 +150,7 @@ namespace Handheld_Control_Panel.Pages
                         break;
                     case "Start":
                         Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), Notification.Wpf.NotificationType.Success);
-                        XML_Management.Save_Profile(Global_Variables.profiles.editingProfile);
+                        Profiles_XML_SaveLoad.Save_XML(Global_Variables.profiles.editingProfile.ProfileName,"Profile_Main", Global_Variables.profiles.editingProfile);
 
                         XML_Management.Load_Profile(Global_Variables.profiles.editingProfile.ProfileName);
                         wnd = (MainWindow)Application.Current.MainWindow;

@@ -46,9 +46,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-            if (Global_Variables.profiles.editingProfile.imageLocation != null)
+            if (Global_Variables.profiles.editingProfile.profile_Exe.Exe_Image_Path != null)
             {
-                if (File.Exists(Global_Variables.profiles.editingProfile.imageLocation))
+                if (File.Exists(Global_Variables.profiles.editingProfile.profile_Exe.Exe_Image_Path))
                 {
                     updateImage();
                     control.IsOn = true;
@@ -70,11 +70,11 @@ namespace Handheld_Control_Panel.UserControls
 
         private void updateImage()
         {
-            string imageDirectory = Global_Variables.profiles.editingProfile.imageLocation;
+            string imageDirectory = Global_Variables.profiles.editingProfile.profile_Exe.Exe_Image_Path;
             if (File.Exists(imageDirectory))
             {
                 controlImage.Source = new BitmapImage(new Uri(imageDirectory, UriKind.RelativeOrAbsolute));
-                controlTextbox.Text = Global_Variables.profiles.editingProfile.imageLocation;
+                controlTextbox.Text = Global_Variables.profiles.editingProfile.profile_Exe.Exe_Image_Path;
             }
             
         }
@@ -155,19 +155,19 @@ namespace Handheld_Control_Panel.UserControls
             if (result == true)
             {
                 controlTextbox.Text = dialog.FileName;
-                Global_Variables.profiles.editingProfile.Path = controlTextbox.Text;
-                Global_Variables.profiles.editingProfile.AppType = "Exe";
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path = controlTextbox.Text;
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type = "Exe";
 
             }
         }
 
         private void control_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Global_Variables.profiles.editingProfile.AppType == "")
+            if (Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type == "")
             {
-                Global_Variables.profiles.editingProfile.AppType = "Exe";
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type = "Exe";
             }
-            Global_Variables.profiles.editingProfile.Path = controlTextbox.Text;
+            Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path = controlTextbox.Text;
         }
     }
 }

@@ -513,46 +513,46 @@ namespace Handheld_Control_Panel.Classes.UserControl_Management
 
                     break;
                 case "Slider_ProfileOnlineTDP":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_TDP1 = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_TDP1 = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineTDP":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_TDP1 = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_TDP1 = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineTDP2":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_TDP2 = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_TDP2 = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineTDP2":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_TDP2 = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_TDP2 = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineEPP":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_EPP = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_EPP = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineEPP":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_EPP = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_EPP = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineGPUCLK":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_GPUCLK = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_GPUCLK = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineGPUCLK":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_GPUCLK = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_GPUCLK = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineFPS":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_FPSLimit = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_FPSLimit = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineFPS":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_FPSLimit = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_FPSLimit = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineMaxCPU":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_MAXCPU = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_MAXCPU = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineMaxCPU":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_MAXCPU = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_MAXCPU = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOnlineActiveCores":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Online_ActiveCores = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Online_ActiveCores = sliderValue.ToString();
                     break;
                 case "Slider_ProfileOfflineActiveCores":
-                    Global_Variables.Global_Variables.profiles.editingProfile.Offline_ActiveCores = sliderValue.ToString();
+                    Global_Variables.Global_Variables.profiles.editingProfile.profile_Parameters.Offline_ActiveCores = sliderValue.ToString();
                     break;
  
                 case "Slider_MaxGPUCLK":

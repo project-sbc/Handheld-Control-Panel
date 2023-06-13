@@ -20,10 +20,10 @@ namespace Handheld_Control_Panel.Classes
 
             //run all routines to get device ready
 
-          
+
 
             //test code here
-     
+                        
 
 
             //test code
@@ -68,7 +68,7 @@ namespace Handheld_Control_Panel.Classes
             //start task scheduler, the dedicated task queue
             Task_Scheduler.Task_Scheduler.startScheduler();
 
-            //update values
+            //update values like TDP, etc,
             ParallelTaskUpdate_Management.UpdateTask();
                    
             //apply rtss fps limit of 0 by default if cant find limit between 5-60
@@ -79,7 +79,7 @@ namespace Handheld_Control_Panel.Classes
 
 
             //wrap in dispatcher because calling profiles from UI thread later will give an error. REMINDER: this is running on separate thread for spinner
-            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => Global_Variables.Global_Variables.profiles = new Profiles_Management()));
+            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => Global_Variables.Global_Variables.profiles = new Profiles()));
 
 
             AutoProfile_Management.checkAutoProfileApplicator_StartUp();

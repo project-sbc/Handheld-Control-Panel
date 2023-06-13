@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setControlValue()
         {
             
-            control.IsOn = Global_Variables.profiles.editingProfile.SeparateChargerBattery;
+            control.IsOn = Global_Variables.profiles.editingProfile.profile_Parameters.SeparateChargerBattery;
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -71,7 +71,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Global_Variables.profiles.editingProfile.SeparateChargerBattery = control.IsOn;
+                Global_Variables.profiles.editingProfile.profile_Parameters.SeparateChargerBattery = control.IsOn;
                 Profile_Events.raiseSeparateChargerBatteryEvent();
             }
           

@@ -298,7 +298,7 @@ where childItem : DependencyObject
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 if (controlList.SelectedItem != null)
                 {
-                    Profile lbai = controlList.SelectedItem as Profile;
+                    Profile_Main lbai = controlList.SelectedItem as Profile_Main;
                     int index = controlList.SelectedIndex;
                     switch (action)
                     {

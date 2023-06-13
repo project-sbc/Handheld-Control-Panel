@@ -184,6 +184,7 @@
     <PackageReference Include="MouseKeyHook" Version="5.6.0" />
     <PackageReference Include="Nefarius.Drivers.HidHide" Version="1.8.60" />
     <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="3.8.228" />
+    <PackageReference Include="Nefarius.ViGEm.Client" Version="1.21.256" />
     <PackageReference Include="Notification.Wpf" Version="7.0.0" />
     <PackageReference Include="PidSharp" Version="1.0.0.1" />
     <PackageReference Include="PInvoke.Windows.Core" Version="0.7.124" />

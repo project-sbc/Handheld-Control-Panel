@@ -40,10 +40,10 @@ namespace Handheld_Control_Panel.UserControls
             UserControl_Management.setupControl(control);
 
 
-            if (Global_Variables.profiles.editingProfile.Offline_MAXCPU != "")
+            if (Global_Variables.profiles.editingProfile.profile_Parameters.Offline_MAXCPU != "")
             {
                 controlToggle.IsOn = true;
-                control.Value = Convert.ToDouble(Global_Variables.profiles.editingProfile.Offline_MAXCPU);
+                control.Value = Convert.ToDouble(Global_Variables.profiles.editingProfile.profile_Parameters.Offline_MAXCPU);
             }
             else
             {
@@ -133,13 +133,13 @@ namespace Handheld_Control_Panel.UserControls
                   
                     control.Visibility = Visibility.Visible;
                     secondLabel.Visibility = Visibility.Visible;
-                    Global_Variables.profiles.editingProfile.Offline_MAXCPU = control.Value.ToString();
+                    Global_Variables.profiles.editingProfile.profile_Parameters.Offline_MAXCPU = control.Value.ToString();
                 }
                 else
                 {
                     control.Visibility = Visibility.Collapsed;
                     secondLabel.Visibility = Visibility.Collapsed;
-                    Global_Variables.profiles.editingProfile.Offline_MAXCPU = "";
+                    Global_Variables.profiles.editingProfile.profile_Parameters.Offline_MAXCPU = "";
                 }
             }
         }

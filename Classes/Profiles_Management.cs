@@ -29,13 +29,13 @@ using Path = System.IO.Path;
 
 namespace Handheld_Control_Panel.Classes
 {
-    public class Profiles_Management: List<Profile>
+    public class Profiles_ManagementBREAKIT: List<Profile>
     {
         private string profileDirectory = AppDomain.CurrentDomain.BaseDirectory + "Profiles\\";
         public Profile activeProfile=null;
         public Profile editingProfile = null;
         public Profile defaultProfile = null;
-        public Profiles_Management()
+        public Profiles_ManagementBREAKIT()
         {
             //populates list
 
@@ -123,7 +123,7 @@ namespace Handheld_Control_Panel.Classes
                     Profile gameIDProfile = this.Find(o => o.GameID == item.gameID);
                     if (gameIDProfile == null)
                     {
-                        Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, item.exe, item.imageLocation);
+                        //Global_Variables.Global_Variables.profiles.createProfileForGame(item.gameName, item.path,item.gameID,item.launchCommand,item.appType, item.exe, item.imageLocation);
                     }
                 }
                
@@ -140,13 +140,13 @@ namespace Handheld_Control_Panel.Classes
         }
         public void changeProfileFavorite(string name)
         {
-            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName == name);
+            Profile_Main profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName == name);
 
             if (profile != null)
             {
-                profile.Favorite = !profile.Favorite;
+                //profile.profile_Exe.favori = !profile.Favorite;
           
-                XML_Management.Save_Profile(profile);
+                //XML_Management.Save_Profile(profile);
             }
 
 
@@ -154,20 +154,20 @@ namespace Handheld_Control_Panel.Classes
 
         public void openProgram(string name)
         {
-            Profile profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName== name);
+            Profile_Main profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName == name);
 
             if (profile != null)
             {
                 profile.applyProfile(true, true);
 
-                Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LaunchCommand, profile.Path));
+                //Classes.Task_Scheduler.Task_Scheduler.runTask(() => Game_Management.LaunchApp(profile.GameID, profile.appType, profile.LaunchCommand, profile.Path));
 
-                profile.NumberLaunches = profile.NumberLaunches + 1;
+                //profile.NumberLaunches = profile.NumberLaunches + 1;
 
 
-                profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
-                                   System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
-                XML_Management.Save_Profile(profile);
+                //profile.LastLaunched = DaysBetween(DateTime.ParseExact("2023-01-01", "yyyy-MM-dd",
+                                   //System.Globalization.CultureInfo.InvariantCulture), DateTime.Today);
+                //XML_Management.Save_Profile(profile);
         
             }
 
@@ -182,17 +182,17 @@ namespace Handheld_Control_Panel.Classes
 
                 if (Global_Variables.Global_Variables.profiles.activeProfile != null)
                 {
-                    if (Global_Variables.Global_Variables.profiles.activeProfile == profile)
-                    {
-                        Global_Variables.Global_Variables.profiles.activeProfile = null;
-                    }
+                   //if (Global_Variables.Global_Variables.profiles.activeProfile == profile)
+                    //{
+                     //   Global_Variables.Global_Variables.profiles.activeProfile = null;
+                    //}
                 }
                 if (Global_Variables.Global_Variables.profiles.defaultProfile != null)
                 {
-                    if (Global_Variables.Global_Variables.profiles.defaultProfile == profile)
-                    {
-                        Global_Variables.Global_Variables.profiles.defaultProfile = null;
-                    }
+                   // if (Global_Variables.Global_Variables.profiles.defaultProfile == profile)
+                    //{
+                      //  Global_Variables.Global_Variables.profiles.defaultProfile = null;
+                 //   }
                 }
                 
                 if (File.Exists(profileDirectory + profileName + ".xml"))
@@ -458,11 +458,11 @@ namespace Handheld_Control_Panel.Classes
             //remove active profile flag for current
             if (Global_Variables.Global_Variables.profiles.activeProfile != null) 
             { 
-                Global_Variables.Global_Variables.profiles.activeProfile.ActiveProfile = false;
+                //Global_Variables.Global_Variables.profiles.activeProfile.ActiveProfile = false;
 
             }
             //apply active profile flag
-            Global_Variables.Global_Variables.profiles.activeProfile = this;
+            //Global_Variables.Global_Variables.profiles.activeProfile = this;
             ActiveProfile = true;
             string powerStatus = SystemParameters.PowerLineStatus.ToString();
 

@@ -231,7 +231,7 @@ namespace Handheld_Control_Panel.Classes.Global_Variables
         //Profile 
         public static bool profileAutoApplied = false;
       
-        public static Profiles_Management profiles;
+        public static Profiles profiles;
         public static MouseMode_Management mousemodes;
         public static Action_Management hotKeys;
         public static CustomizeHome_Management homePageItems;

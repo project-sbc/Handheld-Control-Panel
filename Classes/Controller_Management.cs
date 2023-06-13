@@ -24,6 +24,7 @@ using enabledevice;
 using Windows.Media.SpeechRecognition;
 using Nefarius.Drivers.HidHide;
 using System.IO;
+using Nefarius.ViGEm.Client;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -41,7 +42,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
         public static int activeTimerTickInterval = 60;
         public static int passiveTimerTickInterval = 100;
 
-        public static HidHideControlService hideHidService = null;
+        public static HidHideControlService hideHidService = new HidHideControlService();
 
         public static void getDefaultControllerDeviceInformation()
         {
@@ -80,7 +81,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
           
         }
 
-        public static async Task HIDHideConfiguredAsync()
+        public static bool setUpHIDHide()
         {
             //make sure its configured with HCP in it
             if (hideHidService.IsInstalled)
@@ -88,17 +89,21 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                 //check to make sure hidhide client isn't running or else an error will occur
                 Process[] hidHideClient = Process.GetProcessesByName("HidHideClient");
 
-                foreach(Process p in hidHideClient)
+                if (hidHideClient.Length > 0)
                 {
-                    p.CloseMainWindow();
+                    foreach (Process p in hidHideClient)
+                    {
+                        p.CloseMainWindow();
+                    }
+                    Thread.Sleep(1000);
                 }
-                await Task.Delay(1000);
+              
 
                 hidHideClient = Process.GetProcessesByName("HidHideClient");
                 if (hidHideClient.Length == 0)
                 {
                     IReadOnlyList<string> appList = hideHidService.ApplicationPaths;
-                    string appPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Handheld Control Panel.exe");
+                    string appPath = AppDomain.CurrentDomain.BaseDirectory + "Handheld Control Panel.exe";
                     if (!appList.Contains(appPath))
                     {
                         hideHidService.AddApplicationPath(appPath);
@@ -109,9 +114,18 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     {
                         hideHidService.AddBlockedInstanceId(Global_Variables.Global_Variables.settings.instanceID);
                     }
+                    //turn on hiding
+                    hideHidService.IsActive = true;
+
+                    //start the controller
+                    ViGEm_Management.startViGEm();
+
+                    return true;
                 }
+                return false;
               
             }
+            return false;
         }
 
         public static void hideController()
@@ -491,9 +505,8 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             {
                 try
                 {
+                    //make sure there is an input controller
                     if (controller == null)
-
-
                     {
                         getController();
                         if (controller.IsConnected == false)
@@ -534,15 +547,31 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                             ActionParameter action = Global_Variables.Global_Variables.controllerHotKeyDictionary[btnShort];
                                             QuickAction_Management.runHotKeyAction(action);
 
-                                            
+                                            //sleep 200ms to prevent input from hotkey making other app changes like moving slider
                                             Thread.Sleep(200);
+                                            //controller GOTO is toward the end and prevents the next input from being registered by the program which can cause things like sliders to move when you bring up the screen
                                             goto Controller;
                                         }
                                     }
                                 }
+                           
+
 
                                 if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
                                 {
+                                    if (ViGEm_Management.x360 != null)
+                                    {
+                                        ViGEm_Management.x360.SetButtonsFull(btnShort);
+                                        ViGEm_Management.x360.LeftThumbX = currentGamePad.LeftThumbX;
+                                        ViGEm_Management.x360.LeftThumbY = currentGamePad.LeftThumbY;
+                                        ViGEm_Management.x360.RightThumbX = currentGamePad.RightThumbX;
+                                        ViGEm_Management.x360.RightThumbY = currentGamePad.RightThumbY;
+                                        ViGEm_Management.x360.LeftTrigger = currentGamePad.LeftTrigger;
+                                        ViGEm_Management.x360.RightTrigger = currentGamePad.RightTrigger;
+                                        ViGEm_Management.x360.SubmitReport();
+
+                                    }
+
 
                                     //reset continuousNew for every cycle
                                     continuousInputNew = "";
@@ -673,7 +702,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                             //doSomeWork();
   Controller:
                             previousGamePad = currentGamePad;
-                            Thread.Sleep(activeTimerTickInterval);
+                            Thread.Sleep(10);
                         }
 
                     }

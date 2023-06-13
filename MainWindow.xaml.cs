@@ -70,11 +70,18 @@ namespace Handheld_Control_Panel
             //start mouse mode, required because controller management makes call to mousemode
             Global_Variables.mousemodes = new MouseMode_Management();
 
+
+            //CONTROLLER STUFF GOES HERE, this is regarding HIDHide/ViGEm,etc
+            //check controller usb device info GUID instance ID, THIS IS IMPORTANT FOR POWER CYCLE IN CASE HIDHIDE AND VIGEM GET USED
+            Controller_Management.getDefaultControllerDeviceInformation();
+
+            //make sure hidhide is configured
+            Controller_Management.setUpHIDHide();
+
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
 
-            //check controller usb device info GUID instance ID
-            Controller_Management.getDefaultControllerDeviceInformation();
+      
 
             //now check for hidhide configured  DONT RUN THIS YET WAIT FOR GYOR AND VIGEM INSTALL
             //Controller_Management.HIDHideConfiguredAsync();
@@ -482,7 +489,7 @@ namespace Handheld_Control_Panel
         {
             this.BeginInvoke(new Action(() =>
             {
-                Global_Variables.profiles = new Profiles_Management();
+                Global_Variables.profiles = new Profiles();
             }));
         }
         

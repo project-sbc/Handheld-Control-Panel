@@ -63,7 +63,7 @@ namespace Handheld_Control_Panel.Classes
         public bool startSafeMode = true;
         public bool hideSplashScreen = false;
         public string directoryRTSS = "";
-       
+        public bool enableViGEmController = true;
         public void Save()
         {
             //use lock to prevent multiple threads from using stream writer which will cause an error

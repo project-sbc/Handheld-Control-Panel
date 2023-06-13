@@ -47,9 +47,9 @@ namespace Handheld_Control_Panel.UserControls
 
         private  void setControlValue()
         {
-            if (Global_Variables.profiles.editingProfile.Resolution != "")
+            if (Global_Variables.profiles.editingProfile.profile_Exe.Resolution != "")
             {
-                foreach (string refresh in Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution])
+                foreach (string refresh in Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.profile_Exe.Resolution])
                 {
                     RefreshRates.Add(refresh);
                 }
@@ -57,8 +57,8 @@ namespace Handheld_Control_Panel.UserControls
               
                 controlList.ItemsSource = RefreshRates;
 
-                controlList.SelectedItem = Global_Variables.profiles.editingProfile.Resolution;
-                selectedObject = Global_Variables.profiles.editingProfile.Resolution;
+                controlList.SelectedItem = Global_Variables.profiles.editingProfile.profile_Exe.Resolution;
+                selectedObject = Global_Variables.profiles.editingProfile.profile_Exe.Resolution;
             }
 
             controlList.Visibility = Visibility.Collapsed;

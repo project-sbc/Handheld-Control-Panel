@@ -81,12 +81,12 @@ namespace Handheld_Control_Panel.Classes
             }
 
             //continue forward if active profile doesn't have running exe
-            foreach (Profile profile in Global_Variables.Global_Variables.profiles)
+            foreach (Profile_Main profile in Global_Variables.Global_Variables.profiles)
             {
-                if (profile.Exe != "")
+                if (profile.profile_Info.ProfileExe != "")
                 {
                     //check if that exe is still running
-                    Process[] pList = Process.GetProcessesByName(profile.Exe);
+                    Process[] pList = Process.GetProcessesByName(profile.profile_Info.ProfileExe);
 
                     //if pLlist is greater than 0 than process detected running
                     if (pList.Length > 0)
@@ -103,7 +103,7 @@ namespace Handheld_Control_Panel.Classes
             if (Global_Variables.Global_Variables.profiles.activeProfile != null)
             {
                 //reapply profile is power status changed from charger to battery or vice versa. Global variables has the last power status, we will update that later in this routine
-                if (Global_Variables.Global_Variables.powerStatus != "" && Global_Variables.Global_Variables.powerStatus != Power && Global_Variables.Global_Variables.profiles.activeProfile.SeparateChargerBattery == true)
+                if (Global_Variables.Global_Variables.powerStatus != "" && Global_Variables.Global_Variables.powerStatus != Power && Global_Variables.Global_Variables.profiles.activeProfile.profile_Parameters.SeparateChargerBattery == true)
                 {
                     Global_Variables.Global_Variables.profiles.activeProfile.applyProfile(true, false);
                     Global_Variables.Global_Variables.powerStatus = Power;
@@ -112,7 +112,7 @@ namespace Handheld_Control_Panel.Classes
             }
 
             //if none of the above, we will just check to see if global powerstatus needs update and be done
-            if (Global_Variables.Global_Variables.powerStatus != Power && Global_Variables.Global_Variables.profiles.activeProfile.SeparateChargerBattery == true)
+            if (Global_Variables.Global_Variables.powerStatus != Power && Global_Variables.Global_Variables.profiles.activeProfile.profile_Parameters.SeparateChargerBattery == true)
             {
                 Global_Variables.Global_Variables.powerStatus = Power;
             }
@@ -124,12 +124,12 @@ namespace Handheld_Control_Panel.Classes
         {
 
             //continue forward if active profile doesn't have running exe
-            foreach (Profile profile in Global_Variables.Global_Variables.profiles)
+            foreach (Profile_Main profile in Global_Variables.Global_Variables.profiles)
             {
-                if (profile.Exe != "")
+                if (profile.profile_Info.ProfileExe != "")
                 {
                     //check if that exe is still running
-                    Process[] pList = Process.GetProcessesByName(profile.Exe);
+                    Process[] pList = Process.GetProcessesByName(profile.profile_Info.ProfileExe);
 
                     //if pLlist is greater than 0 than process detected running
                     if (pList.Length > 0)

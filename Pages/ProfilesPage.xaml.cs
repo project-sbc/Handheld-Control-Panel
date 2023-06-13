@@ -93,7 +93,7 @@ namespace Handheld_Control_Panel.Pages
                     switch (action)
                     {
                         case "A":
-                            Global_Variables.profiles.editingProfile = (Profile)controlList.SelectedItem;
+                            Global_Variables.profiles.editingProfile = (Profile_Main)controlList.SelectedItem;
                             MainWindow wnd = (MainWindow)Application.Current.MainWindow;
                             wnd.navigateFrame("ProfileEditPage");
                             break;
@@ -122,7 +122,7 @@ namespace Handheld_Control_Panel.Pages
                             controlList.ScrollIntoView(controlList.SelectedItem);
                             break;
                         case "Start":
-                            Global_Variables.profiles.addNewProfile(null);
+                            Global_Variables.profiles.createProfile();
                             controlList.Items.Refresh();
                             break;
                         case "Back":
@@ -138,7 +138,7 @@ namespace Handheld_Control_Panel.Pages
                 {
                     if (action == "Start")
                     {
-                        Global_Variables.profiles.addNewProfile(null);
+                        Global_Variables.profiles.createProfile();
                         controlList.Items.Refresh();
                     }
                     if (action == "Up" || action == "Down")

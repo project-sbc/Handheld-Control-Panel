@@ -53,8 +53,8 @@ namespace Handheld_Control_Panel.UserControls
             Resolutions.Insert(0, "");
 
             controlList.ItemsSource = Resolutions;
-            controlList.SelectedItem = Global_Variables.profiles.editingProfile.Resolution;
-            selectedObject = Global_Variables.profiles.editingProfile.Resolution;
+            controlList.SelectedItem = Global_Variables.profiles.editingProfile.profile_Exe.Resolution;
+            selectedObject = Global_Variables.profiles.editingProfile.profile_Exe.Resolution;
 
             controlList.Visibility = Visibility.Collapsed;
         }
@@ -119,7 +119,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (controlList.SelectedItem != null)
                 {
                     string resolution = controlList.SelectedItem.ToString();
-                    Global_Variables.profiles.editingProfile.Resolution = resolution;
+                    Global_Variables.profiles.editingProfile.profile_Exe.Resolution = resolution;
                     selectedObject = controlList.SelectedItem;
                     Global_Variables.raiseValueChanged("ProfileResolution");
                     if (controlList.Visibility == Visibility.Visible)

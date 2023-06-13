@@ -30,6 +30,12 @@ namespace Handheld_Control_Panel.Classes
                 XmlSerializer xmls = null;
                 switch(objType)
                 {
+                    case "Profile_Main":
+                        xmls = new XmlSerializer(typeof(Profile_Main));
+                        Profile_Main objMain = (Profile_Main)objClass;
+                        xmls.Serialize(sw, objMain);
+                        objMain = null;
+                        break;
                     case "Profile_Info":
                         xmls = new XmlSerializer(typeof(Profile_Info));
                         Profile_Info objInfo = (Profile_Info)objClass;
@@ -73,10 +79,13 @@ namespace Handheld_Control_Panel.Classes
 
                     switch (objType)
                     {
+                        case "Profile_Main":
+                            xmls = new XmlSerializer(typeof(Profile_Main));
+                            objObject = ((Profile_Main)xmls.Deserialize(sr));
+                            break;
                         case "Profile_Info":
                             xmls = new XmlSerializer(typeof(Profile_Info));
                             objObject = ((Profile_Info)xmls.Deserialize(sr));
-              
                             break;
                         case "Profile_Exe":
                             xmls = new XmlSerializer(typeof(Profile_Exe));
