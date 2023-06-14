@@ -43,7 +43,7 @@ namespace Handheld_Control_Panel.UserControls
         private void setControlValue()
         {
             
-            control.IsOn = Global_Variables.profiles.editingProfile.defaultProfile;
+            control.IsOn = Global_Variables.profiles.editingProfile.profile_Info.defaultProfile;
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -70,7 +70,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             if (control.IsLoaded)
             {
-                Global_Variables.profiles.editingProfile.DefaultProfile = control.IsOn;
+                Global_Variables.profiles.editingProfile.profile_Info.DefaultProfile = control.IsOn;
 
             }
           

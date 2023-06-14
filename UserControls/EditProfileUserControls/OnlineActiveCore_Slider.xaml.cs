@@ -40,10 +40,11 @@ namespace Handheld_Control_Panel.UserControls
             UserControl_Management.setupControl(control);
 
 
-            if (Global_Variables.profiles.editingProfile.Online_ActiveCores != "")
+            if (Global_Variables.profiles.editingProfile.profile_Parameters.Online_ActiveCores != "")
             {
+
                 controlToggle.IsOn = true;
-                control.Value = Convert.ToDouble(Global_Variables.profiles.editingProfile.Online_ActiveCores);
+                control.Value = Convert.ToDouble(Global_Variables.profiles.editingProfile.profile_Parameters.Online_ActiveCores);
             }
             else
             {

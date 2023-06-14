@@ -80,15 +80,15 @@ namespace Handheld_Control_Panel.UserControls
             {
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (Global_Variables.profiles.editingProfile.Resolution != "")
+                    if (Global_Variables.profiles.editingProfile.profile_Exe.Resolution != "")
                     {
                         RefreshRates.Clear();
-                        RefreshRates = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.Resolution];
+                        RefreshRates = Global_Variables.resolution_refreshrates[Global_Variables.profiles.editingProfile.profile_Exe.Resolution];
                         RefreshRates.Insert(0, "");
                         controlList.ItemsSource = RefreshRates;
-                        if (controlList.Items.Contains(Global_Variables.profiles.editingProfile.RefreshRate) && controlList.SelectedItem != Global_Variables.profiles.editingProfile.RefreshRate && controlList.IsLoaded)
+                        if (controlList.Items.Contains(Global_Variables.profiles.editingProfile.profile_Exe.RefreshRate) && controlList.SelectedItem != Global_Variables.profiles.editingProfile.profile_Exe.RefreshRate && controlList.IsLoaded)
                         {
-                            controlList.SelectedItem = Global_Variables.profiles.editingProfile.RefreshRate;
+                            controlList.SelectedItem = Global_Variables.profiles.editingProfile.profile_Exe.RefreshRate;
 
                         }
                     }
@@ -157,7 +157,7 @@ namespace Handheld_Control_Panel.UserControls
                 if (controlList.SelectedItem != null)
                 {
                     string refreshrate = controlList.SelectedItem.ToString();
-                    Global_Variables.profiles.editingProfile.RefreshRate = refreshrate;
+                    Global_Variables.profiles.editingProfile.profile_Exe.RefreshRate = refreshrate;
                     selectedObject = controlList.SelectedItem;
                  
                     if (controlList.Visibility == Visibility.Visible)

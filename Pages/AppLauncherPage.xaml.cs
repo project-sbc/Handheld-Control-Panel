@@ -29,6 +29,7 @@ using MahApps.Metro.IconPacks;
 using System.Windows.Threading;
 using Handheld_Control_Panel.Classes.Task_Scheduler;
 using ControlzEx.Standard;
+using YamlDotNet.Core.Tokens;
 
 
 namespace Handheld_Control_Panel.Pages
@@ -47,6 +48,12 @@ namespace Handheld_Control_Panel.Pages
         public string DisplayFilterMethod { get; set; }
         public string FilterMethod { get; set; }
     }
+    public class Profile_Image
+    {
+        public Profile_Main profile_Main { get; set; }
+        public ImageSource imageApp { get; set; } = null;
+
+    }
     public partial class AppLauncherPage : Page
     {
 
@@ -54,8 +61,8 @@ namespace Handheld_Control_Panel.Pages
         private static DispatcherTimer spinStopTimer = new DispatcherTimer();
 
         private string windowpage;
-        private List<Profile> items = new List<Profile>();
-        private List<Profile> tempList = new List<Profile>();
+        private List<Profile_Image> items = new List<Profile_Image>();
+        private List<Profile_Image> tempList = new List<Profile_Image>();
         private string currentSortMethod = Global_Variables.settings.appSortMethod;
         private string currentFilterMethod = "Filter_Method_None";
 
@@ -204,8 +211,33 @@ namespace Handheld_Control_Panel.Pages
             {
                 items.Clear();
             }
+            List<Profile_Main> tempLoadValues = new List<Profile_Main>();
+            tempLoadValues = Global_Variables.profiles.Where(o => o.profile_Exe.Exe_Type != "").ToList();
+            
 
-            items =  Global_Variables.profiles.Where(o => o.AppType != "").ToList();
+            foreach (Profile_Main pm in tempLoadValues)
+            {
+                Profile_Image pi = new Profile_Image();
+                pi.profile_Main = pm;
+
+                if (File.Exists(pm.profile_Exe.Exe_Image_Path))
+                {
+                    if (pm.profile_Exe.Exe_Image_Path.Contains(".exe"))
+                    {
+                        using (Icon ico = Icon.ExtractAssociatedIcon(pm.profile_Exe.Exe_Image_Path))
+                        {
+                            pi.imageApp = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                        }
+                    }
+                    else
+                    {
+                        pi.imageApp = new BitmapImage(new Uri(pm.profile_Exe.Exe_Image_Path));
+                    }
+                 
+
+                }
+
+            }
         
        
 
@@ -222,13 +254,13 @@ namespace Handheld_Control_Panel.Pages
                     tempList = items;
                     break;
                 case "Filter_Method_Favorite":
-                    tempList = items.Where(o => o.Favorite == true).ToList<Profile>();
+                    tempList = items.Where(o => o.profile_Main.profile_Exe.Favorite == true).ToList<Profile_Image>();
                     break;
                 case "Filter_Method_Applications":
-                    tempList = items.Where(o => o.AppType == "Exe").ToList<Profile>();
+                    tempList = items.Where(o => o.profile_Main.profile_Exe.Exe_Type == "Exe").ToList<Profile_Image>();
                     break;
                 default:
-                    tempList = items.Where(o => o.AppType == Application.Current.Resources[currentFilterMethod].ToString()).ToList<Profile>();
+                    tempList = items.Where(o => o.profile_Main.profile_Exe.Exe_Type == Application.Current.Resources[currentFilterMethod].ToString()).ToList<Profile_Image>();
                     break;
 
             }
@@ -236,21 +268,21 @@ namespace Handheld_Control_Panel.Pages
             switch (currentSortMethod)
             {
                 case "Sort_Method_AppType":
-                    tempList = tempList.OrderBy(o => o.AppType).ThenBy(p => p.ProfileName).ToList();
+                    tempList = tempList.OrderBy(o => o.profile_Main.profile_Exe.Exe_Type).ThenBy(p => p.profile_Main.ProfileName).ToList();
                     break;
                 case "Sort_Method_RecentlyLaunched":
-                    tempList = tempList.OrderByDescending(o => o.LastLaunched).ThenBy(p => p.ProfileName).ToList();
+                    tempList = tempList.OrderByDescending(o => o.profile_Main.profile_Exe.LastLaunched).ThenBy(p => p.profile_Main.ProfileName).ToList();
                     break;
                 case "Sort_Method_FrequentlyLaunched":
-                    tempList = tempList.OrderByDescending(o => o.NumberLaunches).ThenBy(p => p.ProfileName).ToList();
+                    tempList = tempList.OrderByDescending(o => o.profile_Main.profile_Exe.NumberLaunches).ThenBy(p => p.profile_Main.ProfileName).ToList();
 
                     break;
 
                 case "Sort_Method_Favorite":
-                    tempList = tempList.OrderByDescending(o => o.Favorite).ThenBy(p => p.ProfileName).ToList();
+                    tempList = tempList.OrderByDescending(o => o.profile_Main.profile_Exe.Favorite).ThenBy(p => p.profile_Main.ProfileName).ToList();
                     break;
                 case "Sort_Method_ProfileName":
-                    tempList = tempList.OrderBy(o => o.ProfileName).ToList();
+                    tempList = tempList.OrderBy(o => o.profile_Main.ProfileName).ToList();
                     break;
                 default:
 
@@ -408,7 +440,7 @@ where childItem : DependencyObject
                             }
                             break;
                         case "Y":
-                            Global_Variables.profiles.changeProfileFavorite(lbai.ProfileName);
+                            Global_Variables.profiles.changeProfileFavorite(lbai);
                             if (currentFilterMethod.Contains("Favorite") || currentSortMethod.Contains("Favorite"))
                             {
                                 applySortAndFilter();
@@ -555,13 +587,13 @@ where childItem : DependencyObject
                     controlList.ItemsSource = items;
                     break;
                 case "Filter_Method_Favorite":
-                    controlList.ItemsSource = items.Where(o => o.Favorite == true);
+                    controlList.ItemsSource = items.Where(o => o.profile_Main.profile_Exe.Favorite == true);
                     break;
                 case "Filter_Method_Applications":
-                    controlList.ItemsSource = items.Where(o => o.AppType == "Exe");
+                    controlList.ItemsSource = items.Where(o => o.profile_Main.profile_Exe.Exe_Type == "Exe");
                     break;
                 default:
-                    controlList.ItemsSource = items.Where(o => o.AppType == Application.Current.Resources[currentFilterMethod].ToString());
+                    controlList.ItemsSource = items.Where(o => o.profile_Main.profile_Exe.Exe_Type == Application.Current.Resources[currentFilterMethod].ToString());
                     break;
 
             }

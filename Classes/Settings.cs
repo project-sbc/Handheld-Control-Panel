@@ -54,7 +54,7 @@ namespace Handheld_Control_Panel.Classes
         public string instanceID="";
         public string qamUserControls = "Usercontrol_Bluetooth1;Usercontrol_Wifi1;Usercontrol_MouseMode1;Usercontrol_Controller0;Divider1;Usercontrol_Volume1;Usercontrol_VolumeMute1;Usercontrol_Brightness1;Divider1;Usercontrol_Resolution1;Usercontrol_RefreshRate1;Usercontrol_Scaling1;Usercontrol_FPSLimit1;Divider1;Usercontrol_TDP1;Usercontrol_TDP21;Usercontrol_EPP1;Usercontrol_ActiveCores1;Usercontrol_MaxCPUFrequency1;Usercontrol_GPUCLK1;Divider1;UserControl_FanControl1;";
         public bool enableNotifications = true;
-        public string appSortMethod = "Sort_method_ProfileName";
+        public string appSortMethod = "Sort_Method_ProfileName";
         public double joystickDeadzone = 1200;
         public string fanCurveTemperature = "";
         public string fanCurvePackagePower = "";

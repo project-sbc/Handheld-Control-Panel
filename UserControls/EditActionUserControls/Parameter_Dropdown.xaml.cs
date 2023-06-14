@@ -201,10 +201,10 @@ namespace Handheld_Control_Panel.UserControls
                     break;
                 case "Open_Program":
 
-                    foreach (Profile profile in Global_Variables.profiles.Where(o => o.AppType != "").ToList<Profile>())
+                    foreach (Profile_Main profile in Global_Variables.profiles.Where(o => o.profile_Exe.Exe_Type != "").ToList<Profile_Main>())
                     {
                         Parameter parameter = new Parameter();
-                        Debug.WriteLine(profile.appType);
+                        Debug.WriteLine(profile.profile_Exe.Exe_Type);
                         parameter.DisplayParameter = profile.ProfileName;
                         parameter.ParameterValue = profile.ProfileName;
                         hotkeyParameter.Add(parameter);

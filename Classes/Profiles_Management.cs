@@ -383,13 +383,13 @@ namespace Handheld_Control_Panel.Classes
                             string imageDirectory = Global_Variables.Global_Variables.settings.directorySteam + "\\appcache\\librarycache\\" + GameID + "_header";
                             if (File.Exists(imageDirectory + ".jpg"))
                             {
-                                //imageApp = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
+                                ImageLocation = imageDirectory + ".jpg";
                             }
                             else
                             {
                                 if (File.Exists(imageDirectory + ".png"))
                                 {
-                                    //imageApp = new BitmapImage(new Uri(imageDirectory + ".png", UriKind.RelativeOrAbsolute));
+                                    ImageLocation = imageDirectory + ".png";
                                 }
 
                             }

@@ -1,6 +1,7 @@
 ﻿using Shell32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace Handheld_Control_Panel.Classes
 
             foreach (string folder in folders)
             {
-                loadProfile(Path.GetDirectoryName(folder), true);
+                loadProfile(Path.GetFileName(folder), true);
             }
         }
 
@@ -43,7 +44,7 @@ namespace Handheld_Control_Panel.Classes
             string folder = AppDomain.CurrentDomain.BaseDirectory + profileName;
 
             Profile_Main profile;
-            if (!firstStart)
+            if (firstStart)
             {
                 if (File.Exists(folder + "Profile_Main.xml"))
                 {
@@ -102,12 +103,12 @@ namespace Handheld_Control_Panel.Classes
             if (firstStart) { this.Add(profile); }
 
         }
-        public void createProfile(GameLauncherItem gli = null)
+        public void createProfile(GameLauncherItem gli = null, Profile_Main profileCopy=null) 
         {
             //check if game launcher item GLI has a profile with the game name already first, because if it does then we can return immediately
             if (gli != null)
             {
-                if (Global_Variables.Global_Variables.profiles.First(o=>o.ProfileName == gli.gameName) != null) { return; }
+                if (Global_Variables.Global_Variables.profiles.Exists(o=>o.ProfileName == gli.gameName)) { return; }
             }
 
             Profile_Main profile = new Profile_Main();
@@ -118,16 +119,37 @@ namespace Handheld_Control_Panel.Classes
             if (gli == null)
             {
                 int x = 1;
-                string newProfileName = "New Profile " + x.ToString();
-                while (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
+
+                string newProfileName;
+                if (profileCopy != null)
                 {
-                    x++;
-                    newProfileName = "New Profile " + x.ToString();
+                    newProfileName = profileCopy.ProfileName + " " + x.ToString();
+                    while (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
+                    {
+                        x++;
+                        newProfileName = profileCopy.ProfileName + " " + x.ToString();
+                    }
+                    profile.profile_Parameters = profileCopy.profile_Parameters;
+                    profile.profile_ControllerMapping = profileCopy.profile_ControllerMapping;
+                
                 }
+                else
+                {
+                    newProfileName = "New Profile " + x.ToString();
+                    while (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
+                    {
+                        x++;
+                        newProfileName = "New Profile " + x.ToString();
+                    }
+                }
+                profile.ProfileName = newProfileName;
             }
             else 
-            { 
-                profile.ProfileName = gli.gameName;
+            {
+                string name = gli.gameName;
+                //use this to get rid of directory invalid characters
+                name = string.Join("_", name.Split(Path.GetInvalidFileNameChars()));
+                profile.ProfileName = name;
                 profile.profile_Info.ProfileExe = gli.exe;
                 profile.profile_Exe.Exe_ID = gli.gameID;
                 profile.profile_Exe.Exe_Type = gli.appType;
@@ -172,7 +194,29 @@ namespace Handheld_Control_Panel.Classes
             Notification_Management.ShowInWindow(Application.Current.Resources["Notification_GameSyncDone"].ToString(), Notification.Wpf.NotificationType.Information);
 
         }
-        public void openGame(string name)
+        public void deleteProfile(Profile_Main profile)
+        {
+            if (profile !=null)
+            {
+                if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profile.ProfileName))
+                {
+                    Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profile.ProfileName,true);
+                }
+                if(Global_Variables.Global_Variables.profiles.Exists(o => o == profile))
+                {
+                    Global_Variables.Global_Variables.profiles.Remove(profile);
+                }
+            }
+        }
+        public void changeProfileFavorite(Profile_Main profile)
+        {
+            if (profile!=null)
+            {
+                profile.profile_Exe.Favorite = !profile.profile_Exe.Favorite;
+                Profiles_XML_SaveLoad.Save_XML(profile.ProfileName, "Profile_Main", profile);
+            }
+        }
+        public void openProgram(string name)
         {
             Profile_Main profile = Global_Variables.Global_Variables.profiles.First(p => p.ProfileName == name);
 
@@ -201,10 +245,10 @@ namespace Handheld_Control_Panel.Classes
     {
         //profile name is also the folder name
         public string ProfileName { get; set; }
-        public Profile_Info profile_Info { get; set; }
-        public Profile_Exe profile_Exe { get; set; }
-        public Profile_Parameters profile_Parameters { get; set; }
-        public Profile_ControllerMapping profile_ControllerMapping { get; set; }
+        public Profile_Info profile_Info { get; set; } = new Profile_Info();
+        public Profile_Exe profile_Exe { get; set; } = new Profile_Exe();
+        public Profile_Parameters profile_Parameters { get; set; } = new Profile_Parameters();
+        public Profile_ControllerMapping profile_ControllerMapping { get; set; }= new Profile_ControllerMapping();
 
         public void applyProfile(bool autoApplied, bool changeDisplay)
         {
@@ -306,9 +350,44 @@ namespace Handheld_Control_Panel.Classes
         public string Exe_Type { get; set; }
         public string Exe_ID { get; set; }
         public string Exe_LaunchCommand { get; set; }
-        public string Exe_Image_Path { get; set; }
+        public string exe_Image_Path { get; set; }
+        public string Exe_Image_Path
+        {
+            get
+            {
+                return exe_Image_Path;
+            }
+            set
+            {
+                if (value != "")
+                {
+                    if (File.Exists(value.Replace("%20", " ")))
+                    {
+                        value = value.Replace("%20", " ");
+
+                    }
+
+                }
+                else
+                {
+                    if (Exe_Path != "" && Exe_Type != "Steam")
+                    {
+
+                        if (File.Exists(Exe_Path))
+                        {
+                            value = Exe_Path;
+                        }
+                    }
+
+                }
+                exe_Image_Path = value;
+
+            }
+
+        }
         public int LastLaunched { get; set; } = 0;
         public int NumberLaunches { get; set; } = 0;
+        public Visibility favoriteIconVisibility { get; set; } = Visibility.Collapsed;
         public bool Favorite
         {
             get
@@ -321,7 +400,7 @@ namespace Handheld_Control_Panel.Classes
                 if (value == true) { favoriteIconVisibility = Visibility.Visible; } else { favoriteIconVisibility = Visibility.Collapsed; }
             }
         }
-        public Visibility favoriteIconVisibility { get; set; } = Visibility.Collapsed;
+
         public string Resolution { get; set; } = "";
         public string RefreshRate { get; set; } = "";
 

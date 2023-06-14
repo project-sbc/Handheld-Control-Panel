@@ -56,7 +56,7 @@ namespace Handheld_Control_Panel.UserControls
             windowpage = WindowPageUserControl_Management.getWindowPageFromWindowToString(this);
             usercontrol = this.ToString().Replace("Handheld_Control_Panel.Pages.UserControls.","");
 
-            control.Text = Global_Variables.profiles.editingProfile.Exe;
+            control.Text = Global_Variables.profiles.editingProfile.profile_Info.ProfileExe;
            
 
         }
@@ -82,7 +82,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void control_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Global_Variables.profiles.editingProfile.Exe = control.Text;
+            Global_Variables.profiles.editingProfile.profile_Info.ProfileExe = control.Text;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -98,8 +98,8 @@ namespace Handheld_Control_Panel.UserControls
             if (result == true)
             {
                 control.Text = dialog.FileName;
-                Global_Variables.profiles.editingProfile.Path = control.Text;
-                Global_Variables.profiles.editingProfile.AppType = "Exe";
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path = control.Text;
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type = "Exe";
 
             }
         }

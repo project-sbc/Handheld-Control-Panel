@@ -46,7 +46,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void setControlValue()
         {
-            switch (Global_Variables.profiles.editingProfile.AppType)
+            switch (Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type)
             {
                 case "Steam":
                     control.Visibility = Visibility.Collapsed;
@@ -57,15 +57,15 @@ namespace Handheld_Control_Panel.UserControls
                 case "EpicGames":
                     control.Visibility = Visibility.Collapsed;
                     controlTextbox.IsReadOnly = true;
-                    controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;
+                    controlTextbox.Text = Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path;
                     updateIconImage();
                     break;
 
                 default:
-                    if (Global_Variables.profiles.editingProfile.Path != "")
+                    if (Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path != "")
                     {
                         updateIconImage();
-                        controlTextbox.Text = Global_Variables.profiles.editingProfile.Path;
+                        controlTextbox.Text = Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path;
                         control.IsOn = true;
 
                     }
@@ -86,7 +86,7 @@ namespace Handheld_Control_Panel.UserControls
         {
             controlImage.Width = 34;
             controlImage.Height = 34;
-            string file = Global_Variables.profiles.editingProfile.Path;
+            string file = Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path;
             if (File.Exists(file))
             {
                 using (Icon ico = Icon.ExtractAssociatedIcon(file))
@@ -99,7 +99,7 @@ namespace Handheld_Control_Panel.UserControls
 
         private void updateSteamImage()
         {
-            string imageDirectory = Global_Variables.settings.directorySteam + "\\appcache\\librarycache\\" + Global_Variables.profiles.editingProfile.GameID + "_header";
+            string imageDirectory = Global_Variables.settings.directorySteam + "\\appcache\\librarycache\\" + Global_Variables.profiles.editingProfile.profile_Exe.Exe_ID + "_header";
             if (File.Exists(imageDirectory + ".jpg"))
             {
                 controlImage.Source = new BitmapImage(new Uri(imageDirectory + ".jpg", UriKind.RelativeOrAbsolute));
@@ -190,19 +190,19 @@ namespace Handheld_Control_Panel.UserControls
             if (result == true)
             {
                 controlTextbox.Text = dialog.FileName;
-                Global_Variables.profiles.editingProfile.Path = controlTextbox.Text;
-                Global_Variables.profiles.editingProfile.AppType = "Exe";
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path = controlTextbox.Text;
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type = "Exe";
 
             }
         }
 
         private void control_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Global_Variables.profiles.editingProfile.AppType == "")
+            if (Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type == "")
             {
-                Global_Variables.profiles.editingProfile.AppType = "Exe";
+                Global_Variables.profiles.editingProfile.profile_Exe.Exe_Type = "Exe";
             }
-            Global_Variables.profiles.editingProfile.Path = controlTextbox.Text;
+            Global_Variables.profiles.editingProfile.profile_Exe.Exe_Path = controlTextbox.Text;
         }
     }
 }

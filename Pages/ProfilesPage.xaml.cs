@@ -88,7 +88,7 @@ namespace Handheld_Control_Panel.Pages
                 //global method handles the event tracking and returns what the index of the highlighted and selected usercontrolshould be
                 if (controlList.SelectedItem != null)
                 {
-                    Profile profile = controlList.SelectedItem as Profile;
+                    Profile_Main profile = controlList.SelectedItem as Profile_Main;
                     int index = controlList.SelectedIndex;
                     switch (action)
                     {
@@ -100,6 +100,8 @@ namespace Handheld_Control_Panel.Pages
 
                         case "Delete_Profile":
                             Global_Variables.profiles.deleteProfile(profile);
+
+
                             controlList.Items.Refresh();
                             if (controlList.Items.Count > 0) { if (index > 0) { controlList.SelectedIndex = index - 1; } else { controlList.SelectedIndex = 0; } };
 
@@ -126,7 +128,7 @@ namespace Handheld_Control_Panel.Pages
                             controlList.Items.Refresh();
                             break;
                         case "Back":
-                            Global_Variables.profiles.addNewProfile(profile);
+                            Global_Variables.profiles.createProfile(null, profile);
                             controlList.Items.Refresh();
                             break;
                         default: break;

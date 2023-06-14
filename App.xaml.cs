@@ -29,7 +29,7 @@ namespace Handheld_Control_Panel
             base.OnStartup(e);
 
             //LOAD SETTINGS FIRST!!!!
-            Global_Variables.settings = Load_Settings.loadSettings(AppDomain.CurrentDomain.BaseDirectory + "Settings.xml");
+            Global_Variables.settings = Load_Settings.loadSettings(AppDomain.CurrentDomain.BaseDirectory + "\\Settings\\Settings.xml");
             
 
             bool quietStart = false;

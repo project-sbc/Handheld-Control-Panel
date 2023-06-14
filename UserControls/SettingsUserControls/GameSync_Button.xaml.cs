@@ -59,7 +59,7 @@ namespace Handheld_Control_Panel.UserControls
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Global_Variables.profiles.syncGamesToProfile());
+            Classes.Task_Scheduler.Task_Scheduler.runTask(() => Global_Variables.profiles.createProfilesForGames());
 
             
 
