@@ -806,7 +806,11 @@ namespace Handheld_Control_Panel
 
         }
 
-
+        private void Keyboard_Loaded(object sender, RoutedEventArgs e)
+        {
+            //add this line to force ROG ally to normal state, ASUS armory crate forces all apps on built in screen to maximize
+            if (this.WindowState == WindowState.Maximized) { this.WindowState = WindowState.Normal; }
+        }
     }
 
     public class buttonEvents

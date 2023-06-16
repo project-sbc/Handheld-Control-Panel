@@ -575,6 +575,9 @@ namespace Handheld_Control_Panel
         {
             if (this.IsLoaded || forceRun)
             {
+                //add this line to force ROG ally to normal state, ASUS armory crate forces all apps on built in screen to maximize
+                if (this.WindowState == WindowState.Maximized) { this.WindowState = WindowState.Normal; }
+
                 getDPIScaling();
                 //this relies on getting dpi to scale correctly to the display. This NEEDS to be done after loaded or during loading right after getting DPI. Otherwise
                 //scaling might not be correct. Added if check for loaded or forceRun
