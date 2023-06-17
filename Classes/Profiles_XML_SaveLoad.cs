@@ -68,7 +68,7 @@ namespace Handheld_Control_Panel.Classes
         }
         public static object Load_XML(string folderPath, string objType)
         {
-            string filePath = hcpDirectory + folderPath + "\\" + objType + ".xml";
+            string filePath = folderPath + "\\" + objType + ".xml";
             object objObject = null;
             if (File.Exists(filePath))
             {

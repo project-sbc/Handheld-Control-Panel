@@ -1,6 +1,7 @@
 ﻿using Shell32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -41,15 +42,15 @@ namespace Handheld_Control_Panel.Classes
         {
             //this is an all encompassing load routine, for both first start, during run (like when you dont save changes to a profile you reload the xml to make it back to the way it was)
             //or imports from outside
-            string folder = AppDomain.CurrentDomain.BaseDirectory + profileName;
+            string folder = AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + profileName;
 
             Profile_Main profile;
             if (firstStart)
             {
-                if (File.Exists(folder + "Profile_Main.xml"))
+                if (File.Exists(folder + "\\Profile_Main.xml"))
                 {
-                    profile = (Profile_Main)Profiles_XML_SaveLoad.Load_XML(folder + "Profile_Main.xml", "Profile_Main");
-
+                    profile = (Profile_Main)Profiles_XML_SaveLoad.Load_XML(folder, "Profile_Main");
+                    Debug.WriteLine(profile.profile_Info.VisibilityDefaultProfile);
                 }
                 else
                 {
@@ -124,7 +125,7 @@ namespace Handheld_Control_Panel.Classes
                 if (profileCopy != null)
                 {
                     newProfileName = profileCopy.ProfileName + " " + x.ToString();
-                    while (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
+                    while (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
                     {
                         x++;
                         newProfileName = profileCopy.ProfileName + " " + x.ToString();
@@ -136,7 +137,7 @@ namespace Handheld_Control_Panel.Classes
                 else
                 {
                     newProfileName = "New Profile " + x.ToString();
-                    while (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
+                    while (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + newProfileName))
                     {
                         x++;
                         newProfileName = "New Profile " + x.ToString();

@@ -45,7 +45,6 @@ namespace Handheld_Control_Panel.Classes
             string cpu = Registry.GetValue("HKEY_LOCAL_MACHINE\\hardware\\description\\system\\centralprocessor\\0", "ProcessorNameString", null).ToString();
             HandheldDevice handheldDevice = new GenericDevice();
 
-            
             switch(manufacturer)
             {
                 case "ayn":

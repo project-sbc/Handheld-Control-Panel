@@ -43,12 +43,12 @@
                             <DockPanel DockPanel.Dock="Left" >
                               
                                 <TextBlock  DockPanel.Dock="Top" Text="{Binding ProfileName}"  FontSize="16" MaxWidth="300" />
-                                <TextBlock  Text="{Binding Exe}" FontSize="14" FontStyle="Italic"/>
+                                <TextBlock  Text="{Binding profile_Info.ProfileExe}" FontSize="14" FontStyle="Italic"/>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-                                <TextBlock  VerticalAlignment="Center" DockPanel.Dock="Top"  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding VisibilityDefaultProfile}" FontSize="16" />
+                                <TextBlock  VerticalAlignment="Center" DockPanel.Dock="Top"  HorizontalAlignment="Right" Text="{DynamicResource Default_Profile}" Visibility="{Binding profile_Info.VisibilityDefaultProfile}" FontSize="16" />
 
-                                <TextBlock VerticalAlignment="Center" Margin="0,-6,0,0" HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding VisibilityActiveProfile}" FontSize="16" />
+                                <TextBlock VerticalAlignment="Center" Margin="0,-6,0,0" HorizontalAlignment="Right" Text="{DynamicResource Active_Profile}" Visibility="{Binding profile_Info.VisibilityActiveProfile}" FontSize="16" />
                             </DockPanel>
                 
 
