@@ -156,11 +156,13 @@
                                     <Image  Height="65"    Source="{Binding imageApp}" Panel.ZIndex="2" />
                                     <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
                                         <Image   Height="35" Margin="0,0,8,0" DockPanel.Dock="Left" HorizontalAlignment="Left"  Source="{Binding imageIcon}" />
-                                        <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding ProfileName}"/>
+                                        <TextBlock Margin="3,3,3,3" DockPanel.Dock="Bottom"  HorizontalAlignment="Center" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" TextWrapping="Wrap"  VerticalAlignment="Center"  FontSize="12" Text="{Binding profile_Main.ProfileName}"/>
 
+                                        
+                                        
                                     </DockPanel>
                                     <Border Margin="0,0,-7,2" HorizontalAlignment="Right"   VerticalAlignment="Bottom" CornerRadius="4" Background="White" Panel.ZIndex="3">
-                                        <TextBlock   Text="&#xE735;" Margin="2,2,2,2"  FontFamily="Segoe MDL2 Assets"  Foreground="{DynamicResource MahApps.Brushes.AccentBase}"  Visibility="{Binding favoriteIconVisibility}" FontSize="22"  />
+                                        <TextBlock   Text="&#xE735;" Margin="2,2,2,2"  FontFamily="Segoe MDL2 Assets"  Foreground="{DynamicResource MahApps.Brushes.AccentBase}"  Visibility="{Binding profile_Main.profile_Exe.favoriteIconVisibility}" FontSize="22"  />
                                    
                                     </Border>
                                      

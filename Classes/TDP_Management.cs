@@ -71,8 +71,8 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
             //Return Success as default value, otherwise alert calling routine to error
             try
             {
-                //apply TDP if auto tdp is false (not on), otherwise dont touch tdp
-                if (!Global_Variables.Global_Variables.autoTDP)
+                //apply TDP if auto tdp is false (not on), otherwise dont touch tdp. prevent 0,0 sends on the change tdp add criteria for tdp must be larger than 0
+                if (!Global_Variables.Global_Variables.autoTDP && pl1TDP > 0 && pl2TDP > 0)
                 {
                     //check to make sure input TDP is not above maximum set and minimum 5
                     if (pl1TDP < Global_Variables.Global_Variables.settings.minTDP) { pl1TDP = Global_Variables.Global_Variables.settings.minTDP; }

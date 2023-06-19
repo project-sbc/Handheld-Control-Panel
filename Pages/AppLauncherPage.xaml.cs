@@ -52,6 +52,7 @@ namespace Handheld_Control_Panel.Pages
     {
         public Profile_Main profile_Main { get; set; }
         public ImageSource imageApp { get; set; } = null;
+        public ImageSource imageIcon { get; set; } = null;
 
     }
     public partial class AppLauncherPage : Page
@@ -226,16 +227,24 @@ namespace Handheld_Control_Panel.Pages
                     {
                         using (Icon ico = Icon.ExtractAssociatedIcon(pm.profile_Exe.Exe_Image_Path))
                         {
-                            pi.imageApp = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                            pi.imageIcon = Imaging.CreateBitmapSourceFromHIcon(ico.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                         }
                     }
                     else
                     {
-                        pi.imageApp = new BitmapImage(new Uri(pm.profile_Exe.Exe_Image_Path));
+                        if (pm.profile_Exe.Exe_Image_Path.Contains("StoreLogo.png"))
+                        {
+                            pi.imageIcon = new BitmapImage(new Uri(pm.profile_Exe.Exe_Image_Path));
+                        }
+                        else
+                        {
+                            pi.imageApp = new BitmapImage(new Uri(pm.profile_Exe.Exe_Image_Path));
+                        }
                     }
                  
 
                 }
+                items.Add(pi);
 
             }
         

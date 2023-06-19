@@ -21,6 +21,7 @@ using Windows.System;
 using System.Windows.Documents;
 using static Vanara.Interop.KnownShellItemPropertyKeys;
 using System.Reflection;
+using System.Windows.Media.Imaging;
 
 namespace Handheld_Control_Panel.Classes
 {
@@ -252,6 +253,20 @@ namespace Handheld_Control_Panel.Classes
                                 {
                                     launcherItem.path = game.Executables.Last();
                                     launcherItem.exe = Path.GetFileNameWithoutExtension(game.Executables.Last());
+                                }
+
+                                string imageDirectory = Global_Variables.Global_Variables.settings.directorySteam + "\\appcache\\librarycache\\" + launcherItem.gameID + "_header";
+                                if (File.Exists(imageDirectory + ".jpg"))
+                                {
+                                    launcherItem.imageLocation = imageDirectory + ".jpg";
+                                }
+                                else
+                                {
+                                    if (File.Exists(imageDirectory + ".png"))
+                                    {
+                                        launcherItem.imageLocation = imageDirectory +  ".png";
+                                    }
+
                                 }
 
 

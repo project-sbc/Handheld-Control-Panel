@@ -25,6 +25,7 @@ using Windows.Media.SpeechRecognition;
 using Nefarius.Drivers.HidHide;
 using System.IO;
 using Nefarius.ViGEm.Client;
+using ControlzEx.Standard;
 
 namespace Handheld_Control_Panel.Classes.Controller_Management
 {
@@ -683,10 +684,16 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                                         if (continuousInputCurrent != "")
                                         {
                                             continuousInputCounter++;
-                                            if (continuousInputCounter > 9)
+                                            if (continuousInputCounter > 39)
                                             {
+                                                //use modulus operator to slow down continous input to every 5th cycle
 
-                                                buttonEvents.raiseControllerInput(continuousInputCurrent);
+
+                                                if (continuousInputCounter % 5 == 0)
+                                                {
+                                                    buttonEvents.raiseControllerInput(continuousInputCurrent);
+                                                }
+                                               
                                             }
                                         }
 
