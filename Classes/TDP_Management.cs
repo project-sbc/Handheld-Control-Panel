@@ -480,7 +480,7 @@ namespace Handheld_Control_Panel.Classes.TDP_Management
             string result = "";
             string commandArguments = "";
     
-            if (Global_Variables.Global_Variables.processorName.Contains("APU 0405"))
+            if (Global_Variables.Global_Variables.processorName.Contains("APU 0405") || Global_Variables.Global_Variables.processorName.Contains("7840U") || Global_Variables.Global_Variables.processorName.Contains("Z1 Extreme"))
             {
                 Global_Variables.Global_Variables.readPL1 = Global_Variables.Global_Variables.SetPL1;
                 Global_Variables.Global_Variables.readPL2 = Global_Variables.Global_Variables.SetPL2;

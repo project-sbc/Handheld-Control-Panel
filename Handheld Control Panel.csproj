@@ -259,6 +259,9 @@
     <Compile Update="UserControls\EditActionUserControls\Hotkey_Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\EditActionUserControls\Action_Textbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\EditActionUserControls\Type_Dropdown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

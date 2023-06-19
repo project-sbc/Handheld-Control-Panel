@@ -24,6 +24,7 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.UserControls;
 using System.Windows.Threading;
 using Handheld_Control_Panel.Classes.UserControl_Management;
+using System.IO;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -37,6 +38,8 @@ namespace Handheld_Control_Panel.Pages
 
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
+
+        private string originalID = Global_Variables.hotKeys.editingHotkey.ID;
         public ActionEditPage()
         {
             InitializeComponent();
@@ -83,6 +86,7 @@ namespace Handheld_Control_Panel.Pages
                         }
                         else
                         {
+                            Global_Variables.hotKeys.editingHotkey.ID = originalID;
                             XML_Management.Load_Action(Global_Variables.hotKeys.editingHotkey.ID);
                             wnd = (MainWindow)Application.Current.MainWindow;
                             wnd.navigateFrame("ActionPage");
@@ -92,6 +96,10 @@ namespace Handheld_Control_Panel.Pages
                         break;
                     case "Start":
                         XML_Management.Save_Action(Global_Variables.hotKeys.editingHotkey);
+                        if (originalID != Global_Variables.hotKeys.editingHotkey.ID && File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Actions\\" + originalID + ".xml"))
+                        {
+                            File.Delete(AppDomain.CurrentDomain.BaseDirectory +"Actions\\" + originalID + ".xml");
+                        }
                         if (Global_Variables.hotKeys.editingHotkey.Type == "Controller")
                         {
                             Global_Variables.hotKeys.generateGlobalControllerHotKeyList();
