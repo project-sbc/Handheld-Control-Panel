@@ -15,7 +15,7 @@
                     <Label x:Name="label" Content="{DynamicResource Usercontrol_ProfileName}"   Style="{StaticResource userControlHotkeyLabel}" />
                     <Label  x:Name="actionLabel" Margin="0,0,0,0" ContentStringFormat="{}- {0}"  Style="{StaticResource userControlHotkeyLabel}" />
                 </StackPanel>
-                <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="240" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" TextChanged="control_TextChanged" />
+                <TextBox x:Name="control" Background="Transparent" VerticalContentAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" Height="32" FontSize="12" Width="240" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" TextChanged="control_TextChanged" PreviewTextInput="control_PreviewTextInput" />
 
             </DockPanel>
             

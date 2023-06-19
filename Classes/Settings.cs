@@ -40,6 +40,7 @@ namespace Handheld_Control_Panel.Classes
         public int minTDP { get; set; } = 5;
         public int maxTDP { get; set; } = 35;
         public bool checkUpdatesAtStartUp { get; set; } = true;
+        public bool useHIDHideAndVIGEM { get; set; } = false;
         public bool dockWindowRight { get; set; } = true;
         public int maxGPUCLK { get; set; } = 1500;
         public bool combineTDP = true;

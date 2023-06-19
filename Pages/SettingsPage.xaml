@@ -49,6 +49,8 @@
                 <uc:Divider/>
                 <uc:GameSync_Button/>
                 <uc:Divider/>
+                <uc:HIDHide_VIGEM_Toggle/>
+                <uc:Divider/>
                 <uc:Deadzone_Slider/>
             </StackPanel>
     </ScrollViewer>

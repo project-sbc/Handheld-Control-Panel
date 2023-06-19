@@ -20,7 +20,7 @@ namespace Handheld_Control_Panel.Classes
             //this checks if ViGEm is installed and will activate it if its set to enable
             try
             {
-                if (!Global_Variables.Global_Variables.settings.enableViGEmController)
+                if (Global_Variables.Global_Variables.settings.useHIDHideAndVIGEM)
                 {
                     vigemClient = new ViGEmClient();
                     x360 = vigemClient.CreateXbox360Controller();

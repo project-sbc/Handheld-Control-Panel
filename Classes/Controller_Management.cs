@@ -118,6 +118,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
                     //turn on hiding
                     hideHidService.IsActive = true;
 
+                    //powercycle controller to make sure all processes tied to it are freed and the controller can truely be hidden
+                    powerCycleController();
+
                     //start the controller
                     ViGEm_Management.startViGEm();
 
@@ -502,7 +505,9 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
             //start timer to read and compare controller inputs
             //Controller input handler
             //error number CM05
-            while(Global_Variables.Global_Variables.mainWindow != null)
+     
+
+            while (Global_Variables.Global_Variables.mainWindow != null)
             {
                 try
                 {
@@ -560,7 +565,7 @@ namespace Handheld_Control_Panel.Classes.Controller_Management
 
                                 if (!Global_Variables.Global_Variables.mousemodes.status_MouseMode())
                                 {
-                                    if (ViGEm_Management.x360 != null)
+                                    if (ViGEm_Management.x360 != null && Global_Variables.Global_Variables.mainWindow.Visibility!=Visibility.Visible)
                                     {
                                         ViGEm_Management.x360.SetButtonsFull(btnShort);
                                         ViGEm_Management.x360.LeftThumbX = currentGamePad.LeftThumbX;

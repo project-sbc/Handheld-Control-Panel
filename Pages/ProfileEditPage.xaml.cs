@@ -1,4 +1,5 @@
-﻿using Handheld_Control_Panel.Classes;
+﻿
+using Handheld_Control_Panel.Classes;
 using Handheld_Control_Panel.Classes.Controller_Management;
 using Handheld_Control_Panel.UserControls;
 using Microsoft.Win32.TaskScheduler;
@@ -24,6 +25,7 @@ using Handheld_Control_Panel.Classes.Global_Variables;
 using Handheld_Control_Panel.UserControls;
 using System.Windows.Threading;
 using Handheld_Control_Panel.Classes.UserControl_Management;
+using System.IO;
 
 namespace Handheld_Control_Panel.Pages
 {
@@ -37,6 +39,8 @@ namespace Handheld_Control_Panel.Pages
   
         private int highlightedUserControl = -1;
         private int selectedUserControl = -1;
+
+        private string originalName = Global_Variables.profiles.editingProfile.ProfileName;
         public ProfileEditPage()
         {
             InitializeComponent();
@@ -152,6 +156,10 @@ namespace Handheld_Control_Panel.Pages
                         Notification_Management.ShowInWindow(Application.Current.Resources["Usercontrol_ProfileSaved"].ToString(), Notification.Wpf.NotificationType.Success);
                         Profiles_XML_SaveLoad.Save_XML(Global_Variables.profiles.editingProfile.ProfileName,"Profile_Main", Global_Variables.profiles.editingProfile);
 
+                        if (originalName != Global_Variables.profiles.editingProfile.ProfileName && Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + originalName))
+                        {
+                            Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + originalName, true);
+                        }
                         XML_Management.Load_Profile(Global_Variables.profiles.editingProfile.ProfileName);
                         wnd = (MainWindow)Application.Current.MainWindow;
                         wnd.navigateFrame("ProfilesPage");

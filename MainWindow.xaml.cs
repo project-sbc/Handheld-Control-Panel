@@ -75,8 +75,12 @@ namespace Handheld_Control_Panel
             //check controller usb device info GUID instance ID, THIS IS IMPORTANT FOR POWER CYCLE IN CASE HIDHIDE AND VIGEM GET USED
             Controller_Management.getDefaultControllerDeviceInformation();
 
-            //make sure hidhide is configured
-            Controller_Management.setUpHIDHide();
+            //make sure hidhide is configured and start ViGEm if installed
+            if (Global_Variables.settings.useHIDHideAndVIGEM)
+            {
+                Controller_Management.setUpHIDHide();
+            }
+        
 
             //start controller management, do this when the window opens to prevent accidental hotkey presses
             Controller_Management.start_Controller_Management();
@@ -648,6 +652,14 @@ namespace Handheld_Control_Panel
                 m_notifyIcon.Dispose();
             }
             
+            //stop hidhide if enabled
+            if (Controller_Management.hideHidService.IsInstalled)
+            {
+                if (Controller_Management.hideHidService.IsActive)
+                {
+                    Controller_Management.hideHidService.IsActive = false;
+                }
+            }
 
 
             //stop timers
