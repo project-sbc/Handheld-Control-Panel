@@ -659,6 +659,7 @@ namespace Handheld_Control_Panel
                 {
                     Controller_Management.hideHidService.IsActive = false;
                 }
+                if (ViGEm_Management.x360 != null) { ViGEm_Management.x360.Disconnect(); }
             }
 
 
