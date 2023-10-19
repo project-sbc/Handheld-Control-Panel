@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Handheld Control Panel", "Handheld Control Panel.csproj", "{011B7CF4-05DF-4835-91F7-7E982F3EC71B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handheld Control Panel Installer", "..\Handheld Control Panel Installer\Handheld Control Panel Installer.csproj", "{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|Any CPU = All|Any CPU
@@ -47,30 +45,6 @@ Global
 		{011B7CF4-05DF-4835-91F7-7E982F3EC71B}.Release|x64.Build.0 = Release|x64
 		{011B7CF4-05DF-4835-91F7-7E982F3EC71B}.Release|x86.ActiveCfg = Release|x86
 		{011B7CF4-05DF-4835-91F7-7E982F3EC71B}.Release|x86.Build.0 = Release|x86
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|Any CPU.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|Any CPU.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|ARM64.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|ARM64.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|x64.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|x64.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|x86.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.All|x86.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|x64.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Debug|x86.Build.0 = Debug|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|ARM64.Build.0 = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|x64.ActiveCfg = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|x64.Build.0 = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|x86.ActiveCfg = Release|Any CPU
-		{05B2C4A4-F6B5-470C-A213-1D5D3E852AAF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
