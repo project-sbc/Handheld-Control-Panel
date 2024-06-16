@@ -2,6 +2,11 @@
 
 Please see my latest tool Handheld Hardware Tools https://github.com/project-sbc/Handheld-Hardware-Tools
 
+--------------
+# This tool is obsolete, please see above message
+--------------
+--------------
+--------------
 # Handheld-Control-Panel
 
 This software is aimed to be a one stop shop for windows gaming handhelds. It is designed to be controller friendly and convenient to use and not instrusive while working with other software seamlessly. 
